@@ -1,0 +1,34 @@
+PODS:
+  - AFImageHelper (3.2.1)
+  - Alamofire (4.7.2)
+  - Moya (11.0.2):
+    - Moya/Core (= 11.0.2)
+  - Moya/Core (11.0.2):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Result (3.2.4)
+  - SwiftyJSON (4.1.0)
+
+DEPENDENCIES:
+  - AFImageHelper (~> 3.2.1)
+  - Moya (~> 11.0)
+  - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFImageHelper
+    - Alamofire
+    - Moya
+    - Result
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  AFImageHelper: 9142599fb4f826b480d177902ab7f0c961bc966c
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+
+PODFILE CHECKSUM: 328f92110f1b3f524f81c9ce339202c5f0843eda
+
+COCOAPODS: 1.5.3

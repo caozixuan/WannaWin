@@ -4,12 +4,15 @@
 //
 //  Created by yiner on 2018/7/5.
 //  Copyright © 2018年 WannaWin. All rights reserved.
-//
+//  reference: http://www.hangge.com/blog/cache/detail_1314.html
 
 import UIKit
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
-
+	
+	
+	@IBOutlet weak var imageScrollerView: UIImageView!
+	
 	//获取屏幕宽度
 	let screenWidth =  UIScreen.main.bounds.size.width
 	
@@ -23,8 +26,10 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		//初始化图片轮播组件
 		imageScroller = ImageScrollerViewController()
 		imageScroller.delegate = self
-		imageScroller.view.frame = CGRect(x: 10, y: 40, width: screenWidth-20,
-										  height: (screenWidth-20)/4);
+		imageScroller.view.frame = CGRect(x: 10, y: 70, width: screenWidth-20, height: (screenWidth-20)/4*2);
+		imageScroller.view.layer.cornerRadius = 20;
+		imageScroller.view.layer.masksToBounds = true;
+		//imageScroller.view = imageScrollerView
 		
 		//将图片轮播组件添加到当前视图
 		self.addChildViewController(imageScroller)
@@ -39,16 +44,16 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	//图片轮播组件协议方法：获取内部scrollView尺寸
 	func scrollerViewSize() -> CGSize {
-		return CGSize(width: screenWidth-20, height: (screenWidth-20)/4)
+		return CGSize(width: screenWidth-20, height: (screenWidth-20)/4*2)
 	}
 	
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
-		return ["http://bizhi.zhuoku.com/bizhi2008/0516/3d/3d_desktop_13.jpg",
-				"http://tupian.enterdesk.com/2012/1015/zyz/03/5.jpg",
-				"http://img.web07.cn/UpImg/Desk/201301/12/desk230393121053551.jpg",
-				"http://wallpaper.160.com/Wallpaper/Image/1280_960/1280_960_37227.jpg",
-				"http://bizhi.zhuoku.com/wall/jie/20061124/cartoon2/cartoon014.jpg"]
+		return ["https://images.pexels.com/photos/1203705/pexels-photo-1203705.jpeg?cs=srgb&dl=adorable-animal-breed-1203705.jpg&fm=jpg",
+				"https://images.pexels.com/photos/977736/pexels-photo-977736.jpeg?cs=srgb&dl=beach-cliffs-evening-977736.jpg&fm=jpg",
+				"https://images.pexels.com/photos/459554/pexels-photo-459554.jpeg?cs=srgb&dl=4th-of-july-berries-berry-459554.jpg&fm=jpg",
+				"https://images.pexels.com/photos/968245/pexels-photo-968245.jpeg?cs=srgb&dl=beverage-brew-citrus-968245.jpg&fm=jpg",
+				"https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?cs=srgb&dl=adult-book-business-297755.jpg&fm=jpg"]
 	}
 	
 	//点击事件响应

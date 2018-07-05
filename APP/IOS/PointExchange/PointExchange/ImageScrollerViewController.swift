@@ -7,34 +7,7 @@
 //
 
 import UIKit
-
-// 用文字生成图片
-public extension UIImage {
-	convenience init?(text: String, font: UIFont = UIFont.systemFont(ofSize: 18), color: UIColor = UIColor.white, backgroundColor: UIColor = UIColor.gray, size: CGSize = CGSize(width: 100, height: 100), offset: CGPoint = CGPoint(x: 0, y: 0)) {
-		let label = UILabel(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-		label.font = font
-		label.text = text
-		label.textColor = color
-		label.textAlignment = .center
-		label.backgroundColor = backgroundColor
-		
-		let image = UIImage(fromView: label)
-		UIGraphicsBeginImageContextWithOptions(size, false, 0)
-		image?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-		
-		self.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
-		UIGraphicsEndImageContext()
-	}
-	
-	convenience init?(fromView view: UIView) {
-		UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0)
-		//view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
-		view.layer.render(in: UIGraphicsGetCurrentContext()!)
-		self.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
-		UIGraphicsEndImageContext()
-	}
-	
-}
+import AFImageHelper
 
 //图片轮播组件代理协议
 protocol ImageScrollerControllerDelegate{
@@ -158,12 +131,12 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	func configureAutoScrollTimer() {
 		//设置一个定时器，每三秒钟滚动一次
 		autoScrollTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
-											   selector: #selector(ImageSliderController.letItScroll),
+											   selector: #selector(ImageScrollerViewController.letItScroll),
 											   userInfo: nil, repeats: true)
 	}
 	
 	//计时器时间一到，滚动一张图片
-	func letItScroll(){
+	@objc func letItScroll(){
 		let offset = CGPoint(x: 2*scrollerViewWidth!, y: 0)
 		self.scrollerView?.setContentOffset(offset, animated: true)
 	}

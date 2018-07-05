@@ -1,0 +1,8 @@
+xcodeproj 'PointExchange'
+workspace 'PointExchange'
+use_frameworks!
+target 'PointExchange' do
+pod 'Moya', '~>11.0'
+pod 'SwiftyJSON'
+pod 'AFImageHelper', '~> 3.2.1'
+end
