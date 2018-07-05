@@ -1,6 +1,0 @@
-framework module AFImageHelper {
-  umbrella header "AFImageHelper-umbrella.h"
-
-  export *
-  module * { export * }
-}
