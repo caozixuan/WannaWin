@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14ECA9B05A9DED1BC9FCBD4E /* Pods_PointExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */; };
 		3E4C155420EDFF5A000743C0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155320EDFF5A000743C0 /* MainViewController.swift */; };
 		3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */; };
 		3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155720EE0087000743C0 /* QRScanViewController.swift */; };
@@ -38,6 +39,9 @@
 		3E8AB4BC20EDAEDE00915561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E8AB4C420EDAFB300915561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
+		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14ECA9B05A9DED1BC9FCBD4E /* Pods_PointExchange.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +61,8 @@
 			children = (
 				3E8AB4AF20EDAEDC00915561 /* PointExchange */,
 				3E8AB4AE20EDAEDC00915561 /* Products */,
+				6F37093A26C5F7D98AB5745B /* Pods */,
+				63CAE8CF1E8136F012CC53A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +143,23 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
+		63CAE8CF1E8136F012CC53A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F37093A26C5F7D98AB5745B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */,
+				7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E8AB4BF20EDAEDE00915561 /* Build configuration list for PBXNativeTarget "PointExchange" */;
 			buildPhases = (
+				64A4FF8C2DC9B749279B719C /* [CP] Check Pods Manifest.lock */,
 				3E8AB4A920EDAEDC00915561 /* Sources */,
 				3E8AB4AA20EDAEDC00915561 /* Frameworks */,
 				3E8AB4AB20EDAEDC00915561 /* Resources */,
+				4496219832B8D03BF19FBED0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +227,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4496219832B8D03BF19FBED0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		64A4FF8C2DC9B749279B719C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PointExchange-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3E8AB4A920EDAEDC00915561 /* Sources */ = {
@@ -358,6 +429,7 @@
 		};
 		3E8AB4C020EDAEDE00915561 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -375,6 +447,7 @@
 		};
 		3E8AB4C120EDAEDE00915561 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
