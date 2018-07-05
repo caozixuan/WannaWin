@@ -521,7 +521,7 @@
         <!--首页-积分-->
         <scene sceneID="qm3-im-Sgx">
             <objects>
-                <viewController title="首页-积分" id="9q5-mV-epd" sceneMemberID="viewController">
+                <viewController title="首页-积分" id="9q5-mV-epd" customClass="MainViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cjw-1E-asS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -656,6 +656,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="积分" id="Pqh-jX-ifQ"/>
                     <navigationItem key="navigationItem" title="花旗宝——save your money" id="1Ck-sY-Zm0"/>
+                    <connections>
+                        <outlet property="imageScrollerView" destination="bdB-wX-VWA" id="YpX-N5-CZX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nHT-jl-djX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
