@@ -12,6 +12,7 @@ class UserSettingViewController: UITableViewController {
     
     var user = User.getUser()
     
+    @IBOutlet weak var logoutButton: UIView!
     //登录后头部
     var usernameHeadLabel:UILabel = UILabel()
     var boundingCitiCardHeadLabel:UILabel = UILabel()
@@ -44,12 +45,19 @@ class UserSettingViewController: UITableViewController {
             loginButton?.layer.borderWidth=2
             loginButton?.layer.borderColor=UIColor.white.cgColor
             loginButton?.layer.cornerRadius=15
-            
+            loginButton?.addTarget(self, action: #selector(UserSettingViewController.gotoLogin), for: .touchDown)
             userTableCell?.addSubview(loginButton!)
             
         }
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func gotoLogin(){
+        let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+        self.navigationController!.pushViewController(view, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,5 +79,8 @@ class UserSettingViewController: UITableViewController {
         
     }
     
+    @IBAction func logout(_ sender: AnyObject){
+        
+    }
 
 }
