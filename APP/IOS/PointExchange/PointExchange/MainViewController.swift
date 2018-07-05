@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
+	var user = User.getUser()
 	
 	@IBOutlet weak var imageScrollerView: UIImageView!
 	
@@ -68,11 +69,14 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		self.present(alertController, animated: true, completion: nil)
 	}
 	
+	@IBAction func showCardInfo(_ sender: AnyObject){
+		
+	}
+	
+	@IBAction func addCard(_ sender: AnyObject){
+		
+	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 
     /*
