@@ -23,6 +23,14 @@ public class User {
         this.citiCardNum = citiCardNum;
     }
 
+    /*
+     * 作者:曹子轩
+     * TODO：具体token相关的逻辑需要实现
+     */
+
+    public static User getUserByToken(String token){
+        return new User("token");
+    }
     public String getUserID() {
         return userID;
     }
