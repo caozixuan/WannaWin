@@ -12,6 +12,7 @@ class User: NSObject {
     static let user:User = User()
     var username:String?
     var password:String?
+    var card:Card?
     class func getUser() -> User{
         return user;
     }

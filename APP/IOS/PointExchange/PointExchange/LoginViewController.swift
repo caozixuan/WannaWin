@@ -8,8 +8,12 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
+class LoginViewController: UITableViewController{
+    @IBOutlet weak var phoneNumberField: UITextField!
+    
+    @IBOutlet weak var passwordField: UITextField!
+    
+    var user:User = User.getUser()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,5 +35,17 @@ class LoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
+            if isLoginValid() {
+                user.username = phoneNumberField.text
+                user.password = passwordField.text
+                self.navigationController!.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func isLoginValid()->Bool{
+        return true
+    }
 }

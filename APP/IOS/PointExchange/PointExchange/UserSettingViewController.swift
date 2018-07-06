@@ -25,33 +25,13 @@ class UserSettingViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let name = user.username{
-            usernameHeadLabel.text="用户名："
-            
-            usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
-            usernameHeadLabel.textColor=UIColor.white
-            
-            usernameLabel.textColor=UIColor.white
-            usernameLabel.frame=CGRect(x:220, y:47, width:50, height:21)
-            usernameLabel.text=name
-            userTableCell?.addSubview(usernameLabel)
-            userTableCell?.addSubview(usernameHeadLabel)
-        }
-        else{
-            loginButton=UIButton()
-            loginButton?.frame=CGRect(x:175, y:47, width:133, height:50)
-            loginButton?.setTitleColor(UIColor.white, for:.normal)
-            loginButton?.setTitle("登录 / 注册", for: UIControlState.normal)
-            loginButton?.layer.borderWidth=2
-            loginButton?.layer.borderColor=UIColor.white.cgColor
-            loginButton?.layer.cornerRadius=15
-            loginButton?.addTarget(self, action: #selector(UserSettingViewController.gotoLogin), for: .touchDown)
-            userTableCell?.addSubview(loginButton!)
-            
-        }
-        
-
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+            
+        
     }
     
     @objc func gotoLogin(){
@@ -79,5 +59,83 @@ class UserSettingViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
+            let alert = UIAlertController(title:"退出登录", message:"是否确认退出登录？", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+                self.logout()
+            })
+            let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
+            
+            alert.addAction(cancelAction)
+            alert.addAction(okAction)
+            self.present(alert, animated:true, completion:nil)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            if let name = user.username{
+                usernameHeadLabel.text="用户名："
+                
+                usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
+                usernameHeadLabel.textColor=UIColor.white
+                
+                usernameLabel.textColor=UIColor.white
+                usernameLabel.frame=CGRect(x:220, y:47, width:50, height:21)
+                usernameLabel.text=name
+                
+                boundingCitiCardHeadLabel.text = {() -> String in
+                    if let card = user.card{
+                        return "银行卡：" + card.number
+                    }
+                    else{
+                        return "您尚未绑定银行卡"
+                    }
+                }()
+                boundingCitiCardHeadLabel.textColor=UIColor.white
+                boundingCitiCardHeadLabel.frame=CGRect(x:143, y:70, width:200, height:21)
+                
+                userTableCell?.addSubview(usernameLabel)
+                userTableCell?.addSubview(usernameHeadLabel)
+                userTableCell?.addSubview(boundingCitiCardHeadLabel)
+                
+                if let btn = loginButton {
+                    btn.removeFromSuperview()
+                }
+            }
+            else{
+                loginButton=UIButton()
+                loginButton?.frame=CGRect(x:175, y:47, width:133, height:50)
+                loginButton?.setTitleColor(UIColor.white, for:.normal)
+                loginButton?.setTitle("登录 / 注册", for: UIControlState.normal)
+                loginButton?.layer.borderWidth=2
+                loginButton?.layer.borderColor=UIColor.white.cgColor
+                loginButton?.layer.cornerRadius=15
+                loginButton?.addTarget(self, action: #selector(UserSettingViewController.gotoLogin), for: .touchDown)
+                userTableCell?.addSubview(loginButton!)
+                
+                boundingCitiCardHeadLabel.removeFromSuperview()
+                usernameLabel.removeFromSuperview()
+                usernameHeadLabel.removeFromSuperview()
+                
+                
+            }
+            return userTableCell!
+        }
+        else{
+            return super.tableView(self.tableView, cellForRowAt: indexPath)
+        }
+        
+    }
+
+    
+    
+    func logout(){
+        self.user.username=nil
+        print("logout")
+        self.tableView.reloadData()
+        
+    }
 
 }

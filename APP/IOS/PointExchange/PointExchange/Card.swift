@@ -8,5 +8,5 @@
 
 import Foundation
 class Card: NSObject {
-    
+    var number:String = "00000"
 }
