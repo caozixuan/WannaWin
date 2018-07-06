@@ -12,12 +12,12 @@ class SignUpViewController: UITableViewController {
     
     var user = User.getUser()
 
+    @IBOutlet weak var signUpButton: UITableViewCell!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var identifyField: UITextField!
     @IBOutlet weak var phoneNumberField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -55,20 +55,54 @@ class SignUpViewController: UITableViewController {
     
     private func isSignUpValid()->Bool{
         // TODO: - 注册是否有效
-        user.username=phoneNumberField.text
-        user.password=passwordField.text
+        if let username=phoneNumberField.text {
+            self.user.username=username
+        }
+        else{
+            let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+                self.navigationController!.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
+            })
+            let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
+            
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        if let password=passwordField.text {
+            self.user.password=password
+        }else{
+            let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+                self.navigationController!.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
+            })
+            let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
+            
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
         return true
     }
     
     @IBAction func inputedIdentifyCode(_ sender: Any) {
-        if self.isIdentifyCodeValid() {
-            
+        if self.isInputValid() {
+            signUpButton.isUserInteractionEnabled=true
+            signUpButton.backgroundColor=UIColor.blue
+        }
+        else{
+            // TODO: - 验证码不正确
         }
     }
     
-    private func isIdentifyCodeValid()->Bool{
+    private func isInputValid()->Bool{
         // TODO: - 验证码是否正确
-        return true
+        if passwordField != nil && identifyField != nil && phoneNumberField != nil {
+            return true
+        }
+        return false
     }
     
 }
