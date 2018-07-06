@@ -34,7 +34,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //todo:设置发现页行数
+		// TODO: - 设置发现页行数
         return 4
     }
     
