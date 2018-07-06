@@ -70,11 +70,29 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	@IBAction func showCardInfo(_ sender: AnyObject){
-		
+		user.username = "yiner"
+		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+		if user.username != nil {
+			let view = storyBoard.instantiateViewController(withIdentifier: "CardInfoTableViewController")
+			self.navigationController!.pushViewController(view, animated: true)
+		}
+		else{
+			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+			self.navigationController!.pushViewController(view, animated: true)
+		}
 	}
 	
 	@IBAction func addCard(_ sender: AnyObject){
-		
+		user.username = "yiner"
+		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+		if user.username != nil {
+			let view = storyBoard.instantiateViewController(withIdentifier: "AddCardTableViewController")
+			self.navigationController!.pushViewController(view, animated: true)
+		}
+		else{
+			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+			self.navigationController!.pushViewController(view, animated: true)
+		}
 	}
 
     

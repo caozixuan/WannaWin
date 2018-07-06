@@ -79,8 +79,5 @@ class UserSettingViewController: UITableViewController {
         
     }
     
-    @IBAction func logout(_ sender: AnyObject){
-        
-    }
 
 }
