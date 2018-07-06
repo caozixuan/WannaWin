@@ -1,6 +1,5 @@
 package citi.pay;
-import net.sf.json.JSONObject;
-import citi.vo.User;
+import citi.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ public class PayController {
     @RequestMapping(value = "/pay/{token}")
     @ResponseBody
     public Map<String, Object> returnCustomerInformation(@PathVariable String token){
-        // TODO: 这里是不是该有一个根据token确定用户的接口?
+        // TODO: 这里是不是该有一个根据token确定用户的接口?或者传过来的是用户信息？
         User user = getUserByToken(token);
         Map<String, Object> map=new HashMap<String, Object>();
         map.put("ID",user.getUserID());
@@ -31,8 +30,17 @@ public class PayController {
 
     @ResponseBody
     @RequestMapping(value="/pay/submitOrder",method= RequestMethod.POST)
-    public User ajaxRequest(@RequestBody User user){
-        System.out.println(user);
-        return user;
+    public Map<String, Object> ajaxRequest(@RequestBody Order order){
+        User user = new User("13013550115");  //这里怎么定义接口获取请求商户？
+        int points = Strategy.returnPointsTobePaid(order,user);
+        user.changePoint(order);
+        Map<String, Object> map=new HashMap<String, Object>();
+        map.put("orderId",order.getOrderId());
+        map.put("originalPrice",order.getOriginalPrice());
+        map.put("priceAfter",order.getPriceAfter());
+        map.put("pointsNeeded",order.getPointsNeeded());
+        map.put("state",order.getState());
+        // TODO:同时也应该给用户返回
+        return map;
     }
 }

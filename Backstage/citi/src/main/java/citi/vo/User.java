@@ -31,6 +31,13 @@ public class User {
     public static User getUserByToken(String token){
         return new User("token");
     }
+
+    public void changePoint(Order order){
+        //TODO:这里需要根据用户的设定扣除积分，扣除过程应该会比较复杂
+        if(order.getPointsNeeded()>0)
+            this.setAvailablePoints(this.getAvailablePoints()-order.getPointsNeeded());
+        order.changeState();
+    }
     public String getUserID() {
         return userID;
     }
