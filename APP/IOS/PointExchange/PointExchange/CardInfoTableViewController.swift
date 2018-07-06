@@ -12,9 +12,9 @@ class CardInfoTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		let addBtn = UIBarButtonItem.init(barButtonSystemItem:UIBarButtonSystemItemAdd , target: self, action: nil)
-		let navItem = 
-		self.navigationController?.navigationBar.pushItem(<#T##item: UINavigationItem##UINavigationItem#>, animated: true)
+//        let addBtn = UIBarButtonItem.init(barButtonSystemItem:UIBarButtonSystemItemAdd , target: self, action: nil)
+//        let navItem =
+//        self.navigationController?.navigationBar.pushItem(<#T##item: UINavigationItem##UINavigationItem#>, animated: true)
         // Do any additional setup after loading the view.
     }
 
