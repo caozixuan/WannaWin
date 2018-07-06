@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="citi.controller"/>
+    <context:component-scan base-package="citi.serivce"/>
+    <context:component-scan base-package="citi.dao"/>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <mvc:default-servlet-handler/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="citi.interceptor.DecryptIeterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="citi.interceptor.EncryptIeterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+        <property name="driverClassName" value="${jdbc.driver}" />
+
+        <property name="url" value="${jdbc.url}" />
+
+        <property name="username" value="${jdbc.username}" />
+
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    <!-- 3. 自动扫描mybatis映射文件和接口的包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="score.dao.mappers"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+
+
+</beans>
