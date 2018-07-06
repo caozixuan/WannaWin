@@ -20,10 +20,10 @@
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
 		3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4C320EDAFB300915561 /* Main.storyboard */; };
 		3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */; };
-		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
-		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
 		3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */; };
 		3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155320EDFF5A000743C0 /* MainViewController.swift */; };
+		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
+		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -309,7 +309,6 @@
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
 				3E4C155E20EE0158000743C0 /* UserSettingViewController.swift in Sources */,
-				3E4C155420EDFF5A000743C0 /* MainViewController.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
