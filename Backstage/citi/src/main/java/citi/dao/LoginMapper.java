@@ -3,6 +3,11 @@ package citi.dao;
 
 import org.springframework.stereotype.Repository;
 
+/*
+ * 接口设计：刘钟博
+ * 代码填充：任思远
+ */
+
 @Repository
 public interface LoginMapper {
 
