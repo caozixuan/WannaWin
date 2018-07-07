@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="okio-1.14.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../okio-1.14.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
