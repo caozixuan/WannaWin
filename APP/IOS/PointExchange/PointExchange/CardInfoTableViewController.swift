@@ -44,6 +44,12 @@ class CardInfoTableViewController: UITableViewController {
 		
 	}
 	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
+		self.navigationController!.pushViewController(view, animated: true)
+	}
+	
     /*
     // MARK: - Navigation
 
