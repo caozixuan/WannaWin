@@ -14,6 +14,7 @@ class SignUpViewController: UITableViewController {
 
     @IBOutlet weak var signUpButton: UITableViewCell!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var passwordIdentifyField: UITextField!
     @IBOutlet weak var identifyField: UITextField!
     @IBOutlet weak var phoneNumberField: UITextField!
     override func viewDidLoad() {
@@ -93,13 +94,13 @@ class SignUpViewController: UITableViewController {
             signUpButton.backgroundColor=UIColor.blue
         }
         else{
-            // TODO: - 验证码不正确
+            // TODO: - 输入是否合理
         }
     }
     
     private func isInputValid()->Bool{
         // TODO: - 验证码是否正确
-        if passwordField != nil && identifyField != nil && phoneNumberField != nil {
+        if passwordField.text != nil && identifyField.text != nil && phoneNumberField.text != nil && passwordIdentifyField.text != nil{
             return true
         }
         return false
