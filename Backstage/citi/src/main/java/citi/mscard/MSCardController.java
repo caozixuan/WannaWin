@@ -1,11 +1,21 @@
 package citi.mscard;
 
 import citi.vo.MSCard;
+import citi.vo.MSCardType;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/*
+ * 接口设计：刘钟博
+ * 代码填充：曹子轩
+ */
 @Controller
 //Membership card
 @RequestMapping("/mscard")
@@ -24,7 +34,10 @@ public class MSCardController {
      */
     @RequestMapping("/infos")
     public String getMSInfo(String userId,int n){
-
+        List<MSCard> cards = msCardService.getInfo(userId, n);
+        // json的转换需要再看怎么做
+        String jsonStr = null;
+        // 如何返回json格式？
         return "";
     }
 
@@ -35,7 +48,7 @@ public class MSCardController {
      */
     @RequestMapping("/cardtype")
     public String getCardType(String merchantID){
-
+        List<MSCardType> msCardTypes = msCardService.getTypes(merchantID);
         return "";
     }
 
@@ -45,7 +58,7 @@ public class MSCardController {
      */
     @RequestMapping("/addcard")
     public String addMSCard(MSCard msCard){
-
+        msCardService.addMSCard(msCard);
         return "";
     }
 }
