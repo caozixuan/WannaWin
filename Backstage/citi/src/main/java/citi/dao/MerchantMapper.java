@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/*
+ * 接口设计：刘钟博
+ * 代码填充：任思远
+ */
+
 @Repository
 public interface MerchantMapper {
 
