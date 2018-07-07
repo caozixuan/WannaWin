@@ -8,8 +8,9 @@
 
 import UIKit
 
-class UserSettingViewController: UITableViewController {
+class UserSettingViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var portraitImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +19,8 @@ class UserSettingViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        let imageClickGuesture = UITapGestureRecognizer(target: self, action: #selector(UserSettingViewController.changePortrait))
+        portraitImage.addGestureRecognizer(imageClickGuesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +28,24 @@ class UserSettingViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func changePortrait(){
+        selectImageFromAlbum()
+    }
+    
+    func selectImageFromAlbum(){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.sourceType=UIImagePickerControllerSourceType.photoLibrary
+            self.present(picker, animated:true, completion:nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var image = UIImage()
+        image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        portraitImage.image=image
+    }
 
     
     // MARK: - Navigation
@@ -64,5 +85,5 @@ class UserSettingViewController: UITableViewController {
         
     }
     
-
+    
 }

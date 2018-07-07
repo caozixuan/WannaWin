@@ -18,7 +18,6 @@ class LoginViewController: UITableViewController{
     var user:User = User.getUser()
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
