@@ -13,6 +13,8 @@
 		3E46B75E20EFE00400843193 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75D20EFE00400843193 /* Discover.storyboard */; };
 		3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75F20EFE05500843193 /* HomePage.storyboard */; };
 		3E46B76420EFE0B400843193 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B76220EFE0B400843193 /* User.storyboard */; };
+		3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */; };
+		3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B76C20F09E7900843193 /* ExchangeViewController.swift */; };
 		3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */; };
 		3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155720EE0087000743C0 /* QRScanViewController.swift */; };
 		3E4C155A20EE00E7000743C0 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155920EE00E7000743C0 /* StoreViewController.swift */; };
@@ -39,6 +41,8 @@
 		3E46B75D20EFE00400843193 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		3E46B76020EFE05500843193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HomePage.storyboard; sourceTree = "<group>"; };
 		3E46B76320EFE0B400843193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/User.storyboard; sourceTree = "<group>"; };
+		3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewController.swift; sourceTree = "<group>"; };
+		3E46B76C20F09E7900843193 /* ExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
 		3E4C155320EDFF5A000743C0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		3E4C155720EE0087000743C0 /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 		3E8AB4C920EDBABF00915561 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
 				3E4C155320EDFF5A000743C0 /* MainViewController.swift */,
 				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
 				3E4C155720EE0087000743C0 /* QRScanViewController.swift */,
@@ -161,6 +166,7 @@
 				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
 				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
 				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
+				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -336,7 +342,9 @@
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
+				3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */,
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
+				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,
 				3E4C155A20EE00E7000743C0 /* StoreViewController.swift in Sources */,
 				3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
