@@ -20,6 +20,7 @@ import java.util.Map;
 class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     //数据源
     private List<String> list;
+    private List<Integer> img_list;
     private Context context;
     //是否显示单选框,默认false
     private boolean isshowBox = false;
@@ -32,7 +33,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
 
     //构造方法
-    public PayingAdapter(List<String> list, Context context) {
+    public PayingAdapter(List<String> list,List<Integer> img_list, Context context) {
+        this.img_list = img_list;
         this.list = list;
         this.context = context;
         initMap();
@@ -71,11 +73,21 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(final PayingAdapter.MyViewHolder holder, final int position) {
+        //设置列表中积分信息
         holder.Points_Possession.setText(list.get(position));
+        //设置商家图片
+        holder.Business_Image.setImageResource(img_list.get(position));
 
         holder.Button_Modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(holder.Button_Modify.getText().equals("修改")){
+                    holder.Button_Modify.setText("完成");
+                }
+                else{
+                    holder.Button_Modify.setText("修改");
+                }
+
                 if(buttonInterface!=null) {
                   //接口实例化后的而对象，调用重写后的方法
                     buttonInterface.onclick(v,position);

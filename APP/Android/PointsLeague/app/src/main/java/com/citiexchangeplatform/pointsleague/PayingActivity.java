@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ public class PayingActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private List<String> data_posses_point;
+    private List<Integer> business_image;
     private PayingAdapter mAdapter;
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
@@ -62,14 +64,15 @@ public class PayingActivity extends AppCompatActivity {
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingAdapter(data_posses_point,getApplicationContext());
+        mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.buttonSetOnclick(new PayingAdapter.ButtonInterface() {
             @Override
             public void onclick(View view, int position) {
-                Toast.makeText(getApplicationContext(), "点击条目上的按钮"+position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "点击条目上的按钮"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), data_posses_point.get(position), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,12 +80,23 @@ public class PayingActivity extends AppCompatActivity {
     }
 
 
-    /*按钮点击事件*/
+    /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
         Button Finish_Button = (Button) findViewById(R.id.button_finish);
         Intent intent = new Intent(this, PaymentFinishActivity.class);
 
+        ArrayList<String> Points_Result = new ArrayList<>();
+        ArrayList<Integer> Business_Image_Result = new ArrayList<>();
+
         map = mAdapter.getMap();
+        for (Integer i:map.keySet()){
+            //map.keySet()返回的是所有key的值
+            if(map.get(i)){
+                Points_Result.add(data_posses_point.get(i));
+                Business_Image_Result.add(business_image.get(i));
+            }
+
+        }
         Bundle bundle = new Bundle();
 
 
@@ -91,7 +105,9 @@ public class PayingActivity extends AppCompatActivity {
         SerializableHashMap myMap=new SerializableHashMap();
         myMap.setMap(map);//将hashmap数据添加到封装的myMap中
 
-        bundle.putSerializable("checkbox_map", myMap);
+        bundle.putStringArrayList("points_result",Points_Result);
+        bundle.putIntegerArrayList("image_resource",Business_Image_Result);
+        //bundle.putSerializable("checkbox_map", myMap);
         intent.putExtras(bundle);
 
         startActivity(intent);
@@ -111,6 +127,14 @@ public class PayingActivity extends AppCompatActivity {
         for (int i = 'A'; i < 'z'; i++)
         {
             data_posses_point.add("" + (char) i);
+        }
+
+        //设置选择积分栏目中商家logo
+        business_image = new ArrayList<Integer>();
+
+        for (int i = 0; i < data_posses_point.size(); i++)
+        {
+            business_image.add(R.drawable.nike_store);
         }
     }
 

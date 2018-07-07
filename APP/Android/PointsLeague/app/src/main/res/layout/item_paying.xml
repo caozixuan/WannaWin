@@ -12,14 +12,14 @@
 
         <CheckBox
             android:id="@+id/checkbox_choose"
-            android:layout_width="5dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/image_business"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@color/colorPrimary" />
 
@@ -45,7 +45,7 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"
+            android:text="修改"
             android:visibility="invisible" />
 
     </LinearLayout>
