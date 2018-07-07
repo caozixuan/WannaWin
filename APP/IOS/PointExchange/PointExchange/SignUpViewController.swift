@@ -21,6 +21,10 @@ class SignUpViewController: UITableViewController {
     @IBOutlet weak var phoneNumberField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordField.delegate=self
+        identifyField.delegate=self
+        phoneNumberField.delegate=self
+        passwordIdentifyField.delegate=self
         // Do any additional setup after loading the view.
     }
 

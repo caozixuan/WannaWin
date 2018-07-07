@@ -20,7 +20,7 @@ class UserViewController: UITableViewController {
     var usernameLabel:UILabel = UILabel()
     
     //未登录时登录按钮
-    var loginButton:UIButton?
+    var loginButton:UIButton = UIButton()
     
     @IBOutlet weak var userTableCell: UITableViewCell?
 
@@ -76,9 +76,11 @@ class UserViewController: UITableViewController {
             self.present(alert, animated:true, completion:nil)
         }
         else if indexPath.section == 0 {
-            let storyboard = UIStoryboard(name:"User", bundle:nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "UserSettingViewController")
-            self.navigationController!.pushViewController(view, animated: true)
+            if let _ = user.username{
+                let storyboard = UIStoryboard(name:"User", bundle:nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "UserSettingViewController")
+                self.navigationController!.pushViewController(view, animated: true)
+            }
         }
     }
     
@@ -86,12 +88,11 @@ class UserViewController: UITableViewController {
         if indexPath.section == 0 {
             if let name = user.username{
                 usernameHeadLabel.text="用户名："
-                
                 usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
                 usernameHeadLabel.textColor=UIColor.white
                 
                 usernameLabel.textColor=UIColor.white
-                usernameLabel.frame=CGRect(x:220, y:47, width:50, height:21)
+                usernameLabel.frame=CGRect(x:220, y:47, width:100, height:21)
                 usernameLabel.text=name
                 
                 boundingCitiCardHeadLabel.text = {() -> String in
@@ -112,21 +113,20 @@ class UserViewController: UITableViewController {
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 userTableCell?.selectionStyle = UITableViewCellSelectionStyle.default
                 
-                if let btn = loginButton {
-                    btn.removeFromSuperview()
-                }
+                loginButton.removeFromSuperview()
             }
             else{
-                loginButton=UIButton()
-                loginButton?.frame=CGRect(x:175, y:47, width:133, height:50)
-                loginButton?.setTitleColor(UIColor.white, for:.normal)
-                loginButton?.setTitle("登录 / 注册", for: UIControlState.normal)
-                loginButton?.layer.borderWidth=2
-                loginButton?.layer.borderColor=UIColor.white.cgColor
-                loginButton?.layer.cornerRadius=15
-                loginButton?.addTarget(self, action: #selector(UserViewController.gotoLogin), for: .touchDown)
-                userTableCell?.addSubview(loginButton!)
+                loginButton.frame=CGRect(x:175, y:47, width:133, height:50)
+                loginButton.setTitleColor(UIColor.white, for:.normal)
+                loginButton.setTitle("登录 / 注册", for: UIControlState.normal)
+                loginButton.layer.borderWidth=2
+                loginButton.layer.borderColor=UIColor.white.cgColor
+                loginButton.layer.cornerRadius=15
+                loginButton.addTarget(self, action: #selector(UserViewController.gotoLogin), for: .touchDown)
+                userTableCell?.addSubview(loginButton)
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.none
+                userTableCell?.selectionStyle = UITableViewCellSelectionStyle.none
+                
                 
                 boundingCitiCardHeadLabel.removeFromSuperview()
                 usernameLabel.removeFromSuperview()
@@ -144,9 +144,8 @@ class UserViewController: UITableViewController {
                 exitButton.textLabel?.textColor = UIColor.black
             }else{
                 exitButton.isUserInteractionEnabled = false
-                exitButton.backgroundColor = UIColor.gray
+                exitButton.backgroundColor = UIColor.lightGray
                 exitButton.textLabel?.textColor = UIColor.white
-                exitButton.textLabel?.backgroundColor = UIColor.gray
             }
             return super.tableView(self.tableView, cellForRowAt: indexPath)
         }

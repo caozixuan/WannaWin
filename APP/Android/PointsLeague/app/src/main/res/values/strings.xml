@@ -3,4 +3,6 @@
     <string name="QRDescription">display QRCode</string>
     <string name="BarCodeDescription">display BarCode</string>
     <string name="need_points">消费积分：</string>
+    <string name="paying_success">抵扣成功</string>
+    <string name="Button_Paying">确认抵扣</string>
 </resources>

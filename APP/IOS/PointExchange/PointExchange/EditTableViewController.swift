@@ -17,6 +17,8 @@ class EditTableViewController: UITableViewController {
         super.viewDidLoad()
         
         textField.placeholder = textPlaceholder!
+        
+        textField.delegate=self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
