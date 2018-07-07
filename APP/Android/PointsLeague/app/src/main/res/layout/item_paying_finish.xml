@@ -10,43 +10,32 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/checkbox_choose"
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+
 
         <ImageView
-            android:id="@+id/image_business"
+            android:id="@+id/image_finish_business"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@color/colorPrimary" />
 
-        <EditText
-            android:id="@+id/editText_points_posses"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="200" />
-
         <TextView
-            android:id="@+id/textview_points_transfer"
+            android:id="@+id/textview_points_used"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="1" />
 
-        <Button
-            android:id="@+id/button_modify"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/textview_points_remain"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
             android:layout_weight="1"
-            android:text="Button"
-            android:visibility="invisible" />
+            android:gravity="center"
+            android:text="1" />
+
+
 
     </LinearLayout>
 

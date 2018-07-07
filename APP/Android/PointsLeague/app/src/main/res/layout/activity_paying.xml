@@ -20,30 +20,27 @@
         android:id="@+id/button_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/rv_points"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
         android:onClick="click_finish"
-        android:text="Button" />
+        android:text="@string/Button_Paying" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView_business"
         android:layout_width="83dp"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="18dp"
         app:srcCompat="@color/colorAccent" />
 
     <TextView
         android:id="@+id/textView_spend_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="107dp"
-        android:text="TextView"
+        android:layout_below="@+id/imageView_business"
+        android:layout_toStartOf="@+id/button_finish"
+        android:text="@string/need_points"
         tools:text="@string/need_points" />
 
     <TextView
