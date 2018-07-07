@@ -73,7 +73,8 @@ class UserViewController: UITableViewController {
             switch indexPath.row{
             case 0:
                 if let _ = user.username{
-                    // TODO: 绑定花期账户
+                    let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
                 }else{
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
                     self.navigationController?.pushViewController(view, animated: true)
