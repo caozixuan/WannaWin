@@ -9,9 +9,11 @@
 import UIKit
 
 class LoginViewController: UITableViewController{
-    @IBOutlet weak var phoneNumberField: UITextField!
-    
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var loginButton: UITableViewCell!
+    
+    
     
     var user:User = User.getUser()
     override func viewDidLoad() {
@@ -38,7 +40,7 @@ class LoginViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
             if isLoginValid() {
-                user.username = phoneNumberField.text
+                user.username = usernameField.text
                 user.password = passwordField.text
                 self.navigationController!.popViewController(animated: true)
             }
@@ -48,4 +50,23 @@ class LoginViewController: UITableViewController{
     func isLoginValid()->Bool{
         return true
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 2 && indexPath.row == 0{
+            loginButton.textLabel?.backgroundColor = UIColor.lightGray
+            loginButton.backgroundColor = UIColor.lightGray
+            return loginButton
+        }else{
+            return super.tableView(self.tableView, cellForRowAt: indexPath)
+        }
+    }
+    
+    @IBAction func isInputValid(_ sender: Any) {
+        if usernameField.text != "" && passwordField.text != "" {
+            loginButton.textLabel?.backgroundColor = UIColor.blue
+            loginButton.backgroundColor = UIColor.blue
+            loginButton.isUserInteractionEnabled = true
+        }
+    }
+    
 }

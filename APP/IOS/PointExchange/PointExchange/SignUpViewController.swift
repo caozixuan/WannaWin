@@ -11,10 +11,12 @@ import UIKit
 class SignUpViewController: UITableViewController {
     
     var user = User.getUser()
+    
+    var phoneNumberValid = false, passwordValid = false, identifyValid = false, passwordIdentifyValid = false
 
+    @IBOutlet weak var passwordIdentifyField: UITextField!
     @IBOutlet weak var signUpButton: UITableViewCell!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var passwordIdentifyField: UITextField!
     @IBOutlet weak var identifyField: UITextField!
     @IBOutlet weak var phoneNumberField: UITextField!
     override func viewDidLoad() {
@@ -88,22 +90,89 @@ class SignUpViewController: UITableViewController {
         return true
     }
     
-    @IBAction func inputedIdentifyCode(_ sender: Any) {
-        if self.isInputValid() {
+    /// 检查phoneNumber输入是否合法
+    func checkPhoneNumberInput()->Bool{
+        if phoneNumberField.text?.count != 11 {
+            phoneNumberField.layer.borderWidth = 0.5
+            phoneNumberField.layer.cornerRadius = 5
+            phoneNumberField.layer.borderColor=UIColor.red.cgColor
+            // TODO: - 验证手机号是否注册过
+            
+            phoneNumberField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+            return false
+        }
+        else{
+            phoneNumberField.layer.borderColor = UIColor.gray.cgColor
+            return true
+        }
+    }
+    
+    /// 检查验证码输入是否合法
+    func checkIdentifyCodeInput()->Bool{
+        // TODO: - 检查验证码
+        
+        return true
+    }
+    
+    /// 检查密码输入是否合法
+    func checkPasswordInput()->Bool{
+        // TODO: - 检查密码
+        return true
+    }
+    
+    /// 检查确认密码输入是否合法
+    func checkPasswordIdentifyInput()->Bool{
+        if passwordIdentifyField.text != passwordField.text {
+            passwordIdentifyField.layer.borderWidth = 0.5
+            passwordIdentifyField.layer.cornerRadius = 5
+            passwordIdentifyField.layer.borderColor=UIColor.red.cgColor
+            
+            passwordIdentifyField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+            return false
+        }else{
+            passwordIdentifyField.layer.borderColor = UIColor.gray.cgColor
+            return true
+        }
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //使除了“注册”按钮以外的cell都不可选择
+        if indexPath.section == 2 && indexPath.row == 1 {
+            return super.tableView(self.tableView, cellForRowAt: indexPath)
+        }
+        else{
+            let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
+            cell.selectionStyle=UITableViewCellSelectionStyle.none
+            return cell
+        }
+    }
+    
+    //各区域输入完毕后的检查
+    @IBAction func checkInputValid(_ sender: Any) {
+        
+        switch (sender as! UITextField).restorationIdentifier{
+        case "phoneNumber field":
+            phoneNumberValid=checkPhoneNumberInput()
+        case "identifyCode field":
+            identifyValid=checkIdentifyCodeInput()
+        case "password field":
+            passwordValid=checkPasswordIdentifyInput()
+            passwordIdentifyValid=checkPasswordIdentifyInput()
+        case "passwordIdentify field":
+            passwordIdentifyValid=checkPasswordIdentifyInput()
+        default:
+            break;
+        }
+        
+        if phoneNumberValid && passwordIdentifyValid && passwordIdentifyValid && phoneNumberField.text != "" && identifyField.text != "" && passwordField.text != "" && passwordIdentifyField.text != ""{
             signUpButton.isUserInteractionEnabled=true
             signUpButton.backgroundColor=UIColor.blue
         }
         else{
-            // TODO: - 输入是否合理
+            signUpButton.isUserInteractionEnabled=false
+            signUpButton.backgroundColor=UIColor.gray
         }
-    }
-    
-    private func isInputValid()->Bool{
-        // TODO: - 验证码是否正确
-        if passwordField.text != nil && identifyField.text != nil && phoneNumberField.text != nil && passwordIdentifyField.text != nil{
-            return true
-        }
-        return false
     }
     
 }
