@@ -1,0 +1,17 @@
+<!--
+    2018-7-7
+    mapped from resource/mybatis-config.xml (the name should be Mapper.xml)
+-->
+
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper-->
+        <!--PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+        <!--"http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+
+<!--<mapper namespace="DBMapper">   &lt;!&ndash; 命名空间，名字可以随意起，只要不冲突即可 &ndash;&gt;-->
+    <!--&lt;!&ndash; 对象映射，可以不写 &ndash;&gt;-->
+    <!--&lt;!&ndash; 查询功能，resultType 设置返回值类型 &ndash;&gt;-->
+    <!--<select id="findMSCardWithID" resultType="citi.vo.MSCard">  &lt;!&ndash; 书写 SQL 语句 &ndash;&gt;-->
+        <!--SELECT * FROM MSCard WHERE MSCardID = #{userID}-->
+    <!--</select>-->
+<!--</mapper>-->

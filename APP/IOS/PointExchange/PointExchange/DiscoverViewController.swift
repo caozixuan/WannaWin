@@ -10,6 +10,7 @@ import UIKit
 
 class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var rowCount = 4;
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -35,7 +36,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// TODO: - 设置发现页行数
-        return 4
+        return rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,6 +44,9 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: - 点击发现页折扣活动后跳转
+    }
 
     /*
     // MARK: - Navigation
