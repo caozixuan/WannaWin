@@ -11,7 +11,8 @@ import UIKit
 class UserSettingViewController: UITableViewController {
     
     var user = User.getUser()
-    
+
+    @IBOutlet weak var exitButton: UITableViewCell!
     @IBOutlet weak var logoutButton: UIView!
     //登录后头部
     var usernameHeadLabel:UILabel = UILabel()
@@ -30,6 +31,8 @@ class UserSettingViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
+        
+        
             
         
     }
@@ -46,7 +49,7 @@ class UserSettingViewController: UITableViewController {
     }
     
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -58,6 +61,7 @@ class UserSettingViewController: UITableViewController {
         }
         
     }
+ */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
@@ -122,6 +126,19 @@ class UserSettingViewController: UITableViewController {
                 
             }
             return userTableCell!
+        }
+        else if indexPath.section == 2 {
+            if let _ = user.username{
+                exitButton.isUserInteractionEnabled = true
+                exitButton.backgroundColor = UIColor.white
+                exitButton.textLabel?.textColor = UIColor.black
+            }else{
+                exitButton.isUserInteractionEnabled = false
+                exitButton.backgroundColor = UIColor.gray
+                exitButton.textLabel?.textColor = UIColor.white
+                exitButton.textLabel?.backgroundColor = UIColor.gray
+            }
+            return super.tableView(self.tableView, cellForRowAt: indexPath)
         }
         else{
             return super.tableView(self.tableView, cellForRowAt: indexPath)
