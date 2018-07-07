@@ -15,15 +15,16 @@ public class Authorize {
                 .addHeader("authorization", "Basic NTU0NjUwMjYtMzFkMy00ODgxLWEyOWEtNDE5YzM2NGI2N2RiOlc2dlkwbEg4ckw0c0s2bFg2YlA3YUw2ZUMyd1gxbkczYUc3c1I4dkE4bEEzbVMwZUg2")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .build();
-
+        String return_str="";
         try{
             Response response = client.newCall(request).execute();
             ResponseBody RB = response.body();
             System.out.println(RB.string());
+            return_str=RB.string();
         }
         catch (IOException e){
             System.out.println("request error");
         }
-        return RB.string();
+        return return_str;
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var tableView: UITableView!
+	let maxPoints:Int = 2000
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +42,15 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		if indexPath.row == 0 {
 			cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
+			if let cell1 = cell as? ExchangeItemCell {
+				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
+			}
 		}
 		else {
 			cell = tableView.dequeueReusableCell(withIdentifier: "bank to store", for: indexPath)
+			if let cell1 = cell as? ExchangeItemCell {
+				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
+			}
 		}
 
         // Configure the cell...
@@ -51,6 +58,19 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
 	
+	// MARK: - TextField delegate
+	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool{
+		let number = Int(textField.text!)
+		if number != nil && number! <= maxPoints {
+			return true
+		}
+		else {
+			textField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+			textField.text = String(maxPoints)
+			return false
+		}
+		
+	}
 
     /*
     // Override to support conditional editing of the table view.
