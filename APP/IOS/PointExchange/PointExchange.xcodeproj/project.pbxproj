@@ -39,6 +39,7 @@
 		B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */; };
 		B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */; };
 		B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */; };
+		B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */; };
 		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
 		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		B6A6EC5220F0CAE90079FFA4 /* PointExchange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PointExchange.entitlements; sourceTree = "<group>"; };
+		B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
 		C1ED982020EE1C7900A2F0C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1ED982220EE1E3900A2F0C5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +192,7 @@
 				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
 				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
+				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
+				B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,

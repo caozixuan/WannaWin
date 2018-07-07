@@ -12,6 +12,7 @@ class UserViewController: UITableViewController {
     
     var user = User.getUser()
 
+    @IBOutlet weak var portraitImageView: UIImageView!
     @IBOutlet weak var exitButton: UITableViewCell!
     @IBOutlet weak var logoutButton: UIView!
     //登录后头部
@@ -31,8 +32,6 @@ class UserViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-        
-        
             
         
     }
@@ -49,19 +48,6 @@ class UserViewController: UITableViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if let name=user.username{
-            
-        }
-        
-    }
- */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
@@ -81,6 +67,30 @@ class UserViewController: UITableViewController {
                 let view = storyboard.instantiateViewController(withIdentifier: "UserSettingViewController")
                 self.navigationController!.pushViewController(view, animated: true)
             }
+        }
+        else if indexPath.section == 1 {
+            let storyBoard = UIStoryboard(name: "User", bundle: nil)
+            switch indexPath.row{
+            case 0:
+                if let _ = user.username{
+                    // TODO: 绑定花期账户
+                }else{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }
+                break
+            case 1:
+                if let _ = user.username{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"OrdersViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }else{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }
+            default:
+                break;
+            }
+            
         }
     }
     
@@ -113,6 +123,8 @@ class UserViewController: UITableViewController {
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 userTableCell?.selectionStyle = UITableViewCellSelectionStyle.default
                 
+                
+                
                 loginButton.removeFromSuperview()
             }
             else{
@@ -135,6 +147,8 @@ class UserViewController: UITableViewController {
                 
                 
             }
+            //头像显示
+            self.portraitImageView.image = user.portrait?.roundCornersToCircle()
             return userTableCell!
         }
         else if indexPath.section == 2 {
@@ -156,9 +170,9 @@ class UserViewController: UITableViewController {
     }
 
     
-    
     func logout(){
-        self.user.username=nil
+        User.logout()
+        self.user=User.getUser()
         print("logout")
         self.tableView.reloadData()
         
