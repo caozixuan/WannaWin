@@ -69,7 +69,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			textField.text = String(maxPoints)
 			return false
 		}
-		
 	}
 
     /*
