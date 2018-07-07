@@ -1,18 +1,14 @@
 //
-//  CardDetailTableViewController.swift
+//  AddBankCardTableViewController.swift
 //  PointExchange
 //
-//  Created by yiner on 2018/7/7.
+//  Created by panyy on 2018/7/7.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 
 import UIKit
 
-class CardDetailTableViewController: UITableViewController {
-	
-	enum CardDetail:Int {
-		case cardImage = 0, cardDetail, unBind
-	}
+class AddBankCardTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,46 +27,25 @@ class CardDetailTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//		//FIXME: 待完善
-//        return 3
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        //FIXME: 待完善
-//		if section == CardDetail.cardImage.rawValue {
-//			return 1
-//		} else if section == CardDetail.cardDetail.rawValue {
-//			return 4
-//		} else {
-//			return 1
-//		}
-//		
-//    }
-//
-//	
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		let cell:UITableViewCell!
-//		if indexPath.section == CardDetail.cardImage.rawValue {
-//			cell = tableView.dequeueReusableCell(withIdentifier: "card image", for: indexPath)
-//			
-//		}
-//		else if indexPath.section == CardDetail.cardDetail.rawValue {
-//			switch indexPath.row {
-//			case 0 : cell = tableView.dequeueReusableCell(withIdentifier: "card id", for: indexPath)
-//			case 1 : cell = tableView.dequeueReusableCell(withIdentifier: "nickname", for: indexPath)
-//			case 2 : cell = tableView.dequeueReusableCell(withIdentifier: "binding phone", for: indexPath)
-//			default : cell = tableView.dequeueReusableCell(withIdentifier: "available store", for: indexPath)
-//			}
-//			
-//		}
-//		else {
-//			cell = tableView.dequeueReusableCell(withIdentifier: "unbind", for: indexPath)
-//		}
-//
-//        return cell
-//    }
-	
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 0
+    }
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
+    }
+    */
 
     /*
     // Override to support conditional editing of the table view.

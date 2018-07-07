@@ -18,7 +18,8 @@ class LoginViewController: UITableViewController{
     var user:User = User.getUser()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        passwordField.delegate=self
+        usernameField.delegate=self
         // Do any additional setup after loading the view.
     }
 

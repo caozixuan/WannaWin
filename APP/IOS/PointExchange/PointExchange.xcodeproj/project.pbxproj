@@ -39,6 +39,8 @@
 		B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */; };
 		B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */; };
 		B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */; };
+		B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */; };
+		B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */; };
 		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
 		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,8 @@
 		B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		B6A6EC5220F0CAE90079FFA4 /* PointExchange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PointExchange.entitlements; sourceTree = "<group>"; };
+		B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
+		B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardTableViewController.swift; sourceTree = "<group>"; };
 		C1ED982020EE1C7900A2F0C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1ED982220EE1E3900A2F0C5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +194,8 @@
 				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
 				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
+				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
+				B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -329,6 +335,7 @@
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Valet/Valet.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -337,6 +344,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Valet.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -380,6 +388,7 @@
 				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,
 				B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */,
 				3E4C155A20EE00E7000743C0 /* StoreViewController.swift in Sources */,
+				B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */,
 				3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */,
 				B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
@@ -388,6 +397,7 @@
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
+				B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,

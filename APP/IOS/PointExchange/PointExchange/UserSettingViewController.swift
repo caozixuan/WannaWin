@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import AFImageHelper
 
-class UserSettingViewController: UITableViewController {
+class UserSettingViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var picker:UIImagePickerController?
 
+    @IBOutlet weak var portraitImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +22,8 @@ class UserSettingViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        let imageClickGuesture = UITapGestureRecognizer(target: self, action: #selector(UserSettingViewController.changePortrait))
+        portraitImage.addGestureRecognizer(imageClickGuesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +31,28 @@ class UserSettingViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func changePortrait(){
+        selectImageFromAlbum()
+    }
+    
+    func selectImageFromAlbum(){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            picker = UIImagePickerController()
+            picker?.delegate = self
+            picker?.sourceType=UIImagePickerControllerSourceType.photoLibrary
+            picker?.allowsEditing = true
+            self.present(picker!, animated:true, completion:nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var image = UIImage()
+        image = (info[UIImagePickerControllerEditedImage] as! UIImage)
+        
+        portraitImage.image=image.roundCornersToCircle()
+        User.getUser().portrait=image
+        picker.dismiss(animated: true, completion: nil)
+    }
 
     
     // MARK: - Navigation
@@ -50,6 +78,7 @@ class UserSettingViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
+        portraitImage.image=User.getUser().portrait?.roundCornersToCircle()
         if indexPath.section == 1 {
             switch indexPath.row{
             case 0:
@@ -64,5 +93,5 @@ class UserSettingViewController: UITableViewController {
         
     }
     
-
+    
 }

@@ -12,6 +12,7 @@ class UserViewController: UITableViewController {
     
     var user = User.getUser()
 
+    @IBOutlet weak var portraitImageView: UIImageView!
     @IBOutlet weak var exitButton: UITableViewCell!
     @IBOutlet weak var logoutButton: UIView!
     //登录后头部
@@ -20,7 +21,7 @@ class UserViewController: UITableViewController {
     var usernameLabel:UILabel = UILabel()
     
     //未登录时登录按钮
-    var loginButton:UIButton?
+    var loginButton:UIButton = UIButton()
     
     @IBOutlet weak var userTableCell: UITableViewCell?
 
@@ -31,8 +32,6 @@ class UserViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-        
-        
             
         
     }
@@ -49,19 +48,6 @@ class UserViewController: UITableViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if let name=user.username{
-            
-        }
-        
-    }
- */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
@@ -76,9 +62,36 @@ class UserViewController: UITableViewController {
             self.present(alert, animated:true, completion:nil)
         }
         else if indexPath.section == 0 {
-            let storyboard = UIStoryboard(name:"User", bundle:nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "UserSettingViewController")
-            self.navigationController!.pushViewController(view, animated: true)
+            if let _ = user.username{
+                let storyboard = UIStoryboard(name:"User", bundle:nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "UserSettingViewController")
+                self.navigationController!.pushViewController(view, animated: true)
+            }
+        }
+        else if indexPath.section == 1 {
+            let storyBoard = UIStoryboard(name: "User", bundle: nil)
+            switch indexPath.row{
+            case 0:
+                if let _ = user.username{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }else{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }
+                break
+            case 1:
+                if let _ = user.username{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"OrdersViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }else{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }
+            default:
+                break;
+            }
+            
         }
     }
     
@@ -86,12 +99,11 @@ class UserViewController: UITableViewController {
         if indexPath.section == 0 {
             if let name = user.username{
                 usernameHeadLabel.text="用户名："
-                
                 usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
                 usernameHeadLabel.textColor=UIColor.white
                 
                 usernameLabel.textColor=UIColor.white
-                usernameLabel.frame=CGRect(x:220, y:47, width:50, height:21)
+                usernameLabel.frame=CGRect(x:220, y:47, width:100, height:21)
                 usernameLabel.text=name
                 
                 boundingCitiCardHeadLabel.text = {() -> String in
@@ -112,21 +124,22 @@ class UserViewController: UITableViewController {
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 userTableCell?.selectionStyle = UITableViewCellSelectionStyle.default
                 
-                if let btn = loginButton {
-                    btn.removeFromSuperview()
-                }
+                
+                
+                loginButton.removeFromSuperview()
             }
             else{
-                loginButton=UIButton()
-                loginButton?.frame=CGRect(x:175, y:47, width:133, height:50)
-                loginButton?.setTitleColor(UIColor.white, for:.normal)
-                loginButton?.setTitle("登录 / 注册", for: UIControlState.normal)
-                loginButton?.layer.borderWidth=2
-                loginButton?.layer.borderColor=UIColor.white.cgColor
-                loginButton?.layer.cornerRadius=15
-                loginButton?.addTarget(self, action: #selector(UserViewController.gotoLogin), for: .touchDown)
-                userTableCell?.addSubview(loginButton!)
+                loginButton.frame=CGRect(x:175, y:47, width:133, height:50)
+                loginButton.setTitleColor(UIColor.white, for:.normal)
+                loginButton.setTitle("登录 / 注册", for: UIControlState.normal)
+                loginButton.layer.borderWidth=2
+                loginButton.layer.borderColor=UIColor.white.cgColor
+                loginButton.layer.cornerRadius=15
+                loginButton.addTarget(self, action: #selector(UserViewController.gotoLogin), for: .touchDown)
+                userTableCell?.addSubview(loginButton)
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.none
+                userTableCell?.selectionStyle = UITableViewCellSelectionStyle.none
+                
                 
                 boundingCitiCardHeadLabel.removeFromSuperview()
                 usernameLabel.removeFromSuperview()
@@ -135,6 +148,8 @@ class UserViewController: UITableViewController {
                 
                 
             }
+            //头像显示
+            self.portraitImageView.image = user.portrait?.roundCornersToCircle()
             return userTableCell!
         }
         else if indexPath.section == 2 {
@@ -144,9 +159,8 @@ class UserViewController: UITableViewController {
                 exitButton.textLabel?.textColor = UIColor.black
             }else{
                 exitButton.isUserInteractionEnabled = false
-                exitButton.backgroundColor = UIColor.gray
+                exitButton.backgroundColor = UIColor.lightGray
                 exitButton.textLabel?.textColor = UIColor.white
-                exitButton.textLabel?.backgroundColor = UIColor.gray
             }
             return super.tableView(self.tableView, cellForRowAt: indexPath)
         }
@@ -157,9 +171,9 @@ class UserViewController: UITableViewController {
     }
 
     
-    
     func logout(){
-        self.user.username=nil
+        User.logout()
+        self.user=User.getUser()
         print("logout")
         self.tableView.reloadData()
         

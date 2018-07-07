@@ -37,19 +37,16 @@ class AddCardTableViewController: UITableViewController {
 //        return section
 //    }
 
+//	
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+//		
+//        return cell
+//    }
+//	
+	// MARK: - TextField delegate
 	
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-		
-		// 修改按钮"下一步"对应的单元格样式
-		if indexPath.section==1 {
-			cell.backgroundView = nil
-			cell.backgroundColor = nil
-			tableView.separatorStyle = UITableViewCellSeparatorStyle(rawValue: 0)!
-		}
-		
-        return cell
-    }
+	
 
 
     /*

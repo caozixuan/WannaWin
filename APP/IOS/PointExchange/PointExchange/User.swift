@@ -9,12 +9,17 @@
 import UIKit
 
 class User: NSObject {
-    static let user:User = User()
+    static var user:User = User()
     var username:String?
     var nickname:String = "default"
     var password:String?
     var card:Card?
+    var portrait = UIImage(named:"通讯录")
     class func getUser() -> User{
         return user;
+    }
+    
+    static func logout(){
+        user=User()
     }
 }
