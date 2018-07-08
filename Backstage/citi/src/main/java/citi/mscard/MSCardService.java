@@ -1,10 +1,22 @@
 package citi.mscard;
 
+import citi.dao.MSCardMapper;
+import citi.dao.MerchantMapper;
+import citi.dao.UserMapper;
 import citi.vo.MSCard;
 import citi.vo.MSCardType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+/*
+ * 接口设计：刘钟博
+ * 代码填充：曹子轩
+ */
 
 @Service
 public class MSCardService {
@@ -15,11 +27,33 @@ public class MSCardService {
      * @param n
      * @return 卡列表
      */
-    public List<MSCard> getInfo(String userId, String n){
 
-        return null;
+    @Autowired
+    private MSCardMapper msCardMapper;
+    @Autowired
+    private MerchantMapper merchantMapper;
+
+    public List<MSCard> getInfo(String userId, int n){
+        List<MSCard> allCards =msCardMapper.select(userId);
+        Collections.sort(allCards,new SortByPoints());
+        ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
+        for(int i=0;i<n;i++){
+            returnCards.add(allCards.get(i));
+        }
+
+        return returnCards;
     }
 
+    class SortByPoints implements Comparator{
+        public int compare(Object o1, Object o2){
+            MSCard c1 = (MSCard) o1;
+            MSCard c2 = (MSCard) o2;
+            if(c1.getPoints()<c2.getPoints()){
+                return 1;
+            }
+            return 0;
+        }
+    }
     /**
      * 由cardID获取卡片
      * @param CardID
@@ -27,7 +61,7 @@ public class MSCardService {
      */
     public MSCard getMSCardInfo(String CardID){
 
-        return null;
+        return msCardMapper.selectCard(CardID);
     }
 
     /**
@@ -36,8 +70,8 @@ public class MSCardService {
      * @return
      */
     public List<MSCardType> getTypes(String merchantID){
-
-        return null;
+        List<MSCardType> types = merchantMapper.selectTypes(merchantID);
+        return types;
     }
 
     /**
@@ -46,7 +80,9 @@ public class MSCardService {
      * @return
      */
     public boolean addMSCard(MSCard msCard){
-
+        int flag = msCardMapper.insert(msCard);
+        if(flag>0)
+            return true;
         return false;
     }
 

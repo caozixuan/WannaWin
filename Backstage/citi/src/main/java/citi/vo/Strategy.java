@@ -12,9 +12,13 @@ public class Strategy {
     // 默认这三个应该是递增顺序
     ArrayList<Double> priceOriginal;
     ArrayList<Double> pricePaid;
-    ArrayList<int> pointsNeed;
+    ArrayList<Integer> pointsNeed;
 
-    public Strategy(String merchantId, ArrayList<String> discountCommodityIDs, ArrayList<Double> priceOriginal, ArrayList<Double> pricePaid, ArrayList<int> pointsNeed) {
+    public Strategy()
+    {}
+
+
+    public Strategy(String merchantId, ArrayList<String> discountCommodityIDs, ArrayList<Double> priceOriginal, ArrayList<Double> pricePaid, ArrayList<Integer> pointsNeed) {
         this.merchantId = merchantId;
         this.discountCommodityIDs = discountCommodityIDs;
         this.priceOriginal = priceOriginal;

@@ -2,7 +2,7 @@
 //  QRScanViewController.swift
 //  PointExchange
 //
-//  Created by yiner on 2018/7/5.
+//  Created by Pan on 2018/7/5.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 
