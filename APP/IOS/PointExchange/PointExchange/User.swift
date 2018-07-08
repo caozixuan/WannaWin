@@ -27,7 +27,8 @@ extension User{
             if let currentUser = currentUserJSON?.data(using: .utf8){
                 print(currentUserJSON!)
                 let decoder = JSONDecoder()
-                return try! decoder.decode(User.self, from: currentUser)
+                user = try! decoder.decode(User.self, from: currentUser)
+                return user!
             }
             else{
                 user = User()
@@ -57,5 +58,12 @@ extension User{
         else{
             return UIImage(named: self.portraitName)!
         }
+    }
+    
+    static func saveToKeychain(){
+        let encoder = JSONEncoder()
+        let jsonData = try! encoder.encode(user)
+        KeychainHandler.getInstance().set(object: jsonData, forKey: "current_user")
+        print("save: \(jsonData)")
     }
 }

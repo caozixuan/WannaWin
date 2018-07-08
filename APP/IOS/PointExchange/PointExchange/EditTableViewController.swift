@@ -106,13 +106,16 @@ class EditTableViewController: UITableViewController {
     }
     
     func changedUserInfo(){
-        switch changedType {
-        case "username":
-            User.getUser().username = textField.text
-        case "nickname":
-            User.getUser().nickname = textField.text!
-        default:
-            break;
+        if self.textField.text != ""{
+            switch changedType {
+            case "username":
+                User.getUser().username = self.textField.text
+            case "nickname":
+                User.getUser().nickname = self.textField.text!
+            default:
+                break;
+            }
         }
+        User.saveToKeychain()
     }
 }
