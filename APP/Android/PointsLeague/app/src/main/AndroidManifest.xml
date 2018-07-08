@@ -29,28 +29,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PayCodeActivity" />
-        <activity android:name=".PayingActivity" />
-        <activity android:name=".PaymentFinishActivity" />
+
+        <activity
+            android:name=".PaymentFinishActivity"
+            android:parentActivityName=".MainActivity"
+            />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity android:name=".PayCodeActivity">
+            android:label="@string/title_activity_login">
+
+        </activity>
+        <activity
+            android:name=".PayCodeActivity"
+            android:parentActivityName=".MainActivity"
+            >
+
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
+                <!---->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
 
-        <activity android:name=".PayingActivity">
+        <activity
+            android:name=".PayingActivity"
+            android:parentActivityName=".MainActivity"
+            >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
-
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".PaymentFinishActivity"></activity>
     </application>
 
 </manifest>

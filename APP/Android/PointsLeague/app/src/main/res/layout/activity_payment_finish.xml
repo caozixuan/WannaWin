@@ -72,20 +72,24 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_finish_points"
             android:layout_width="match_parent"
-            android:layout_height="242dp"
+            android:layout_weight="4"
+            android:layout_height="0dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+        </android.support.v7.widget.RecyclerView>
+
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_ad"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -93,31 +97,34 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-    <LinearLayout
-        android:id="@+id/id_dots_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/id_viewpager"
-        android:background="#33000000"
-        android:orientation="vertical"
-        android:padding="4dp">
-        <TextView
-            android:id="@+id/id_image_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="这个是描述"
-            android:textColor="#ffffff" />
+
         <LinearLayout
-            android:id="@+id/id_dots"
-            android:layout_width="wrap_content"
+            android:id="@+id/id_dots_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:background="@drawable/dotsgroupbg"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"></LinearLayout>
-    </LinearLayout>
+            android:background="#33000000"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/id_image_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="这个是描述"
+                android:textColor="#ffffff" />
+
+            <LinearLayout
+                android:id="@+id/id_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/dotsgroupbg"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
