@@ -14,7 +14,6 @@ class LoginViewController: UITableViewController{
     @IBOutlet weak var loginButton: UITableViewCell!
     
     
-    var user:User = User.getUser()
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordField.delegate=self
@@ -40,21 +39,21 @@ class LoginViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
             if isLoginValid() {
-                
-                self.navigationController!.popViewController(animated: true)
+                let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
+                let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+                    self.navigationController!.popViewController(animated: true)
+                })
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     func isLoginValid()->Bool{
-        user.username = usernameField.text
-        user.password = passwordField.text
+        User.getUser().username = usernameField.text
+        User.getUser().password = passwordField.text
         
-        let encoder = JSONEncoder()
-        let jsonData = try! encoder.encode(user)
-        KeychainHandler.getInstance().set(object: jsonData, forKey: "current_user")
-        
-        
+        User.saveToKeychain()
         return true
     }
     

@@ -1,23 +1,19 @@
 //
-//  OrdersTableViewController.swift
+//  OrderDetailTableViewController.swift
 //  PointExchange
 //
-//  Created by panyy on 2018/7/7.
+//  Created by panyy on 2018/7/8.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 
 import UIKit
 
-class OrdersTableViewController: UITableViewController {
-    
-    var ordersCount = 4
-    
+class OrderDetailTableViewController: UITableViewController {
 
+    @IBOutlet weak var QRCodeImageView: UIImageView!
+    @IBOutlet weak var barCodeImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(OrdersTableViewController.refreshData), for: .valueChanged)
-        self.tableView.addSubview(self.refreshControl!)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -25,8 +21,10 @@ class OrdersTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    @objc func refreshData(){
-        // TODO: - 下拉刷新
+    override func viewWillAppear(_ animated: Bool) {
+        let codeManager = ScanCodeManager()
+        QRCodeImageView.image = codeManager.createQRCode(url: "null")
+        barCodeImageView.image = codeManager.createBarCode(url: "null")
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,19 +36,9 @@ class OrdersTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return ordersCount
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "order")!
-        tableView.rowHeight = 119
-        return cell
-    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

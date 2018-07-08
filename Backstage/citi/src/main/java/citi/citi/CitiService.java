@@ -1,7 +1,9 @@
 package citi.citi;
 
 import citi.vo.CitiCard;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CitiService {
 
     /**
