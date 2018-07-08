@@ -4,9 +4,8 @@ package citi.vo;
  * 作者：曹子轩
  * 创建订单实体类
  */
-enum OrderState{
-    SUCCESS,FAIL,TOBEFINISHED
-}
+
+
 public class Order {
     private String orderId;
     private double originalPrice;
@@ -16,7 +15,11 @@ public class Order {
     private OrderState state;
     private String merchantId;
 
-    public Order(String orderId, double originalPrice, double priceAfter,String userId, String merchantId) {
+    public enum OrderState {
+        SUCCESS, FAIL, TOBEFINISHED
+    }
+
+    public Order(String orderId, double originalPrice, double priceAfter, String userId, String merchantId) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
@@ -31,10 +34,9 @@ public class Order {
     }
 
     public void changeState() {
-        if(pointsNeeded>0&&state==OrderState.TOBEFINISHED){
+        if (pointsNeeded > 0 && state == OrderState.TOBEFINISHED) {
             state = OrderState.SUCCESS;
-        }
-        else{
+        } else {
             state = OrderState.FAIL;
         }
     }

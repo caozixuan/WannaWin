@@ -14,6 +14,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+
+/**
+ * 短信验证码的实现
+ * 作者：彭璇
+ */
 public class VerificationCode {
     private static final Random random = new Random();
     //发送验证码的请求路径URL
@@ -29,11 +34,12 @@ public class VerificationCode {
     //短信模板ID
     private static final String TEMPLATEID="4132141";
     //手机号
-    private static final String MOBILE="13294150809";
+    private static  String MOBILE=null;
     //验证码长度，范围4～10，默认为4
     private static final String CODELEN="6";
 
-    public static String GenVeriCode() throws  Exception{
+    public static String GenVeriCode(String phoneNum) throws  Exception{
+        MOBILE = phoneNum;
         int Vcode = random.nextInt(1000000);
         String vcode = String.valueOf(Vcode);
         int num = 6-vcode.length();
@@ -75,12 +81,12 @@ public class VerificationCode {
          * 1.打印执行结果，打印结果一般会200、315、403、404、413、414、500
          * 2.具体的code有问题的可以参考官网的Code状态表
          */
-//        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+//      System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
         return vcode;
     }
 
-//    public static void main(String[] args) throws  Exception{
-//        GenVeriCode();
+//   public static void main(String[] args) throws  Exception{
+//       GenVeriCode();
 //    }
 
 
