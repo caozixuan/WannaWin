@@ -7,10 +7,8 @@ package citi.vo;
 public class MSCard {
     String cardID;
     String UserID;
-    String merchantID;
     String cardNo;
     int points;
-    double proportion;
     MSCardType msCardType;
 
     public String getCardID() {
@@ -21,10 +19,6 @@ public class MSCard {
         return UserID;
     }
 
-    public String getMerchantID() {
-        return merchantID;
-    }
-
     public String getCardNo() {
         return cardNo;
     }
@@ -33,7 +27,4 @@ public class MSCard {
         return points;
     }
 
-    public double getProportion() {
-        return proportion;
-    }
 }
