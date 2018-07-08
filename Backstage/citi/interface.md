@@ -37,6 +37,30 @@ citiCardNum,phoneNum,ID,password
 #商户相关
 获取从start开始的n条商户信息
 ```
+xxxx/merchant/getInfos
+start,n
+[{"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"},{}...]
+```
+获取指定ID的商家信息
+```
+xxxx/merchant/{MerchantID}
+{"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"}
+```
+#会员卡相关
+获取指定用户积分最多的n张卡
+```
+xxxx/mscard/infos
+userID,n
 
 ```
-
+一个商户可能有多张卡，返回该商户所有卡的类型
+```
+xxxx/mscard/cardtype
+merchantID
+[{"MerchantID":"xxxx","Mtype":"xxxx","cardType":"xxxx"},{},{}...]
+```
+添加会员卡
+```
+xxxx/mscard/addcard
+cardID;UserID;cardNo;MSCardType msCardType;
+```
