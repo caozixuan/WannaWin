@@ -10,10 +10,14 @@ import UIKit
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
-	var user = User.getUser()
-	
+
 	@IBOutlet weak var imageScrollerView: UIImageView!
 	
+	@IBOutlet weak var cardImage1: UIImageView!
+	
+	@IBOutlet weak var cardImage2: UIImageView!
+	
+	@IBOutlet weak var cardImage3: UIImageView!
 	
 	
 	//获取屏幕宽度
@@ -42,6 +46,12 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		let tap = UITapGestureRecognizer(target: self,
 										 action: #selector(MainViewController.handleTapAction(_:)))
 		imageScroller.view.addGestureRecognizer(tap)
+		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+		cardImage1.addGestureRecognizer(cardTap1)
+		cardImage2.addGestureRecognizer(cardTap2)
+		cardImage3.addGestureRecognizer(cardTap3)
 		
     }
 	
@@ -71,10 +81,35 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		self.present(alertController, animated: true, completion: nil)
 	}
 	
+	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
+		let storyBoard:UIStoryboard!
+		let view:UIViewController!
+		if User.getUser().username != nil {
+			storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+			view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
+			switch tap.view {
+			case cardImage1:
+				// FIXME: - 后期用来判断点击了那张卡，用来传递数据
+				let a = 1
+			case cardImage2:
+				// FIXME: - 后期用来判断点击了那张卡，用来传递数据
+				let a = 1
+			default:
+				// FIXME: - 后期用来判断点击了那张卡，用来传递数据
+				let a = 1
+			}
+		}
+		else {
+			storyBoard = UIStoryboard(name:"User", bundle:nil)
+			view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+		}
+		
+		self.navigationController!.pushViewController(view, animated: true)
+	}
+	
 	@IBAction func showCardInfo(_ sender: AnyObject){
-		user.username = "yiner"
 		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
-		if user.username != nil {
+		if User.getUser().username != nil {
 			let view = storyBoard.instantiateViewController(withIdentifier: "CardInfoTableViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
@@ -85,9 +120,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	@IBAction func addCard(_ sender: AnyObject){
-		user.username = "yiner"
 		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
-		if user.username != nil {
+		if User.getUser().username != nil {
 			let view = storyBoard.instantiateViewController(withIdentifier: "AddCardTableViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
