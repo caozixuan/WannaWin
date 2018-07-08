@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 public interface LoginMapper {
 
     final String insertUser = "";
-    final String getByPhoneNum = "SELETC ";
+    final String getByPhoneNum = "SELECT ";
 
     //注解，添加向前端发送的验证码至数据库
     @Insert(insertUser)
