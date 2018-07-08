@@ -2,6 +2,7 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,24 +10,19 @@ import android.support.v7.widget.RecyclerView;
 import android.text.method.KeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
+
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class PayingActivity extends AppCompatActivity {
 
@@ -36,6 +32,7 @@ public class PayingActivity extends AppCompatActivity {
     private PayingAdapter mAdapter;
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
+    TextView Choose_Points;
 
 
     KeyListener storedKeylistener;
@@ -52,11 +49,18 @@ public class PayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paying);
 
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         Text_NeedPoints = (TextView)findViewById(R.id.textView_points_need);
         //通过findViewById拿到RecyclerView实例
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_points);
 
         ImageView_Business = (ImageView)findViewById(R.id.imageView_business);
+        Choose_Points = (TextView) findViewById(R.id.textview_points_choose);
 
 
         //初始化数据
@@ -76,7 +80,29 @@ public class PayingActivity extends AppCompatActivity {
             }
         });
 
+        mAdapter.checkBoxSetOnclick(new PayingAdapter.CheckBoxInterface() {
+            @Override
+            public void onclick(View view, int position) {
+                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
+                if(isSoftShowing()){
 
+                }
+            }
+        });
+
+
+    }
+
+
+    /*判断是否显示软键盘*/
+    private boolean isSoftShowing() {
+        //获取当前屏幕内容的高度
+        int screenHeight = getWindow().getDecorView().getHeight();
+        //获取View可见区域的bottom
+        Rect rect = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+
+        return screenHeight - rect.bottom != 0;
     }
 
 
@@ -88,29 +114,37 @@ public class PayingActivity extends AppCompatActivity {
         ArrayList<String> Points_Result = new ArrayList<>();
         ArrayList<Integer> Business_Image_Result = new ArrayList<>();
 
-        map = mAdapter.getMap();
-        for (Integer i:map.keySet()){
-            //map.keySet()返回的是所有key的值
-            if(map.get(i)){
-                Points_Result.add(data_posses_point.get(i));
-                Business_Image_Result.add(business_image.get(i));
+        if(Text_NeedPoints.getText().toString().equals(Choose_Points.getText().toString())){
+            map = mAdapter.getMap();
+            for (Integer i:map.keySet()){
+                //map.keySet()返回的是所有key的值
+                if(map.get(i)){
+                    Points_Result.add(data_posses_point.get(i));
+                    Business_Image_Result.add(business_image.get(i));
+                }
+
             }
+            Bundle bundle = new Bundle();
 
+
+            //intent.putExtra("value", (Serializable)map);
+
+            SerializableHashMap myMap=new SerializableHashMap();
+            myMap.setMap(map);//将hashmap数据添加到封装的myMap中
+
+            bundle.putStringArrayList("points_result",Points_Result);
+            bundle.putIntegerArrayList("image_resource",Business_Image_Result);
+            //bundle.putSerializable("checkbox_map", myMap);
+            intent.putExtras(bundle);
+
+            startActivity(intent);
         }
-        Bundle bundle = new Bundle();
+        else{
+            int diffPoints = Integer.parseInt(Text_NeedPoints.getText().toString()) - Integer.parseInt(Choose_Points.getText().toString());
+            Toast.makeText(getApplicationContext(), "所选积分不足，还需"+diffPoints, Toast.LENGTH_SHORT).show();
+        }
 
 
-        //intent.putExtra("value", (Serializable)map);
-
-        SerializableHashMap myMap=new SerializableHashMap();
-        myMap.setMap(map);//将hashmap数据添加到封装的myMap中
-
-        bundle.putStringArrayList("points_result",Points_Result);
-        bundle.putIntegerArrayList("image_resource",Business_Image_Result);
-        //bundle.putSerializable("checkbox_map", myMap);
-        intent.putExtras(bundle);
-
-        startActivity(intent);
 
     }
 
@@ -118,15 +152,15 @@ public class PayingActivity extends AppCompatActivity {
     protected void initData()
     {
         //设置需要的积分数
-        Text_NeedPoints.setText("120p");
+        Text_NeedPoints.setText("120");
 
-        ImageView_Business.setImageResource(R.drawable.nike_store);
+        ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
 
         //设置列表项中的文字（用户拥有的积分数）
         data_posses_point = new ArrayList<String>();
-        for (int i = 'A'; i < 'z'; i++)
+        for (int i = 0; i < 20; i++)
         {
-            data_posses_point.add("" + (char) i);
+            data_posses_point.add("" + i);
         }
 
         //设置选择积分栏目中商家logo
@@ -134,7 +168,7 @@ public class PayingActivity extends AppCompatActivity {
 
         for (int i = 0; i < data_posses_point.size(); i++)
         {
-            business_image.add(R.drawable.nike_store);
+            business_image.add(R.drawable.ic_mall_black_24dp);
         }
     }
 

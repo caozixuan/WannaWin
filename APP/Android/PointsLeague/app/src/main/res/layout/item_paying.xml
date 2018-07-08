@@ -8,45 +8,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <CheckBox
             android:id="@+id/checkbox_choose"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1.5" />
 
         <ImageView
             android:id="@+id/image_business"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             app:srcCompat="@color/colorPrimary" />
 
         <EditText
             android:id="@+id/editText_points_posses"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="200" />
+            android:text="200"
+            android:imeOptions="actionDone"/>
 
         <TextView
             android:id="@+id/textview_points_transfer"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:gravity="center"
             android:text="1" />
 
+
+
+
         <Button
             android:id="@+id/button_modify"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
             android:layout_weight="1"
-            android:text="修改"
-            android:visibility="invisible" />
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ic_modify_24dp"
+            android:visibility="visible" />
 
     </LinearLayout>
 
