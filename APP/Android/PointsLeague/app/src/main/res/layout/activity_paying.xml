@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PayingActivity">
+    tools:context=".PayingActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linear_bottom"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp"
+        >
 
         <ImageView
             android:id="@+id/imageView_business"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:srcCompat="@color/colorAccent" />
 
         <LinearLayout
@@ -33,7 +42,6 @@
                 android:id="@+id/textView_spend_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_weight="1"
                 android:text="@string/need_points"
                 android:textSize="18sp" />
@@ -59,14 +67,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_alignParentLeft="true"
                 android:text="已选择：" />
 
             <TextView
                 android:id="@+id/textview_points_choose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_weight="1"
                 android:text="0"
                 android:textSize="18sp" />
@@ -75,61 +81,46 @@
 
     </LinearLayout>
 
+
+
     <LinearLayout
         android:id="@+id/linear_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="start"
+            android:text="使用积分:"
+            android:textColor="@color/default_inactive_item_color"
+            android:textSize="18sp"
+
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_points"
             android:layout_width="match_parent"
-            android:layout_height="282dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
+            android:layout_height="0dp"
             android:layout_marginBottom="15dp"
-            android:layout_weight="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="8dp">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_weight="4"
+            />
 
         <Button
             android:id="@+id/button_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rv_points"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
-            android:layout_weight="1"
+
             android:onClick="click_finish"
             android:text="@string/Button_Paying" />
     </LinearLayout>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
-
-    <TextView
-        android:id="@+id/textView_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="17dp"
-        android:text="使用积分"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
-
-</RelativeLayout>
+</LinearLayout>

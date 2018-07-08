@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".PaymentFinishActivity">
-
 
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_height="154dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -59,7 +58,6 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -67,20 +65,24 @@
         android:layout_height="358dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:orientation="vertical">
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_finish_points"
             android:layout_width="match_parent"
-            android:layout_weight="4"
             android:layout_height="0dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="40dp"
+            android:layout_weight="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -102,7 +104,7 @@
             android:id="@+id/id_dots_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#33000000"
+            android:background="#84171717"
             android:orientation="vertical"
             android:padding="4dp"
             android:visibility="visible">
@@ -123,9 +125,9 @@
                 android:background="@drawable/dotsgroupbg"
                 android:orientation="horizontal"
                 android:paddingBottom="4dp"
-                android:paddingTop="4dp"/>
+                android:paddingTop="4dp" />
         </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
