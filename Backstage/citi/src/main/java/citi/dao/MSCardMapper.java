@@ -12,7 +12,7 @@ public interface MSCardMapper {
     final String insert = "INSERT INTO MSCard (userID, cardID, merchantID, cardNo, points, proportion) VALUES (#{userID}, #{cardID}, #{merchantID}, #{cardNo}, #{points}, #{proportion})";
     final String getAll = "SELECT * FROM MSCard";
     final String getByuserId = "SELECT * FROM MSCard WHERE userID = #{userid}";
-    final String deleteById = "DELETE from MSCard WHERE userID = #{userid}";
+    final String deleteById = "DELETE FROM MSCard WHERE userID = #{userid}";
 
     //插入一个会员卡
     // 曹子轩：疑问这里int是怎么规定的？
