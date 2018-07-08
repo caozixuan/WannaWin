@@ -50,6 +50,11 @@ class LoginViewController: UITableViewController{
         user.username = usernameField.text
         user.password = passwordField.text
         
+        let encoder = JSONEncoder()
+        let jsonData = try! encoder.encode(user)
+        KeychainHandler.getInstance().set(object: jsonData, forKey: "current_user")
+        
+        
         return true
     }
     
