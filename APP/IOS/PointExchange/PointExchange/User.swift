@@ -30,7 +30,8 @@ extension User{
                 return try! decoder.decode(User.self, from: currentUser)
             }
             else{
-                return User()
+                user = User()
+                return user!
             }
         }
     }
@@ -38,6 +39,13 @@ extension User{
     static func logout(){
         user=nil
         KeychainHandler.getInstance().removeObject(forKey: "current_user")
+    }
+    
+    static func login(username:String, password:String)->Bool{
+        // TODO: - 登录是否有效
+        user?.username = username
+        user?.password = password
+        return true
     }
     
     func getPortraitImage()->UIImage{

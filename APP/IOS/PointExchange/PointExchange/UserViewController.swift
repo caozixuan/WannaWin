@@ -30,7 +30,6 @@ class UserViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-            
         
     }
     
@@ -120,7 +119,7 @@ class UserViewController: UITableViewController {
                 userTableCell?.addSubview(boundingCitiCardHeadLabel)
                 
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-                userTableCell?.selectionStyle = UITableViewCellSelectionStyle.default
+                userTableCell?.isUserInteractionEnabled = true
                 
                 
                 
@@ -136,7 +135,7 @@ class UserViewController: UITableViewController {
                 loginButton.addTarget(self, action: #selector(UserViewController.gotoLogin), for: .touchDown)
                 userTableCell?.addSubview(loginButton)
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.none
-                userTableCell?.selectionStyle = UITableViewCellSelectionStyle.none
+                userTableCell?.selectionStyle = .none
                 
                 
                 boundingCitiCardHeadLabel.removeFromSuperview()
