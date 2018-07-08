@@ -18,7 +18,7 @@ public class PayController {
      */
     @Autowired
     private Gson gson;
-    @RequestMapping(value = "/pay/userInformation")
+    @RequestMapping(value = "/userInformation")
     @ResponseBody
     public String returnCustomerInformation(User user){
         String jsonStr = gson.toJson(user);
@@ -27,7 +27,7 @@ public class PayController {
 
 
     @ResponseBody
-    @RequestMapping(value="/pay/submitOrder",method= RequestMethod.POST)
+    @RequestMapping(value="/submitOrder",method= RequestMethod.POST)
     public String ajaxRequest(Order order, User user){
         Strategy.returnPointsTobePaid(order,user);
         user.changePoint(order);
