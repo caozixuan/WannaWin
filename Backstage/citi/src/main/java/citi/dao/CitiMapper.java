@@ -1,6 +1,7 @@
 package citi.dao;
 
 import citi.vo.CitiCard;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /*
@@ -11,6 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CitiMapper {
 
+    final String insertCiti = "INSERT INTO citicard VALUES(#{citiCardNum}, #{phoneNum}, #{ID}, #{password}) ";
+    final String deleteCiti = "";
+
+
+
+    @Insert(insertCiti)
     int insert(CitiCard citiCard);
 
     int delete(String citiNum);
