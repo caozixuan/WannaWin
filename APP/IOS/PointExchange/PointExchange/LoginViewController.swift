@@ -14,7 +14,6 @@ class LoginViewController: UITableViewController{
     @IBOutlet weak var loginButton: UITableViewCell!
     
     
-    
     var user:User = User.getUser()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +40,16 @@ class LoginViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
             if isLoginValid() {
-                user.username = usernameField.text
-                user.password = passwordField.text
+                
                 self.navigationController!.popViewController(animated: true)
             }
         }
     }
     
     func isLoginValid()->Bool{
+        user.username = usernameField.text
+        user.password = passwordField.text
+        
         return true
     }
     

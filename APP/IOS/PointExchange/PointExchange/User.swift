@@ -8,7 +8,7 @@
 
 import UIKit
 
-class User: NSObject {
+class User: NSObject{
     static var user:User = User()
     var username:String?
     var nickname:String = "default"

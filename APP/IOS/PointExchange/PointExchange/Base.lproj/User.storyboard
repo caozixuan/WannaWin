@@ -13,7 +13,7 @@
         <!--通用设置-->
         <scene sceneID="qdq-iY-sRF">
             <objects>
-                <tableViewController storyboardIdentifier="SettingViewController" title="通用设置" id="Jf7-qw-NIb" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingViewController" title="通用设置" hidesBottomBarWhenPushed="YES" id="Jf7-qw-NIb" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="orf-Fh-bPB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +61,7 @@
         <!--历史订单-->
         <scene sceneID="kXi-nK-iUA">
             <objects>
-                <tableViewController storyboardIdentifier="OrdersViewController" title="历史订单" id="0Uz-7L-HAW" customClass="OrdersTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="OrdersViewController" title="历史订单" hidesBottomBarWhenPushed="YES" id="0Uz-7L-HAW" customClass="OrdersTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oye-a7-e4r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,7 +116,7 @@
         <!--编辑-->
         <scene sceneID="Ot9-PB-e2h">
             <objects>
-                <tableViewController title="编辑" id="CE9-4W-t74" customClass="EditTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="编辑" hidesBottomBarWhenPushed="YES" id="CE9-4W-t74" customClass="EditTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6gp-sn-Cvm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +167,7 @@
         <!--用户设置-->
         <scene sceneID="jp1-lR-PIx">
             <objects>
-                <tableViewController storyboardIdentifier="UserSettingViewController" title="用户设置" id="PoZ-Um-c7R" customClass="UserSettingViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UserSettingViewController" title="用户设置" hidesBottomBarWhenPushed="YES" id="PoZ-Um-c7R" customClass="UserSettingViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lf9-IK-Bur">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -288,7 +288,7 @@
         <!--Navigation Controller-->
         <scene sceneID="bqa-hZ-6V7">
             <objects>
-                <navigationController id="MOR-Ol-tRL" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" id="MOR-Ol-tRL" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="psJ-gU-vhz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -473,7 +473,7 @@
         <!--登录-->
         <scene sceneID="Jdu-tr-Uwg">
             <objects>
-                <tableViewController storyboardIdentifier="LoginViewController" title="登录" id="BCV-6w-YtR" customClass="LoginViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LoginViewController" title="登录" hidesBottomBarWhenPushed="YES" id="BCV-6w-YtR" customClass="LoginViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="C0w-3G-s2u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -625,7 +625,7 @@
         <!--关于-->
         <scene sceneID="Ac7-lZ-1Bg">
             <objects>
-                <viewController storyboardIdentifier="AboutViewController" title="关于" id="lDT-iN-iyJ" customClass="AboutViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutViewController" title="关于" hidesBottomBarWhenPushed="YES" id="lDT-iN-iyJ" customClass="AboutViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P5h-s3-Ox6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -650,7 +650,7 @@
         <!--注册-->
         <scene sceneID="nh4-o1-2hl">
             <objects>
-                <tableViewController title="注册" id="KrY-UL-JYZ" customClass="SignUpViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="注册" hidesBottomBarWhenPushed="YES" id="KrY-UL-JYZ" customClass="SignUpViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bCt-mh-OHY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -844,7 +844,7 @@
         <!--反馈-->
         <scene sceneID="ZRG-x7-tZP">
             <objects>
-                <tableViewController storyboardIdentifier="FeedbackViewController" title="反馈" id="Qds-MF-chv" customClass="FeedbackViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FeedbackViewController" title="反馈" hidesBottomBarWhenPushed="YES" id="Qds-MF-chv" customClass="FeedbackViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6uH-z3-sE2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -930,7 +930,7 @@
         <!--添加银行卡-->
         <scene sceneID="IPb-FV-40V">
             <objects>
-                <tableViewController storyboardIdentifier="AddBankCardViewController" title="添加银行卡" id="vgW-or-OH1" customClass="AddBankCardTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddBankCardViewController" title="添加银行卡" hidesBottomBarWhenPushed="YES" id="vgW-or-OH1" customClass="AddBankCardTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="OJ9-ts-AM2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
