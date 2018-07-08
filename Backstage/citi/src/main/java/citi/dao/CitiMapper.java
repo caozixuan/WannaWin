@@ -13,12 +13,12 @@ import org.springframework.stereotype.Repository;
 public interface CitiMapper {
 
     final String insertCiti = "INSERT INTO citicard VALUES(#{citiCardNum}, #{phoneNum}, #{ID}, #{password}) ";
-    final String deleteCiti = "";
-
-
+    final String deleteCiti = "DELETE FROM citicard WHERE citiCardNum = #{citiNum}";
 
     @Insert(insertCiti)
     int insert(CitiCard citiCard);
 
+    @Delete(deleteCiti)
     int delete(String citiNum);
+
 }
