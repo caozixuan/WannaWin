@@ -48,9 +48,13 @@ class UserSettingViewController: UITableViewController, UIImagePickerControllerD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var image = UIImage()
         image = (info[UIImagePickerControllerEditedImage] as! UIImage)
+        let imagePath = info[UIImagePickerControllerImageURL] as! NSURL
+        User.getUser().portraitPath = imagePath.path
+        
+        // TODO: - 上传头像图片
+        
         
         portraitImage.image=image.roundCornersToCircle()
-        User.getUser().portrait=image
         picker.dismiss(animated: true, completion: nil)
     }
 
@@ -78,7 +82,7 @@ class UserSettingViewController: UITableViewController, UIImagePickerControllerD
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
-        portraitImage.image=User.getUser().portrait?.roundCornersToCircle()
+        portraitImage.image=User.getUser().getPortraitImage().roundCornersToCircle()
         if indexPath.section == 1 {
             switch indexPath.row{
             case 0:

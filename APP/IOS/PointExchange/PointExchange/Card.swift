@@ -7,6 +7,6 @@
 //
 
 import Foundation
-class Card: NSObject {
+class Card: NSObject,Codable {
     var number:String = "00000"
 }

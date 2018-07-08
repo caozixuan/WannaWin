@@ -35,10 +35,8 @@ public class MSCardController {
     @RequestMapping("/infos")
     public String getMSInfo(String userId,int n){
         List<MSCard> cards = msCardService.getInfo(userId, n);
-        // json的转换需要再看怎么做
-        String jsonStr = null;
-        // 如何返回json格式？
-        return "";
+        String jsonStr = gson.toJson(cards);
+        return jsonStr;
     }
 
     /**
@@ -49,7 +47,8 @@ public class MSCardController {
     @RequestMapping("/cardtype")
     public String getCardType(String merchantID){
         List<MSCardType> msCardTypes = msCardService.getTypes(merchantID);
-        return "";
+        String jsonStr = gson.toJson(msCardTypes);
+        return jsonStr;
     }
 
     /**
@@ -58,7 +57,7 @@ public class MSCardController {
      */
     @RequestMapping("/addcard")
     public String addMSCard(MSCard msCard){
-        msCardService.addMSCard(msCard);
-        return "";
+        boolean flag = msCardService.addMSCard(msCard);
+        return "{state:"+flag+"}";
     }
 }
