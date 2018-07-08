@@ -19,7 +19,7 @@ public interface LoginMapper {
 
     final String insertVCode = "INSERT INTO Vcode(phoneNum, VCode Time) VALUES(#{phoneNum}, #{VCode}, #{Time})";
     final String getByPhoneNum = "SELECT VCode FROM Vcode " +
-            "WHERE phoneNum = #{phoneNum} AND timediff(now(), Time) ";
+            "WHERE phoneNum = #{phoneNum} AND timediff(now(), Time) < '00:10:00'";
 
     //注解，添加向前端发送的验证码至数据库
     @Insert(insertVCode)
