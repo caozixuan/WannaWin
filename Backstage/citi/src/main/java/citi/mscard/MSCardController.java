@@ -16,8 +16,8 @@ import java.util.Map;
  * 接口设计：刘钟博
  * 代码填充：曹子轩
  */
-@Controller
 //Membership card
+@Controller
 @RequestMapping("/mscard")
 public class MSCardController {
 
