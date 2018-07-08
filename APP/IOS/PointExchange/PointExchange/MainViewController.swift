@@ -14,6 +14,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	@IBOutlet weak var imageScrollerView: UIImageView!
 	
+	
+	
 	//获取屏幕宽度
 	let screenWidth =  UIScreen.main.bounds.size.width
 	

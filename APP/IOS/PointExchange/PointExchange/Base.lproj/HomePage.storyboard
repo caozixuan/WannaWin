@@ -180,7 +180,7 @@
         <!--积分卡列表-->
         <scene sceneID="36A-L8-F6x">
             <objects>
-                <tableViewController storyboardIdentifier="CardInfoTableViewController" title="积分卡列表" id="H9L-pC-lHS" customClass="CardInfoTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CardInfoTableViewController" title="积分卡列表" hidesBottomBarWhenPushed="YES" id="H9L-pC-lHS" customClass="CardInfoTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="174" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WZQ-hY-8Oa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -220,7 +220,7 @@
         <!--积分兑换-->
         <scene sceneID="Kt6-Ir-B8l">
             <objects>
-                <viewController title="积分兑换" id="MRG-2t-LdV" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="积分兑换" hidesBottomBarWhenPushed="YES" id="MRG-2t-LdV" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M6x-hg-rXY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -391,7 +391,7 @@
         <!--积分卡详情-->
         <scene sceneID="Jsn-ue-wGG">
             <objects>
-                <tableViewController storyboardIdentifier="CardDetailTableViewController" title="积分卡详情" id="V9u-KS-9IY" customClass="CardDetailTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CardDetailTableViewController" title="积分卡详情" hidesBottomBarWhenPushed="YES" id="V9u-KS-9IY" customClass="CardDetailTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="bdh-Hc-BOu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -545,7 +545,7 @@
         <!--添加积分卡-->
         <scene sceneID="e5e-Z6-mbm">
             <objects>
-                <tableViewController storyboardIdentifier="AddCardTableViewController" title="添加积分卡" id="fym-jZ-a26" customClass="AddCardTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddCardTableViewController" title="添加积分卡" hidesBottomBarWhenPushed="YES" id="fym-jZ-a26" customClass="AddCardTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="fZs-PR-vid">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

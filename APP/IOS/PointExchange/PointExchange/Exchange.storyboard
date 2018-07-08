@@ -62,7 +62,7 @@
         <!--积分兑换-->
         <scene sceneID="RGa-78-cph">
             <objects>
-                <viewController title="积分兑换" id="FFM-Si-jqT" sceneMemberID="viewController">
+                <viewController title="积分兑换" hidesBottomBarWhenPushed="YES" id="FFM-Si-jqT" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hN1-fx-TxA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0dm-7O-qlQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0dm-7O-qlQ">
                                         <rect key="frame" x="0.0" y="55.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0dm-7O-qlQ" id="BF4-MU-awn">
@@ -83,7 +83,7 @@
                                             <segue destination="MNw-WE-pnC" kind="show" id="M8c-28-hcM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="t8n-NA-VJd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="t8n-NA-VJd">
                                         <rect key="frame" x="0.0" y="99.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t8n-NA-VJd" id="ktl-jm-FTE">
@@ -91,7 +91,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qlC-r0-s78">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qlC-r0-s78">
                                         <rect key="frame" x="0.0" y="143.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qlC-r0-s78" id="aF1-Ql-Lj9">
@@ -133,7 +133,7 @@
         <!--积分兑换详情-->
         <scene sceneID="em3-fp-PMK">
             <objects>
-                <viewController title="积分兑换详情" id="MNw-WE-pnC" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="积分兑换详情" hidesBottomBarWhenPushed="YES" id="MNw-WE-pnC" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="Wcs-UN-glC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -280,7 +280,7 @@
         <!--完成抵扣-->
         <scene sceneID="YCc-lO-hJo">
             <objects>
-                <viewController title="完成抵扣" id="W2c-uv-jC5" sceneMemberID="viewController">
+                <viewController title="完成抵扣" hidesBottomBarWhenPushed="YES" id="W2c-uv-jC5" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lv2-UG-st3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
