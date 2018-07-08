@@ -59,7 +59,6 @@ public class PaymentFinishActivity extends AppCompatActivity {
         imageDescriptions = new String[]{
                 "巩俐不低俗，我就不能低俗",
                 "扑树又回来啦！再唱经典老歌引万人大合唱",
-                "揭秘北京电影如何升级",
                 "乐视网TV版大派送"
         };
         //保存
@@ -78,11 +77,6 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //map = serializableHashMap.getMap();
         data_posses_point = (List) bundle.get("points_result");
         business_image = (List) bundle.get("image_resource");
-
-
-
-
-
 
 
         //初始化数据
@@ -108,7 +102,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //设置需要的积分数
         Text_NeedPoints.setText("120p");
 
-        ImageView_Business.setImageResource(R.drawable.nike_store);
+        ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
 
     }
 

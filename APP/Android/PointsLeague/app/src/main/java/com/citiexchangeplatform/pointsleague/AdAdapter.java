@@ -33,6 +33,7 @@ public class AdAdapter extends PagerAdapter {
      * position     相应的位置
      */
     public Object instantiateItem(ViewGroup container, int position) {
+        destroyItem(container,position,img_list.get(position % img_list.size()));
         container.addView(img_list.get(position % img_list.size()));
         return img_list.get(position % img_list.size());
     }
