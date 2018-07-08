@@ -1,4 +1,5 @@
 package citi.pay;
+import citi.dao.OrderMapper;
 import citi.vo.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +19,26 @@ public class PayController {
      */
     @Autowired
     private Gson gson;
-    @RequestMapping(value = "/userInformation")
+    @Autowired
+    private OrderMapper orderMapper;
+    @RequestMapping(value = "/getUserAndOrderInformation")
     @ResponseBody
-    public String returnCustomerInformation(User user){
-        String jsonStr = gson.toJson(user);
-        return jsonStr;
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value="/submitOrder",method= RequestMethod.POST)
-    public String ajaxRequest(Order order, User user){
+    public String returnCustomerInformation(User user, Order order){
         Strategy.returnPointsTobePaid(order,user);
         user.changePoint(order);
         String jsonStr = gson.toJson(order);
-        // TODO:如何再返还给用户?
         return jsonStr;
+    }
+
+    // 这里应该通过轮询的方式请求
+    @ResponseBody
+    @RequestMapping(value="/submitOrder",method= RequestMethod.POST)
+    public String ajaxRequest(String orderID, User user){
+        Order order = orderMapper.select(orderID);
+        if(order.getState()== Order.OrderState.SUCCESS||order.getState()==Order.OrderState.FAIL){
+            String jsonStr = gson.toJson(order);
+            return jsonStr;
+        }
+        return null;
     }
 }
