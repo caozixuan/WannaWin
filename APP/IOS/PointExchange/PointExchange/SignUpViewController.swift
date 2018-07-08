@@ -10,7 +10,6 @@ import UIKit
 
 class SignUpViewController: UITableViewController {
     
-    var user = User.getUser()
     
     var phoneNumberValid = false, passwordValid = false, identifyValid = false, passwordIdentifyValid = false
 
@@ -50,7 +49,7 @@ class SignUpViewController: UITableViewController {
             if self.isSignUpValid(){
                 let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
                 let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    self.navigationController!.popViewController(animated: true)
+                    self.navigationController?.popViewController(animated: true)
                     self.navigationController?.popViewController(animated: true)
                 })
                 
@@ -62,8 +61,8 @@ class SignUpViewController: UITableViewController {
     
     private func isSignUpValid()->Bool{
         // TODO: - 注册是否有效
-        if let username=phoneNumberField.text {
-            self.user.username=username
+        if let username = phoneNumberField.text {
+            User.getUser().username=username
         }
         else{
             let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
@@ -76,9 +75,10 @@ class SignUpViewController: UITableViewController {
             alert.addAction(okAction)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
+            return false
         }
         if let password=passwordField.text {
-            self.user.password=password
+            User.getUser().password=password
         }else{
             let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
@@ -90,6 +90,7 @@ class SignUpViewController: UITableViewController {
             alert.addAction(okAction)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
+            return false
         }
         return true
     }
@@ -147,7 +148,7 @@ class SignUpViewController: UITableViewController {
         }
         else{
             let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
-            cell.selectionStyle=UITableViewCellSelectionStyle.none
+            cell.selectionStyle = .none
             return cell
         }
     }

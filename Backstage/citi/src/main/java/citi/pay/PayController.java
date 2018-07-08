@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static citi.vo.User.getUserByToken;
 
+@RequestMapping("/pay")
 @Controller
 public class PayController {
     /*

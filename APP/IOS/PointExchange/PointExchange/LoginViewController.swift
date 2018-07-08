@@ -60,19 +60,17 @@ class LoginViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = .none
         return cell
         
     }
     
     @IBAction func isInputValid(_ sender: Any) {
         if usernameField.text != "" && passwordField.text != "" {
-//            loginButton.textLabel?.backgroundColor = UIColor.blue
             loginButton.contentView.backgroundColor = UIColor.blue
             loginButton.isUserInteractionEnabled = true
         }
         else{
-//            loginButton.textLabel?.backgroundColor = UIColor.lightGray
             loginButton.contentView.backgroundColor = UIColor.lightGray
             loginButton.isUserInteractionEnabled = false
         }
