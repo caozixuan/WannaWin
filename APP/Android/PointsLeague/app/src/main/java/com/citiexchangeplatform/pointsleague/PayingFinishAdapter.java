@@ -16,11 +16,13 @@ import java.util.List;
 public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapter.MyViewHolder> {
     //数据源
     private List<String> list;
+    private List<Integer> img_list;
     private Context context;
 
     //构造方法
-    public PayingFinishAdapter(List<String> list, Context context) {
+    public PayingFinishAdapter(List<String> list,List<Integer> img_list, Context context) {
         this.list = list;
+        this.img_list = img_list;
         this.context = context;
 
     }
@@ -37,7 +39,10 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(final PayingFinishAdapter.MyViewHolder holder, final int position) {
+        //使用的积分
         holder.Points_Used.setText(list.get(position));
+        //设置商家图片
+        holder.Business_Image.setImageResource(img_list.get(position));
 
     }
 
