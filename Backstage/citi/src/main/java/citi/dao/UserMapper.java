@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     final String loginVerify = "SELECT userID, phoneNum, generalPoints, availablePoints, citiCardNum FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
-    final String insertUser = "INSERT INTO user (userID, password, phoneNum, generalPoints, availablePoints, citiCardNum) VALUES (#{userID}, #{password}, #{phoneNum}, #{generalPoints}, #{availablePoints}, #{citiCardNum}";
+    final String insertUser = "INSERT INTO user (userID, password, phoneNum, generalPoints, availablePoints, citiCardNum) "+
+            "VALUES (#{userID}, #{password}, #{phoneNum}, 0, 0, null";
 
 
     //注解部分，登陆验证
@@ -29,5 +30,5 @@ public interface UserMapper {
     //int为受影响的行数，插入成功为1，用来判断是否操作成功
     //If the BATCH executor is in use, the insert counts are being lost.
     @Insert(insertUser)
-    int insert(UserInfo userInfo);
+    int insert(String phoneNum, String password);
 }
