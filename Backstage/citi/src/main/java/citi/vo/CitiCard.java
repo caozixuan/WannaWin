@@ -4,12 +4,14 @@ public class CitiCard {
     private String citiCardNum;
     private String phoneNum;
     private String ID;
+    private String userID;
     private String password;
 
-    public CitiCard(String citiCardNum, String phoneNum, String ID, String password) {
+    public CitiCard(String citiCardNum, String phoneNum, String ID, String userID, String password) {
         this.citiCardNum = citiCardNum;
         this.phoneNum = phoneNum;
         this.ID = ID;
+        this.userID = userID;
         this.password = password;
     }
 
@@ -17,31 +19,19 @@ public class CitiCard {
         return citiCardNum;
     }
 
-    public void setCitiCardNum(String citiCardNum) {
-        this.citiCardNum = citiCardNum;
-    }
-
     public String getPhoneNum() {
         return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
     }
 
     public String getID() {
         return ID;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public String getUserID() {
+        return userID;
     }
 
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

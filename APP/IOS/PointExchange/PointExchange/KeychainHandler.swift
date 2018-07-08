@@ -7,9 +7,13 @@
 //
 
 import UIKit
-import Security
+import Valet
 
 class KeychainHandler: NSObject {
+    static let myValet = Valet.valet(with: Identifier(nonEmpty: "userInfo")!, accessibility: .whenUnlocked)
     
+    public static func getInstance()->Valet{
+        return myValet
+    }
     
 }

@@ -1,6 +1,12 @@
 package citi.dao;
 
 
+import citi.vo.UserInfo;
+import citi.vo.VCode;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /*
@@ -11,10 +17,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginMapper {
 
+    final String insertVCode = "INSERT INTO Vcode(phoneNum, VCode) VALUES(#{phoneNum}, #{VCode})";
+    final String getByPhoneNum = "SELECT VCode FROM Vcode WHERE phoneNum = #{phoneNum}";
+
     //注解，添加向前端发送的验证码至数据库
-    int insertVcode(String phoneNum, String vcode);
+    @Insert(insertVCode)
+    int insertVcode(VCode vcode);
 
     //从数据库中搜索对应的验证码
+    @Select(getByPhoneNum)
     String selectVcode(String phoneNum);
 
 }
