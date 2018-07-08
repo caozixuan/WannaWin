@@ -10,8 +10,6 @@ import UIKit
 
 class UserViewController: UITableViewController {
     
-    var user = User.getUser()
-
     @IBOutlet weak var portraitImageView: UIImageView!
     @IBOutlet weak var exitButton: UITableViewCell!
     @IBOutlet weak var logoutButton: UIView!
@@ -62,7 +60,7 @@ class UserViewController: UITableViewController {
             self.present(alert, animated:true, completion:nil)
         }
         else if indexPath.section == 0 {
-            if let _ = user.username{
+            if let _ = User.getUser().username {
                 let storyboard = UIStoryboard(name:"User", bundle:nil)
                 let view = storyboard.instantiateViewController(withIdentifier: "UserSettingViewController")
                 self.navigationController!.pushViewController(view, animated: true)
@@ -72,7 +70,7 @@ class UserViewController: UITableViewController {
             let storyBoard = UIStoryboard(name: "User", bundle: nil)
             switch indexPath.row{
             case 0:
-                if let _ = user.username{
+                if let _ = User.getUser().username{
                     let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
                     self.navigationController?.pushViewController(view, animated: true)
                 }else{
@@ -81,7 +79,7 @@ class UserViewController: UITableViewController {
                 }
                 break
             case 1:
-                if let _ = user.username{
+                if let _ = User.getUser().username{
                     let view = storyBoard.instantiateViewController(withIdentifier:"OrdersViewController")
                     self.navigationController?.pushViewController(view, animated: true)
                 }else{
@@ -97,7 +95,7 @@ class UserViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            if let name = user.username{
+            if let name = User.getUser().username{
                 usernameHeadLabel.text="用户名："
                 usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
                 usernameHeadLabel.textColor=UIColor.white
@@ -107,7 +105,7 @@ class UserViewController: UITableViewController {
                 usernameLabel.text=name
                 
                 boundingCitiCardHeadLabel.text = {() -> String in
-                    if let card = user.card{
+                    if let card = User.getUser().card{
                         return "银行卡：" + card.number
                     }
                     else{
@@ -149,11 +147,11 @@ class UserViewController: UITableViewController {
                 
             }
             //头像显示
-            self.portraitImageView.image = user.portrait?.roundCornersToCircle()
+            self.portraitImageView.image = User.getUser().getPortraitImage().roundCornersToCircle()
             return userTableCell!
         }
         else if indexPath.section == 2 {
-            if let _ = user.username{
+            if let _ = User.getUser().username{
                 exitButton.isUserInteractionEnabled = true
                 exitButton.backgroundColor = UIColor.white
                 exitButton.textLabel?.textColor = UIColor.black
@@ -173,7 +171,6 @@ class UserViewController: UITableViewController {
     
     func logout(){
         User.logout()
-        self.user=User.getUser()
         print("logout")
         self.tableView.reloadData()
         

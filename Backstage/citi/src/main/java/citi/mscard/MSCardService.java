@@ -80,12 +80,11 @@ public class MSCardService {
      * @return
      */
     public boolean addMSCard(MSCard msCard){
+        // TODO:请求相关商家接口，做验证
+
         int flag = msCardMapper.insert(msCard);
         if(flag>0)
             return true;
         return false;
     }
-
-
-
 }
