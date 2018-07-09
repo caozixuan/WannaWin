@@ -1,8 +1,7 @@
 package citi.mscard;
 
-import citi.dao.MSCardMapper;
-import citi.dao.MerchantMapper;
-import citi.dao.UserMapper;
+import citi.mybatismapper.MSCardMapper;
+import citi.mybatismapper.MerchantMapper;
 import citi.vo.MSCard;
 import citi.vo.MSCardType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,11 @@ public class MSCardService {
 
     public List<MSCard> getInfo(String userId, int n){
         List<MSCard> allCards =msCardMapper.select(userId);
+        if(allCards==null)
+            return null;
         Collections.sort(allCards,new SortByPoints());
         ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n&&i<returnCards.size();i++){
             returnCards.add(allCards.get(i));
         }
 
@@ -60,8 +61,7 @@ public class MSCardService {
      * @return
      */
     public MSCard getMSCardInfo(String CardID){
-
-        return msCardMapper.selectCard(CardID);
+        return msCardMapper.selectCard(CardID).toMSCard();
     }
 
     /**

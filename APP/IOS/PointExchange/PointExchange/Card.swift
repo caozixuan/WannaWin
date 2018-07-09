@@ -7,6 +7,9 @@
 //
 
 import Foundation
-class Card: NSObject,Codable {
+class Card: Codable {
     var number:String = "00000"
+    var merchant:Merchant?
+    var type:String?
+    var point:Int = 0
 }

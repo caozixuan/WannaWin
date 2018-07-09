@@ -9,13 +9,25 @@
     android:orientation="vertical"
     android:gravity="center">
 
+
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_paying"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用积分"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -114,13 +126,23 @@
             />
 
         <Button
+            android:id="@+id/button_expand"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/ic_expand_more_black_24dp"
+            android:onClick="click_expand" />
+
+        <Button
             android:id="@+id/button_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-
+            android:background="@drawable/button_bg"
             android:onClick="click_finish"
-            android:text="@string/Button_Paying" />
+            android:text="@string/Button_Paying"
+            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="15dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

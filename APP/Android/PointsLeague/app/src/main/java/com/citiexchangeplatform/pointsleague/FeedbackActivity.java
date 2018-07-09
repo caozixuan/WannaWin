@@ -21,6 +21,8 @@ public class FeedbackActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
     }
 
     public void buttonClick(View view){

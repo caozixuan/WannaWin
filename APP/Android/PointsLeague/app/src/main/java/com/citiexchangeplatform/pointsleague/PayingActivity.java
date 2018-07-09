@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.KeyListener;
@@ -49,10 +50,11 @@ public class PayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paying);
 
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         Text_NeedPoints = (TextView)findViewById(R.id.textView_points_need);
@@ -71,6 +73,8 @@ public class PayingActivity extends AppCompatActivity {
         mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
+        //添加Android自带的分割线
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         mAdapter.buttonSetOnclick(new PayingAdapter.ButtonInterface() {
             @Override
@@ -105,10 +109,16 @@ public class PayingActivity extends AppCompatActivity {
         return screenHeight - rect.bottom != 0;
     }
 
+    /*展示详情点击事件*/
+    public void click_expand(View view){
+
+        Intent intent = new Intent(this, PayingDetailsActivity.class);
+        startActivity(intent);
+    }
 
     /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
-        Button Finish_Button = (Button) findViewById(R.id.button_finish);
+
         Intent intent = new Intent(this, PaymentFinishActivity.class);
 
         ArrayList<String> Points_Result = new ArrayList<>();

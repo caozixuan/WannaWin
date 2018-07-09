@@ -18,6 +18,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="3SC-Sg-n9J" kind="relationship" relationship="viewControllers" id="TFp-ib-BJg"/>
                         <segue destination="fL6-Sy-t1d" kind="relationship" relationship="viewControllers" id="JbN-v0-Cqb"/>

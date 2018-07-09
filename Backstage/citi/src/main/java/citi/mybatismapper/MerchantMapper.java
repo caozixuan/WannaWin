@@ -1,4 +1,4 @@
-package citi.dao;
+package citi.mybatismapper;
 
 import citi.vo.MSCardType;
 import citi.vo.Merchant;
@@ -41,7 +41,7 @@ public interface MerchantMapper {
                     @Result(property = "logoURL", column = "logoURL")
             }
     )
-    Merchant select(String MerchantID);
+    Merchant selectByID(String MerchantID);
 
     // 曹子轩：返回商户对应的卡类型，这个属于数据库的操作吧？
     // 返回商家所有有的卡的类型
