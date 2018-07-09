@@ -8,6 +8,7 @@
                             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <context:annotation-config/>
+    <mvc:annotation-driven />
     <context:component-scan base-package="citi.citi"/>
     <context:component-scan base-package="citi.dao"/>
     <context:component-scan base-package="citi.interceptor"/>
@@ -22,6 +23,7 @@
 
     <!-- 拦截器配置-->
     <mvc:interceptors>
+        <!--
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="citi.interceptor.DecryptIeterceptor"/>
@@ -31,11 +33,12 @@
             <mvc:mapping path="/**"/>
             <bean class="citi.interceptor.EncryptIeterceptor"/>
         </mvc:interceptor>
+        -->
 
 
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/login/getVCode" />
+            <!--<mvc:exclude-mapping path="/citi/login/**" />-->
             <bean class="citi.interceptor.AuthIeterceptor" />
         </mvc:interceptor>
 

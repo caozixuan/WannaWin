@@ -31,10 +31,11 @@ public class LoginSerivce {
      */
     public void sendMs(String phoneNum){
         try{
-            String vcode = VerificationCode.GenVeriCode(phoneNum);
+            //String vcode = VerificationCode.GenVeriCode(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-            VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+            //VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+            VCode v = new VCode(phoneNum,"1234",timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
@@ -48,7 +49,7 @@ public class LoginSerivce {
      */
     public boolean vfVcode(String phoneNum,String vCode,String password){
         boolean isMatch = false;
-        if(loginMapper.selectVcode(phoneNum)==vCode){
+        if(loginMapper.selectVcode(phoneNum).equals(vCode)){
             isMatch = true;
             userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password);
         }

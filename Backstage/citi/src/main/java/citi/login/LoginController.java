@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
@@ -26,13 +27,15 @@ public class LoginController {
      * 前端请求发送验证码
      * @param phoneNum
      */
+    @ResponseBody
     @RequestMapping("/getVCode")
-    public void getVCode(String phoneNum){
+    public String getVCode(String phoneNum){
         /*
         验证码发送
         sendMs..
          */
         loginSerivce.sendMs(phoneNum);
+        return "getcode";
     }
 
     /**
@@ -42,6 +45,7 @@ public class LoginController {
      * @return 成功：{"isCreate": true｝
      *          失败：{"isCreate": false｝
      */
+    @ResponseBody
     @RequestMapping("/sendVCode")
     public String sendVcode(String phoneNum,String vcode,String password){
         boolean isMatch = loginSerivce.vfVcode(phoneNum,vcode,password);
