@@ -43,6 +43,10 @@
 		B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */; };
 		B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */; };
 		B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */; };
+		B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */; };
+		B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */; };
+		B6A6EC6020F25B810079FFA4 /* Mechant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Mechant.swift */; };
+		B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */; };
 		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
 		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +93,10 @@
 		B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCodeManager.swift; sourceTree = "<group>"; };
+		B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnector.swift; sourceTree = "<group>"; };
+		B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
+		B6A6EC5F20F25B810079FFA4 /* Mechant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechant.swift; sourceTree = "<group>"; };
+		B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantList.swift; sourceTree = "<group>"; };
 		C1ED982020EE1C7900A2F0C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1ED982220EE1E3900A2F0C5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +183,8 @@
 			children = (
 				C1ED982020EE1C7900A2F0C5 /* User.swift */,
 				C1ED982220EE1E3900A2F0C5 /* Card.swift */,
+				B6A6EC5F20F25B810079FFA4 /* Mechant.swift */,
+				B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -229,6 +239,8 @@
 				3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */,
 				B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */,
 				B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */,
+				B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */,
+				B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -385,10 +397,12 @@
 				3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */,
 				3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */,
 				B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */,
+				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
+				B6A6EC6020F25B810079FFA4 /* Mechant.swift in Sources */,
 				3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */,
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
 				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,
@@ -410,7 +424,9 @@
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
+				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
+				B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
