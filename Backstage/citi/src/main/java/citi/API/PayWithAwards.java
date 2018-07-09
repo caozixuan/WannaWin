@@ -7,19 +7,7 @@ import java.util.UUID;
 
 public class PayWithAwards {
 
-    public static String getResponseBody(Request request){
-        OkHttpClient client = new OkHttpClient();
-        String returnInformation = null;
-        try{
-            Response response = client.newCall(request).execute();
-            ResponseBody RB = response.body();
-            returnInformation = RB.string();
-        }catch (IOException e)
-        {
-            System.out.println("error");
-        }
-        return returnInformation;
-    }
+
     public static String getLinkCode(String cardNum, String phoneNum, String merchantCustomerReferenceId){
         String linkCode = null;
         String accessToken = Authorize.getAccessToken();
@@ -36,7 +24,7 @@ public class PayWithAwards {
                 .addHeader("client_id", "55465026-31d3-4881-a29a-419c364b67db")
                 .build();
 
-        linkCode = getResponseBody(request);
+        linkCode = Authorize.getResponseBody(request);
         return linkCode;
     }
 
@@ -73,7 +61,7 @@ public class PayWithAwards {
                 .addHeader("accept-language", "en-us")
                 .build();
 
-        information = getResponseBody(request);
+        information = Authorize.getResponseBody(request);
         return information;
     }
 
@@ -93,7 +81,7 @@ public class PayWithAwards {
                 .addHeader("accept-language", "en-us")
                 .build();
 
-        String information = getResponseBody(request);
+        String information = Authorize.getResponseBody(request);
         return information;
     }
 
