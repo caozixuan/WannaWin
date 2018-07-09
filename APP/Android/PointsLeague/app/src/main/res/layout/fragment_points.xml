@@ -23,40 +23,53 @@
             />
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_below="@+id/toolbar_main"
-        android:id="@+id/points_banner_main"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="150dp">
-
-        <com.daimajia.slider.library.SliderLayout
-            android:id="@+id/slider_main"
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-
-            <com.daimajia.slider.library.Indicators.PagerIndicator
-                android:id="@+id/custom_indicator_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp" />
-
-        </com.daimajia.slider.library.SliderLayout>
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/linearlayout_account_info_points"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/points_banner_main"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/points_banner_main"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <com.daimajia.slider.library.Indicators.PagerIndicator
+                        android:id="@+id/custom_indicator_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp" />
+
+                </com.daimajia.slider.library.SliderLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_account_info_points"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/points_banner_main"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
 
 
-    </LinearLayout>
+            </LinearLayout>
 
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
