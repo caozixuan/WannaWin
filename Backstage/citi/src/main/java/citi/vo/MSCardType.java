@@ -7,8 +7,13 @@ public class MSCardType {
     private Double Proportion;
     private String miniExpense;
 
+    //Type of CardType is String in consistence with DB
     public MSCardType(String CardType) {
-
+        this.MerchantID = "";
+        this.MType = "";
+        this.CardType = "";
+        this.Proportion = 0.0;
+        this.miniExpense = "";
     }
 
     public MSCardType(String merchantID, String MType, String cardType, Double proportion, String miniExpense) {
