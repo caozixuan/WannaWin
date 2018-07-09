@@ -1,5 +1,7 @@
 package citi.interceptor;
 
-public class DecryptIeterceptor {
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+public class DecryptIeterceptor  extends HandlerInterceptorAdapter {
 
 }
