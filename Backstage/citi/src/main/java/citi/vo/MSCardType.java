@@ -7,6 +7,10 @@ public class MSCardType {
     private Double Proportion;
     private String miniExpense;
 
+    public MSCardType(String CardType) {
+
+    }
+
     public MSCardType(String merchantID, String MType, String cardType, Double proportion, String miniExpense) {
         MerchantID = merchantID;
         this.MType = MType;

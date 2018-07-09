@@ -9,14 +9,15 @@ public class MSCard {
     String userID;
     String cardNo;
     int points;
-    MSCardType msCardType;
+    MSCardType CardType;
 
-    public MSCard(String cardID, String userID, String cardNo, int points, MSCardType msCardType) {
+
+    public MSCard(String cardID, String userID, String cardNo, int points, MSCardType CardType) {
         this.cardID = cardID;
         this.userID = userID;
         this.cardNo = cardNo;
         this.points = points;
-        this.msCardType = msCardType;
+        this.CardType = CardType;
     }
 
     public String getCardID() {

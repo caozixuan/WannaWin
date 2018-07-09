@@ -8,18 +8,18 @@ public class MSCardDAO {
     String userID;
     String cardNo;
     int points;
-    String msCardType;
+    String CardType;
 
     public MSCardDAO(String cardID, String userID, String cardNo, int points, String msCardType) {
         this.cardID = cardID;
         this.userID = userID;
         this.cardNo = cardNo;
         this.points = points;
-        this.msCardType = msCardType;
+        this.CardType = msCardType;
     }
 
-    public MSCard toMSCard(){
-        MSCard msCard=new MSCard(cardID,userID,cardNo,points,new MSCardType(msCardType));
+    public MSCard toMSCard() {
+        MSCard msCard = new MSCard(cardID, userID, cardNo, points, new MSCardType(CardType));
         return msCard;
     }
 
@@ -56,10 +56,10 @@ public class MSCardDAO {
     }
 
     public String getMsCardType() {
-        return msCardType;
+        return CardType;
     }
 
     public void setMsCardType(String msCardType) {
-        this.msCardType = msCardType;
+        this.CardType = msCardType;
     }
 }
