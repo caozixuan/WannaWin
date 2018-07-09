@@ -13,7 +13,7 @@ url:xxx/login/sendVCode
 ```
 登陆:
 ```$xslt
-xxx/login/user
+xxx/login/login
 phoneNum,password
 成功：{"userID":"xxxx","generalPoints":0,"availablePoints":0}
 失败：{"isLogin":false}

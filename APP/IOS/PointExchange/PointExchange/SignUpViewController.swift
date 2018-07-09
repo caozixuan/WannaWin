@@ -12,6 +12,8 @@ class SignUpViewController: UITableViewController {
     
     
     var phoneNumberValid = false, passwordValid = false, identifyValid = false, passwordIdentifyValid = false
+    
+    var activityIndicator:UIActivityIndicatorView?
 
     @IBOutlet weak var passwordIdentifyField: UITextField!
     @IBOutlet weak var signUpButton: UITableViewCell!
@@ -46,16 +48,23 @@ class SignUpViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //若点击的是注册按钮
         if indexPath.section == 2 {
-            if self.isSignUpValid(){
-                let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
-                let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    self.navigationController?.popViewController(animated: true)
-                    self.navigationController?.popViewController(animated: true)
-                })
-                
-                alert.addAction(okAction)
-                self.present(alert, animated:true, completion:nil)
-            }
+//            if self.isSignUpValid(){
+//                let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
+//                let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+//                    self.navigationController?.popViewController(animated: true)
+//                    self.navigationController?.popViewController(animated: true)
+//                })
+//
+//                alert.addAction(okAction)
+//                self.present(alert, animated:true, completion:nil)
+//            }
+            // 加载动画
+            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            self.activityIndicator?.center = self.tableView.center
+            self.activityIndicator?.backgroundColor = UIColor.gray
+            self.activityIndicator?.hidesWhenStopped = true
+            self.tableView.addSubview(self.activityIndicator!)
+            self.activityIndicator?.startAnimating()
         }
     }
     
