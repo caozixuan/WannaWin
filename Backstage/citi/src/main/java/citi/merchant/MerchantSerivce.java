@@ -19,8 +19,7 @@ public class MerchantSerivce {
     }
 
     public Merchant getMerchant(String merchantID){
-
-        return null;
+        return merchantMapper.selectByID(merchantID);
     }
 
 }

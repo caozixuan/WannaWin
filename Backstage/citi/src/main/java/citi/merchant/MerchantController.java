@@ -1,5 +1,6 @@
 package citi.merchant;
 
+import citi.vo.Merchant;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,10 @@ public class MerchantController {
     @ResponseBody
     @RequestMapping("/{MerchantID}")
     public String getMerchant(@PathVariable String MerchantID){
-
-        return null;
+        Merchant m = merchantSerivce.getMerchant(MerchantID);
+        if(m==null)
+            return "{}";
+        else
+            return m.toString();
     }
 }

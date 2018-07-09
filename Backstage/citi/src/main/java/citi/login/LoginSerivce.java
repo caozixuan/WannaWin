@@ -1,6 +1,7 @@
 package citi.login;
 
 import citi.API.VerificationCode;
+import citi.dao.UserDAO;
 import citi.mybatismapper.LoginMapper;
 import citi.mybatismapper.UserMapper;
 import citi.vo.User;
@@ -51,7 +52,9 @@ public class LoginSerivce {
         boolean isMatch = false;
         if(loginMapper.selectVcode(phoneNum).equals(vCode)){
             isMatch = true;
-            userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password);
+            UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
+            userMapper.insert(d);
+            //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
         }
         return isMatch;
     }
