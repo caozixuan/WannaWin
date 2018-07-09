@@ -31,11 +31,11 @@ public class LoginSerivce {
      */
     public void sendMs(String phoneNum){
         try{
-            //String vcode = VerificationCode.GenVeriCode(phoneNum);
+            String vcode = VerificationCode.GenVeriCode(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-            //VCode v = new VCode(phoneNum,vcode,timestamp.toString());
-            VCode v = new VCode(phoneNum,"1234",timestamp.toString());
+            VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+            //VCode v = new VCode(phoneNum,"1234",timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
