@@ -15,6 +15,12 @@ public class CitiCard {
         this.password = password;
     }
 
+    public CitiCard(String citiCardNum, String phoneNum, String userID) {
+        this.citiCardNum = citiCardNum;
+        this.phoneNum = phoneNum;
+        this.userID = userID;
+    }
+
     public String getCitiCardNum() {
         return citiCardNum;
     }
