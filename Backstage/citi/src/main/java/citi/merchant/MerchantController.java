@@ -25,7 +25,7 @@ public class MerchantController {
     @ResponseBody
     @RequestMapping("/getInfos")
     public String getMerchantInfos(int start,int n){
-
+        //以什么样的方式为商户排序呢
         return null;
     }
 
