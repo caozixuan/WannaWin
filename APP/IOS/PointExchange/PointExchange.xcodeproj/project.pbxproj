@@ -17,6 +17,8 @@
 		3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B76C20F09E7900843193 /* ExchangeViewController.swift */; };
 		3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */; };
 		3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B77220F0BD5C00843193 /* UIViewControllerExtension.swift */; };
+		3E46B77520F22C8900843193 /* ExchangeSelectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B77420F22C8900843193 /* ExchangeSelectDetailViewController.swift */; };
+		3E46B77720F238AD00843193 /* FinishExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B77620F238AD00843193 /* FinishExchangeViewController.swift */; };
 		3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */; };
 		3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155720EE0087000743C0 /* QRScanViewController.swift */; };
 		3E4C155A20EE00E7000743C0 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155920EE00E7000743C0 /* StoreViewController.swift */; };
@@ -57,6 +59,8 @@
 		3E46B76C20F09E7900843193 /* ExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
 		3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItemCell.swift; sourceTree = "<group>"; };
 		3E46B77220F0BD5C00843193 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		3E46B77420F22C8900843193 /* ExchangeSelectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeSelectDetailViewController.swift; sourceTree = "<group>"; };
+		3E46B77620F238AD00843193 /* FinishExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishExchangeViewController.swift; sourceTree = "<group>"; };
 		3E4C155320EDFF5A000743C0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		3E4C155720EE0087000743C0 /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,46 @@
 				3E8AB4C320EDAFB300915561 /* Main.storyboard */,
 			);
 			name = storyboard;
+			sourceTree = "<group>";
+		};
+		3E46B77820F254C900843193 /* UserTab */ = {
+			isa = PBXGroup;
+			children = (
+				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
+				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
+				3E4C155B20EE0117000743C0 /* SettingViewController.swift */,
+				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
+				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
+				B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */,
+				B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */,
+				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
+				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
+				B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */,
+				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
+			);
+			name = UserTab;
+			sourceTree = "<group>";
+		};
+		3E46B77920F254E800843193 /* ExchangeTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
+				3E4C155720EE0087000743C0 /* QRScanViewController.swift */,
+				3E46B77420F22C8900843193 /* ExchangeSelectDetailViewController.swift */,
+				3E46B77620F238AD00843193 /* FinishExchangeViewController.swift */,
+			);
+			name = ExchangeTab;
+			sourceTree = "<group>";
+		};
+		3E46B77A20F254FF00843193 /* HomePageTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155320EDFF5A000743C0 /* MainViewController.swift */,
+				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
+				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
+				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
+			);
+			name = HomePageTab;
 			sourceTree = "<group>";
 		};
 		3E8AB4A420EDAEDC00915561 = {
@@ -182,25 +226,11 @@
 		3E8AB4C920EDBABF00915561 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
-				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
-				3E4C155320EDFF5A000743C0 /* MainViewController.swift */,
+				3E46B77A20F254FF00843193 /* HomePageTab */,
+				3E46B77820F254C900843193 /* UserTab */,
+				3E46B77920F254E800843193 /* ExchangeTab */,
 				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
-				3E4C155720EE0087000743C0 /* QRScanViewController.swift */,
 				3E4C155920EE00E7000743C0 /* StoreViewController.swift */,
-				3E4C155B20EE0117000743C0 /* SettingViewController.swift */,
-				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
-				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
-				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
-				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
-				B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */,
-				B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */,
-				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
-				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
-				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
-				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
-				B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */,
-				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -338,6 +368,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFImageHelper/AFImageHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -347,6 +378,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFImageHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -400,11 +432,13 @@
 				B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
+				3E46B77520F22C8900843193 /* ExchangeSelectDetailViewController.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
 				B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */,
+				3E46B77720F238AD00843193 /* FinishExchangeViewController.swift in Sources */,
 				B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,

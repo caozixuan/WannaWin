@@ -19,6 +19,9 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="9q5-mV-epd" kind="relationship" relationship="rootViewController" id="3gY-N6-Qxb"/>
                     </connections>
@@ -169,6 +172,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="积分" id="Pqh-jX-ifQ"/>
                     <navigationItem key="navigationItem" title="Point League" id="1Ck-sY-Zm0"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="cardImage1" destination="CdQ-PU-iAM" id="sIf-Gx-ffp"/>
                         <outlet property="cardImage2" destination="GfM-Rt-XOO" id="vSX-Ug-bqC"/>
