@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     LogStateInfo.getInstance(LoginActivity.this).login().setAccount(editTextAccount.getText().toString());
 
-                    Toast.makeText(LoginActivity.this, "login successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
