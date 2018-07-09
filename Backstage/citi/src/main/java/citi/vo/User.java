@@ -1,36 +1,38 @@
 package citi.vo;
 
+import citi.dao.OrderDAO;
+
 import java.util.UUID;
 
 public class User {
     private String userID;
+    private String citiCard;
     private String phoneNum;
     private int generalPoints;
     private int availablePoints;
-    private String citiCardNum;
 
     public User(String phoneNum) {
         this.phoneNum = phoneNum;
-        this.availablePoints=0;
-        this.generalPoints=0;
+        this.availablePoints = 0;
+        this.generalPoints = 0;
         //设定唯一标识方式
-        this.userID="";
+        this.userID = "";
     }
 
-    public User(String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
-        this.userID=UUID.randomUUID().toString().toLowerCase();
+    public User(String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
+        this.userID = UUID.randomUUID().toString().toLowerCase();
+        this.citiCard = citiCardNum;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
-        this.citiCardNum = citiCardNum;
     }
 
-    public User(String userID, String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
+    public User(String userID, String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = userID;
+        this.citiCard = citiCardNum;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
-        this.citiCardNum = citiCardNum;
     }
 
     /*
@@ -38,16 +40,17 @@ public class User {
      * TODO：具体token相关的逻辑需要实现
      */
 
-    public static User getUserByToken(String token){
+    public static User getUserByToken(String token) {
         return new User("token");
     }
 
-    public void changePoint(Order order){
+    public void changePoint(OrderDAO orderDAO) {
         //TODO:这里需要根据用户的设定扣除积分，扣除过程应该会比较复杂
-        if(order.getPointsNeeded()>0)
-            this.setAvailablePoints(this.getAvailablePoints()-order.getPointsNeeded());
-        order.changeState();
+        if (orderDAO.getPointsNeeded() > 0)
+            this.setAvailablePoints(this.getAvailablePoints() - orderDAO.getPointsNeeded());
+        orderDAO.changeState();
     }
+
     public String getUserID() {
         return userID;
     }
@@ -81,10 +84,10 @@ public class User {
     }
 
     public String getCitiCardNum() {
-        return citiCardNum;
+        return citiCard;
     }
 
     public void setCitiCardNum(String citiCardNum) {
-        this.citiCardNum = citiCardNum;
+        this.citiCard = citiCardNum;
     }
 }

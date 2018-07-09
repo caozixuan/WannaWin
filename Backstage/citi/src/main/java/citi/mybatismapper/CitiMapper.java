@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CitiMapper {
 
-    final String insertCiti = "INSERT INTO citicard(citiCardNum, phoneNum, idCardNum, userID, password) " +
+    final String insertCiti = "INSERT INTO citicard(citiCard, phoneNum, ID, userID, password) " +
             "VALUES(#{citiCardNum}, #{phoneNum}, #{ID}, #{userID}, #{password})";
-    final String deleteCiti = "DELETE FROM citicard WHERE citiCardNum = #{citiNum}";
+    final String deleteCiti = "DELETE FROM citicard WHERE citiCard = #{citiNum}";
 
     @Insert(insertCiti)
     int insert(CitiCard citiCard);
