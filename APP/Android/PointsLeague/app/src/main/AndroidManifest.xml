@@ -31,6 +31,11 @@
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
+        <activity android:name=".PayCodeActivity" />
+        <activity android:name=".PayingActivity" />
+        <activity android:name=".PaymentFinishActivity" />
+        <activity android:name=".LoginActivity"/>
+
         <activity
             android:name=".PaymentFinishActivity"
             android:parentActivityName=".MainActivity" />

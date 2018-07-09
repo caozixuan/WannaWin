@@ -33,4 +33,9 @@ dependencies {
 
     implementation files('libs/core-3.0.0.jar')
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
+    implementation 'com.android.support:cardview-v7:27.1.1'
 }

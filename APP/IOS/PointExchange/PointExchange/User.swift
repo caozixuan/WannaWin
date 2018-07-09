@@ -18,7 +18,7 @@ class User: Codable{
 }
 
 extension User{
-    static var user:User?
+    private static var user:User?
     class func getUser() -> User{
         if let userN = user {
             return userN
