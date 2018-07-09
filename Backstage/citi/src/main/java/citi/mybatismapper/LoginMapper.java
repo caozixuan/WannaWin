@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /*
  * 接口设计：刘钟博
  * 代码填充：任思远
@@ -15,8 +17,7 @@ import org.springframework.stereotype.Repository;
 public interface LoginMapper {
 
     final String insertVCode = "INSERT INTO Vcode (phoneNum, VCode, Time) VALUES (#{phoneNum}, #{VCode}, #{Time})";
-    final String getByPhoneNum = "SELECT VCode FROM Vcode " +
-            "WHERE phoneNum = #{phoneNum}";
+    final String getByPhoneNum = "SELECT VCode FROM Vcode WHERE phoneNum = #{phoneNum}";
 
     //注解，添加向前端发送的验证码至数据库
     @Insert(insertVCode)
@@ -24,6 +25,6 @@ public interface LoginMapper {
 
     //从数据库中搜索对应的验证码
     @Select(getByPhoneNum)
-    String selectVcode(String phoneNum);
+    List<String> selectVcode(String phoneNum);
 
 }
