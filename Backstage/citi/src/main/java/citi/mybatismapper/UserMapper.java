@@ -10,6 +10,7 @@ public interface UserMapper {
 
     final String loginVerify = "SELECT userID, phoneNum, generalPoints, availablePoints, citiCardNum FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
     final String insertUser = "INSERT INTO user (userID, password, phoneNum, generalPoints, availablePoints, citiCardNum) " +
+    final String insertUser = "INSERT INTO user (userID, password, phoneNum, generalPoints, availablePoints, citiCard) " +
             "VALUES (#{userID}, #{password}, #{phoneNum}, 0, 0, null)";
 
 
