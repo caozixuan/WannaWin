@@ -59,6 +59,7 @@ public class LoginController {
      * @return 成功:{"userID":"xxxx","generalPoints":0,"availablePoints":0}
      *          失败：{"isLogin":false}
      */
+    @ResponseBody
     @RequestMapping("/login")
     public String Login(String phoneNum,String password){
         /*

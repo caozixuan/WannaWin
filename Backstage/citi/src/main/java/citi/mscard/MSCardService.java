@@ -1,5 +1,6 @@
 package citi.mscard;
 
+import citi.dao.MSCardDAO;
 import citi.mybatismapper.MSCardMapper;
 import citi.mybatismapper.MerchantMapper;
 import citi.vo.MSCard;
@@ -34,9 +35,11 @@ public class MSCardService {
 
     public List<MSCard> getInfo(String userId, int n){
         List<MSCard> allCards =msCardMapper.select(userId);
+        if(allCards==null)
+            return null;
         Collections.sort(allCards,new SortByPoints());
         ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n&&i<returnCards.size();i++){
             returnCards.add(allCards.get(i));
         }
 
@@ -77,7 +80,7 @@ public class MSCardService {
      * @param msCard
      * @return
      */
-    public boolean addMSCard(MSCard msCard){
+    public boolean addMSCard(MSCardDAO msCard){
         // TODO:请求相关商家接口，做验证
 
         int flag = msCardMapper.insert(msCard);

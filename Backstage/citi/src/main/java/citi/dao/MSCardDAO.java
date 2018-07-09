@@ -3,6 +3,8 @@ package citi.dao;
 import citi.vo.MSCard;
 import citi.vo.MSCardType;
 
+import java.io.IOException;
+
 public class MSCardDAO {
     String cardID;
     String userID;
@@ -19,7 +21,12 @@ public class MSCardDAO {
     }
 
     public MSCard toMSCard() {
-        MSCard msCard = new MSCard(cardID, userID, cardNo, points, new MSCardType(CardType));
+        MSCard msCard = null;
+        try{
+            msCard = new MSCard(cardID, userID, cardNo, points, new MSCardType(CardType));
+        }catch (IOException e){
+            System.out.println("error");
+        }
         return msCard;
     }
 

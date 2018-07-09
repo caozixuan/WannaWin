@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/merchant")
@@ -21,6 +22,7 @@ public class MerchantController {
      * @param n
      * @return [{"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"},{}...]
      */
+    @ResponseBody
     @RequestMapping("/getInfos")
     public String getMerchantInfos(int start,int n){
 
@@ -32,6 +34,7 @@ public class MerchantController {
      * @param MerchantID
      * @return {"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"}
      */
+    @ResponseBody
     @RequestMapping("/{MerchantID}")
     public String getMerchant(@PathVariable String MerchantID){
 

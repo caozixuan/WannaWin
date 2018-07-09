@@ -1,5 +1,7 @@
 package citi.vo;
 
+import java.util.UUID;
+
 public class User {
     private String userID;
     private String phoneNum;
@@ -15,7 +17,15 @@ public class User {
         this.userID="";
     }
 
-    public User(String userID,String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
+    public User(String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
+        this.userID=UUID.randomUUID().toString().toLowerCase();
+        this.phoneNum = phoneNum;
+        this.generalPoints = generalPoints;
+        this.availablePoints = availablePoints;
+        this.citiCardNum = citiCardNum;
+    }
+
+    public User(String userID, String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
         this.userID = userID;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,11 +58,17 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     LogStateInfo.getInstance(LoginActivity.this).login().setAccount(editTextAccount.getText().toString());
 
-                    Toast.makeText(LoginActivity.this, "login successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
         });
+
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_login);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
