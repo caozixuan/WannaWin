@@ -16,7 +16,7 @@ public interface MSCardMapper {
 
     //插入一个会员卡
     @Insert(insert)
-    int insert(MSCard msCard);
+    int insert(MSCardDAO msCard);
 
     //查询用户下的会员卡
     @Select(getByuserId)

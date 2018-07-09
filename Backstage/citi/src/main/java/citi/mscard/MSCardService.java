@@ -1,5 +1,6 @@
 package citi.mscard;
 
+import citi.dao.MSCardDAO;
 import citi.mybatismapper.MSCardMapper;
 import citi.mybatismapper.MerchantMapper;
 import citi.vo.MSCard;
@@ -79,7 +80,7 @@ public class MSCardService {
      * @param msCard
      * @return
      */
-    public boolean addMSCard(MSCard msCard){
+    public boolean addMSCard(MSCardDAO msCard){
         // TODO:请求相关商家接口，做验证
 
         int flag = msCardMapper.insert(msCard);
