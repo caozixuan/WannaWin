@@ -24,9 +24,11 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     private Context context;
     //是否显示单选框,默认false
     private boolean isshowBox = false;
+    private int total;
 
     private HashMap<Integer, Boolean> map = new HashMap<>();
     private ButtonInterface buttonInterface;
+    private CheckBoxInterface checkBoxInterface;
 
     KeyListener storedKeylistener;
 
@@ -37,6 +39,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         this.img_list = img_list;
         this.list = list;
         this.context = context;
+        this.total = 0;
         initMap();
     }
 
@@ -62,6 +65,21 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     }
 
 
+    /**
+     *checkbox点击事件需要的方法
+     */
+    public void checkBoxSetOnclick(CheckBoxInterface checkBoxInterface){
+        this.checkBoxInterface=checkBoxInterface;
+    }
+
+    /**
+     * checkbox点击事件对应的接口
+     */
+    public interface CheckBoxInterface{
+        public void onclick( View view,int position);
+    }
+
+
     @Override
     public PayingAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         /*列表布局*/
@@ -77,15 +95,34 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         holder.Points_Possession.setText(list.get(position));
         //设置商家图片
         holder.Business_Image.setImageResource(img_list.get(position));
+        //初始编辑框为不可编辑状态
+        holder.EditText_Points_Posses.setFocusable(false);
+        holder.EditText_Points_Posses.setFocusableInTouchMode(false);
 
         holder.Button_Modify.setOnClickListener(new View.OnClickListener() {
+            Boolean button_status = false;
             @Override
             public void onClick(View v) {
-                if(holder.Button_Modify.getText().equals("修改")){
-                    holder.Button_Modify.setText("完成");
+                if(!button_status){
+                    holder.Button_Modify.setBackgroundResource(R.drawable.ic_check_24dp);
+                    //编辑框可修改
+                    holder.EditText_Points_Posses.setFocusableInTouchMode(true);
+                    holder.EditText_Points_Posses.setFocusable(true);
+                    holder.EditText_Points_Posses.requestFocus();
+                    button_status = true;
                 }
+               /* if(holder.Button_Modify.getText().equals("修改")){
+                    holder.Button_Modify.setText("完成");
+
+
+                }*/
                 else{
-                    holder.Button_Modify.setText("修改");
+                    holder.Button_Modify.setBackgroundResource(R.drawable.ic_modify_24dp);
+                    //holder.Button_Modify.setText("修改");
+                    //编辑框设置为不可编辑状态
+                    holder.EditText_Points_Posses.setFocusable(false);
+                    holder.EditText_Points_Posses.setFocusableInTouchMode(false);
+                    button_status = false;
                 }
 
                 if(buttonInterface!=null) {
@@ -96,20 +133,52 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
             }
         });
 
+        holder.Checkbox_Choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(checkBoxInterface!=null) {
+                    //接口实例化后的而对象，调用重写后的方法
+                    checkBoxInterface.onclick(v,position);
+                }
+
+            }
+        });
+
         //设置checkBox改变监听
         holder.Checkbox_Choose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Boolean previous_status = map.get(position);
                 //用map集合保存
                 map.put(position, isChecked);
+
+                int add_point = Integer.parseInt(holder.Points_Possession.getText().toString());
+                if(map.get(position)){
+                    total += add_point;
+                }
+                else if(previous_status&&!map.get(position)){
+                    total -= add_point;
+                }
+
                 if (map.get(position)) {
                     holder.Button_Modify.setVisibility(View.VISIBLE);
+
                 } else {
                     holder.Button_Modify.setVisibility(View.INVISIBLE);
+                    //取消选择后编辑框为不可编辑状态
+                    holder.EditText_Points_Posses.setFocusable(false);
+                    holder.EditText_Points_Posses.setFocusableInTouchMode(false);
+                    holder.EditText_Points_Posses.setText(list.get(position));
+
                 }
+
             }
         });
+
+
 
 
         // 设置CheckBox的状态
@@ -136,6 +205,11 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     public void setShowBox() {
         //取反
         isshowBox = !isshowBox;
+    }
+
+    /*返回总计价格*/
+    public int getTotal() {
+        return total;
     }
 
     //点击item选中CheckBox

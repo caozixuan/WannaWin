@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CitiMapper {
 
-    final String insertCiti = "INSERT INTO citicard VALUES(#{citiCardNum}, #{phoneNum}, #{ID}, #{password}) ";
+    final String insertCiti = "INSERT INTO citicard(citiCardNum, phoneNum, idCardNum, userID, password) " +
+            "VALUES(#{citiCardNum}, #{phoneNum}, #{ID}, #{userID}, #{password})";
     final String deleteCiti = "DELETE FROM citicard WHERE citiCardNum = #{citiNum}";
 
     @Insert(insertCiti)
