@@ -794,11 +794,6 @@
                                                         <action selector="checkInputValid:" destination="KrY-UL-JYZ" eventType="editingDidEndOnExit" id="aRr-pS-bJi"/>
                                                     </connections>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iY9-aQ-uLB">
-                                                    <rect key="frame" x="282" y="7" width="77" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="获取验证码"/>
-                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -817,7 +812,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="identifyCode field" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入短信验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="acN-Mi-Zud">
-                                                    <rect key="frame" x="86" y="6" width="265" height="30"/>
+                                                    <rect key="frame" x="86" y="6" width="144" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -827,6 +822,14 @@
                                                         <action selector="checkInputValid:" destination="KrY-UL-JYZ" eventType="editingDidEnd" id="gE8-P9-kxJ"/>
                                                     </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iY9-aQ-uLB">
+                                                    <rect key="frame" x="232" y="6" width="127" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="获取验证码"/>
+                                                    <connections>
+                                                        <action selector="clickGetVCodeBtn:" destination="KrY-UL-JYZ" eventType="touchUpInside" id="HvN-K7-pAI"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -924,16 +927,18 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="getVCodeBtn" destination="iY9-aQ-uLB" id="7li-hh-vKg"/>
                         <outlet property="identifyField" destination="acN-Mi-Zud" id="IFP-0a-5yu"/>
                         <outlet property="passwordField" destination="lGT-Js-Zfi" id="DmF-xu-QBJ"/>
                         <outlet property="passwordIdentifyField" destination="Btr-T4-3JT" id="ybr-i5-TbN"/>
                         <outlet property="phoneNumberField" destination="tpz-SE-SbG" id="PGZ-Ko-ixR"/>
                         <outlet property="signUpButton" destination="mMQ-YH-5ZL" id="Hwl-hs-ZAQ"/>
+                        <outlet property="vcodeField" destination="acN-Mi-Zud" id="dS7-72-EX2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xta-ha-SuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3873" y="-1996"/>
+            <point key="canvasLocation" x="3872.8000000000002" y="-1996.5517241379312"/>
         </scene>
         <!--个人设置nav-->
         <scene sceneID="MyA-uA-yHq">

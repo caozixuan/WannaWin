@@ -20,6 +20,13 @@ public class MSCard {
         this.CardType = CardType;
     }
 
+    public MSCard(String cardID, String userID, String cardNo, MSCardType cardType) {
+        this.cardID = cardID;
+        this.userID = userID;
+        this.cardNo = cardNo;
+        CardType = cardType;
+    }
+
     public String getCardID() {
         return cardID;
     }

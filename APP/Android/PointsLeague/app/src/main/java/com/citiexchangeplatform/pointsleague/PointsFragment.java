@@ -1,11 +1,16 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -19,14 +24,23 @@ import java.util.List;
 
 public class PointsFragment extends Fragment {
 
+    boolean isLogin;
+
     View view;
+    LinearLayout accountInfoLayout;
+    Context context;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_points, null);
+        accountInfoLayout = (LinearLayout)view.findViewById(R.id.linearlayout_account_info_points);
+        context = getContext();
 
         initImageSlider();
+
+        loadAccountInfo();
 
         return view;
     }
@@ -38,7 +52,7 @@ public class PointsFragment extends Fragment {
 
 
     /**
-     * 初始化首页的商品广告条
+     * 初始化推广轮播内容
      */
     private void initImageSlider() {
 
@@ -69,11 +83,45 @@ public class PointsFragment extends Fragment {
             sliderLayout.addSlider(tsv);
         }
 
-        //对SliderLayout进行一些自定义的配置
+        //对SliderLayout自定义配置
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
         sliderLayout.setDuration(3000);
         //      sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomIndicator(indicator);
+    }
+
+
+    private void loadAccountInfo(){
+        accountInfoLayout.removeAllViewsInLayout();
+        isLogin = LogStateInfo.getInstance(getContext()).isLogin();
+
+        if(isLogin){
+            View content = LayoutInflater.from(context).inflate(R.layout.content_cards_points, null);
+            accountInfoLayout.addView(content);
+
+        }else {
+
+            View content = LayoutInflater.from(context).inflate(R.layout.content_login_button_points, null);
+            accountInfoLayout.addView(content);
+
+            Button button = (Button)view.findViewById(R.id.button_login_points);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(LogStateInfo.getInstance(getContext()).isLogin() != isLogin)
+        {
+            loadAccountInfo();
+        }
     }
 }

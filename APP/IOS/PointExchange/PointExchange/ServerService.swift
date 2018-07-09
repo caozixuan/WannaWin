@@ -42,7 +42,7 @@ enum ServerService {
 
 extension ServerService:TargetType {
     var baseURL:URL{
-        return URL(string: "www")!
+        return URL(string: "http://193.112.44.141:8080/citi")!
     }
     
     var path : String {
@@ -52,7 +52,7 @@ extension ServerService:TargetType {
         case .sendPassword:
             return "/login/sendVCode"
         case .login:
-            return "/login/user"
+            return "/login/login"
         case .getMerchantsInfos:
             return "/merchant/getInfos"
         case .getMerchantInfoByID(let merchantID):

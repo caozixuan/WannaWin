@@ -49,7 +49,7 @@ public class LoginController {
     @RequestMapping("/sendVCode")
     public String sendVcode(String phoneNum,String vcode,String password){
         boolean isMatch = loginSerivce.vfVcode(phoneNum,vcode,password);
-        return "{\"isCreate\": "+isMatch+"｝";
+        return "{\"isCreate\": "+isMatch+"}";
     }
 
     /**
@@ -59,6 +59,7 @@ public class LoginController {
      * @return 成功:{"userID":"xxxx","generalPoints":0,"availablePoints":0}
      *          失败：{"isLogin":false}
      */
+    @ResponseBody
     @RequestMapping("/login")
     public String Login(String phoneNum,String password){
         /*
@@ -69,7 +70,7 @@ public class LoginController {
         */
         User user  = loginSerivce.login(phoneNum,password);
         if(user==null){
-            return "{\"isLogin\":false}";
+            return "{}";
         }
         else
             return gson.toJson(user);

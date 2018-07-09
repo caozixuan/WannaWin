@@ -1,6 +1,7 @@
 package citi.login;
 
 import citi.API.VerificationCode;
+import citi.dao.UserDAO;
 import citi.mybatismapper.LoginMapper;
 import citi.mybatismapper.UserMapper;
 import citi.vo.User;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,11 +34,11 @@ public class LoginSerivce {
      */
     public void sendMs(String phoneNum){
         try{
-            //String vcode = VerificationCode.GenVeriCode(phoneNum);
+            String vcode = VerificationCode.GenVeriCode(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-            //VCode v = new VCode(phoneNum,vcode,timestamp.toString());
-            VCode v = new VCode(phoneNum,"1234",timestamp.toString());
+            VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+            //VCode v = new VCode(phoneNum,"1234",timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
@@ -49,9 +52,15 @@ public class LoginSerivce {
      */
     public boolean vfVcode(String phoneNum,String vCode,String password){
         boolean isMatch = false;
-        if(loginMapper.selectVcode(phoneNum).equals(vCode)){
-            isMatch = true;
-            userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password);
+        List<String> vCodes = loginMapper.selectVcode(phoneNum);
+        for(int i=0;i<vCodes.size();i++){
+            if(vCodes.get(i).equals(vCode)){
+                isMatch = true;
+                UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
+                userMapper.insert(d);
+                break;
+                //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
+            }
         }
         return isMatch;
     }
