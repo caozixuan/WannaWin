@@ -37,6 +37,12 @@ public class MSCardController {
     @RequestMapping("/infos")
     public String getMSInfo(String userId,String n){
         List<MSCard> cards = msCardService.getInfo(userId, Integer.valueOf(n));
+        System.out.println(userId);
+        System.out.println(n);
+        List<MSCard> cards = msCardService.getInfo(userId, Integer.getInteger(n));
+        if(cards==null){
+            return "{result:null}";
+        }
         String jsonStr = gson.toJson(cards);
         return jsonStr;
     }

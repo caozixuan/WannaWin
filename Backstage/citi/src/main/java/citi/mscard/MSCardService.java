@@ -34,9 +34,13 @@ public class MSCardService {
 
     public List<MSCard> getInfo(String userId, int n){
         List<MSCard> allCards =msCardMapper.select(userId);
+        if(allCards==null)
+            return null;
         Collections.sort(allCards,new SortByPoints());
         ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
         for(int i=0;i<n&&i<allCards.size();i++){
+        for(int i=0;i<n&&i<returnCards.size();i++){
+>>>>>>> b4ca9e390a8aef913ecf4c6e994cb2574b87fb4a
             returnCards.add(allCards.get(i));
         }
 

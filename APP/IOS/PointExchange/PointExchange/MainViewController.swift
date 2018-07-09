@@ -33,7 +33,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		//初始化图片轮播组件
 		imageScroller = ImageScrollerViewController()
 		imageScroller.delegate = self
-		imageScroller.view.frame = CGRect(x: 10, y: 70, width: screenWidth-20, height: (screenWidth-20)/4*2);
+		imageScroller.view.frame = CGRect(x: 10, y: 74, width: screenWidth-20, height: 180);
 		imageScroller.view.layer.cornerRadius = 20;
 		imageScroller.view.layer.masksToBounds = true;
 		//imageScroller.view = imageScrollerView

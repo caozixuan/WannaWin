@@ -29,5 +29,5 @@ public interface UserMapper {
     //int为受影响的行数，插入成功为1，用来判断是否操作成功
     //If the BATCH executor is in use, the insert counts are being lost.
     @Insert(insertUser)
-    int insert(@Param("userID") String userID,@Param("phoneNum") String phoneNum,@Param("password") String password);
+    int insert(@Param("userID") String userID, @Param("phoneNum") String phoneNum, @Param("password") String password);
 }

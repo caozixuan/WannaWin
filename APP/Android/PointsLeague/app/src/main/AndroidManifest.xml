@@ -24,71 +24,44 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <!-- 启动项 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".PayCodeActivity" />
-        <activity android:name=".PayingActivity" />
-        <activity android:name=".PaymentFinishActivity" />
+
         <activity android:name=".LoginActivity"/>
+
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity" />
+
+
 
         <activity
             android:name=".PaymentFinishActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"/>
-
-
-        <activity
             android:name=".PayCodeActivity"
-            android:parentActivityName=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!--  -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PayingActivity"
-            android:parentActivityName=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".AboutUsActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".FeedbackActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".FeedbackResultActivity">
-            <!-- 声明逻辑父项 -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FeedbackActivity" />
-        </activity>
+            android:parentActivityName=".PayCodeActivity" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FeedbackResultActivity"
+            android:parentActivityName=".FeedbackActivity" />
+        <activity
+            android:name=".GeneralSettingActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".PayingDetailsActivity"></activity>
     </application>
 
 </manifest>
