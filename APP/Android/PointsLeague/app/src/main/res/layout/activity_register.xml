@@ -7,7 +7,7 @@
     >
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_login"
+        android:id="@+id/toolbar_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="登录"
+            android:text="注册"
             android:layout_marginStart="10dp"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="登录"
+        android:text="注册"
         android:textSize="34sp" />
 
     <LinearLayout
@@ -40,22 +40,58 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editText_account_login"
+            android:id="@+id/editText_account_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="14"
             android:inputType="phone"
-            android:hint="请输入账户（电话号码）"/>
+            android:hint="请输入电话号码"/>
 
         <EditText
-            android:id="@+id/editText_password_login"
+            android:id="@+id/editText_password_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="14"
             android:inputType="textPassword"
             android:hint="请输入密码"/>
+
+        <EditText
+            android:id="@+id/editText_password_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="14"
+            android:inputType="textPassword"
+            android:hint="请确认密码"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText_msg_verification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:ems="6"
+                android:inputType="number"
+                android:maxLength="6"
+                android:hint="请输入验证码"/>
+
+            <Button
+                android:id="@+id/button_get_verification_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="获取验证码"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -66,18 +102,10 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_login_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
 
-            android:backgroundTint="@color/colorPrimary"
-            android:text="登录"
-            android:textColor="@color/colorWhite" />
 
         <Button
-            android:id="@+id/button_register_login"
+            android:id="@+id/button_register_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
