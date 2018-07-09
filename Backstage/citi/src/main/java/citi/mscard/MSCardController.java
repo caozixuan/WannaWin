@@ -7,6 +7,7 @@ import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +33,10 @@ public class MSCardController {
      * @param n 请求积分最多的n张卡
      * @return
      */
+    @ResponseBody
     @RequestMapping("/infos")
-    public String getMSInfo(String userId,int n){
-        List<MSCard> cards = msCardService.getInfo(userId, n);
+    public String getMSInfo(String userId,String n){
+        List<MSCard> cards = msCardService.getInfo(userId, Integer.valueOf(n));
         String jsonStr = gson.toJson(cards);
         return jsonStr;
     }
@@ -44,6 +46,7 @@ public class MSCardController {
      * @param merchantID
      * @return [{"MerchantID":"xxxx","Mtype":"xxxx","cardType":"xxxx"},{},{}...]
      */
+    @ResponseBody
     @RequestMapping("/cardtype")
     public String getCardType(String merchantID){
         List<MSCardType> msCardTypes = msCardService.getTypes(merchantID);
@@ -55,6 +58,7 @@ public class MSCardController {
      *@param msCard 会员卡
      * @return 成功：{"isBinding":true}，失败：{"isBinding":false}
      */
+    @ResponseBody
     @RequestMapping("/addcard")
     public String addMSCard(MSCard msCard){
         boolean flag = msCardService.addMSCard(msCard);

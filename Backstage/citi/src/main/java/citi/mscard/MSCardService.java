@@ -36,7 +36,7 @@ public class MSCardService {
         List<MSCard> allCards =msCardMapper.select(userId);
         Collections.sort(allCards,new SortByPoints());
         ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n&&i<allCards.size();i++){
             returnCards.add(allCards.get(i));
         }
 
