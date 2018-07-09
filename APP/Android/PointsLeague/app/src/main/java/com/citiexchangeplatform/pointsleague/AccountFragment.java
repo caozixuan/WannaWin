@@ -76,7 +76,8 @@ public class AccountFragment extends Fragment {
                         Toast.makeText(getContext(),"绑定",Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Toast.makeText(getContext(),"通用",Toast.LENGTH_SHORT).show();
+                        Intent intentToGeneral = new Intent(getContext(), GeneralSettingActivity.class);
+                        startActivity(intentToGeneral);
                         break;
                     case 3:
                         Intent intentToFeedback = new Intent(getContext(), FeedbackActivity.class);
