@@ -10,10 +10,13 @@ import UIKit
 
 class SignUpViewController: UITableViewController {
     
+    @IBOutlet weak var vcodeField: UITextField!
     
+    @IBOutlet weak var getVCodeBtn: UIButton!
     var phoneNumberValid = false, passwordValid = false, identifyValid = false, passwordIdentifyValid = false
     
     var activityIndicator:UIActivityIndicatorView?
+    var second = 30
 
     @IBOutlet weak var passwordIdentifyField: UITextField!
     @IBOutlet weak var signUpButton: UITableViewCell!
@@ -34,30 +37,11 @@ class SignUpViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+    // 点击事件处理
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //若点击的是注册按钮
         if indexPath.section == 2 {
-//            if self.isSignUpValid(){
-//                let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
-//                let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-//                    self.navigationController?.popViewController(animated: true)
-//                    self.navigationController?.popViewController(animated: true)
-//                })
-//
-//                alert.addAction(okAction)
-//                self.present(alert, animated:true, completion:nil)
-//            }
+            signUp()
             // 加载动画
             self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
             self.activityIndicator?.center = self.tableView.center
@@ -68,42 +52,33 @@ class SignUpViewController: UITableViewController {
         }
     }
     
-    private func isSignUpValid()->Bool{
-        // TODO: - 注册是否有效
-        if let username = phoneNumberField.text {
-            User.getUser().username=username
-        }
-        else{
-            let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
+    // 向服务器进行注册操作
+    func signUp(){
+        ServerConnector.sendPassword(phoneNumber: phoneNumberField.text!, vcode: vcodeField.text!, password: passwordField.text!, callback: signUpFinish)
+    }
+    
+    // 注册完成后的处理
+    func signUpFinish(result:Bool){
+        if result == true{
+            let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                self.navigationController!.popViewController(animated: true)
+                self.navigationController!.popViewController(animated: false)
                 self.navigationController?.popViewController(animated: true)
             })
-            let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
-            
             alert.addAction(okAction)
-            alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
-            return false
-        }
-        if let password=passwordField.text {
-            User.getUser().password=password
         }else{
             let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                self.navigationController!.popViewController(animated: true)
-                self.navigationController?.popViewController(animated: true)
             })
             let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
             
             alert.addAction(okAction)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
-            return false
         }
-        return true
     }
-    
+
     /// 检查phoneNumber输入是否合法
     func checkPhoneNumberInput()->Bool{
         if phoneNumberField.text?.count != 11 {
@@ -124,8 +99,10 @@ class SignUpViewController: UITableViewController {
     /// 检查验证码输入是否合法
     func checkIdentifyCodeInput()->Bool{
         // TODO: - 检查验证码
-        
-        return true
+        if let _ = self.vcodeField.text {
+            return true
+        }
+        return false
     }
     
     /// 检查密码输入是否合法
@@ -168,6 +145,7 @@ class SignUpViewController: UITableViewController {
         switch (sender as! UITextField).restorationIdentifier{
         case "phoneNumber field":
             phoneNumberValid=checkPhoneNumberInput()
+            getVCodeBtn.isEnabled = true
         case "identifyCode field":
             identifyValid=checkIdentifyCodeInput()
         case "password field":
@@ -189,4 +167,25 @@ class SignUpViewController: UITableViewController {
         }
     }
     
+    // 点击获取验证码按钮后的处理
+    @IBAction func clickGetVCodeBtn(_ sender: Any) {
+        ServerConnector.getVCode(phoneNumber: phoneNumberField.text!)
+        self.getVCodeBtn.isEnabled = false
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SignUpViewController.refreshVCodeTime), userInfo: sender, repeats: true)
+        timer.fire()
+    }
+    
+    // 重新获取验证码倒计时
+    @objc func refreshVCodeTime(timer:Timer){
+        self.getVCodeBtn.titleLabel?.text = "\(second)秒后重新发送"
+        self.getVCodeBtn.setTitle("\(second)秒后重新发送", for: .normal)
+        if second <= 0 {
+            second = 30
+            self.getVCodeBtn.isEnabled = true
+            self.getVCodeBtn.titleLabel?.text = "获取验证码"
+            self.getVCodeBtn.setTitle("获取验证码", for: .normal)
+            timer.invalidate()
+        }
+        second -= 1
+    }
 }
