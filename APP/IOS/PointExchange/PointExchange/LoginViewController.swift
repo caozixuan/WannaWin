@@ -14,6 +14,9 @@ class LoginViewController: UITableViewController{
     @IBOutlet weak var loginButton: UITableViewCell!
     
     
+    var activityIndicator:UIActivityIndicatorView?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordField.delegate=self
@@ -26,35 +29,51 @@ class LoginViewController: UITableViewController{
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    // 点击事件
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
-            if isLoginValid() {
-                let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
-                let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    self.navigationController!.popViewController(animated: true)
-                })
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
-            }
+            ServerConnector.login(phoneNum: usernameField.text!, password: passwordField.text!, callback: login)
+            // 加载动画
+            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            self.activityIndicator?.center = self.tableView.center
+            self.activityIndicator?.backgroundColor = UIColor.gray
+            self.activityIndicator?.hidesWhenStopped = true
+            self.tableView.addSubview(self.activityIndicator!)
+            self.activityIndicator?.startAnimating()
+            
         }
     }
     
-    func isLoginValid()->Bool{
+    // 登录完成后的操作
+    func login(result:Bool){
+        if result == true {
+            saveUserInfo()
+            
+            self.activityIndicator?.stopAnimating()
+            
+            let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            let alert = UIAlertController(title:"登录", message:"登录失败！请检查用户名和密码是否正确", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+            })
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        self.activityIndicator?.stopAnimating()
+    }
+    
+    // 设置当前用户的用户名和密码，并存储到keychain
+    func saveUserInfo(){
         User.getUser().username = usernameField.text
         User.getUser().password = passwordField.text
         
         User.saveToKeychain()
-        return true
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,6 +83,7 @@ class LoginViewController: UITableViewController{
         
     }
     
+    // 每次输入完后判断输入是否合法
     @IBAction func isInputValid(_ sender: Any) {
         if usernameField.text != "" && passwordField.text != "" {
             loginButton.contentView.backgroundColor = UIColor.blue

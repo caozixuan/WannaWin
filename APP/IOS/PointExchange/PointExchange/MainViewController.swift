@@ -10,8 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
-
-	@IBOutlet weak var imageScrollerView: UIImageView!
+	
 	
 	@IBOutlet weak var cardImage1: UIImageView!
 	
@@ -19,6 +18,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	@IBOutlet weak var cardImage3: UIImageView!
 	
+	@IBOutlet weak var imageScrollerContainer: UIView!
 	
 	//获取屏幕宽度
 	let screenWidth =  UIScreen.main.bounds.size.width
@@ -28,24 +28,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		// Do any additional setup after loading the view.
 		
-		//初始化图片轮播组件
-		imageScroller = ImageScrollerViewController()
-		imageScroller.delegate = self
-		imageScroller.view.frame = CGRect(x: 10, y: 74, width: screenWidth-20, height: 180);
-		imageScroller.view.layer.cornerRadius = 20;
-		imageScroller.view.layer.masksToBounds = true;
-		//imageScroller.view = imageScrollerView
-		
-		//将图片轮播组件添加到当前视图
-		self.addChildViewController(imageScroller)
-		self.view.addSubview(imageScroller.view)
-		
-		//添加组件的点击事件
-		let tap = UITapGestureRecognizer(target: self,
-										 action: #selector(MainViewController.handleTapAction(_:)))
-		imageScroller.view.addGestureRecognizer(tap)
+		//添加积分卡添加点击手势事件
 		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
 		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
 		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
@@ -55,9 +39,11 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		
     }
 	
+	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取内部scrollView尺寸
 	func scrollerViewSize() -> CGSize {
-		return CGSize(width: screenWidth-20, height: (screenWidth-20)/4*2)
+		let height = imageScrollerContainer.frame.height
+		return CGSize(width: screenWidth-20, height:height)
 	}
 	
 	//图片轮播组件协议方法：获取数据集合
@@ -69,6 +55,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 				"https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?cs=srgb&dl=adult-book-business-297755.jpg&fm=jpg"]
 	}
 	
+	// MARK: - 所有的点击事件响应动作
 	//点击事件响应
 	@objc func handleTapAction(_ tap:UITapGestureRecognizer)->Void{
 		//获取图片索引值
@@ -133,14 +120,25 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 
     
 
-    /*
+	
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // 初始化图片轮播组件，为嵌入的图片轮播VC做数据准备
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+		if segue.identifier == "show scroller" {
+			if segue.destination .isKind(of: ImageScrollerViewController.self){
+				imageScroller = segue.destination as! ImageScrollerViewController
+				imageScroller.delegate = self
+				imageScroller.view.layer.cornerRadius = 20;
+				imageScroller.view.layer.masksToBounds = true;
+				
+				//为图片添加点击手势事件
+				let tap = UITapGestureRecognizer(target: self,
+												 action: #selector(MainViewController.handleTapAction(_:)))
+				imageScroller.view.addGestureRecognizer(tap)
+				
+			}
+		}
     }
-    */
+	
 
 }

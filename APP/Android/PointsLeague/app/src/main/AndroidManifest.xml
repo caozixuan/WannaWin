@@ -36,6 +36,9 @@
             android:name=".PaymentFinishActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".PayCodeActivity" />
+
+
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".PayingActivity"
             android:parentActivityName=".PayCodeActivity" />

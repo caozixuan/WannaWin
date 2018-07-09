@@ -27,12 +27,16 @@ class ServerConnector: NSObject {
         }
     }
     /// 提交密码并验证验证码
-    static func sendPassword(phoneNumber:String, vcode:String, password:String,callback:(_ result:Bool)->()){
-        provider.request(.getVCode(phoneNumber:phoneNumber)){ result in
+    static func sendPassword(phoneNumber:String, vcode:String, password:String,callback:@escaping (_ result:Bool)->()){
+        provider.request(.sendPassword(phoneNumber:phoneNumber, vcode:vcode, password: password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
                 // TODO: 处理验证码正确或错误
-                
+                if data["isCreate"].bool == true{
+                    callback(true)
+                }else{
+                    callback(false)
+                }
             }
         }
     }
@@ -42,13 +46,18 @@ class ServerConnector: NSObject {
         provider.request(.login(phoneNum:phoneNum, password:password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
-                let isLogin = data["isLogin"]
-                if isLogin != "false" {
+                let isLogin = data.count
+                if isLogin != 0 {
+                    User.getUser().generalPoints = data["generalPoints"].int
+                    User.getUser().availablePoints = data["availablePoints"].int
                     callback(true)
                 }
                 else{
                     callback(false)
                 }
+            }
+            if case let .failure(response) = result{
+                print("连接失败")
             }
         }
     }

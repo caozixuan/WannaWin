@@ -1,4 +1,4 @@
-package citi.vo;
+package citi.dao;
 
 /*
  * 作者：曹子轩
@@ -6,7 +6,7 @@ package citi.vo;
  */
 
 
-public class Order {
+public class OrderDAO {
     private String orderId;
     private double originalPrice;
     private double priceAfter;
@@ -19,7 +19,7 @@ public class Order {
         SUCCESS, FAIL, TOBEFINISHED
     }
 
-    public Order(String orderId, double originalPrice, double priceAfter, String userId, String merchantId) {
+    public OrderDAO(String orderId, double originalPrice, double priceAfter, String userId, String merchantId) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;

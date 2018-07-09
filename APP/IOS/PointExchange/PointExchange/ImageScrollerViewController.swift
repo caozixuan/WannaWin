@@ -4,7 +4,7 @@
 //
 //  Created by yiner on 2018/7/5.
 //  Copyright © 2018年 WannaWin. All rights reserved.
-//
+//  reference: http://www.hangge.com/blog/cache/detail_1314.html
 
 import UIKit
 import AFImageHelper
@@ -121,7 +121,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//设置页控制器
 	func configurePageController() {
 		self.pageControl = UIPageControl(frame: CGRect(x: kScreenWidth/2-60,
-													   y: self.scrollerViewHeight! - 20, width: 120, height: 20))
+													   y: self.scrollerViewHeight! - 30, width: 120, height: 20))
 		self.pageControl?.numberOfPages = (self.dataSource?.count)!
 		self.pageControl?.isUserInteractionEnabled = false
 		self.view.addSubview(self.pageControl!)
