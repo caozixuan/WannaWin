@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class Account {
-    public static String getAccountInformation(String returnInformation){
-        JsonElement je = new JsonParser().parse(returnInformation);
-        String access_token=je.getAsJsonObject().get("access_token").toString();
+    public static String getAccountInformation(String access_token){
         OkHttpClient client = new OkHttpClient();
         String information = null;
         Request request = new Request.Builder()

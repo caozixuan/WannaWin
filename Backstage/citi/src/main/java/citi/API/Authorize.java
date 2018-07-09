@@ -96,4 +96,10 @@ public class Authorize {
         }
         return returnInformation;
     }
+
+    public static String getToken(String tokenInformation){
+        JsonElement je = new JsonParser().parse(tokenInformation);
+        String access_token=je.getAsJsonObject().get("access_token").toString();
+        return access_token;
+    }
 }

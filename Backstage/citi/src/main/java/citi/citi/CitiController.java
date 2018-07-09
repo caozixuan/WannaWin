@@ -2,6 +2,7 @@ package citi.citi;
 
 import citi.API.Account;
 import citi.API.Authorize;
+import citi.API.Card;
 import citi.vo.CitiCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,20 @@ public class CitiController {
     @RequestMapping("/bindCard")
     public String bindCard(String code){
         String accessInformation = Authorize.getAccessTokenWithGrantType(code,"https://www.baidu.com");
-        String acountInformation = Account.getAccountInformation(accessInformation);
-        return accessInformation;
+        String accessToken = Authorize.getToken(accessInformation);
+        String acountInformation = Account.getAccountInformation(accessToken);
+        String cardsInformation = Card.getCardsInformation(accessToken);
+        /*
+          TODO:后面欠json解析和把相关数据存入数据库
+          某一个表中是不是要增加refresh_token?
+         */
+        return "{state:success}";
     }
 
     @ResponseBody
     @RequestMapping("/requestBind")
     public String requestBind(){
-        return Authorize.getURL("accounts_details_transactions","AU","GCB","en_US","123456","https://www.baidu.com");
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","https://www.baidu.com");
     }
 
     /**
