@@ -14,7 +14,9 @@ class ServerConnector: NSObject {
     
     static var provider: MoyaProvider<ServerService>{
         //自定义manager
-        let manager = Manager(configuration: URLSessionConfiguration.default)
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 15
+        let manager = Manager(configuration: config)
         return MoyaProvider<ServerService>(manager:manager)
     }
     
