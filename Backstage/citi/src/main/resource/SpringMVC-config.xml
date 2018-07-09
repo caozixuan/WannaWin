@@ -26,16 +26,19 @@
             <mvc:mapping path="/**"/>
             <bean class="citi.interceptor.DecryptIeterceptor"/>
         </mvc:interceptor>
+
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="citi.interceptor.EncryptIeterceptor"/>
         </mvc:interceptor>
 
+
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/login/**" />
+            <mvc:exclude-mapping path="/login/getVCode" />
             <bean class="citi.interceptor.AuthIeterceptor" />
         </mvc:interceptor>
+
     </mvc:interceptors>
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -55,7 +58,7 @@
     </bean>
     <!-- 自动扫描mybatis映射文件和接口的包 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="citi.dao"/>
+        <property name="basePackage" value="citi.mybatismapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!-- gson注入 -->

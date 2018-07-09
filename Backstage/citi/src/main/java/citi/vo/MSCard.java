@@ -6,17 +6,25 @@ package citi.vo;
  */
 public class MSCard {
     String cardID;
-    String UserID;
+    String userID;
     String cardNo;
     int points;
     MSCardType msCardType;
+
+    public MSCard(String cardID, String userID, String cardNo, int points, MSCardType msCardType) {
+        this.cardID = cardID;
+        this.userID = userID;
+        this.cardNo = cardNo;
+        this.points = points;
+        this.msCardType = msCardType;
+    }
 
     public String getCardID() {
         return cardID;
     }
 
     public String getUserID() {
-        return UserID;
+        return userID;
     }
 
     public String getCardNo() {

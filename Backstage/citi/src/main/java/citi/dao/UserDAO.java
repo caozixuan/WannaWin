@@ -1,6 +1,6 @@
-package citi.vo;
+package citi.dao;
 
-public class UserInfo {
+public class UserDAO {
     private String userID;
     private String password;
     private String phoneNum;
@@ -8,7 +8,7 @@ public class UserInfo {
     private int availablePoints;
     private String citiCardNum;
 
-    public UserInfo(String userID, String password, String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
+    public UserDAO(String userID, String password, String phoneNum, int generalPoints, int availablePoints, String citiCardNum) {
         this.userID = userID;
         this.password = password;
         this.phoneNum = phoneNum;

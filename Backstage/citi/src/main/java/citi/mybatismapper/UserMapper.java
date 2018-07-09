@@ -1,8 +1,7 @@
-package citi.dao;
+package citi.mybatismapper;
 
 
 import citi.vo.User;
-import citi.vo.UserInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

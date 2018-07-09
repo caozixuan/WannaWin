@@ -13,6 +13,10 @@ public class MSCardType {
         Proportion = proportion;
     }
 
+    public MSCardType(String cardType) {
+        CardType = cardType;
+    }
+
     public String getMerchantID() {
         return MerchantID;
     }

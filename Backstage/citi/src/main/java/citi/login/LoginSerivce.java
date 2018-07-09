@@ -1,10 +1,9 @@
 package citi.login;
 
 import citi.API.VerificationCode;
-import citi.dao.LoginMapper;
-import citi.dao.UserMapper;
+import citi.mybatismapper.LoginMapper;
+import citi.mybatismapper.UserMapper;
 import citi.vo.User;
-import citi.vo.UserInfo;
 import citi.vo.VCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
