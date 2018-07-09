@@ -1,20 +1,27 @@
 package citi.vo;
 
 public class MSCardType {
-    String MerchantID;
-    String MType;
-    String CardType;
-    Double Proportion;
+    private String MerchantID;
+    private String MType;
+    private String CardType;
+    private Double Proportion;
+    private String miniExpense;
 
-    public MSCardType(String merchantID, String MType, String cardType, Double proportion) {
+    //Type of CardType is String in consistence with DB
+    public MSCardType(String CardType) {
+        this.MerchantID = "";
+        this.MType = "";
+        this.CardType = "";
+        this.Proportion = 0.0;
+        this.miniExpense = "";
+    }
+
+    public MSCardType(String merchantID, String MType, String cardType, Double proportion, String miniExpense) {
         MerchantID = merchantID;
         this.MType = MType;
         CardType = cardType;
         Proportion = proportion;
-    }
-
-    public MSCardType(String cardType) {
-        CardType = cardType;
+        this.miniExpense = miniExpense;
     }
 
     public String getMerchantID() {
@@ -47,5 +54,13 @@ public class MSCardType {
 
     public void setProportion(Double proportion) {
         Proportion = proportion;
+    }
+
+    public String getMiniExpense() {
+        return miniExpense;
+    }
+
+    public void setMiniExpense(String miniExpense) {
+        this.miniExpense = miniExpense;
     }
 }
