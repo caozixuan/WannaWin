@@ -1,7 +1,7 @@
-package citi.dao;
+package citi.mybatismapper;
 
+import citi.dao.MSCardDAO;
 import citi.vo.MSCard;
-import citi.vo.MSCardType;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -40,8 +40,8 @@ public interface MSCardMapper {
                     @Result(property = "UserID", column = "UserID"),
                     @Result(property = "cardNo", column = "cardNo"),
                     @Result(property = "points", column = "points"),
-                    @Result(property = "msCardType", column = "msCardType")
+                    @Result(property = "cardType", column = "CardType")
             }
     )
-    MSCard selectCard(String cardID);
+    MSCardDAO selectCard(String cardID);
 }

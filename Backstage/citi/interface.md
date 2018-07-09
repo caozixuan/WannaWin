@@ -62,5 +62,5 @@ merchantID
 添加会员卡
 ```
 xxxx/mscard/addcard
-cardID;UserID;cardNo;MSCardType msCardType;
+cardID;UserID;cardNo;msCardType;
 ```

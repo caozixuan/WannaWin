@@ -18,7 +18,7 @@ class User: Codable{
 }
 
 extension User{
-    static var user:User?
+    private static var user:User?
     class func getUser() -> User{
         if let userN = user {
             return userN
@@ -53,7 +53,11 @@ extension User{
         if let path = self.portraitPath {
             // TODO: - 从服务器获取图片
             let image = UIImage(contentsOfFile: path)
-            return image!
+            if let i = image {
+                return i
+            }else{
+                return UIImage(named: self.portraitName)!
+            }
         }
         else{
             return UIImage(named: self.portraitName)!

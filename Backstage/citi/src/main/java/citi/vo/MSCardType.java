@@ -1,16 +1,48 @@
 package citi.vo;
 
-public class MSCardType {
-    String MerchantID;
-    String MType;
-    String CardType;
-    Double Proportion;
+import java.io.IOException;
+import java.io.StringReader;
 
-    public MSCardType(String merchantID, String MType, String cardType, Double proportion) {
+import com.google.gson.*;
+import org.apache.commons.*;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+
+public class MSCardType {
+    private String MerchantID;
+    private String MType;
+    private String CardType;
+    private Double Proportion;
+    private String miniExpense;
+
+    //Type of CardType is String in consistence with DB
+    public MSCardType(String CardTypeJson) throws IOException {
+        JsonReader reader = new JsonReader(new StringReader(CardTypeJson));
+        reader.beginObject();
+        JsonToken token;
+        MSCardType temp = new GsonBuilder().create().fromJson(CardTypeJson, MSCardType.class);
+
+        this.MerchantID = temp.MerchantID;
+        this.MType = temp.MType;
+        this.CardType = temp.CardType;
+        this.Proportion = temp.Proportion;
+        this.miniExpense = temp.miniExpense;
+    }
+
+    //
+    public String toString() {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        //System.out.println(gson.toJson(this));
+        return gson.toJson(this);
+    }
+
+    public MSCardType(String merchantID, String MType, String cardType, Double proportion, String miniExpense) {
         MerchantID = merchantID;
         this.MType = MType;
         CardType = cardType;
         Proportion = proportion;
+        this.miniExpense = miniExpense;
     }
 
     public String getMerchantID() {
@@ -43,5 +75,13 @@ public class MSCardType {
 
     public void setProportion(Double proportion) {
         Proportion = proportion;
+    }
+
+    public String getMiniExpense() {
+        return miniExpense;
+    }
+
+    public void setMiniExpense(String miniExpense) {
+        this.miniExpense = miniExpense;
     }
 }
