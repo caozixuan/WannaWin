@@ -19,9 +19,7 @@ public class MSCardType {
     public MSCardType(String CardTypeJson) throws IOException {
         JsonReader reader = new JsonReader(new StringReader(CardTypeJson));
         reader.beginObject();
-        JsonToken token;
         MSCardType temp = new GsonBuilder().create().fromJson(CardTypeJson, MSCardType.class);
-
         this.MerchantID = temp.MerchantID;
         this.MType = temp.MType;
         this.CardType = temp.CardType;
