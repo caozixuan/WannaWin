@@ -1,10 +1,13 @@
 package citi.citi;
 
+import citi.API.Account;
+import citi.API.Authorize;
 import citi.vo.CitiCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/citi")
 @Controller
@@ -18,13 +21,21 @@ public class CitiController {
 
     /**
      * 绑定花旗卡
-     * @param citiCard
+     * @param code
      * @return 成功：{"isBinding":true}，失败：{"isBinding":false}
      */
+    @ResponseBody
     @RequestMapping("/bindCard")
-    public String bindCard(CitiCard citiCard){
+    public String bindCard(String code){
+        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"https://www.baidu.com");
+        String acountInformation = Account.getAccountInformation(accessInformation);
+        return accessInformation;
+    }
 
-        return "";
+    @ResponseBody
+    @RequestMapping("/requestBind")
+    public String requestBind(){
+        return Authorize.getURL("accounts_details_transactions","AU","GCB","en_US","123456","https://www.baidu.com");
     }
 
     /**

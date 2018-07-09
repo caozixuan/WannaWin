@@ -34,7 +34,7 @@ public class Authorize {
         return return_str;
     }
 
-    public static String getURL(String code, String client_id, String scope, String countryCode, String businessCode, String locale, String state, String redirect_url){
+    public static String getURL(String scope, String countryCode, String businessCode, String locale, String state, String redirect_url){
         /*
         OkHttpClient client = new OkHttpClient();
 
@@ -50,7 +50,8 @@ public class Authorize {
             System.out.println("request error");
         }
         */
-        return "https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type="+code+"&client_id="+client_id+"&scope="+scope+"&countryCode="+countryCode+"&businessCode="+businessCode+"&locale="+locale+"&state="+state+"&redirect_uri="+redirect_url;
+        String client_id = "55465026-31d3-4881-a29a-419c364b67db";
+        return "https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code"+"&client_id="+client_id+"&scope="+scope+"&countryCode="+countryCode+"&businessCode="+businessCode+"&locale="+locale+"&state="+state+"&redirect_uri="+redirect_url;
     }
 
     public static String getCode(String url){
@@ -73,8 +74,7 @@ public class Authorize {
     "refresh_token_expires_in": 2592000
 }
      */
-    public static String getAccessTokenWithGrantType(String url, String redirect_URL){
-        String code = getCode(url);
+    public static String getAccessTokenWithGrantType(String code, String redirect_URL){
         OkHttpClient client = new OkHttpClient();
         String returnInformation=null;
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
