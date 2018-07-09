@@ -16,6 +16,12 @@ public class MSCardType {
         this.miniExpense = "";
     }
 
+    //
+    public String toString() {
+
+
+    }
+
     public MSCardType(String merchantID, String MType, String cardType, Double proportion, String miniExpense) {
         MerchantID = merchantID;
         this.MType = MType;
