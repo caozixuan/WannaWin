@@ -1,5 +1,7 @@
 package citi.vo;
 
+import citi.dao.OrderDAO;
+
 import java.util.UUID;
 
 public class User {
@@ -42,11 +44,11 @@ public class User {
         return new User("token");
     }
 
-    public void changePoint(Order order) {
+    public void changePoint(OrderDAO orderDAO) {
         //TODO:这里需要根据用户的设定扣除积分，扣除过程应该会比较复杂
-        if (order.getPointsNeeded() > 0)
-            this.setAvailablePoints(this.getAvailablePoints() - order.getPointsNeeded());
-        order.changeState();
+        if (orderDAO.getPointsNeeded() > 0)
+            this.setAvailablePoints(this.getAvailablePoints() - orderDAO.getPointsNeeded());
+        orderDAO.changeState();
     }
 
     public String getUserID() {

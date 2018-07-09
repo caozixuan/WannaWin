@@ -1,6 +1,6 @@
 package citi.mybatismapper;
 
-import citi.vo.Order;
+import citi.dao.OrderDAO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,6 @@ public interface OrderMapper {
     final String getByID = "SELECT * FROM order WHERE OrderID = #{orderID}";
 
     @Select(getByID)
-    Order select(String orderID);
+    OrderDAO select(String orderID);
 
 }
