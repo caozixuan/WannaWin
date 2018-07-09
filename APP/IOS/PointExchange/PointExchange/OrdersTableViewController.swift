@@ -11,15 +11,22 @@ import UIKit
 class OrdersTableViewController: UITableViewController {
     
     var ordersCount = 4
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(OrdersTableViewController.refreshData), for: .valueChanged)
+        self.tableView.addSubview(self.refreshControl!)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func refreshData(){
+        // TODO: - 下拉刷新
     }
 
     override func didReceiveMemoryWarning() {

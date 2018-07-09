@@ -1,10 +1,18 @@
 package citi.login;
 
+import citi.API.VerificationCode;
+import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+/**
+ * 接口设计：刘钟博
+ * 代码填充：彭璇
+ */
+@RequestMapping("/login")
 @Controller
 public class LoginController {
 
@@ -24,6 +32,7 @@ public class LoginController {
         验证码发送
         sendMs..
          */
+        loginSerivce.sendMs(phoneNum);
     }
 
     /**
@@ -35,8 +44,8 @@ public class LoginController {
      */
     @RequestMapping("/sendVCode")
     public String sendVcode(String phoneNum,String vcode,String password){
-
-        return "{\"isCreate\": false｝";
+        boolean isMatch = loginSerivce.vfVcode(phoneNum,vcode,password);
+        return "{\"isCreate\": "+isMatch+"｝";
     }
 
     /**
@@ -54,7 +63,12 @@ public class LoginController {
         User user=new User();
         return gson.toJson(user);
         */
-        return "";
+        User user  = loginSerivce.login(phoneNum,password);
+        if(user==null){
+            return "{\"isLogin\":false}";
+        }
+        else
+            return gson.toJson(user);
     }
 
 
