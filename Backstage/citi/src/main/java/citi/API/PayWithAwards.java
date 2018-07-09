@@ -3,6 +3,7 @@ package citi.API;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class PayWithAwards {
 
@@ -46,7 +47,7 @@ public class PayWithAwards {
         Request request = new Request.Builder()
                 .url("https://sandbox.apihub.citi.com/gcb/api/v1/apac/rewards/"+linkCode+"/activations")
                 .put(body)
-                .addHeader("uuid", "19941865-338e-4fcf-bf3d-cbba7d07075e")
+                .addHeader("uuid",  UUID.randomUUID().toString())
                 .addHeader("accept", "application/json")
                 .addHeader("client_id", "55465026-31d3-4881-a29a-419c364b67db")
                 .addHeader("content-type", "application/json")
@@ -66,7 +67,7 @@ public class PayWithAwards {
                 .url("https://sandbox.apihub.citi.com/gcb/api/v1/apac/rewards/"+linkCode+"/pointBalance")
                 .get()
                 .addHeader("authorization", "Bearer "+accessToken)
-                .addHeader("uuid", "10de44d2-254f-4d7d-b296-4b69ad4ac377")
+                .addHeader("uuid",  UUID.randomUUID().toString())
                 .addHeader("accept", "application/json")
                 .addHeader("client_id", "55465026-31d3-4881-a29a-419c364b67db")
                 .addHeader("accept-language", "en-us")
@@ -85,7 +86,7 @@ public class PayWithAwards {
                 .url("https://sandbox.apihub.citi.com/gcb/api/v1/apac/rewards/"+linkCode+"/redemption")
                 .post(body)
                 .addHeader("authorization", "Bearer "+linkCode)
-                .addHeader("uuid", "fdf95328-2856-486a-a4d2-398252ce9e79")
+                .addHeader("uuid",  UUID.randomUUID().toString())
                 .addHeader("accept", "application/json")
                 .addHeader("content-type", "application/json")
                 .addHeader("client_id", "55465026-31d3-4881-a29a-419c364b67db")
