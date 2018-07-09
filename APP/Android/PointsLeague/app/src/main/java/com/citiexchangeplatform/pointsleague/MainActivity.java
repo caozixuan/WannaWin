@@ -95,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(BaseFragment.newInstance("积分"));
-        adapter.addFragment(BaseFragment.newInstance("发现"));
+        adapter.addFragment(new PointsFragment());
+        adapter.addFragment(new FindFragment());
         adapter.addFragment(BaseFragment.newInstance("商城"));
-        adapter.addFragment(BaseFragment.newInstance("我的"));
+        adapter.addFragment(new AccountFragment());
         viewPager.setAdapter(adapter);
     }
 

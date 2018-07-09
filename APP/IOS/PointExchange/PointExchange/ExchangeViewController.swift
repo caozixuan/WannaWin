@@ -17,11 +17,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,14 +101,23 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     }
     */
 
-    /*
+	
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//	
+//	@IBAction func pressVerifyBtn(_ sender: Any) {
+//		
+//		if self.restorationIdentifier == "ExchangeSelectViewController" {
+//			self.navigationController?.popViewController(animated: false)
+//		}
+//		else if self.restorationIdentifier == "ExchangeSelectDetailViewController"  {
+//			self.navigationController?.popViewController(animated: false)
+//			self.navigationController?.popViewController(animated: false)
+//		}
+//		let storyBoard = UIStoryboard(name:"Exchange", bundle:nil)
+//		let view = storyBoard.instantiateViewController(withIdentifier: "FinishExchangeViewController")
+//		self.navigationController?.pushViewController(view, animated: true)
+//	}
+//
+//	
 
 }
