@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface MerchantMapper {
 
-    final String getSome = "SELECT * FROM merchant ORDER BY MerchantID LIMIT #{start-1}, #{length}";
+    final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start-1}, #{length}";
     final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
     final String getTypes = "SELECT * FROM cardtype WHERE MerchantID = #{Mercantid}";
 
