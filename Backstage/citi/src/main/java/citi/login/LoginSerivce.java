@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -50,11 +52,15 @@ public class LoginSerivce {
      */
     public boolean vfVcode(String phoneNum,String vCode,String password){
         boolean isMatch = false;
-        if(loginMapper.selectVcode(phoneNum).equals(vCode)){
-            isMatch = true;
-            UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
-            userMapper.insert(d);
-            //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
+        List<String> vCodes = loginMapper.selectVcode(phoneNum);
+        for(int i=0;i<vCodes.size();i++){
+            if(vCodes.get(i).equals(vCode)){
+                isMatch = true;
+                UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
+                userMapper.insert(d);
+                break;
+                //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
+            }
         }
         return isMatch;
     }

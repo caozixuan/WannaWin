@@ -49,7 +49,7 @@ public class LoginController {
     @RequestMapping("/sendVCode")
     public String sendVcode(String phoneNum,String vcode,String password){
         boolean isMatch = loginSerivce.vfVcode(phoneNum,vcode,password);
-        return "{\"isCreate\": "+isMatch+"｝";
+        return "{\"isCreate\": "+isMatch+"}";
     }
 
     /**
