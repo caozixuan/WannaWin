@@ -38,7 +38,6 @@ public class MSCardService {
             return null;
         Collections.sort(allCards,new SortByPoints());
         ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
-        for(int i=0;i<n&&i<allCards.size();i++){
         for(int i=0;i<n&&i<returnCards.size();i++){
             returnCards.add(allCards.get(i));
         }
