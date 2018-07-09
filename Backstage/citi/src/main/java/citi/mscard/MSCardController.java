@@ -1,5 +1,6 @@
 package citi.mscard;
 
+import citi.dao.MSCardDAO;
 import citi.vo.MSCard;
 import citi.vo.MSCardType;
 import com.google.gson.Gson;
@@ -65,7 +66,7 @@ public class MSCardController {
      */
     @ResponseBody
     @RequestMapping("/addcard")
-    public String addMSCard(MSCard msCard){
+    public String addMSCard(MSCardDAO msCard){
         boolean flag = msCardService.addMSCard(msCard);
         return "{state:"+flag+"}";
     }
