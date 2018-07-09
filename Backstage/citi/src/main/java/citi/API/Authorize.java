@@ -9,6 +9,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Authorize {
+
+    public static String getResponseBody(Request request){
+        OkHttpClient client = new OkHttpClient();
+        String returnInformation = null;
+        try{
+            Response response = client.newCall(request).execute();
+            ResponseBody RB = response.body();
+            returnInformation = RB.string();
+        }catch (IOException e)
+        {
+            System.out.println("error");
+        }
+        return returnInformation;
+    }
+
+
     public static String getAccessToken(){
         OkHttpClient client = new OkHttpClient();
 
@@ -35,21 +51,6 @@ public class Authorize {
     }
 
     public static String getURL(String scope, String countryCode, String businessCode, String locale, String state, String redirect_url){
-        /*
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url("https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type="+code+"&client_id="+client_id+"&scope="+scope+"&countryCode="+countryCode+"&businessCode="+businessCode+"&locale="+locale+"&state="+state+"&redirect_uri="+redirect_uri)
-                .get()
-                .addHeader("accept", "application/json")
-                .build();
-
-        try{
-            Response response = client.newCall(request).execute();
-        }catch (IOException e){
-            System.out.println("request error");
-        }
-        */
         String client_id = "55465026-31d3-4881-a29a-419c364b67db";
         return "https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code"+"&client_id="+client_id+"&scope="+scope+"&countryCode="+countryCode+"&businessCode="+businessCode+"&locale="+locale+"&state="+state+"&redirect_uri="+redirect_url;
     }
@@ -75,7 +76,6 @@ public class Authorize {
 }
      */
     public static String getAccessTokenWithGrantType(String code, String redirect_URL){
-        OkHttpClient client = new OkHttpClient();
         String returnInformation=null;
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         RequestBody body = RequestBody.create(mediaType, "grant_type=authorization_code&code="+code+"&redirect_uri="+redirect_URL);
@@ -86,14 +86,7 @@ public class Authorize {
                 .addHeader("authorization", "Basic NTU0NjUwMjYtMzFkMy00ODgxLWEyOWEtNDE5YzM2NGI2N2RiOlc2dlkwbEg4ckw0c0s2bFg2YlA3YUw2ZUMyd1gxbkczYUc3c1I4dkE4bEEzbVMwZUg2")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .build();
-
-        try{
-            Response response = client.newCall(request).execute();
-            ResponseBody RB = response.body();
-            returnInformation = RB.string();
-        }catch (IOException e){
-            System.out.println("request error");
-        }
+        returnInformation = Authorize.getResponseBody(request);
         return returnInformation;
     }
 
@@ -101,5 +94,42 @@ public class Authorize {
         JsonElement je = new JsonParser().parse(tokenInformation);
         String access_token=je.getAsJsonObject().get("access_token").toString();
         return access_token;
+    }
+
+    public static String refreshToken(){
+        String formerRefreshToken = "test"; //这个应该从数据库获取
+        OkHttpClient client = new OkHttpClient();
+        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+        RequestBody body = RequestBody.create(mediaType, "grant_type=refresh_token&refresh_token="+formerRefreshToken);
+        Request request = new Request.Builder()
+                .url("https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/refresh")
+                .post(body)
+                .addHeader("accept", "application/json")
+                .addHeader("authorization", "Bearer NTU0NjUwMjYtMzFkMy00ODgxLWEyOWEtNDE5YzM2NGI2N2RiOlc2dlkwbEg4ckw0c0s2bFg2YlA3YUw2ZUMyd1gxbkczYUc3c1I4dkE4bEEzbVMwZUg2")
+                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .build();
+
+        String status = Authorize.getResponseBody(request);
+        return status;
+    }
+
+    /*
+      revokeToken:在解绑的时候需要
+     */
+
+    public static String revokeToken(String token, String tokenType){
+        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+        RequestBody body = RequestBody.create(mediaType, "token="+token+"&token_type_hint="+tokenType);
+        Request request = new Request.Builder()
+                .url("https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/revoke")
+                .post(body)
+                .addHeader("accept", "application/json")
+                .addHeader("authorization", "Bearer NTU0NjUwMjYtMzFkMy00ODgxLWEyOWEtNDE5YzM2NGI2N2RiOlc2dlkwbEg4ckw0c0s2bFg2YlA3YUw2ZUMyd1gxbkczYUc3c1I4dkE4bEEzbVMwZUg2\n")
+                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .build();
+
+        String status = Authorize.getResponseBody(request);
+
+        return status;
     }
 }

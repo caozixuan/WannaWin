@@ -23,7 +23,7 @@ public class Account {
                 .addHeader("client_id", "55465026-31d3-4881-a29a-419c364b67db")
                 .build();
 
-        information = PayWithAwards.getResponseBody(request);
+        information = Authorize.getResponseBody(request);
         return information;
     }
 }

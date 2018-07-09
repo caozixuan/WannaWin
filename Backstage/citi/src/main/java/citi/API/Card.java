@@ -2,7 +2,6 @@ package citi.API;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
 import java.util.UUID;
 
@@ -19,7 +18,7 @@ public class Card {
                 .addHeader("accept", "application/json")
                 .build();
 
-        String cardsInformation = PayWithAwards.getResponseBody(request);
+        String cardsInformation = Authorize.getResponseBody(request);
         return cardsInformation;
     }
 }

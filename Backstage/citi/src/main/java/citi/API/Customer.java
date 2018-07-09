@@ -20,7 +20,7 @@ public class Customer {
                 .addHeader("client_id", client_id)
                 .build();
 
-        String phoneInformation = PayWithAwards.getResponseBody(request);
+        String phoneInformation = Authorize.getResponseBody(request);
         return phoneInformation;
     }
 }
