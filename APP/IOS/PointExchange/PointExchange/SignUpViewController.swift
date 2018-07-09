@@ -77,6 +77,7 @@ class SignUpViewController: UITableViewController {
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
         }
+        self.activityIndicator?.stopAnimating()
     }
 
     /// 检查phoneNumber输入是否合法

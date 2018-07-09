@@ -65,6 +65,7 @@ class LoginViewController: UITableViewController{
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
+        self.activityIndicator?.stopAnimating()
     }
     
     // 设置当前用户的用户名和密码，并存储到keychain

@@ -46,8 +46,8 @@ class ServerConnector: NSObject {
         provider.request(.login(phoneNum:phoneNum, password:password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
-                let isLogin = data["isLogin"].bool
-                if isLogin != false {
+                let isLogin = data.count
+                if isLogin != 0 {
                     User.getUser().generalPoints = data["generalPoints"].int
                     User.getUser().availablePoints = data["availablePoints"].int
                     callback(true)
