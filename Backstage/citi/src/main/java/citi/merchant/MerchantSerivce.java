@@ -1,6 +1,6 @@
 package citi.merchant;
 
-import citi.dao.MerchantMapper;
+import citi.mybatismapper.MerchantMapper;
 import citi.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

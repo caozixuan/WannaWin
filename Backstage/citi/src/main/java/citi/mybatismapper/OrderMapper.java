@@ -1,4 +1,4 @@
-package citi.dao;
+package citi.mybatismapper;
 
 import citi.vo.Order;
 import org.apache.ibatis.annotations.*;

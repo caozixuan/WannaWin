@@ -1,11 +1,8 @@
-package citi.dao;
+package citi.mybatismapper;
 
 
-import citi.vo.UserInfo;
 import citi.vo.VCode;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginMapper {
 
-    final String insertVCode = "INSERT INTO Vcode(phoneNum, VCode Time) VALUES(#{phoneNum}, #{VCode}, #{Time})";
+    final String insertVCode = "INSERT INTO Vcode (phoneNum, VCode, Time) VALUES (#{phoneNum}, #{VCode}, #{Time})";
     final String getByPhoneNum = "SELECT VCode FROM Vcode " +
-            "WHERE phoneNum = #{phoneNum} AND timediff(now(), Time) < '00:10:00'";
+            "WHERE phoneNum = #{phoneNum}";
 
     //注解，添加向前端发送的验证码至数据库
     @Insert(insertVCode)
