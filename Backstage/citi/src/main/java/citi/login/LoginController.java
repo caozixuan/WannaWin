@@ -70,7 +70,7 @@ public class LoginController {
         */
         User user  = loginSerivce.login(phoneNum,password);
         if(user==null){
-            return "{\"isLogin\":false}";
+            return "{}";
         }
         else
             return gson.toJson(user);
