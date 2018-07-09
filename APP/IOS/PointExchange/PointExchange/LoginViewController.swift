@@ -13,6 +13,8 @@ class LoginViewController: UITableViewController{
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UITableViewCell!
     
+    var activityIndicator:UIActivityIndicatorView?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,23 +40,44 @@ class LoginViewController: UITableViewController{
     */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
-            if isLoginValid() {
-                let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
-                let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    self.navigationController!.popViewController(animated: true)
-                })
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
-            }
+            ServerConnector.login(phoneNum: usernameField.text!, password: passwordField.text!, callback: login)
+            // 加载动画
+            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            self.activityIndicator?.center = self.tableView.center
+            self.activityIndicator?.backgroundColor = UIColor.gray
+            self.activityIndicator?.hidesWhenStopped = true
+            self.tableView.addSubview(self.activityIndicator!)
+            self.activityIndicator?.startAnimating()
+            
         }
     }
     
-    func isLoginValid()->Bool{
+    func login(result:Bool){
+        if result == true {
+            saveUserInfo()
+            self.activityIndicator?.stopAnimating()
+            
+            let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            let alert = UIAlertController(title:"登录", message:"登录失败！请检查用户名和密码是否正确", preferredStyle:.alert)
+            let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+            })
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func saveUserInfo(){
         User.getUser().username = usernameField.text
         User.getUser().password = passwordField.text
         
         User.saveToKeychain()
-        return true
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
