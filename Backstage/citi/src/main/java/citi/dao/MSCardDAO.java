@@ -4,29 +4,34 @@ import citi.vo.MSCard;
 import citi.vo.MSCardType;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class MSCardDAO {
-    String cardID;
-    String userID;
-    String card_No;
-    int points;
-    String CardType;
+    private String cardID;
+    private String userID;
+    private String card_No;
+    private int points;
+    private String CardType;
 
-    public MSCardDAO(String cardID, String userID, String cardNo, int points, String msCardType) {
-        this.cardID = cardID;
+    public MSCardDAO(String userID, String cardNo, int points, String msCardType) {
+        this.cardID = UUID.randomUUID().toString().toLowerCase();
         this.userID = userID;
         this.card_No = cardNo;
         this.points = points;
         this.CardType = msCardType;
     }
 
+    public MSCardDAO() {
+        this.cardID= UUID.randomUUID().toString().toLowerCase();
+    }
+
     public MSCard toMSCard() {
         MSCard msCard = null;
-        try {
-            msCard = new MSCard(cardID, userID, card_No, points, new MSCardType(CardType));
-        } catch (IOException e) {
+
+        msCard = new MSCard(cardID, userID, card_No, points, new MSCardType(CardType));
+        /*catch (IOException e) {
             System.out.println("error");
-        }
+        }*/
         return msCard;
     }
 

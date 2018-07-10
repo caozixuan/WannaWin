@@ -14,19 +14,21 @@ public class OrderDAO {
     private String userId;
     private OrderState state;
     private String merchantId;
+    private String time;
 
     public enum OrderState {
         SUCCESS, FAIL, TOBEFINISHED
     }
 
-    public OrderDAO(String orderId, double originalPrice, double priceAfter, String userId, String merchantId) {
+    public OrderDAO(String orderId, double originalPrice, double priceAfter, int pointsNeeded, String userId, OrderState state, String merchantId, String time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
-        this.pointsNeeded = -1;
+        this.pointsNeeded = pointsNeeded;
         this.userId = userId;
+        this.state = state;
         this.merchantId = merchantId;
-        this.state = OrderState.TOBEFINISHED;
+        this.time = time;
     }
 
     public void setPointsNeeded(int pointsNeeded) {
@@ -67,5 +69,9 @@ public class OrderDAO {
 
     public String getMerchantId() {
         return merchantId;
+    }
+
+    public String getTime() {
+        return time;
     }
 }

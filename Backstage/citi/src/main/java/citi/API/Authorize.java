@@ -96,6 +96,12 @@ public class Authorize {
         return access_token;
     }
 
+    public static String getRefreshToken(String tokenInformation){
+        JsonElement je = new JsonParser().parse(tokenInformation);
+        String refresh_access_token=je.getAsJsonObject().get("refresh_token").toString();
+        return refresh_access_token;
+    }
+
     public static String refreshToken(){
         String formerRefreshToken = "test"; //这个应该从数据库获取
         OkHttpClient client = new OkHttpClient();

@@ -20,7 +20,7 @@ public interface MSCardMapper {
 
     //查询用户下的会员卡
     @Select(getByuserId)
-    List<MSCard> select(String userID);
+    List<MSCardDAO> select(String userID);
 
     @Select(getCard)
     MSCardDAO selectCard(String cardID);

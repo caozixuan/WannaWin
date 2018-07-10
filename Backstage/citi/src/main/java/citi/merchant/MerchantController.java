@@ -33,7 +33,6 @@ public class MerchantController {
         sb.append("[");
         for(int i=0;i<merchants.size();i++){
             sb.append(merchants.get(i).toString());
-
             sb.append(",");
         }
 
