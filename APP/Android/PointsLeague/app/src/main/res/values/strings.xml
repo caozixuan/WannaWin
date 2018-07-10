@@ -22,4 +22,6 @@
     <string name="about_us_description">Points League旨在建立一个以花旗银行信用为担保的积分兑换平台，实现花旗银行及其友商客户群体的互通，打破各友商积分使用的局限，有助于其积分业务的有效合理互通，扩大消费者积分使用范围及其友商的社会影响力。</string>
     <string name="about_us">武汉大学计算机学院</string>
     <string name="about_us_2">武汉大学经管学院</string>
+
+    <string name="action_search">Search</string>
 </resources>
