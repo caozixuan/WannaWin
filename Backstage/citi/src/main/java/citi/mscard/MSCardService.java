@@ -51,7 +51,7 @@ public class MSCardService {
         public int compare(Object o1, Object o2){
             MSCard c1 = (MSCard) o1;
             MSCard c2 = (MSCard) o2;
-            if(c1.getPoints()<c2.getPoints()){
+            if(c1.getPoints()*c1.getProportion()<c2.getPoints()*c2.getProportion()){
                 return 1;
             }
             return 0;
@@ -83,9 +83,10 @@ public class MSCardService {
      */
     public boolean addMSCard(MSCardDAO msCard){
         // TODO:请求相关商家接口，做验证
-
+        boolean isNoBlank = MSCardDAO.checkAttribute(msCard);
+        if(!isNoBlank)
+            return false;
         int flag = msCardMapper.insert(msCard);
-        System.out.println(msCard.getCardID());
         if(flag>0)
             return true;
         return false;
