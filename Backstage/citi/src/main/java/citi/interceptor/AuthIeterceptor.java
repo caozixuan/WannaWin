@@ -11,7 +11,7 @@ public class AuthIeterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String userID=(String) request.getSession().getAttribute("userID");
         if (userID==null){
-            return false;
+            return true;
         }
         return true;
     }
