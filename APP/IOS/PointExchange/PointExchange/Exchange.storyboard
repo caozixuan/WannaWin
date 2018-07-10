@@ -414,7 +414,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sV-G4-cy4">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sV-G4-cy4">
                                                     <rect key="frame" x="260" y="19" width="39" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -530,6 +530,8 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="selectedPointsLabel" destination="ZdM-Rg-ljq" id="afL-2X-OdL"/>
+                        <outlet property="shouldSelectPointsLabel" destination="osz-CK-R75" id="jFO-gV-Hno"/>
                         <outlet property="tableView" destination="ORh-LS-8uT" id="wDe-Jc-eKQ"/>
                     </connections>
                 </viewController>
@@ -621,6 +623,6 @@
         <image name="编辑" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ibp-GC-DTh"/>
+        <segue reference="ojH-ed-eE2"/>
     </inferredMetricsTieBreakers>
 </document>
