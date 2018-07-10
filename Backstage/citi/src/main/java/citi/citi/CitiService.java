@@ -40,8 +40,7 @@ public class CitiService {
         return false;
     }
 
-    public void saveRefreshToken(String accessInformation){
-        String userID = "123";
+    public void saveRefreshToken(String accessInformation, String userID){
         String refreshAccessToken = Authorize.getRefreshToken(accessInformation);
         RefreshToken refreshToken = new RefreshToken(userID,refreshAccessToken,String.valueOf(System.currentTimeMillis()));
         tokenMapper.insert(refreshToken);
