@@ -36,10 +36,8 @@ public class MSCardController {
      */
     @ResponseBody
     @RequestMapping("/infos")
-    public String getMSInfo(String userId,String n){
-        System.out.println(userId);
-        System.out.println(n);
-        List<MSCard> cards = msCardService.getInfo(userId, Integer.getInteger(n));
+    public String getMSInfo(String userId,int n){
+        List<MSCard> cards = msCardService.getInfo(userId, n);
         if(cards==null){
             return "{result:null}";
         }

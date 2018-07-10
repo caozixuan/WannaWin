@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PayingActivity"
+    tools:context=".PayingDetailsActivity"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -15,15 +15,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        app:title="选择积分"
+        app:theme="@style/ToolbarTheme">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="使用积分"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -47,8 +41,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/ic_expand_less_black_24dp"
-            android:onClick="click_expand_less" />
+            android:background="@drawable/ic_expand_less_black_24dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"

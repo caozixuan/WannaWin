@@ -46,12 +46,14 @@ public class CitiController {
     public String bindCard(String code){
         String phoneNum = null;
         String creditCardNum = null;
-        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/bindCard");
+        String citiCardID = null;
+        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");
         String accessToken = Authorize.getToken(accessInformation);
         citiService.saveRefreshToken(accessInformation, userID);
         phoneNum = citiService.getPhoneNum(accessToken);
         creditCardNum = citiService.getCardNum(accessToken);
-        CitiCard citiCard = new CitiCard(creditCardNum,phoneNum,userID);
+        citiCardID = citiService.getCardID(accessToken);
+        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID);
         if(citiService.binding(citiCard)){
             return "{status: success"+phoneNum+creditCardNum+accessToken+"}";
         }
@@ -62,26 +64,28 @@ public class CitiController {
     @RequestMapping("/requestBind")
     public String requestBind(String userID){
         this.userID = userID;
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","http://193.112.44.141/citi/bindCard");
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","http://193.112.44.141/citi/citi/bindCard");
     }
 
     /**
      * @param citiCard 将被解绑的卡
      * @return 成功：{"unBinding":true}，失败：{"unBinding":false}
      */
+    @ResponseBody
     @RequestMapping("/unbind")
     public String unBind(CitiCard citiCard){
         String refreshAccessToken = tokenMapper.select(citiCard.getUserID());
         Authorize.revokeToken(refreshAccessToken,"refresh_token");
         citiMapper.delete(citiCard.getCitiCardNum());
-        return null;
+        return "{status: success}";
     }
 
     @RequestMapping("/refreshToekn")
     public String refreshToken(String userID){
-        String refreshToken = Authorize.refreshToken();
-        citiService.saveRefreshToken(refreshToken, userID);
-        return "{status:success}";
+        String formerRefreshToken = tokenMapper.select(userID);
+        String[] tokens = Authorize.getTokenAndRefreshTokenByFormerRefreshToken(userID, formerRefreshToken);
+        citiService.saveRefreshToken(tokens[1], userID);
+        return tokens[0];
     }
 
 }

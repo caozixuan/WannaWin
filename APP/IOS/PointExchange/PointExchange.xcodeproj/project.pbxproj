@@ -34,6 +34,7 @@
 		3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155320EDFF5A000743C0 /* MainViewController.swift */; };
 		3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */; };
 		3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */; };
+		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
 		B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */; };
 		B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */; };
@@ -47,7 +48,7 @@
 		B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */; };
 		B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */; };
 		B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */; };
-		B6A6EC6020F25B810079FFA4 /* Mechant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Mechant.swift */; };
+		B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Merchant.swift */; };
 		B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */; };
 		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
 		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
@@ -85,6 +86,7 @@
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
+		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +101,7 @@
 		B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCodeManager.swift; sourceTree = "<group>"; };
 		B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnector.swift; sourceTree = "<group>"; };
 		B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
-		B6A6EC5F20F25B810079FFA4 /* Mechant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechant.swift; sourceTree = "<group>"; };
+		B6A6EC5F20F25B810079FFA4 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
 		B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantList.swift; sourceTree = "<group>"; };
 		C1ED982020EE1C7900A2F0C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1ED982220EE1E3900A2F0C5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -227,7 +229,7 @@
 			children = (
 				C1ED982020EE1C7900A2F0C5 /* User.swift */,
 				C1ED982220EE1E3900A2F0C5 /* Card.swift */,
-				B6A6EC5F20F25B810079FFA4 /* Mechant.swift */,
+				B6A6EC5F20F25B810079FFA4 /* Merchant.swift */,
 				B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */,
 			);
 			name = Model;
@@ -287,6 +289,7 @@
 				B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */,
 				B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */,
 				B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */,
+				B61D90AE20F43A9400A66662 /* Component.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -396,7 +399,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFImageHelper/AFImageHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -408,7 +410,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFImageHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -447,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */,
+				B61D90AF20F43A9400A66662 /* Component.swift in Sources */,
 				3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */,
 				B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */,
 				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,
@@ -454,7 +456,7 @@
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
-				B6A6EC6020F25B810079FFA4 /* Mechant.swift in Sources */,
+				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
 				3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */,
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
 				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,

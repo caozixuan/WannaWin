@@ -12,20 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CitiMapper {
 
-    final String insertCiti = "INSERT INTO citicard(citiCard, phoneNum, userID) " +
-            "VALUES(#{citiCardNum}, #{phoneNum}, #{userID})";
-    final String updateCitiByPhoneNum = "UPDATE citicard SET citiCard = #{citiCardNum} WHERE phoneNum = #{phoneNum}";
-    final String updateCitiByID = "UPDATE citicard SET citiCard = #{citiCardNum} WHERE userID = #{userID}";
-    final String deleteCiti = "DELETE FROM citicard WHERE citiCard = #{citiNum}";
+    final String insertCiti = "INSERT INTO citicard(citiCardID, citiCardNum, phoneNum, userID) " +
+            "VALUES(#{citiCardID}, #{citiCardNum}, #{phoneNum}, #{userID})";
+    final String deleteCiti = "DELETE FROM citicard WHERE citiCardID = #{citiCardID}";
 
     @Insert(insertCiti)
     int insert(CitiCard citiCard);
-
-    @Update(updateCitiByPhoneNum)
-    int updateByPhoneNum(@Param("phoneNum") String phoneNum, @Param("citiCard") String citiCardNum);
-
-    @Update(updateCitiByID)
-    int updateByUserID(@Param("userID") String userID, @Param("citiCard") String citiCardNum);
 
     @Delete(deleteCiti)
     int delete(String citiNum);

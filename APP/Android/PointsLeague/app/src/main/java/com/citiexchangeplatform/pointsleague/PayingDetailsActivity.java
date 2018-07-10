@@ -1,14 +1,22 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.KeyListener;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PayingDetailsActivity extends AppCompatActivity {
+public class PayingDetailsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private RecyclerView mRecyclerView;
     private List<String> data_posses_point;
@@ -38,7 +46,7 @@ public class PayingDetailsActivity extends AppCompatActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying_details);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //通过findViewById拿到RecyclerView实例
@@ -70,6 +78,14 @@ public class PayingDetailsActivity extends AppCompatActivity {
             public void onclick(View view, int position) {
                 Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
 
+            }
+        });
+
+        Button Expand_Less = (Button) findViewById(R.id.button_expand_less);
+        Expand_Less.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -149,4 +165,46 @@ public class PayingDetailsActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        //final List<WordModel> filteredModelList = filter(mModels, query);
+        //mAdapter.edit()
+        //        .replaceAll(filteredModelList)
+        //        .commit();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    /*private static List<WordModel> filter(List<WordModel> models, String query) {
+        final String lowerCaseQuery = query.toLowerCase();
+
+        final List<WordModel> filteredModelList = new ArrayList<>();
+        for (WordModel model : models) {
+            final String text = model.getWord().toLowerCase();
+            final String rank = String.valueOf(model.getRank());
+            if (text.contains(lowerCaseQuery) || rank.contains(lowerCaseQuery)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }*/
+
+
+
 }

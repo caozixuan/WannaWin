@@ -5,7 +5,7 @@ public class Phone {
     String areaCode;
     int extension;
     int phoneKey;
-    int phoneNum;
+    int phoneNumber;
     int phoneCountryCode;
 
     public Phone(String phoneType, String areaCode, int extension, int phoneKey, int phoneNum, int phoneCountryCode) {
@@ -13,7 +13,7 @@ public class Phone {
         this.areaCode = areaCode;
         this.extension = extension;
         this.phoneKey = phoneKey;
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNum;
         this.phoneCountryCode = phoneCountryCode;
     }
 
@@ -34,7 +34,7 @@ public class Phone {
     }
 
     public int getPhoneNum() {
-        return phoneNum;
+        return phoneNumber;
     }
 
     public int getPhoneCountryCode() {

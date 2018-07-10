@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class User {
     private String userID;
-    private String citiCard;
+    private String citiCardID;
     private String phoneNum;
     private int generalPoints;
     private int availablePoints;
@@ -19,9 +19,9 @@ public class User {
         this.userID = "";
     }
 
-    public User(String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
+    public User(String citiCardID, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = UUID.randomUUID().toString().toLowerCase();
-        this.citiCard = citiCardNum;
+        this.citiCardID = citiCardID;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
@@ -29,7 +29,7 @@ public class User {
 
     public User(String userID, String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = userID;
-        this.citiCard = citiCardNum;
+        this.citiCardID = citiCardNum;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
@@ -83,11 +83,11 @@ public class User {
         this.availablePoints = availablePoints;
     }
 
-    public String getCitiCardNum() {
-        return citiCard;
+    public String getCitiCardID() {
+        return citiCardID;
     }
 
-    public void setCitiCardNum(String citiCardNum) {
-        this.citiCard = citiCardNum;
+    public void setCitiCardID(String citiCardID) {
+        this.citiCardID = citiCardID;
     }
 }
