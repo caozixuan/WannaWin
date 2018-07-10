@@ -239,10 +239,26 @@
 				3E46B77A20F254FF00843193 /* HomePageTab */,
 				3E46B77820F254C900843193 /* UserTab */,
 				3E46B77920F254E800843193 /* ExchangeTab */,
-				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
-				3E4C155920EE00E7000743C0 /* StoreViewController.swift */,
+				3E8B15E320F4491E0034896B /* DiscoverTab */,
+				3E8B15E420F449320034896B /* StoreTab */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		3E8B15E320F4491E0034896B /* DiscoverTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
+			);
+			name = DiscoverTab;
+			sourceTree = "<group>";
+		};
+		3E8B15E420F449320034896B /* StoreTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155920EE00E7000743C0 /* StoreViewController.swift */,
+			);
+			name = StoreTab;
 			sourceTree = "<group>";
 		};
 		3EA0334920EDCDF700D05A03 /* Extensions */ = {
@@ -383,6 +399,8 @@
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Valet/Valet.framework",
 			);
@@ -393,6 +411,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Valet.framework",
 			);
