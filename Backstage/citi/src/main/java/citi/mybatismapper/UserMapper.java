@@ -15,7 +15,7 @@ public interface UserMapper {
             "VALUES (#{userID}, #{password}, #{citiCard}, #{phoneNum}, #{generalPoints}, #{availablePoints})";
 
     @Select(getInfoByPhoneNum)
-    User getInfoByPhoneNum(String phoneNum);
+    User getInfoByPhone(String phoneNum);
 
     //注解部分，登陆验证
     @Select(loginVerify)
