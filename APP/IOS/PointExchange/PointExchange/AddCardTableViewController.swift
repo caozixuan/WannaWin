@@ -8,19 +8,25 @@
 
 import UIKit
 
-class AddCardTableViewController: UITableViewController {
+class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+    
+    
 
-	@IBOutlet weak var cardUser: UITextField!
-	
+    var cardTypeCount:Int?
+    var merchant:Merchant?
+    @IBOutlet weak var pickerView: UIPickerView!
 	@IBOutlet weak var cardId: UITextField!
 	
 	@IBOutlet weak var finishBtn: UITableViewCell!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		cardUser.delegate = self
 		cardId.delegate = self
 		finishBtn.isUserInteractionEnabled = false
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,11 +36,9 @@ class AddCardTableViewController: UITableViewController {
 
 	// MARK: - TextField delegate
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-		let text1 = cardUser.text
 		let text2 = cardId.text
 		// FIXME: - 后期需要修改条件
-		if text1?.count != 0 &&
-			text2?.count != 0 && isCardIdValid()
+		if text2?.count != 0 && isCardIdValid()
 		{
 			finishBtn.isUserInteractionEnabled = true
 			finishBtn.backgroundColor = UIColor.blue
@@ -75,6 +79,24 @@ class AddCardTableViewController: UITableViewController {
 
 		}
 	}
+    
+    // pickerView相关
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return self.cardTypeCount!
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let count = cardTypeCount {
+            return count
+        }
+        return 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if let m = merchant?.cardTypes {
+            return m[row].cardType
+        }
+        return "null"
+    }
 	
     /*
     // MARK: - Navigation

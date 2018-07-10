@@ -35,6 +35,7 @@
 		3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */; };
 		3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
+		B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
 		B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */; };
 		B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */; };
@@ -87,6 +88,7 @@
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantChooseTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
 				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
+				B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */,
+				B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

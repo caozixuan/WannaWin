@@ -34,7 +34,6 @@ class ServerConnector: NSObject {
         provider.request(.sendPassword(phoneNumber:phoneNumber, vcode:vcode, password: password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
-                // TODO: 处理验证码正确或错误
                 if data["isCreate"].bool == true{
                     callback(true)
                 }else{
@@ -222,7 +221,19 @@ class ServerConnector: NSObject {
         }
     }
     /// 添加会员卡
-    func addCard(cardID:String, UserID:String, cardNo:String, msCardType:String){
-        // TODO: 添加会员卡
+    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
+        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                if data["isCreate"].bool == true{
+                    callback(true)
+                }else{
+                    callback(false)
+                }
+                
+            }
+            
+        }
+        
     }
 }
