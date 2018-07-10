@@ -74,4 +74,11 @@ public class MSCardDAO {
     public void setMsCardType(String msCardType) {
         this.CardType = msCardType;
     }
+
+    public static boolean checkAttribute(MSCardDAO msCardDAO){
+        if(msCardDAO.cardID!=null&&msCardDAO.userID!=null&&msCardDAO.card_No!=null&&msCardDAO.CardType!=null){
+            return true;
+        }
+        return false;
+    }
 }
