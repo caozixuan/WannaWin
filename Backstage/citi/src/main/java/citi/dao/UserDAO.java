@@ -8,10 +8,10 @@ public class UserDAO {
     private int generalPoints;
     private int availablePoints;
 
-    public UserDAO(String userID, String password, String citiCard, String phoneNum, int generalPoints, int availablePoints) {
+    public UserDAO(String userID, String password, String citiCardID, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = userID;
         this.password = password;
-        this.citiCardID = citiCard;
+        this.citiCardID = citiCardID;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
@@ -33,12 +33,12 @@ public class UserDAO {
         this.password = password;
     }
 
-    public String getCitiCard() {
+    public String getCitiCardID() {
         return citiCardID;
     }
 
-    public void setCitiCard(String citiCard) {
-        this.citiCardID = citiCard;
+    public void setCitiCardID(String citiCardID) {
+        this.citiCardID = citiCardID;
     }
 
     public String getPhoneNum() {
