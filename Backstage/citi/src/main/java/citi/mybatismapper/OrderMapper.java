@@ -12,8 +12,8 @@ import java.util.List;
 public interface OrderMapper {
 
     final String getByOrderID = "SELECT * FROM order WHERE OrderID = #{orderID}";
-    final String addOrder = "INSERT INTO order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID) " +
-            "VALUES(#{orderId}, #{originalPrice}, #{priceAfter}, #{pointsNeeded}, #{userId}, #{state}, #{merchantId})";
+    final String addOrder = "INSERT INTO order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID, time) " +
+            "VALUES(#{orderId}, #{originalPrice}, #{priceAfter}, #{pointsNeeded}, #{userId}, #{state}, #{merchantId}, #{time})";
     final String getOrderIDByUserID = "SELECT orderID FROM order WHERE userID = #{userID}";
 
     @Select(getByOrderID)
