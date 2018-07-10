@@ -43,11 +43,7 @@ class SignUpViewController: UITableViewController {
         if indexPath.section == 2 {
             signUp()
             // 加载动画
-            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-            self.activityIndicator?.center = self.tableView.center
-            self.activityIndicator?.backgroundColor = UIColor.gray
-            self.activityIndicator?.hidesWhenStopped = true
-            self.tableView.addSubview(self.activityIndicator!)
+            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
             self.activityIndicator?.startAnimating()
         }
     }
@@ -62,11 +58,18 @@ class SignUpViewController: UITableViewController {
         if result == true{
             let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                self.navigationController!.popViewController(animated: false)
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController!.popViewController(animated: true)
+                self.navigationController!.popViewController(animated: true)
             })
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
+            ServerConnector.login(phoneNum: phoneNumberField.text!, password: passwordField.text!){result in
+                if result {
+                    User.getUser().username = self.phoneNumberField.text
+                    User.getUser().password = self.passwordField.text
+                    User.saveToKeychain()
+                }
+            }
         }else{
             let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
@@ -179,7 +182,7 @@ class SignUpViewController: UITableViewController {
     // 重新获取验证码倒计时
     @objc func refreshVCodeTime(timer:Timer){
         self.getVCodeBtn.titleLabel?.text = "\(second)秒后重新发送"
-        self.getVCodeBtn.setTitle("\(second)秒后重新发送", for: .normal)
+        self.getVCodeBtn.setTitle("\(second)秒后重新发送", for: .disabled)
         if second <= 0 {
             second = 30
             self.getVCodeBtn.isEnabled = true
