@@ -68,4 +68,15 @@ public class CitiService {
         return creditCardNum;
     }
 
+    public String getCardID(String accessToken){
+        String creditCardID=null;
+        String cardsInformation = Card.getCardsInformation(accessToken);
+        ArrayList<CardDetail> cardDetails = gson.fromJson(cardsInformation, new TypeToken<ArrayList<CardDetail>>() {
+        }.getType());
+        if(cardDetails.size()==1){
+            creditCardID = cardDetails.get(0).getCardId();
+        }
+        return creditCardID;
+    }
+
 }

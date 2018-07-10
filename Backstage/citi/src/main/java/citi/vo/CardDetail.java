@@ -65,6 +65,10 @@ public class CardDetail {
         this.cardFunction = cardFunction;
     }
 
+    public String getCardId() {
+        return cardId;
+    }
+
     public String getDisplayCardNumber() {
         return displayCardNumber;
     }
