@@ -3,12 +3,22 @@ package citi.citi;
 import citi.API.Account;
 import citi.API.Authorize;
 import citi.API.Card;
+import citi.API.Customer;
+import citi.mybatismapper.CitiMapper;
+import citi.mybatismapper.TokenMapper;
+import citi.mybatismapper.UserMapper;
+import citi.vo.CardDetail;
 import citi.vo.CitiCard;
+import citi.vo.Phone;
+import citi.vo.RefreshToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
 
 @RequestMapping("/citi")
 @Controller
@@ -17,6 +27,10 @@ public class CitiController {
     @Autowired
     private CitiService citiService;
 
+    @Autowired
+    private TokenMapper tokenMapper;
+    @Autowired
+    private CitiMapper citiMapper;
     @Autowired
     private Gson gson;
 
@@ -28,15 +42,20 @@ public class CitiController {
     @ResponseBody
     @RequestMapping("/bindCard")
     public String bindCard(String code){
+        // TODO:怎么获取当前请求的用户？
+        String userID = "123";  //先作为测试
+        String phoneNum = null;
+        String creditCardNum = null;
         String accessInformation = Authorize.getAccessTokenWithGrantType(code,"https://www.baidu.com");
         String accessToken = Authorize.getToken(accessInformation);
-        String acountInformation = Account.getAccountInformation(accessToken);
-        String cardsInformation = Card.getCardsInformation(accessToken);
-        /*
-          TODO:后面欠json解析和把相关数据存入数据库
-          某一个表中是不是要增加refresh_token?
-         */
-        return "{state:success}";
+        citiService.saveRefreshToken(accessInformation);
+        phoneNum = citiService.getPhoneNum(accessToken);
+        creditCardNum = citiService.getCardNum(accessToken);
+        CitiCard citiCard = new CitiCard(creditCardNum,phoneNum,userID);
+        if(citiService.binding(citiCard)){
+            return "{status: success}";
+        }
+        return "{status: fail}";
     }
 
     @ResponseBody
@@ -51,8 +70,17 @@ public class CitiController {
      */
     @RequestMapping("/unbind")
     public String unBind(CitiCard citiCard){
+        String refreshAccessToken = tokenMapper.select(citiCard.getUserID());
+        Authorize.revokeToken(refreshAccessToken,"refresh_token");
+        citiMapper.delete(citiCard.getCitiCardNum());
+        return null;
+    }
 
-
+    @RequestMapping("/refreshToekn")
+    public String refreshToken(){
+        String userID = "123";
+        String refreshToken = Authorize.refreshToken();
+        citiService.saveRefreshToken(refreshToken);
         return null;
     }
 

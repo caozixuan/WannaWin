@@ -46,4 +46,22 @@ public class LogStateInfo {
     public String getAccount(){
         return sharedPreferences.getString("account", "load error");
     }
+
+    public LogStateInfo setGeneralPoint(int generalPoint){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("generalPoint", generalPoint);
+        editor.apply();
+        return logStateInfo;
+    }
+
+    public int getGeneralPoint(){ return sharedPreferences.getInt("generalPoint",0); }
+
+    public LogStateInfo setAvailablePoints(int availablePoints){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("availablePoints", availablePoints);
+        editor.apply();
+        return logStateInfo;
+    }
+
+    public int getAvailablePoints(){ return sharedPreferences.getInt("availablePoints",0); }
 }

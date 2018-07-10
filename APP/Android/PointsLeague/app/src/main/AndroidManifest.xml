@@ -12,8 +12,8 @@
 
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 开启访问网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -31,20 +31,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity
-            android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity" />
-
-
-
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".PaymentFinishActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".PayCodeActivity"
-            android:parentActivityName=".MainActivity" />
+        <activity android:name=".PayCodeActivity" />
+
+
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".PayingActivity"
             android:parentActivityName=".PayCodeActivity" />
@@ -60,7 +54,8 @@
         <activity
             android:name=".GeneralSettingActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".PayingDetailsActivity"></activity>
+        <activity android:name=".PayingDetailsActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
