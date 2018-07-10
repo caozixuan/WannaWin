@@ -68,8 +68,10 @@ public class LoginController {
         if(user==null){
             return "{}";
         }
-        else
+        else{
             return gson.toJson(user);
+        }
+
     }
 
 

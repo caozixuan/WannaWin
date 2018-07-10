@@ -57,6 +57,8 @@ class ServerConnector: NSObject {
                 if isLogin != 0 {
                     User.getUser().generalPoints = data["generalPoints"].int
                     User.getUser().availablePoints = data["availablePoints"].int
+                    User.getUser().id = data["userID"].string
+                    print(data["userID"].string)
                     callback(true)
                 }
                 else{
@@ -112,20 +114,20 @@ class ServerConnector: NSObject {
     
     // 商户相关
     /// 获取从start开始的n条商户信息
-    static func getMerchantsInfos(start:String,n:Int,callback:@escaping (_ result:Bool, _ merchants:[(Merchant)])->()){
+    static func getMerchantsInfos(start:Int,n:Int,callback:@escaping (_ result:Bool, _ merchants:[(Merchant)])->()){
         provider.request(.getMerchantsInfos(start:start, n:n)){ result in
             if case let .success(response) = result{
-                let dataJSON = try? response.mapJSON()
+                let dataJson = try? response.mapJSON()
                 var merchants = [Merchant]()
-                if let json = dataJSON {
+                if let json = dataJson {
                     let datas = JSON(json).array
-                    
                     for data in datas! {
                         let merchant = Merchant()
                         merchant.id = data["merchantID"].string!
-                        merchant.name = data["mechantName"].string!
+                        merchant.name = data["name"].string!
                         merchant.description = data["description"].string!
                         merchant.logoURL = data["logoURL"].string!
+                        merchant.address = data["address"].string!
                         merchants.append(merchant)
                     }
                     callback(true,merchants)
@@ -191,8 +193,33 @@ class ServerConnector: NSObject {
         }
     }
     /// 返回商户所有卡的类型
-    func getCardTypeByUserID(merchantID:String){
+    static func getCardTypeByUserID(merchantID:String, callback:@escaping (_ result:Bool, _ cardTypes:[CardType])->()){
         // TODO: 返回商户所有卡的类型
+        provider.request(.getCardTypeByUserID(merchantID:merchantID)){ result in
+            if case let .success(response) = result{
+                let dataJSON = try? response.mapJSON()
+                var types = [CardType]()
+                if let json = dataJSON {
+                    let datas = JSON(json).array
+                    for data in datas! {
+                        var cardType = CardType()
+                        cardType.merchantID = data["MerchantID"].string
+                        cardType.mType = data["MType"].string
+                        cardType.cardType = data["CardType"].string
+                        cardType.proportion = data["Proportion"].double
+                        cardType.miniExpense = data["MiniExpense"].string
+                        types.append(cardType)
+                    }
+                    callback(true,types)
+                }else{
+                    callback(false,types)
+                }
+            }
+            if case let .failure(response) = result{
+                callback(false,[CardType]())
+                print("连接失败")
+            }
+        }
     }
     /// 添加会员卡
     func addCard(cardID:String, UserID:String, cardNo:String, msCardType:String){

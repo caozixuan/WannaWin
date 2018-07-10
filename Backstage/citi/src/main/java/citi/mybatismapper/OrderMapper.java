@@ -1,9 +1,11 @@
 package citi.mybatismapper;
 
 import citi.dao.OrderDAO;
+//import citi.dao.OrderStateTypeHandler;
 import citi.vo.OrderItem;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,9 +19,17 @@ public interface OrderMapper {
     final String getOrderIDByUserID = "SELECT orderID FROM order WHERE userID = #{userID}";
 
     @Select(getByOrderID)
+//    @Results({
+//            @Result(column = "state", property = "state", jdbcType = JdbcType.VARCHAR, javaType = OrderDAO.OrderState.class,
+//                    typeHandler = OrderStateTypeHandler.class)
+//    })
     OrderDAO selectOrderByID(String orderID);
 
     @Insert(addOrder)
+//    @Results({
+//            @Result(column = "state", property = "state", jdbcType = JdbcType.VARCHAR, javaType = OrderDAO.OrderState.class,
+//                    typeHandler = OrderStateTypeHandler.class)
+//    })
     int addOrder(OrderDAO order);
 
     @Select(getOrderIDByUserID)

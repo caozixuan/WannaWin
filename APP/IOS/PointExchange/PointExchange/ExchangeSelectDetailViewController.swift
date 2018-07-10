@@ -10,9 +10,7 @@ import UIKit
 
 class ExchangeSelectDetailViewController: ExchangeViewController {
 
-    @IBOutlet weak var shouldSelectPointsLabel: UILabel!
-    @IBOutlet weak var selectedPointsLabel: UILabel!
-    override func viewDidLoad() {
+	override func viewDidLoad() {
         super.viewDidLoad()
 		self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.

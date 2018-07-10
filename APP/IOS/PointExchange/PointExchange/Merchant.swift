@@ -12,6 +12,16 @@ class Merchant:Codable {
     var name:String = ""
     var description:String?
     var logoURL:String?
-    var cardTypes:[(String)]?
+    var cardTypes:[CardType]?
     var Mtype:String?
+    var address:String?
+}
+
+struct CardType:Codable {
+    var merchantID:String?
+    var mType:String?
+    var proportion:Double?
+    var miniExpense:String?
+    var cardType:String?
+    
 }

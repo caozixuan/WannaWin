@@ -26,7 +26,7 @@ enum ServerService {
     
     // 商户相关
     /// 获取从start开始的n条商户信息
-    case getMerchantsInfos(start:String,n:Int)
+    case getMerchantsInfos(start:Int,n:Int)
     case getMerchantInfoByID(id:String)
     
     // 会员卡相关
@@ -103,7 +103,7 @@ extension ServerService:TargetType {
             
         case .getMerchantsInfos(let start, let n):
             var params:[String:String] = [:]
-            params["start"] = start
+            params["start"] = String(start)
             params["n"] = String(n)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             

@@ -13,10 +13,16 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var tableView: UITableView!
 	let maxPoints:Int = 2000
 	
+	@IBOutlet weak var shouldSelectPointsLabel: UILabel!
+	@IBOutlet weak var selectedPointsLabel: UILabel!
+	
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
+		
+		
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +33,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 4
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -35,7 +41,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		let cell:UITableViewCell!
 		// TODO: - 测试使用，后面再修改
 		
-		if indexPath.row == 0 {
+		if indexPath.row == 0 || indexPath.row == 1 {
 			cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
 			if let cell1 = cell as? ExchangeItemCell {
 				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
