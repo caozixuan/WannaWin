@@ -1,5 +1,6 @@
 package citi.login;
 
+import citi.API.AliSMS;
 import citi.API.VerificationCode;
 import citi.dao.UserDAO;
 import citi.mybatismapper.LoginMapper;
@@ -34,11 +35,11 @@ public class LoginSerivce {
      */
     public void sendMs(String phoneNum){
         try{
-            //String vcode = VerificationCode.GenVeriCode(phoneNum);
+            String vcode = AliSMS.sendSms(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
            // VCode v = new VCode(phoneNum,vcode,timestamp.toString());
-            VCode v = new VCode(phoneNum,"123456",timestamp.toString());
+            VCode v = new VCode(phoneNum,vcode,timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
