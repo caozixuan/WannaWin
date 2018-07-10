@@ -9,9 +9,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
+    final String getInfoByPhoneNum = "SELECT userID, citiCard, phoneNum, generalPoints, availablePoints FROM user WHERE phoneNum = #{phoneNum}";
     final String loginVerify = "SELECT userID, citiCard, phoneNum, generalPoints, availablePoints FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
     final String insertUser = "INSERT INTO user (userID, password, citiCard, phoneNum, generalPoints, availablePoints) " +
             "VALUES (#{userID}, #{password}, #{citiCard}, #{phoneNum}, #{generalPoints}, #{availablePoints})";
+
+    @Select(getInfoByPhoneNum)
+    User getInfoByPhoneNum(String phoneNum);
 
     //注解部分，登陆验证
     @Select(loginVerify)

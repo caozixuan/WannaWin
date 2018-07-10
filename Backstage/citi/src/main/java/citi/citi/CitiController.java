@@ -34,6 +34,8 @@ public class CitiController {
     @Autowired
     private Gson gson;
 
+    String userID;  // 测试用
+
     /**
      * 绑定花旗卡
      * @param code
@@ -42,26 +44,25 @@ public class CitiController {
     @ResponseBody
     @RequestMapping("/bindCard")
     public String bindCard(String code){
-        // TODO:怎么获取当前请求的用户？
-        String userID = "123";  //先作为测试
         String phoneNum = null;
         String creditCardNum = null;
-        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"https://www.baidu.com");
+        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/bindCard");
         String accessToken = Authorize.getToken(accessInformation);
-        citiService.saveRefreshToken(accessInformation);
+        citiService.saveRefreshToken(accessInformation, userID);
         phoneNum = citiService.getPhoneNum(accessToken);
         creditCardNum = citiService.getCardNum(accessToken);
         CitiCard citiCard = new CitiCard(creditCardNum,phoneNum,userID);
         if(citiService.binding(citiCard)){
-            return "{status: success}";
+            return "{status: success"+phoneNum+creditCardNum+accessToken+"}";
         }
         return "{status: fail}";
     }
 
     @ResponseBody
     @RequestMapping("/requestBind")
-    public String requestBind(){
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","https://www.baidu.com");
+    public String requestBind(String userID){
+        this.userID = userID;
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","http://193.112.44.141/citi/bindCard");
     }
 
     /**
@@ -77,14 +78,10 @@ public class CitiController {
     }
 
     @RequestMapping("/refreshToekn")
-    public String refreshToken(){
-        String userID = "123";
+    public String refreshToken(String userID){
         String refreshToken = Authorize.refreshToken();
-        citiService.saveRefreshToken(refreshToken);
-        return null;
+        citiService.saveRefreshToken(refreshToken, userID);
+        return "{status:success}";
     }
-
-
-
 
 }

@@ -22,6 +22,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	//获取屏幕宽度
 	let screenWidth =  UIScreen.main.bounds.size.width
+
 	
 	//图片轮播组件
 	var imageScroller : ImageScrollerViewController!
@@ -42,9 +43,12 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取内部scrollView尺寸
 	func scrollerViewSize() -> CGSize {
-		let height = imageScrollerContainer.frame.height
-		return CGSize(width: screenWidth-20, height:height)
+		let height = imageScrollerContainer.bounds.size.height
+		let width = imageScrollerContainer.bounds.size.width
+		return CGSize(width: width, height:height)
+
 	}
+
 	
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
