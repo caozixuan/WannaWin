@@ -61,7 +61,9 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     /// 获得商户卡信息的回调函数
     func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
         if result {
-            MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
+            if cardTypes.count != 0 {
+                MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
+            }
         }
     }
     
@@ -136,12 +138,14 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	@IBAction func addCard(_ sender: AnyObject){
-		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+		
 		if User.getUser().username != nil {
-			let view = storyBoard.instantiateViewController(withIdentifier: "AddCardTableViewController")
+            let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+			let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
 		else{
+            let storyBoard = UIStoryboard(name:"User", bundle:nil)
 			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}

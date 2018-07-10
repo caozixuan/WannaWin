@@ -1,7 +1,9 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -29,7 +33,39 @@ public class RegisterActivity extends AppCompatActivity {
     private String strPasswordVerification;
     private String strMsgVerification;
 
-    @Override
+    Button buttonMsg;
+    Button buttonRegister;
+    
+    boolean getVerification = false;
+    
+    int remainSecond;
+    final int WAITING_TIME_FOR_EACH_MSG = 30;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message message) {
+            switch (message.what) {
+                case 1:
+                    if (remainSecond == WAITING_TIME_FOR_EACH_MSG) {
+                        enableButton(false, buttonMsg);
+                    }
+                    remainSecond--;
+                    buttonMsg.setText(remainSecond + "秒后重试");
+                    if(remainSecond != 0) {
+                        Message message1 = new Message();
+                        message1.what = 1;
+                        this.sendMessageDelayed(message1, 1000);
+                    }
+                    else {
+                        buttonMsg.setText("获取验证码");
+                        enableButton(true, buttonMsg);
+                    }
+            }
+        }
+    };
+
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -39,8 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText editTextPasswordVerification = (EditText)findViewById(R.id.editText_password_verification);
         final EditText editTextMsgVerification = (EditText)findViewById(R.id.editText_msg_verification);
 
-        Button buttonMsg = (Button)findViewById(R.id.button_get_verification_register);
-        Button buttonRegister = (Button)findViewById(R.id.button_register_register);
+        buttonMsg = (Button)findViewById(R.id.button_get_verification_register);
+        buttonRegister = (Button)findViewById(R.id.button_register_register);
+
 
         buttonMsg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +99,19 @@ public class RegisterActivity extends AppCompatActivity {
                 strPasswordVerification = editTextPasswordVerification.getText().toString();
                 strMsgVerification = editTextMsgVerification.getText().toString();
 
-                if(!strAccount.equals(editTextAccount.getText().toString())){
+
+                if(!getVerification){
+                    showAlert("请先获得验证码");
+                }
+                else if(!strAccount.equals(editTextAccount.getText().toString())){
                     Toast.makeText(RegisterActivity.this,"电话号码不匹配，注册失败",Toast.LENGTH_LONG).show();
                 }else if (!strPassword.equals(strPasswordVerification)){
                     showAlert("两次输入密码不相同");
                 }else if(strMsgVerification.length() != 6){
                     showAlert("请输入正确的验证码");
                 }else {
-
+                    dialog = ProgressDialog.show(RegisterActivity.this, "", "正在注册...");
+                    new Thread(new RegisterActivity.tryRegister()).start();
                 }
             }
         });
@@ -101,15 +143,22 @@ public class RegisterActivity extends AppCompatActivity {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try {
-                URL url = new URL("http://193.112.44.141:8080/citi/login/getVCode");
+                URL url = new URL("http://193.112.44.141:80/citi/login/getVCode");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
+
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
                 out.writeBytes("phoneNum=" + strAccount);
-                connection.setConnectTimeout(8000);
-                connection.setReadTimeout(8000);
-                getSuccess = true;
-                //out.writeBytes("phoneNum=17622833370&vcode=996428&password=987654");
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
+                InputStream in = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(in));
+                String json = reader.readLine();
+                System.out.println(json);
+                if(json.length() == 2)
+                    getSuccess = true;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,8 +176,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             dialog.dismiss();
+
             if(getSuccess){
-                //修改按钮enable和延时,enable注册按钮
+                getVerification = true;
+                remainSecond = WAITING_TIME_FOR_EACH_MSG;
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
 
             }else {
                 Looper.prepare();
@@ -148,17 +202,20 @@ public class RegisterActivity extends AppCompatActivity {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try {
-                URL url = new URL("http://193.112.44.141:8080/citi/login/sendVCode");
+                URL url = new URL("http://193.112.44.141:80/citi/login/sendVCode");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
+
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
                 out.writeBytes("phoneNum=" + strAccount + "&vcode=" + strMsgVerification + "&password=" + strPassword);
-                connection.setConnectTimeout(8000);
-                connection.setReadTimeout(8000);
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
 
                 InputStream in = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(in));
                 String json = reader.readLine();
+                System.out.println(json);
                 JSONObject jsonObject = new JSONObject(json);
                 registerSuccess = jsonObject.getBoolean("isCreate");
 
@@ -180,12 +237,23 @@ public class RegisterActivity extends AppCompatActivity {
             dialog.dismiss();
             if(registerSuccess){
                 //返回并填充账户
+                finish();
 
             }else {
                 Looper.prepare();
                 Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
+        }
+    }
+
+    private void enableButton(boolean isEnable, Button button){
+        if(isEnable){
+            button.setEnabled(true);
+            button.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }else {
+            button.setEnabled(false);
+            button.setBackgroundColor(getResources().getColor(R.color.colorUnable));
         }
     }
 }
