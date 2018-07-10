@@ -1,14 +1,18 @@
 package citi.API;
+import citi.mybatismapper.TokenMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Authorize {
+
+
 
     public static String getResponseBody(Request request){
         OkHttpClient client = new OkHttpClient();
@@ -55,8 +59,8 @@ public class Authorize {
         return "https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code"+"&client_id="+client_id+"&scope="+scope+"&countryCode="+countryCode+"&businessCode="+businessCode+"&locale="+locale+"&state="+state+"&redirect_uri="+redirect_url;
     }
 
-    public static String getCode(String url){
-        Pattern pattern = Pattern.compile("(code=)([^<]*)(&)");
+    public static String getTokenByRF(String url){
+        Pattern pattern = Pattern.compile("(\")([^<]*)(\")");
         Matcher matcher = pattern.matcher(url);
         while (matcher.find()) {
 			return matcher.group(2);
@@ -93,6 +97,8 @@ public class Authorize {
     public static String getToken(String tokenInformation){
         JsonElement je = new JsonParser().parse(tokenInformation);
         String access_token=je.getAsJsonObject().get("access_token").toString();
+        access_token = Authorize.getTokenByRF(access_token);
+        System.out.println(access_token);
         return access_token;
     }
 
@@ -102,9 +108,7 @@ public class Authorize {
         return refresh_access_token;
     }
 
-    public static String refreshToken(){
-        String formerRefreshToken = "test"; //这个应该从数据库获取
-        OkHttpClient client = new OkHttpClient();
+    public static String refreshToken(String userID, String formerRefreshToken){
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         RequestBody body = RequestBody.create(mediaType, "grant_type=refresh_token&refresh_token="+formerRefreshToken);
         Request request = new Request.Builder()
@@ -117,6 +121,15 @@ public class Authorize {
 
         String status = Authorize.getResponseBody(request);
         return status;
+    }
+
+    public static String[] getTokenAndRefreshTokenByFormerRefreshToken(String userID, String formerRefreshToken){
+        String accessInformation = refreshToken(userID, formerRefreshToken);
+        JsonElement je = new JsonParser().parse(accessInformation);
+        String token =je.getAsJsonObject().get("access_token").toString();
+        String refresh_token = je.getAsJsonObject().get("refresh_token").toString();
+        String[] tokens = {token,refresh_token};
+        return tokens;
     }
 
     /*

@@ -58,6 +58,7 @@ public class LoginSerivce {
                 isMatch = true;
                 UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
                 userMapper.insert(d);
+                loginMapper.deleteVcode(phoneNum);
                 break;
                 //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
             }
