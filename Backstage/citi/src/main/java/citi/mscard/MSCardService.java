@@ -34,13 +34,14 @@ public class MSCardService {
     private MerchantMapper merchantMapper;
 
     public List<MSCard> getInfo(String userId, int n){
-        List<MSCard> allCards =msCardMapper.select(userId);
+        List<MSCardDAO> allCards =msCardMapper.select(userId);
         if(allCards==null)
             return null;
         Collections.sort(allCards,new SortByPoints());
-        ArrayList<MSCard> returnCards = new ArrayList<MSCard>();
-        for(int i=0;i<n&&i<returnCards.size();i++){
-            returnCards.add(allCards.get(i));
+
+        ArrayList<MSCard> returnCards = new ArrayList<>();
+        for(int i=0;i<n&&i<allCards.size();i++){
+            returnCards.add(allCards.get(i).toMSCard());
         }
 
         return returnCards;
@@ -84,6 +85,7 @@ public class MSCardService {
         // TODO:请求相关商家接口，做验证
 
         int flag = msCardMapper.insert(msCard);
+        System.out.println(msCard.getCardID());
         if(flag>0)
             return true;
         return false;

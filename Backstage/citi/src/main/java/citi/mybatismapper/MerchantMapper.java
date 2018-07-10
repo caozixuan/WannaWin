@@ -21,7 +21,8 @@ public interface MerchantMapper {
 
     //The return sequence will be [start+1, start+2, ,,, start+length].
     @Select(getSome)
-    List<Merchant> select(@Param("start") int start, @Param("length") int length);
+    List<Merchant> select(@Param("start") int start,@Param("length") int length);
+
 
     @Select(getById)
     Merchant selectByID(String MerchantID);

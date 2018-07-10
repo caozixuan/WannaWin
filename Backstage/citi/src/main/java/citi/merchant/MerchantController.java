@@ -29,16 +29,7 @@ public class MerchantController {
     @RequestMapping("/getInfos")
     public String getMerchantInfos(int start,int n){
         List<Merchant> merchants= merchantSerivce.getMerchants(start,n);
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for(int i=0;i<merchants.size();i++){
-            sb.append(merchants.get(i).toString());
-            sb.append(",");
-        }
-
-        sb.deleteCharAt(sb.length()-1);
-        sb.append("]");
-        return sb.toString();
+        return gson.toJson(merchants);
     }
 
     /**
@@ -53,6 +44,6 @@ public class MerchantController {
         if(m==null)
             return "{}";
         else
-            return m.toString();
+            return gson.toJson(m);
     }
 }
