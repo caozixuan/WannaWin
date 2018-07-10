@@ -11,7 +11,7 @@ import com.google.gson.stream.JsonToken;
 public class MSCardType {
     private String MerchantID;
     private String MType;
-    private String CardType;
+    private String CardType;    //'CardType' can be derived from 'MerchantID' and 'MType'.
     private Double Proportion;
     private String miniExpense;
 
