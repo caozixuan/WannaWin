@@ -3,7 +3,7 @@ package citi.dao;
 public class UserDAO {
     private String userID;
     private String password;
-    private String citiCardID;
+    private String citiCard;
     private String phoneNum;
     private int generalPoints;
     private int availablePoints;
@@ -11,7 +11,7 @@ public class UserDAO {
     public UserDAO(String userID, String password, String citiCard, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = userID;
         this.password = password;
-        this.citiCardID = citiCard;
+        this.citiCard = citiCard;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
@@ -34,11 +34,11 @@ public class UserDAO {
     }
 
     public String getCitiCard() {
-        return citiCardID;
+        return citiCard;
     }
 
     public void setCitiCard(String citiCard) {
-        this.citiCardID = citiCard;
+        this.citiCard = citiCard;
     }
 
     public String getPhoneNum() {
