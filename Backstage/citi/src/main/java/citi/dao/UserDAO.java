@@ -7,6 +7,7 @@ public class UserDAO {
     private String phoneNum;
     private int generalPoints;
     private int availablePoints;
+    private String rewardLinkCode;
 
     public UserDAO(String userID, String password, String citiCardID, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = userID;
@@ -15,6 +16,7 @@ public class UserDAO {
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
+        this.rewardLinkCode = "";
     }
 
     public String getUserID() {
@@ -63,5 +65,13 @@ public class UserDAO {
 
     public void setAvailablePoints(int availablePoints) {
         this.availablePoints = availablePoints;
+    }
+
+    public String getRewardLinkCode() {
+        return rewardLinkCode;
+    }
+
+    public void setRewardLinkCode(String rewardLinkCode) {
+        this.rewardLinkCode = rewardLinkCode;
     }
 }
