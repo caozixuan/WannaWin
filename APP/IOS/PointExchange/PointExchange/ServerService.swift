@@ -42,7 +42,7 @@ enum ServerService {
 
 extension ServerService:TargetType {
     var baseURL:URL{
-        return URL(string: "http://193.112.44.141:8080/citi")!
+        return URL(string: "http://193.112.44.141:80/citi")!
     }
     
     var path : String {

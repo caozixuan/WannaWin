@@ -15,16 +15,19 @@ class ServerConnector: NSObject {
     static var provider: MoyaProvider<ServerService>{
         //自定义manager
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 15
+        config.timeoutIntervalForRequest = 10
         let manager = Manager(configuration: config)
         return MoyaProvider<ServerService>(manager:manager)
     }
     
     /// 获取验证码
     static func getVCode(phoneNumber:String){
-        provider.request(.getVCode(phoneNumber:phoneNumber)){_ in
-            print("获取验证码成功")
+        provider.request(.getVCode(phoneNumber:phoneNumber)){result in
+            if case let .success(response) = result {
+                print("发送验证码成功")
+            }
         }
+        
     }
     /// 提交密码并验证验证码
     static func sendPassword(phoneNumber:String, vcode:String, password:String,callback:@escaping (_ result:Bool)->()){
@@ -37,6 +40,10 @@ class ServerConnector: NSObject {
                 }else{
                     callback(false)
                 }
+            }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
             }
         }
     }
@@ -57,6 +64,7 @@ class ServerConnector: NSObject {
                 }
             }
             if case let .failure(response) = result{
+                callback(false)
                 print("连接失败")
             }
         }
@@ -76,6 +84,10 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
+            }
         }
     }
     /// 解绑银行卡
@@ -90,6 +102,10 @@ class ServerConnector: NSObject {
                 else{
                     callback(false)
                 }
+            }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
             }
         }
     }
@@ -117,6 +133,10 @@ class ServerConnector: NSObject {
                     callback(false,merchants)
                 }
             }
+            if case let .failure(response) = result{
+                callback(false,[Merchant]())
+                print("连接失败")
+            }
         }
     }
     /// 根据id获得商户信息
@@ -135,6 +155,10 @@ class ServerConnector: NSObject {
                 }else{
                     callback(false,merchant)
                 }
+            }
+            if case let .failure(response) = result{
+                callback(false,Merchant())
+                print("连接失败")
             }
         }
     }
@@ -158,6 +182,10 @@ class ServerConnector: NSObject {
                 }else{
                     callback(false,cards)
                 }
+            }
+            if case let .failure(response) = result{
+                callback(false,[Card]())
+                print("连接失败")
             }
             
         }

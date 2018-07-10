@@ -37,12 +37,11 @@ public class LoginSerivce {
             //String vcode = VerificationCode.GenVeriCode(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-            //VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+           // VCode v = new VCode(phoneNum,vcode,timestamp.toString());
             VCode v = new VCode(phoneNum,"123456",timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
-            e.printStackTrace();
         }
     }
 

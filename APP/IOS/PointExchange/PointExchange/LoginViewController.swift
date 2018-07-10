@@ -34,11 +34,7 @@ class LoginViewController: UITableViewController{
         if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
             ServerConnector.login(phoneNum: usernameField.text!, password: passwordField.text!, callback: login)
             // 加载动画
-            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-            self.activityIndicator?.center = self.tableView.center
-            self.activityIndicator?.backgroundColor = UIColor.gray
-            self.activityIndicator?.hidesWhenStopped = true
-            self.tableView.addSubview(self.activityIndicator!)
+            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
             self.activityIndicator?.startAnimating()
             
         }
@@ -47,7 +43,7 @@ class LoginViewController: UITableViewController{
     // 登录完成后的操作
     func login(result:Bool){
         if result == true {
-            saveUserInfo()
+            self.saveUserInfo()
             
             self.activityIndicator?.stopAnimating()
             
