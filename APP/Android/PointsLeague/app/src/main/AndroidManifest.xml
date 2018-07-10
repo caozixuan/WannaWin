@@ -36,9 +36,6 @@
             android:name=".PaymentFinishActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".PayCodeActivity" />
-
-
-        <activity android:name=".LoginActivity" />
         <activity
             android:name=".PayingActivity"
             android:parentActivityName=".PayCodeActivity" />
@@ -55,7 +52,8 @@
             android:name=".GeneralSettingActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".PayingDetailsActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".AddCardActivity"></activity>
     </application>
 
 </manifest>
