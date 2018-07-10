@@ -9,15 +9,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    final String getInfoByPhoneNum = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints FROM user WHERE phoneNum = #{phoneNum}";
-    final String loginVerify = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
-    final String insertUser = "INSERT INTO user (userID, password, citiCardID, phoneNum, generalPoints, availablePoints) " +
+    final String getInfoByPhoneNum = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE phoneNum = #{phoneNum}";
+    final String getInfoByUserID = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE userID = #{userID}";
+    final String loginVerify = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
+    final String insertUser = "INSERT INTO user (userID, password, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode) " +
             "VALUES (#{userID}, #{password}, #{citiCardID}, #{phoneNum}, #{generalPoints}, #{availablePoints})";
     final String bindCitiCard = "UPDATE user SET CitiCardID = #{CitiCardID} WHERE userID = #{userID}";
     final String addLinkCode = "UPDATE user SET rewardLinkCode = #{rewardLinkCode} WHERE userID = #{userID}";
 
     @Select(getInfoByPhoneNum)
     User getInfoByPhone(String phoneNum);
+
+    @Select(getInfoByUserID)
+    User getInfoByUserID(String userID);
 
     //注解部分，登陆验证
     @Select(loginVerify)
