@@ -46,12 +46,14 @@ public class CitiController {
     public String bindCard(String code){
         String phoneNum = null;
         String creditCardNum = null;
+        String citiCardID = null;
         String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/bindCard");
         String accessToken = Authorize.getToken(accessInformation);
         citiService.saveRefreshToken(accessInformation, userID);
         phoneNum = citiService.getPhoneNum(accessToken);
         creditCardNum = citiService.getCardNum(accessToken);
-        CitiCard citiCard = new CitiCard(creditCardNum,phoneNum,userID);
+        citiCardID = citiService.getCardID(accessToken);
+        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID);
         if(citiService.binding(citiCard)){
             return "{status: success"+phoneNum+creditCardNum+accessToken+"}";
         }
