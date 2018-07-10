@@ -753,12 +753,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnK-1Y-3Wm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3716" y="-1183.3583208395803"/>
+            <point key="canvasLocation" x="4622" y="-1184"/>
         </scene>
-        <!--Merchant Choose Table View Controller-->
+        <!--选择商户-->
         <scene sceneID="4DG-LT-8Mn">
             <objects>
-                <tableViewController storyboardIdentifier="MerchantChooseTableViewController" id="0Lo-jb-ebS" customClass="MerchantChooseTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MerchantChooseTableViewController" title="选择商户" id="0Lo-jb-ebS" customClass="MerchantChooseTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OBa-p1-Gpg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -795,7 +795,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ao8-Yp-gl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4519" y="-1183"/>
+            <point key="canvasLocation" x="3706" y="-1183"/>
         </scene>
     </scenes>
     <resources>

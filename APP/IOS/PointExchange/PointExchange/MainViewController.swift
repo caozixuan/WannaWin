@@ -39,7 +39,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		cardImage3.addGestureRecognizer(cardTap3)
         
         // 获得商家信息
-        ServerConnector.getMerchantsInfos(start: 0, n: 2, callback: gotMerchantsCallback)
+        ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
         
 		
     }
@@ -48,24 +48,13 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
             MerchantList.list = merchants
-            for merchant in MerchantList.list{
-                // 获得商家卡类型
-                ServerConnector.getCardTypeByUserID(merchantID: merchant.id, callback: gotCardTypeCallback)
-            }
         }
         else {
             print("商户信息获取失败")
         }
     }
     
-    /// 获得商户卡信息的回调函数
-    func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
-        if result {
-            if cardTypes.count != 0 {
-                MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
-            }
-        }
-    }
+    
     
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取内部scrollView尺寸

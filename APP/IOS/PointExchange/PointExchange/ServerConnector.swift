@@ -149,7 +149,7 @@ class ServerConnector: NSObject {
                 if let json = dataJSON {
                     let data = JSON(json)
                     merchant.id = data["merchantID"].string!
-                    merchant.name = data["mechantName"].string!
+                    merchant.name = data["name"].string!
                     merchant.description = data["description"].string!
                     merchant.logoURL = data["logoURL"].string!
                     callback(true,merchant)
@@ -176,7 +176,10 @@ class ServerConnector: NSObject {
                     
                     for data in datas! {
                         let card = Card()
-                        
+                        card.id = data["cardID"].string
+                        card.userID = data["userID"].string
+                        card.number = data["cardNo"].string
+                        card.point = data["points"].int!
                         cards.append(card)
                     }
                     callback(true,cards)

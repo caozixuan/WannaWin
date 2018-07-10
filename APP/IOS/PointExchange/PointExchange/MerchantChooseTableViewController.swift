@@ -46,11 +46,25 @@ class MerchantChooseTableViewController: UITableViewController {
         return cell!
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-        let view = storyboard.instantiateViewController(withIdentifier: "AddCardTableView") as? AddCardTableViewController
-        view?.merchant = MerchantList.list[indexPath.row]
-        view?.cardTypeCount = MerchantList.list[indexPath.row].cardTypes?.count
-        self.navigationController?.pushViewController(view!, animated: true)
+        
+        // 获得商家卡类型
+        ServerConnector.getCardTypeByUserID(merchantID: MerchantList.list[indexPath.row].id, callback: gotCardTypeCallback)
+//        ServerConnector.getCardTypeByUserID(merchantID:"00001", callback: gotCardTypeCallback)
+        
+    }
+    /// 获得商户卡信息的回调函数
+    func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
+        if result {
+            if cardTypes.count != 0 {
+                MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
+                
+                let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "AddCardTableView") as? AddCardTableViewController
+                view?.merchant = MerchantList.get(merchantID: cardTypes[0].merchantID!)
+                view?.cardTypeCount = cardTypes.count
+                self.navigationController?.pushViewController(view!, animated: true)
+            }
+        }
     }
 
 }
