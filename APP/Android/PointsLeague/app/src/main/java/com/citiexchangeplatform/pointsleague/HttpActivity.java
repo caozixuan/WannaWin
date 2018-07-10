@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -38,15 +39,23 @@ public class HttpActivity extends AppCompatActivity {
                     //获取验证码
                     //URL url = new URL("http://193.112.44.141:8080/citi/login/getVCode");
                     //验证 验证码
-                    URL url = new URL("http://193.112.44.141:8080/citi/login/sendVCode");
+
+                    //URL url = new URL("http://193.112.44.141:80/citi/login/login");
+                    URL url = new URL("http://193.112.44.141:80/citi/mscard/infos");
+                    //URL url = new URL("http://193.112.44.141:80/citi/merchant/getInfos");
+
+                    //URL url = new URL("http://193.112.44.141:80/citi/mscard/cardtype");
                     connection = (HttpURLConnection) url.openConnection();
                     /*GET方法*/
                     //connection.setRequestMethod("GET");
 
                     connection.setRequestMethod("POST");
                     DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-
-                    out.writeBytes("phoneNum=17622833370");
+                    out.writeBytes("userId=1ac9be07-f446-458c-b325-df2c7ecd113f&n=1");
+                    //out.writeBytes("start=0&n=2");
+                    //out.writeBytes("merchantID=00001");
+                    //out.writeBytes("phoneNum=12345678901&password=123456");
+                    //out.writeBytes("start=0&n=2");
                     //out.writeBytes("phoneNum=17622833370&vcode=996428&password=987654");
 
                     connection.setConnectTimeout(8000);
@@ -61,6 +70,13 @@ public class HttpActivity extends AppCompatActivity {
                     }
 
                     System.out.println(response.toString());
+                    /*json字符串最外层是方括号时：*/
+                    //JSONArray jsonArray = new JSONArray(response.toString());
+                    //for (int i = 0; i < jsonArray.length(); i++) {
+                    //    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    //    String mid= jsonObject.getString("MType");
+                    //    System.out.println(mid);
+                    //}
                     /*json字符串最外层是大括号时：*/
                     //JSONObject jsonObject = new JSONObject(response.toString());
                     //String mid= jsonObject.getString("userID");

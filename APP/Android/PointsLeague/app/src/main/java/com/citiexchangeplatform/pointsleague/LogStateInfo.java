@@ -64,4 +64,14 @@ public class LogStateInfo {
     }
 
     public int getAvailablePoints(){ return sharedPreferences.getInt("availablePoints",0); }
+
+    public LogStateInfo setUserID(String userID){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userID", userID);
+        editor.apply();
+        return logStateInfo;
+    }
+
+    public String getUserID(){ return sharedPreferences.getString("userID",null); }
+
 }
