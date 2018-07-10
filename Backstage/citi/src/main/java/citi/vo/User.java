@@ -1,6 +1,8 @@
 package citi.vo;
 
 import citi.dao.OrderDAO;
+import citi.mybatismapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
@@ -10,14 +12,8 @@ public class User {
     private String phoneNum;
     private int generalPoints;
     private int availablePoints;
+    private String rewardLinkCode;
 
-    public User(String phoneNum) {
-        this.phoneNum = phoneNum;
-        this.availablePoints = 0;
-        this.generalPoints = 0;
-        //设定唯一标识方式
-        this.userID = "";
-    }
 
     public User(String citiCardID, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = UUID.randomUUID().toString().toLowerCase();
@@ -25,6 +21,7 @@ public class User {
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
+        this.rewardLinkCode = "";
     }
 
     public User(String userID, String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
@@ -33,15 +30,19 @@ public class User {
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
+        this.rewardLinkCode = "";
     }
 
     /*
      * 作者:曹子轩
      * TODO：具体token相关的逻辑需要实现
      */
+    @Autowired
+    static private UserMapper userMapper;
 
     public static User getUserByToken(String token) {
-        return new User("token");
+        String phoneNum = "";//according to token
+        return userMapper.getInfoByPhone(phoneNum);
     }
 
     public void changePoint(OrderDAO orderDAO) {
@@ -90,4 +91,13 @@ public class User {
     public void setCitiCardID(String citiCardID) {
         this.citiCardID = citiCardID;
     }
+
+    public String getRewardLinkCode() {
+        return rewardLinkCode;
+    }
+
+    public void setRewardLinkCode(String rewardLinkCode) {
+        this.rewardLinkCode = rewardLinkCode;
+    }
+
 }
