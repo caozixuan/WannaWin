@@ -30,12 +30,8 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("/getVCode")
     public String getVCode(String phoneNum){
-        /*
-        验证码发送
-        sendMs..
-         */
         loginSerivce.sendMs(phoneNum);
-        return "getcode";
+        return "{}";
     }
 
     /**

@@ -98,7 +98,7 @@ public class Authorize {
 
     public static String getRefreshToken(String tokenInformation){
         JsonElement je = new JsonParser().parse(tokenInformation);
-        String refresh_access_token=je.getAsJsonObject().get("refresh_access_token").toString();
+        String refresh_access_token=je.getAsJsonObject().get("refresh_token").toString();
         return refresh_access_token;
     }
 

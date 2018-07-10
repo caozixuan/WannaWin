@@ -40,8 +40,7 @@ public class CitiService {
         return false;
     }
 
-    public void saveRefreshToken(String accessInformation){
-        String userID = "123";
+    public void saveRefreshToken(String accessInformation, String userID){
         String refreshAccessToken = Authorize.getRefreshToken(accessInformation);
         RefreshToken refreshToken = new RefreshToken(userID,refreshAccessToken,String.valueOf(System.currentTimeMillis()));
         tokenMapper.insert(refreshToken);
@@ -67,6 +66,17 @@ public class CitiService {
             creditCardNum = cardDetails.get(0).getDisplayCardNumber();
         }
         return creditCardNum;
+    }
+
+    public String getCardID(String accessToken){
+        String creditCardID=null;
+        String cardsInformation = Card.getCardsInformation(accessToken);
+        ArrayList<CardDetail> cardDetails = gson.fromJson(cardsInformation, new TypeToken<ArrayList<CardDetail>>() {
+        }.getType());
+        if(cardDetails.size()==1){
+            creditCardID = cardDetails.get(0).getCardId();
+        }
+        return creditCardID;
     }
 
 }
