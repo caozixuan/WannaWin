@@ -47,7 +47,7 @@ public class CitiController {
         String phoneNum = null;
         String creditCardNum = null;
         String citiCardID = null;
-        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/bindCard");
+        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");
         String accessToken = Authorize.getToken(accessInformation);
         citiService.saveRefreshToken(accessInformation, userID);
         phoneNum = citiService.getPhoneNum(accessToken);
@@ -64,7 +64,7 @@ public class CitiController {
     @RequestMapping("/requestBind")
     public String requestBind(String userID){
         this.userID = userID;
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","http://193.112.44.141/citi/bindCard");
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","http://193.112.44.141/citi/citi/bindCard");
     }
 
     /**
