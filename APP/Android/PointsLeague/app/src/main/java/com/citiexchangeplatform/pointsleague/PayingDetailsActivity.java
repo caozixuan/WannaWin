@@ -46,8 +46,15 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying_details);
         setSupportActionBar(mToolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        //获得map
+        Bundle bundle = getIntent().getExtras();
+        SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map");
+        map = serializableHashMap.getMap();
+
+
 
         //通过findViewById拿到RecyclerView实例
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_paying_details);
@@ -59,11 +66,14 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
+        mAdapter = new PayingAdapter(data_posses_point,business_image,map,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+
+        //初始化checkbox选择情况
+        mAdapter.setShowBox();
 
         mAdapter.buttonSetOnclick(new PayingAdapter.ButtonInterface() {
             @Override
@@ -85,9 +95,19 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
         Expand_Less.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(PayingDetailsActivity.this, PayingActivity.class);
+                map = mAdapter.getMap();
+                SerializableHashMap myMap=new SerializableHashMap();
+                myMap.setMap(map);//将hashmap数据添加到封装的myMap中
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("checkbox_detail_map", myMap);
+                intent.putExtras(bundle);
+
                 finish();
             }
         });
+
+
 
 
     }

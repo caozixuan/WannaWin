@@ -53,6 +53,13 @@
             android:name=".GeneralSettingActivity" />
         <activity android:name=".PayingDetailsActivity" />
         <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".HttpActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
     </application>
 
 </manifest>
