@@ -11,12 +11,12 @@ import com.google.gson.stream.JsonToken;
 public class MSCardType {
     private String MerchantID;
     private String MType;
-    private String CardType;
+    private String CardType;    //'CardType can be derived from 'MerchantID' and 'MType'.
     private Double Proportion;
     private String miniExpense;
 
     //Type of CardType is String in consistence with DB
-    public MSCardType(String CardTypeJson) throws IOException {
+/*    public MSCardType(String CardTypeJson) throws IOException {
         JsonReader reader = new JsonReader(new StringReader(CardTypeJson));
         reader.beginObject();
         MSCardType temp = new GsonBuilder().create().fromJson(CardTypeJson, MSCardType.class);
@@ -25,6 +25,10 @@ public class MSCardType {
         this.CardType = temp.CardType;
         this.Proportion = temp.Proportion;
         this.miniExpense = temp.miniExpense;
+    }*/
+
+    public MSCardType(String cardType) {
+        CardType = cardType;
     }
 
     //

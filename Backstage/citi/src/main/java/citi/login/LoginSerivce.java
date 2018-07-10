@@ -34,11 +34,11 @@ public class LoginSerivce {
      */
     public void sendMs(String phoneNum){
         try{
-            String vcode = VerificationCode.GenVeriCode(phoneNum);
+            //String vcode = VerificationCode.GenVeriCode(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-            VCode v = new VCode(phoneNum,vcode,timestamp.toString());
-            //VCode v = new VCode(phoneNum,"1234",timestamp.toString());
+           // VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+            VCode v = new VCode(phoneNum,"123456",timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
@@ -58,6 +58,7 @@ public class LoginSerivce {
                 isMatch = true;
                 UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
                 userMapper.insert(d);
+                loginMapper.deleteVcode(phoneNum);
                 break;
                 //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
             }

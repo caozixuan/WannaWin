@@ -10,9 +10,10 @@ import UIKit
 
 class User: Codable{
     var username:String?
+    var id:String?
     var nickname:String = "default"
     var password:String?
-    var card:Card?
+    var card:[Card]?
     var portraitName = "通讯录"
     var portraitPath:String?
     var generalPoints: Int?

@@ -37,18 +37,21 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
 
     //构造方法
-    public PayingAdapter(List<String> list,List<Integer> img_list, Context context) {
+    public PayingAdapter(List<String> list,List<Integer> img_list, HashMap<Integer,Boolean> map, Context context) {
         this.img_list = img_list;
         this.list = list;
         this.context = context;
         this.total = 0;
+        this.map = map;
         initMap();
     }
 
     //初始化map集合,默认为不选中
     private void initMap() {
-        for (int i = 0; i < list.size(); i++) {
-            map.put(i, false);
+        if(map.isEmpty()){
+            for (int i = 0; i < list.size(); i++) {
+                map.put(i, false);
+            }
         }
     }
 
@@ -93,6 +96,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(final PayingAdapter.MyViewHolder holder, final int position) {
+        //初始化checkbox选中状态
+        holder.Checkbox_Choose.setChecked(map.get(position));
         //设置列表中积分信息
         holder.Points_Possession.setText(list.get(position));
         //设置商家图片

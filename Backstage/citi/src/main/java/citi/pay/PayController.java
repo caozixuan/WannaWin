@@ -15,6 +15,7 @@ public class PayController {
     @Autowired
     private Gson gson;
 
+    @RequestMapping("/pay")
     public void pay(){
 
     }

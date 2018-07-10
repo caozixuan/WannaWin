@@ -15,16 +15,19 @@ class ServerConnector: NSObject {
     static var provider: MoyaProvider<ServerService>{
         //自定义manager
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 15
+        config.timeoutIntervalForRequest = 10
         let manager = Manager(configuration: config)
         return MoyaProvider<ServerService>(manager:manager)
     }
     
     /// 获取验证码
     static func getVCode(phoneNumber:String){
-        provider.request(.getVCode(phoneNumber:phoneNumber)){_ in
-            print("获取验证码成功")
+        provider.request(.getVCode(phoneNumber:phoneNumber)){result in
+            if case let .success(response) = result {
+                print("发送验证码成功")
+            }
         }
+        
     }
     /// 提交密码并验证验证码
     static func sendPassword(phoneNumber:String, vcode:String, password:String,callback:@escaping (_ result:Bool)->()){
@@ -38,6 +41,10 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
+            }
         }
     }
     
@@ -50,6 +57,8 @@ class ServerConnector: NSObject {
                 if isLogin != 0 {
                     User.getUser().generalPoints = data["generalPoints"].int
                     User.getUser().availablePoints = data["availablePoints"].int
+                    User.getUser().id = data["userID"].string
+                    print(data["userID"].string)
                     callback(true)
                 }
                 else{
@@ -57,6 +66,7 @@ class ServerConnector: NSObject {
                 }
             }
             if case let .failure(response) = result{
+                callback(false)
                 print("连接失败")
             }
         }
@@ -76,6 +86,10 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
+            }
         }
     }
     /// 解绑银行卡
@@ -91,31 +105,39 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
+            }
         }
     }
     
     // 商户相关
     /// 获取从start开始的n条商户信息
-    static func getMerchantsInfos(start:String,n:Int,callback:@escaping (_ result:Bool, _ merchants:[(Merchant)])->()){
+    static func getMerchantsInfos(start:Int,n:Int,callback:@escaping (_ result:Bool, _ merchants:[(Merchant)])->()){
         provider.request(.getMerchantsInfos(start:start, n:n)){ result in
             if case let .success(response) = result{
-                let dataJSON = try? response.mapJSON()
+                let dataJson = try? response.mapJSON()
                 var merchants = [Merchant]()
-                if let json = dataJSON {
+                if let json = dataJson {
                     let datas = JSON(json).array
-                    
                     for data in datas! {
                         let merchant = Merchant()
                         merchant.id = data["merchantID"].string!
-                        merchant.name = data["mechantName"].string!
+                        merchant.name = data["name"].string!
                         merchant.description = data["description"].string!
                         merchant.logoURL = data["logoURL"].string!
+                        merchant.address = data["address"].string!
                         merchants.append(merchant)
                     }
                     callback(true,merchants)
                 }else{
                     callback(false,merchants)
                 }
+            }
+            if case let .failure(response) = result{
+                callback(false,[Merchant]())
+                print("连接失败")
             }
         }
     }
@@ -135,6 +157,10 @@ class ServerConnector: NSObject {
                 }else{
                     callback(false,merchant)
                 }
+            }
+            if case let .failure(response) = result{
+                callback(false,Merchant())
+                print("连接失败")
             }
         }
     }
@@ -159,12 +185,41 @@ class ServerConnector: NSObject {
                     callback(false,cards)
                 }
             }
+            if case let .failure(response) = result{
+                callback(false,[Card]())
+                print("连接失败")
+            }
             
         }
     }
     /// 返回商户所有卡的类型
-    func getCardTypeByUserID(merchantID:String){
+    static func getCardTypeByUserID(merchantID:String, callback:@escaping (_ result:Bool, _ cardTypes:[CardType])->()){
         // TODO: 返回商户所有卡的类型
+        provider.request(.getCardTypeByUserID(merchantID:merchantID)){ result in
+            if case let .success(response) = result{
+                let dataJSON = try? response.mapJSON()
+                var types = [CardType]()
+                if let json = dataJSON {
+                    let datas = JSON(json).array
+                    for data in datas! {
+                        var cardType = CardType()
+                        cardType.merchantID = data["MerchantID"].string
+                        cardType.mType = data["MType"].string
+                        cardType.cardType = data["CardType"].string
+                        cardType.proportion = data["Proportion"].double
+                        cardType.miniExpense = data["MiniExpense"].string
+                        types.append(cardType)
+                    }
+                    callback(true,types)
+                }else{
+                    callback(false,types)
+                }
+            }
+            if case let .failure(response) = result{
+                callback(false,[CardType]())
+                print("连接失败")
+            }
+        }
     }
     /// 添加会员卡
     func addCard(cardID:String, UserID:String, cardNo:String, msCardType:String){
