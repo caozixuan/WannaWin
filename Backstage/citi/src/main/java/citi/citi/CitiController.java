@@ -55,7 +55,7 @@ public class CitiController {
         citiCardID = citiService.getCardID(accessToken);
         CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID);
         if(citiService.binding(citiCard)){
-            return "{status: success"+phoneNum+creditCardNum+accessToken+"}";
+            return gson.toJson(citiCard);
         }
         return "{status: fail}";
     }
