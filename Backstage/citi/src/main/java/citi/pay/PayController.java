@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zhong
+ * @data 2018-7-11
  */
 @RequestMapping("/pay")
 @Controller
@@ -16,7 +17,8 @@ public class PayController {
     private Gson gson;
 
     @RequestMapping("/pay")
-    public void pay(){
+    public void pay(String userId,String merchantId,float totelPrice){
+
 
     }
 

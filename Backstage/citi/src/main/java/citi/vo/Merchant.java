@@ -1,11 +1,11 @@
 package citi.vo;
 
 public class Merchant {
-    String merchantID;
-    String name;
-    String description;
-    String address;
-    String logoURL;
+    private String merchantID;
+    private String name;
+    private String description;
+    private String address;
+    private String logoURL;
 
     public Merchant(String merchantID, String name, String description, String address, String logoURL) {
         this.merchantID = merchantID;
@@ -55,8 +55,8 @@ public class Merchant {
         this.logoURL = logoURL;
     }
 
-   @Override
-    public String toString(){
-        return "{\"merchantID\":"+merchantID+",\"merchantName\":"+name+",\"description\":"+description+",\"logoURL\":"+logoURL+"}";
-   }
+    @Override
+    public String toString() {
+        return "{\"merchantID\":" + merchantID + ",\"merchantName\":" + name + ",\"description\":" + description + ",\"logoURL\":" + logoURL + "}";
+    }
 }
