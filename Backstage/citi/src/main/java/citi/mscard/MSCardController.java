@@ -40,18 +40,7 @@ public class MSCardController {
         return jsonStr;
     }
 
-    /**
-     * 一个商户可能有多张卡，返回该商户所有卡的类型
-     * @param merchantID
-     * @return [{"MerchantID":"xxxx","Mtype":"xxxx","cardType":"xxxx"},{},{}...]
-     */
-    @ResponseBody
-    @RequestMapping("/cardtype")
-    public String getCardType(String merchantID){
-        List<MSCardType> msCardTypes = msCardService.getTypes(merchantID);
-        String jsonStr = gson.toJson(msCardTypes);
-        return jsonStr;
-    }
+
 
     /**
      *@param msCard 会员卡

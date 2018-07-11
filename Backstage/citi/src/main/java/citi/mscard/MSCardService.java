@@ -1,5 +1,6 @@
 package citi.mscard;
 
+import citi.mapper.MSCardMapper;
 import citi.mapper.MerchantMapper;
 import citi.vo.MSCard;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,9 @@ public class MSCardService {
         public int compare(Object o1, Object o2){
             MSCard c1 = (MSCard) o1;
             MSCard c2 = (MSCard) o2;
-            if(c1.getPoints()*c1.getProportion()<c2.getPoints()*c2.getProportion()){
+            /*if(c1.getPoints()*c1.getProportion()<c2.getPoints()*c2.getProportion()){
                 return 1;
-            }
+            }*/
             return 0;
         }
     }
@@ -63,15 +64,6 @@ public class MSCardService {
         return msCardMapper.selectCard(CardID);
     }
 
-    /**
-     * 获取该商户下的卡类型
-     * @param merchantID
-     * @return
-     */
-    public List<MSCardType> getTypes(String merchantID){
-        List<MSCardType> types = merchantMapper.selectTypes(merchantID);
-        return types;
-    }
 
     /**
      * 添加会员卡

@@ -8,13 +8,19 @@ import java.util.UUID;
  * 重构：刘钟博
  */
 public class User {
+    @Expose
     private String userID;
+    @Expose
     private String citiCardID;
     @Expose(serialize = false)
     private String password;
+    @Expose
     private String phoneNum;
+    @Expose
     private double generalPoints;
+    @Expose
     private double availablePoints;
+    @Expose
     private String rewardLinkCode;
 
     public User(String phoneNum,String password) {
@@ -25,6 +31,16 @@ public class User {
         generalPoints=0;
         availablePoints=0;
         rewardLinkCode="";
+    }
+
+    public User(String userID, String citiCardID, String password, String phoneNum, double generalPoints, double availablePoints, String rewardLinkCode) {
+        this.userID = userID;
+        this.citiCardID = citiCardID;
+        this.password = password;
+        this.phoneNum = phoneNum;
+        this.generalPoints = generalPoints;
+        this.availablePoints = availablePoints;
+        this.rewardLinkCode = rewardLinkCode;
     }
 
     public String getUserID() {
