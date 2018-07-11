@@ -32,11 +32,6 @@ import java.util.ListIterator;
 
 public class AddCardActivity extends AppCompatActivity {
 
-    List<String> names = new ArrayList<String>();
-    List<String> descriptions = new ArrayList<String>();
-    List<String> logos = new ArrayList<String>();
-    List<Bitmap> bitmaps = new ArrayList<Bitmap>();
-
     ProgressDialog dialog;
     AddCardAdapter addCardAdapter;
 
@@ -50,7 +45,7 @@ public class AddCardActivity extends AppCompatActivity {
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
         //设置Adapter
-        addCardAdapter = new AddCardAdapter(names, descriptions, logos, bitmaps);
+        addCardAdapter = new AddCardAdapter(AddCardActivity.this);
         recyclerView.setAdapter(addCardAdapter);
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -100,8 +95,6 @@ public class AddCardActivity extends AppCompatActivity {
                     //jobj.getString("address")
                     addCardAdapter.addData(jobj.getString("name"),jobj.getString("description"),jobj.getString("logoURL"));
                 }
-                dialog.dismiss();
-
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -117,7 +110,7 @@ public class AddCardActivity extends AppCompatActivity {
                     connection.disconnect();
                 }
             }
-
+            dialog.dismiss();
         }
     }
 }

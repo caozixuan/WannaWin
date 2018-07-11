@@ -17,8 +17,9 @@ public interface CouponMapper {
             "WHERE userID = #{userID} AND ItemID = #{ItemID} AND state = 'UNUSED'";
     final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state) " +
             "VALUES(NULL, #{userID}, #{ItemID}, #{state})";
-    final String deleteOneUserCouponByUserID = "UPDATE user_coupon SET state = 'USED' " +
-            "WHERE userID = #{userID} AND couponID ";
+    final String deleteOneUserCouponBy_UserID_AND_ItemID = "UPDATE user_coupon SET state = 'USED' " +
+            "WHERE userID = #{userID} AND ItemID = #{itemID} AND state = 'UNUSED'" +
+            "ORDER BY userID ASC LIMIT 1";
 
     @Select(getCouponsByUserID)
     List<UserCoupon> getCouponsByUserID(String userID);
@@ -29,7 +30,7 @@ public interface CouponMapper {
     @Insert(addUserCoupon)
     int addUserCoupon(UserCoupon msCardType);
 
-    @Update(deleteOneUserCouponByUserID)
-    int deleteOneUserCouponByUserID(String userID);
+    @Update(deleteOneUserCouponBy_UserID_AND_ItemID)
+    int deleteOneUserCouponBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("ItemID") String itemID);
 
 }
