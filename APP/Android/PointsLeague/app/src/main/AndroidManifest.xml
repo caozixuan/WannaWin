@@ -39,29 +39,28 @@
         <activity
             android:name=".PayCodeActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".PayingActivity"
             android:parentActivityName=".PayCodeActivity" />
-        <activity
-            android:name=".AboutUsActivity" />
-        <activity
-            android:name=".FeedbackActivity" />
+        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".FeedbackActivity" />
         <activity
             android:name=".FeedbackResultActivity"
             android:parentActivityName=".FeedbackActivity" />
-        <activity
-            android:name=".GeneralSettingActivity" />
+        <activity android:name=".GeneralSettingActivity" />
         <activity android:name=".PayingDetailsActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".AddCardActivity"></activity>
+        <activity android:name=".AddCardActivity" />
         <activity android:name=".HttpActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".AllCardActivity"></activity>
     </application>
 
 </manifest>

@@ -9,11 +9,11 @@
 import UIKit
 
 class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIPickerViewDataSource {
-    
-    
 
+    
     var cardTypeCount:Int?
     var merchant:Merchant?
+
     @IBOutlet weak var pickerView: UIPickerView!
 	@IBOutlet weak var cardId: UITextField!
 	
@@ -28,7 +28,10 @@ class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIP
         pickerView.dataSource = self
         
         
+        
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

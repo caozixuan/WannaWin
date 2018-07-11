@@ -109,6 +109,14 @@ public class PointsFragment extends Fragment {
         if(isLogin){
             View content = LayoutInflater.from(getContext()).inflate(R.layout.content_cards_points, null);
             accountInfoLayout.addView(content);
+            Button buttonAllCard = (Button) content.findViewById(R.id.button_all_card_main);
+            buttonAllCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToAllCard = new Intent(getActivity(), AllCardActivity.class);
+                    startActivity(intentToAllCard);
+                }
+            });
             Button buttonAddCard = (Button) content.findViewById(R.id.button_add_card_main);
             buttonAddCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -157,9 +165,7 @@ public class PointsFragment extends Fragment {
         }
     }
 
-    //internet to get the most points card, dynamically replace the card below
-    //new thread
-    //use userID
+
     class getCardsInfo implements Runnable {
 
         @Override
@@ -173,7 +179,7 @@ public class PointsFragment extends Fragment {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                out.writeBytes("userID=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=3");
+                out.writeBytes("userId=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=20");
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
 
@@ -186,15 +192,10 @@ public class PointsFragment extends Fragment {
                 for(int i = 0; i < jsonArray.length(); i++){
                     JSONObject jobj = jsonArray.getJSONObject(i);
                     String cardID = jobj.getString("cardID");
-                    String cardNo = jobj.getString("cardNo");
+                    String cardNo = jobj.getString("card_No");
                     int points = jobj.getInt("points");
-                    JSONObject cardType = jobj.getJSONObject("CardType");
                     System.out.println(cardID+ " "+cardNo+" "+points);
                 }
-
-                dialog.dismiss();
-
-
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -210,7 +211,7 @@ public class PointsFragment extends Fragment {
                     connection.disconnect();
                 }
             }
-
+            dialog.dismiss();
         }
     }
 }

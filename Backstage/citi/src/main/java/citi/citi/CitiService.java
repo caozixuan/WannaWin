@@ -4,10 +4,9 @@ import citi.API.Authorize;
 import citi.API.Card;
 import citi.API.Customer;
 import citi.API.PayWithAwards;
-import citi.dao.UserDAO;
-import citi.mybatismapper.CitiMapper;
-import citi.mybatismapper.TokenMapper;
-import citi.mybatismapper.UserMapper;
+import citi.mapper.CitiMapper;
+import citi.mapper.TokenMapper;
+import citi.mapper.UserMapper;
 import citi.vo.*;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -19,11 +18,6 @@ import java.util.ArrayList;
 @Service
 public class CitiService {
 
-    /**
-     * 绑定操作
-     * @param citiCard
-     * @return 判断绑定是否成功
-     */
     @Autowired
     private TokenMapper tokenMapper;
 
@@ -38,6 +32,11 @@ public class CitiService {
 
     public String userID;  // 测试用
 
+    /**
+     * 绑定操作
+     * @param citiCard 花旗卡
+     * @return 判断绑定是否成功
+     */
     public boolean binding(CitiCard citiCard){
         int flag = citiMapper.insert(citiCard);
         if(flag>0)
@@ -126,7 +125,7 @@ public class CitiService {
         phoneNum = getPhoneNum(accessToken);
         creditCardNum = getCardNum(accessToken);
         citiCardID = getCardID(accessToken);
-        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID);
+        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID,0.0);
         return citiCard;
     }
 
