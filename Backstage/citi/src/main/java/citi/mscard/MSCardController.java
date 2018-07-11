@@ -1,18 +1,13 @@
 package citi.mscard;
 
-import citi.dao.MSCardDAO;
 import citi.vo.MSCard;
-import citi.vo.MSCardType;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * 接口设计：刘钟博
@@ -30,9 +25,10 @@ public class MSCardController {
 
     /**
      * 登陆成功时请求
+     * @url /mscard/infos
      * @param userId 用户id
      * @param n 请求积分最多的n张卡
-     * @return
+     * @return [{"cardID":"a7a8f255-f129-4b46-9de2-55f07c7ff65e","userID":"1ac9be07-f446-458c-b325-df2c7ecd113f","card_No":"888888","points":0}]
      */
     @ResponseBody
     @RequestMapping("/infos")
@@ -45,26 +41,15 @@ public class MSCardController {
         return jsonStr;
     }
 
-    /**
-     * 一个商户可能有多张卡，返回该商户所有卡的类型
-     * @param merchantID
-     * @return [{"MerchantID":"xxxx","Mtype":"xxxx","cardType":"xxxx"},{},{}...]
-     */
-    @ResponseBody
-    @RequestMapping("/cardtype")
-    public String getCardType(String merchantID){
-        List<MSCardType> msCardTypes = msCardService.getTypes(merchantID);
-        String jsonStr = gson.toJson(msCardTypes);
-        return jsonStr;
-    }
+
 
     /**
      *@param msCard 会员卡
-     * @return 成功：{"isBinding":true}，失败：{"isBinding":false}
+     * @return 成功：{"state":true}，失败：{"state":false}
      */
     @ResponseBody
     @RequestMapping("/addcard")
-    public String addMSCard(MSCardDAO msCard){
+    public String addMSCard(MSCard msCard){
         boolean flag = msCardService.addMSCard(msCard);
         return "{state: "+flag+"}";
     }

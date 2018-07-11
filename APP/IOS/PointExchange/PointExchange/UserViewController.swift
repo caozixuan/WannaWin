@@ -34,7 +34,7 @@ class UserViewController: UITableViewController {
     }
     
     @objc func gotoLogin(){
-        let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+        let storyBoard = UIStoryboard(name:"User", bundle:nil)
         let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
         self.navigationController!.pushViewController(view, animated: true)
     }

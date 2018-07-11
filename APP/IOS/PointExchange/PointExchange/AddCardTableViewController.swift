@@ -9,11 +9,11 @@
 import UIKit
 
 class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIPickerViewDataSource {
-    
-    
 
+    
     var cardTypeCount:Int?
     var merchant:Merchant?
+
     @IBOutlet weak var pickerView: UIPickerView!
 	@IBOutlet weak var cardId: UITextField!
 	
@@ -27,7 +27,11 @@ class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIP
         pickerView.delegate = self
         pickerView.dataSource = self
         
+        
+        
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -82,7 +86,12 @@ class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIP
     
     // pickerView相关
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return self.cardTypeCount!
+        if let number = cardTypeCount {
+            return number
+        }
+        else{
+            return 1
+        }
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let count = cardTypeCount {

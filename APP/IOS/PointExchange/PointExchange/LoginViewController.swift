@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginViewController: UITableViewController{
     @IBOutlet weak var usernameField: UITextField!
@@ -55,7 +56,14 @@ class LoginViewController: UITableViewController{
             self.present(alert, animated: true, completion: nil)
         }
         else{
-            let alert = UIAlertController(title:"登录", message:"登录失败！请检查用户名和密码是否正确", preferredStyle:.alert)
+			let alert:UIAlertController!
+			let reachable = NetworkReachabilityManager()
+			if !(reachable?.isReachable)! {
+				alert = UIAlertController(title:"登录", message:"网络连接失败，请刷新重试！", preferredStyle:.alert)
+			}
+			else {
+				alert = UIAlertController(title:"登录", message:"登录失败！请检查用户名和密码是否正确", preferredStyle:.alert)
+			}
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
             })
             alert.addAction(okAction)

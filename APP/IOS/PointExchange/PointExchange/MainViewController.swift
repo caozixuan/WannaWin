@@ -11,8 +11,9 @@ import UIKit
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	
-	
-	@IBOutlet weak var cardImage1: UIImageView!
+    @IBOutlet weak var availablePointsLabel: UILabel!
+    @IBOutlet weak var generalPointsLabel: UILabel!
+    @IBOutlet weak var cardImage1: UIImageView!
 	
 	@IBOutlet weak var cardImage2: UIImageView!
 	
@@ -20,6 +21,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
+    var activityIndicator:UIActivityIndicatorView?
 	//获取屏幕宽度
 	let screenWidth =  UIScreen.main.bounds.size.width
 
@@ -38,34 +40,39 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		cardImage2.addGestureRecognizer(cardTap2)
 		cardImage3.addGestureRecognizer(cardTap3)
         
-        // 获得商家信息
-        ServerConnector.getMerchantsInfos(start: 0, n: 2, callback: gotMerchantsCallback)
-        
-		
     }
-	
+    override func viewWillAppear(_ animated: Bool) {
+        ServerConnector.getPointsInfo(callback: gotPointsInfo)
+    }
+	/// 获得积分信息后的回调函数
+    func gotPointsInfo(result:Bool){
+        if result {
+            availablePointsLabel.text = String(User.getUser().availablePoints!)
+            generalPointsLabel.text = String(User.getUser().generalPoints!)
+        }else{
+            availablePointsLabel.text = "---"
+            generalPointsLabel.text = "---"
+        }
+    }
     /// 获得商户信息后的回调函数
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
             MerchantList.list = merchants
-            for merchant in MerchantList.list{
-                // 获得商家卡类型
-                ServerConnector.getCardTypeByUserID(merchantID: merchant.id, callback: gotCardTypeCallback)
+            var merchantName = [String]()
+            for m in merchants{
+                merchantName.append(m.name)
             }
+            let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+            let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
+            view.merchantNames = merchantName
+            self.navigationController!.pushViewController(view, animated: true)
         }
         else {
             print("商户信息获取失败")
         }
     }
     
-    /// 获得商户卡信息的回调函数
-    func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
-        if result {
-            if cardTypes.count != 0 {
-                MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
-            }
-        }
-    }
+    
     
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取内部scrollView尺寸
@@ -126,12 +133,13 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	@IBAction func showCardInfo(_ sender: AnyObject){
-		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
 		if User.getUser().username != nil {
+			let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 			let view = storyBoard.instantiateViewController(withIdentifier: "CardInfoTableViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
 		else{
+			let storyBoard = UIStoryboard(name:"User", bundle:nil)
 			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
@@ -140,9 +148,17 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	@IBAction func addCard(_ sender: AnyObject){
 		
 		if User.getUser().username != nil {
-            let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-			let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController")
-			self.navigationController!.pushViewController(view, animated: true)
+            // 加载动画
+            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            self.activityIndicator?.center = self.view.center
+            self.activityIndicator?.backgroundColor = UIColor.gray
+            self.activityIndicator?.hidesWhenStopped = true
+            self.view.addSubview(self.activityIndicator!)
+            self.activityIndicator?.startAnimating()
+            
+            // 获得商家信息
+            ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
+            
 		}
 		else{
             let storyBoard = UIStoryboard(name:"User", bundle:nil)

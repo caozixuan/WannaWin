@@ -1,18 +1,43 @@
 package citi.vo;
 
-public class Merchant {
-    String merchantID;
-    String name;
-    String description;
-    String address;
-    String logoURL;
+import com.google.gson.annotations.Expose;
 
-    public Merchant(String merchantID, String name, String description, String address, String logoURL) {
+public class Merchant {
+    private String merchantID;
+    private String name;
+    @Expose(serialize = false)
+    private String password;
+    private String description;
+    private String address;
+    private String logoURL;
+    private String cardLogoURL;
+    private double proportion;
+
+    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, String cardLogoURL, double proportion) {
         this.merchantID = merchantID;
         this.name = name;
+        this.password = password;
         this.description = description;
         this.address = address;
         this.logoURL = logoURL;
+        this.cardLogoURL = cardLogoURL;
+        this.proportion = proportion;
+    }
+
+    public String getCardLogoURL() {
+        return cardLogoURL;
+    }
+
+    public void setCardLogoURL(String cardLogoURL) {
+        this.cardLogoURL = cardLogoURL;
+    }
+
+    public double getProportion() {
+        return proportion;
+    }
+
+    public void setProportion(double proportion) {
+        this.proportion = proportion;
     }
 
     public String getMerchantID() {
@@ -55,8 +80,4 @@ public class Merchant {
         this.logoURL = logoURL;
     }
 
-   @Override
-    public String toString(){
-        return "{\"merchantID\":"+merchantID+",\"merchantName\":"+name+",\"description\":"+description+",\"logoURL\":"+logoURL+"}";
-   }
 }

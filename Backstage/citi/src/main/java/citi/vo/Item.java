@@ -2,23 +2,27 @@ package citi.vo;
 
 public class Item {
     private String ItemID;
+    private String name;
     private String description;
     private String merchantID;
-    private String points;
-    private String type;
-    private double originalPrice;
-    private double afterPrice;
-    private double discount;
+    private int discount;
+    private String logoURL;
 
-    public Item(String itemID, String description, String merchantID, String points, String type, double originalPrice, double afterPrice, double discount) {
+    public Item(String itemID, String name, String description, String merchantID, int discount, String logoURL) {
         ItemID = itemID;
+        this.name = name;
         this.description = description;
         this.merchantID = merchantID;
-        this.points = points;
-        this.type = type;
-        this.originalPrice = originalPrice;
-        this.afterPrice = afterPrice;
         this.discount = discount;
+        this.logoURL = logoURL;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
     }
 
     public String getItemID() {
@@ -33,23 +37,7 @@ public class Item {
         return merchantID;
     }
 
-    public String getPoints() {
-        return points;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public double getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public double getAfterPrice() {
-        return afterPrice;
-    }
-
-    public double getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 }

@@ -1,7 +1,10 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +15,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
 
@@ -34,22 +49,27 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
         }
     }
 
+    private Context context;
     private List<String> names;
     private List<String> descriptions;
     private List<String> logos;
-    public AddCardAdapter(List<String> names, List<String> descriptions, List<String> logos) {
-        this.names = names;
-        this.descriptions = descriptions;
-        this.logos = logos;
+
+    public AddCardAdapter(Context context) {
+        names = new ArrayList<String>();
+        descriptions = new ArrayList<String>();
+        logos = new ArrayList<String>();
+        this.context = context;
     }
 
-    //③ 在Adapter中实现3个方法
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         holder.textViewName.setText(names.get(position));
         holder.textViewDesc.setText(descriptions.get(position));
-        //Bitmap bimage = getBitmapFromURL(logos.get(position));
-        //holder.imageViewLogo.setImageBitmap(bimage);
+        Glide.with(context)
+                .load(logos.get(position))
+                .placeholder(R.drawable.ic_points_black_24dp)
+                .error(R.drawable.ic_mall_black_24dp)
+                .into(holder.imageViewLogo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +81,7 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
 
     @Override
     public int getItemCount() {
-        return names.size();
+        return logos.size();
     }
 
     @Override
@@ -70,25 +90,10 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
         return new VH(v);
     }
 
-    private Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void addData(String name, String description, String logo) {
+    public void addData(String name, String description, String logoURL) {
         names.add(name);
         descriptions.add(description);
-        logos.add(logo);
-        notifyItemInserted(names.size());
+        logos.add(logoURL);
+        notifyDataSetChanged();
     }
 }

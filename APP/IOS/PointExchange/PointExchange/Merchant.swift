@@ -15,6 +15,12 @@ class Merchant:Codable {
     var cardTypes:[CardType]?
     var Mtype:String?
     var address:String?
+	
+	//test
+	convenience init(name:String){
+		self.init()
+		self.name = name
+	}
 }
 
 struct CardType:Codable {

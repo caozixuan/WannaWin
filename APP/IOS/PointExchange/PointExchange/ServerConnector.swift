@@ -9,15 +9,21 @@
 import UIKit
 import Moya
 import SwiftyJSON
+import Alamofire
 
 class ServerConnector: NSObject {
     
     static var provider: MoyaProvider<ServerService>{
         //自定义manager
+        let securityPolicy:[String:ServerTrustPolicy]=[
+            "193.112.44.141":.disableEvaluation
+        ]
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
-        let manager = Manager(configuration: config)
-        return MoyaProvider<ServerService>(manager:manager)
+        let manager = Manager(configuration: config,serverTrustPolicyManager:ServerTrustPolicyManager(policies: securityPolicy))
+//        let manager = Manager(configuration: config)
+        
+        return MoyaProvider<ServerService>(manager:manager,plugins: [NetworkLoggerPlugin(verbose: true)])
     }
     
     /// 获取验证码
@@ -54,8 +60,8 @@ class ServerConnector: NSObject {
                 let data = JSON(try? response.mapJSON())
                 let isLogin = data.count
                 if isLogin != 0 {
-                    User.getUser().generalPoints = data["generalPoints"].int
-                    User.getUser().availablePoints = data["availablePoints"].int
+                    User.getUser().generalPoints = data["generalPoints"].double
+                    User.getUser().availablePoints = data["availablePoints"].double
                     User.getUser().id = data["userID"].string
                     print(data["userID"].string)
                     callback(true)
@@ -69,6 +75,23 @@ class ServerConnector: NSObject {
                 print("连接失败")
             }
         }
+    }
+    /// 获得积分信息
+    static func getPointsInfo(callback:@escaping (_ result:Bool)->()){
+        if let id = User.getUser().id{
+            provider.request(.getPointsInfo(userID: id)){result in
+                if case let .success(response) = result {
+                    let data = JSON(try? response.mapJSON())
+                    User.getUser().availablePoints = data["availablePoints"].int
+                    User.getUser().generalPoints = data["generalPoints"].int
+                    callback(true)
+                }
+            }
+        }
+        else{
+            callback(false)
+        }
+        
     }
     
     //花旗卡相关
@@ -149,7 +172,7 @@ class ServerConnector: NSObject {
                 if let json = dataJSON {
                     let data = JSON(json)
                     merchant.id = data["merchantID"].string!
-                    merchant.name = data["mechantName"].string!
+                    merchant.name = data["name"].string!
                     merchant.description = data["description"].string!
                     merchant.logoURL = data["logoURL"].string!
                     callback(true,merchant)
@@ -176,7 +199,10 @@ class ServerConnector: NSObject {
                     
                     for data in datas! {
                         let card = Card()
-                        
+                        card.id = data["cardID"].string
+                        card.userID = data["userID"].string
+                        card.number = data["cardNo"].string
+                        card.point = data["points"].double!
                         cards.append(card)
                     }
                     callback(true,cards)
