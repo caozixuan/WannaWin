@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    final String getInfoByPhoneNum = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE phoneNum = #{phoneNum}";
-    final String getInfoByUserID = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE userID = #{userID}";
+    final String getInfoByPhoneNum = "SELECT * FROM user WHERE phoneNum = #{phoneNum}";
+    final String getInfoByUserID = "SELECT * FROM user WHERE userID = #{userID}";
     final String loginVerify = "SELECT * FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
     final String insertUser = "INSERT INTO user (userID, password, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode) " +
             "VALUES (#{userID}, #{password}, #{citiCardID}, #{phoneNum}, #{generalPoints}, #{availablePoints}, #{rewardLinkCode})";
