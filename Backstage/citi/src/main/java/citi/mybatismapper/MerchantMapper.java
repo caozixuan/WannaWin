@@ -1,5 +1,6 @@
 package citi.mybatismapper;
 
+import citi.dao.MerchantDAO;
 import citi.vo.MSCardType;
 import citi.vo.Merchant;
 import org.apache.ibatis.annotations.*;
@@ -21,7 +22,7 @@ public interface MerchantMapper {
 
     //The return sequence will be [start+1, start+2, ,,, start+length].
     @Select(getSome)
-    List<Merchant> select(@Param("start") int start,@Param("length") int length);
+    List<MerchantDAO> select(@Param("start") int start, @Param("length") int length);
 
 
     @Select(getById)

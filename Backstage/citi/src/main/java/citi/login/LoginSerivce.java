@@ -31,26 +31,27 @@ public class LoginSerivce {
 
     /**
      * 发送验证码，储存验证码至数据库中
-     * @param phoneNum
+     * @param phoneNum 手机号
      */
     public void sendMs(String phoneNum){
         try{
             String vcode = AliSMS.sendSms(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-           // VCode v = new VCode(phoneNum,vcode,timestamp.toString());
             VCode v = new VCode(phoneNum,vcode,timestamp.toString());
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
-
+            e.printStackTrace();
+            //之后做日志记录，手机号不合格等...
         }
     }
 
     /**
      * 验证验证码
-     * @param phoneNum
-     * @param vCode
+     * @param phoneNum 手机号
+     * @param vCode 验证码
+     * @return 是否匹配成功
      */
     public boolean vfVcode(String phoneNum,String vCode,String password){
         boolean isMatch = false;
@@ -62,7 +63,6 @@ public class LoginSerivce {
                 userMapper.insert(d);
                 loginMapper.deleteVcode(phoneNum);
                 break;
-                //userMapper.insert(UUID.randomUUID().toString().toLowerCase(),phoneNum,password,null,);
             }
         }
         return isMatch;
@@ -70,9 +70,9 @@ public class LoginSerivce {
 
     /**
      * 验证登陆
-     * @param phoneNum
-     * @param password
-     * @return boolean isSucceed
+     * @param phoneNum 手机号
+     * @param password 密码
+     * @return user
      *
      */
     public User login(String phoneNum, String password){

@@ -1,18 +1,30 @@
-package citi.vo;
+package citi.dao;
 
-public class Merchant {
+import citi.vo.Merchant;
+import com.google.gson.annotations.Expose;
+
+/**
+ * Created by zhong on 2018/7/11 14:50
+ */
+public class MerchantDAO {
     private String merchantID;
     private String name;
+    private String password;
     private String description;
     private String address;
     private String logoURL;
 
-    public Merchant(String merchantID, String name, String description, String address, String logoURL) {
+    public MerchantDAO(String merchantID, String name,String password, String description, String address, String logoURL) {
         this.merchantID = merchantID;
         this.name = name;
+        this.password=password;
         this.description = description;
         this.address = address;
         this.logoURL = logoURL;
+    }
+
+    public Merchant toMerchant(){
+        return new Merchant(merchantID,name,description,address,logoURL);
     }
 
     public String getMerchantID() {
@@ -55,8 +67,4 @@ public class Merchant {
         this.logoURL = logoURL;
     }
 
-   @Override
-    public String toString(){
-        return "{\"merchantID\":"+merchantID+",\"merchantName\":"+name+",\"description\":"+description+",\"logoURL\":"+logoURL+"}";
-   }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zhong
- * @data 2018-7-11
+ * @date 2018-7-11
  */
 @RequestMapping("/pay")
 @Controller
