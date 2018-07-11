@@ -17,8 +17,8 @@ import java.util.List;
 public interface ItemMapper {
 
 
-    final String addItem = "INSERT INTO item(ItemID, description, MerchantID, discount) " +
-            "VALUES(#{ItemID}, #{description}, #{merchantID}, #{discount})";
+    final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, discount, logoURL) " +
+            "VALUES(#{ItemID}, #{name}, #{description}, #{merchantID}, #{discount}, #{logoURL})";
     final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID}";
     final String deleteItemByID = "DELETE FROM item WHERE ItemID = #{ItemID}";
 
