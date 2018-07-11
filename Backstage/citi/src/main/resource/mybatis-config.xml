@@ -23,6 +23,6 @@
     </environments>
 
     <mappers>
-        <package name="citi.mybatismapper"/>
+        <package name="citi.mapper"/>
     </mappers>
 </configuration>

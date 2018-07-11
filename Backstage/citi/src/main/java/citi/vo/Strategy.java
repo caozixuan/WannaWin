@@ -1,7 +1,5 @@
 package citi.vo;
 
-import citi.dao.OrderDAO;
-
 import java.util.ArrayList;
 
 /*
@@ -29,7 +27,7 @@ public class Strategy {
     }
 
     // TODO:这里需要数据库相关操作，找到订单
-    public static Strategy getStrategy(OrderDAO orderDAO) {
+    public static Strategy getStrategy(Order order) {
         return new Strategy();
     }
 
@@ -45,19 +43,19 @@ public class Strategy {
     }
 
     // TODO:这里返回一个json格式会更合理
-    public static int returnPointsTobePaid(OrderDAO orderDAO, User user) {
-        Strategy strategy = getStrategy(orderDAO);
+    public static int returnPointsTobePaid(Order order, User user) {
+        Strategy strategy = getStrategy(order);
         int points = 0;
-        if (orderDAO.getOriginalPrice() >= strategy.priceOriginal.get(strategy.priceOriginal.size() - 1)) {
+        if (order.getOriginalPrice() >= strategy.priceOriginal.get(strategy.priceOriginal.size() - 1)) {
             points = strategy.pointsNeed.get(strategy.pointsNeed.size() - 1);
             points = isPointsEnough(points, user);
-            orderDAO.setPointsNeeded(points);
+            order.setPointsNeeded(points);
         }
         for (int i = 0; i < strategy.priceOriginal.size() - 1; i++) {
-            if (orderDAO.getOriginalPrice() >= strategy.priceOriginal.get(i) && orderDAO.getOriginalPrice() < strategy.priceOriginal.get(i + 1)) {
+            if (order.getOriginalPrice() >= strategy.priceOriginal.get(i) && order.getOriginalPrice() < strategy.priceOriginal.get(i + 1)) {
                 points = strategy.pointsNeed.get(i);
                 points = isPointsEnough(points, user);
-                orderDAO.setPointsNeeded(points);
+                order.setPointsNeeded(points);
             }
         }
         return points;

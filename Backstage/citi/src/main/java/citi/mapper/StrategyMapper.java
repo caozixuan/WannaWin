@@ -1,7 +1,7 @@
-package citi.mybatismapper;
+package citi.mapper;
 
 
-import citi.dao.StrategyDAO;
+import citi.vo.Strategy;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -19,13 +19,13 @@ public interface StrategyMapper {
     final String deleteStrategy = "DELETE FROM Strategy WHERE CardTypeID = #{CardTypeID}";
 
     @Select(getStrategysByMerchantID)
-    List<StrategyDAO> getStrategysByMerchantID(String merchantID);
+    List<Strategy> getStrategysByMerchantID(String merchantID);
 
     @Select(getStrategy)
-    StrategyDAO getStrategy(String CardTypeID);
+    Strategy getStrategy(String CardTypeID);
 
     @Insert(addStrategy)
-    int addStrategy(StrategyDAO strategy);
+    int addStrategy(Strategy strategy);
 
     @Delete(deleteStrategy)
     int deleteStrategy(String CardTypeID);

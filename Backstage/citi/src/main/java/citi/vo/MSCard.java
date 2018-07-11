@@ -9,22 +9,10 @@ public class MSCard {
     String userID;
     String cardNo;
     int points;
-    MSCardType CardType;
 
+    public static boolean checkAttribute(MSCard msCard){
 
-    public MSCard(String cardID, String userID, String cardNo, int points, MSCardType CardType) {
-        this.cardID = cardID;
-        this.userID = userID;
-        this.cardNo = cardNo;
-        this.points = points;
-        this.CardType = CardType;
-    }
-
-    public MSCard(String cardID, String userID, String cardNo, MSCardType cardType) {
-        this.cardID = cardID;
-        this.userID = userID;
-        this.cardNo = cardNo;
-        CardType = cardType;
+        return false;
     }
 
     public String getCardID() {
@@ -43,8 +31,5 @@ public class MSCard {
         return points;
     }
 
-    public double getProportion(){
-        return CardType.getProportion();
-    }
 
 }

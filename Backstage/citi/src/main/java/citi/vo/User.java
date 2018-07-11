@@ -1,64 +1,30 @@
 package citi.vo;
 
-import citi.dao.OrderDAO;
-import citi.mybatismapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.annotations.Expose;
 
 import java.util.UUID;
 
+/**
+ * 重构：刘钟博
+ */
 public class User {
     private String userID;
     private String citiCardID;
+    @Expose(serialize = false)
+    private String password;
     private String phoneNum;
     private double generalPoints;
     private double availablePoints;
     private String rewardLinkCode;
 
-
-    public User(String citiCardID, String phoneNum, double generalPoints, double availablePoints) {
-        this.userID = UUID.randomUUID().toString().toLowerCase();
-        this.citiCardID = citiCardID;
+    public User(String phoneNum,String password) {
+        userID=UUID.randomUUID().toString().toLowerCase();
+        citiCardID="";
+        this.password = password;
         this.phoneNum = phoneNum;
-        this.generalPoints = generalPoints;
-        this.availablePoints = availablePoints;
-        this.rewardLinkCode = "";
-    }
-
-    public User(String userID, String citiCardID, String phoneNum, double generalPoints, double availablePoints, String rewardLinkCode) {
-        this.userID = userID;
-        this.citiCardID = citiCardID;
-        this.phoneNum = phoneNum;
-        this.generalPoints = generalPoints;
-        this.availablePoints = availablePoints;
-        this.rewardLinkCode = rewardLinkCode;
-    }
-
-    public User(String userID, String citiCardNum, String phoneNum, double generalPoints, double availablePoints) {
-        this.userID = userID;
-        this.citiCardID = citiCardNum;
-        this.phoneNum = phoneNum;
-        this.generalPoints = generalPoints;
-        this.availablePoints = availablePoints;
-        this.rewardLinkCode = "";
-    }
-
-    /*
-     * 作者:曹子轩
-     * TODO：具体token相关的逻辑需要实现
-     */
-    @Autowired
-    static private UserMapper userMapper;
-
-    public static User getUserByToken(String token) {
-        String phoneNum = "";//according to token
-        return userMapper.getInfoByPhone(phoneNum);
-    }
-
-    public void changePoint(OrderDAO orderDAO) {
-        //TODO:这里需要根据用户的设定扣除积分，扣除过程应该会比较复杂
-        if (orderDAO.getPointsNeeded() > 0)
-            this.setAvailablePoints(this.getAvailablePoints() - orderDAO.getPointsNeeded());
-        orderDAO.changeState();
+        generalPoints=0;
+        availablePoints=0;
+        rewardLinkCode="";
     }
 
     public String getUserID() {

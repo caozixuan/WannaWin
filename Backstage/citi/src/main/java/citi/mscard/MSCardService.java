@@ -1,10 +1,7 @@
 package citi.mscard;
 
-import citi.dao.MSCardDAO;
-import citi.mybatismapper.MSCardMapper;
-import citi.mybatismapper.MerchantMapper;
+import citi.mapper.MerchantMapper;
 import citi.vo.MSCard;
-import citi.vo.MSCardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,14 +31,14 @@ public class MSCardService {
     private MerchantMapper merchantMapper;
 
     public List<MSCard> getInfo(String userId, int n){
-        List<MSCardDAO> allCards =msCardMapper.select(userId);
+        List<MSCard> allCards =msCardMapper.select(userId);
         if(allCards==null)
             return null;
         Collections.sort(allCards,new SortByPoints());
 
         ArrayList<MSCard> returnCards = new ArrayList<>();
         for(int i=0;i<n&&i<allCards.size();i++){
-            returnCards.add(allCards.get(i).toMSCard());
+            returnCards.add(allCards.get(i));
         }
 
         return returnCards;
@@ -63,7 +60,7 @@ public class MSCardService {
      * @return
      */
     public MSCard getMSCardInfo(String CardID){
-        return msCardMapper.selectCard(CardID).toMSCard();
+        return msCardMapper.selectCard(CardID);
     }
 
     /**
@@ -81,9 +78,9 @@ public class MSCardService {
      * @param msCard
      * @return
      */
-    public boolean addMSCard(MSCardDAO msCard){
+    public boolean addMSCard(MSCard msCard){
         // TODO:请求相关商家接口，做验证
-        boolean isNoBlank = MSCardDAO.checkAttribute(msCard);
+        boolean isNoBlank = MSCard.checkAttribute(msCard);
         if(!isNoBlank)
             return false;
         int flag = msCardMapper.insert(msCard);

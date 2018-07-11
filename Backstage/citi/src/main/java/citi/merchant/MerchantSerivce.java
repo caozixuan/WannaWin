@@ -1,7 +1,6 @@
 package citi.merchant;
 
-import citi.dao.MerchantDAO;
-import citi.mybatismapper.MerchantMapper;
+import citi.mapper.MerchantMapper;
 import citi.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,7 @@ public class MerchantSerivce {
     private MerchantMapper merchantMapper;
 
     public List<Merchant> getMerchants(int start,int length){
-        List<MerchantDAO> merchants = merchantMapper.select(start,length);
-
+        List<Merchant> merchants = merchantMapper.select(start,length);
         return merchants;
     }
 

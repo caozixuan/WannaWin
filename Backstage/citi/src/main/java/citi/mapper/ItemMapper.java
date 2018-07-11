@@ -1,11 +1,9 @@
-package citi.mybatismapper;
+package citi.mapper;
 
-import citi.vo.CitiCard;
 import citi.vo.Item;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

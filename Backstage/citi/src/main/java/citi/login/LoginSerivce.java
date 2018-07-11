@@ -1,20 +1,16 @@
 package citi.login;
 
 import citi.API.AliSMS;
-import citi.API.VerificationCode;
-import citi.dao.UserDAO;
-import citi.mybatismapper.LoginMapper;
-import citi.mybatismapper.UserMapper;
+import citi.mapper.VcodeMapper;
+import citi.mapper.UserMapper;
 import citi.vo.User;
 import citi.vo.VCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 接口设计：刘钟博
@@ -24,7 +20,7 @@ import java.util.UUID;
 public class LoginSerivce {
 
     @Autowired
-    private LoginMapper loginMapper;
+    private VcodeMapper vcodeMapper;
 
     @Autowired
     private UserMapper userMapper;
@@ -39,7 +35,7 @@ public class LoginSerivce {
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
             VCode v = new VCode(phoneNum,vcode,timestamp.toString());
-            loginMapper.insertVcode(v);
+            vcodeMapper.insertVcode(v);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -55,13 +51,13 @@ public class LoginSerivce {
      */
     public boolean vfVcode(String phoneNum,String vCode,String password){
         boolean isMatch = false;
-        List<String> vCodes = loginMapper.selectVcode(phoneNum);
+        List<String> vCodes = vcodeMapper.selectVcode(phoneNum);
         for(int i=0;i<vCodes.size();i++){
             if(vCodes.get(i).equals(vCode)){
                 isMatch = true;
-                UserDAO d = new UserDAO(UUID.randomUUID().toString().toLowerCase(),password,null,phoneNum,0,0);
+                User d = new User(phoneNum,password);
                 userMapper.insert(d);
-                loginMapper.deleteVcode(phoneNum);
+                vcodeMapper.deleteVcode(phoneNum);
                 break;
             }
         }

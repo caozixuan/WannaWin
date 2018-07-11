@@ -1,8 +1,7 @@
-package citi.mybatismapper;
+package citi.mapper;
 
-import citi.dao.OrderDAO;
+import citi.vo.Order;
 //import citi.dao.OrderStateTypeHandler;
-import citi.vo.Item;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +16,10 @@ public interface OrderMapper {
     final String getOrderIDByUserID = "SELECT orderID FROM order WHERE userID = #{userID}";
 
     @Select(getByOrderID)
-    OrderDAO selectOrderByID(String orderID);
+    Order selectOrderByID(String orderID);
 
     @Insert(addOrder)
-    int addOrder(OrderDAO order);
+    int addOrder(Order order);
 
     @Select(getOrderIDByUserID)
     List<String> getOrderIDByUserID(String userID);

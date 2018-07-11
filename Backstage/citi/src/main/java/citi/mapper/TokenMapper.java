@@ -1,4 +1,4 @@
-package citi.mybatismapper;
+package citi.mapper;
 
 import citi.vo.RefreshToken;
 import org.apache.ibatis.annotations.Delete;
