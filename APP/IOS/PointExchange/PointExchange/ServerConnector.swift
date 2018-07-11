@@ -9,15 +9,21 @@
 import UIKit
 import Moya
 import SwiftyJSON
+import Alamofire
 
 class ServerConnector: NSObject {
     
     static var provider: MoyaProvider<ServerService>{
         //自定义manager
+        let securityPolicy:[String:ServerTrustPolicy]=[
+            "193.112.44.141":.disableEvaluation
+        ]
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
-        let manager = Manager(configuration: config)
-        return MoyaProvider<ServerService>(manager:manager)
+        let manager = Manager(configuration: config,serverTrustPolicyManager:ServerTrustPolicyManager(policies: securityPolicy))
+//        let manager = Manager(configuration: config)
+        
+        return MoyaProvider<ServerService>(manager:manager,plugins: [NetworkLoggerPlugin(verbose: true)])
     }
     
     /// 获取验证码
