@@ -1,5 +1,6 @@
 package citi.user;
 
+import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,13 @@ public class UserController {
     @RequestMapping("/getInfo")
     @ResponseBody
     public String getInfo(String userID){
-        return  gson.toJson(userService.getInfo(userID));
+        User u = userService.getInfo(userID);
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"generalPoints\":");
+        sb.append(u.getGeneralPoints());
+        sb.append(",\"availablePoints\":");
+        sb.append(u.getAvailablePoints());
+        sb.append("}");
+        return  sb.toString();
     }
 }
