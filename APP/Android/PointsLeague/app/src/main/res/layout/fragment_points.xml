@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:text="积分兑"
             />
