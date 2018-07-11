@@ -10,16 +10,26 @@ public class Merchant {
     private String description;
     private String address;
     private String logoURL;
+    private String cardLogoURL;
     private double proportion;
 
-    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, double proportion) {
+    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, String cardLogoURL, double proportion) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
         this.description = description;
         this.address = address;
         this.logoURL = logoURL;
+        this.cardLogoURL = cardLogoURL;
         this.proportion = proportion;
+    }
+
+    public String getCardLogoURL() {
+        return cardLogoURL;
+    }
+
+    public void setCardLogoURL(String cardLogoURL) {
+        this.cardLogoURL = cardLogoURL;
     }
 
     public double getProportion() {
