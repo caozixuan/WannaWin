@@ -12,7 +12,7 @@ public class OrderDAO {
     private String orderId;
     private double originalPrice;
     private double priceAfter;
-    private int pointsNeeded;
+    private double pointsNeeded;
     private String userId;
     private String state;   //2018-07-10 从 OrderState 改为 String - 任思远
     private String merchantId;
@@ -44,7 +44,7 @@ public class OrderDAO {
 
     }
 
-    public OrderDAO(String orderId, double originalPrice, double priceAfter, int pointsNeeded, String userId, OrderState state, String merchantId, String time) {
+    public OrderDAO(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, String time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
@@ -79,7 +79,7 @@ public class OrderDAO {
         return priceAfter;
     }
 
-    public int getPointsNeeded() {
+    public double getPointsNeeded() {
         return pointsNeeded;
     }
 

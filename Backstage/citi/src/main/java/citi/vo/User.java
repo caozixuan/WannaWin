@@ -10,12 +10,12 @@ public class User {
     private String userID;
     private String citiCardID;
     private String phoneNum;
-    private int generalPoints;
-    private int availablePoints;
+    private double generalPoints;
+    private double availablePoints;
     private String rewardLinkCode;
 
 
-    public User(String citiCardID, String phoneNum, int generalPoints, int availablePoints) {
+    public User(String citiCardID, String phoneNum, double generalPoints, double availablePoints) {
         this.userID = UUID.randomUUID().toString().toLowerCase();
         this.citiCardID = citiCardID;
         this.phoneNum = phoneNum;
@@ -24,7 +24,7 @@ public class User {
         this.rewardLinkCode = "";
     }
 
-    public User(String userID, String citiCardID, String phoneNum, int generalPoints, int availablePoints, String rewardLinkCode) {
+    public User(String userID, String citiCardID, String phoneNum, double generalPoints, double availablePoints, String rewardLinkCode) {
         this.userID = userID;
         this.citiCardID = citiCardID;
         this.phoneNum = phoneNum;
@@ -33,7 +33,7 @@ public class User {
         this.rewardLinkCode = rewardLinkCode;
     }
 
-    public User(String userID, String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
+    public User(String userID, String citiCardNum, String phoneNum, double generalPoints, double availablePoints) {
         this.userID = userID;
         this.citiCardID = citiCardNum;
         this.phoneNum = phoneNum;
@@ -77,19 +77,19 @@ public class User {
         this.phoneNum = phoneNum;
     }
 
-    public int getGeneralPoints() {
+    public double getGeneralPoints() {
         return generalPoints;
     }
 
-    public void setGeneralPoints(int generalPoints) {
+    public void setGeneralPoints(double generalPoints) {
         this.generalPoints = generalPoints;
     }
 
-    public int getAvailablePoints() {
+    public double getAvailablePoints() {
         return availablePoints;
     }
 
-    public void setAvailablePoints(int availablePoints) {
+    public void setAvailablePoints(double availablePoints) {
         this.availablePoints = availablePoints;
     }
 
