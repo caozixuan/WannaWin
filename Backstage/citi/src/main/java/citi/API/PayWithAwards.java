@@ -1,5 +1,7 @@
 package citi.API;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -25,6 +27,9 @@ public class PayWithAwards {
                 .build();
 
         linkCode = Authorize.getResponseBody(request);
+        JsonElement je = new JsonParser().parse(linkCode);
+        linkCode=je.getAsJsonObject().get("rewardLinkCode").toString();
+        linkCode = Authorize.getTokenByRF(linkCode);
         return linkCode;
     }
 
@@ -65,11 +70,12 @@ public class PayWithAwards {
         return information;
     }
 
-    public static String finishOrder(String linkCode){
+    public static String finishOrder(String linkCode, String orderInformation){
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\"transactionReferenceNumber\":\"132323454de6234543\",\"redemptionOrder\":{\"transactionAmount\":100.5,\"currencyCode\":\"AUD\",\"pointsToRedeem\":1005,\"transactionDescription\":\"Completed\"}}");
+        //RequestBody body = RequestBody.create(mediaType, "{\"transactionReferenceNumber\":\"132323454de6234543\",\"redemptionOrder\":{\"transactionAmount\":100.5,\"currencyCode\":\"AUD\",\"pointsToRedeem\":1005,\"transactionDescription\":\"Completed\"}}");
+        RequestBody body = RequestBody.create(mediaType, orderInformation);
         Request request = new Request.Builder()
                 .url("https://sandbox.apihub.citi.com/gcb/api/v1/apac/rewards/"+linkCode+"/redemption")
                 .post(body)

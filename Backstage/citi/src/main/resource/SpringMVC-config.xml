@@ -9,6 +9,7 @@
 
     <context:annotation-config/>
     <mvc:annotation-driven />
+    <mvc:resources mapping="/citi/img/**" location="/img/"/>
     <context:component-scan base-package="citi.citi"/>
     <context:component-scan base-package="citi.dao"/>
     <context:component-scan base-package="citi.interceptor"/>
