@@ -24,6 +24,15 @@ public class User {
         this.rewardLinkCode = "";
     }
 
+    public User(String userID, String citiCardID, String phoneNum, int generalPoints, int availablePoints, String rewardLinkCode) {
+        this.userID = userID;
+        this.citiCardID = citiCardID;
+        this.phoneNum = phoneNum;
+        this.generalPoints = generalPoints;
+        this.availablePoints = availablePoints;
+        this.rewardLinkCode = rewardLinkCode;
+    }
+
     public User(String userID, String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
         this.userID = userID;
         this.citiCardID = citiCardNum;

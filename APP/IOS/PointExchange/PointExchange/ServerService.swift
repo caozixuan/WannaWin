@@ -62,7 +62,7 @@ extension ServerService:TargetType {
         case .unbind:
             return "/citi/unbind"
         case .getMostPointCards:
-            return "/mscard/infos userID"
+            return "/mscard/infos"
         case .getCardTypeByUserID:
             return "/mscard/cardtype"
         case .addCard:
@@ -113,7 +113,7 @@ extension ServerService:TargetType {
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getMostPointCards(let userID, let n):
             var params:[String:String] = [:]
-            params["userID"] = userID
+            params["userId"] = userID
             params["n"] = String(n)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .addCard(let cardID, let UserID, let cardNo, let msCardType):

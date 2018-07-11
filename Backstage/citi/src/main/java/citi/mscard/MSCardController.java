@@ -66,6 +66,6 @@ public class MSCardController {
     @RequestMapping("/addcard")
     public String addMSCard(MSCardDAO msCard){
         boolean flag = msCardService.addMSCard(msCard);
-        return "{state:"+flag+"}";
+        return "{state: "+flag+"}";
     }
 }

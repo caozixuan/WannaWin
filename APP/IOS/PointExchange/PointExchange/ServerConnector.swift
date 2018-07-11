@@ -9,15 +9,21 @@
 import UIKit
 import Moya
 import SwiftyJSON
+import Alamofire
 
 class ServerConnector: NSObject {
     
     static var provider: MoyaProvider<ServerService>{
         //自定义manager
+        let securityPolicy:[String:ServerTrustPolicy]=[
+            "193.112.44.141":.disableEvaluation
+        ]
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
-        let manager = Manager(configuration: config)
-        return MoyaProvider<ServerService>(manager:manager)
+        let manager = Manager(configuration: config,serverTrustPolicyManager:ServerTrustPolicyManager(policies: securityPolicy))
+//        let manager = Manager(configuration: config)
+        
+        return MoyaProvider<ServerService>(manager:manager,plugins: [NetworkLoggerPlugin(verbose: true)])
     }
     
     /// 获取验证码
@@ -34,7 +40,6 @@ class ServerConnector: NSObject {
         provider.request(.sendPassword(phoneNumber:phoneNumber, vcode:vcode, password: password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
-                // TODO: 处理验证码正确或错误
                 if data["isCreate"].bool == true{
                     callback(true)
                 }else{
@@ -150,7 +155,7 @@ class ServerConnector: NSObject {
                 if let json = dataJSON {
                     let data = JSON(json)
                     merchant.id = data["merchantID"].string!
-                    merchant.name = data["mechantName"].string!
+                    merchant.name = data["name"].string!
                     merchant.description = data["description"].string!
                     merchant.logoURL = data["logoURL"].string!
                     callback(true,merchant)
@@ -177,7 +182,10 @@ class ServerConnector: NSObject {
                     
                     for data in datas! {
                         let card = Card()
-                        
+                        card.id = data["cardID"].string
+                        card.userID = data["userID"].string
+                        card.number = data["cardNo"].string
+                        card.point = data["points"].int!
                         cards.append(card)
                     }
                     callback(true,cards)
@@ -222,7 +230,19 @@ class ServerConnector: NSObject {
         }
     }
     /// 添加会员卡
-    func addCard(cardID:String, UserID:String, cardNo:String, msCardType:String){
-        // TODO: 添加会员卡
+    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
+        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                if data["isCreate"].bool == true{
+                    callback(true)
+                }else{
+                    callback(false)
+                }
+                
+            }
+            
+        }
+        
     }
 }

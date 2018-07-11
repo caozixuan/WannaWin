@@ -73,22 +73,6 @@
             </objects>
             <point key="canvasLocation" x="857" y="-1183"/>
         </scene>
-        <!--CardInfoTableViewController-->
-        <scene sceneID="8tU-FU-jW4">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="CardInfoTableViewController" storyboardName="HomePage" referencedIdentifier="CardInfoTableViewController" id="xqK-ya-gfg" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ice-i7-zHN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1936" y="-1184"/>
-        </scene>
-        <!--AddCardTableViewController-->
-        <scene sceneID="ghx-GD-GuR">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="AddCardTableViewController" storyboardName="HomePage" referencedIdentifier="AddCardTableViewController" id="dnJ-eb-1Gi" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yjb-9S-iXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3076" y="-1184"/>
-        </scene>
         <!--UINavigationController-fGz-YH-H6L-->
         <scene sceneID="iiK-ng-gOE">
             <objects>
