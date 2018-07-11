@@ -7,24 +7,72 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
-class MerchantChooseTableViewController: UITableViewController {
+class MerchantChooseTableViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var marchantCount = MerchantList.list.count
     
     var merchantNames = [String]()
+    
+    var disposeBag = DisposeBag()
     
     var indexController:UILocalizedIndexedCollation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        let result = Observable.empty().asObservable()
+            .startWith(())
+            .flatMapLatest(getDatas)
+            .flatMap(filter)
+            .share(replay: 1)
+        let dataSource = RxTableViewSectionedReloadDataSource
+            <SectionModel<String, String>>(configureCell: {
+                (dataSource, tv, indexPath, element) in
+                let cell = tv.dequeueReusableCell(withIdentifier: "cell")!
+                (cell.viewWithTag(1) as? UILabel)?.text = element
+                let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
+                cell.imageView?.imageFromURL(MerchantList.list[indexPath.row].logoURL!, placeholder: UIImage(named: "周黑鸭")!)
+                return cell
+            })
+        result.bind(to: self.tableView.rx.items(dataSource: dataSource))
+            .disposed(by:disposeBag)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
+    }
+    func getDatas()->Observable<[SectionModel<String, String>]> {
+        print("正在请求数据......")
+        let items = (0 ..< marchantCount).map {i in
+            merchantNames[i]
+        }
+        let observable = Observable.just([SectionModel(model: "S", items: items)])
+        return observable
+    }
+    func filter(data:[SectionModel<String, String>])-> Observable<[SectionModel<String, String>]> {
+        return searchBar.rx.text.orEmpty
+            .flatMapLatest{ query -> Observable<[SectionModel<String, String>]> in
+                if query.isEmpty{
+                    return Observable.just(data)
+                }
+                else{
+                    var newData:[SectionModel<String, String>] = []
+                    for sectionModel in data {
+                        let items = sectionModel.items.filter{ "\($0)".transformToPinyin().contains(query.lowercased()) }
+                        newData.append(SectionModel(model: sectionModel.model, items: items))
+                    }
+                    return Observable.just(newData)
+                }
+        }
     }
     
     func createIndex(){
@@ -56,34 +104,26 @@ class MerchantChooseTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.marchantCount
-    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "merchant")
-        
-        let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
-        if let d = data {
-             cell?.imageView?.image = UIImage(data: d)
-        }
-        
-        (cell?.viewWithTag(1) as! UILabel).text = MerchantList.list[indexPath.row].name
-        return cell!
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // 获得商家卡类型
-        ServerConnector.getCardTypeByUserID(merchantID: MerchantList.list[indexPath.row].id, callback: gotCardTypeCallback)
-//        ServerConnector.getCardTypeByUserID(merchantID:"00001", callback: gotCardTypeCallback)
-        
-    }
+    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "merchant")
+//
+//        let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
+//        if let d = data {
+//             cell?.imageView?.image = UIImage(data: d)
+//        }
+//
+//        (cell?.viewWithTag(1) as! UILabel).text = MerchantList.list[indexPath.row].name
+//        return cell!
+//    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        // 获得商家卡类型
+//        ServerConnector.getCardTypeByUserID(merchantID: MerchantList.list[indexPath.row].id, callback: gotCardTypeCallback)
+////        ServerConnector.getCardTypeByUserID(merchantID:"00001", callback: gotCardTypeCallback)
+//
+//    }
     /// 获得商户卡信息的回调函数
     func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
         if result {

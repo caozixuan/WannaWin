@@ -1,10 +1,7 @@
 package citi.API;
-import citi.mybatismapper.TokenMapper;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import okhttp3.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

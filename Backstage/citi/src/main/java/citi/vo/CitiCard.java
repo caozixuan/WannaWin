@@ -5,12 +5,14 @@ public class CitiCard {
     private String citiCardNum;
     private String phoneNum;
     private String userID;
+    private double miniExpense;
 
-    public CitiCard(String citiCardID, String citiCardNum, String phoneNum, String userID) {
+    public CitiCard(String citiCardID, String citiCardNum, String phoneNum, String userID, double miniExpense) {
         this.citiCardID = citiCardID;
         this.citiCardNum = citiCardNum;
         this.phoneNum = phoneNum;
         this.userID = userID;
+        this.miniExpense = miniExpense;
     }
 
     public String getCitiCardID() {
@@ -28,4 +30,9 @@ public class CitiCard {
     public String getUserID() {
         return userID;
     }
+
+    public double getMiniExpense() {
+        return miniExpense;
+    }
+
 }

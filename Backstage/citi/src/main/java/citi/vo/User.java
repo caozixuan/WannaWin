@@ -1,64 +1,46 @@
 package citi.vo;
 
-import citi.dao.OrderDAO;
-import citi.mybatismapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.annotations.Expose;
 
 import java.util.UUID;
 
+/**
+ * 重构：刘钟博
+ */
 public class User {
+    @Expose
     private String userID;
+    @Expose
     private String citiCardID;
+    @Expose(serialize = false)
+    private String password;
+    @Expose
     private String phoneNum;
-    private int generalPoints;
-    private int availablePoints;
+    @Expose
+    private double generalPoints;
+    @Expose
+    private double availablePoints;
+    @Expose
     private String rewardLinkCode;
 
-
-    public User(String citiCardID, String phoneNum, int generalPoints, int availablePoints) {
-        this.userID = UUID.randomUUID().toString().toLowerCase();
-        this.citiCardID = citiCardID;
+    public User(String phoneNum,String password) {
+        userID=UUID.randomUUID().toString().toLowerCase();
+        citiCardID="";
+        this.password = password;
         this.phoneNum = phoneNum;
-        this.generalPoints = generalPoints;
-        this.availablePoints = availablePoints;
-        this.rewardLinkCode = "";
+        generalPoints=0;
+        availablePoints=0;
+        rewardLinkCode="";
     }
 
-    public User(String userID, String citiCardID, String phoneNum, int generalPoints, int availablePoints, String rewardLinkCode) {
+    public User(String userID, String citiCardID, String password, String phoneNum, double generalPoints, double availablePoints, String rewardLinkCode) {
         this.userID = userID;
         this.citiCardID = citiCardID;
+        this.password = password;
         this.phoneNum = phoneNum;
         this.generalPoints = generalPoints;
         this.availablePoints = availablePoints;
         this.rewardLinkCode = rewardLinkCode;
-    }
-
-    public User(String userID, String citiCardNum, String phoneNum, int generalPoints, int availablePoints) {
-        this.userID = userID;
-        this.citiCardID = citiCardNum;
-        this.phoneNum = phoneNum;
-        this.generalPoints = generalPoints;
-        this.availablePoints = availablePoints;
-        this.rewardLinkCode = "";
-    }
-
-    /*
-     * 作者:曹子轩
-     * TODO：具体token相关的逻辑需要实现
-     */
-    @Autowired
-    static private UserMapper userMapper;
-
-    public static User getUserByToken(String token) {
-        String phoneNum = "";//according to token
-        return userMapper.getInfoByPhone(phoneNum);
-    }
-
-    public void changePoint(OrderDAO orderDAO) {
-        //TODO:这里需要根据用户的设定扣除积分，扣除过程应该会比较复杂
-        if (orderDAO.getPointsNeeded() > 0)
-            this.setAvailablePoints(this.getAvailablePoints() - orderDAO.getPointsNeeded());
-        orderDAO.changeState();
     }
 
     public String getUserID() {
@@ -77,19 +59,19 @@ public class User {
         this.phoneNum = phoneNum;
     }
 
-    public int getGeneralPoints() {
+    public double getGeneralPoints() {
         return generalPoints;
     }
 
-    public void setGeneralPoints(int generalPoints) {
+    public void setGeneralPoints(double generalPoints) {
         this.generalPoints = generalPoints;
     }
 
-    public int getAvailablePoints() {
+    public double getAvailablePoints() {
         return availablePoints;
     }
 
-    public void setAvailablePoints(int availablePoints) {
+    public void setAvailablePoints(double availablePoints) {
         this.availablePoints = availablePoints;
     }
 

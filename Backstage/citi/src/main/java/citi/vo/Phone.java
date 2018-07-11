@@ -1,12 +1,12 @@
 package citi.vo;
 
 public class Phone {
-    String phoneType;
-    String areaCode;
-    int extension;
-    int phoneKey;
-    int phoneNumber;
-    int phoneCountryCode;
+    private String phoneType;
+    private String areaCode;
+    private int extension;
+    private int phoneKey;
+    private int phoneNumber;
+    private int phoneCountryCode;
 
     public Phone(String phoneType, String areaCode, int extension, int phoneKey, int phoneNum, int phoneCountryCode) {
         this.phoneType = phoneType;

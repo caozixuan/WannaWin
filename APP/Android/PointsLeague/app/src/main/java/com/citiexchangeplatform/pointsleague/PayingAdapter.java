@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.KeyListener;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     //数据源
     private List<String> list;
     private List<Integer> img_list;
+    private List<Bitmap> bitmaps;
     private Context context;
     //是否显示单选框,默认false
     private boolean isshowBox = false;
@@ -144,7 +146,6 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
 
-
                 if(checkBoxInterface!=null) {
                     //接口实例化后的而对象，调用重写后的方法
                     checkBoxInterface.onclick(v,position);
@@ -184,7 +185,6 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
             }
         });
-
 
 
 

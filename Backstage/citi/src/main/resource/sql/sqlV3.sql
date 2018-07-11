@@ -127,9 +127,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `huaqi`.`orderDAO`
+-- Table `huaqi`.`order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `huaqi`.`orderDAO` (
+CREATE TABLE IF NOT EXISTS `huaqi`.`order` (
   `OrderID` VARCHAR(45) NOT NULL,
   `OriginalPrice` DOUBLE NULL DEFAULT NULL,
   `PriceAfter` DOUBLE NULL DEFAULT NULL,
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `huaqi`.`orderitem` (
     REFERENCES `huaqi`.`item` (`ItemID`),
   CONSTRAINT `OrderID_FK`
     FOREIGN KEY (`OrderID`)
-    REFERENCES `huaqi`.`orderDAO` (`OrderID`))
+    REFERENCES `huaqi`.`order` (`OrderID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
