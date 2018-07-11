@@ -1,3 +1,4 @@
+/*
 package citi.mapper;
 
 import citi.vo.CardLogo;
@@ -31,3 +32,4 @@ public interface CardLogoMapper {
     int deleteCardLogo(String merchantID);
 
 }
+*/

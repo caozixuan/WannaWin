@@ -1,3 +1,4 @@
+/*
 package citi.vo;
 
 public class CardLogo {
@@ -18,3 +19,4 @@ public class CardLogo {
     }
 
 }
+*/
