@@ -42,6 +42,7 @@ public class LoginSerivce {
             loginMapper.insertVcode(v);
         }
         catch (Exception e){
+
         }
     }
 
