@@ -28,6 +28,7 @@ public class OrderDAO {
             enumMap1.put("SUCCESS", SUCCESS);
             enumMap1.put("FAIL", FAIL);
             enumMap1.put("TOBEFINISHED", TOBEFINISHED);
+
             enumMap2.put(SUCCESS, "SUCCESS");
             enumMap2.put(FAIL, "FAIL");
             enumMap2.put(TOBEFINISHED, "TOBEFINISHED");

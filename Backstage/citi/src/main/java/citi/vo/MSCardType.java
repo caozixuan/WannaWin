@@ -11,7 +11,7 @@ import com.google.gson.stream.JsonToken;
 public class MSCardType {
     private String MerchantID;
     private String MType;
-    private String CardType;    //'CardType can be derived from 'MerchantID' and 'MType'.
+    private String CardTypeID;
     private Double Proportion;
     private String miniExpense;
 
@@ -27,8 +27,8 @@ public class MSCardType {
         this.miniExpense = temp.miniExpense;
     }*/
 
-    public MSCardType(String cardType) {
-        CardType = cardType;
+    public MSCardType(String cardTypeID) {
+        CardTypeID = cardTypeID;
     }
 
     //
@@ -39,10 +39,10 @@ public class MSCardType {
         return gson.toJson(this);
     }
 
-    public MSCardType(String merchantID, String MType, String cardType, Double proportion, String miniExpense) {
+    public MSCardType(String merchantID, String MType, String cardTypeID, Double proportion, String miniExpense) {
         MerchantID = merchantID;
         this.MType = MType;
-        CardType = cardType;
+        CardTypeID = cardTypeID;
         Proportion = proportion;
         this.miniExpense = miniExpense;
     }
@@ -51,39 +51,20 @@ public class MSCardType {
         return MerchantID;
     }
 
-    public void setMerchantID(String merchantID) {
-        MerchantID = merchantID;
-    }
-
     public String getMType() {
         return MType;
     }
 
-    public void setMType(String MType) {
-        this.MType = MType;
-    }
-
-    public String getCardType() {
-        return CardType;
-    }
-
-    public void setCardType(String cardType) {
-        CardType = cardType;
+    public String getCardTypeID() {
+        return CardTypeID;
     }
 
     public Double getProportion() {
         return Proportion;
     }
 
-    public void setProportion(Double proportion) {
-        Proportion = proportion;
-    }
-
     public String getMiniExpense() {
         return miniExpense;
     }
-
-    public void setMiniExpense(String miniExpense) {
-        this.miniExpense = miniExpense;
-    }
+    
 }
