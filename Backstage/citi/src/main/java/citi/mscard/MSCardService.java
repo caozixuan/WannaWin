@@ -1,10 +1,8 @@
 package citi.mscard;
 
-import citi.dao.MSCardDAO;
-import citi.mybatismapper.MSCardMapper;
-import citi.mybatismapper.MerchantMapper;
+import citi.mapper.MSCardMapper;
+import citi.mapper.MerchantMapper;
 import citi.vo.MSCard;
-import citi.vo.MSCardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,27 +19,27 @@ import java.util.List;
 @Service
 public class MSCardService {
 
-    /**
-     * 获取该用户下积分最多的n张卡信息
-     * @param userId
-     * @param n
-     * @return 卡列表
-     */
+
+
 
     @Autowired
     private MSCardMapper msCardMapper;
-    @Autowired
-    private MerchantMapper merchantMapper;
 
+    /**
+     * 获取该用户下积分最多的n张卡信息
+     * @param userId 用户id
+     * @param n n张卡
+     * @return 卡列表
+     */
     public List<MSCard> getInfo(String userId, int n){
-        List<MSCardDAO> allCards =msCardMapper.select(userId);
+        List<MSCard> allCards =msCardMapper.select(userId);
         if(allCards==null)
             return null;
         Collections.sort(allCards,new SortByPoints());
 
         ArrayList<MSCard> returnCards = new ArrayList<>();
         for(int i=0;i<n&&i<allCards.size();i++){
-            returnCards.add(allCards.get(i).toMSCard());
+            returnCards.add(allCards.get(i));
         }
 
         return returnCards;
@@ -51,39 +49,30 @@ public class MSCardService {
         public int compare(Object o1, Object o2){
             MSCard c1 = (MSCard) o1;
             MSCard c2 = (MSCard) o2;
-            if(c1.getPoints()*c1.getProportion()<c2.getPoints()*c2.getProportion()){
+            /*if(c1.getPoints()*c1.getProportion()<c2.getPoints()*c2.getProportion()){
                 return 1;
-            }
+            }*/
             return 0;
         }
     }
     /**
      * 由cardID获取卡片
-     * @param CardID
-     * @return
+     * @param CardID 卡ID
+     * @return 卡信息
      */
     public MSCard getMSCardInfo(String CardID){
-        return msCardMapper.selectCard(CardID).toMSCard();
+        return msCardMapper.selectCard(CardID);
     }
 
-    /**
-     * 获取该商户下的卡类型
-     * @param merchantID
-     * @return
-     */
-    public List<MSCardType> getTypes(String merchantID){
-        List<MSCardType> types = merchantMapper.selectTypes(merchantID);
-        return types;
-    }
 
     /**
      * 添加会员卡
      * @param msCard
      * @return
      */
-    public boolean addMSCard(MSCardDAO msCard){
+    public boolean addMSCard(MSCard msCard){
         // TODO:请求相关商家接口，做验证
-        boolean isNoBlank = MSCardDAO.checkAttribute(msCard);
+        boolean isNoBlank = MSCard.checkAttribute(msCard);
         if(!isNoBlank)
             return false;
         int flag = msCardMapper.insert(msCard);

@@ -6,4 +6,7 @@ import org.springframework.stereotype.Service;
 public class PayService {
 
 
+    public void calc(String userId,String merchantId,float totlePrice){
+
+    }
 }

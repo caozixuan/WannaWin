@@ -7,7 +7,6 @@
 
     <typeAliases>
         <package name="citi.vo"/>
-        <package name="citi.dao"/>
     </typeAliases>
     <!-- 配置环境，制定数据库连接信息 -->
     <environments default="development">
@@ -23,6 +22,6 @@
     </environments>
 
     <mappers>
-        <package name="citi.mybatismapper"/>
+        <package name="citi.mapper"/>
     </mappers>
 </configuration>
