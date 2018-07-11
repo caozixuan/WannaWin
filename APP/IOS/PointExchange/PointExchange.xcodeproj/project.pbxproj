@@ -25,6 +25,7 @@
 		3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155B20EE0117000743C0 /* SettingViewController.swift */; };
 		3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155F20EE0185000743C0 /* LoginViewController.swift */; };
 		3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C156120EE01AB000743C0 /* SignUpViewController.swift */; };
+		3E4D999F20F5F95B0083A62C /* ExchangeToGeneralPointVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D999E20F5F95B0083A62C /* ExchangeToGeneralPointVC.swift */; };
 		3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */; };
 		3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B720EDAEDE00915561 /* Assets.xcassets */; };
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
@@ -75,6 +76,7 @@
 		3E4C155B20EE0117000743C0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3E4C155F20EE0185000743C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E4C156120EE01AB000743C0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3E4D999E20F5F95B0083A62C /* ExchangeToGeneralPointVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeToGeneralPointVC.swift; sourceTree = "<group>"; };
 		3E8AB4AD20EDAEDC00915561 /* PointExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PointExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E8AB4B720EDAEDE00915561 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,8 +159,8 @@
 		3E46B77920F254E800843193 /* ExchangeTab */ = {
 			isa = PBXGroup;
 			children = (
-				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
 				3E4C155720EE0087000743C0 /* QRScanViewController.swift */,
+				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
 				3E46B77420F22C8900843193 /* ExchangeSelectDetailViewController.swift */,
 				3E46B77620F238AD00843193 /* FinishExchangeViewController.swift */,
 			);
@@ -170,9 +172,10 @@
 			children = (
 				3E4C155320EDFF5A000743C0 /* MainViewController.swift */,
 				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
-				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
+				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
 				B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */,
+				3E4D999E20F5F95B0083A62C /* ExchangeToGeneralPointVC.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */,
 				B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */,
 				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,
+				3E4D999F20F5F95B0083A62C /* ExchangeToGeneralPointVC.swift in Sources */,
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,

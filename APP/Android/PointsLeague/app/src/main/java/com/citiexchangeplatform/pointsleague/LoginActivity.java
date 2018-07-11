@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.study.xuan.xvolleyutil.base.XVolley;
+import com.study.xuan.xvolleyutil.callback.CallBack;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -57,7 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                     strPassword = editTextPassword.getText().toString();
 
                     dialog = ProgressDialog.show(LoginActivity.this, "", "登录中...");
-                    new Thread(new tryLogin()).start();
+                    //new Thread(new tryLogin()).start();
+                    tryLogin();
                 }
             }
         });
@@ -90,6 +97,45 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.setTitle(msg).setPositiveButton("OK", null).show();
     }
 
+
+    private void tryLogin(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/login")
+                .addParam("phoneNum", strAccount)
+                .addParam("password", strPassword)
+                .build()
+                .execute(LoginActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            if(response.length() > 2){
+                                JSONObject jsonObject = new JSONObject(response);
+
+                                String accountPhoneNum = jsonObject.getString("phoneNum");
+                                String userID = jsonObject.getString("userID");
+                                int generalPoint = jsonObject.getInt("generalPoints");
+                                int availablePoints = jsonObject.getInt("availablePoints");
+
+                                LogStateInfo.getInstance(LoginActivity.this).setAccount(accountPhoneNum)
+                                        .setUserID(userID)
+                                        .setGeneralPoint(generalPoint)
+                                        .setAvailablePoints(availablePoints);
+
+                                dialog.dismiss();
+                                LogStateInfo.getInstance(LoginActivity.this).login();
+                                finish();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
 
     class tryLogin implements Runnable {
 
@@ -154,5 +200,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
 }

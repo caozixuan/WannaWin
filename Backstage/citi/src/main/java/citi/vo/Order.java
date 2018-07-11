@@ -5,6 +5,7 @@ package citi.vo;
  * 创建订单实体类
  */
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class Order {
     private String userId;
     private String state;   //2018-07-10 从 OrderState 改为 String - 任思远
     private String merchantId;
-    private String time;
+    private Timestamp time;
 
     public enum OrderState {
         SUCCESS, FAIL, TOBEFINISHED;
@@ -44,7 +45,7 @@ public class Order {
 
     }
 
-    public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, String time) {
+    public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
@@ -95,7 +96,7 @@ public class Order {
         return merchantId;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 }

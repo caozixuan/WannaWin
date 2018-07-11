@@ -8,10 +8,14 @@
 
 import UIKit
 
-class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 
 	@IBOutlet weak var tableView: UITableView!
-	let maxPoints:Int = 2000
+	//let maxPoints:Int = 2000
+	
+	//var dataSource:[Card]? = User.getUser().card
+	var dataSource:[Any]?
+	
 	
 	@IBOutlet weak var shouldSelectPointsLabel: UILabel!
 	@IBOutlet weak var selectedPointsLabel: UILabel!
@@ -22,6 +26,13 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		
+		// test data
+		let user = User.getUser()
+		user.generalPoints = 1000
+		let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
+		let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
+		let card3 = Card(merchant: Merchant(name: "耐克"), point: 300, proportion: 0.4)
+		dataSource = [user.generalPoints as Any,card1,card2,card3]
 		
     }
 
@@ -33,7 +44,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return (dataSource?.count)!
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,27 +52,55 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		let cell:UITableViewCell!
 		// TODO: - 测试使用，后面再修改
 		
-		if indexPath.row == 0 || indexPath.row == 1 {
+		if indexPath.row != 0 {
 			cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
 			if let cell1 = cell as? ExchangeItemCell {
 				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
+				cell1.delegate = self
+				cell1.editSourcePoints?.tag = indexPath.row
+				if let card = dataSource?[indexPath.row] as? Card{
+					cell1.storeName.text = card.merchant?.name
+					cell1.sourcePoints.text = String(card.point)
+					cell1.editSourcePoints.placeholder = String(card.point)
+					cell1.targetPoints.text = String(card.point * (card.proportion)!)
+					cell1.proportion = card.proportion
+				}
 			}
+			
+			
 		}
 		else {
 			cell = tableView.dequeueReusableCell(withIdentifier: "bank to store", for: indexPath)
 			if let cell1 = cell as? ExchangeItemCell {
 				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
+				cell1.delegate = self
+				cell1.generalPoints?.tag = indexPath.row
+				if let generalPoints = dataSource?[indexPath.row] as? Double{
+					cell1.generalPoints.text = String(generalPoints)
+					cell1.editGeneralPoints.placeholder = String(generalPoints)
+				}
 			}
 		}
-
-        // Configure the cell...
-
+		
+		
         return cell
     }
 	
 	// MARK: - TextField delegate
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool{
-		let number = Int(textField.text!)
+		let number = Double(textField.text!)
+		var maxPoints:Double!
+		if textField.tag == 0 {
+			if let generalPoints = self.dataSource?[textField.tag] as? Double {
+				maxPoints = generalPoints
+			}
+		}
+		else {
+			if let card = self.dataSource?[textField.tag] as? Card {
+				maxPoints = card.point
+			}
+		}
+		
 		if number != nil && number! <= maxPoints {
 			return true
 		}
@@ -71,6 +110,21 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			return false
 		}
 	}
+	
+	// MARK: - ExchangeItemCell delegate
+	/// 获得输入框值并统计积分总数
+	func contentDidChanged(text: String, row: Int) {
+		if row == 0 {
+			if let card = dataSource?[row] as? Card {
+				
+			}
+		}
+		else {
+			
+		}
+	}
+	
+	
 
     /*
     // Override to support conditional editing of the table view.
@@ -109,16 +163,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 
 	
     // MARK: - Navigation
-//	
+	// FIXME: - 后期发请求，加判断条件
 //	@IBAction func pressVerifyBtn(_ sender: Any) {
 //		
-//		if self.restorationIdentifier == "ExchangeSelectViewController" {
-//			self.navigationController?.popViewController(animated: false)
-//		}
-//		else if self.restorationIdentifier == "ExchangeSelectDetailViewController"  {
-//			self.navigationController?.popViewController(animated: false)
-//			self.navigationController?.popViewController(animated: false)
-//		}
+//
 //		let storyBoard = UIStoryboard(name:"Exchange", bundle:nil)
 //		let view = storyBoard.instantiateViewController(withIdentifier: "FinishExchangeViewController")
 //		self.navigationController?.pushViewController(view, animated: true)

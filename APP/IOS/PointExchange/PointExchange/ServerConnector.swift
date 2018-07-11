@@ -60,8 +60,8 @@ class ServerConnector: NSObject {
                 let data = JSON(try? response.mapJSON())
                 let isLogin = data.count
                 if isLogin != 0 {
-                    User.getUser().generalPoints = data["generalPoints"].int
-                    User.getUser().availablePoints = data["availablePoints"].int
+                    User.getUser().generalPoints = data["generalPoints"].double
+                    User.getUser().availablePoints = data["availablePoints"].double
                     User.getUser().id = data["userID"].string
                     print(data["userID"].string)
                     callback(true)
@@ -202,7 +202,7 @@ class ServerConnector: NSObject {
                         card.id = data["cardID"].string
                         card.userID = data["userID"].string
                         card.number = data["cardNo"].string
-                        card.point = data["points"].int!
+                        card.point = data["points"].double!
                         cards.append(card)
                     }
                     callback(true,cards)

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ExchangeItemCellDelegate {
+	func contentDidChanged(text:String,row:Int)
+}
+
+
 class ExchangeItemCell: UITableViewCell{
 
 	// store to bank cell
@@ -23,7 +28,12 @@ class ExchangeItemCell: UITableViewCell{
 	@IBOutlet weak var editBtn2: UIButton!
 	@IBOutlet weak var generalPoints: UILabel!
 	@IBOutlet weak var editGeneralPoints: UITextField!
-
+	
+	// 换算和总计相关
+	var proportion:Double?
+	
+	// 代理用来获得textfield更新的值
+	var delegate:ExchangeItemCellDelegate?
 	
 	override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,8 +41,8 @@ class ExchangeItemCell: UITableViewCell{
 		if self.reuseIdentifier == "store to bank" {
 			editSourcePoints.isHidden = true
 			sourcePoints.isHidden = false
-			checkbox1.addTarget(self, action: #selector(checkboxClick), for: UIControlEvents.touchUpInside)
-			editBtn1.addTarget(self, action: #selector(editBtnClick), for: UIControlEvents.touchUpInside)
+			checkbox1.addTarget(self, action: #selector(checkboxClick), for: .touchUpInside)
+			editBtn1.addTarget(self, action: #selector(editBtnClick), for: .touchUpInside)
 			editBtn1.isHidden = true
 		}
 		else { // "bank to store"
@@ -43,8 +53,10 @@ class ExchangeItemCell: UITableViewCell{
 			editBtn2.isHidden = true
 		}
 		
+		
     }
-	
+
+	/// 点击选中按钮的触发动作
 	@objc func checkboxClick(button:UIButton){
 		button.isSelected = !button.isSelected
 		
@@ -65,6 +77,7 @@ class ExchangeItemCell: UITableViewCell{
 		}
 	}
 	
+	/// 点击确认修改按钮的触发动作
 	@objc func editBtnClick(button:UIButton){
 		button.isSelected = !button.isSelected
 		
@@ -84,8 +97,25 @@ class ExchangeItemCell: UITableViewCell{
 			
 			generalPoints?.text = editGeneralPoints?.text
 			sourcePoints?.text = editSourcePoints?.text
+			
+			// TODO: - 积分换算
+			if sourcePoints?.text != nil {
+				targetPoints?.text = String(Double(sourcePoints.text!)! * proportion!)
+			}
+			
+			// 触发代理获得textfield数据，统计积分总数
+			if let text = generalPoints?.text{
+				self.delegate?.contentDidChanged(text: text, row: generalPoints.tag)
+			}
+			
+			if let text = sourcePoints?.text {
+				self.delegate?.contentDidChanged(text: text, row: generalPoints.tag)
+			}
+			
+			
 		}
 	}
+	
 	
 	/// 让viewController成为textField的delegate来控制键盘收回
 	@objc func setTextFieldDelegateWith(_ viewController:UIViewController){
