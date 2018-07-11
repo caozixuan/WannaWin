@@ -6,57 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <LinearLayout
-        android:id="@+id/search_bar_find"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_find"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+        <include layout="@layout/searchbar_find"></include>
+    </android.support.v7.widget.Toolbar>
 
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <!--android:background="@drawable/search_edittext_shape"-->
-            <EditText
-                android:id="@+id/search_et_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/ic_search_black_24dp"
-                android:hint="请输入搜索内容"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/search_iv_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_clear_black_24dp" />
-        </FrameLayout>
-
-        <Button
-            android:id="@+id/search_btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:backgroundTint="#a8a8a8"
-            android:text="搜索"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
-    </LinearLayout>
 
     <!--筛选栏-->
     <LinearLayout
