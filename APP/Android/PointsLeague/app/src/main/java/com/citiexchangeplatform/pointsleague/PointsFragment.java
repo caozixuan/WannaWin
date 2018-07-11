@@ -179,7 +179,7 @@ public class PointsFragment extends Fragment {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                out.writeBytes("userID=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=3");
+                out.writeBytes("userId=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=20");
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
 
@@ -192,9 +192,8 @@ public class PointsFragment extends Fragment {
                 for(int i = 0; i < jsonArray.length(); i++){
                     JSONObject jobj = jsonArray.getJSONObject(i);
                     String cardID = jobj.getString("cardID");
-                    String cardNo = jobj.getString("cardNo");
+                    String cardNo = jobj.getString("card_No");
                     int points = jobj.getInt("points");
-                    JSONObject cardType = jobj.getJSONObject("CardType");
                     System.out.println(cardID+ " "+cardNo+" "+points);
                 }
             } catch (Exception e) {

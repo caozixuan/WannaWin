@@ -1,11 +1,13 @@
 package citi.vo;
 
+import java.sql.Timestamp;
+
 public class RefreshToken {
     private String userID;
     private String refreshToken;
-    private String time;
+    private Timestamp time;
 
-    public RefreshToken(String userID, String refreshToken, String time) {
+    public RefreshToken(String userID, String refreshToken, Timestamp time) {
         this.userID = userID;
         this.refreshToken = refreshToken;
         this.time = time;
@@ -27,11 +29,11 @@ public class RefreshToken {
         this.refreshToken = refreshToken;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }

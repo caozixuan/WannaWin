@@ -13,5 +13,14 @@ class Card: Codable {
     var number:String?
     var merchant:Merchant?
     var type:String?
-    var point:Int = 0
+    var point:Double = 0
+	var proportion:Double?
+	
+	//test
+	convenience init(merchant:Merchant,point:Double,proportion:Double){
+		self.init()
+		self.merchant = merchant
+		self.point = point
+		self.proportion = proportion
+	}
 }

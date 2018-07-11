@@ -15,9 +15,9 @@ public interface CouponMapper {
             "WHERE userID = #{userID} AND state = 'UNUSED'";
     final String getCouponsBy_UserID_AND_ItemID = "SELECT * FROM user_coupon " +
             "WHERE userID = #{userID} AND ItemID = #{ItemID} AND state = 'UNUSED'";
-    final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state) " +
-            "VALUES(NULL, #{userID}, #{ItemID}, #{state})";
-    final String deleteOneUserCouponBy_UserID_AND_ItemID = "UPDATE user_coupon SET state = 'USED' " +
+    final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state, getTime, useTime) " +
+            "VALUES(NULL, #{userID}, #{ItemID}, #{state}, now(), null)";
+    final String deleteOneUserCouponBy_UserID_AND_ItemID = "UPDATE user_coupon SET state = 'USED', useTime = now() " +
             "WHERE userID = #{userID} AND ItemID = #{itemID} AND state = 'UNUSED'" +
             "ORDER BY userID ASC LIMIT 1";
 

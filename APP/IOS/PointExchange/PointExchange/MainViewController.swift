@@ -11,7 +11,9 @@ import UIKit
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	
-	@IBOutlet weak var cardImage1: UIImageView!
+    @IBOutlet weak var availablePointsLabel: UILabel!
+    @IBOutlet weak var generalPointsLabel: UILabel!
+    @IBOutlet weak var cardImage1: UIImageView!
 	
 	@IBOutlet weak var cardImage2: UIImageView!
 	
@@ -38,16 +40,31 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		cardImage2.addGestureRecognizer(cardTap2)
 		cardImage3.addGestureRecognizer(cardTap3)
         
-        
-		
     }
-	
+    override func viewWillAppear(_ animated: Bool) {
+        ServerConnector.getPointsInfo(callback: gotPointsInfo)
+    }
+	/// 获得积分信息后的回调函数
+    func gotPointsInfo(result:Bool){
+        if result {
+            availablePointsLabel.text = String(User.getUser().availablePoints!)
+            generalPointsLabel.text = String(User.getUser().generalPoints!)
+        }else{
+            availablePointsLabel.text = "---"
+            generalPointsLabel.text = "---"
+        }
+    }
     /// 获得商户信息后的回调函数
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
             MerchantList.list = merchants
+            var merchantName = [String]()
+            for m in merchants{
+                merchantName.append(m.name)
+            }
             let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-            let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController")
+            let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
+            view.merchantNames = merchantName
             self.navigationController!.pushViewController(view, animated: true)
         }
         else {
