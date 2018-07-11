@@ -13,8 +13,11 @@ import org.springframework.stereotype.Repository;
 public interface CitiMapper {
 
     final String getCardByID = "SELECT * FROM citicard WHERE userID = #{userID}";
-    final String insertCiti = "INSERT INTO citicard(citiCardID, citiCardNum, phoneNum, userID) " +
-            "VALUES(#{citiCardID}, #{citiCardNum}, #{phoneNum}, #{userID})";
+    final String insertCiti = "INSERT INTO citicard(citiCardID, citiCardNum, phoneNum, userID, miniExpense) " +
+            "VALUES(#{citiCardID}, #{citiCardNum}, #{phoneNum}, #{userID}, #{miniExpense})";
+    final String updateCiti = "UPDATE citicard " +
+            "SET citiCardID = #{citiCardID}, citiCardNum = #{citiCardNum}, phoneNum = #{phoneNum}, miniExpense = #{miniExpense}" +
+            "WHERE userID = #{userID}";
     final String deleteCiti = "DELETE FROM citicard WHERE citiCardID = #{citiCardID}";
 
     @Select(getCardByID)
@@ -22,6 +25,9 @@ public interface CitiMapper {
 
     @Insert(insertCiti)
     int insert(CitiCard citiCard);
+
+    @Update(updateCiti)
+    int update(CitiCard citiCard);
 
     @Delete(deleteCiti)
     int delete(String citiNum);
