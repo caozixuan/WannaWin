@@ -47,7 +47,7 @@ xxxx/merchant/{MerchantID}
 {"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"}
 ```
 #会员卡相关
-获取指定用户积分最多的n张卡
+获取指定用户       积分最多的n张卡
 ```
 xxxx/mscard/infos
 userID,n

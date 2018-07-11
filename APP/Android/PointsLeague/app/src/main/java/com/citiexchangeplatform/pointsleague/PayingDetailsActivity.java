@@ -102,6 +102,7 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("checkbox_detail_map", myMap);
                 intent.putExtras(bundle);
+                setResult(1,intent);
 
                 finish();
             }

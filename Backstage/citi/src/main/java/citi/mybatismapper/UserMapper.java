@@ -13,7 +13,7 @@ public interface UserMapper {
     final String getInfoByUserID = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE userID = #{userID}";
     final String loginVerify = "SELECT userID, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
     final String insertUser = "INSERT INTO user (userID, password, citiCardID, phoneNum, generalPoints, availablePoints, rewardLinkCode) " +
-            "VALUES (#{userID}, #{password}, #{citiCardID}, #{phoneNum}, #{generalPoints}, #{availablePoints})";
+            "VALUES (#{userID}, #{password}, #{citiCardID}, #{phoneNum}, #{generalPoints}, #{availablePoints}, #{rewardLinkCode})";
     final String bindCitiCard = "UPDATE user SET CitiCardID = #{CitiCardID} WHERE userID = #{userID}";
     final String addLinkCode = "UPDATE user SET rewardLinkCode = #{rewardLinkCode} WHERE userID = #{userID}";
 

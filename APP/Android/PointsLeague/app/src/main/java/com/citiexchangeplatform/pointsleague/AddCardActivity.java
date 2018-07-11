@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class AddCardActivity extends AppCompatActivity {
     List<String> names = new ArrayList<String>();
     List<String> descriptions = new ArrayList<String>();
     List<String> logos = new ArrayList<String>();
+    List<Bitmap> bitmaps = new ArrayList<Bitmap>();
 
     ProgressDialog dialog;
     AddCardAdapter addCardAdapter;
@@ -46,13 +50,24 @@ public class AddCardActivity extends AppCompatActivity {
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
         //设置Adapter
-        addCardAdapter = new AddCardAdapter(names, descriptions, logos);
+        addCardAdapter = new AddCardAdapter(names, descriptions, logos, bitmaps);
         recyclerView.setAdapter(addCardAdapter);
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         dialog = ProgressDialog.show(AddCardActivity.this, "", "正在获取商家列表...");
         new Thread(new getInfos()).start();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_add_card);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("商家卡列表");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
@@ -69,7 +84,7 @@ public class AddCardActivity extends AppCompatActivity {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                out.writeBytes("start=0&n=100");
+                out.writeBytes("start=0&n=50");
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
 

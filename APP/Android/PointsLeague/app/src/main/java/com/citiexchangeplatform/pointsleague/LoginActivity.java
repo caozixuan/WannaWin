@@ -72,11 +72,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_login);
-        setSupportActionBar(mToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_login);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -117,11 +117,13 @@ public class LoginActivity extends AppCompatActivity {
                     logSuccess = true;
                     JSONObject jsonObject = new JSONObject(json);
 
-                    String accountPhoneNum=jsonObject.getString("phoneNum");
+                    String accountPhoneNum = jsonObject.getString("phoneNum");
+                    String userID = jsonObject.getString("userID");
                     int generalPoint = jsonObject.getInt("generalPoints");
                     int availablePoints = jsonObject.getInt("availablePoints");
 
                     LogStateInfo.getInstance(LoginActivity.this).setAccount(accountPhoneNum)
+                            .setUserID(userID)
                             .setGeneralPoint(generalPoint)
                             .setAvailablePoints(availablePoints);
                 }

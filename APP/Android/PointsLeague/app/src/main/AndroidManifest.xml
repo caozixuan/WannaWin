@@ -35,7 +35,6 @@
         <activity
             android:name=".PaymentFinishActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".PayCodeActivity" />
         <activity
             android:name=".PayCodeActivity"
             android:parentActivityName=".MainActivity" />
@@ -55,7 +54,6 @@
         <activity android:name=".PayingDetailsActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AddCardActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".HttpActivity">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->

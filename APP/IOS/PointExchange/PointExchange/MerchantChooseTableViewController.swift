@@ -11,6 +11,10 @@ import UIKit
 class MerchantChooseTableViewController: UITableViewController {
     
     var marchantCount = MerchantList.list.count
+    
+    var merchantNames = [String]()
+    
+    var indexController:UILocalizedIndexedCollation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,28 @@ class MerchantChooseTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    func createIndex(){
+        indexController = UILocalizedIndexedCollation.current()
+        let sectionTitileCount = indexController?.sectionTitles.count
+        // TODO: 侧边栏索引
+        var sectionDataArray = [[String]]()
+        
+        for _ in 0..<sectionTitileCount! {
+            let array = [String]()
+            sectionDataArray.append(array)
+        }
+        // TODO: 中文索引
+        // 数据分类
+//        for name in merchantNames {
+//            let sectionNum = indexController?.section(for: name, collationStringSelector: #selector(getter:name))
+//
+//
+//
+//        }
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,7 +68,13 @@ class MerchantChooseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "merchant")
-        cell?.textLabel?.text = MerchantList.list[indexPath.row].name
+        
+        let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
+        if let d = data {
+             cell?.imageView?.image = UIImage(data: d)
+        }
+        
+        (cell?.viewWithTag(1) as! UILabel).text = MerchantList.list[indexPath.row].name
         return cell!
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -2,7 +2,11 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -41,6 +48,7 @@ public class PayingActivity extends AppCompatActivity {
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
     TextView Choose_Points;
+    private Bitmap bitmapLogo;
 
 
     KeyListener storedKeylistener;
@@ -70,6 +78,14 @@ public class PayingActivity extends AppCompatActivity {
 
         ImageView_Business = (ImageView)findViewById(R.id.imageView_business);
         Choose_Points = (TextView) findViewById(R.id.textview_points_choose);
+
+
+        //获得map
+        if(getIntent().getExtras()!=null){
+            Bundle bundle = getIntent().getExtras();
+            SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map_restart");
+            map = serializableHashMap.getMap();
+        }
 
 
         //初始化数据
@@ -135,10 +151,19 @@ public class PayingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==1){
             //获得map
-            Bundle bundle = getIntent().getExtras();
+
+            Bundle bundle = data.getExtras();
             SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_detail_map");
             map = serializableHashMap.getMap();
-
+            finish();
+            Intent intent = new Intent(PayingActivity.this, PayingActivity.class);
+            //map = mAdapter.getMap();
+            SerializableHashMap myMap=new SerializableHashMap();
+            myMap.setMap(map);//将hashmap数据添加到封装的myMap中
+            Bundle bundle_2 = new Bundle();
+            bundle_2.putSerializable("checkbox_map_restart", myMap);
+            intent.putExtras(bundle_2);
+            startActivity(intent);
         }
     }
 
@@ -188,9 +213,17 @@ public class PayingActivity extends AppCompatActivity {
     protected void initData()
     {
         //设置需要的积分数
+        sendRequestWithHttpURLConnection("http://193.112.44.141:80/citi/merchant/getInfos",1);
+        String name = MerchantInfo.getInstance(PayingActivity.this).getName();
+        String logoURL = MerchantInfo.getInstance(PayingActivity.this).getLogoURL();
         Text_NeedPoints.setText("120");
 
-        ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
+
+
+
+        //ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
+        new Thread(new getLogo(logoURL)).start();
+
 
         //设置列表项中的文字（用户拥有的积分数）
         data_posses_point = new ArrayList<String>();
@@ -199,6 +232,8 @@ public class PayingActivity extends AppCompatActivity {
             data_posses_point.add("" + i);
         }
 
+
+        //sendRequestWithHttpURLConnection("http://193.112.44.141:80/citi/merchant/getInfos",data_posses_point.size());
         //设置选择积分栏目中商家logo
         business_image = new ArrayList<Integer>();
 
@@ -208,8 +243,60 @@ public class PayingActivity extends AppCompatActivity {
         }
     }
 
+    public static Bitmap getBitmap(String path) throws IOException{
 
-    private void sendRequestWithHttpURLConnection(){
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setConnectTimeout(5000);
+        conn.setRequestMethod("GET");
+        if(conn.getResponseCode() == 200){
+            InputStream inputStream = conn.getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }
+        return null;
+    }
+
+
+    /*获得商家logo*/
+    class getLogo implements Runnable{
+        private String logoURL;
+
+        public getLogo(String logoURL) {
+            this.logoURL = logoURL;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                bitmapLogo = getBitmap(logoURL);
+
+                //TODO: 告诉主线程一个消息:帮我更改界面。内容:bitmap
+                Message msg = new Message();
+                msg.what = 1;
+                msg.obj = bitmapLogo;
+                handler.sendMessage(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private Handler handler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+            if(msg.what ==1){
+                Bitmap bitmap = (Bitmap) msg.obj;
+                ImageView_Business.setImageBitmap(bitmapLogo);
+            }else if(msg.what == 0){
+                Toast.makeText(PayingActivity.this, "显示图片错误", Toast.LENGTH_SHORT).show();
+            }
+        };
+    };
+
+    /*发送网络请求*/
+    private void sendRequestWithHttpURLConnection(final String  url_string, final int n){
         //开启线程来发起网络请求
         new Thread(new Runnable() {
             @Override
@@ -217,27 +304,12 @@ public class PayingActivity extends AppCompatActivity {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-                    //获取验证码
-                    //URL url = new URL("http://193.112.44.141:8080/citi/login/getVCode");
-                    //验证 验证码
 
-                    //URL url = new URL("http://193.112.44.141:80/citi/login/login");
-                    //URL url = new URL("http://193.112.44.141:80/citi/mscard/infos");
-                    URL url = new URL("http://193.112.44.141:80/citi/merchant/getInfos");
-
-                    //URL url = new URL("http://193.112.44.141:80/citi/mscard/cardtype");
+                    URL url = new URL(url_string);
                     connection = (HttpURLConnection) url.openConnection();
-                    /*GET方法*/
-                    //connection.setRequestMethod("GET");
-
                     connection.setRequestMethod("POST");
                     DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                    //out.writeBytes("userID=1ac9be07-f446-458c-b325-df2c7ecd113f&n=1");
-                    out.writeBytes("start=0&n=2");
-                    //out.writeBytes("merchantID=00001");
-                    //out.writeBytes("phoneNum=12345678901&password=123456");
-                    //out.writeBytes("start=0&n=2");
-                    //out.writeBytes("phoneNum=17622833370&vcode=996428&password=987654");
+                    out.writeBytes("start="+ 0 + "&n=" + n);
 
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
@@ -252,19 +324,22 @@ public class PayingActivity extends AppCompatActivity {
 
                     System.out.println(response.toString());
                     /*json字符串最外层是方括号时：*/
-                    //JSONArray jsonArray = new JSONArray(response.toString());
-                    //for (int i = 0; i < jsonArray.length(); i++) {
-                    //    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    //    String mid= jsonObject.getString("MType");
-                    //    System.out.println(mid);
-                    //}
-                    /*json字符串最外层是大括号时：*/
-                    //JSONObject jsonObject = new JSONObject(response.toString());
-                    //String mid= jsonObject.getString("userID");
-                    //String mcourse=jsonObject.getString("phoneNum");
-                    //int generalPoint = jsonObject.getInt("generalPoints");
-                    //int availablePoints = jsonObject.getInt("availablePoints");
-                    //System.out.println(mid);
+                    JSONArray jsonArray = new JSONArray(response.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String name= jsonObject.getString("name");
+                        String merchantID= jsonObject.getString("merchantID");
+                        String logoURL= jsonObject.getString("logoURL");
+                        String description= jsonObject.getString("description");
+                        String address= jsonObject.getString("address");
+
+                        System.out.println(name);
+                        MerchantInfo.getInstance(PayingActivity.this).setMerchantID(merchantID)
+                                .setName(name)
+                                .setLogoURL(logoURL)
+                                .setDescription(description)
+                                .setAddress(address);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -285,6 +360,10 @@ public class PayingActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+    }
 }
 
