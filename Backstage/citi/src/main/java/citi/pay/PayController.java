@@ -16,7 +16,7 @@ public class PayController {
     private Gson gson;
 
     @RequestMapping("/pay")
-    public void pay(){
+    public void pay(String userId){
 
     }
 
