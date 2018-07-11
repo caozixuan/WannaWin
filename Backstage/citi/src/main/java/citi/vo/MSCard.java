@@ -7,11 +7,11 @@ import java.util.UUID;
  * TODO: 里面的很多地方需要再沟通
  */
 public class MSCard {
-    String cardID;
-    String userID;
-    String card_No;
-    int points;
-    String merchantId;
+    private String cardID;
+    private String userID;
+    private String card_No;
+    private int points;
+    private String merchantId;
 
     public MSCard() {
         cardID=UUID.randomUUID().toString().toLowerCase();
