@@ -43,4 +43,8 @@ public class MSCard {
         return points;
     }
 
+    public double getProportion(){
+        return CardType.getProportion();
+    }
+
 }

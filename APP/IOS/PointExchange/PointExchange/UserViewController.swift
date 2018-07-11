@@ -105,7 +105,7 @@ class UserViewController: UITableViewController {
                 
                 boundingCitiCardHeadLabel.text = {() -> String in
                     if let card = User.getUser().card{
-                        return "银行卡：" + card.number
+                        return "银行卡："
                     }
                     else{
                         return "您尚未绑定银行卡"

@@ -37,9 +37,25 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		cardImage1.addGestureRecognizer(cardTap1)
 		cardImage2.addGestureRecognizer(cardTap2)
 		cardImage3.addGestureRecognizer(cardTap3)
+        
+        // 获得商家信息
+        ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
+        
 		
     }
 	
+    /// 获得商户信息后的回调函数
+    func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
+        if result {
+            MerchantList.list = merchants
+        }
+        else {
+            print("商户信息获取失败")
+        }
+    }
+    
+    
+    
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取内部scrollView尺寸
 	func scrollerViewSize() -> CGSize {
@@ -111,12 +127,14 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	@IBAction func addCard(_ sender: AnyObject){
-		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+		
 		if User.getUser().username != nil {
-			let view = storyBoard.instantiateViewController(withIdentifier: "AddCardTableViewController")
+            let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+			let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
 		else{
+            let storyBoard = UIStoryboard(name:"User", bundle:nil)
 			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}

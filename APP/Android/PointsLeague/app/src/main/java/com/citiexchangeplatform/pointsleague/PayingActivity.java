@@ -20,6 +20,13 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +77,7 @@ public class PayingActivity extends AppCompatActivity {
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
+        mAdapter = new PayingAdapter(data_posses_point,business_image,map,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
@@ -113,7 +120,26 @@ public class PayingActivity extends AppCompatActivity {
     public void click_expand(View view){
 
         Intent intent = new Intent(this, PayingDetailsActivity.class);
-        startActivity(intent);
+        map = mAdapter.getMap();
+        SerializableHashMap myMap=new SerializableHashMap();
+        myMap.setMap(map);//将hashmap数据添加到封装的myMap中
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("checkbox_map", myMap);
+        intent.putExtras(bundle);
+
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==1){
+            //获得map
+            Bundle bundle = getIntent().getExtras();
+            SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_detail_map");
+            map = serializableHashMap.getMap();
+
+        }
     }
 
     /*确认抵扣按钮点击事件*/
@@ -183,6 +209,82 @@ public class PayingActivity extends AppCompatActivity {
     }
 
 
+    private void sendRequestWithHttpURLConnection(){
+        //开启线程来发起网络请求
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                try {
+                    //获取验证码
+                    //URL url = new URL("http://193.112.44.141:8080/citi/login/getVCode");
+                    //验证 验证码
 
+                    //URL url = new URL("http://193.112.44.141:80/citi/login/login");
+                    //URL url = new URL("http://193.112.44.141:80/citi/mscard/infos");
+                    URL url = new URL("http://193.112.44.141:80/citi/merchant/getInfos");
+
+                    //URL url = new URL("http://193.112.44.141:80/citi/mscard/cardtype");
+                    connection = (HttpURLConnection) url.openConnection();
+                    /*GET方法*/
+                    //connection.setRequestMethod("GET");
+
+                    connection.setRequestMethod("POST");
+                    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+                    //out.writeBytes("userID=1ac9be07-f446-458c-b325-df2c7ecd113f&n=1");
+                    out.writeBytes("start=0&n=2");
+                    //out.writeBytes("merchantID=00001");
+                    //out.writeBytes("phoneNum=12345678901&password=123456");
+                    //out.writeBytes("start=0&n=2");
+                    //out.writeBytes("phoneNum=17622833370&vcode=996428&password=987654");
+
+                    connection.setConnectTimeout(8000);
+                    connection.setReadTimeout(8000);
+                    InputStream in = connection.getInputStream();
+                    //下面对获取到的输入流进行读取
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null){
+                        response.append(line);
+                    }
+
+                    System.out.println(response.toString());
+                    /*json字符串最外层是方括号时：*/
+                    //JSONArray jsonArray = new JSONArray(response.toString());
+                    //for (int i = 0; i < jsonArray.length(); i++) {
+                    //    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    //    String mid= jsonObject.getString("MType");
+                    //    System.out.println(mid);
+                    //}
+                    /*json字符串最外层是大括号时：*/
+                    //JSONObject jsonObject = new JSONObject(response.toString());
+                    //String mid= jsonObject.getString("userID");
+                    //String mcourse=jsonObject.getString("phoneNum");
+                    //int generalPoint = jsonObject.getInt("generalPoints");
+                    //int availablePoints = jsonObject.getInt("availablePoints");
+                    //System.out.println(mid);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if (reader != null){
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (connection != null){
+                        connection.disconnect();
+                    }
+                }
+            }
+        }).start();
     }
+
+
+
+}
 

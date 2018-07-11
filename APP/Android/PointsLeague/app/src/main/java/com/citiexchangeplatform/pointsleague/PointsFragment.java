@@ -99,6 +99,14 @@ public class PointsFragment extends Fragment {
         if(isLogin){
             View content = LayoutInflater.from(context).inflate(R.layout.content_cards_points, null);
             accountInfoLayout.addView(content);
+            Button buttonAddCard = (Button) content.findViewById(R.id.button_add_card_main);
+            buttonAddCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToAddCard = new Intent(getActivity(), AddCardActivity.class);
+                    startActivity(intentToAddCard);
+                }
+            });
 
         }else {
 

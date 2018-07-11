@@ -26,7 +26,7 @@ enum ServerService {
     
     // 商户相关
     /// 获取从start开始的n条商户信息
-    case getMerchantsInfos(start:String,n:Int)
+    case getMerchantsInfos(start:Int,n:Int)
     case getMerchantInfoByID(id:String)
     
     // 会员卡相关
@@ -62,7 +62,7 @@ extension ServerService:TargetType {
         case .unbind:
             return "/citi/unbind"
         case .getMostPointCards:
-            return "/mscard/infos userID"
+            return "/mscard/infos"
         case .getCardTypeByUserID:
             return "/mscard/cardtype"
         case .addCard:
@@ -103,7 +103,7 @@ extension ServerService:TargetType {
             
         case .getMerchantsInfos(let start, let n):
             var params:[String:String] = [:]
-            params["start"] = start
+            params["start"] = String(start)
             params["n"] = String(n)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
@@ -113,7 +113,7 @@ extension ServerService:TargetType {
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getMostPointCards(let userID, let n):
             var params:[String:String] = [:]
-            params["userID"] = userID
+            params["userId"] = userID
             params["n"] = String(n)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .addCard(let cardID, let UserID, let cardNo, let msCardType):

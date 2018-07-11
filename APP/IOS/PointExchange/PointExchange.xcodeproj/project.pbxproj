@@ -35,6 +35,7 @@
 		3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */; };
 		3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
+		B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
 		B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */; };
 		B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */; };
@@ -48,7 +49,7 @@
 		B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */; };
 		B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */; };
 		B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */; };
-		B6A6EC6020F25B810079FFA4 /* Mechant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Mechant.swift */; };
+		B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Merchant.swift */; };
 		B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */; };
 		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
 		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
@@ -87,6 +88,7 @@
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantChooseTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +103,7 @@
 		B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCodeManager.swift; sourceTree = "<group>"; };
 		B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnector.swift; sourceTree = "<group>"; };
 		B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
-		B6A6EC5F20F25B810079FFA4 /* Mechant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechant.swift; sourceTree = "<group>"; };
+		B6A6EC5F20F25B810079FFA4 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
 		B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantList.swift; sourceTree = "<group>"; };
 		C1ED982020EE1C7900A2F0C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1ED982220EE1E3900A2F0C5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
 				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
+				B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -229,7 +232,7 @@
 			children = (
 				C1ED982020EE1C7900A2F0C5 /* User.swift */,
 				C1ED982220EE1E3900A2F0C5 /* Card.swift */,
-				B6A6EC5F20F25B810079FFA4 /* Mechant.swift */,
+				B6A6EC5F20F25B810079FFA4 /* Merchant.swift */,
 				B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */,
 			);
 			name = Model;
@@ -241,10 +244,26 @@
 				3E46B77A20F254FF00843193 /* HomePageTab */,
 				3E46B77820F254C900843193 /* UserTab */,
 				3E46B77920F254E800843193 /* ExchangeTab */,
-				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
-				3E4C155920EE00E7000743C0 /* StoreViewController.swift */,
+				3E8B15E320F4491E0034896B /* DiscoverTab */,
+				3E8B15E420F449320034896B /* StoreTab */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		3E8B15E320F4491E0034896B /* DiscoverTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
+			);
+			name = DiscoverTab;
+			sourceTree = "<group>";
+		};
+		3E8B15E420F449320034896B /* StoreTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155920EE00E7000743C0 /* StoreViewController.swift */,
+			);
+			name = StoreTab;
 			sourceTree = "<group>";
 		};
 		3EA0334920EDCDF700D05A03 /* Extensions */ = {
@@ -440,7 +459,7 @@
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
-				B6A6EC6020F25B810079FFA4 /* Mechant.swift in Sources */,
+				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
 				3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */,
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
 				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,
@@ -467,6 +486,7 @@
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */,
+				B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
