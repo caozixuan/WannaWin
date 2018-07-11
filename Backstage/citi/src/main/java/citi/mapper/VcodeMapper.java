@@ -1,4 +1,4 @@
-package citi.mybatismapper;
+package citi.mapper;
 
 
 import citi.vo.VCode;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Repository
-public interface LoginMapper {
+public interface VcodeMapper {
 
     final String insertVCode = "INSERT INTO Vcode (phoneNum, VCode, Time) VALUES (#{phoneNum}, #{VCode}, #{Time})";
     final String getByPhoneNum = "SELECT VCode FROM Vcode WHERE phoneNum = #{phoneNum}";

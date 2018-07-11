@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * 接口设计：刘钟博
  * 代码填充：彭璇
+ *bug修复：刘钟博
  */
 @Controller
 @RequestMapping("/merchant")
@@ -25,8 +26,8 @@ public class MerchantController {
 
     /**
      * 从start开始的n个商家，不足n即返回实际数量
-     * @param start
-     * @param n
+     * @param start 开始数
+     * @param n 请求长度
      * @return [{"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"},{}...]
      */
     @ResponseBody

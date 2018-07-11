@@ -1,4 +1,4 @@
-package citi.dao;
+package citi.vo;
 
 /*
  * 作者：曹子轩
@@ -8,7 +8,7 @@ package citi.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderDAO {
+public class Order {
     private String orderId;
     private double originalPrice;
     private double priceAfter;
@@ -44,7 +44,7 @@ public class OrderDAO {
 
     }
 
-    public OrderDAO(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, String time) {
+    public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, String time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;

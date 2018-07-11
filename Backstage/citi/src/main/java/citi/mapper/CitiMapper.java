@@ -1,4 +1,4 @@
-package citi.mybatismapper;
+package citi.mapper;
 
 import citi.vo.CitiCard;
 import org.apache.ibatis.annotations.*;

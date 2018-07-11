@@ -1,11 +1,10 @@
 package citi.merchant;
 
-import citi.mybatismapper.MerchantMapper;
+import citi.mapper.MerchantMapper;
 import citi.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

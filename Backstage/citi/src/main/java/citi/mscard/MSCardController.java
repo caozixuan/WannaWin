@@ -1,18 +1,13 @@
 package citi.mscard;
 
-import citi.dao.MSCardDAO;
 import citi.vo.MSCard;
-import citi.vo.MSCardType;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * 接口设计：刘钟博
@@ -45,18 +40,7 @@ public class MSCardController {
         return jsonStr;
     }
 
-    /**
-     * 一个商户可能有多张卡，返回该商户所有卡的类型
-     * @param merchantID
-     * @return [{"MerchantID":"xxxx","Mtype":"xxxx","cardType":"xxxx"},{},{}...]
-     */
-    @ResponseBody
-    @RequestMapping("/cardtype")
-    public String getCardType(String merchantID){
-        List<MSCardType> msCardTypes = msCardService.getTypes(merchantID);
-        String jsonStr = gson.toJson(msCardTypes);
-        return jsonStr;
-    }
+
 
     /**
      *@param msCard 会员卡
@@ -64,7 +48,7 @@ public class MSCardController {
      */
     @ResponseBody
     @RequestMapping("/addcard")
-    public String addMSCard(MSCardDAO msCard){
+    public String addMSCard(MSCard msCard){
         boolean flag = msCardService.addMSCard(msCard);
         return "{state: "+flag+"}";
     }
