@@ -26,9 +26,10 @@ public class MerchantController {
 
     /**
      * 从start开始的n个商家，不足n即返回实际数量
+     * @url /merchant/getInfos
      * @param start 开始数
      * @param n 请求长度
-     * @return [{"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"},{}...]
+     * @return [{"merchantID":"1","name":"1","description":"520d9479","address":"7ea18369","logoURL":"http://xx.png"}]
      */
     @ResponseBody
     @RequestMapping("/getInfos")
@@ -39,8 +40,9 @@ public class MerchantController {
 
     /**
      * 获取该ID的商家信息
-     * @param MerchantID
-     * @return {"merchantID":"xxxx","merchantName":"xxxx","description":"xxxx","logoURL":"xxxx"}
+     * @url /merchant/{MerchantID}
+     * @param MerchantID 商户ID
+     * @return {"merchantID":"00001","name":"apple","description":"to eat","address":"WHU","logoURL":"http://.png"}
      */
     @ResponseBody
     @RequestMapping("/{MerchantID}")

@@ -25,9 +25,10 @@ public class MSCardController {
 
     /**
      * 登陆成功时请求
+     * @url /mscard/infos
      * @param userId 用户id
      * @param n 请求积分最多的n张卡
-     * @return
+     * @return [{"cardID":"a7a8f255-f129-4b46-9de2-55f07c7ff65e","userID":"1ac9be07-f446-458c-b325-df2c7ecd113f","card_No":"888888","points":0}]
      */
     @ResponseBody
     @RequestMapping("/infos")
@@ -44,7 +45,7 @@ public class MSCardController {
 
     /**
      *@param msCard 会员卡
-     * @return 成功：{"isBinding":true}，失败：{"isBinding":false}
+     * @return 成功：{"state":true}，失败：{"state":false}
      */
     @ResponseBody
     @RequestMapping("/addcard")

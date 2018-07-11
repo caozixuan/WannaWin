@@ -18,11 +18,22 @@ public class MerchantSerivce {
     @Autowired
     private MerchantMapper merchantMapper;
 
+    /**
+     * 获取商家列表
+     * @param start 开始节点
+     * @param length 长度
+     * @return 商家列表
+     */
     public List<Merchant> getMerchants(int start,int length){
         List<Merchant> merchants = merchantMapper.select(start,length);
         return merchants;
     }
 
+    /**
+     * 通过id获取商家
+     * @param merchantID 商家ID
+     * @return 商家
+     */
     public Merchant getMerchant(String merchantID){
         return merchantMapper.selectByID(merchantID);
     }

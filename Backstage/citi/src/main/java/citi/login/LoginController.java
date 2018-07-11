@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 接口设计：刘钟博
  * 代码填充：彭璇
+ * bug修复：刘钟博
  */
 @RequestMapping("/login")
 @Controller
