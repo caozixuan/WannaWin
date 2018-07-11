@@ -32,7 +32,7 @@ public class AccountFragment extends Fragment {
 
     ListView listViewMenu;
     ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("查看历史订单","绑定花旗账户","通用","反馈","关于"));
-    ArrayList<Integer> menuIcon = new ArrayList<Integer>(Arrays.asList(R.drawable.ic_mall_black_24dp, R.drawable.ic_account_black_24dp, R.drawable.ic_points_black_24dp, R.drawable.ic_search_black_24dp, R.drawable.ic_points_black_24dp));
+    ArrayList<Integer> menuIcon = new ArrayList<Integer>(Arrays.asList(R.drawable.ic_mall_black_24dp, R.drawable.ic_account_black_24dp, R.drawable.ic_settings_black_24dp, R.drawable.ic_search_black_24dp, R.drawable.ic_points_black_24dp));
 
 
     @Nullable

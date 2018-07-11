@@ -109,6 +109,14 @@ public class PointsFragment extends Fragment {
         if(isLogin){
             View content = LayoutInflater.from(getContext()).inflate(R.layout.content_cards_points, null);
             accountInfoLayout.addView(content);
+            Button buttonAllCard = (Button) content.findViewById(R.id.button_all_card_main);
+            buttonAllCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToAllCard = new Intent(getActivity(), AllCardActivity.class);
+                    startActivity(intentToAllCard);
+                }
+            });
             Button buttonAddCard = (Button) content.findViewById(R.id.button_add_card_main);
             buttonAddCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -157,9 +165,7 @@ public class PointsFragment extends Fragment {
         }
     }
 
-    //internet to get the most points card, dynamically replace the card below
-    //new thread
-    //use userID
+
     class getCardsInfo implements Runnable {
 
         @Override
@@ -191,10 +197,6 @@ public class PointsFragment extends Fragment {
                     JSONObject cardType = jobj.getJSONObject("CardType");
                     System.out.println(cardID+ " "+cardNo+" "+points);
                 }
-
-                dialog.dismiss();
-
-
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -210,7 +212,7 @@ public class PointsFragment extends Fragment {
                     connection.disconnect();
                 }
             }
-
+            dialog.dismiss();
         }
     }
 }

@@ -18,6 +18,7 @@
     <context:component-scan base-package="citi.pay"/>
     <context:component-scan base-package="citi.vo"/>
     <context:component-scan base-package="citi.mapper"/>
+    <context:component-scan base-package="citi.user"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mvc:default-servlet-handler/>

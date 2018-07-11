@@ -8,11 +8,11 @@ import java.util.ArrayList;
  */
 public class Strategy {
     private String merchantId;
-    ArrayList<String> discountCommodityIDs;
+    private ArrayList<String> discountCommodityIDs;
     // 默认这三个应该是递增顺序
-    ArrayList<Double> priceOriginal;
-    ArrayList<Double> pricePaid;
-    ArrayList<Integer> pointsNeed;
+    private ArrayList<Double> priceOriginal;
+    private ArrayList<Double> pricePaid;
+    private ArrayList<Integer> pointsNeed;
 
     public Strategy() {
     }
