@@ -34,29 +34,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
+public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
 
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
-        public final TextView textViewDesc;
         public final ImageView imageViewLogo;
 
         public VH(View v) {
             super(v);
-            textViewName = (TextView) v.findViewById(R.id.textView_merchant_name_item);
-            textViewDesc = (TextView) v.findViewById(R.id.textView_merchant_description_item);
-            imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_item);
+            textViewName = (TextView) v.findViewById(R.id.textView_name_all_card_item);
+            imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_all_card_item);
         }
     }
 
     private Context context;
     private List<String> names;
-    private List<String> descriptions;
     private List<String> logos;
 
-    public AddCardAdapter(Context context) {
+    public AllCardAdapter(Context context) {
         names = new ArrayList<String>();
-        descriptions = new ArrayList<String>();
         logos = new ArrayList<String>();
         this.context = context;
     }
@@ -64,12 +60,7 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         holder.textViewName.setText(names.get(position));
-        holder.textViewDesc.setText(descriptions.get(position));
-        Glide.with(context)
-                .load(logos.get(position))
-                .placeholder(R.drawable.ic_points_black_24dp)
-                .error(R.drawable.ic_mall_black_24dp)
-                .into(holder.imageViewLogo);
+        //image
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,14 +77,15 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH>{
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_card, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_card, parent, false);
         return new VH(v);
     }
 
-    public void addData(String name, String description, String logoURL) {
+
+    public void addData(String name, String logoURL) {
         names.add(name);
-        descriptions.add(description);
         logos.add(logoURL);
         notifyDataSetChanged();
     }
+
 }

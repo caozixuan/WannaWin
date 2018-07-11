@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try {
-                URL url = new URL("http://193.112.44.141:80/citi/login/login");
+                URL url = new URL("http://193.112.44.141:80/citi/login");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
