@@ -52,7 +52,7 @@ extension ServerService:TargetType {
         case .sendPassword:
             return "/login/sendVCode"
         case .login:
-            return "/login/login"
+            return "/login"
         case .getMerchantsInfos:
             return "/merchant/getInfos"
         case .getMerchantInfoByID(let merchantID):

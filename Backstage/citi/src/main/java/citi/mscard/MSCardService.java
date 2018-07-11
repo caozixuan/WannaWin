@@ -19,18 +19,18 @@ import java.util.List;
 @Service
 public class MSCardService {
 
-    /**
-     * 获取该用户下积分最多的n张卡信息
-     * @param userId
-     * @param n
-     * @return 卡列表
-     */
+
+
 
     @Autowired
     private MSCardMapper msCardMapper;
-    @Autowired
-    private MerchantMapper merchantMapper;
 
+    /**
+     * 获取该用户下积分最多的n张卡信息
+     * @param userId 用户id
+     * @param n n张卡
+     * @return 卡列表
+     */
     public List<MSCard> getInfo(String userId, int n){
         List<MSCard> allCards =msCardMapper.select(userId);
         if(allCards==null)
@@ -57,8 +57,8 @@ public class MSCardService {
     }
     /**
      * 由cardID获取卡片
-     * @param CardID
-     * @return
+     * @param CardID 卡ID
+     * @return 卡信息
      */
     public MSCard getMSCardInfo(String CardID){
         return msCardMapper.selectCard(CardID);
