@@ -40,7 +40,10 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         
         // 获得商家信息
         ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
-        
+		
+		let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory,
+													   FileManager.SearchPathDomainMask.userDomainMask, true).last
+		NSLog("%@", path!)
 		
     }
 	
@@ -115,12 +118,13 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	@IBAction func showCardInfo(_ sender: AnyObject){
-		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
 		if User.getUser().username != nil {
+			let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 			let view = storyBoard.instantiateViewController(withIdentifier: "CardInfoTableViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
 		else{
+			let storyBoard = UIStoryboard(name:"User", bundle:nil)
 			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 			self.navigationController!.pushViewController(view, animated: true)
 		}
