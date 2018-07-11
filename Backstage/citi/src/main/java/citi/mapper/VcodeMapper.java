@@ -17,8 +17,9 @@ import java.util.List;
 @Repository
 public interface VcodeMapper {
 
+    final String intervalTime = "3000";  //30分钟之内的验证码
     final String insertVCode = "INSERT INTO Vcode (phoneNum, VCode, Time) VALUES (#{phoneNum}, #{VCode}, #{Time})";
-    final String getByPhoneNum = "SELECT VCode FROM Vcode WHERE phoneNum = #{phoneNum}";
+    final String getByPhoneNum = "SELECT VCode FROM Vcode WHERE phoneNum = #{phoneNum} AND Time >= now() - " + intervalTime + " AND Time <= now()";
     final String deleteByPhoneNum = "DELETE FROM Vcode WHERE phoneNum = #{phoneNum}";
 
     //注解，添加向前端发送的验证码至数据库

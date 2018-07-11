@@ -1,12 +1,14 @@
 package citi.vo;
 
+import java.sql.Timestamp;
+
 public class VCode {
 
     private String phoneNum;
     private String VCode;
-    private String Time;
+    private Timestamp Time;
 
-    public VCode(String phoneNum, String VCode, String time) {
+    public VCode(String phoneNum, String VCode, Timestamp time) {
         this.phoneNum = phoneNum;
         this.VCode = VCode;
         Time = time;
@@ -20,7 +22,7 @@ public class VCode {
         return VCode;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return Time;
     }
 }
