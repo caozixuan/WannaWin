@@ -25,7 +25,7 @@ class CardInfoTableViewController: UITableViewController {
 	
 	// 跳转到“添加银行卡”页面
 	@objc func goAddVC() {
-		let storyBoard = UIStoryboard(name:"Main", bundle:nil)
+		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "AddCardTableViewController")
 		self.navigationController!.pushViewController(view, animated: true)
 		

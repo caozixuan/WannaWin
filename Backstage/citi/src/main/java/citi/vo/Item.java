@@ -4,20 +4,12 @@ public class Item {
     private String ItemID;
     private String description;
     private String merchantID;
-    private String points;
-    private String type;
-    private double originalPrice;
-    private double afterPrice;
-    private double discount;
+    private int discount;
 
-    public Item(String itemID, String description, String merchantID, String points, String type, double originalPrice, double afterPrice, double discount) {
+    public Item(String itemID, String description, String merchantID, int discount) {
         ItemID = itemID;
         this.description = description;
         this.merchantID = merchantID;
-        this.points = points;
-        this.type = type;
-        this.originalPrice = originalPrice;
-        this.afterPrice = afterPrice;
         this.discount = discount;
     }
 
@@ -33,23 +25,7 @@ public class Item {
         return merchantID;
     }
 
-    public String getPoints() {
-        return points;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public double getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public double getAfterPrice() {
-        return afterPrice;
-    }
-
-    public double getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 }

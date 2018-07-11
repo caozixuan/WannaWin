@@ -4,8 +4,11 @@ import citi.vo.CitiCard;
 import citi.vo.Item;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /*
  * 接口设计：刘钟博
@@ -15,18 +18,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ItemMapper {
 
-    final String addItem = "INSERT INTO item(ItemID, description, MerchantID, Points, Type, OriginalPrice, AfterPrice, Discount) " +
-            "VALUES(#{ItemID}, #{description}, #{merchantID}, #{points}, #{type}, #{originalPrice}, #{afterPrice}, #{discount})";
-    final String updateItem = "";
-    final String deleteItem = "DELETE FROM item WHERE ItemID = #{ItemID}";
+
+    final String addItem = "INSERT INTO item(ItemID, description, MerchantID, discount) " +
+            "VALUES(#{ItemID}, #{description}, #{merchantID}, #{discount})";
+    final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID}";
+    final String deleteItemByID = "DELETE FROM item WHERE ItemID = #{ItemID}";
 
     @Insert(addItem)
     int addItem(Item item);
 
-//    @Update(updateItem)
-//    int updateItem(String nothing);
+    @Select(getItemByMerchantID)
+    List<Item> getItemByMerchantID(String merchantID);
 
-    @Delete(deleteItem)
-    int deleteItem(String ItemID);
+    @Delete(deleteItemByID)
+    int deleteItemByID(String ItemID);
 
 }

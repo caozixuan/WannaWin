@@ -7,17 +7,22 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CardTypeMapper {
 
-    final String getCardTypeInfo = "SELECT * FROM cardtype WHERE CardType = #{CardType}" +
-            "VALUES(#{citiCardID}, #{citiCardNum}, #{phoneNum}, #{userID})";
-    final String addCardType = "INSERT INTO cardtype(MerchantID, MType, CardType, Proportion, miniExpense) " +
-            "VALUES(#{MerchantID}, #{MType}, #{CardType}, #{Proportion}, #{miniExpense})";
-    final String deleteCardType = "DELETE FROM cardtype WHERE CardType = #{CardType}";
+    final String getCardTypeByMerchantID = "SEECT * FROM cardtype WHERE MerchantID = #{merchantID}";
+    final String getCardTypeInfo = "SELECT * FROM cardtype WHERE CardTypeID = #{CardTypeID}";
+    final String addCardType = "INSERT INTO cardtype(MerchantID, MType, CardTypeID, Proportion, miniExpense) " +
+            "VALUES(#{MerchantID}, #{MType}, #{CardTypeID}, #{Proportion}, #{miniExpense})";
+    final String deleteCardType = "DELETE FROM cardtype WHERE CardTypeID = #{CardTypeID}";
+
+    @Select(getCardTypeByMerchantID)
+    List<MSCardType> getCardTypeByMerchantID(String merchantID);
 
     @Select(getCardTypeInfo)
-    MSCardType getCardTypeInfo(String CardType);
+    MSCardType getCardTypeInfo(String CardTypeID);
 
     @Insert(addCardType)
     int addCardType(MSCardType msCardType);

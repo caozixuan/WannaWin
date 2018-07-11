@@ -31,21 +31,21 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.rowHeight = 185
         
         // TODO: - 搜索rx定义
-        let searchResult = self.searchBar.rx.text.orEmpty.flatMapFirst{  query -> Observable<[String]> in
-            if query.isEmpty {
-                return .just([])
-            }
-            else{
-                let results = self.discountArray.filter{ $0.hasPrefix(query)}
-                return .just(results)
-            }
-            }
-            .observeOn(MainScheduler.instance)
-        
-        searchResult.bind(to: tableView.rx.items(cellIdentifier: tableCellIdentifier)){
-            (index, label: String, cell) in
-            (cell.viewWithTag(2) as! UILabel).text = label
-            }.disposed(by: disposeBag)
+//        let searchResult = self.searchBar.rx.text.orEmpty.flatMapFirst{  query -> Observable<[String]> in
+//            if query.isEmpty {
+//                return .just([])
+//            }
+//            else{
+//                let results = self.discountArray.filter{ $0.hasPrefix(query)}
+//                return .just(results)
+//            }
+//            }
+//            .observeOn(MainScheduler.instance)
+//
+//        searchResult.bind(to: tableView.rx.items(cellIdentifier: tableCellIdentifier)){
+//            (index, label: String, cell) in
+//            (cell.viewWithTag(2) as! UILabel).text = label
+//            }.disposed(by: disposeBag)
         
 
         // Do any additional setup after loading the view.

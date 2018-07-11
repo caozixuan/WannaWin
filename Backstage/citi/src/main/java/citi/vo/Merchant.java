@@ -55,8 +55,8 @@ public class Merchant {
         this.logoURL = logoURL;
     }
 
-   @Override
-    public String toString(){
-        return "{\"merchantID\":"+merchantID+",\"merchantName\":"+name+",\"description\":"+description+",\"logoURL\":"+logoURL+"}";
-   }
+    @Override
+    public String toString() {
+        return "{\"merchantID\":" + merchantID + ",\"merchantName\":" + name + ",\"description\":" + description + ",\"logoURL\":" + logoURL + "}";
+    }
 }
