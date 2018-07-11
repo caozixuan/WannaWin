@@ -13,6 +13,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -24,7 +25,20 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.study.xuan.xvolleyutil.base.XVolley;
+import com.study.xuan.xvolleyutil.callback.CallBack;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -37,6 +51,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class PayingActivity extends AppCompatActivity {
@@ -213,16 +228,56 @@ public class PayingActivity extends AppCompatActivity {
     protected void initData()
     {
         //设置需要的积分数
-        sendRequestWithHttpURLConnection("http://193.112.44.141:80/citi/merchant/getInfos",1);
+        //sendRequestWithHttpURLConnection("http://193.112.44.141:80/citi/merchant/getInfos",1);
+
+        //postStringRequest();
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/merchant/getInfos")
+                .addParam("start", "0")
+                .addParam("n", "1")
+                .build()
+                .execute(PayingActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        JSONArray jsonArray = null;
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                String merchantID = jsonObject.getString("merchantID");
+                                String logoURL = jsonObject.getString("logoURL");
+                                String description = jsonObject.getString("description");
+                                String address = jsonObject.getString("address");
+
+                                System.out.println(name);
+                                MerchantInfo.getInstance(PayingActivity.this).setMerchantID(merchantID)
+                                        .setName(name)
+                                        .setLogoURL(logoURL)
+                                        .setDescription(description)
+                                        .setAddress(address);
+
+                                System.out.println(name);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
         String name = MerchantInfo.getInstance(PayingActivity.this).getName();
         String logoURL = MerchantInfo.getInstance(PayingActivity.this).getLogoURL();
         Text_NeedPoints.setText("120");
 
 
-
-
-        //ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
-        new Thread(new getLogo(logoURL)).start();
+        //获得并显示商家logo
+        Glide.with(PayingActivity.this)
+                .load(logoURL)
+                .override(200,200)
+                .into(ImageView_Business);
 
 
         //设置列表项中的文字（用户拥有的积分数）
@@ -233,7 +288,6 @@ public class PayingActivity extends AppCompatActivity {
         }
 
 
-        //sendRequestWithHttpURLConnection("http://193.112.44.141:80/citi/merchant/getInfos",data_posses_point.size());
         //设置选择积分栏目中商家logo
         business_image = new ArrayList<Integer>();
 
@@ -243,57 +297,6 @@ public class PayingActivity extends AppCompatActivity {
         }
     }
 
-    public static Bitmap getBitmap(String path) throws IOException{
-
-        URL url = new URL(path);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setConnectTimeout(5000);
-        conn.setRequestMethod("GET");
-        if(conn.getResponseCode() == 200){
-            InputStream inputStream = conn.getInputStream();
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            return bitmap;
-        }
-        return null;
-    }
-
-
-    /*获得商家logo*/
-    class getLogo implements Runnable{
-        private String logoURL;
-
-        public getLogo(String logoURL) {
-            this.logoURL = logoURL;
-        }
-
-        @Override
-        public void run() {
-
-            try {
-                bitmapLogo = getBitmap(logoURL);
-
-                //TODO: 告诉主线程一个消息:帮我更改界面。内容:bitmap
-                Message msg = new Message();
-                msg.what = 1;
-                msg.obj = bitmapLogo;
-                handler.sendMessage(msg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private Handler handler = new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            if(msg.what ==1){
-                Bitmap bitmap = (Bitmap) msg.obj;
-                ImageView_Business.setImageBitmap(bitmapLogo);
-            }else if(msg.what == 0){
-                Toast.makeText(PayingActivity.this, "显示图片错误", Toast.LENGTH_SHORT).show();
-            }
-        };
-    };
 
     /*发送网络请求*/
     private void sendRequestWithHttpURLConnection(final String  url_string, final int n){
@@ -359,11 +362,117 @@ public class PayingActivity extends AppCompatActivity {
         }).start();
     }
 
+    private void postStringRequest_2(){
+        //RequestQueue mRequestQueue = VolleySingleton.getVolleySingleton(this.getApplicationContext()).getRequestQueue();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,"https://www.baidu.com",new Response.Listener<String>(){
+
+            @Override
+            public void onResponse(String s) {
+                //打印请求返回结果
+                Log.e("volley",s);
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e("volleyerror","erro2");
+            }
+        });
+//将StringRequest对象添加进RequestQueue请求队列中
+        VolleySingleton.getVolleySingleton(this.getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+
+    private void postStringRequest() {
+        String url="http://193.112.44.141:80/citi/merchant/getInfos";
+        RequestQueue queue=Volley.newRequestQueue(this);
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("sucess",s);
+                System.out.println(s);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("start","0");
+                map.put("n", "1");
+                return map;
+            }
+        };
+        queue.add(request);
+    }
+
+    private void postRequest() {
+        //RequestQueue queue = VolleySingleton.getVolleySingleton(this.getApplicationContext()).getRequestQueue();
+        String url="http://193.112.44.141:80/citi/merchant/getInfos";
+        //RequestQueue queue= Volley.newRequestQueue(this);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url, (String) null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println("json data===" + response.toString());
+                JSONArray jsonArray = null;
+                try {
+                    jsonArray = new JSONArray(response.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String name= jsonObject.getString("name");
+                        String merchantID= jsonObject.getString("merchantID");
+                        String logoURL= jsonObject.getString("logoURL");
+                        String description= jsonObject.getString("description");
+                        String address= jsonObject.getString("address");
+
+                        System.out.println(name);
+                        MerchantInfo.getInstance(PayingActivity.this).setMerchantID(merchantID)
+                                .setName(name)
+                                .setLogoURL(logoURL)
+                                .setDescription(description)
+                                .setAddress(address);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+
+                map.put("start","0");
+                map.put("n", "1");
+
+                return map;
+            }
+        };
+
+        //queue.add(request);
+        //VolleySingleton.getVolleySingleton(this).addToRequestQueue(request);
+        //设置请求标签用于加入全局队列后，方便找到
+        request.setTag("postsr");
+        //添加到全局的请求队列
+        MyApplication.getHttpQueues().add(request);
+    }
+
+
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
+     protected void onStop() {
+        MyApplication.getHttpQueues().cancelAll("postsr");
+        super.onStop();
     }
 }
+
+
 
