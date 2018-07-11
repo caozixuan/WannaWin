@@ -8,9 +8,15 @@
 
 import UIKit
 
-class MerchantChooseTableViewController: UITableViewController {
+class MerchantChooseTableViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var marchantCount = MerchantList.list.count
+    
+    var merchantNames = [String]()
+    
+    var indexController:UILocalizedIndexedCollation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +27,31 @@ class MerchantChooseTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
     }
+    
+    func createIndex(){
+        indexController = UILocalizedIndexedCollation.current()
+        let sectionTitileCount = indexController?.sectionTitles.count
+        // TODO: 侧边栏索引
+        var sectionDataArray = [[String]]()
+        
+        for _ in 0..<sectionTitileCount! {
+            let array = [String]()
+            sectionDataArray.append(array)
+        }
+        // TODO: 中文索引
+        // 数据分类
+//        for name in merchantNames {
+//            let sectionNum = indexController?.section(for: name, collationStringSelector: #selector(getter:name))
+//
+//
+//
+//        }
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -30,28 +60,26 @@ class MerchantChooseTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.marchantCount
-    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "merchant")
-        cell?.textLabel?.text = MerchantList.list[indexPath.row].name
-        return cell!
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // 获得商家卡类型
-        ServerConnector.getCardTypeByUserID(merchantID: MerchantList.list[indexPath.row].id, callback: gotCardTypeCallback)
-//        ServerConnector.getCardTypeByUserID(merchantID:"00001", callback: gotCardTypeCallback)
-        
-    }
+    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "merchant")
+//
+//        let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
+//        if let d = data {
+//             cell?.imageView?.image = UIImage(data: d)
+//        }
+//
+//        (cell?.viewWithTag(1) as! UILabel).text = MerchantList.list[indexPath.row].name
+//        return cell!
+//    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        // 获得商家卡类型
+//        ServerConnector.getCardTypeByUserID(merchantID: MerchantList.list[indexPath.row].id, callback: gotCardTypeCallback)
+////        ServerConnector.getCardTypeByUserID(merchantID:"00001", callback: gotCardTypeCallback)
+//
+//    }
     /// 获得商户卡信息的回调函数
     func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
         if result {
