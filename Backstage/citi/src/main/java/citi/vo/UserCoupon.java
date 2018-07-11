@@ -1,5 +1,6 @@
 package citi.vo;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ public class UserCoupon {
     private String userID;
     private String ItemID;
     private String state;
+    private Timestamp getTime;
+    private Timestamp useTime;
 
     public enum CouponState {
         USED, UNUSED;
@@ -38,6 +41,8 @@ public class UserCoupon {
         this.userID = userID;
         ItemID = itemID;
         this.state = CouponState.getStateString(state);
+        this.getTime = null;
+        this.useTime = null;
     }
 
     public String getUserID() {
