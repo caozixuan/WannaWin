@@ -14,12 +14,11 @@ import java.util.List;
 @Repository
 public interface MerchantMapper {
 
-    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, address, logoURL) " +
-            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{address}, #{logoURL})";
+    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, address, logoURL, proportion) " +
+            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{address}, #{logoURL}, #{proportion})";
     final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchant}";
-    final String getSome = "SELECT MerchantID, name, description, address, logoURL FROM merchant ORDER BY name LIMIT #{start}, #{length}";
-    final String getById = "SELECT MerchantID, name, description, address, logoURL FROM merchant WHERE MerchantID = #{Mercantid}";
-
+    final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
+    final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
 
     @Insert(addMerchant)
     int addMerchant(Merchant merchantDAO);
@@ -30,7 +29,6 @@ public interface MerchantMapper {
     //The return sequence will be [start+1, start+2, ,,, start+length].
     @Select(getSome)
     List<Merchant> select(@Param("start") int start, @Param("length") int length);
-
 
     @Select(getById)
     Merchant selectByID(String MerchantID);

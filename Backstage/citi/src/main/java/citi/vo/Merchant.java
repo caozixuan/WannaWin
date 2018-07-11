@@ -10,10 +10,25 @@ public class Merchant {
     private String description;
     private String address;
     private String logoURL;
+    private double proportion;
 
+    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, double proportion) {
+        this.merchantID = merchantID;
+        this.name = name;
+        this.password = password;
+        this.description = description;
+        this.address = address;
+        this.logoURL = logoURL;
+        this.proportion = proportion;
+    }
 
+    public double getProportion() {
+        return proportion;
+    }
 
-
+    public void setProportion(double proportion) {
+        this.proportion = proportion;
+    }
 
     public String getMerchantID() {
         return merchantID;
