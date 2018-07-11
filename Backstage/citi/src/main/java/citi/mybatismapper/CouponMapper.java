@@ -18,7 +18,7 @@ public interface CouponMapper {
     final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state) " +
             "VALUES(NULL, #{userID}, #{ItemID}, #{state})";
     final String deleteOneUserCouponByUserID = "UPDATE user_coupon SET state = 'USED' " +
-            "WHERE userID = #{userID} AND ";
+            "WHERE userID = #{userID} AND couponID ";
 
     @Select(getCouponsByUserID)
     List<UserCoupon> getCouponsByUserID(String userID);

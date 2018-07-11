@@ -1,3 +1,8 @@
+/**********      Deprecated      **********
+ * 2018-07-11 16:07
+ * 每个商户只允许发行一种卡，
+ * 消费策略和商户绑定。
+
 package citi.mybatismapper;
 
 import citi.vo.CitiCard;
@@ -31,3 +36,4 @@ public interface CardTypeMapper {
     int deleteCardType(String CardType);
 
 }
+ */

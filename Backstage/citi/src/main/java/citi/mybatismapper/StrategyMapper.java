@@ -12,22 +12,18 @@ import java.util.List;
 @Repository
 public interface StrategyMapper {
 
-    final String getStrategysByMerchantID = "SELECT CardTypeID, full, discount FROM Strategy NATURAL JOIN cardtype WHERE MerchantID = #{merchantID}";
-    final String getStrategy = "SELECT * FROM Strategy WHERE CardTypeID = #{CardTypeID}";
-    final String addStrategy = "INSERT INTO Strategy(CardTypeID, full, discount) " +
-            "VALUES(#{CardTypeID}, #{full}, #{CardTypeID}, #{discount})";
-    final String deleteStrategy = "DELETE FROM Strategy WHERE CardTypeID = #{CardTypeID}";
+    final String getStrategysByMerchantID = "SELECT * FROM Strategy WHERE MerchantID = #{merchantID}";
+    final String addStrategy = "INSERT INTO Strategy(CardTypeID, full, discount, points) " +
+            "VALUES(#{CardTypeID}, #{full}, #{CardTypeID}, #{discount}, #{points})";
+    final String deleteStrategy = "DELETE FROM Strategy WHERE MerchantID = #{merchantID}";
 
     @Select(getStrategysByMerchantID)
     List<StrategyDAO> getStrategysByMerchantID(String merchantID);
-
-    @Select(getStrategy)
-    StrategyDAO getStrategy(String CardTypeID);
 
     @Insert(addStrategy)
     int addStrategy(StrategyDAO strategy);
 
     @Delete(deleteStrategy)
-    int deleteStrategy(String CardTypeID);
+    int deleteStrategy(String merchantID);
 
 }

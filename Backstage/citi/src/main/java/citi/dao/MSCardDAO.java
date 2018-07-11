@@ -1,7 +1,7 @@
 package citi.dao;
 
 import citi.vo.MSCard;
-import citi.vo.MSCardType;
+//import citi.vo.MSCardType;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -11,28 +11,14 @@ public class MSCardDAO {
     private String userID;
     private String card_No;
     private int points;
-    private String CardType;
+    private String merchantID;
 
-    public MSCardDAO(String userID, String cardNo, int points, String msCardType) {
+    public MSCardDAO(String userID, String cardNo, int points, String merchantID) {
         this.cardID = UUID.randomUUID().toString().toLowerCase();
         this.userID = userID;
         this.card_No = cardNo;
         this.points = points;
-        this.CardType = msCardType;
-    }
-
-    public MSCardDAO() {
-        this.cardID= UUID.randomUUID().toString().toLowerCase();
-    }
-
-    public MSCard toMSCard() {
-        MSCard msCard = null;
-
-        msCard = new MSCard(cardID, userID, card_No, points, new MSCardType(CardType));
-        /*catch (IOException e) {
-            System.out.println("error");
-        }*/
-        return msCard;
+        this.merchantID = merchantID;
     }
 
     public String getCardID() {
@@ -67,16 +53,16 @@ public class MSCardDAO {
         this.points = points;
     }
 
-    public String getMsCardType() {
-        return CardType;
+    public String getMerchantID() {
+        return merchantID;
     }
 
-    public void setMsCardType(String msCardType) {
-        this.CardType = msCardType;
+    public void setMerchantID(String msCardType) {
+        this.merchantID = msCardType;
     }
 
-    public static boolean checkAttribute(MSCardDAO msCardDAO){
-        if(msCardDAO.cardID!=null&&msCardDAO.userID!=null&&msCardDAO.card_No!=null&&msCardDAO.CardType!=null){
+    public static boolean checkAttribute(MSCardDAO msCardDAO) {
+        if (msCardDAO.cardID != null && msCardDAO.userID != null && msCardDAO.card_No != null && msCardDAO.merchantID != null) {
             return true;
         }
         return false;
