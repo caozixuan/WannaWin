@@ -16,8 +16,8 @@ class User: Codable{
     var card:[Card]?
     var portraitName = "通讯录"
     var portraitPath:String?
-    var generalPoints: Int?
-    var availablePoints: Int?
+    var generalPoints: Double?
+    var availablePoints: Double?
 }
 
 extension User{
