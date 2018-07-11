@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class MerchantChooseTableViewController: UIViewController {
     
@@ -16,12 +19,29 @@ class MerchantChooseTableViewController: UIViewController {
     
     var merchantNames = [String]()
     
+    var disposeBag = DisposeBag()
+    
     var indexController:UILocalizedIndexedCollation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        let result = Observable.empty().asObservable()
+            .startWith(())
+            .flatMapLatest(getDatas)
+            .flatMap(filter)
+            .share(replay: 1)
+        let dataSource = RxTableViewSectionedReloadDataSource
+            <SectionModel<String, String>>(configureCell: {
+                (dataSource, tv, indexPath, element) in
+                let cell = tv.dequeueReusableCell(withIdentifier: "cell")!
+                (cell.viewWithTag(1) as? UILabel)?.text = element
+                let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
+                cell.imageView?.imageFromURL(MerchantList.list[indexPath.row].logoURL!, placeholder: UIImage(named: "周黑鸭")!)
+                return cell
+            })
+        result.bind(to: self.tableView.rx.items(dataSource: dataSource))
+            .disposed(by:disposeBag)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,6 +49,30 @@ class MerchantChooseTableViewController: UIViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         
+    }
+    func getDatas()->Observable<[SectionModel<String, String>]> {
+        print("正在请求数据......")
+        let items = (0 ..< marchantCount).map {i in
+            merchantNames[i]
+        }
+        let observable = Observable.just([SectionModel(model: "S", items: items)])
+        return observable
+    }
+    func filter(data:[SectionModel<String, String>])-> Observable<[SectionModel<String, String>]> {
+        return searchBar.rx.text.orEmpty
+            .flatMapLatest{ query -> Observable<[SectionModel<String, String>]> in
+                if query.isEmpty{
+                    return Observable.just(data)
+                }
+                else{
+                    var newData:[SectionModel<String, String>] = []
+                    for sectionModel in data {
+                        let items = sectionModel.items.filter{ "\($0)".transformToPinyin().contains(query.lowercased()) }
+                        newData.append(SectionModel(model: sectionModel.model, items: items))
+                    }
+                    return Observable.just(newData)
+                }
+        }
     }
     
     func createIndex(){

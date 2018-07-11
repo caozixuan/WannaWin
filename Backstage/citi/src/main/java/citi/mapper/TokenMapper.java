@@ -15,7 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TokenMapper {
 
-    final String selectTokenByID = "SELECT refreshToken FROM user_token WHERE userID = #{userID}";
+    final String intervalTime = "30000";  //3个小时之内的Token
+    final String selectTokenByID = "SELECT refreshToken FROM user_token WHERE userID = #{userID} AND time >= now() - " + intervalTime + " AND time <= now()";
     final String insertToken = "INSERT INTO user_token(userID, refreshToken, time) VALUES(#{userID}, #{refreshToken}, #{time})";
     final String updateToken = "UPDATE user_token SET refreshToken = #{refreshToken}, time = #{time} WHERE userID = #{userID}";
     final String deleteToken = "DELETE FROM user_token WHERE userID = #{userID}";

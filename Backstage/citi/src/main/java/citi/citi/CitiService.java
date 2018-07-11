@@ -125,7 +125,7 @@ public class CitiService {
         phoneNum = getPhoneNum(accessToken);
         creditCardNum = getCardNum(accessToken);
         citiCardID = getCardID(accessToken);
-        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID);
+        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID,0.0);
         return citiCard;
     }
 
