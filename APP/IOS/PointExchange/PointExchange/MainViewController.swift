@@ -46,8 +46,13 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
             MerchantList.list = merchants
+            var merchantName = [String]()
+            for m in merchants{
+                merchantName.append(m.name)
+            }
             let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-            let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController")
+            let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
+            view.merchantNames = merchantName
             self.navigationController!.pushViewController(view, animated: true)
         }
         else {
