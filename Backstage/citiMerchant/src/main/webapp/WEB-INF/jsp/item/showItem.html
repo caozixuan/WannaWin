@@ -151,20 +151,29 @@ desired effect
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- Optionally, you can add icons to the links -->
-    <li class="treeview">
+        <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/item/getItem">商品清单</a></li>
-            <li><a href="/item/addItem">添加商品</a></li>
+            <li><a href="/showItemRequest">商品清单</a></li>
+            <li><a href="item/addItem.html">添加商品</a></li>
           </ul>
-        <li class="active"><a href="../strategy/strategy.html"><i class="fa fa-link"></i> <span>减免策略</span></a></li>
-        <li><a href="../history/history.html"><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-    <li class="active"><a href="../showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-       
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/strategy/getStrategyList">策略清单</a></li>
+            <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
+          </ul>
+        <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
