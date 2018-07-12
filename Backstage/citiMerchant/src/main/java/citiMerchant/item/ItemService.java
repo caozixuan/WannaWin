@@ -21,7 +21,7 @@ public class ItemService {
     }
 
     public Item getItem(String itemID){
-        Item item = new Item();     //此处也是应该调用数据库
+        Item item = itemMapper.getItemByItemID(itemID);
         return item;
     }
 
