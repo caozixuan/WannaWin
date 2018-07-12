@@ -6,6 +6,6 @@ package citiMerchant.history;
 public class HistoryController {
 
     public void getHistory(String merchantID){
-        
+
     }
 }
