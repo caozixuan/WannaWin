@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private String strAccount;
     private String strPassword;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,28 +50,25 @@ public class LoginActivity extends AppCompatActivity {
         editTextAccount = (EditText) findViewById(R.id.editText_account_login);
         editTextPassword = (EditText) findViewById(R.id.editText_password_login);
 
-        Button buttonLogin = (Button)findViewById(R.id.button_login_login);
+        Button buttonLogin = (Button) findViewById(R.id.button_login_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextAccount.getText().length() == 0){
+                if (editTextAccount.getText().length() == 0) {
                     showAlert("请输入账户");
-                }else if (editTextPassword.getText().length() == 0){
+                } else if (editTextPassword.getText().length() == 0) {
                     showAlert("请输入密码");
-                }
-                else {
+                } else {
 
                     strAccount = editTextAccount.getText().toString();
                     strPassword = editTextPassword.getText().toString();
 
-                    dialog = ProgressDialog.show(LoginActivity.this, "", "登录中...");
-                    //new Thread(new tryLogin()).start();
                     tryLogin();
                 }
             }
         });
 
-        Button buttonRegister = (Button)findViewById(R.id.button_register_login);
+        Button buttonRegister = (Button) findViewById(R.id.button_register_login);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intentToRegister);
             }
         });
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_login);
         setSupportActionBar(toolbar);
@@ -92,13 +90,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void showAlert(String msg){
+    private void showAlert(String msg) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
         alertDialog.setTitle(msg).setPositiveButton("OK", null).show();
     }
 
 
-    private void tryLogin(){
+    private void tryLogin() {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/login")
@@ -109,8 +107,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Context context, String response) {
                         System.out.println(response);
+                        boolean logSuccess = false;
                         try {
-                            if(response.length() > 2){
+                            if (response.length() > 2) {
                                 JSONObject jsonObject = new JSONObject(response);
 
                                 String accountPhoneNum = jsonObject.getString("phoneNum");
@@ -123,84 +122,36 @@ public class LoginActivity extends AppCompatActivity {
                                         .setGeneralPoint(generalPoint)
                                         .setAvailablePoints(availablePoints);
 
-                                dialog.dismiss();
-                                LogStateInfo.getInstance(LoginActivity.this).login();
-                                finish();
-
+                                logSuccess = true;
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
+                        dialog.dismiss();
+
+                        if (logSuccess) {
+                            LogStateInfo.getInstance(LoginActivity.this).login();
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(LoginActivity.this, "", "登录中...");
                     }
                 });
     }
-
-    class tryLogin implements Runnable {
-
-        @Override
-        public void run() {
-            boolean logSuccess = false;
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            try {
-                URL url = new URL("http://193.112.44.141:80/citi/login");
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                out.writeBytes("phoneNum=" + strAccount + "&password=" + strPassword);
-                connection.setConnectTimeout(8000);
-                connection.setReadTimeout(8000);
-
-                InputStream in = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(in));
-                String json = reader.readLine();
-                System.out.println(json);
-
-                if(json.length() > 2){
-                    logSuccess = true;
-                    JSONObject jsonObject = new JSONObject(json);
-
-                    String accountPhoneNum = jsonObject.getString("phoneNum");
-                    String userID = jsonObject.getString("userID");
-                    int generalPoint = jsonObject.getInt("generalPoints");
-                    int availablePoints = jsonObject.getInt("availablePoints");
-
-                    LogStateInfo.getInstance(LoginActivity.this).setAccount(accountPhoneNum)
-                            .setUserID(userID)
-                            .setGeneralPoint(generalPoint)
-                            .setAvailablePoints(availablePoints);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }finally {
-                if (reader != null){
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (connection != null){
-                    connection.disconnect();
-                }
-            }
-
-            dialog.dismiss();
-            if(logSuccess){
-                LogStateInfo.getInstance(LoginActivity.this).login();
-                finish();
-
-            }else {
-                Looper.prepare();
-                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-                Looper.loop();
-            }
-        }
-    }
-
-
-
 }
