@@ -17,7 +17,7 @@ public interface StrategyMapper {
             "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{CardTypeID}, #{discount}, #{points})";
     final String updateStrategy = "UPDATE strategy SET full = #{full}, discount = #{discount}, points = #{points} " +
             "WHERE strategyID = #{strategyID}";
-    final String deleteStrategy = "DELETE FROM Strategy WHERE MerchantID = #{merchantID}";
+    final String deleteStrategy = "DELETE FROM Strategy WHERE MerchantID = #{strategyID}";
 
     @Select(getStrategysByMerchantID)
     List<StrategyDAO> getStrategysByMerchantID(String merchantID);
@@ -29,7 +29,7 @@ public interface StrategyMapper {
     int updateStrategy(StrategyDAO strategyDAO);
 
     @Delete(deleteStrategy)
-    int deleteStrategy(String merchantID);
+    int deleteStrategy(String strategyID);
 
     final String getStrategyAmountByMerchantID = "SELECT COUNT(*) FROM strategy WHERE MerchantID = #{merchantID}";
 
