@@ -8,12 +8,19 @@
 
 import UIKit
 
+enum changeType {
+	case add
+	case minus
+}
+
 protocol ExchangeItemCellDelegate {
-	func contentDidChanged(text:String,row:Int)
+	func contentDidChanged(text: String, row: Int, type: changeType)
 }
 
 
 class ExchangeItemCell: UITableViewCell{
+	
+	
 
 	// store to bank cell
 	@IBOutlet weak var checkbox1: UIButton!
@@ -63,22 +70,54 @@ class ExchangeItemCell: UITableViewCell{
 		if button.isSelected {
 			editBtn1?.isHidden = false
 			editBtn2?.isHidden = false
+			// 触发代理获得转换后的通用积分，统计积分总数
+			if let text = generalPoints?.text{
+				self.delegate?.contentDidChanged(text: text, row: editGeneralPoints.tag, type: .add)
+			}
+			
+			if let text = targetPoints?.text {
+				self.delegate?.contentDidChanged(text: text, row: editSourcePoints.tag, type: .add)
+			}
 		}
 		else {
-			editBtn1?.isSelected = false
-			editSourcePoints?.isHidden = true
-			sourcePoints?.isHidden = false
-			editBtn1?.isHidden = true
 			
-			editBtn2?.isSelected = false
-			editGeneralPoints?.isHidden = true
-			generalPoints?.isHidden = false
-			editBtn2?.isHidden = true
+			if editBtn1 != nil {
+				if editBtn1?.isSelected == true {
+					editBtnClick(button: editBtn1)
+				}
+				
+				editBtn1?.isSelected = false
+				editSourcePoints?.isHidden = true
+				sourcePoints?.isHidden = false
+				editBtn1?.isHidden = true
+			}
+			
+			if editBtn2 != nil {
+				if editBtn2?.isSelected == true {
+					editBtnClick(button: editBtn2)
+				}
+				editBtn2?.isSelected = false
+				editGeneralPoints?.isHidden = true
+				generalPoints?.isHidden = false
+				editBtn2?.isHidden = true
+			}
+			
+			
+
+			// 触发代理获得转换后的通用积分，统计积分总数
+			if let text = generalPoints?.text{
+				self.delegate?.contentDidChanged(text: text, row: editGeneralPoints.tag, type: .minus)
+			}
+			
+			if let text = targetPoints?.text {
+				self.delegate?.contentDidChanged(text: text, row: editSourcePoints.tag, type: .minus)
+			}
 		}
 	}
 	
 	/// 点击确认修改按钮的触发动作
 	@objc func editBtnClick(button:UIButton){
+		
 		button.isSelected = !button.isSelected
 		
 		if button.isSelected {
@@ -87,6 +126,16 @@ class ExchangeItemCell: UITableViewCell{
 			
 			editGeneralPoints?.isHidden = false
 			generalPoints?.isHidden = true
+
+			// 触发代理获得textfield数据，统计积分总数
+			if let text = generalPoints?.text{
+				self.delegate?.contentDidChanged(text: text, row: editGeneralPoints.tag, type: .minus)
+			}
+			
+			if let text = targetPoints?.text {
+				self.delegate?.contentDidChanged(text: text, row: editSourcePoints.tag, type: .minus)
+			}
+			
 		}
 		else {
 			editSourcePoints?.isHidden = true
@@ -94,24 +143,28 @@ class ExchangeItemCell: UITableViewCell{
 			
 			editGeneralPoints?.isHidden = true
 			generalPoints?.isHidden = false
-			
-			generalPoints?.text = editGeneralPoints?.text
-			sourcePoints?.text = editSourcePoints?.text
-			
-			// TODO: - 积分换算
-			if sourcePoints?.text != nil {
-				targetPoints?.text = String(Double(sourcePoints.text!)! * proportion!)
+			if (editGeneralPoints?.text != nil && (editGeneralPoints?.text?.count)! > 0) ||
+				(editSourcePoints?.text != nil && (editSourcePoints?.text?.count)! > 0) {
+				
+				generalPoints?.text = editGeneralPoints?.text
+				sourcePoints?.text = editSourcePoints?.text
+				
+				// TODO: - 积分换算
+				if sourcePoints?.text != nil {
+					if (sourcePoints?.text?.count)! > 0 {
+						targetPoints?.text = String(Double(sourcePoints.text!)! * proportion!)
+					}
+				}
 			}
 			
-			// 触发代理获得textfield数据，统计积分总数
+			// 触发代理获得转换后的通用积分，统计积分总数
 			if let text = generalPoints?.text{
-				self.delegate?.contentDidChanged(text: text, row: generalPoints.tag)
+				self.delegate?.contentDidChanged(text: text, row: editGeneralPoints.tag, type: .add)
 			}
 			
-			if let text = sourcePoints?.text {
-				self.delegate?.contentDidChanged(text: text, row: generalPoints.tag)
+			if let text = targetPoints?.text {
+				self.delegate?.contentDidChanged(text: text, row: editSourcePoints.tag, type: .add)
 			}
-			
 			
 		}
 	}
