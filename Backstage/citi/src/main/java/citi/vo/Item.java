@@ -11,8 +11,9 @@ public class Item {
     private double originalPrice;
     private int points;
     private Timestamp overdueTime;
+    private long stock;
 
-    public Item(String itemID, String name, String description, String merchantID, String logoURL, double originalPrice, int points, Timestamp overdueTime) {
+    public Item(String itemID, String name, String description, String merchantID, String logoURL, double originalPrice, int points, Timestamp overdueTime, long stock) {
         ItemID = itemID;
         this.name = name;
         this.description = description;
@@ -21,6 +22,7 @@ public class Item {
         this.originalPrice = originalPrice;
         this.points = points;
         this.overdueTime = overdueTime;
+        this.stock = stock;
     }
 
     public String getItemID() {
@@ -53,6 +55,10 @@ public class Item {
 
     public Timestamp getOverdueTime() {
         return overdueTime;
+    }
+
+    public long getStock() {
+        return stock;
     }
 
 }
