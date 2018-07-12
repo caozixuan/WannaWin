@@ -49,10 +49,10 @@ public interface OrderMapper {
     List<String> getOrderIDByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
 
     @Select(getOrderByUserID)
-    List<String> getOrderByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
+    List<Order> getOrderByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
 
     @Select(getOrderByMerchantID)
-    List<String> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
+    List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
 
 
     final String getOrderAmount = "SELECT COUNT(*) FROM order WHERE MerchantID = #{merchantID}";
