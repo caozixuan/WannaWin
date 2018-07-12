@@ -27,6 +27,4 @@ public class LoginService {
         else
             return dBhandler.getAmountByMerchantID(m.getMerchantID());
     }
-
-
 }
