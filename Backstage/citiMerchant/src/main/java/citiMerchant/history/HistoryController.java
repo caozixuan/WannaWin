@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 public class HistoryController {
+
     @Autowired
     HistoryService historyService;
 
@@ -30,4 +31,5 @@ public class HistoryController {
             mv.addObject("orders",orders);
         return mv;
     }
+
 }
