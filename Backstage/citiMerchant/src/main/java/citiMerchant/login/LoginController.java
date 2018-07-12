@@ -1,9 +1,11 @@
 package citiMerchant.login;
 
 import citiMerchant.vo.Merchant;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,9 +30,9 @@ public class LoginController {
     }
 
     @RequestMapping("/loginSubmit")
-    public ModelAndView loginSubmit(String username,String password){
+    public ModelAndView loginSubmit(String merchantID,String password){
         ModelAndView mv = new ModelAndView();
-        ArrayList<Integer> nums = loginService.getNums(username,password);
+        ArrayList<Integer> nums = loginService.getNums(merchantID,password);
         if(nums==null){
             mv.setViewName("login/fail");
             return mv;
@@ -42,6 +44,11 @@ public class LoginController {
         }
 
     }
+    @RequestMapping("/starter")
+    public ModelAndView starter(String merchantID,String password){
+        return loginSubmit(merchantID,password);
+    }
+
 
 
 

@@ -14,6 +14,7 @@ import java.util.UUID;
 
 /**
  * Created by zhong on 2018/7/11 19:52
+ * @author 彭璇
  */
 @Controller
 public class StrategyController {
@@ -31,6 +32,7 @@ public class StrategyController {
         return mv;
     }
 
+    @RequestMapping("/strategy/deleteStrategy")
     public ModelAndView deleteStrategy(String merchantID,String strategyID){
         ModelAndView mv = new ModelAndView();
         strategyService.deleteStrategy(strategyID);
@@ -43,6 +45,7 @@ public class StrategyController {
         return mv;
     }
 
+    @RequestMapping("/strategy/updateStrategy")
     public ModelAndView updateStrategy(StrategyDAO strategyDAO){
         ModelAndView mv = new ModelAndView();
         strategyService.updateStrategy(strategyDAO);
@@ -55,6 +58,7 @@ public class StrategyController {
         return mv;
     }
 
+    @RequestMapping("/strategy/addStrategyRequest")
     public ModelAndView addStrategyRequest(String merchantID){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/strategy/addStrategy");
@@ -62,6 +66,7 @@ public class StrategyController {
         return mv;
     }
 
+    @RequestMapping("/strategy/addStrategySubmit")
     public ModelAndView addStrategySubmit(String merchantID, int full,int discount,int points){
         ModelAndView mv = new ModelAndView();
         StrategyDAO strategyDAO = new StrategyDAO(UUID.randomUUID().toString(),merchantID,full,discount,points);
