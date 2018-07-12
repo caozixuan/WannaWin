@@ -1,11 +1,8 @@
-package citi.vo;
+package citiMerchant.vo;
 
 import java.util.UUID;
 
-/*
- * 作者：曹子轩
- * TODO: 里面的很多地方需要再沟通
- */
+
 public class MSCard {
     private String cardID;
     private String userID;

@@ -1,4 +1,4 @@
-package citi.vo;
+package citiMerchant.vo;
 
 public class CitiCard {
     private String citiCardID;

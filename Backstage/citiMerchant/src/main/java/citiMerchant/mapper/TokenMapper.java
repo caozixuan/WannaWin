@@ -1,6 +1,6 @@
-package citi.mapper;
+package citiMerchant.mapper;
 
-import citi.vo.RefreshToken;
+import citiMerchant.vo.RefreshToken;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

@@ -1,9 +1,4 @@
-package citi.vo;
-
-/*
- * 作者：曹子轩
- * 创建订单实体类
- */
+package citiMerchant.vo;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
