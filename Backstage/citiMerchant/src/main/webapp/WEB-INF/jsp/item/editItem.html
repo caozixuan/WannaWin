@@ -177,8 +177,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="showItem.html">商品清单</a></li>
-            <li><a href="addItem.html">添加商品</a></li>
+            <li><a href="/item/getItem">商品清单</a></li>
+            <li><a href="/item/addItem">添加商品</a></li>
           </ul>
         <li class="active"><a href="../strategy/strategy.html"><i class="fa fa-link"></i> <span>减免策略</span></a></li>
         <li><a href="../history/history.html"><i class="fa fa-link"></i> <span>历史订单</span></a></li>
@@ -208,24 +208,24 @@ desired effect
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form">
+              <form role="form" action="/item/addItemOperation">
                 <!-- text input -->
                 <div class="form-group">
                   <label>商品名称</label>
-                  <input type="text" class="form-control" placeholder="输入商品名称">
+                  <input type="text" class="form-control" placeholder="输入商品名称" value=${item.name}>
                 </div>
 				<div class="form-group">
                   <label>商品原价</label>
-                  <input type="text" class="form-control" placeholder="输入商品原价">
+                  <input type="text" class="form-control" placeholder="输入商品原价" value=${item.originalPrice}>
                 </div>
 				<div class="form-group">
                   <label>抵扣积分</label>
-                  <input type="text" class="form-control" placeholder="输入抵扣的花旗积分">
+                  <input type="text" class="form-control" placeholder="输入抵扣的花旗积分" value=${item.points}>
                 </div>
                 <!-- textarea -->
                 <div class="form-group">
                   <label>商品描述</label>
-                  <textarea class="form-control" rows="3" placeholder="输入商品描述"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="输入商品描述">${item.description}</textarea>
                 </div>
                 <div class="form-group">
                   <label>商品图片</label>
@@ -233,7 +233,7 @@ desired effect
                          class="col-sm-10 myfile" value="" /> <input type="hidden"
                                                                      name="url2" value="">
                 </div>
-                <button type="submit" class="btn btn-success">提 交</button></td>
+                  <a href="/item/submitEdit"> <button type="submit" class="btn btn-success">提 交</button></a>
 
               </form>
 
