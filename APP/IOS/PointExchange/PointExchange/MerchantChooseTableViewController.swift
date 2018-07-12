@@ -42,22 +42,20 @@ class MerchantChooseTableViewController: UIViewController {
             })
         result.bind(to: self.tableView.rx.items(dataSource: dataSource))
             .disposed(by:disposeBag)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         
     }
+    
+    /// 初始化tableView显示的数据
     func getDatas()->Observable<[SectionModel<String, String>]> {
-        print("正在请求数据......")
         let items = (0 ..< marchantCount).map {i in
             merchantNames[i]
         }
         let observable = Observable.just([SectionModel(model: "S", items: items)])
         return observable
     }
+    
+    /// 搜索时结果过滤
     func filter(data:[SectionModel<String, String>])-> Observable<[SectionModel<String, String>]> {
         return searchBar.rx.text.orEmpty
             .flatMapLatest{ query -> Observable<[SectionModel<String, String>]> in
@@ -75,6 +73,7 @@ class MerchantChooseTableViewController: UIViewController {
         }
     }
     
+    /// 创建索引
     func createIndex(){
         indexController = UILocalizedIndexedCollation.current()
         let sectionTitileCount = indexController?.sectionTitles.count
@@ -102,28 +101,7 @@ class MerchantChooseTableViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
     
-    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "merchant")
-//
-//        let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
-//        if let d = data {
-//             cell?.imageView?.image = UIImage(data: d)
-//        }
-//
-//        (cell?.viewWithTag(1) as! UILabel).text = MerchantList.list[indexPath.row].name
-//        return cell!
-//    }
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        // 获得商家卡类型
-//        ServerConnector.getCardTypeByUserID(merchantID: MerchantList.list[indexPath.row].id, callback: gotCardTypeCallback)
-////        ServerConnector.getCardTypeByUserID(merchantID:"00001", callback: gotCardTypeCallback)
-//
-//    }
     /// 获得商户卡信息的回调函数
     func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
         if result {

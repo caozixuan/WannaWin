@@ -11,7 +11,9 @@ import UIKit
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
 	
-	@IBOutlet weak var cardImage1: UIImageView!
+    @IBOutlet weak var availablePointsLabel: UILabel!
+    @IBOutlet weak var generalPointsLabel: UILabel!
+    @IBOutlet weak var cardImage1: UIImageView!
 	
 	@IBOutlet weak var cardImage2: UIImageView!
 	
@@ -38,10 +40,20 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		cardImage2.addGestureRecognizer(cardTap2)
 		cardImage3.addGestureRecognizer(cardTap3)
         
-        
-		
     }
-	
+    override func viewWillAppear(_ animated: Bool) {
+        ServerConnector.getPointsInfo(callback: gotPointsInfo)
+    }
+	/// 获得积分信息后的回调函数
+    func gotPointsInfo(result:Bool){
+        if result {
+            availablePointsLabel.text = String(User.getUser().availablePoints!)
+            generalPointsLabel.text = String(User.getUser().generalPoints!)
+        }else{
+            availablePointsLabel.text = "---"
+            generalPointsLabel.text = "---"
+        }
+    }
     /// 获得商户信息后的回调函数
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
@@ -58,6 +70,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         else {
             print("商户信息获取失败")
         }
+        activityIndicator?.stopAnimating()
     }
     
     
@@ -137,11 +150,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		
 		if User.getUser().username != nil {
             // 加载动画
-            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-            self.activityIndicator?.center = self.view.center
-            self.activityIndicator?.backgroundColor = UIColor.gray
-            self.activityIndicator?.hidesWhenStopped = true
-            self.view.addSubview(self.activityIndicator!)
+            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
             self.activityIndicator?.startAnimating()
             
             // 获得商家信息

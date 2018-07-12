@@ -9,9 +9,10 @@
 import UIKit
 
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
-
+	
 	@IBOutlet weak var tableView: UITableView!
-	//let maxPoints:Int = 2000
+	var shouldSelectPoints:Double = 900
+	var selectedPoints:Double = 0
 	
 	//var dataSource:[Card]? = User.getUser().card
 	var dataSource:[Any]?
@@ -20,19 +21,24 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var shouldSelectPointsLabel: UILabel!
 	@IBOutlet weak var selectedPointsLabel: UILabel!
 	
+	@IBOutlet weak var confirmBtn: UIButton!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		
+		selectedPointsLabel.text = String(selectedPoints)
+		shouldSelectPointsLabel.text = String(shouldSelectPoints)
+		
 		// test data
 		let user = User.getUser()
 		user.generalPoints = 1000
+		var generalPoints = user.generalPoints
 		let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
 		let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
 		let card3 = Card(merchant: Merchant(name: "耐克"), point: 300, proportion: 0.4)
-		dataSource = [user.generalPoints as Any,card1,card2,card3]
+		dataSource = [generalPoints as Any,card1,card2,card3]
 		
     }
 
@@ -74,7 +80,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			if let cell1 = cell as? ExchangeItemCell {
 				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
 				cell1.delegate = self
-				cell1.generalPoints?.tag = indexPath.row
+				cell1.editGeneralPoints?.tag = indexPath.row
 				if let generalPoints = dataSource?[indexPath.row] as? Double{
 					cell1.generalPoints.text = String(generalPoints)
 					cell1.editGeneralPoints.placeholder = String(generalPoints)
@@ -111,17 +117,62 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
+	
+	
 	// MARK: - ExchangeItemCell delegate
 	/// 获得输入框值并统计积分总数
-	func contentDidChanged(text: String, row: Int) {
-		if row == 0 {
-			if let card = dataSource?[row] as? Card {
-				
+	func contentDidChanged(text: String, row: Int, type: changeType) {
+		switch type {
+		case .add:
+			if shouldSelectPoints - Double(text)! >= 0 {
+				shouldSelectPoints -= Double(text)!
+				shouldSelectPointsLabel.text = String(shouldSelectPoints)
+				selectedPoints += Double(text)!
+				selectedPointsLabel.text = String(selectedPoints)
+			}
+			else {
+				let indexPath = IndexPath(row: row, section: 0)
+				if let cell = self.tableView.cellForRow(at: indexPath) as? ExchangeItemCell{
+					if row == 0 {
+						cell.generalPoints.text = String(shouldSelectPoints)
+						//cell.editGeneralPoints.placeholder = cell.generalPoints.text
+					}
+					else {
+						cell.targetPoints.text = String(shouldSelectPoints)
+						cell.sourcePoints.text = String(shouldSelectPoints / cell.proportion!)
+						//cell.editSourcePoints.placeholder = cell.sourcePoints.text
+					}
+					selectedPoints += shouldSelectPoints
+					selectedPointsLabel.text = String(selectedPoints)
+					shouldSelectPoints = 0
+					shouldSelectPointsLabel.text = String(shouldSelectPoints)
+					
+				}
+			}
+		default: //minus
+			shouldSelectPoints += Double(text)!
+			shouldSelectPointsLabel.text = String(shouldSelectPoints)
+			selectedPoints -= Double(text)!
+			selectedPointsLabel.text = String(selectedPoints)
+			let indexPath = IndexPath(row: row, section: 0)
+			if let cell = self.tableView.cellForRow(at: indexPath) as? ExchangeItemCell{
+				if row == 0 {
+					if let generalPoints = dataSource?[row] as? Double{
+						cell.generalPoints.text = String(generalPoints)
+						cell.editGeneralPoints.placeholder = String(generalPoints)
+					}
+					
+				}
+				else {
+					if let card = dataSource?[row] as? Card{
+						cell.sourcePoints.text = String(card.point)
+						cell.editSourcePoints.placeholder = String(card.point)
+						cell.targetPoints.text = String(card.point * (card.proportion)!)
+					}
+				}
 			}
 		}
-		else {
-			
-		}
+
 	}
 	
 	

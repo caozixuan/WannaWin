@@ -76,6 +76,23 @@ class ServerConnector: NSObject {
             }
         }
     }
+    /// 获得积分信息
+    static func getPointsInfo(callback:@escaping (_ result:Bool)->()){
+        if let id = User.getUser().id{
+            provider.request(.getPointsInfo(userID: id)){result in
+                if case let .success(response) = result {
+                    let data = JSON(try? response.mapJSON())
+                    User.getUser().availablePoints = data["availablePoints"].double
+                    User.getUser().generalPoints = data["generalPoints"].double
+                    callback(true)
+                }
+            }
+        }
+        else{
+            callback(false)
+        }
+        
+    }
     
     //花旗卡相关
     /// 绑定花旗银行卡

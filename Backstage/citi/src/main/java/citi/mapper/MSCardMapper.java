@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface MSCardMapper {
 
-    final String insert = "INSERT INTO m_card (userID, cardID, card_No, points, MerchantID) VALUES (#{userID}, #{cardID}, #{card_No}, #{points}, #{merchantId})";
+    final String insert = "INSERT INTO m_card (cardID, userID, cardNum, points, MerchantID) VALUES (#{cardID}, #{userID}, #{cardNum}, #{points}, #{merchantId})";
     final String getByuserId = "SELECT * FROM m_card WHERE userID = #{userID}";
     final String getCard = "SELECT * FROM m_card WHERE cardID = #{cardID}";
 

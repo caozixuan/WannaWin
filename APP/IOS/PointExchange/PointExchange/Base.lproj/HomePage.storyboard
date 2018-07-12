@@ -123,10 +123,10 @@
                                                         <rect key="frame" x="0.0" y="253.5" width="343" height="50"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Zd-9b-qqE">
-                                                                <rect key="frame" x="97.5" y="4.5" width="148.5" height="41"/>
+                                                                <rect key="frame" x="102" y="4.5" width="140" height="41"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NZN-5Y-hcM">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="148.5" height="20.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="20.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="当前通用积分:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irj-yn-0t3">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="109" height="20.5"/>
@@ -134,8 +134,8 @@
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oW-a7-cS3">
-                                                                                <rect key="frame" x="117" y="0.0" width="31.5" height="20.5"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oW-a7-cS3">
+                                                                                <rect key="frame" x="117" y="0.0" width="23" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -143,16 +143,16 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1fx-kp-q6T">
-                                                                        <rect key="frame" x="0.0" y="20.5" width="148.5" height="20.5"/>
+                                                                        <rect key="frame" x="0.0" y="20.5" width="140" height="20.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="剩余可抵积分:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-AO-Xlq">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="112" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="109" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="180" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSP-Sy-n6i">
-                                                                                <rect key="frame" x="120" y="0.0" width="28.5" height="20.5"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSP-Sy-n6i">
+                                                                                <rect key="frame" x="117" y="0.0" width="23" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -263,9 +263,11 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="availablePointsLabel" destination="oSP-Sy-n6i" id="cZb-zZ-x1O"/>
                         <outlet property="cardImage1" destination="CdQ-PU-iAM" id="sIf-Gx-ffp"/>
                         <outlet property="cardImage2" destination="GfM-Rt-XOO" id="vSX-Ug-bqC"/>
                         <outlet property="cardImage3" destination="761-dq-5Zd" id="4Nn-TJ-DeY"/>
+                        <outlet property="generalPointsLabel" destination="7oW-a7-cS3" id="GPo-Bp-Bta"/>
                         <outlet property="imageScrollerContainer" destination="oSD-fv-QKp" id="5of-O3-FjX"/>
                     </connections>
                 </viewController>

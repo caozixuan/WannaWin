@@ -1,7 +1,6 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.KeyListener;
 import android.view.LayoutInflater;
@@ -14,17 +13,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     //数据源
-    private List<String> list;
+    private List<String> data_posses_point;
+    private List<String> available_point;
+    private List<String> logos;
     private List<Integer> img_list;
-    private List<Bitmap> bitmaps;
     private Context context;
     //是否显示单选框,默认false
     private boolean isshowBox = false;
@@ -39,22 +37,26 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
 
     //构造方法
-    public PayingAdapter(List<String> list,List<Integer> img_list, HashMap<Integer,Boolean> map, Context context) {
+    public PayingAdapter(List<String> list,List<Integer> img_list, Context context) {
         this.img_list = img_list;
-        this.list = list;
+        this.data_posses_point = list;
         this.context = context;
         this.total = 0;
-        this.map = map;
         initMap();
     }
 
     //初始化map集合,默认为不选中
     private void initMap() {
-        if(map.isEmpty()){
-            for (int i = 0; i < list.size(); i++) {
-                map.put(i, false);
-            }
+        for (int i = 0; i < data_posses_point.size(); i++) {
+            map.put(i, false);
         }
+    }
+
+    public void addData(String posses, String available, String logoURL) {
+        data_posses_point.add(posses);
+        available_point.add(available);
+        logos.add(logoURL);
+        notifyDataSetChanged();
     }
 
     /**
@@ -98,10 +100,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(final PayingAdapter.MyViewHolder holder, final int position) {
-        //初始化checkbox选中状态
-        holder.Checkbox_Choose.setChecked(map.get(position));
         //设置列表中积分信息
-        holder.Points_Possession.setText(list.get(position));
+        holder.Points_Possession.setText(data_posses_point.get(position));
         //设置商家图片
         holder.Business_Image.setImageResource(img_list.get(position));
         //初始编辑框为不可编辑状态
@@ -135,7 +135,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 }
 
                 if(buttonInterface!=null) {
-                  //接口实例化后的而对象，调用重写后的方法
+                    //接口实例化后的而对象，调用重写后的方法
                     buttonInterface.onclick(v,position);
                 }
 
@@ -145,6 +145,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         holder.Checkbox_Choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 if(checkBoxInterface!=null) {
                     //接口实例化后的而对象，调用重写后的方法
@@ -179,12 +180,13 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                     //取消选择后编辑框为不可编辑状态
                     holder.EditText_Points_Posses.setFocusable(false);
                     holder.EditText_Points_Posses.setFocusableInTouchMode(false);
-                    holder.EditText_Points_Posses.setText(list.get(position));
+                    holder.EditText_Points_Posses.setText(data_posses_point.get(position));
 
                 }
 
             }
         });
+
 
 
 
@@ -205,7 +207,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     /*返回列表长度*/
     @Override
     public int getItemCount() {
-        return list.size();
+        return data_posses_point.size();
     }
 
     //设置是否显示CheckBox
