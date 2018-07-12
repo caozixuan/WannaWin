@@ -35,7 +35,7 @@ public class MSCardController {
     public String getMSInfo(String userId,int n){
         List<MSCard> cards = msCardService.getInfo(userId, n);
         if(cards==null){
-            return "{result:null}";
+            return "[]";
         }
         String jsonStr = gson.toJson(cards);
         return jsonStr;
