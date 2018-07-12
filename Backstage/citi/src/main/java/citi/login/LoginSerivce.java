@@ -34,7 +34,7 @@ public class LoginSerivce {
             String vcode = AliSMS.sendSms(phoneNum);
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
-            VCode v = new VCode(phoneNum,vcode,timestamp.toString());
+            VCode v = new VCode(phoneNum,vcode,timestamp);
             vcodeMapper.insertVcode(v);
         }
         catch (Exception e){

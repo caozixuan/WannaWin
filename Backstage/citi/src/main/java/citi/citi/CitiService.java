@@ -13,7 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class CitiService {
@@ -47,7 +49,7 @@ public class CitiService {
     public void saveRefreshToken(String accessInformation, String userID){
         String refreshAccessToken = Authorize.getRefreshToken(accessInformation);
         refreshAccessToken = Authorize.getTokenByRF(refreshAccessToken);
-        RefreshToken refreshToken = new RefreshToken(userID,refreshAccessToken,String.valueOf(System.currentTimeMillis()));
+        RefreshToken refreshToken = new RefreshToken(userID,refreshAccessToken,new Timestamp(new Date().getTime()));
         tokenMapper.update(refreshToken);
     }
 
