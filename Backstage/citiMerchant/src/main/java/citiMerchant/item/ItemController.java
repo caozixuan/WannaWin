@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zhong on 2018/7/11 19:51
@@ -22,12 +23,13 @@ public class ItemController {
     @RequestMapping("getItem")
     public ModelAndView getItemList(String merchantID){
         ModelAndView mv =new ModelAndView();
-        ArrayList<Item> items = itemService.getInfo(merchantID);
+        List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
         mv.setViewName("showItem");
         return mv;
     }
 
+    @RequestMapping("editItem")
     public ModelAndView editItem(String itemID){
         ModelAndView mv =new ModelAndView();
         Item item = itemService.getItem(itemID);
@@ -36,21 +38,34 @@ public class ItemController {
         return mv;
     }
 
-    public void submitEdit(Item item){
-
-    }
-
-    public ModelAndView deleteItem(String merchantID, String itemID){
-        itemService.deleteItem(itemID);
+    @RequestMapping("submitEdit")
+    public ModelAndView submitEdit(String merchantID, Item item){
         ModelAndView mv =new ModelAndView();
-        ArrayList<Item> items = itemService.getInfo(merchantID);
+        itemService.updateItem(item);
+        List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
         mv.setViewName("showItem");
         return mv;
     }
 
-    public void addItem(Item item){
+    @RequestMapping("deleteItem")
+    public ModelAndView deleteItem(String merchantID, String itemID){
+        itemService.deleteItem(itemID);
+        ModelAndView mv =new ModelAndView();
+        List<Item> items = itemService.getInfo(merchantID);
+        mv.addObject("items",items);
+        mv.setViewName("showItem");
+        return mv;
+    }
 
+    @RequestMapping("addItem")
+    public ModelAndView addItem(String merchantID, Item item){
+        itemService.addItem(item);
+        ModelAndView mv =new ModelAndView();
+        List<Item> items = itemService.getInfo(merchantID);
+        mv.addObject("items",items);
+        mv.setViewName("showItem");
+        return mv;
     }
 
 }

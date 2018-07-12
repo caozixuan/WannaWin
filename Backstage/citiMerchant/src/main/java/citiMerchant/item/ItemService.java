@@ -1,6 +1,8 @@
 package citiMerchant.item;
 
+import citiMerchant.mapper.ItemMapper;
 import citiMerchant.vo.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,11 @@ import java.util.List;
  */
 public class ItemService {
 
-    public ArrayList<Item> getInfo(String merchantID){
-        ArrayList<Item> items = new ArrayList<Item>(); //此处应该调用数据库，根据merchantID获取
+    @Autowired
+    private ItemMapper itemMapper;
+
+    public List<Item> getInfo(String merchantID){
+        List<Item> items = itemMapper.getItemByMerchantID(merchantID);
         return items;
     }
 
@@ -20,7 +25,15 @@ public class ItemService {
         return item;
     }
 
+    public void updateItem(Item item){
+        itemMapper.updateItemByID(item);
+    }
+
     public void deleteItem(String itemID){
-                                   // 此处调用删除方法
+        itemMapper.deleteItemByID(itemID);
+    }
+
+    public void addItem(Item item){
+        itemMapper.addItem(item);
     }
 }
