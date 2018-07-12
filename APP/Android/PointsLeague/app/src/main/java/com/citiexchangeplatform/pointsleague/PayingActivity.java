@@ -2,11 +2,7 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -34,20 +30,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.study.xuan.xvolleyutil.base.XVolley;
-import com.study.xuan.xvolleyutil.callback.CallBack;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +50,6 @@ public class PayingActivity extends AppCompatActivity {
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
     TextView Choose_Points;
-    private Bitmap bitmapLogo;
 
 
     KeyListener storedKeylistener;
@@ -95,20 +81,12 @@ public class PayingActivity extends AppCompatActivity {
         Choose_Points = (TextView) findViewById(R.id.textview_points_choose);
 
 
-        //获得map
-        if(getIntent().getExtras()!=null){
-            Bundle bundle = getIntent().getExtras();
-            SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map_restart");
-            map = serializableHashMap.getMap();
-        }
-
-
         //初始化数据
         initData();
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingAdapter(data_posses_point,business_image,map,getApplicationContext());
+        mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
@@ -132,6 +110,7 @@ public class PayingActivity extends AppCompatActivity {
             }
         });
 
+        getMscardInfoRequest();
 
     }
 
@@ -151,35 +130,7 @@ public class PayingActivity extends AppCompatActivity {
     public void click_expand(View view){
 
         Intent intent = new Intent(this, PayingDetailsActivity.class);
-        map = mAdapter.getMap();
-        SerializableHashMap myMap=new SerializableHashMap();
-        myMap.setMap(map);//将hashmap数据添加到封装的myMap中
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("checkbox_map", myMap);
-        intent.putExtras(bundle);
-
-        startActivityForResult(intent,1);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1 && resultCode==1){
-            //获得map
-
-            Bundle bundle = data.getExtras();
-            SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_detail_map");
-            map = serializableHashMap.getMap();
-            finish();
-            Intent intent = new Intent(PayingActivity.this, PayingActivity.class);
-            //map = mAdapter.getMap();
-            SerializableHashMap myMap=new SerializableHashMap();
-            myMap.setMap(map);//将hashmap数据添加到封装的myMap中
-            Bundle bundle_2 = new Bundle();
-            bundle_2.putSerializable("checkbox_map_restart", myMap);
-            intent.putExtras(bundle_2);
-            startActivity(intent);
-        }
+        startActivity(intent);
     }
 
     /*确认抵扣按钮点击事件*/
@@ -227,51 +178,14 @@ public class PayingActivity extends AppCompatActivity {
     /*获得各项积分数据：商家图标、积分数*/
     protected void initData()
     {
-        //设置需要的积分数
-        //sendRequestWithHttpURLConnection("http://193.112.44.141:80/citi/merchant/getInfos",1);
 
         //postStringRequest();
-        XVolley.getInstance()
-                .doPost()
-                .url("http://193.112.44.141:80/citi/merchant/getInfos")
-                .addParam("start", "0")
-                .addParam("n", "1")
-                .build()
-                .execute(PayingActivity.this, new CallBack<String>() {
-                    @Override
-                    public void onSuccess(Context context, String response) {
-                        System.out.println(response);
-                        JSONArray jsonArray = null;
-                        try {
-                            jsonArray = new JSONArray(response);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String name = jsonObject.getString("name");
-                                String merchantID = jsonObject.getString("merchantID");
-                                String logoURL = jsonObject.getString("logoURL");
-                                String description = jsonObject.getString("description");
-                                String address = jsonObject.getString("address");
-
-                                System.out.println(name);
-                                MerchantInfo.getInstance(PayingActivity.this).setMerchantID(merchantID)
-                                        .setName(name)
-                                        .setLogoURL(logoURL)
-                                        .setDescription(description)
-                                        .setAddress(address);
-
-                                System.out.println(name);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-
         String name = MerchantInfo.getInstance(PayingActivity.this).getName();
         String logoURL = MerchantInfo.getInstance(PayingActivity.this).getLogoURL();
+        //设置需要的积分数
         Text_NeedPoints.setText("120");
 
+        //ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
 
         //获得并显示商家logo
         Glide.with(PayingActivity.this)
@@ -287,7 +201,6 @@ public class PayingActivity extends AppCompatActivity {
             data_posses_point.add("" + i);
         }
 
-
         //设置选择积分栏目中商家logo
         business_image = new ArrayList<Integer>();
 
@@ -298,97 +211,14 @@ public class PayingActivity extends AppCompatActivity {
     }
 
 
-    /*发送网络请求*/
-    private void sendRequestWithHttpURLConnection(final String  url_string, final int n){
-        //开启线程来发起网络请求
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection connection = null;
-                BufferedReader reader = null;
-                try {
-
-                    URL url = new URL(url_string);
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("POST");
-                    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                    out.writeBytes("start="+ 0 + "&n=" + n);
-
-                    connection.setConnectTimeout(8000);
-                    connection.setReadTimeout(8000);
-                    InputStream in = connection.getInputStream();
-                    //下面对获取到的输入流进行读取
-                    reader = new BufferedReader(new InputStreamReader(in));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null){
-                        response.append(line);
-                    }
-
-                    System.out.println(response.toString());
-                    /*json字符串最外层是方括号时：*/
-                    JSONArray jsonArray = new JSONArray(response.toString());
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String name= jsonObject.getString("name");
-                        String merchantID= jsonObject.getString("merchantID");
-                        String logoURL= jsonObject.getString("logoURL");
-                        String description= jsonObject.getString("description");
-                        String address= jsonObject.getString("address");
-
-                        System.out.println(name);
-                        MerchantInfo.getInstance(PayingActivity.this).setMerchantID(merchantID)
-                                .setName(name)
-                                .setLogoURL(logoURL)
-                                .setDescription(description)
-                                .setAddress(address);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }finally {
-                    if (reader != null){
-                        try {
-                            reader.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (connection != null){
-                        connection.disconnect();
-                    }
-                }
-            }
-        }).start();
-    }
-
-    private void postStringRequest_2(){
-        //RequestQueue mRequestQueue = VolleySingleton.getVolleySingleton(this.getApplicationContext()).getRequestQueue();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,"https://www.baidu.com",new Response.Listener<String>(){
-
-            @Override
-            public void onResponse(String s) {
-                //打印请求返回结果
-                Log.e("volley",s);
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.e("volleyerror","erro2");
-            }
-        });
-//将StringRequest对象添加进RequestQueue请求队列中
-        VolleySingleton.getVolleySingleton(this.getApplicationContext()).addToRequestQueue(stringRequest);
-    }
-
-
     private void postStringRequest() {
         String url="http://193.112.44.141:80/citi/merchant/getInfos";
-        RequestQueue queue=Volley.newRequestQueue(this);
+        RequestQueue queue = MyApplication.getHttpQueues();
+        //RequestQueue queue= Volley.newRequestQueue(this);
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Log.e("sucess",s);
+                Log.e("success",s);
                 System.out.println(s);
             }
         }, new Response.ErrorListener() {
@@ -402,6 +232,44 @@ public class PayingActivity extends AppCompatActivity {
                 Map<String,String> map=new HashMap<>();
                 map.put("start","0");
                 map.put("n", "1");
+                return map;
+            }
+        };
+        queue.add(request);
+    }
+
+    private void getMscardInfoRequest() {
+        String url="http://193.112.44.141:80/citi/mscard/infos";
+        RequestQueue queue = MyApplication.getHttpQueues();
+        //RequestQueue queue=Volley.newRequestQueue(this);
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("success",s);
+                System.out.println(s);
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jobj = jsonArray.getJSONObject(i);
+
+                        mAdapter.addData(jobj.getString("generalPoints"),jobj.getString("availablePoints"),jobj.getString("logoURL"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("userId",LogStateInfo.getInstance(PayingActivity.this).getUserID());
+                map.put("n", "10");
                 return map;
             }
         };
@@ -467,12 +335,5 @@ public class PayingActivity extends AppCompatActivity {
 
 
 
-    @Override
-     protected void onStop() {
-        MyApplication.getHttpQueues().cancelAll("postsr");
-        super.onStop();
-    }
 }
-
-
 
