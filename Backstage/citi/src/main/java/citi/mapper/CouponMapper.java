@@ -28,7 +28,7 @@ public interface CouponMapper {
     List<UserCoupon> getCouponsBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("ItemID") String ItemID);
 
     @Insert(addUserCoupon)
-    int addUserCoupon(UserCoupon msCardType);
+    int addUserCoupon(UserCoupon userCoupon);
 
     @Update(deleteOneUserCouponBy_UserID_AND_ItemID)
     int deleteOneUserCouponBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("ItemID") String itemID);
