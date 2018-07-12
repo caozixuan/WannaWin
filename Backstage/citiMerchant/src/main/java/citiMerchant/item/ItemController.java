@@ -23,19 +23,30 @@ public class ItemController {
     public ModelAndView getItemList(String merchantID){
         ModelAndView mv =new ModelAndView();
         ArrayList<Item> items = itemService.getInfo(merchantID);
-        //return null;
+        mv.addObject("items",items);
+        mv.setViewName("showItem");
+        return mv;
     }
 
-    public void editItem(String itemID){
-
+    public ModelAndView editItem(String itemID){
+        ModelAndView mv =new ModelAndView();
+        Item item = itemService.getItem(itemID);
+        mv.addObject("item",item);
+        mv.setViewName("addItem");
+        return mv;
     }
 
     public void submitEdit(Item item){
 
     }
 
-    public void deleteItem(String itemID){
-
+    public ModelAndView deleteItem(String merchantID, String itemID){
+        itemService.deleteItem(itemID);
+        ModelAndView mv =new ModelAndView();
+        ArrayList<Item> items = itemService.getInfo(merchantID);
+        mv.addObject("items",items);
+        mv.setViewName("showItem");
+        return mv;
     }
 
     public void addItem(Item item){
