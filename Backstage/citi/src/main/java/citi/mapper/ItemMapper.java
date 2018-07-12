@@ -1,6 +1,6 @@
-package citiMerchant.mapper;
+package citi.mapper;
 
-import citiMerchant.vo.Item;
+import citi.vo.Item;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

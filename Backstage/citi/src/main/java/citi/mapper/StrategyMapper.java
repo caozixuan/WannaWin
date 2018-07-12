@@ -1,6 +1,6 @@
-package citiMerchant.mapper;
+package citi.mapper;
 
-import citiMerchant.vo.StrategyDAO;
+import citi.vo.StrategyDAO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

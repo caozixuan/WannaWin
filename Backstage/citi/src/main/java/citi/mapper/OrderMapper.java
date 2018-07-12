@@ -1,6 +1,6 @@
-package citiMerchant.mapper;
+package citi.mapper;
 
-import citiMerchant.vo.Order;
+import citi.vo.Order;
 //import citi.dao.OrderStateTypeHandler;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
