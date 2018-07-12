@@ -1,6 +1,9 @@
 package citiMerchant.login;
 
-import citiMerchant.dao.LoginDao;
+
+import citiMerchant.mapper.DBhandler;
+import citiMerchant.mapper.MerchantMapper;
+import citiMerchant.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,16 @@ import java.util.ArrayList;
 public class LoginService {
 
     @Autowired
-    private LoginDao loginDao;
+    private DBhandler dBhandler;
+    @Autowired
+    private MerchantMapper merchantMapper;
 
     public ArrayList<Integer> getNums(String username, String password) {
-        if(!loginDao.verify(username,password))
+        Merchant m = merchantMapper.loginMerchant(username,password);
+        if(m==null)
             return null;
         else
-            return loginDao.getNums(username,password);
+            return dBhandler.getAmountByMerchantID(m.getMerchantID());
     }
 
 
