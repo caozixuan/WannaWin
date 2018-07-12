@@ -1,10 +1,13 @@
 package citiMerchant.mapper;
 
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +20,20 @@ public class DBHandler {
     @Autowired
     public static StrategyMapper strategyMapper;
 
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-    SqlSession session = sqlSessionFactory.openSession();
+    static final private String resource = "mapper.xml";
+    static private SqlSessionFactoryBuilder sqlSessionFactoryBuilder;
+    static private SqlSessionFactory sqlSessionFactory;
+
+    static {
+        try {
+            Reader reader = Resources.getResourceAsReader(resource);
+            sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+            sqlSessionFactory = sqlSessionFactoryBuilder.build(reader);
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("\nfail to read mapper.xml\n");
+        }
+    }
 
     static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
         int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
@@ -30,22 +45,13 @@ public class DBHandler {
 
 
     static public class Record {
+        static public void coupon_record() {
+            SqlSession session = sqlSessionFactory.openSession();
 
-/*
-        //select a particular student  by  id
-        Student student = (Student) session.selectOne("Student.callById", 3);
 
-        //Print the student details
-      System.out.println("Details of the student are:: ");
-      System.out.println("Id :"+student.getId());
-      System.out.println("Name :"+student.getName());
-      System.out.println("Branch :"+student.getBranch());
-      System.out.println("Percentage :"+student.getPercentage());
-      System.out.println("Email :"+student.getEmail());
-      System.out.println("Phone :"+student.getPhone());
-      session.commit();
-      session.close();
-*/
+            session.commit();
+            session.close();
+        }
     }
 
 
