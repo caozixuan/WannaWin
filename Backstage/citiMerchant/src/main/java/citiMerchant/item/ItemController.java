@@ -32,14 +32,22 @@ public class ItemController {
         return mv;
     }
 
+    @RequestMapping("addItem")
+    public ModelAndView addItem(String merchantID){
+        ModelAndView mv =new ModelAndView();
+        mv.setViewName("addItem");
+        return mv;
+    }
+
     @RequestMapping("editItem")
     public ModelAndView editItem(String itemID){
         ModelAndView mv =new ModelAndView();
         Item item = itemService.getItem(itemID);
         mv.addObject("item",item);
-        mv.setViewName("addItem");
+        mv.setViewName("editItem");
         return mv;
     }
+
 
     @RequestMapping("submitEdit")
     public ModelAndView submitEdit(String merchantID, Item item){
@@ -61,8 +69,8 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("addItem")
-    public ModelAndView addItem(String merchantID, Item item){
+    @RequestMapping("addItemOperation")
+    public ModelAndView addItemOperation(String merchantID, Item item){
         itemService.addItem(item);
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
