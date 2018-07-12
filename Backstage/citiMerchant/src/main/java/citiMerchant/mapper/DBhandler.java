@@ -1,16 +1,26 @@
 package citiMerchant.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class DBhandler {
 
-    static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+    @Autowired
+    public static OrderMapper orderMapper;
+    @Autowired
+    public static ItemMapper itemMapper;
+    @Autowired
+    public static StrategyMapper strategyMapper;
 
-        List<Integer> amount = Arrays.asList(1, 2, 3);
-        ArrayList<Integer> nums = new ArrayList(amount);
-        return nums;
+    static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+        int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
+        int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
+        int orderAmount = orderMapper.getOrderAmount(merchantID);
+        List<Integer> amount = Arrays.asList(itemAmount, stategyAmount, orderAmount);
+        return new ArrayList(amount);
     }
 
 

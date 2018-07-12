@@ -6,11 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/*
- * 接口设计：刘钟博
- * 代码填充：任思远
- */
-
 @Repository
 public interface ItemMapper {
 
@@ -40,5 +35,9 @@ public interface ItemMapper {
 
     @Delete(deleteItemByID)
     int deleteItemByID(String ItemID);
+
+    final String getItemAmountByMerchantID="SELECT COUNT(*) FROM item WHERE MerchantID = #{merchantID}";
+    @Select(getItemByMerchantID)
+    int getItemAmountByMerchantID(String merchantID);
 
 }

@@ -1,6 +1,6 @@
 package citiMerchant.mapper;
 
-import citi.vo.StrategyDAO;
+import citiMerchant.vo.StrategyDAO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -30,5 +30,10 @@ public interface StrategyMapper {
 
     @Delete(deleteStrategy)
     int deleteStrategy(String merchantID);
+
+    final String getStrategyAmountByMerchantID = "SELECT COUNT(*) FROM strategy WHERE MerchantID = #{merchantID}";
+
+    @Select(getStrategyAmountByMerchantID)
+    int getStrategyAmountByMerchantID(String merchantID);
 
 }
