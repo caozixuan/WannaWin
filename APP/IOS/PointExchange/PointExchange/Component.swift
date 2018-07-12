@@ -9,6 +9,7 @@
 import UIKit
 
 class ActivityIndicator {
+    /// 等待操作时的动画
     static func createWaitIndicator(parentView:UIView)->UIActivityIndicatorView{
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         activityIndicator.center = parentView.center
@@ -21,3 +22,17 @@ class ActivityIndicator {
     }
     
 }
+
+class Alert{
+    static func createAlert(parentView:UIView)->UIAlertController{
+        let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
+        let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+        })
+        let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        return alert
+    }
+}
+

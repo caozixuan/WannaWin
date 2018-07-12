@@ -70,6 +70,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         else {
             print("商户信息获取失败")
         }
+        activityIndicator?.stopAnimating()
     }
     
     
@@ -149,11 +150,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		
 		if User.getUser().username != nil {
             // 加载动画
-            self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-            self.activityIndicator?.center = self.view.center
-            self.activityIndicator?.backgroundColor = UIColor.gray
-            self.activityIndicator?.hidesWhenStopped = true
-            self.view.addSubview(self.activityIndicator!)
+            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
             self.activityIndicator?.startAnimating()
             
             // 获得商家信息
