@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version = "1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTDSQL Map Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
@@ -24,23 +24,14 @@
 
     <mappers>
 
-        <resultMap id="BaseResultMap" type="CusDevicePOJO">
-            <result column="device_sn" property="device_sn" jdbcType="VARCHAR" />
-        </resultMap>
-
-        <sql id="Base_Column_List">
-            device_sn, device_name,device_mac
-        </sql>
-
-        <select id="count" parameterType="DevicePOJO" useCache="false"
-                statementType="CALLABLE">
+        <select id="count" statementType="CALLABLE">
             <![CDATA[
-        call countDevicesName(
-        #{devoceName,mode=IN,jdbcType=VARCHAR},
-        #{deviceCount,mode=OUT,jdbcType=INTEGER});
+        call coupon_record(
+        #{IN_MerchantID, mode = IN,jdbcType = VARCHAR(45)},
+        #{IN_intervalDate, mode = IN,jdbcType = INT},
+        #{totalPoints, mode = OUT, jdbcType = BIGINT});
         ]]>
         </select>
-
 
     </mappers>
 </configuration>
