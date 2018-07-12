@@ -15,13 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.study.xuan.xvolleyutil.base.XVolley;
+import com.study.xuan.xvolleyutil.callback.CallBack;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -47,7 +51,7 @@ public class PointsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_points, null);
-        accountInfoLayout = (LinearLayout)view.findViewById(R.id.linearlayout_account_info_points);
+        accountInfoLayout = (LinearLayout) view.findViewById(R.id.linearlayout_account_info_points);
 
         initImageSlider();
         loadAccountInfo();
@@ -102,11 +106,11 @@ public class PointsFragment extends Fragment {
     }
 
 
-    private void loadAccountInfo(){
+    private void loadAccountInfo() {
         accountInfoLayout.removeAllViewsInLayout();
         isLogin = LogStateInfo.getInstance(getContext()).isLogin();
 
-        if(isLogin){
+        if (isLogin) {
             View content = LayoutInflater.from(getContext()).inflate(R.layout.content_cards_points, null);
             accountInfoLayout.addView(content);
             Button buttonAllCard = (Button) content.findViewById(R.id.button_all_card_main);
@@ -130,12 +134,12 @@ public class PointsFragment extends Fragment {
             TextView textViewAvailablePoint = (TextView) content.findViewById(R.id.textView_remain_points_main);
             textViewAvailablePoint.setText("剩余可抵积分 : " + LogStateInfo.getInstance(getContext()).getAvailablePoints());
 
-        }else {
+        } else {
 
             View content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_button_points, null);
             accountInfoLayout.addView(content);
 
-            Button button = (Button)view.findViewById(R.id.button_login_points);
+            Button button = (Button) view.findViewById(R.id.button_login_points);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -149,8 +153,7 @@ public class PointsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(LogStateInfo.getInstance(getContext()).isLogin() != isLogin)
-        {
+        if (LogStateInfo.getInstance(getContext()).isLogin() != isLogin) {
             loadAccountInfo();
         }
 
@@ -158,60 +161,107 @@ public class PointsFragment extends Fragment {
 
     }
 
-    private void loadCardsInfo(){
-        if(isLogin){
-            dialog = ProgressDialog.show(getContext(),"","正在获取卡片信息...");
-            new Thread(new getCardsInfo()).start();
+    private void loadCardsInfo() {
+        if (isLogin) {
+            //dialog = ProgressDialog.show(getContext(),"","正在获取卡片信息...");
+            //new Thread(new getCardsInfo()).start();
+            getCardInfo();
         }
     }
 
+    private void getCardInfo() {
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/mscard/infos")
+                .addParam("userId", LogStateInfo.getInstance(getContext()).getUserID())
+                .addParam("n", "3")
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean logSuccess = false;
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jobj = jsonArray.getJSONObject(i);
+                                String cardID = jobj.getString("cardID");
+                                String merchantId = jobj.getString("merchantId");
+                                int points = jobj.getInt("points");
+                                System.out.println(cardID + " " + merchantId + " " + points);
+                            }
+                            //显示前n
 
-    class getCardsInfo implements Runnable {
-
-        @Override
-        public void run() {
-            boolean getInfoSuccess = false;
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            try {
-                URL url = new URL("http://193.112.44.141:80/citi/mscard/infos");
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                out.writeBytes("userId=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=20");
-                connection.setConnectTimeout(5000);
-                connection.setReadTimeout(5000);
-
-                InputStream in = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(in));
-                String json = reader.readLine();
-                System.out.println(json);
-
-                JSONArray jsonArray = new JSONArray(json);
-                for(int i = 0; i < jsonArray.length(); i++){
-                    JSONObject jobj = jsonArray.getJSONObject(i);
-                    String cardID = jobj.getString("cardID");
-                    String cardNo = jobj.getString("card_No");
-                    int points = jobj.getInt("points");
-                    System.out.println(cardID+ " "+cardNo+" "+points);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
                     }
-                }
-                if (connection != null) {
-                    connection.disconnect();
-                }
-            }
-            dialog.dismiss();
-        }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(getContext(), "", "正在获取卡片信息...");
+                    }
+
+                });
     }
 }
+
+
+//    class getCardsInfo implements Runnable {
+//
+//        @Override
+//        public void run() {
+//            boolean getInfoSuccess = false;
+//
+//            HttpURLConnection connection = null;
+//            BufferedReader reader = null;
+//            try {
+//                URL url = new URL("http://193.112.44.141:80/citi/mscard/infos");
+//                connection = (HttpURLConnection) url.openConnection();
+//                connection.setRequestMethod("POST");
+//                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+//                out.writeBytes("userId=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=20");
+//                connection.setConnectTimeout(5000);
+//                connection.setReadTimeout(5000);
+//
+//                InputStream in = connection.getInputStream();
+//                reader = new BufferedReader(new InputStreamReader(in));
+//                String json = reader.readLine();
+//                System.out.println(json);
+//
+//                JSONArray jsonArray = new JSONArray(json);
+//                for(int i = 0; i < jsonArray.length(); i++){
+//                    JSONObject jobj = jsonArray.getJSONObject(i);
+//                    String cardID = jobj.getString("cardID");
+//                    String merchantId = jobj.getString("merchantId");
+//                    int points = jobj.getInt("points");
+//                    System.out.println(cardID+ " "+merchantId+" "+points);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//
+//            } finally {
+//                if (reader != null) {
+//                    try {
+//                        reader.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                if (connection != null) {
+//                    connection.disconnect();
+//                }
+//            }
+//            dialog.dismiss();
+//        }
+//    }
+//

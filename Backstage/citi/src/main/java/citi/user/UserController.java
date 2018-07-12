@@ -24,6 +24,10 @@ public class UserController {
     public String getInfo(String userID){
         User u = userService.getInfo(userID);
         StringBuilder sb = new StringBuilder();
+        if(u==null){
+            sb.append("{}");
+            return sb.toString();
+        }
         sb.append("{\"generalPoints\":");
         sb.append(u.getGeneralPoints());
         sb.append(",\"availablePoints\":");
