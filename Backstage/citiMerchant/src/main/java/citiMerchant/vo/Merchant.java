@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 import com.google.gson.annotations.Expose;
 

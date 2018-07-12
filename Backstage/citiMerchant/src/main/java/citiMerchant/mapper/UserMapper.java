@@ -1,7 +1,7 @@
-package citiMerchant.mapper;
+package citi.mapper;
 
 
-import citiMerchant.vo.User;
+import citi.vo.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

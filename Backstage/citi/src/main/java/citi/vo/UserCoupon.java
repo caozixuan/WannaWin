@@ -13,7 +13,7 @@ public class UserCoupon {
     private Timestamp useTime;
 
     public enum CouponState {
-        USED, UNUSED;
+        USED, UNUSED, OVERDUED;
 
         static Map<String, UserCoupon.CouponState> enumMap1 = new HashMap<>();
         static Map<UserCoupon.CouponState, String> enumMap2 = new HashMap<>();
@@ -21,9 +21,11 @@ public class UserCoupon {
         static {
             enumMap1.put("USED", USED);
             enumMap1.put("UNUSED", UNUSED);
+            enumMap1.put("OVERDUED", OVERDUED);
 
             enumMap2.put(USED, "USED");
             enumMap2.put(UNUSED, "UNUSED");
+            enumMap2.put(OVERDUED, "OVERDUED");
         }
 
         public static UserCoupon.CouponState getCouponState(String couponState) {

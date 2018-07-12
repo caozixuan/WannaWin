@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 public class Phone {
     private String phoneType;

@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 import com.google.gson.annotations.Expose;
 
@@ -23,14 +23,14 @@ public class User {
     @Expose
     private String rewardLinkCode;
 
-    public User(String phoneNum,String password) {
-        userID=UUID.randomUUID().toString().toLowerCase();
-        citiCardID="";
+    public User(String phoneNum, String password) {
+        userID = UUID.randomUUID().toString().toLowerCase();
+        citiCardID = "";
         this.password = password;
         this.phoneNum = phoneNum;
-        generalPoints=0;
-        availablePoints=0;
-        rewardLinkCode="";
+        generalPoints = 0;
+        availablePoints = 0;
+        rewardLinkCode = "";
     }
 
     public User(String userID, String citiCardID, String password, String phoneNum, double generalPoints, double availablePoints, String rewardLinkCode) {

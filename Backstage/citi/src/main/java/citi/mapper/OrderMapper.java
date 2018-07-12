@@ -1,6 +1,6 @@
-package citi.mapper;
+package citiMerchant.mapper;
 
-import citi.vo.Order;
+import citiMerchant.vo.Order;
 //import citi.dao.OrderStateTypeHandler;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -10,11 +10,13 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
+
     final String getByOrderID = "SELECT * FROM order WHERE OrderID = #{orderID}";
     final String addOrder = "INSERT INTO order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID, time) " +
             "VALUES(#{orderId}, #{originalPrice}, #{priceAfter}, #{pointsNeeded}, #{userId}, #{state}, #{merchantId}, #{time})";
     final String getOrderIDByUserID = "SELECT orderID FROM order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
     final String getOrderIDByMerchantID = "SELECT orderID FROM order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+
 
     @Select(getByOrderID)
     Order selectOrderByID(String orderID);
@@ -44,5 +46,10 @@ public interface OrderMapper {
 
     @Select(getOrderIDByMerchantID)
     List<String> getOrderIDByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
+
+    final String getOrderAmount = "SELECT COUNT(*) FROM order WHERE MerchantID = #{merchantID}";
+
+    int getOrderAmount(String merchantID);
+
 
 }

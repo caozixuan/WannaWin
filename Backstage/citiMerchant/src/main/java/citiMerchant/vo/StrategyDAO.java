@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 public class StrategyDAO {
     private String strategyID;

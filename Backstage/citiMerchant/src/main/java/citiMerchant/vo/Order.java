@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 /*
  * 作者：曹子轩
