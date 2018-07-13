@@ -19,10 +19,10 @@ public class DBHandler {
     @Autowired
     public static StrategyMapper strategyMapper;
 
-    static final private String resource = "./mapper.xml";
+    static final private String resource = "./citiMerchant/mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
 
-    static private String pathname = "./log.txt";
+    static private String pathname = "./citiMerchant/log.txt";
     static private File log_file;
     static private BufferedWriter log_writer;
 
