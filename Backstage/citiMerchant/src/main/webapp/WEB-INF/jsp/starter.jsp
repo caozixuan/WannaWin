@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -152,8 +152,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/showItemRequest">商品清单</a></li>
-            <li><a href="item/addItem.html">添加商品</a></li>
+            <li><a href="/item/getItem">商品清单</a></li>
+            <li><a href="item/addItem">添加商品</a></li>
           </ul>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -167,6 +167,7 @@ desired effect
           </ul>
         <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
 		<li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
        
       </ul>
       <!-- /.sidebar-menu -->
@@ -191,7 +192,7 @@ desired effect
   <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
   <div class="info-box-content">
     <span class="info-box-text">优惠商品</span>
-    <span class="info-box-number">0</span>
+    <span class="info-box-number"></span>
   </div>
   <!-- /.info-box-content -->
   
