@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface MerchantMapper {
 
-    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, address, logoURL, cardLogoURL, proportion) " +
-            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{address}, #{logoURL}, #{cardLogoURL}, #{proportion})";
+    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, logoURL, cardLogoURL, proportion) " +
+            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{logoURL}, #{cardLogoURL}, #{proportion})";
     final String updateMerchantLogo="UPDATE merchant SET logoURL = #{logoURL} WHERE MerchantID = #{merchantID}";
     final String updateMerchantCardLogo="UPDATE merchant SET cardLogoURL = #{cardLogoURL} WHERE MerchantID = #{merchantID}";
     final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchant} AND password = #{password}";
