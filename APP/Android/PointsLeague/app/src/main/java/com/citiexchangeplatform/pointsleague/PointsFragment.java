@@ -129,6 +129,14 @@ public class PointsFragment extends Fragment {
                     startActivity(intentToAddCard);
                 }
             });
+            Button buttonExchangePoint = (Button) content.findViewById(R.id.button_exchange_points_main);
+            buttonExchangePoint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToExchangePoint = new Intent(getActivity(), PayingActivity.class);
+                    startActivity(intentToExchangePoint);
+                }
+            });
             TextView textViewGeneralPoint = (TextView) content.findViewById(R.id.textView_all_points_main);
             textViewGeneralPoint.setText("当前通用积分 : " + LogStateInfo.getInstance(getContext()).getGeneralPoint());
             TextView textViewAvailablePoint = (TextView) content.findViewById(R.id.textView_remain_points_main);
@@ -163,8 +171,6 @@ public class PointsFragment extends Fragment {
 
     private void loadCardsInfo() {
         if (isLogin) {
-            //dialog = ProgressDialog.show(getContext(),"","正在获取卡片信息...");
-            //new Thread(new getCardsInfo()).start();
             getCardInfo();
         }
     }
