@@ -3,6 +3,7 @@ package citiMerchant.item;
 import citiMerchant.mapper.ItemMapper;
 import citiMerchant.vo.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by zhong on 2018/7/11 19:51
  */
+@Service
 public class ItemService {
 
     @Autowired
@@ -21,7 +23,7 @@ public class ItemService {
     }
 
     public Item getItem(String itemID){
-        Item item = new Item();     //此处也是应该调用数据库
+        Item item = itemMapper.getItemByItemID(itemID);
         return item;
     }
 

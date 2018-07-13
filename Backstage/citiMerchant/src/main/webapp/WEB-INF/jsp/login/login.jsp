@@ -30,32 +30,24 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../starter.html"><b>商户管理平台</b></a>
+    <a href="/login"><b>商户管理平台</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="../starter.html" method="post">
+    <form action="/loginSubmit" method="post">
       <div class="form-group has-feedback">
-        <input type="username" class="form-control" placeholder="username">
+        <input type="merchantID" name ="merchantID" class="form-control" placeholder="merchantID">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name = "password" class="form-control" placeholder="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-        </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
         </div>
         <!-- /.col -->
       </div>

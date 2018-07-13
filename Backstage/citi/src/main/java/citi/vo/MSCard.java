@@ -12,6 +12,9 @@ public class MSCard {
     private String cardNum;
     private int points;
     private String merchantId;
+    private double proportion;
+    private String logoURL;
+    private String merchantName;
 
     public MSCard() {
         cardID = UUID.randomUUID().toString().toLowerCase();
@@ -29,6 +32,30 @@ public class MSCard {
     public static boolean checkAttribute(MSCard msCard) {
         //TODO:完整性验证
         return true;
+    }
+
+    public double getProportion() {
+        return proportion;
+    }
+
+    public void setProportion(double proportion) {
+        this.proportion = proportion;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
+    }
+
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
     }
 
     public void setCardID(String cardID) {

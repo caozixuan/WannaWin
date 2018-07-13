@@ -4,6 +4,7 @@ import citiMerchant.mapper.StrategyMapper;
 import citiMerchant.vo.Strategy;
 import citiMerchant.vo.StrategyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by zhong on 2018/7/11 19:52
  * @author  彭璇
  */
+@Service
 public class StrategyService {
     @Autowired StrategyMapper strategyMapper;
 
