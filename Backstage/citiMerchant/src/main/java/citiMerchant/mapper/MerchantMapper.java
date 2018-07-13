@@ -18,6 +18,7 @@ public interface MerchantMapper {
     final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
     final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
+    final String changePassword = "UPDATE merchant SET password = #{password} WHERE MerchantID = #{merchantID}";
 
     @Insert(addMerchant)
     int addMerchant(Merchant merchantDAO);
@@ -43,5 +44,8 @@ public interface MerchantMapper {
 
     @Select(getById)
     Merchant selectByID(String MerchantID);
+
+    @Update(changePassword)
+    int changePassword(@Param("merchantID") String merchantID, @Param("password") String password);
 
 }
