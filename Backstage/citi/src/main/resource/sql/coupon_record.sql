@@ -7,3 +7,4 @@ WHERE getTime BETWEEN (NOW() - INTERVAL IN_intervalDate DAY) AND NOW()
 INTO totalPoints;
 SELECT totalPoints;
 END$$
+commit;

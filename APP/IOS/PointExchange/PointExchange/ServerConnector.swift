@@ -81,11 +81,21 @@ class ServerConnector: NSObject {
         if let id = User.getUser().id{
             provider.request(.getPointsInfo(userID: id)){result in
                 if case let .success(response) = result {
-                    let data = JSON(try? response.mapJSON())
-                    User.getUser().availablePoints = data["availablePoints"].double
-                    User.getUser().generalPoints = data["generalPoints"].double
-                    callback(true)
+                    if response.statusCode == 200 {
+                        let data = JSON(try? response.mapJSON())
+                        User.getUser().availablePoints = data["availablePoints"].double
+                        User.getUser().generalPoints = data["generalPoints"].double
+                        callback(true)
+                    }else{
+                        callback(false)
+                    }
+                    
                 }
+                if case let .failure(response) = result{
+                    callback(false)
+                    print("连接失败")
+                }
+                
             }
         }
         else{
