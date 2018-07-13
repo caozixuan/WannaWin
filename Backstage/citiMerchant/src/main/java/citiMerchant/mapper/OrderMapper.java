@@ -11,13 +11,13 @@ import java.util.List;
 public interface OrderMapper {
 
 
-    final String getByOrderID = "SELECT * FROM order WHERE OrderID = #{orderID}";
-    final String addOrder = "INSERT INTO order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID, time) " +
+    final String getByOrderID = "SELECT * FROM huaqi.order WHERE OrderID = #{orderID}";
+    final String addOrder = "INSERT INTO huaqi.order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID, time) " +
             "VALUES(#{orderId}, #{originalPrice}, #{priceAfter}, #{pointsNeeded}, #{userId}, #{state}, #{merchantId}, #{time})";
-    final String getOrderIDByUserID = "SELECT orderID FROM order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
-    final String getOrderIDByMerchantID = "SELECT orderID FROM order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
-    final String getOrderByUserID = "SELECT * FROM order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
-    final String getOrderByMerchantID = "SELECT * FROM order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderIDByUserID = "SELECT orderID FROM huaqi.order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderIDByMerchantID = "SELECT orderID FROM huaqi.order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderByUserID = "SELECT * FROM huaqi.order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderByMerchantID = "SELECT * FROM huaqi.order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
 
     @Select(getByOrderID)
     Order selectOrderByID(String orderID);
