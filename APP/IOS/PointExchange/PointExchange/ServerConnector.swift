@@ -86,6 +86,11 @@ class ServerConnector: NSObject {
                     User.getUser().generalPoints = data["generalPoints"].double
                     callback(true)
                 }
+                if case let .failure(response) = result{
+                    callback(false)
+                    print("连接失败")
+                }
+                
             }
         }
         else{
