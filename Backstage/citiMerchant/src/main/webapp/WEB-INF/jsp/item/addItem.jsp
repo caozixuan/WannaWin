@@ -245,6 +245,8 @@ desired effect
               <label>商品描述</label>
               <textarea name="description" class="form-control" rows="3" placeholder="输入商品描述"></textarea>
             </div>
+            <form class="form-horizontal" role="form" method="post"
+                  action="uploadFile" enctype="multipart/form-data">
             <div class="form-group">
               <label>商品图片</label>
               <div class="col-sm-10">
@@ -253,10 +255,10 @@ desired effect
                                                                  name="url2" value="">
               </div>
             </div>
+            </form>
             <button type="submit" class="btn btn-success">提 交</button>
 
           </form>
-
         </div>
         <!-- /.box-body -->
       </div>
@@ -299,7 +301,7 @@ desired effect
     $(".myfile").fileinput({
         //上传的地址
         uploadUrl:"uploadFile",
-        uploadAsync : false, //默认异步上传
+        uploadAsync : true, //默认异步上传
         showUpload : false, //是否显示上传按钮,跟随文本框的那个
         showRemove : false, //显示移除按钮,跟随文本框的那个
         showCaption : true,//是否显示标题,就是那个文本框
