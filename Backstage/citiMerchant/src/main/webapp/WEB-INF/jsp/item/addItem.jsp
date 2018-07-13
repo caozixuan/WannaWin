@@ -245,8 +245,6 @@ desired effect
               <label>商品描述</label>
               <textarea name="description" class="form-control" rows="3" placeholder="输入商品描述"></textarea>
             </div>
-            <form class="form-horizontal" role="form" method="post"
-                  action="uploadFile" enctype="multipart/form-data">
             <div class="form-group">
               <label>商品图片</label>
               <div class="col-sm-10">
@@ -255,7 +253,6 @@ desired effect
                                                                  name="url2" value="">
               </div>
             </div>
-            </form>
             <button type="submit" class="btn btn-success">提 交</button>
 
           </form>

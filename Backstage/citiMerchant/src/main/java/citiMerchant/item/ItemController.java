@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -80,7 +84,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("showItem");
+        mv.setViewName("item/showItem");
         return mv;
     }
 
@@ -88,7 +92,6 @@ public class ItemController {
     @ResponseBody
     public Map<String, Object> uploadFile(MultipartFile myfile)
             throws IllegalStateException, IOException {
-        System.out.println("hahahahahah");
         // 原始名称
         String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
 //      System.out.println(oldFileName);
@@ -96,8 +99,11 @@ public class ItemController {
         String saveFilePath = "E://picture";
         // 上传图片
         if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session =request.getSession();
+            String merchantID = session.getAttribute("merchantID").toString();
             // 新的图片名称
-            String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
+            String newFileName = merchantID+"null";
             // 新图片
             File newFile = new File(saveFilePath + "\\" + newFileName);
             // 将内存中的数据写入磁盘

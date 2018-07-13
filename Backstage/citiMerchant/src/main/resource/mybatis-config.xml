@@ -23,11 +23,11 @@
     </environments>
 
     <mappers>
-        <package name="citiMerchant.mapper"/>
+    <package name="citiMerchant.mapper"/>
     </mappers>
 
     <!--<mappers>-->
-    <!--<mapper resource="./src/main/java/citiMerchant/mapper/mapper.xml"/>-->
+        <!--<mapper resource="./src/main/java/citiMerchant/mapper/mapper.xml"/>-->
     <!--</mappers>-->
 
 </configuration>
