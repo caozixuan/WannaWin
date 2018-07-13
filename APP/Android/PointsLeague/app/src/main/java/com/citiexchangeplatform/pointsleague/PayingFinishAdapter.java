@@ -1,55 +1,70 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapter.MyViewHolder> {
     //数据源
-    private List<String> list;
-    private List<Integer> img_list;
+    private List<String> points_used;
+    private List<String> points_exchanged;
+    private List<String> names;
+    private List<String> logos;
     private Context context;
 
     //构造方法
-    public PayingFinishAdapter(List<String> list,List<Integer> img_list, Context context) {
-        this.list = list;
-        this.img_list = img_list;
+    public PayingFinishAdapter(List<String> bNames,List<String> logoURLs,List<String> used,List<String> exchanged, Context context) {
+        this.names = bNames;
+        this.points_used = used;
+        this.points_exchanged = exchanged;
+        this.logos = logoURLs;
         this.context = context;
 
     }
 
+    @NonNull
     @Override
-    public PayingFinishAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PayingFinishAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         /*列表布局*/
-        PayingFinishAdapter.MyViewHolder holder = new PayingFinishAdapter.MyViewHolder(LayoutInflater.from(
+        return new MyViewHolder(LayoutInflater.from(
                 context).inflate(R.layout.item_paying_finish, parent, false));
-        return holder;
     }
 
 
     /*为列表内容配置数据*/
     @Override
-    public void onBindViewHolder(final PayingFinishAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final PayingFinishAdapter.MyViewHolder holder, final int position) {
         //使用的积分
-        holder.Points_Used.setText(list.get(position));
+        holder.pointsUsed.setText(points_used.get(position));
+        //设置列表中积分信息
+        holder.pointsExchange.setText(points_exchanged.get(position));
         //设置商家图片
-        holder.Business_Image.setImageResource(img_list.get(position));
+        Glide.with(context)
+                .load(logos.get(position))
+                .placeholder(R.drawable.ic_points_black_24dp)
+                .error(R.drawable.ic_mall_black_24dp)
+                .override(60,60)
+                .into(holder.logo);
+        //holder.logo.setImageResource(img_list.get(position));
+        //设置商户名
+        holder.name.setText(names.get(position));
+
 
     }
 
     /*返回列表长度*/
     @Override
     public int getItemCount() {
-        return list.size();
+        return points_used.size();
     }
 
 
@@ -58,18 +73,20 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
      */
     class MyViewHolder extends RecyclerView.ViewHolder {
         View view;
-        TextView Points_Used;
-        ImageView Business_Image;
-        TextView Points_Remain;
+        TextView pointsUsed;
+        ImageView logo;
+        TextView pointsExchange;
+        TextView name;
 
 
 
 
         public MyViewHolder(View view) {
             super(view);
-            Points_Used = (TextView) view.findViewById(R.id.textview_points_used);
-            Points_Remain = (TextView) view.findViewById(R.id.textview_points_remain);
-            Business_Image = (ImageView) view.findViewById(R.id.image_finish_business);
+            pointsUsed = view.findViewById(R.id.textview_business_used_finish);
+            pointsExchange = view.findViewById(R.id.textview_points_exchanged);
+            logo = view.findViewById(R.id.image_finish_business);
+            name = view.findViewById(R.id.textview_business_name);
 
 
 

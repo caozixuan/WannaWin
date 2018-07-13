@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailFindActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageView_logo_detail_find"
+                    android:layout_width="match_parent"
+                    android:layout_height="84dp"
+                    android:src="@drawable/eastern_logo"/>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/textView_name_detail_find"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="东方航空"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+        </FrameLayout>
+
+        <View
+            android:background="@color/colorUnable"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"></View>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商家简介"
+                android:textSize="24sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="中国东方航空股份有限公司（China Eastern Airlines），是一家总部位于中国上海的国有控股航空公司，在原中国东方航空集团公司的基础上，兼并中国西北航空公司，联合中国云南航空公司重组而成。是中国民航第一家在香港、纽约和上海三地上市的航空公司."/>
+        </LinearLayout>
+
+        <View
+            android:background="@color/colorUnable"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"></View>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="积分抵扣"
+                android:textSize="24sp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:background="@drawable/rectangle"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="5dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="机票抵扣"
+                        android:textSize="18sp"/>
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/nike_store"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1000通用积分抵扣100元机票费用"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:gravity="center_vertical|end"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="天河机场"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/rectangle"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="5dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="机票抵扣"
+                        android:textSize="18sp"/>
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/nike_store"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1000通用积分抵扣100元机票费用"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:gravity="center_vertical|end"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="天河机场"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/colorUnable"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"></View>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="线下优惠"
+                android:textSize="24sp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:background="@drawable/rectangle"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="5dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="机票打折"
+                        android:textSize="18sp"/>
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/nike_store"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="暑假期间全场机票6折起"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:gravity="center_vertical|end"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="天河机场"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</ScrollView>
