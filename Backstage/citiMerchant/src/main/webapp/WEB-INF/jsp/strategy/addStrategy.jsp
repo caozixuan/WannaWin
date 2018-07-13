@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -131,7 +131,7 @@ desired effect
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
- <aside class="main-sidebar">
+  <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -147,93 +147,77 @@ desired effect
       </div>
 
       <!-- Sidebar Menu -->
-        <ul class="sidebar-menu" data-widget="tree">
-            <!-- Optionally, you can add icons to the links -->
-            <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
-                    <span class="pull-right-container">
+      <ul class="sidebar-menu" data-widget="tree">
+        <!-- Optionally, you can add icons to the links -->
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
+            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/showItemRequest">商品清单</a></li>
-                    <li><a href="item/addItem.html">添加商品</a></li>
-                </ul>
-            <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
-                    <span class="pull-right-container">
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/showItemRequest">商品清单</a></li>
+            <li><a href="item/addItem.html">添加商品</a></li>
+          </ul>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
+            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/strategy/getStrategyList">策略清单</a></li>
-                    <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
-                </ul>
-            <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-            <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-            <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/strategy/getStrategyList">策略清单</a></li>
+            <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
+          </ul>
+        <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
 
-        </ul>
+      </ul>
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        积分兑
-        <small>一个积分通兑平台</small>
-      </h1>
-    </section>
-
     <!-- Main content -->
     <section class="content container-fluid">
-    	<div class="box">
-            <div class="box-header">
-              <h3 class="box-title">策略列表</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-striped">
-                <tr>
-                  <th style="width: 10px">#</th>
-                  <th>需满金额</th>
-                  <th>抵扣金额</th>
-                  <th>所需积分</th>
-                  <th style="width: 80px"></th>
-                  <th style="width: 80px"></th>
-                </tr>
-            <c:forEach items="${strategies}" var="p">
-                <tr>
-                    <td>${p.strategyID}</td>
-                    <td>${p.full}</td>
-                    <td>${p.discount}</td>
-                    <td>${p.points}</td>
 
-
-												<!--接口一所在位置-->
-
-
-                    <td><a href="/strategy/addStrategyRequest"><span
-                         >修改</span></a></td>
-
-
-                         						<!--接口二所在位置-->
-
-
-                   <td><a href="/strategy/deleteStrategy?strategyID=${p.strategyID}"><span
-                         >下架</span></a></td>
-
-
-                </tr>
-            </c:forEach>
-              </table>
-            </div>
-            <!-- /.box-body -->
+      <!-- textarea -->
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">上架策略</h3>
         </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form role="form" method="post" action="StrategySubmit">
+            <!-- text input -->
+            <div class="form-group">
+              <label>需满金额</label>
+              <input type="text" class="form-control" placeholder="输入需满金额">
+            </div>
+            <div class="form-group">
+              <label>抵扣金额</label>
+              <input type="text" class="form-control" placeholder="输入抵扣金额">
+            </div>
+            <div class="form-group">
+              <label>所需积分</label>
+              <input type="text" class="form-control" placeholder="输入所需的积分">
+            </div>
+            <!-- textarea -->
+            <input type="hidden" name="strategyID" value="${strategy.strategyID}">
+            <input type="hidden" name="merchantID" value="${strategy.merchantID}">
+
+            <button type="submit" class="btn btn-success">提 交</button></td>
+
+          </form>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+
     </section>
     <!-- /.content -->
   </div>
