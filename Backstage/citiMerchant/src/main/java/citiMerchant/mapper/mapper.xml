@@ -1,17 +1,22 @@
 <?xml version = "1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="citiMerchant.mapper.DBHandler">
-
-
-    <select id="coupon_record" parameterType="DevicePOJO" useCache="false"
+    <resultMap type="User" id="UserResult">
+        <id property="userId" column="userId"/>
+        <result property="firstName" column="firstName"/>
+        <result property="lastName" column="lastName"/>
+    </resultMap>
+    <select id="coupon_record" useCache="false" parameterType="int"
             statementType="CALLABLE">
         <![CDATA[
+
             call coupon_record
             (
                 #{IN_MerchantID, mode = IN, jdbcType = VARCHAR },
-                #{IN_intervalDate, mode = INT, jdbcType = INT},
-                #{totalPoints, mode = OUT, jdbcType = BIGINT}
+                #{IN_intervalDate, mode = INT, jdbcType = INT}
             );
+
         ]]>
     </select>
 </mapper>
