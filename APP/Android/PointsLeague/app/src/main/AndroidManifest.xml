@@ -41,14 +41,14 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PayingActivity"
-            android:parentActivityName=".PayCodeActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity
             android:name=".FeedbackResultActivity"
             android:parentActivityName=".FeedbackActivity" />
         <activity android:name=".GeneralSettingActivity" />
-        <activity android:name=".PayingDetailsActivity" />
+
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AddCardActivity" />
         <activity android:name=".HttpActivity">
@@ -60,7 +60,8 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".AllCardActivity"></activity>
+        <activity android:name=".AllCardActivity" />
+        <activity android:name=".DetailFindActivity"></activity>
     </application>
 
 </manifest>

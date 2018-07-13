@@ -22,12 +22,17 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
     private View view;
     private RecyclerView mRecyclerView;
+    private List<String> points_used;
+    private List<String> points_exchanged;
+    private List<String> names;
+    private List<String> logos;
     private List<String> data_posses_point;
     private List<Integer> business_image;
     private PayingFinishAdapter mAdapter;
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
     private HashMap<Integer, Boolean> map = new HashMap<>();
+    private double total;
 
     //控件的声明
     private ViewPager viewPager;
@@ -61,6 +66,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
 
 
+        //广告栏
         imageIds = new int[]{R.drawable.ad1, R.drawable.ad2, R.drawable.ad1};
 
         imageDescriptions = new String[]{
@@ -82,36 +88,30 @@ public class PaymentFinishActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         //SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map");
         //map = serializableHashMap.getMap();
-        data_posses_point = (List) bundle.get("points_result");
-        business_image = (List) bundle.get("image_resource");
 
+        points_used = (List) bundle.get("points_used");
+        points_exchanged = (List) bundle.get("points_exchanged");
+        logos = (List) bundle.get("logo_urls");
+        names = (List) bundle.get("business_names");
+        total = (Double) bundle.get("total");
+
+        Text_NeedPoints.setText(String.valueOf(total));
 
         //初始化数据
-        initData();
         initView();
         initAdData();
         initEvent();
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingFinishAdapter(data_posses_point,business_image,getApplicationContext());
+        mAdapter = new PayingFinishAdapter(names,logos,points_used,points_exchanged,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
 
 
 
-
     }
 
-    /*获得各项积分数据：商家图标、积分数*/
-    protected void initData()
-    {
-        //设置需要的积分数
-        Text_NeedPoints.setText("120p");
-
-        ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
-
-    }
 
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.vp_ad);

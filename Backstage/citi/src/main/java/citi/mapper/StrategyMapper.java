@@ -16,7 +16,7 @@ public interface StrategyMapper {
     final String getStrategyIDByMerchantID = "SELECT strategyID FROM Strategy WHERE MerchantID = #{MerchantID}";
     final String getStrategyByStrategyID = "SELECT * FROM Strategy WHERE strategyID = #{strategyID}";
     final String addStrategy = "INSERT INTO Strategy(strategyID, MerchantID, full, discount, points) " +
-            "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{CardTypeID}, #{discount}, #{points})";
+            "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{discount}, #{points})";
     final String updateStrategy = "UPDATE Strategy SET full = #{full}, discount = #{discount}, points = #{points} " +
             "WHERE strategyID = #{strategyID}";
     final String deleteStrategy = "DELETE FROM Strategy WHERE MerchantID = #{merchantID}";
