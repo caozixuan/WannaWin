@@ -46,8 +46,8 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
         <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+        <div  align="center">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" >登录</button>
         </div>
         <!-- /.col -->
       </div>
