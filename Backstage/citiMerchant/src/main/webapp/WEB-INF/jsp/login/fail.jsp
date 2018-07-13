@@ -30,13 +30,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="/login"><b>商户管理平台</b></a>
+        <a href="login"><b>商户管理平台</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <h2><p class="login-box-msg">Login fail: Unmactch merchantID&password</p></h2>
+        <h2><p class="login-box-msg">Unmactch merchantID&password</p></h2>
 
-        <h3><a href="/login">Click here to return to the login page</a></h3>
+        <h3><a href="login">return to the login page</a></h3>
     </div>
 
     <!-- /.social-auth-links -->
