@@ -19,7 +19,7 @@ public interface StrategyMapper {
             "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{CardTypeID}, #{discount}, #{points})";
     final String updateStrategy = "UPDATE Strategy SET full = #{full}, discount = #{discount}, points = #{points} " +
             "WHERE strategyID = #{strategyID}";
-    final String deleteStrategy = "DELETE FROM Strategy WHERE MerchantID = #{strategyID}";
+    final String deleteStrategy = "DELETE FROM Strategy WHERE strategyID = #{strategyID}";
 
     @Select(getStrategysByMerchantID)
     List<StrategyDAO> getStrategysByMerchantID(String merchantID);
