@@ -45,16 +45,21 @@ public class StrategyController {
         return mv;
     }
 
-    @RequestMapping("/strategy/updateStrategy")
-    public ModelAndView updateStrategy(StrategyDAO strategyDAO){
+    @RequestMapping("/strategy/editStrategyRequest")
+    public ModelAndView editStrategyRequest(String strategyID){
         ModelAndView mv = new ModelAndView();
-        strategyService.updateStrategy(strategyDAO);
-        List<StrategyDAO> strategies = strategyService.getStrategyList(strategyDAO.getMerchantID());
-        if(strategies==null)
-            mv.addObject("strategies",new ArrayList<StrategyDAO>());
-        else
-            mv.addObject("strategies",strategies);
-        mv.setViewName("strategy/strategyList");
+        StrategyDAO strategyDAO = strategyService.editStrategyRequest(strategyID);
+        mv.addObject("strategy",strategyDAO);
+        mv.setViewName("strategy/editStrategy");
+        return mv;
+    }
+
+    @RequestMapping("/strategy/editStrategySubmit")
+    public ModelAndView editStrategySubmit(StrategyDAO strategyDAO){
+        ModelAndView mv = new ModelAndView();
+        strategyService.editStrategySubmit(strategyDAO);
+        mv.addObject("strategies",strategyService.getStrategyList(strategyDAO.getMerchantID()));
+        mv.setViewName("strategy/getStrategyList");
         return mv;
     }
 

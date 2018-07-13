@@ -217,7 +217,7 @@ desired effect
 												<!--接口一所在位置-->
 
 
-                    <td><a href="/strategy/addStrategyRequest"><span
+                    <td><a href="/strategy/editStrategyRequest"><span
                          >修改</span></a></td>
 
 
