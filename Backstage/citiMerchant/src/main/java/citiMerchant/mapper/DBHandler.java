@@ -21,7 +21,7 @@ public class DBHandler {
     @Autowired
     public static StrategyMapper strategyMapper;
 
-    static final private String resource = "mapper.xml";
+    static final private String resource = "./mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
 
     static private String pathname = "./log.txt";
@@ -47,12 +47,31 @@ public class DBHandler {
     /****************************        初始化完成        ****************************/
 
     /*
+     * 用于日志
+     */
+    static private void log(String method, long time) {
+        try {
+            log_writer = new BufferedWriter(new FileWriter(log_file));
+            log_writer.write("\"" + method + "\" elapsed time: " + (System.currentTimeMillis() - time) + "ms\n");
+            log_writer.flush();
+            log_writer.close();
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("\nfail to log \"" + method + "\"\n");
+        }
+    }
+
+    /****************************       用于商户后台的接口     ****************************/
+
+    /*
      * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
      */
     static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+        long time = System.currentTimeMillis();
         int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
         int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
         int orderAmount = orderMapper.getOrderAmount(merchantID);
+        log("getAmountByMerchantID", time);
         List<Integer> amount = Arrays.asList(itemAmount, stategyAmount, orderAmount);
         return new ArrayList(amount);
     }
@@ -63,20 +82,12 @@ public class DBHandler {
      */
     static public class Record {
         static public void coupon_record() {
-            SqlSession session = sqlSessionFactory.openSession();
             long time = System.currentTimeMillis();
-            session.select("coupon_record", );
+            SqlSession session = sqlSessionFactory.openSession();
+            //session.select("citiMerchant.mapper.DBHandler.coupon_record", );
             session.commit();
             session.close();
-            try {
-                log_writer = new BufferedWriter(new FileWriter(log_file));
-                log_writer.write("\"coupon_record\" elapsed time: " + (System.currentTimeMillis() - time) + "ms\n");
-                log_writer.flush();
-                log_writer.close();
-            } catch (IOException e) {
-                //e.printStackTrace();
-                System.out.println("\nfail to log \"coupon_record\"\n");
-            }
+            log("STORED PROCEDURE coupon_record", time);
         }
     }
 
