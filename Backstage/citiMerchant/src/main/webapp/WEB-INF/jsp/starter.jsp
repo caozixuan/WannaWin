@@ -192,7 +192,7 @@ desired effect
   <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
   <div class="info-box-content">
     <span class="info-box-text">优惠商品</span>
-    <span class="info-box-number">${nums}</span>
+    <span class="info-box-number">${nums[0]}</span>
   </div>
   <!-- /.info-box-content -->
   
@@ -203,7 +203,7 @@ desired effect
   <span class="info-box-icon bg-blue"><i class="fa fa-star-o"></i></span>
   <div class="info-box-content">
     <span class="info-box-text">减免策略</span>
-    <span class="info-box-number">${}</span>
+    <span class="info-box-number">${nums[1]}</span>
   </div>
   <!-- /.info-box-content -->
 </div>
@@ -213,7 +213,7 @@ desired effect
   <span class="info-box-icon bg-green"><i class="fa fa-star-o"></i></span>
   <div class="info-box-content">
     <span class="info-box-text">历史订单</span>
-    <span class="info-box-number">${}}</span>
+    <span class="info-box-number">${nums[2]}}</span>
   </div>
   <!-- /.info-box-content -->
 </div>
