@@ -1,6 +1,7 @@
 package citiMerchant.vo;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 public class Item {
     private String ItemID;
@@ -15,6 +16,22 @@ public class Item {
 
     public Item(String itemID, String name, String description, String merchantID, String logoURL, double originalPrice, int points, Timestamp overdueTime, long stock) {
         ItemID = itemID;
+        this.name = name;
+        this.description = description;
+        this.merchantID = merchantID;
+        this.logoURL = logoURL;
+        this.originalPrice = originalPrice;
+        this.points = points;
+        this.overdueTime = overdueTime;
+        this.stock = stock;
+    }
+
+    public Item(){
+        this.ItemID = UUID.randomUUID().toString();
+    }
+
+    public Item(String name, String description, String merchantID, String logoURL, double originalPrice, int points, Timestamp overdueTime, long stock) {
+        this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.merchantID = merchantID;

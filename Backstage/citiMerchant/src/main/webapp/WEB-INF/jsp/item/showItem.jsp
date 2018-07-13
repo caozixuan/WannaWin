@@ -3,24 +3,30 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+
 <html>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,7 +66,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="starter.jsp" class="logo">
+    <a href="../starter.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -82,14 +88,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="../../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -127,54 +133,53 @@ desired effect
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+     <section class="sidebar">
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-        </div>
-      </div>
+       <!-- Sidebar user panel (optional) -->
+       <div class="user-panel">
+         <div class="pull-left image">
+           <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+         </div>
+         <div class="pull-left info">
+           <p>Alexander Pierce</p>
+         </div>
+       </div>
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <!-- Optionally, you can add icons to the links -->
-		<li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
-            <span class="pull-right-container">
+       <!-- Sidebar Menu -->
+       <ul class="sidebar-menu" data-widget="tree">
+         <!-- Optionally, you can add icons to the links -->
+         <li class="treeview">
+           <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
+             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="item/getItem">商品清单</a></li>
-            <li><a href="item/addItem">添加商品</a></li>
-          </ul>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
-            <span class="pull-right-container">
+           </a>
+           <ul class="treeview-menu">
+             <li><a href="/item/getItem">商品清单</a></li>
+             <li><a href="/item/addItem">添加商品</a></li>
+           </ul>
+         <li class="treeview">
+           <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
+             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="strategy/getStrategyList">策略清单</a></li>
-            <li><a href="strategy/addStrategyRequest">添加策略</a></li>
-          </ul>
-        <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-		<li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
-       
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
+           </a>
+           <ul class="treeview-menu">
+             <li><a href="/strategy/getStrategyList">策略清单</a></li>
+             <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
+           </ul>
+         <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+         <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+         <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
+
+       </ul>
+       <!-- /.sidebar-menu -->
+     </section>
     <!-- /.sidebar -->
   </aside>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -187,38 +192,32 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-    <div class="info-box">
-  <!-- Apply any bg-* class to to the icon to color it -->
-  <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
-  <div class="info-box-content">
-    <span class="info-box-text">优惠商品</span>
-    <span class="info-box-number"></span>
-  </div>
-  <!-- /.info-box-content -->
-  
-</div>
-<!-- /.info-box -->
-<div class="info-box">
-  <!-- Apply any bg-* class to to the icon to color it -->
-  <span class="info-box-icon bg-blue"><i class="fa fa-star-o"></i></span>
-  <div class="info-box-content">
-    <span class="info-box-text">减免策略</span>
-    <span class="info-box-number">0</span>
-  </div>
-  <!-- /.info-box-content -->
-</div>
-<!-- /.info-box -->
-<div class="info-box">
-  <!-- Apply any bg-* class to to the icon to color it -->
-  <span class="info-box-icon bg-green"><i class="fa fa-star-o"></i></span>
-  <div class="info-box-content">
-    <span class="info-box-text">历史订单</span>
-    <span class="info-box-number">0</span>
-  </div>
-  <!-- /.info-box-content -->
-</div>
-<!-- /.info-box -->
-<!-- /.info-box -->
+    <table class="table table-striped">
+        <thead>
+            <tr><th>图片</th><th>编号</th><th>名称</th><th>简述</th><th>原价</th><th>抵扣积分</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>
+			<a href="#" class="thumbnail"><img src="1.jpg" alt="通用的占位符缩略图" height="50" width="50"></a>
+			</td><td>001</td><td>毛巾</td><td>毛巾是一种清洁用品，特征为方形纯棉纺织品。</td><td>100￥</td><td>100</td><td><button type="button" class="btn btn-success">编辑</button><button type="button" class="btn btn-danger">删除</button></td></tr>
+            <tr><td><a href="#" class="thumbnail"><img src="2.jpg" alt="通用的占位符缩略图" height="50" width="50"></a></td><td>002</td><td>棉被</td><td>被子是床上用品的一种，是面积足以覆盖人体、长方形的布料。</td><td>100￥</td><td>100</td><td><button type="button" class="btn btn-success">编辑</button><button type="button" class="btn btn-danger">删除</button></td></tr>
+            <tr><td><a href="#" class="thumbnail"><img src="3.jpg" alt="通用的占位符缩略图" height="50" width="50"></a></td><td>003</td><td>零食</td><td>零食，通常是指一日三餐时间点之外的时间里所食用的食品。</td><td>100￥</td><td>100</td><td><button type="button" class="btn btn-success">编辑</button><button type="button" class="btn btn-danger">删除</button></td></tr>
+
+            <c:forEach items="${items}" var="item">
+              <tr>
+                <td>
+                  <a href="#" class="thumbnail"><img src=${item.logoURL} alt="通用的占位符缩略图" height="50" width="50"></a>
+                </td>
+                <td>${item.ItemID}</td>
+                <td>${item.name}</td>
+                <td>${item.description}</td>
+                <td>${item.originalPrice}</td>
+                <td>${item.points}</td>
+                <a href="/item/editItem"><button type="button" class="btn btn-success">编辑</button></a><a href="/item/deleteItem"><button type="button" class="btn btn-danger">删除</button></a></td>
+              </tr>
+            </c:forEach>
+        </tbody>
+    </table>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
@@ -249,11 +248,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../../dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

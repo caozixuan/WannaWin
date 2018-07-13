@@ -4,12 +4,9 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -24,20 +21,22 @@ pageEncoding="UTF-8" isELIgnored="false" %>
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
-  
-  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Morris charts -->
-  <link rel="stylesheet" href="../../../bower_components/morris.js/morris.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../../dist/css/skins/_all-skins.min.css">
-
+  <link href="../../../bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="../../../bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="../../../bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/locales/zh.js"></script>
+  <!-- jQuery 3 -->
+  <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../../dist/js/adminlte.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -48,6 +47,16 @@ pageEncoding="UTF-8" isELIgnored="false" %>
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+
+  <link href="../../../bootstrap-fileinput/css/xlstyle.css" rel="stylesheet">
+
+  <!-- 图片上传即使预览插件 -->
+  <link rel="stylesheet"
+        href="../../../bootstrap-fileinput/css/fileinput.min.css">
+  <script type="text/javascript"
+          src="../../../bootstrap-fileinput/js/fileinput.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -76,7 +85,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/starter" class="logo">
+    <a href="../starter.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -151,7 +160,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -181,8 +190,9 @@ desired effect
             <li><a href="/strategy/getStrategyList">策略清单</a></li>
             <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
           </ul>
-        <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-        <li class="active"><a href="showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+        <li class="active"><a href="../showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li class="active"><a href="../showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
       </ul>
       <!-- /.sidebar-menu -->
@@ -202,37 +212,54 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-<div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">积分消费情况统计</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">商品添加</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form role="form" action="addItemOperation">
+            <!-- text input -->
+            <div class="form-group">
+              <label>商品名称</label>
+              <input name="name" type="text" class="form-control" placeholder="输入商品名称">
+            </div>
+            <div class="form-group">
+              <label>商品原价</label>
+              <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价">
+            </div>
+            <div class="form-group">
+              <label>抵扣积分</label>
+              <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分">
+            </div>
+            <div class="form-group">
+              <label>库存数量</label>
+              <input name="stock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填">
+            </div>
+            <div class="form-group">
+              <label>抵扣券有效时间</label>
+              <input name="overdueTime" type="text" class="form-control" placeholder="抵扣券有效时间">
+            </div>
+            <!-- textarea -->
+            <div class="form-group">
+              <label>商品描述</label>
+              <textarea name="description" class="form-control" rows="3" placeholder="输入商品描述"></textarea>
+            </div>
+            <div class="form-group">
+              <label>商品图片</label>
+              <div class="col-sm-10">
+              <input  type="file" name="myfile" data-ref="url2"
+                     class="col-sm-10 myfile" value="" /> <input type="hidden"
+                                                                 name="url2" value="">
               </div>
             </div>
-            <div class="box-body chart-responsive">
-              <div class="chart" id="line-chart" style="height: 300px;"></div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-<div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">Donut Chart</h3>
+            <button type="submit" class="btn btn-success">提 交</button>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body chart-responsive">
-              <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
-            </div>
-            <!-- /.box-body -->
-          </div>
+          </form>
 
+        </div>
+        <!-- /.box-body -->
+      </div>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
@@ -252,7 +279,7 @@ desired effect
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
- 
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
@@ -262,63 +289,67 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 3 -->
-<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../../dist/js/adminlte.min.js"></script>
-<!-- Morris.js charts -->
-<script src="../../../bower_components/raphael/raphael.min.js"></script>
-<script src="../../../bower_components/morris.js/morris.min.js"></script>
-<!-- FastClick -->
-<script src="../../../bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../../dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    "use strict";
 
-    // LINE CHART
-    var line = new Morris.Line({
-      element: 'line-chart',
-      resize: true,
-      data: [
-        {y: '2011 Q1', item1: 2666},
-        {y: '2011 Q2', item1: 2778},
-        {y: '2011 Q3', item1: 4912},
-        {y: '2011 Q4', item1: 3767},
-        {y: '2012 Q1', item1: 6810},
-        {y: '2012 Q2', item1: 5670},
-        {y: '2012 Q3', item1: 4820},
-        {y: '2012 Q4', item1: 15073},
-        {y: '2013 Q1', item1: 10687},
-        {y: '2013 Q2', item1: 8432}
-      ],
-      xkey: 'y',
-      ykeys: ['item1'],
-      labels: ['Item 1'],
-      lineColors: ['#3c8dbc'],
-      hideHover: 'auto'
-    });
-//DONUT CHART
-    var donut = new Morris.Donut({
-      element: 'sales-chart',
-      resize: true,
-      colors: ["#3c8dbc", "#f56954", "#00a65a"],
-      data: [
-        {label: "Download Sales", value: 12},
-        {label: "In-Store Sales", value: 30},
-        {label: "Mail-Order Sales", value: 20}
-      ],
-      hideHover: 'auto'
-    });
 
-  });
-</script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+<script type="text/javascript">
+    $(".myfile").fileinput({
+        //上传的地址
+        uploadUrl:"uploadFile",
+        uploadAsync : false, //默认异步上传
+        showUpload : false, //是否显示上传按钮,跟随文本框的那个
+        showRemove : false, //显示移除按钮,跟随文本框的那个
+        showCaption : true,//是否显示标题,就是那个文本框
+        showPreview : true, //是否显示预览,不写默认为true
+        dropZoneEnabled : false,//是否显示拖拽区域，默认不写为true，但是会占用很大区域
+        //minImageWidth: 50, //图片的最小宽度
+        //minImageHeight: 50,//图片的最小高度
+        //maxImageWidth: 1000,//图片的最大宽度
+        //maxImageHeight: 1000,//图片的最大高度
+        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+        //minFileCount: 0,
+        maxFileCount : 1, //表示允许同时上传的最大文件个数
+        enctype : 'multipart/form-data',
+        validateInitialCount : true,
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",
+        msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+        allowedFileTypes : [ 'image' ],//配置允许文件上传的类型
+        allowedPreviewTypes : [ 'image' ],//配置所有的被预览文件类型
+        allowedPreviewMimeTypes : [ 'jpg', 'png', 'gif' ],//控制被预览的所有mime类型
+        language : 'zh'
+    })
+    //异步上传返回结果处理
+    $('.myfile').on('fileerror', function(event, data, msg) {
+        console.log("fileerror");
+        console.log(data);
+    });
+    //异步上传返回结果处理
+    $(".myfile").on("fileuploaded", function(event, data, previewId, index) {
+        console.log("fileuploaded");
+        var ref = $(this).attr("data-ref");
+        $("input[name='" + ref + "']").val(data.response.url);
+
+    });
+
+    //同步上传错误处理
+    $('.myfile').on('filebatchuploaderror', function(event, data, msg) {
+        console.log("filebatchuploaderror");
+        console.log(data);
+    });
+
+    //同步上传返回结果处理
+    $(".myfile").on("filebatchuploadsuccess",
+        function(event, data, previewId, index) {
+            console.log("filebatchuploadsuccess");
+            console.log(data);
+        });
+
+    //上传前
+    $('.myfile').on('filepreupload', function(event, data, previewId, index) {
+        console.log("filepreupload");
+    });
+</script>
 </html>

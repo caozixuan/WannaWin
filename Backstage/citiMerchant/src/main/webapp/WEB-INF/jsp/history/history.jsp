@@ -1,26 +1,33 @@
-﻿<!DOCTYPE html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java"
+         pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+
+<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,6 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -60,7 +68,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="starter.jsp" class="logo">
+    <a href="../starter.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -82,14 +90,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="../../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -145,7 +153,7 @@ desired effect
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- Optionally, you can add icons to the links -->
-		<li class="treeview">
+        <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -166,9 +174,9 @@ desired effect
             <li><a href="strategy/addStrategyRequest">添加策略</a></li>
           </ul>
         <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-		<li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
         <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
-       
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -187,42 +195,35 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-    <div class="info-box">
-  <!-- Apply any bg-* class to to the icon to color it -->
-  <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
-  <div class="info-box-content">
-    <span class="info-box-text">优惠商品</span>
-    <span class="info-box-number"></span>
-  </div>
-  <!-- /.info-box-content -->
-  
-</div>
-<!-- /.info-box -->
-<div class="info-box">
-  <!-- Apply any bg-* class to to the icon to color it -->
-  <span class="info-box-icon bg-blue"><i class="fa fa-star-o"></i></span>
-  <div class="info-box-content">
-    <span class="info-box-text">减免策略</span>
-    <span class="info-box-number">0</span>
-  </div>
-  <!-- /.info-box-content -->
-</div>
-<!-- /.info-box -->
-<div class="info-box">
-  <!-- Apply any bg-* class to to the icon to color it -->
-  <span class="info-box-icon bg-green"><i class="fa fa-star-o"></i></span>
-  <div class="info-box-content">
-    <span class="info-box-text">历史订单</span>
-    <span class="info-box-number">0</span>
-  </div>
-  <!-- /.info-box-content -->
-</div>
-<!-- /.info-box -->
-<!-- /.info-box -->
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-
+    	<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">订单列表</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>原价</th>
+                  <th>抵扣后价格</th>
+                  <th>所用积分</th> 
+                  <th style="width: 150px">时间</th>
+                  <th style="width: 80px">状态</th>
+                </tr>
+            <c:forEach items="${orders}" var="p">
+                <tr>
+                    <td>${p.orderID}</td>
+                    <td>${p.originalPrice}</td>
+                    <td>${p.discountPrice}</td>
+                    <td>${p.points}</td>
+                    <td>${p.time}</td>
+                    <td>${p.state}</td>
+                </tr>
+            </c:forEach>
+              </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
     </section>
     <!-- /.content -->
   </div>
@@ -249,11 +250,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../../dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

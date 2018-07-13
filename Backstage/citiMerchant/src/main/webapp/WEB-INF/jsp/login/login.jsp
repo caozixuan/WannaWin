@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -30,13 +30,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/login"><b>商户管理平台</b></a>
+    <a href="login"><b>商户管理平台</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="/loginSubmit" method="post">
+    <form action="loginSubmit" method="post">
       <div class="form-group has-feedback">
         <input type="merchantID" name ="merchantID" class="form-control" placeholder="merchantID">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -46,8 +46,8 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
         <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+        <div  align="center">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" >登录</button>
         </div>
         <!-- /.col -->
       </div>
