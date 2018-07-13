@@ -1,12 +1,16 @@
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java"
+         pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+
 <html>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -178,46 +182,47 @@ desired effect
     <!-- /.sidebar -->
   </aside>
 
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        积分兑
+        <small>一个积分通兑平台</small>
+      </h1>
+    </section>
+
     <!-- Main content -->
     <section class="content container-fluid">
-    
-                <!-- textarea -->
-     <div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">修改策略</h3>
+    	<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">订单列表</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <form role="form" method="post" action="/editStrategySubmit">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>需满金额</label>
-                  <input type="text" class="form-control" placeholder="输入需满金额">
-                </div>
-        <div class="form-group">
-                  <label>抵扣金额</label>
-                  <input type="text" class="form-control" placeholder="输入抵扣金额">
-                </div>
-        <div class="form-group">
-                  <label>所需积分</label>
-                  <input type="text" class="form-control" placeholder="输入所需的积分">
-                </div>
-                <!-- textarea -->
-               <input type="hidden" name="strategyID" value="${strategy.strategyID}">
-                <input type="hidden" name="merchantID" value="${strategy.merchantID}">
-
-                <button type="submit" class="btn btn-success">提 交</button></td>
-
-              </form>
-
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>原价</th>
+                  <th>抵扣后价格</th>
+                  <th>所用积分</th> 
+                  <th style="width: 150px">时间</th>
+                  <th style="width: 80px">状态</th>
+                </tr>
+            <c:forEach items="${orders}" var="p">
+                <tr>
+                    <td>${p.orderID}</td>
+                    <td>${p.originalPrice}</td>
+                    <td>${p.discountPrice}</td>
+                    <td>${p.points}</td>
+                    <td>${p.time}</td>
+                    <td>${p.state}</td>
+                </tr>
+            </c:forEach>
+              </table>
             </div>
             <!-- /.box-body -->
-          </div>
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-
+        </div>
     </section>
     <!-- /.content -->
   </div>

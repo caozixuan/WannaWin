@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -181,39 +181,39 @@ desired effect
   <div class="content-wrapper">
     <!-- Main content -->
     <section class="content container-fluid">
-
-      <!-- textarea -->
-      <div class="box box-warning">
-        <div class="box-header with-border">
-          <h3 class="box-title">上架策略</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <form role="form" method="post" action="StrategySubmit">
-            <!-- text input -->
-            <div class="form-group">
-              <label>需满金额</label>
-              <input type="text" class="form-control" placeholder="输入需满金额">
+    
+                <!-- textarea -->
+     <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">修改策略</h3>
             </div>
-            <div class="form-group">
-              <label>抵扣金额</label>
-              <input type="text" class="form-control" placeholder="输入抵扣金额">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form role="form" method="post" action="/editStrategySubmit">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>需满金额</label>
+                  <input type="text" class="form-control" placeholder="输入需满金额">
+                </div>
+        <div class="form-group">
+                  <label>抵扣金额</label>
+                  <input type="text" class="form-control" placeholder="输入抵扣金额">
+                </div>
+        <div class="form-group">
+                  <label>所需积分</label>
+                  <input type="text" class="form-control" placeholder="输入所需的积分">
+                </div>
+                <!-- textarea -->
+               <input type="hidden" name="strategyID" value="${strategy.strategyID}">
+                <input type="hidden" name="merchantID" value="${strategy.merchantID}">
+
+                <button type="submit" class="btn btn-success">提 交</button></td>
+
+              </form>
+
             </div>
-            <div class="form-group">
-              <label>所需积分</label>
-              <input type="text" class="form-control" placeholder="输入所需的积分">
-            </div>
-            <!-- textarea -->
-            <input type="hidden" name="strategyID" value="${strategy.strategyID}">
-            <input type="hidden" name="merchantID" value="${strategy.merchantID}">
-
-            <button type="submit" class="btn btn-success">提 交</button></td>
-
-          </form>
-
-        </div>
-        <!-- /.box-body -->
-      </div>
+            <!-- /.box-body -->
+          </div>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
