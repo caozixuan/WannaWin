@@ -57,9 +57,11 @@ public class AddCardActivity extends AppCompatActivity {
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        dialog = ProgressDialog.show(AddCardActivity.this, "", "正在获取商家列表...");
         //new Thread(new getInfos()).start();
-        getInfos();
+        //getInfos();
+        addCardAdapter.addData("Apple中国", "苹果中国会员积分卡","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        addCardAdapter.addData("中国移动","中国移动账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        addCardAdapter.addData("Nike","Nike旗舰店购物积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_add_card);
         setSupportActionBar(toolbar);
@@ -85,7 +87,6 @@ public class AddCardActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Context context, String response) {
                         System.out.println(response);
-                        boolean logSuccess = false;
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -97,17 +98,20 @@ public class AddCardActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         super.onError(error);
+                        dialog.dismiss();
                         Toast.makeText(AddCardActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onAfter() {
-                        dialog.dismiss();
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(AddCardActivity.this, "", "正在获取商家列表...");
                     }
                 });
     }

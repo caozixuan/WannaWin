@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,6 +9,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
+
+import com.android.volley.VolleyError;
+import com.study.xuan.xvolleyutil.base.XVolley;
+import com.study.xuan.xvolleyutil.callback.CallBack;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AllCardActivity extends AppCompatActivity {
 
@@ -29,7 +39,7 @@ public class AllCardActivity extends AppCompatActivity {
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡片列表...");
+        //getInfos();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_all_card);
         setSupportActionBar(toolbar);
@@ -42,9 +52,52 @@ public class AllCardActivity extends AppCompatActivity {
             }
         });
 
-        allCardAdapter.addData("Nike专营店","123");
-        allCardAdapter.addData("ANTA专营店","1223");
-        allCardAdapter.addData("LINING专营店","1233");
-        dialog.dismiss();
+        allCardAdapter.addData("Nike旗舰店购物积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png",123,2);
+        allCardAdapter.addData("APPLE中国","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png",555,0.5);
+        allCardAdapter.addData("中国移动账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png",142,1.5);
+        allCardAdapter.addData("中国电信账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/dianxin_logo.png",1322,0.8);
+
+    }
+
+    private void getInfos() {
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/getMSInfo")
+                .addParam("userID", LogStateInfo.getInstance(AllCardActivity.this).getUserID())
+                .addParam("n", "40")
+                .build()
+                .execute(AllCardActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jobj = jsonArray.getJSONObject(i);
+                                String name = jobj.getString("merchantName");
+                                String logoURL = jobj.getString("logoURL");
+                                int point = jobj.getInt("points");
+                                double proportion = jobj.getDouble("proportion");
+                                allCardAdapter.addData(name, logoURL, point, proportion);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(AllCardActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡列表...");
+                    }
+                });
     }
 }
