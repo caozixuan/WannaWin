@@ -25,8 +25,8 @@
 
                 <ImageView
                     android:id="@+id/imageView_logo_all_card_item"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginStart="20dp"
                     android:adjustViewBounds="true"
                     app:srcCompat="@drawable/nike_logo" />
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="28dp"
                     android:text="Nike体育专营店" />
             </LinearLayout>
 
@@ -53,7 +53,7 @@
 
                 <TextView
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView_all_points_add_card_item"
+                    android:id="@+id/textView_all_points_all_card_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="商户卡积分：200"
@@ -61,7 +61,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/textView_exchange_points_add_card_item"
+                    android:id="@+id/textView_exchange_points_all_card_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -167,6 +167,7 @@ desired effect
           </ul>
         <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
 		<li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
        
       </ul>
       <!-- /.sidebar-menu -->

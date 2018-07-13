@@ -1,6 +1,7 @@
 package citiMerchant.vo;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 public class Item {
     private String ItemID;
@@ -23,6 +24,10 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
+    }
+
+    public Item(){
+        this.ItemID = UUID.randomUUID().toString();
     }
 
     public String getItemID() {

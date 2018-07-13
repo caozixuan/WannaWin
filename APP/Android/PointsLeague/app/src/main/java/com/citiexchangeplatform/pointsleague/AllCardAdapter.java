@@ -39,28 +39,45 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
         public final ImageView imageViewLogo;
+        public final TextView textViewPoints;
+        public final TextView textViewExchangePoints;
 
         public VH(View v) {
             super(v);
             textViewName = (TextView) v.findViewById(R.id.textView_name_all_card_item);
             imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_all_card_item);
+            textViewPoints = (TextView) v.findViewById(R.id.textView_all_points_all_card_item);
+            textViewExchangePoints = (TextView) v.findViewById(R.id.textView_exchange_points_all_card_item);
         }
     }
 
     private Context context;
     private List<String> names;
     private List<String> logos;
+    private List<Integer> points;
+    private List<Double> proportions;
 
     public AllCardAdapter(Context context) {
         names = new ArrayList<String>();
         logos = new ArrayList<String>();
+        points = new ArrayList<Integer>();
+        proportions = new ArrayList<Double>();
         this.context = context;
     }
 
     @Override
     public void onBindViewHolder(VH holder, final int position) {
+        Glide.with(context)
+                .load(logos.get(position))
+                .placeholder(R.drawable.ic_points_black_24dp)
+                .error(R.drawable.ic_mall_black_24dp)
+                .into(holder.imageViewLogo);
         holder.textViewName.setText(names.get(position));
+        holder.textViewPoints.setText("商户卡积分：" + points.get(position));
+        holder.textViewExchangePoints.setText("可兑换通用积分" + String.format("%.1f",points.get(position)/proportions.get(position)));
         //image
+
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +99,11 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
     }
 
 
-    public void addData(String name, String logoURL) {
+    public void addData(String name, String logoURL, int point, double proportion) {
         names.add(name);
         logos.add(logoURL);
+        points.add(point);
+        proportions.add(proportion);
         notifyDataSetChanged();
     }
 

@@ -8,20 +8,30 @@ public class Merchant {
     @Expose(serialize = false)
     private String password;
     private String description;
+    private String cardDescription;
     private String address;
-    private String logoURL;
+    private String merchantLogoURL;
     private String cardLogoURL;
     private double proportion;
 
-    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, String cardLogoURL, double proportion) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, double proportion) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
         this.description = description;
+        this.cardDescription = cardDescription;
         this.address = address;
-        this.logoURL = logoURL;
+        this.merchantLogoURL = merchantLogoURL;
         this.cardLogoURL = cardLogoURL;
         this.proportion = proportion;
+    }
+
+    public String getCardDescription() {
+        return cardDescription;
+    }
+
+    public void setCardDescription(String cardDescription) {
+        this.cardDescription = cardDescription;
     }
 
     public String getCardLogoURL() {
@@ -72,12 +82,12 @@ public class Merchant {
         this.address = address;
     }
 
-    public String getLogoURL() {
-        return logoURL;
+    public String getMerchantLogoURL() {
+        return merchantLogoURL;
     }
 
-    public void setLogoURL(String logoURL) {
-        this.logoURL = logoURL;
+    public void setMerchantLogoURL(String logoURL) {
+        this.merchantLogoURL = logoURL;
     }
 
 }
