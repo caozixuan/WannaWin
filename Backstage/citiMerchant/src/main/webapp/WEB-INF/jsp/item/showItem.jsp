@@ -159,7 +159,7 @@ desired effect
            </a>
            <ul class="treeview-menu">
              <li><a href="/item/getItem">商品清单</a></li>
-             <li><a href="item/addItem">添加商品</a></li>
+             <li><a href="/item/addItem">添加商品</a></li>
            </ul>
          <li class="treeview">
            <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>

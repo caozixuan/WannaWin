@@ -13,6 +13,8 @@ import java.util.List;
 public interface StrategyMapper {
 
     final String getStrategysByMerchantID = "SELECT * FROM Strategy WHERE MerchantID = #{merchantID}";
+    final String getStrategyIDByMerchantID = "SELECT strategyID FROM Strategy WHERE MerchantID = #{MerchantID}";
+    final String getStrategyByStrategyID = "SELECT * FROM Strategy WHERE strategyID = #{strategyID}";
     final String addStrategy = "INSERT INTO Strategy(strategyID, MerchantID, full, discount, points) " +
             "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{CardTypeID}, #{discount}, #{points})";
     final String updateStrategy = "UPDATE strategy SET full = #{full}, discount = #{discount}, points = #{points} " +
@@ -21,6 +23,13 @@ public interface StrategyMapper {
 
     @Select(getStrategysByMerchantID)
     List<StrategyDAO> getStrategysByMerchantID(String merchantID);
+
+
+    @Select(getStrategyIDByMerchantID)
+    List<String> getStrategyIDByMerchantID(String MerchantID);
+
+    @Select(getStrategyByStrategyID)
+    StrategyDAO getStrategyByStrategyID(String strategyID);
 
     @Insert(addStrategy)
     int addStrategy(StrategyDAO strategyDAO);

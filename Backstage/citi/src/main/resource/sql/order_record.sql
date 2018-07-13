@@ -6,5 +6,6 @@ FROM order_view
 WHERE MerchantID = IN_MerchantID
 AND order_view.time BETWEEN (NOW() - INTERVAL IN_intervalDate DAY) AND NOW()
 INTO totalPoints;
+SELECT totalPoints;
 END$$
 commit;
