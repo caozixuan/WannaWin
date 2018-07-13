@@ -4,23 +4,23 @@
 
 <mapper namespace="citiMerchant.mapper.DBHandler">
 
-    <resultMap id = "parameter_for_coupon_record" type = "Student">
-        <result property = "id" column = "ID"/>
-        <result property = "name" column = "NAME"/>
-        <result property = "branch" column = "BRANCH"/>
-        <result property = "percentage" column = "PERCENTAGE"/>
-        <result property = "phone" column = "PHONE"/>
-        <result property = "email" column = "EMAIL"/>
+    <resultMap id="parameter_for_coupon_record" type="Student">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="branch" column="BRANCH"/>
+        <result property="percentage" column="PERCENTAGE"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
     </resultMap>
 
     <select id="coupon_record" useCache="false" parameterType="map"
             statementType="CALLABLE">
         <![CDATA[
-            call coupon_record
-            (
+        call coupon_record
+        (
                 #{IN_MerchantID, mode = IN, jdbcType = VARCHAR },
                 #{IN_intervalDate, mode = INT, jdbcType = INT}
-            );
+        );
         ]]>
     </select>
 

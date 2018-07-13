@@ -14,9 +14,9 @@ import java.util.List;
 @Repository
 public interface MerchantMapper {
 
-    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, logoURL, cardLogoURL, proportion) " +
-            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{logoURL}, #{cardLogoURL}, #{proportion})";
-    final String updateMerchantLogo = "UPDATE merchant SET logoURL = #{logoURL} WHERE MerchantID = #{merchantID}";
+    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, merchantLogoURL, cardLogoURL, proportion) " +
+            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{merchantLogoURL}, #{cardLogoURL}, #{proportion})";
+    final String updateMerchantLogo = "UPDATE merchant SET merchantLogoURL = #{merchantLogoURL} WHERE MerchantID = #{merchantID}";
     final String updateMerchantCardLogo = "UPDATE merchant SET cardLogoURL = #{cardLogoURL} WHERE MerchantID = #{merchantID}";
     final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
@@ -29,7 +29,7 @@ public interface MerchantMapper {
     Merchant loginMerchant(@Param("merchantID") String merchantID, @Param("password") String password);
 
     @Update(updateMerchantLogo)
-    int updateMerchantLogo(@Param("logoURL") String logoURL, @Param("merchantID") String merchantID);
+    int updateMerchantLogo(@Param("merchantLogoURL") String merchantLogoURL, @Param("merchantID") String merchantID);
 
     @Update(updateMerchantCardLogo)
     int updateMerchantCardLogo(@Param("cardLogoURL") String cardLogoURL, @Param("merchantID") String merchantID);
