@@ -67,7 +67,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         case 0:
             return (data["Area"] as! [[String: AnyObject]]).count
         case 1:
-            return (data["filter"] as! [[String: AnyObject]]).count
+            return 1
         default:
             return 0
         }
@@ -101,7 +101,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         case 0:
             return (data["Area"] as! [[String: AnyObject]])[indexPath.row]["name"] as! String
         case 1:
-            return (data["filter"] as! [String])[indexPath.row]
+            return data["filter"] as! String
         default:
             return ""
         }

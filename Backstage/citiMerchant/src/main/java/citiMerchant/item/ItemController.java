@@ -88,6 +88,7 @@ public class ItemController {
     @ResponseBody
     public Map<String, Object> uploadFile(MultipartFile myfile)
             throws IllegalStateException, IOException {
+        System.out.println("hahahahahah");
         // 原始名称
         String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
 //      System.out.println(oldFileName);
