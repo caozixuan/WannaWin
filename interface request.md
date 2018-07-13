@@ -93,7 +93,7 @@ return:
 status:true
 失败：
 status:false
-[{merchantID，reason}]
+[{merchantID，merchantName,merchantLogoURL,reason}]
 ```
 - 进入积分兑换页面
 ```

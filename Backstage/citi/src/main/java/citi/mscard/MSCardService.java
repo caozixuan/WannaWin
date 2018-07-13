@@ -44,7 +44,7 @@ public class MSCardService {
         for(int i=0;i<n&&i<allCards.size();i++){
             MSCard msCard=allCards.get(i);
             Merchant merchant=merchantMapper.selectByID(msCard.getMerchantId());
-            msCard.setLogoURL(merchant.getLogoURL());
+            msCard.setLogoURL(merchant.getMerchantLogoURL());
             msCard.setMerchantName(merchant.getName());
             msCard.setProportion(merchant.getProportion());
             returnCards.add(msCard);
