@@ -5,4 +5,5 @@
     <dimen name="feedback_border_radius">5dp</dimen>
     <dimen name="feedback_border_width">1dp</dimen>
     <dimen name="feedback_input_padding">5dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
