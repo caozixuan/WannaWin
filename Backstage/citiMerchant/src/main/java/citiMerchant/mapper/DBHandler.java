@@ -14,11 +14,11 @@ import java.util.*;
 @Component
 public class DBHandler {
     @Autowired
-    public  OrderMapper orderMapper;
+    public OrderMapper orderMapper;
     @Autowired
-    public  ItemMapper itemMapper;
+    public ItemMapper itemMapper;
     @Autowired
-    public  StrategyMapper strategyMapper;
+    public StrategyMapper strategyMapper;
 
     static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
@@ -55,7 +55,6 @@ public class DBHandler {
                     (System.currentTimeMillis() - time) + "ms at" + current_time + "\n");
             log_writer.flush();
             log_writer.close();
-
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("\nfail to log \"" + method + "\"\n");
