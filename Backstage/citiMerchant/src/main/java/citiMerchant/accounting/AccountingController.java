@@ -17,4 +17,5 @@ public class AccountingController {
         //return String.valueOf(accountingService.totalPoints);
         return "";
     }
+
 }
