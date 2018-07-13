@@ -3,6 +3,7 @@ package citi.mscard;
 import citi.mapper.MSCardMapper;
 import citi.mapper.MerchantMapper;
 import citi.vo.MSCard;
+import citi.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class MSCardService {
     @Autowired
     private MSCardMapper msCardMapper;
 
+    @Autowired
+    private MerchantMapper merchantMapper;
     /**
      * 获取该用户下积分最多的n张卡信息
      * @param userId 用户id
@@ -39,7 +42,12 @@ public class MSCardService {
 
         ArrayList<MSCard> returnCards = new ArrayList<>();
         for(int i=0;i<n&&i<allCards.size();i++){
-            returnCards.add(allCards.get(i));
+            MSCard msCard=allCards.get(i);
+            Merchant merchant=merchantMapper.selectByID(msCard.getMerchantId());
+            msCard.setLogoURL(merchant.getLogoURL());
+            msCard.setMerchantName(merchant.getName());
+            msCard.setProportion(merchant.getProportion());
+            returnCards.add(msCard);
         }
 
         return returnCards;

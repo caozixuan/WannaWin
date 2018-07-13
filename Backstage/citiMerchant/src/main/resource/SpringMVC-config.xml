@@ -9,43 +9,21 @@
 
     <context:annotation-config/>
     <mvc:annotation-driven />
-    <mvc:resources mapping="/citi/img/**" location="/img/"/>
+
     <context:component-scan base-package="citiMerchant.accounting"/>
     <context:component-scan base-package="citiMerchant.history"/>
-    <context:component-scan base-package="citiMerchant.interceptor"/>
+    <!--<context:component-scan base-package="citiMerchant.interceptor"/>-->
     <context:component-scan base-package="citiMerchant.item"/>
     <context:component-scan base-package="citiMerchant.login"/>
     <context:component-scan base-package="citiMerchant.strategy"/>
-    <context:component-scan base-package="citi.pay"/>
-    <context:component-scan base-package="citi.vo"/>
-    <context:component-scan base-package="citi.mybatismapper"/>
+    <context:component-scan base-package="citiMerchant.mapper"/>
+    <!--<context:component-scan base-package="citiMerchant.dao"/>-->
+    <context:component-scan base-package="citiMerchant.vo"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mvc:default-servlet-handler/>
 
-    <!-- 拦截器配置-->
-    <mvc:interceptors>
-        <!--
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="citi.interceptor.DecryptIeterceptor"/>
-        </mvc:interceptor>
 
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="citi.interceptor.EncryptIeterceptor"/>
-        </mvc:interceptor>
-        -->
-
-
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/login/**"/>
-            <!--<mvc:exclude-mapping path="/citi/login/**" />-->
-            <bean class="citi.interceptor.AuthIeterceptor" />
-        </mvc:interceptor>
-
-    </mvc:interceptors>
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 
@@ -64,7 +42,7 @@
     </bean>
     <!-- 自动扫描mybatis映射文件和接口的包 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="citi.mybatismapper"/>
+        <property name="basePackage" value="citiMerchant.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!-- gson注入 -->

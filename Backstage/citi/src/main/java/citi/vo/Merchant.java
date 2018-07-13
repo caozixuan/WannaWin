@@ -11,9 +11,9 @@ public class Merchant {
     private String address;
     private String logoURL;
     private String cardLogoURL;
-    private double proportion;
+    private Double proportion;
 
-    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, String cardLogoURL, double proportion) {
+    public Merchant(String merchantID, String name, String password, String description, String address, String logoURL, String cardLogoURL, Double proportion) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -32,11 +32,14 @@ public class Merchant {
         this.cardLogoURL = cardLogoURL;
     }
 
-    public double getProportion() {
+    public Double getProportion() {
+        if (proportion==null){
+            return 0.0;
+        }
         return proportion;
     }
 
-    public void setProportion(double proportion) {
+    public void setProportion(Double proportion) {
         this.proportion = proportion;
     }
 

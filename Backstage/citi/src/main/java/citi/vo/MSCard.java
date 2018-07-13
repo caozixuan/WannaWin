@@ -9,18 +9,53 @@ import java.util.UUID;
 public class MSCard {
     private String cardID;
     private String userID;
-    private String card_No;
+    private String cardNum;
     private int points;
     private String merchantId;
+    private double proportion;
+    private String logoURL;
+    private String merchantName;
 
     public MSCard() {
-        cardID=UUID.randomUUID().toString().toLowerCase();
+        cardID = UUID.randomUUID().toString().toLowerCase();
         //TODO:从商家获取points或其他途径
     }
 
-    public static boolean checkAttribute(MSCard msCard){
+    public MSCard(String cardID, String userID, String cardNum, int points, String merchantId) {
+        this.cardID = cardID;
+        this.userID = userID;
+        this.cardNum = cardNum;
+        this.points = points;
+        this.merchantId = merchantId;
+    }
+
+    public static boolean checkAttribute(MSCard msCard) {
         //TODO:完整性验证
         return true;
+    }
+
+    public double getProportion() {
+        return proportion;
+    }
+
+    public void setProportion(double proportion) {
+        this.proportion = proportion;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
+    }
+
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
     }
 
     public void setCardID(String cardID) {
@@ -31,12 +66,12 @@ public class MSCard {
         this.userID = userID;
     }
 
-    public String getCard_No() {
-        return card_No;
+    public String getCardNum() {
+        return cardNum;
     }
 
-    public void setCard_No(String card_No) {
-        this.card_No = card_No;
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
     }
 
     public String getMerchantId() {
@@ -46,7 +81,6 @@ public class MSCard {
     public void setMerchantId(String merchantId) {
         this.merchantId = merchantId;
     }
-
 
     public void setPoints(int points) {
         this.points = points;
@@ -60,10 +94,8 @@ public class MSCard {
         return userID;
     }
 
-
     public int getPoints() {
         return points;
     }
-
 
 }

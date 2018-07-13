@@ -17,12 +17,21 @@
 	返回:
 	若当前用户未绑定任何卡：[]
 	有卡则按积分大小顺序：
-	[{"cardID":"a7a8f255-f129-4b46-9de2-55f07c7ff65e","card_No":"888888","points":0,"canExchangePoints":0,"exchangeRate":1,"logoURL":"xx","cardName":"xxx"}]
+	[{"cardID":"a7a8f255-f129-4b46-9de2-55f07c7ff65e","cardNum":"888888","points":0,"proportion":1,"logoURL":"xx","merchantName":"xxx"}]
+
+## 3 ##
+    cardID
+    
+    return {"cardID":"a7a8f255-f129-4b46-9de2-55f07c7ff65e","cardNum":"888888","points":0,"proportion":1,"logoURL":"xx","merchantName":"xxx"}
 
 
 
-### 1 - 刘瑞康 ###
-- 获取指定用户的generalPoints、 availablePoints
-- 暂定post userID=xxx
-- 若不存在userID或其他错误情况返回空json {}
-- 正确则返回{"generalPoints" : int ,"availablePoints" : int }
+### 4 ###
+查看历史订单
+
+###coupon
+    userID start length
+    
+    return {"merchantName"：String,"pointsNeed":}
+    
+    
