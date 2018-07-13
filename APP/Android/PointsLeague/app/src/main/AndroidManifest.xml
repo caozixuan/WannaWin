@@ -60,7 +60,8 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".AllCardActivity"></activity>
+        <activity android:name=".AllCardActivity" />
+        <activity android:name=".DetailFindActivity"></activity>
     </application>
 
 </manifest>
