@@ -36,6 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -157,7 +158,7 @@ desired effect
                  </a>
                  <ul class="treeview-menu">
                      <li><a href="/item/getItem">商品清单</a></li>
-                     <li><a href="item/addItem">添加商品</a></li>
+                     <li><a href="/item/addItem">添加商品</a></li>
                  </ul>
              <li class="treeview">
                  <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>

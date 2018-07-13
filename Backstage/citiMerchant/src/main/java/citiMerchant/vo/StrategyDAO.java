@@ -9,7 +9,7 @@ public class StrategyDAO {
 
     public StrategyDAO(String strategyID, String merchantID, int full, int discount, int points) {
         this.strategyID = strategyID;
-        merchantID = merchantID;
+        this.merchantID = merchantID;
         this.full = full;
         this.discount = discount;
         this.points = points;
