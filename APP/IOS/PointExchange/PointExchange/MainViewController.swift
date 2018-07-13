@@ -165,8 +165,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 
     
-
-	
     // MARK: - Navigation
     // 初始化图片轮播组件，为嵌入的图片轮播VC做数据准备
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

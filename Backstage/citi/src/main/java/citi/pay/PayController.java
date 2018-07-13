@@ -15,7 +15,7 @@ public class PayController {
     private Gson gson;
 
     @RequestMapping("/pay")
-    public void pay(String userId,String merchantId,float totelPrice){
+    public void pay(String userId,String merchantId,float totalPrice){
 
 
     }

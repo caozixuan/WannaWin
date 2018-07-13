@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -28,14 +29,14 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("showItem");
+        mv.setViewName("item/showItem");
         return mv;
     }
 
     @RequestMapping("addItem")
     public ModelAndView addItem(String merchantID){
         ModelAndView mv =new ModelAndView();
-        mv.setViewName("addItem");
+        mv.setViewName("item/addItem");
         return mv;
     }
 
@@ -70,7 +71,11 @@ public class ItemController {
     }
 
     @RequestMapping("addItemOperation")
-    public ModelAndView addItemOperation(String merchantID, Item item){
+    public ModelAndView addItemOperation(String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
+
+        String merchantID = "123";
+        overdueTime = overdueTime +" 00:00:00";
+        Item item = new Item(name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
         itemService.addItem(item);
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
@@ -79,10 +84,11 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("/uploadFile")
+    @RequestMapping("uploadFile")
     @ResponseBody
     public Map<String, Object> uploadFile(MultipartFile myfile)
             throws IllegalStateException, IOException {
+        System.out.println("hahahahahah");
         // 原始名称
         String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
 //      System.out.println(oldFileName);

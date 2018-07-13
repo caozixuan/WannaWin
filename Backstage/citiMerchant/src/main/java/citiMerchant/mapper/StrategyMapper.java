@@ -13,14 +13,22 @@ import java.util.List;
 public interface StrategyMapper {
 
     final String getStrategysByMerchantID = "SELECT * FROM Strategy WHERE MerchantID = #{merchantID}";
+    final String getStrategyIDByMerchantID = "SELECT strategyID FROM Strategy WHERE MerchantID = #{MerchantID}";
+    final String getStrategyByStrategyID = "SELECT * FROM Strategy WHERE strategyID = #{strategyID}";
     final String addStrategy = "INSERT INTO Strategy(strategyID, MerchantID, full, discount, points) " +
             "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{CardTypeID}, #{discount}, #{points})";
-    final String updateStrategy = "UPDATE strategy SET full = #{full}, discount = #{discount}, points = #{points} " +
+    final String updateStrategy = "UPDATE Strategy SET full = #{full}, discount = #{discount}, points = #{points} " +
             "WHERE strategyID = #{strategyID}";
-    final String deleteStrategy = "DELETE FROM Strategy WHERE MerchantID = #{strategyID}";
+    final String deleteStrategy = "DELETE FROM Strategy WHERE strategyID = #{strategyID}";
 
     @Select(getStrategysByMerchantID)
     List<StrategyDAO> getStrategysByMerchantID(String merchantID);
+
+    @Select(getStrategyIDByMerchantID)
+    List<String> getStrategyIDByMerchantID(String MerchantID);
+
+    @Select(getStrategyByStrategyID)
+    StrategyDAO getStrategyByStrategyID(String strategyID);
 
     @Insert(addStrategy)
     int addStrategy(StrategyDAO strategyDAO);
@@ -31,7 +39,7 @@ public interface StrategyMapper {
     @Delete(deleteStrategy)
     int deleteStrategy(String strategyID);
 
-    final String getStrategyAmountByMerchantID = "SELECT COUNT(*) FROM strategy WHERE MerchantID = #{merchantID}";
+    final String getStrategyAmountByMerchantID = "SELECT COUNT(*) FROM Strategy WHERE MerchantID = #{merchantID}";
 
     @Select(getStrategyAmountByMerchantID)
     int getStrategyAmountByMerchantID(String merchantID);

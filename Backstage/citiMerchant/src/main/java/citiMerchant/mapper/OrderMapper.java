@@ -11,13 +11,13 @@ import java.util.List;
 public interface OrderMapper {
 
 
-    final String getByOrderID = "SELECT * FROM order WHERE OrderID = #{orderID}";
-    final String addOrder = "INSERT INTO order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID, time) " +
+    final String getByOrderID = "SELECT * FROM huaqi.order WHERE OrderID = #{orderID}";
+    final String addOrder = "INSERT INTO huaqi.order(orderID, originalPrice, priceAfter, pointsNeeded, userID, state, merchantID, time) " +
             "VALUES(#{orderId}, #{originalPrice}, #{priceAfter}, #{pointsNeeded}, #{userId}, #{state}, #{merchantId}, #{time})";
-    final String getOrderIDByUserID = "SELECT orderID FROM order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
-    final String getOrderIDByMerchantID = "SELECT orderID FROM order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
-    final String getOrderByUserID = "SELECT * FROM order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
-    final String getOrderByMerchantID = "SELECT * FROM order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderIDByUserID = "SELECT orderID FROM huaqi.order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderIDByMerchantID = "SELECT orderID FROM huaqi.order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderByUserID = "SELECT * FROM huaqi.order WHERE userID = #{userID} AND Time >= now() - #{intervalTime} AND Time <= now()";
+    final String getOrderByMerchantID = "SELECT * FROM huaqi.order WHERE MerchantID = #{merchantID} AND Time >= now() - #{intervalTime} AND Time <= now()";
 
     @Select(getByOrderID)
     Order selectOrderByID(String orderID);
@@ -55,9 +55,9 @@ public interface OrderMapper {
     List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
 
 
-    final String getOrderAmount = "SELECT COUNT(*) FROM order WHERE MerchantID = #{merchantID}";
+    final String getOrderAmount = "SELECT COUNT(*) FROM huaqi.order WHERE MerchantID = #{merchantID}";
 
     @Select(getOrderAmount)
-    int getOrderAmount(String merchantID);
+    int getOrderAmount(@Param("merchantID") String merchantID);
 
 }

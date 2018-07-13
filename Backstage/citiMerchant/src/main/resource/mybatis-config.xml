@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTDSQL Map Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTDSQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
     <!-- 引入外部资源配置文件 -->
-    <properties resource="jdbc.properties" />
+    <properties resource="jdbc.properties"/>
 
     <typeAliases>
         <package name="citiMerchant.vo"/>
@@ -11,7 +12,7 @@
     <!-- 配置环境，制定数据库连接信息 -->
     <environments default="development">
         <environment id="development">
-            <transactionManager type="JDBC" />
+            <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="${jdbc.driver}"/>
                 <property name="url" value="${jdbc.url}"/>
@@ -24,4 +25,9 @@
     <mappers>
         <package name="citiMerchant.mapper"/>
     </mappers>
+
+    <!--<mappers>-->
+    <!--<mapper resource="./src/main/java/citiMerchant/mapper/mapper.xml"/>-->
+    <!--</mappers>-->
+
 </configuration>

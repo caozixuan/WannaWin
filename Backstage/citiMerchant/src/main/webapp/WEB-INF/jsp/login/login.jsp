@@ -30,13 +30,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/login"><b>商户管理平台</b></a>
+    <a href="login"><b>商户管理平台</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="/loginSubmit" method="post">
+    <form action="loginSubmit" method="post">
       <div class="form-group has-feedback">
         <input type="merchantID" name ="merchantID" class="form-control" placeholder="merchantID">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
