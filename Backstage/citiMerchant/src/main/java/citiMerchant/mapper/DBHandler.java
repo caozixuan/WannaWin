@@ -87,6 +87,7 @@ public class DBHandler {
      */
     static public class Record {
 
+        //针对某一商家的积分流入信息
         static public enum Record_IN {
             //返回coupon的积分兑入总和
             Coupon,
