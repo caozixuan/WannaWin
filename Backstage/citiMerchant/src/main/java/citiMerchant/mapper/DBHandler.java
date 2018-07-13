@@ -14,11 +14,11 @@ import java.util.*;
 @Component
 public class DBHandler {
     @Autowired
-    public static OrderMapper orderMapper;
+    public  OrderMapper orderMapper;
     @Autowired
-    public static ItemMapper itemMapper;
+    public  ItemMapper itemMapper;
     @Autowired
-    public static StrategyMapper strategyMapper;
+    public  StrategyMapper strategyMapper;
 
     static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
@@ -27,23 +27,19 @@ public class DBHandler {
     static private File log_file;
     static private BufferedWriter log_writer;
 
-    static {
+    public DBHandler() {
         try {
-
-            System.out.println(System.getProperty("user.dir"));
-
             //init log_file
             log_file = new File(pathname);
-
             //init sqlsession
             Reader reader = Resources.getResourceAsReader(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-
         } catch (IOException e) {
             //e.printStackTrace();
-            System.out.println("\nfail to read mapper.xml\n");
+            System.out.println("\n************   fail to read mapper.xml   ************\n");
         }
     }
+
 
     /****************************        初始化完成        ****************************/
 
@@ -71,7 +67,7 @@ public class DBHandler {
     /*
      * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
      */
-    static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+    public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
         long time = System.currentTimeMillis();
         int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
         int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
@@ -116,7 +112,7 @@ public class DBHandler {
 
 
         /*
-         * 调用格式：
+         * 调用格式：s
          * 返回7天之内商家"00001"的优惠券积分流入
          * long totalPoints = DBHandler.Record.points_in_record("00001", 7, DBHandler.Record.Record_IN.Coupon);
          */
@@ -135,8 +131,7 @@ public class DBHandler {
             session.close();
             log("STORED PROCEDURE " + record_type_s, time);
             return totalPoints;
-        }
-
+        }//end method points_in_record(String, int, Record_IN);
     }//end class Record - 统计商家积分流水
 
 

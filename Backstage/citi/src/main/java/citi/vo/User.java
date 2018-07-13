@@ -43,6 +43,14 @@ public class User {
         this.rewardLinkCode = rewardLinkCode;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUserID() {
         return userID;
     }

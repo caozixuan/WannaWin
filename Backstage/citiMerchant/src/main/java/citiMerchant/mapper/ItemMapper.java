@@ -15,7 +15,7 @@ public interface ItemMapper {
     final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID}";
     final String updateItemByID = "UPDATE item SET name = #{name}, description = #{description}, logoURL = #{logoURL}, originalPrice = #{originalPrice}, points = #{points}, overdueTime = #{overdueTime}, stock = #{stock}" +
             "WHERE ItemID = #{ItemID}";
-    final String updateItemOverdueTimeByID="UPDATE item SET overdueTime = #{overdueTime} WHERE ItemID = #{ItemID}";
+    final String updateItemOverdueTimeByID = "UPDATE item SET overdueTime = #{overdueTime} WHERE ItemID = #{ItemID}";
     final String updateItemLogoURLByID = "UPDATE item SET logoURL = #{logoURL} WHERE ItemID = #{ItemID}";
     final String updateItemStockByID = "UPDATE item SET stock = #{stock} WHERE ItemID = #{ItemID}";
     final String deleteItemByID = "DELETE FROM item WHERE ItemID = #{ItemID}";
@@ -44,9 +44,9 @@ public interface ItemMapper {
     @Delete(deleteItemByID)
     int deleteItemByID(String ItemID);
 
-    final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE MerchantID = #{merchantID}";
+    final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE merchantID = #{merchantID}";
 
-    @Select(getItemByMerchantID)
+    @Select(getItemAmountByMerchantID)
     int getItemAmountByMerchantID(String merchantID);
 
 }

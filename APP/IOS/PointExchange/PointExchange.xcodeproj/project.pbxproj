@@ -36,6 +36,10 @@
 		3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */; };
 		3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
+		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
+		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
+		B66CFB2220F88AA3007165DF /* YDMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB2120F88AA3007165DF /* YDMenuDelegate.swift */; };
+		B66CFB2420F88B60007165DF /* MenuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = B66CFB2320F88B60007165DF /* MenuData.plist */; };
 		B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */; };
 		B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
@@ -91,6 +95,10 @@
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		B66CFB1D20F88A18007165DF /* YDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenu.swift; path = YDMenu/YDMenu.swift; sourceTree = "<group>"; };
+		B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDMenuDataSource.swift; sourceTree = "<group>"; };
+		B66CFB2120F88AA3007165DF /* YDMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenuDelegate.swift; path = YDMenu/YDMenuDelegate.swift; sourceTree = "<group>"; };
+		B66CFB2320F88B60007165DF /* MenuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MenuData.plist; path = PointExchange/MenuData.plist; sourceTree = "<group>"; };
 		B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantChooseTableViewController.swift; sourceTree = "<group>"; };
 		B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -187,6 +195,7 @@
 				3E8AB4AE20EDAEDC00915561 /* Products */,
 				6F37093A26C5F7D98AB5745B /* Pods */,
 				63CAE8CF1E8136F012CC53A9 /* Frameworks */,
+				B66CFB2320F88B60007165DF /* MenuData.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -293,8 +302,9 @@
 		3EBB5D1020EE1CC300B559BA /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */,
+				B66CFB1C20F889FF007165DF /* YDMenu */,
 				B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */,
+				3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */,
 				B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */,
 				B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */,
 				B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */,
@@ -318,6 +328,16 @@
 				7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B66CFB1C20F889FF007165DF /* YDMenu */ = {
+			isa = PBXGroup;
+			children = (
+				B66CFB2120F88AA3007165DF /* YDMenuDelegate.swift */,
+				B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */,
+				B66CFB1D20F88A18007165DF /* YDMenu.swift */,
+			);
+			name = YDMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +408,7 @@
 				3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */,
 				3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */,
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
+				B66CFB2420F88B60007165DF /* MenuData.plist in Resources */,
 				3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */,
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
@@ -480,6 +501,8 @@
 				3E4C155A20EE00E7000743C0 /* StoreViewController.swift in Sources */,
 				B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */,
 				B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */,
+				B66CFB2220F88AA3007165DF /* YDMenuDelegate.swift in Sources */,
+				B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */,
 				3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */,
 				B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */,
 				B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */,
@@ -487,6 +510,7 @@
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
 				3E46B77520F22C8900843193 /* ExchangeSelectDetailViewController.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
+				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
