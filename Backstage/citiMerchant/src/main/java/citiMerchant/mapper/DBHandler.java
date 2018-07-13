@@ -14,11 +14,11 @@ import java.util.*;
 @Component
 public class DBHandler {
     @Autowired
-    public static OrderMapper orderMapper;
+    public  OrderMapper orderMapper;
     @Autowired
-    public static ItemMapper itemMapper;
+    public  ItemMapper itemMapper;
     @Autowired
-    public static StrategyMapper strategyMapper;
+    public  StrategyMapper strategyMapper;
 
     static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
@@ -71,7 +71,7 @@ public class DBHandler {
     /*
      * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
      */
-    static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+     public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
         long time = System.currentTimeMillis();
         int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
         int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);

@@ -43,8 +43,7 @@ public interface ItemMapper {
 
     @Delete(deleteItemByID)
     int deleteItemByID(String ItemID);
-
-    final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE MerchantID = #{merchantID}";
+    final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE merchantID = #{merchantID}";
 
     @Select(getItemByMerchantID)
     int getItemAmountByMerchantID(String merchantID);
