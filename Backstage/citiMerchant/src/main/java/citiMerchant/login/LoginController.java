@@ -6,9 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 
@@ -21,6 +27,8 @@ import java.util.ArrayList;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+
+
 
     @RequestMapping("/login")
     public ModelAndView login(){
@@ -40,6 +48,10 @@ public class LoginController {
         else{
             mv.addObject("nums",nums);
             mv.setViewName("starter");
+            //添加session
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session =request.getSession();
+            session.setAttribute("merchantID",merchantID);
             return mv;
         }
 

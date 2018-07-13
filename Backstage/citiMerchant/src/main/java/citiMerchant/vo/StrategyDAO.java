@@ -2,14 +2,14 @@ package citiMerchant.vo;
 
 public class StrategyDAO {
     private String strategyID;
-    private String MerchantID;
+    private String merchantID;
     private int full;
     private int discount;
     private int points;
 
     public StrategyDAO(String strategyID, String merchantID, int full, int discount, int points) {
         this.strategyID = strategyID;
-        MerchantID = merchantID;
+        this.merchantID = merchantID;
         this.full = full;
         this.discount = discount;
         this.points = points;
@@ -20,7 +20,7 @@ public class StrategyDAO {
     }
 
     public String getMerchantID() {
-        return MerchantID;
+        return merchantID;
     }
 
     public int getFull() {
