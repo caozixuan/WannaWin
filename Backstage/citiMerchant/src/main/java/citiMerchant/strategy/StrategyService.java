@@ -27,7 +27,7 @@ public class StrategyService {
     }
 
     public StrategyDAO editStrategyRequest(String strategyID){
-        return  StrategyDAO strategyDAO = strategyMapper.getStrategyByStrategyID(strategyID);
+        return   strategyMapper.getStrategyByStrategyID(strategyID);
     }
 
     public void editStrategySubmit(StrategyDAO strategyDAO){
