@@ -19,15 +19,17 @@ public class DBHandler {
     @Autowired
     public static StrategyMapper strategyMapper;
 
-    static final private String resource = "./citiMerchant/mapper.xml";
+    static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
 
-    static private String pathname = "./citiMerchant/log.txt";
+    static private String pathname = "./src/main/java/citiMerchant/mapper/log.txt";
     static private File log_file;
     static private BufferedWriter log_writer;
 
     static {
         try {
+
+            System.out.println(System.getProperty("user.dir"));
 
             //init log_file
             log_file = new File(pathname);
@@ -50,9 +52,11 @@ public class DBHandler {
     static private void log(String method, long time) {
         try {
             log_writer = new BufferedWriter(new FileWriter(log_file));
-            log_writer.write("\"" + method + "\" elapsed time: " + (System.currentTimeMillis() - time) + "ms\n");
+            log_writer.write("\"" + method + "\" elapsed time: " +
+                    (System.currentTimeMillis() - time) + "ms\n");
             log_writer.flush();
             log_writer.close();
+
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("\nfail to log \"" + method + "\"\n");
