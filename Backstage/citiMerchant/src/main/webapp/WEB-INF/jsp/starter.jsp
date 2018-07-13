@@ -192,7 +192,7 @@ desired effect
   <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
   <div class="info-box-content">
     <span class="info-box-text">优惠商品</span>
-    <span class="info-box-number">0</span>
+    <span class="info-box-number"></span>
   </div>
   <!-- /.info-box-content -->
   
