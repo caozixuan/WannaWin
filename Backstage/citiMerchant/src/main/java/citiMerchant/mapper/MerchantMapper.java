@@ -13,7 +13,7 @@ public interface MerchantMapper {
             "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{logoURL}, #{cardLogoURL}, #{proportion})";
     final String updateMerchantLogo="UPDATE merchant SET logoURL = #{logoURL} WHERE MerchantID = #{merchantID}";
     final String updateMerchantCardLogo="UPDATE merchant SET cardLogoURL = #{cardLogoURL} WHERE MerchantID = #{merchantID}";
-    final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchant} AND password = #{password}";
+    final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
     final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
 

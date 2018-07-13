@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class DBHandler {
@@ -81,13 +79,17 @@ public class DBHandler {
      * 用于统计商家的积分流水信息，包含兑入和兑出。
      */
     static public class Record {
-        static public void coupon_record() {
+        static public int coupon_record(String IN_MerchantID, int IN_intervalDate) {
+            Map<String, Object> map = new HashMap<String, Long>();
+            map.put("subPolicyId", Object(IN_MerchantID));
+            map.put("fetchNum", Object(IN_intervalDate));
             long time = System.currentTimeMillis();
             SqlSession session = sqlSessionFactory.openSession();
-            //session.select("citiMerchant.mapper.DBHandler.coupon_record", );
+            int totalPoints = session.selectOne("citiMerchant.mapper.DBHandler.coupon_record", map);
             session.commit();
             session.close();
             log("STORED PROCEDURE coupon_record", time);
+            return totalPoints;
         }
     }
 
