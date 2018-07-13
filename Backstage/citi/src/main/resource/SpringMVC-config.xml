@@ -12,7 +12,7 @@
     <mvc:resources mapping="/citi/img/**" location="/img/"/>
     <context:component-scan base-package="citi.citi"/>
     <context:component-scan base-package="citi.interceptor"/>
-    <context:component-scan base-package="citi.login"/>
+    <context:component-scan base-package="citi.account"/>
     <context:component-scan base-package="citi.merchant"/>
     <context:component-scan base-package="citi.mscard"/>
     <context:component-scan base-package="citi.pay"/>
@@ -41,7 +41,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login/**"/>
-            <!--<mvc:exclude-mapping path="/citi/login/**" />-->
+            <!--<mvc:exclude-mapping path="/citi/account/**" />-->
             <bean class="citi.interceptor.AuthIeterceptor" />
         </mvc:interceptor>
 

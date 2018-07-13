@@ -11,9 +11,9 @@ public class AccountingController {
 
     private AccountingService accountingService;
 
-    @RequestMapping("/accounting")
-    @ResponseBody
-    public String  getStat(){
-        return String.valueOf(accountingService.totalPoints);
-    }
+  //  @RequestMapping("/accounting")
+   // @ResponseBody
+//    public String  getStat(){
+//        return String.valueOf(accountingService.totalPoints);
+//    }
 }
