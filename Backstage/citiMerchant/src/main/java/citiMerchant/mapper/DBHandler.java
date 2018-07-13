@@ -84,41 +84,50 @@ public class DBHandler {
      */
     static public class Record {
 
-        //返回coupon的积分兑入总和
-        static public long coupon_record(String IN_MerchantID, int IN_intervalDate) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            long totalPoints = -1;
-            map.put("IN_MerchantID", (Object) IN_MerchantID);
-            map.put("IN_intervalDate", (Object) IN_intervalDate);
-            map.put("totalPoints", (Object) totalPoints);
-            long time = System.currentTimeMillis();
-            SqlSession session = sqlSessionFactory.openSession();
-            session.selectOne("citiMerchant.mapper.DBHandler.coupon_record", map);
-            totalPoints = (Integer) map.get("totalPoints");
-            session.commit();
-            session.close();
-            log("STORED PROCEDURE coupon_record", time);
-            return totalPoints;
+        static private enum Record_IN {
+            //返回coupon的积分兑入总和
+            Coupon,
+            //返回order的积分使用总和
+            Order;
+            static Map<String, Record_IN> enumMap1 = new HashMap<>();
+            static Map<Record_IN, String> enumMap2 = new HashMap<>();
+
+            static {
+                enumMap1.put("coupon_record", Coupon);
+                enumMap1.put("order_record", Order);
+
+                enumMap2.put(Coupon, "coupon_record");
+                enumMap2.put(Order, "order_record");
+            }
+
+            public static Record_IN getRecord_TYPE(String record_type_s) {
+                return enumMap1.get(record_type_s);
+            }
+
+            public static String getRecord_TYPE_S(Record.Record_IN record_type) {
+                return enumMap2.get(record_type);
+            }
+
         }
 
-        //返回order的积分使用总和
-        static public long order_record(String IN_MerchantID, int IN_intervalDate) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            long totalPoints = -1;
-            map.put("IN_MerchantID", (Object) IN_MerchantID);
-            map.put("IN_intervalDate", (Object) IN_intervalDate);
-            map.put("totalPoints", (Object) totalPoints);
-            long time = System.currentTimeMillis();
-            SqlSession session = sqlSessionFactory.openSession();
-            session.selectOne("citiMerchant.mapper.DBHandler.order_record", map);
-            totalPoints = (Integer) map.get("totalPoints");
-            session.commit();
-            session.close();
-            log("STORED PROCEDURE order_record", time);
-            return totalPoints;
-        }
+    }
 
 
+    static public long points_in_record(String IN_MerchantID, int IN_intervalDate, Record.Record_IN record_type) {
+        Map<String, Object> map = new HashMap<>();
+        long totalPoints = -1;
+        map.put("IN_MerchantID", (Object) IN_MerchantID);
+        map.put("IN_intervalDate", (Object) IN_intervalDate);
+        map.put("totalPoints", (Object) totalPoints);
+        long time = System.currentTimeMillis();
+        SqlSession session = sqlSessionFactory.openSession();
+        final String record_type_s = Record.Record_IN.getRecord_TYPE_S(record_type);
+        session.selectOne("citiMerchant.mapper.DBHandler." + record_type_s, map);
+        totalPoints = (Integer) map.get("totalPoints");
+        session.commit();
+        session.close();
+        log("STORED PROCEDURE " + record_type_s, time);
+        return totalPoints;
     }
 
 
