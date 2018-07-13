@@ -121,7 +121,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final PayingAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         //设置列表中积分信息
-        holder.exchangePoint.setText(maxExchangePoints.get(position));
+        holder.editPoint.setText(exchangePoints.get(position));
+        holder.exchangePoint.setText(targetPoints.get(position));
         //设置商家图片
         Glide.with(context)
                 .load(logos.get(position))
@@ -186,6 +187,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 //用map集合保存
                 map.put(position, isChecked);
 
+                //计算选择的积分可转换成的通用积分
                 double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
 
                 if(map.get(position)){
@@ -237,12 +239,13 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         holder.editPoint.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                double rate = rates.get(position);
-                double exchangedPoint = 0;
-                if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())/rate;
-                }
-                holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+                //double rate = rates.get(position);
+                //double exchangedPoint = 0;
+                //if(s.length()!=0){
+                //    exchangedPoint = Double.parseDouble(s.toString())*rate;
+                //}
+                //
+                //holder.exchangePoint.setText(String.valueOf(exchangedPoint));
 
             }
 
@@ -251,7 +254,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 double rate = rates.get(position);
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())/rate;
+                    exchangedPoint = Double.parseDouble(s.toString())*rate;
                 }
 
 
@@ -265,11 +268,23 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 double rate = rates.get(position);
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())/rate;
+                    exchangedPoint = Double.parseDouble(s.toString())*rate;
                 }
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
                 exchangePoints.set(position,s.toString());
                 targetPoints.set(position,String.valueOf(exchangedPoint));
+                //修改total值
+                double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
+
+                if(totals.get(position)!=null){
+                    totals.put(position,add_point);
+                }
+
+                total = 0;
+                for (Integer key : totals.keySet()) {
+                    total += totals.get(key);
+                }
+
 
                 holder.editPoint.addTextChangedListener(this);
 

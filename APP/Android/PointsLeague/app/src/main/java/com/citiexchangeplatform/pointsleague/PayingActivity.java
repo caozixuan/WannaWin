@@ -81,19 +81,19 @@ public class PayingActivity extends AppCompatActivity {
     /*获得各项积分卡数据：logo merchantName posses_points rate generalPoints*/
     protected void initData()
     {
-        mAdapter.addData("1000", "100","0.5","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.5","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.5","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.5","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.5","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.5","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.5","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.5","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.5","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.5","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.5","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.5","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("3000","30","0.5","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
         //getMSCardInfoRequest();
 
 
@@ -111,6 +111,8 @@ public class PayingActivity extends AppCompatActivity {
         mAdapter.buttonSetOnclick(new PayingAdapter.ButtonInterface() {
             @Override
             public void onclick(View view, int position) {
+                //修改合计价格
+                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
                 //Toast.makeText(getApplicationContext(), "点击条目上的按钮"+position, Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "修改", Toast.LENGTH_SHORT).show();
             }
