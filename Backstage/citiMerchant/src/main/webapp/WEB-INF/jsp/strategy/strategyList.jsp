@@ -134,48 +134,48 @@ desired effect
  <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+     <section class="sidebar">
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-        </div>
-      </div>
+         <!-- Sidebar user panel (optional) -->
+         <div class="user-panel">
+             <div class="pull-left image">
+                 <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+             </div>
+             <div class="pull-left info">
+                 <p>Alexander Pierce</p>
+             </div>
+         </div>
 
-      <!-- Sidebar Menu -->
-        <ul class="sidebar-menu" data-widget="tree">
-            <!-- Optionally, you can add icons to the links -->
-            <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
-                    <span class="pull-right-container">
+         <!-- Sidebar Menu -->
+         <ul class="sidebar-menu" data-widget="tree">
+             <!-- Optionally, you can add icons to the links -->
+             <li class="treeview">
+                 <a href="#"><i class="fa fa-link"></i> <span>商品优惠</span>
+                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/showItemRequest">商品清单</a></li>
-                    <li><a href="item/addItem.html">添加商品</a></li>
-                </ul>
-            <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
-                    <span class="pull-right-container">
+                 </a>
+                 <ul class="treeview-menu">
+                     <li><a href="/item/getItem">商品清单</a></li>
+                     <li><a href="item/addItem">添加商品</a></li>
+                 </ul>
+             <li class="treeview">
+                 <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
+                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/strategy/getStrategyList">策略清单</a></li>
-                    <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
-                </ul>
-            <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-            <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-            <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li><a href="/strategy/getStrategyList">策略清单</a></li>
+                     <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
+                 </ul>
+             <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+             <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+             <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
-        </ul>
-      <!-- /.sidebar-menu -->
-    </section>
+         </ul>
+         <!-- /.sidebar-menu -->
+     </section>
     <!-- /.sidebar -->
   </aside>
 

@@ -79,6 +79,8 @@ public class DBHandler {
      * 用于统计商家的积分流水信息，包含兑入和兑出。
      */
     static public class Record {
+
+        //返回coupon的积分兑入总和
         static public long coupon_record(String IN_MerchantID, int IN_intervalDate) {
             Map<String, Object> map = new HashMap<String, Object>();
             long totalPoints = -1;
@@ -94,6 +96,25 @@ public class DBHandler {
             log("STORED PROCEDURE coupon_record", time);
             return totalPoints;
         }
+
+        //返回order的积分使用总和
+        static public long order_record(String IN_MerchantID, int IN_intervalDate) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            long totalPoints = -1;
+            map.put("IN_MerchantID", (Object) IN_MerchantID);
+            map.put("IN_intervalDate", (Object) IN_intervalDate);
+            map.put("totalPoints", (Object) totalPoints);
+            long time = System.currentTimeMillis();
+            SqlSession session = sqlSessionFactory.openSession();
+            session.selectOne("citiMerchant.mapper.DBHandler.order_record", map);
+            totalPoints = (Integer) map.get("totalPoints");
+            session.commit();
+            session.close();
+            log("STORED PROCEDURE order_record", time);
+            return totalPoints;
+        }
+
+
     }
 
 

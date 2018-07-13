@@ -26,6 +26,9 @@ public class Merchant {
         this.proportion = proportion;
     }
 
+    public Merchant() {
+    }
+
     public String getCardDescription() {
         return cardDescription;
     }
