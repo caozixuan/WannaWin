@@ -27,7 +27,7 @@
     </mappers>
 
     <!--<mappers>-->
-        <!--<mapper resource="citiMerchant/mapper/mapper.xml"/>-->
+    <!--<mapper resource="src/main/java/citiMerchant/mapper/mapper.xml"/>-->
     <!--</mappers>-->
 
 </configuration>
