@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -51,9 +52,11 @@ public class DBHandler {
      */
     static private void log(String method, long time) {
         try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            String current_time = df.format(new Date());// new Date()为获取当前系统时间
             log_writer = new BufferedWriter(new FileWriter(log_file));
             log_writer.write("\"" + method + "\" elapsed time: " +
-                    (System.currentTimeMillis() - time) + "ms\n");
+                    (System.currentTimeMillis() - time) + "ms at" + current_time + "\n");
             log_writer.flush();
             log_writer.close();
 
@@ -114,7 +117,7 @@ public class DBHandler {
         /*
          * 调用格式：
          * 返回7天之内商家"00001"的优惠券积分流入
-         * long totalPoints = Record.points_in_record("00001", 7, Record.Record_IN.Coupon);
+         * long totalPoints = DBHandler.Record.points_in_record("00001", 7, DBHandler.Record.Record_IN.Coupon);
          */
         static public long points_in_record(String IN_MerchantID, int IN_intervalDate, Record_IN record_type) {
             Map<String, Object> map = new HashMap<>();
