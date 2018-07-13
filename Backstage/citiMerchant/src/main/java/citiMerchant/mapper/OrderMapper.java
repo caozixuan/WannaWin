@@ -55,9 +55,9 @@ public interface OrderMapper {
     List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
 
 
-    final String getOrderAmount = "SELECT COUNT(*) FROM order WHERE MerchantID = #{merchantID}";
+    final String getOrderAmount = "SELECT COUNT(*) FROM huaqi.order WHERE MerchantID = #{merchantID}";
 
     @Select(getOrderAmount)
-    int getOrderAmount(String merchantID);
+    int getOrderAmount(@Param("merchantID") String merchantID);
 
 }
