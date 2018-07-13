@@ -221,7 +221,7 @@ desired effect
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" action="/item/addItemOperation">
+              <form role="form" action="submitEdit">
                 <!-- text input -->
                 <div class="form-group">
                   <label>商品名称</label>
@@ -254,7 +254,7 @@ desired effect
                          class="col-sm-10 myfile" value="" /> <input type="hidden"
                                                                      name="url2" value="">
                 </div>
-                  <a href="/item/submitEdit"> <button type="submit" class="btn btn-success">提 交</button></a>
+                  <a href="submitEdit"> <button type="submit" class="btn btn-success">提 交</button></a>
 
               </form>
 
