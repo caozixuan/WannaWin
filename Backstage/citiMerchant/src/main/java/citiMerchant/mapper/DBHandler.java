@@ -84,7 +84,7 @@ public class DBHandler {
      */
     static public class Record {
 
-        static private enum Record_IN {
+        static public enum Record_IN {
             //返回coupon的积分兑入总和
             Coupon,
             //返回order的积分使用总和
@@ -104,31 +104,36 @@ public class DBHandler {
                 return enumMap1.get(record_type_s);
             }
 
-            public static String getRecord_TYPE_S(Record.Record_IN record_type) {
+            public static String getRecord_TYPE_S(Record_IN record_type) {
                 return enumMap2.get(record_type);
             }
 
         }
 
-    }
 
+        /*
+         * 调用格式：
+         * 返回7天之内商家"00001"的优惠券积分流入
+         * long totalPoints = Record.points_in_record("00001", 7, Record.Record_IN.Coupon);
+         */
+        static public long points_in_record(String IN_MerchantID, int IN_intervalDate, Record_IN record_type) {
+            Map<String, Object> map = new HashMap<>();
+            long totalPoints = -1;
+            map.put("IN_MerchantID", (Object) IN_MerchantID);
+            map.put("IN_intervalDate", (Object) IN_intervalDate);
+            map.put("totalPoints", (Object) totalPoints);
+            long time = System.currentTimeMillis();
+            SqlSession session = sqlSessionFactory.openSession();
+            final String record_type_s = Record_IN.getRecord_TYPE_S(record_type);
+            session.selectOne("citiMerchant.mapper.DBHandler." + record_type_s, map);
+            totalPoints = (Integer) map.get("totalPoints");
+            session.commit();
+            session.close();
+            log("STORED PROCEDURE " + record_type_s, time);
+            return totalPoints;
+        }
 
-    static public long points_in_record(String IN_MerchantID, int IN_intervalDate, Record.Record_IN record_type) {
-        Map<String, Object> map = new HashMap<>();
-        long totalPoints = -1;
-        map.put("IN_MerchantID", (Object) IN_MerchantID);
-        map.put("IN_intervalDate", (Object) IN_intervalDate);
-        map.put("totalPoints", (Object) totalPoints);
-        long time = System.currentTimeMillis();
-        SqlSession session = sqlSessionFactory.openSession();
-        final String record_type_s = Record.Record_IN.getRecord_TYPE_S(record_type);
-        session.selectOne("citiMerchant.mapper.DBHandler." + record_type_s, map);
-        totalPoints = (Integer) map.get("totalPoints");
-        session.commit();
-        session.close();
-        log("STORED PROCEDURE " + record_type_s, time);
-        return totalPoints;
-    }
+    }//end class Record - 统计商家积分流水
 
 
 }
