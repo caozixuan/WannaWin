@@ -4,9 +4,6 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,16 +21,16 @@ pageEncoding="UTF-8" isELIgnored="false" %>
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
-<link href="../../../bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
-<link href="../../../bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
-<script src="../../../bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
-<script src="../../../bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
-    <script src="../../../bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
-    <script src="../../../bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
-     <script src="../../../bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
-    <script src="../../../bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
-    <script src="../../../bootstrap-fileinput/js/locales/zh.js"></script>
+  <link href="../../../bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="../../../bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="../../../bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+  <script src="../../../bootstrap-fileinput/js/locales/zh.js"></script>
   <!-- jQuery 3 -->
   <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
@@ -155,7 +152,7 @@ desired effect
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
- <aside class="main-sidebar">
+  <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -180,8 +177,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/showItemRequest">商品清单</a></li>
-            <li><a href="item/addItem.html">添加商品</a></li>
+            <li><a href="/item/getItem">商品清单</a></li>
+            <li><a href="/item/addItem">添加商品</a></li>
           </ul>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -214,44 +211,52 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-<div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">商品添加</h3>
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">商品添加</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form role="form" action="/item/addItemOperation">
+            <!-- text input -->
+            <div class="form-group">
+              <label>商品名称</label>
+              <input name="name" type="text" class="form-control" placeholder="输入商品名称">
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <form role="form" action="/item/addItemOperation">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品名称</label>
-                  <input type="text" class="form-control" placeholder="输入商品名称" value=${item.name}>
-                </div>
-				<div class="form-group">
-                  <label>商品原价</label>
-                  <input type="text" class="form-control" placeholder="输入商品原价" value=${item.originalPrice}>
-                </div>
-				<div class="form-group">
-                  <label>抵扣积分</label>
-                  <input type="text" class="form-control" placeholder="输入抵扣的花旗积分" value=${item.points}>
-                </div>
-                <!-- textarea -->
-                <div class="form-group">
-                  <label>商品描述</label>
-                  <textarea class="form-control" rows="3" placeholder="输入商品描述">${item.description}</textarea>
-                </div>
-                <div class="form-group">
-                  <label>商品图片</label>
-                  <input type="file" name="myfile" data-ref="url2"
-                         class="col-sm-10 myfile" value="" /> <input type="hidden"
-                                                                     name="url2" value="">
-                </div>
-                  <a href="/item/submitEdit"> <button type="submit" class="btn btn-success">提 交</button></a>
-
-              </form>
-
+            <div class="form-group">
+              <label>商品原价</label>
+              <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价">
             </div>
-            <!-- /.box-body -->
-          </div>
+            <div class="form-group">
+              <label>抵扣积分</label>
+              <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分">
+            </div>
+            <div class="form-group">
+              <label>库存数量</label>
+              <input name="atock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填">
+            </div>
+            <div class="form-group">
+              <label>抵扣券有效时间</label>
+              <input name="overdueTime" type="text" class="form-control" placeholder="抵扣券有效时间">
+            </div>
+            <!-- textarea -->
+            <div class="form-group">
+              <label>商品描述</label>
+              <textarea name="description" class="form-control" rows="3" placeholder="输入商品描述"></textarea>
+            </div>
+            <div class="form-group">
+              <label>商品图片</label>
+              <input  type="file" name="logoURL" data-ref="url2"
+                     class="col-sm-10 myfile" value="" /> <input type="hidden"
+                                                                 name="url2" value="">
+            </div>
+            <button type="submit" class="btn btn-success">提 交</button>
+
+          </form>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
@@ -271,7 +276,7 @@ desired effect
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
- 
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
@@ -288,9 +293,9 @@ desired effect
      user experience. -->
 </body>
 <script type="text/javascript">
-    $(".myfile").fileinput({
+    $(".logoURL").fileinput({
         //上传的地址
-        uploadUrl:"<%=basePath%>food/uploadFile",
+        uploadUrl:"item/uploadFile",
         uploadAsync : false, //默认异步上传
         showUpload : false, //是否显示上传按钮,跟随文本框的那个
         showRemove : false, //显示移除按钮,跟随文本框的那个
@@ -314,12 +319,12 @@ desired effect
         language : 'zh'
     })
     //异步上传返回结果处理
-    $('.myfile').on('fileerror', function(event, data, msg) {
+    $('.logoURL').on('fileerror', function(event, data, msg) {
         console.log("fileerror");
         console.log(data);
     });
     //异步上传返回结果处理
-    $(".myfile").on("fileuploaded", function(event, data, previewId, index) {
+    $(".logoURL").on("fileuploaded", function(event, data, previewId, index) {
         console.log("fileuploaded");
         var ref = $(this).attr("data-ref");
         $("input[name='" + ref + "']").val(data.response.url);
@@ -327,20 +332,20 @@ desired effect
     });
 
     //同步上传错误处理
-    $('.myfile').on('filebatchuploaderror', function(event, data, msg) {
+    $('.logoURL').on('filebatchuploaderror', function(event, data, msg) {
         console.log("filebatchuploaderror");
         console.log(data);
     });
 
     //同步上传返回结果处理
-    $(".myfile").on("filebatchuploadsuccess",
+    $(".logoURL").on("filebatchuploadsuccess",
         function(event, data, previewId, index) {
             console.log("filebatchuploadsuccess");
             console.log(data);
         });
 
     //上传前
-    $('.myfile').on('filepreupload', function(event, data, previewId, index) {
+    $('.logoURL').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
     });
 </script>
