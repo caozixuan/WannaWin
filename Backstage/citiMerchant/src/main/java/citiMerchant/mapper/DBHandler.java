@@ -14,11 +14,11 @@ import java.util.*;
 @Component
 public class DBHandler {
     @Autowired
-    public  OrderMapper orderMapper;
+    public static OrderMapper orderMapper;
     @Autowired
-    public  ItemMapper itemMapper;
+    public static ItemMapper itemMapper;
     @Autowired
-    public  StrategyMapper strategyMapper;
+    public static StrategyMapper strategyMapper;
 
     static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
     static private SqlSessionFactory sqlSessionFactory;
@@ -27,23 +27,20 @@ public class DBHandler {
     static private File log_file;
     static private BufferedWriter log_writer;
 
-    static {
+    @Autowired
+    public DBHandler() {
         try {
-
-            System.out.println(System.getProperty("user.dir"));
-
             //init log_file
             log_file = new File(pathname);
-
             //init sqlsession
             Reader reader = Resources.getResourceAsReader(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-
         } catch (IOException e) {
             //e.printStackTrace();
-            System.out.println("\nfail to read mapper.xml\n");
+            System.out.println("\n************   fail to read mapper.xml   ************\n");
         }
     }
+
 
     /****************************        初始化完成        ****************************/
 
@@ -71,7 +68,7 @@ public class DBHandler {
     /*
      * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
      */
-     public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+    static public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
         long time = System.currentTimeMillis();
         int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
         int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
@@ -135,8 +132,7 @@ public class DBHandler {
             session.close();
             log("STORED PROCEDURE " + record_type_s, time);
             return totalPoints;
-        }
-
+        }//end method points_in_record(String, int, Record_IN);
     }//end class Record - 统计商家积分流水
 
 
