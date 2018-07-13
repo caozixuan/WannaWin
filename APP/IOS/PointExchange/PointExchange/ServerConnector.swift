@@ -82,8 +82,8 @@ class ServerConnector: NSObject {
             provider.request(.getPointsInfo(userID: id)){result in
                 if case let .success(response) = result {
                     let data = JSON(try? response.mapJSON())
-                    User.getUser().availablePoints = data["availablePoints"].int
-                    User.getUser().generalPoints = data["generalPoints"].int
+                    User.getUser().availablePoints = data["availablePoints"].double
+                    User.getUser().generalPoints = data["generalPoints"].double
                     callback(true)
                 }
             }
