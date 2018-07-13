@@ -5,6 +5,7 @@ import citiMerchant.vo.Strategy;
 import citiMerchant.vo.StrategyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,11 @@ public class StrategyService {
         strategyMapper.deleteStrategy(strategyID);
     }
 
-    public void updateStrategy(StrategyDAO strategyDAO){
+    public StrategyDAO editStrategyRequest(String strategyID){
+        return  StrategyDAO strategyDAO = strategyMapper.getStrategyByStrategyID(strategyID);
+    }
+
+    public void editStrategySubmit(StrategyDAO strategyDAO){
         strategyMapper.updateStrategy(strategyDAO);
     }
 
