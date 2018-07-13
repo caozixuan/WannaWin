@@ -80,9 +80,9 @@ public class DBHandler {
      */
     static public class Record {
         static public int coupon_record(String IN_MerchantID, int IN_intervalDate) {
-            Map<String, Object> map = new HashMap<String, Long>();
-            map.put("subPolicyId", Object(IN_MerchantID));
-            map.put("fetchNum", Object(IN_intervalDate));
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("IN_MerchantID", (Object) IN_MerchantID);
+            map.put("IN_intervalDate", (Object) IN_intervalDate);
             long time = System.currentTimeMillis();
             SqlSession session = sqlSessionFactory.openSession();
             int totalPoints = session.selectOne("citiMerchant.mapper.DBHandler.coupon_record", map);

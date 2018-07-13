@@ -4,12 +4,16 @@
 
 <mapper namespace="citiMerchant.mapper.DBHandler">
 
-    <parameterMap class="map" id="provCitySplitParameterMap">
-        <parameter property="subPolicyId" jdbcType="DECIMAL" javaType="java.lang.Long" mode="IN"/>
-        <parameter property="fetchNum" jdbcType="DECIMAL" javaType="java.lang.Long" mode="IN"/>
-    </parameterMap>
+    <resultMap id = "parameter_for_coupon_record" type = "Student">
+        <result property = "id" column = "ID"/>
+        <result property = "name" column = "NAME"/>
+        <result property = "branch" column = "BRANCH"/>
+        <result property = "percentage" column = "PERCENTAGE"/>
+        <result property = "phone" column = "PHONE"/>
+        <result property = "email" column = "EMAIL"/>
+    </resultMap>
 
-    <select id="coupon_record" useCache="false" parameterType="int"
+    <select id="coupon_record" useCache="false" parameterType="map"
             statementType="CALLABLE">
         <![CDATA[
             call coupon_record
