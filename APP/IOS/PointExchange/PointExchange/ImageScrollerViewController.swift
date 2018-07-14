@@ -8,13 +8,14 @@
 
 import UIKit
 import AFImageHelper
+import SnapKit
 
 //图片轮播组件代理协议
 protocol ImageScrollerControllerDelegate{
 	//获取数据源
 	func scrollerDataSource()->[String]
 	//获取内部sliderView的宽高尺寸
-	func scrollerViewSize()->CGSize
+	//func scrollerViewSize()->CGSize
 }
 
 class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
@@ -50,13 +51,13 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//自动滚动计时器
 	var autoScrollTimer:Timer?
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		
+	override func viewWillAppear(_ animated: Bool) {
 		//获取并设置scrollerView尺寸
-		let size : CGSize = self.delegate.scrollerViewSize()
-		self.scrollerViewWidth = size.width
-		self.scrollerViewHeight = size.height
+		self.view.setNeedsLayout()
+		self.view.layoutIfNeeded()
+		self.scrollerViewWidth = self.view.bounds.size.width
+		self.scrollerViewHeight = self.view.bounds.size.height
+		
 		
 		//获取数据
 		self.dataSource =  self.delegate.scrollerDataSource()
@@ -76,8 +77,8 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	
 	//设置scrollerView
 	func configureScrollerView(){
-		self.scrollerView = UIScrollView(frame: CGRect(x: 0,y: 0,
-													   width: self.scrollerViewWidth!, height: self.scrollerViewHeight!))
+		//self.scrollerView = UIScrollView(frame: CGRect(x: 0,y: 0, width: self.scrollerViewWidth!, height: self.scrollerViewHeight!))
+		self.scrollerView = UIScrollView()
 		self.scrollerView?.backgroundColor = UIColor.red
 		self.scrollerView?.delegate = self
 		self.scrollerView?.contentSize = CGSize(width: self.scrollerViewWidth! * 3,
@@ -87,7 +88,10 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.scrollerView?.isPagingEnabled = true
 		self.scrollerView?.bounces = false
 		self.view.addSubview(self.scrollerView!)
-		
+		self.scrollerView?.snp.makeConstraints { (make) -> Void in
+			make.size.equalTo(self.view.bounds.size)
+			make.center.equalTo(self.view)
+		}
 	}
 	
 	//设置加载指示图片
@@ -120,11 +124,17 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	
 	//设置页控制器
 	func configurePageController() {
-		self.pageControl = UIPageControl(frame: CGRect(x: kScreenWidth/2-60,
-													   y: self.scrollerViewHeight! - 30, width: 120, height: 20))
+		//self.pageControl = UIPageControl(frame: CGRect(x: self.scrollerViewWidth!/2-60, y: self.scrollerViewHeight! - 40, width: 120, height: 20))
+		self.pageControl = UIPageControl()
 		self.pageControl?.numberOfPages = (self.dataSource?.count)!
 		self.pageControl?.isUserInteractionEnabled = false
 		self.view.addSubview(self.pageControl!)
+		self.pageControl?.snp.makeConstraints { (make) -> Void in
+			make.width.equalTo(120)
+			make.height.equalTo(20)
+			make.centerX.equalTo(self.view.snp.centerX)
+			make.bottom.equalTo(self.view).offset(-5)
+		}
 	}
 	
 	//设置自动滚动计时器
