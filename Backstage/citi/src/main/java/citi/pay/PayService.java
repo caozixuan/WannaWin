@@ -1,7 +1,16 @@
 package citi.pay;
 
+import citi.mapper.StrategyMapper;
+import citi.mapper.UserMapper;
 import citi.vo.Order;
+import citi.vo.StrategyDAO;
+import citi.vo.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author zhong
@@ -10,8 +19,36 @@ import org.springframework.stereotype.Service;
 @Service
 public class PayService {
 
+    @Autowired
+    private StrategyMapper strategyMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public boolean pay(String userID,String timeStamp,String merchantID,float totalPrice){
+        long timeMillis = System.currentTimeMillis();
+        long QRTimestamp=Long.parseLong(timeStamp);
+        if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
+            return false;
+        }
+        List<StrategyDAO> strategyDAOList=strategyMapper.getStrategysByMerchantID(merchantID);
+        Collections.sort(strategyDAOList, new Comparator<StrategyDAO>() {
+            @Override
+            public int compare(StrategyDAO o1, StrategyDAO o2) {
+                if (o1.getPoints()>o2.getPoints()){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
+        });
+        User user=userMapper.getInfoByUserID(userID);
+        for (StrategyDAO strategyDAO:strategyDAOList){
+            if (strategyDAO.getPoints()<user.getGeneralPoints()){
+                user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
+                float priceAfter=strategyDAO.getPriceAfter();
+            }
+        }
 
         return false;
     }

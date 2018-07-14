@@ -15,25 +15,32 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.models.AddCardItemModel;
+import com.citiexchangeplatform.pointsleague.models.ExchangeModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
+class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>implements Filterable {
     //数据源
-    private List<String> maxExchangePoints;
-    private List<String> exchangePoints;
-    private List<String> targetPoints;
-    private List<Double> rates;
-    private List<String> names;
-    private List<String> logos;
-    private List<Integer> img_list;
+    //private List<String> maxExchangePoints;
+    //private List<String> exchangePoints;
+    //private List<String> targetPoints;
+    //private List<Double> rates;
+    //private List<String> names;
+    //private List<String> logos;
+    //private List<Integer> img_list;
+
+    private List<ExchangeModel> sourceItems;
+    private List<ExchangeModel> filteredItems;
     private Context context;
     //是否显示单选框,默认false
     //private boolean isshowBox = false;
@@ -51,25 +58,31 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     //构造方法
     public PayingAdapter(Context context) {
 
-        maxExchangePoints = new ArrayList<String>();
-        exchangePoints = new ArrayList<String>();
-        targetPoints = new ArrayList<String>();
-        rates = new ArrayList<Double>();
-        names = new ArrayList<String>();
-        logos = new ArrayList<String>();
-        img_list = new ArrayList<Integer>();
+        //maxExchangePoints = new ArrayList<String>();
+        //exchangePoints = new ArrayList<String>();
+        //targetPoints = new ArrayList<String>();
+        //rates = new ArrayList<Double>();
+        //names = new ArrayList<String>();
+        //logos = new ArrayList<String>();
+        //img_list = new ArrayList<Integer>();
+
+        sourceItems = new ArrayList<ExchangeModel>();
+        filteredItems = sourceItems;
         this.context = context;
         this.total = 0;
         initMap();
     }
 
     public void addData(String posses, String target,String rate, String name, String logoURL) {
-        maxExchangePoints.add(posses);
-        exchangePoints.add(posses);
-        targetPoints.add(target);
-        rates.add(Double.parseDouble(rate));
-        names.add(name);
-        logos.add(logoURL);
+        //maxExchangePoints.add(posses);
+        //exchangePoints.add(posses);
+        //targetPoints.add(target);
+        //rates.add(Double.parseDouble(rate));
+        //names.add(name);
+        //logos.add(logoURL);
+
+        ExchangeModel newItem = new ExchangeModel(false, posses, target,Double.parseDouble(rate), logoURL,name);
+        sourceItems.add(newItem);
         notifyDataSetChanged();
     }
 
@@ -86,6 +99,37 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
      */
     public void buttonSetOnclick(ButtonInterface buttonInterface){
         this.buttonInterface=buttonInterface;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String partName = charSequence.toString();
+                if (partName.isEmpty()) {
+                    filteredItems = sourceItems;
+                } else {
+                    List<ExchangeModel> newFilterCards = new ArrayList<ExchangeModel>();
+                    for (ExchangeModel item:sourceItems) {
+                        System.out.println(item.getName().toLowerCase() + "    " + partName.toLowerCase());
+                        if(item.getName().toLowerCase().contains(partName.toLowerCase()))
+                            newFilterCards.add(item);
+                    }
+                    filteredItems = newFilterCards;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredItems;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredItems = (ArrayList<ExchangeModel>) filterResults.values;
+                //刷新数据
+                notifyDataSetChanged();
+            }
+        };
     }
 
     /**
@@ -124,18 +168,18 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull final PayingAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.setIsRecyclable(false);
         //设置列表中积分信息
-        holder.editPoint.setText(exchangePoints.get(position));
-        holder.exchangePoint.setText(targetPoints.get(position));
+        holder.editPoint.setText(filteredItems.get(position).getExchangePoint());
+        holder.exchangePoint.setText(filteredItems.get(position).getTargetPoint());
         //设置商家图片
         Glide.with(context)
-                .load(logos.get(position))
+                .load(filteredItems.get(position).getLogo())
                 .placeholder(R.drawable.ic_points_black_24dp)
                 .error(R.drawable.ic_mall_black_24dp)
                 .override(60,60)
                 .into(holder.logo);
         //holder.logo.setImageResource(img_list.get(position));
         //设置商户名
-        holder.name.setText(names.get(position));
+        holder.name.setText(filteredItems.get(position).getName());
         //初始编辑框为不可编辑状态
         holder.editPoint.setFocusable(false);
         holder.editPoint.setFocusableInTouchMode(false);
@@ -186,31 +230,41 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Boolean previous_status = map.get(position);
+                //Boolean previous_status = map.get(position);
+                //Boolean previous_status = filteredItems.get(position).getChoose();
                 //用map集合保存
                 map.put(position, isChecked);
+                filteredItems.get(position).setChoose(isChecked);
 
                 //计算选择的积分可转换成的通用积分
-                double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
+                //double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
 
-                if(map.get(position)){
-                    if(!totals.containsKey(position))
-                     totals.put(position,add_point);
-                    total = 0;
-                    for (Integer key : totals.keySet()) {
-                        total += totals.get(key);
+                //if(map.get(position)){
+                //if(filteredItems.get(position).getChoose()){
+                //    if(!totals.containsKey(position))
+                //     totals.put(position,add_point);
+                //    total = 0;
+                //    for (Integer key : totals.keySet()) {
+                //        total += totals.get(key);
+                //    }
+                //}
+                //else if(previous_status&&!filteredItems.get(position).getChoose()&&totals.containsKey(position)){
+                //    totals.remove(position);
+                //    total = 0;
+                //    for (Integer key : totals.keySet()) {
+                //        total += totals.get(key);
+                //    }
+                //    //total -= add_point;
+                //}
+
+                total = 0;
+                for(int i = 0;i<sourceItems.size();i++){
+                    if(sourceItems.get(i).getChoose()){
+                        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
                     }
                 }
-                else if(previous_status&&!map.get(position)&&totals.containsKey(position)){
-                    totals.remove(position);
-                    total = 0;
-                    for (Integer key : totals.keySet()) {
-                        total += totals.get(key);
-                    }
-                    //total -= add_point;
-                }
 
-                if (map.get(position)) {
+                if (filteredItems.get(position).getChoose()) {
                     holder.modifyButton.setVisibility(View.VISIBLE);
 
                 } else {
@@ -218,7 +272,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                     //取消选择后编辑框为不可编辑状态
                     holder.editPoint.setFocusable(false);
                     holder.editPoint.setFocusableInTouchMode(false);
-                    holder.editPoint.setText(maxExchangePoints.get(position));
+                    holder.editPoint.setText(sourceItems.get(position).getMaxExchangePoint());
 
                 }
 
@@ -227,11 +281,12 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
 
         // 设置CheckBox的状态
-        if (map.get(position) == null) {
+        if (filteredItems.get(position).getChoose() == null) {
             map.put(position, false);
+            filteredItems.get(position).setChoose(false);
         }
-        holder.Checkbox_Choose.setChecked(map.get(position));
-        if (map.get(position)) {
+        holder.Checkbox_Choose.setChecked(filteredItems.get(position).getChoose());
+        if (filteredItems.get(position).getChoose()) {
             holder.modifyButton.setVisibility(View.VISIBLE);
         } else {
             holder.modifyButton.setVisibility(View.INVISIBLE);
@@ -249,24 +304,26 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                double rate = rates.get(position);
+                double rate = filteredItems.get(position).getRate();
                 double exchangedPoint = 0;
                 if(s.length()!=0){
                     exchangedPoint = Double.parseDouble(s.toString())*rate;
-                    exchangePoints.set(position,s.toString());
+                    filteredItems.get(position).setExchangePoint(s.toString());
 
                     //超出最大值，自动更新为最大值
-                    if(Double.parseDouble(s.toString()) > Double.parseDouble(maxExchangePoints.get(position))){
-                        exchangedPoint = Double.parseDouble(maxExchangePoints.get(position))*rate;
-                        exchangePoints.set(position,maxExchangePoints.get(position));
-                        holder.editPoint.setText(maxExchangePoints.get(position));
+                    double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
+                    if(Double.parseDouble(s.toString()) > max){
+
+                        exchangedPoint = max * rate;
+                        filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
+                        holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
                         Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
                 }
 
 
-
-                targetPoints.set(position,String.valueOf(exchangedPoint));
+                filteredItems.get(position).setTargetPoint(String.valueOf(exchangedPoint));
+                //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
                 //notifyItemChanged(position);
             }
@@ -274,33 +331,46 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
             @Override
             public void afterTextChanged(Editable s) {
                 holder.editPoint.removeTextChangedListener(this);
-                double rate = rates.get(position);
+                double rate = filteredItems.get(position).getRate();
                 double exchangedPoint = 0;
                 if(s.length()!=0){
                     exchangedPoint = Double.parseDouble(s.toString())*rate;
-                    exchangePoints.set(position,s.toString());
+                    filteredItems.get(position).setExchangePoint(s.toString());
+
                     //超出最大值，自动更新为最大值
-                    if(Double.parseDouble(s.toString()) > Double.parseDouble(maxExchangePoints.get(position))){
-                        exchangedPoint = Double.parseDouble(maxExchangePoints.get(position))*rate;
-                        exchangePoints.set(position,maxExchangePoints.get(position));
-                        holder.editPoint.setText(maxExchangePoints.get(position));
+                    double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
+                    if(Double.parseDouble(s.toString()) > max){
+
+                        exchangedPoint = max * rate;
+                        filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
+                        holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
                         Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+
+                filteredItems.get(position).setTargetPoint(String.valueOf(exchangedPoint));
+                //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
 
-                targetPoints.set(position,String.valueOf(exchangedPoint));
+
 
                 //修改total值
-                double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
-
-                if(totals.get(position)!=null){
-                    totals.put(position,add_point);
-                }
-
+                //double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
+                //
+                //if(totals.get(position)!=null){
+                //    totals.put(position,add_point);
+                //}
+                //
+                //total = 0;
+                //for (Integer key : totals.keySet()) {
+                //    total += totals.get(key);
+                //}
                 total = 0;
-                for (Integer key : totals.keySet()) {
-                    total += totals.get(key);
+                for(int i = 0;i<sourceItems.size();i++){
+                    if(sourceItems.get(i).getChoose()){
+                        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
+                    }
                 }
 
                 //notifyItemChanged(position);
@@ -375,6 +445,11 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         return position;
     }
 
+    public List<ExchangeModel> getSourceItems() {
+        return sourceItems;
+    }
+
+
     //private void specialUpdate(final int item_position) {
     //    Handler handler = new Handler();
     //    final Runnable r = new Runnable() {
@@ -389,7 +464,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     /*返回列表长度*/
     @Override
     public int getItemCount() {
-        return maxExchangePoints.size();
+        return filteredItems.size();
     }
 
     //设置是否显示CheckBox
@@ -403,21 +478,6 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         return total;
     }
 
-    public List<String> getTargetPoints() {
-        return targetPoints;
-    }
-
-    public List<String> getLogos() {
-        return logos;
-    }
-
-    public List<String> getNames() {
-        return names;
-    }
-
-    public List<String> getExchangePoints() {
-        return exchangePoints;
-    }
 
     //点击item选中CheckBox
     public void setSelectItem(int position) {
