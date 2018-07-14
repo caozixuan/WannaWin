@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -37,8 +38,16 @@ public class MSCardController {
         if(cards==null){
             return "[]";
         }
-        String jsonStr = gson.toJson(cards);
+        ArrayList<BriefCard> briefCards = msCardService.changeToBriefCards(cards);
+        String jsonStr = gson.toJson(briefCards);
         return jsonStr;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getNum")
+    public String getCardNum(String userID){
+        int num = msCardService.getCardNum(userID);
+        return "{\"num\": "+ num + "}";
     }
 
 

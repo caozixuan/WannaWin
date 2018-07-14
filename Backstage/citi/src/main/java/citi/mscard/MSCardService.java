@@ -53,6 +53,10 @@ public class MSCardService {
         return returnCards;
     }
 
+    public int getCardNum(String userID){
+        int num = msCardMapper.select(userID).size();
+        return num;
+    }
     class SortByPoints implements Comparator{
         public int compare(Object o1, Object o2){
             MSCard c1 = (MSCard) o1;
@@ -64,12 +68,12 @@ public class MSCardService {
         }
     }
     /**
-     * 由cardID获取卡片
-     * @param CardID 卡ID
+     * 由userID和merchantID获取卡片
+     * @param userID, @param merchantID
      * @return 卡信息
      */
-    public MSCard getMSCardInfo(String CardID){
-        return msCardMapper.selectCard(CardID);
+    public MSCard getMSCardInfo(String userID, String merchantID){
+        return msCardMapper.getBy_userID_AND_merchantID(userID,merchantID);
     }
 
 
@@ -87,5 +91,15 @@ public class MSCardService {
         if(flag>0)
             return true;
         return false;
+    }
+
+    public ArrayList<BriefCard> changeToBriefCards(List<MSCard> cards){
+        ArrayList<BriefCard> briefCards = new ArrayList<BriefCard>();
+        for(int i=0;i<cards.size();i++){
+            MSCard card = cards.get(i);
+            BriefCard briefCard = new BriefCard(card.getMerchantId(),card.getLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion());
+            briefCards.add(briefCard);
+        }
+        return briefCards;
     }
 }
