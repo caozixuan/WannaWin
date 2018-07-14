@@ -230,31 +230,41 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Boolean previous_status = map.get(position);
+                //Boolean previous_status = map.get(position);
+                //Boolean previous_status = filteredItems.get(position).getChoose();
                 //用map集合保存
                 map.put(position, isChecked);
+                filteredItems.get(position).setChoose(isChecked);
 
                 //计算选择的积分可转换成的通用积分
-                double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
+                //double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
 
-                if(map.get(position)){
-                    if(!totals.containsKey(position))
-                     totals.put(position,add_point);
-                    total = 0;
-                    for (Integer key : totals.keySet()) {
-                        total += totals.get(key);
+                //if(map.get(position)){
+                //if(filteredItems.get(position).getChoose()){
+                //    if(!totals.containsKey(position))
+                //     totals.put(position,add_point);
+                //    total = 0;
+                //    for (Integer key : totals.keySet()) {
+                //        total += totals.get(key);
+                //    }
+                //}
+                //else if(previous_status&&!filteredItems.get(position).getChoose()&&totals.containsKey(position)){
+                //    totals.remove(position);
+                //    total = 0;
+                //    for (Integer key : totals.keySet()) {
+                //        total += totals.get(key);
+                //    }
+                //    //total -= add_point;
+                //}
+
+                total = 0;
+                for(int i = 0;i<sourceItems.size();i++){
+                    if(sourceItems.get(i).getChoose()){
+                        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
                     }
                 }
-                else if(previous_status&&!map.get(position)&&totals.containsKey(position)){
-                    totals.remove(position);
-                    total = 0;
-                    for (Integer key : totals.keySet()) {
-                        total += totals.get(key);
-                    }
-                    //total -= add_point;
-                }
 
-                if (map.get(position)) {
+                if (filteredItems.get(position).getChoose()) {
                     holder.modifyButton.setVisibility(View.VISIBLE);
 
                 } else {
@@ -271,11 +281,12 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
 
 
         // 设置CheckBox的状态
-        if (map.get(position) == null) {
+        if (filteredItems.get(position).getChoose() == null) {
             map.put(position, false);
+            filteredItems.get(position).setChoose(false);
         }
-        holder.Checkbox_Choose.setChecked(map.get(position));
-        if (map.get(position)) {
+        holder.Checkbox_Choose.setChecked(filteredItems.get(position).getChoose());
+        if (filteredItems.get(position).getChoose()) {
             holder.modifyButton.setVisibility(View.VISIBLE);
         } else {
             holder.modifyButton.setVisibility(View.INVISIBLE);
@@ -345,15 +356,21 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
 
 
                 //修改total值
-                double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
-
-                if(totals.get(position)!=null){
-                    totals.put(position,add_point);
-                }
-
+                //double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
+                //
+                //if(totals.get(position)!=null){
+                //    totals.put(position,add_point);
+                //}
+                //
+                //total = 0;
+                //for (Integer key : totals.keySet()) {
+                //    total += totals.get(key);
+                //}
                 total = 0;
-                for (Integer key : totals.keySet()) {
-                    total += totals.get(key);
+                for(int i = 0;i<sourceItems.size();i++){
+                    if(sourceItems.get(i).getChoose()){
+                        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
+                    }
                 }
 
                 //notifyItemChanged(position);
