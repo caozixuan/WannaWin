@@ -59,10 +59,11 @@ return:{"status":true}
 //merchant的logoURL改为merchantLogoURL
 ```
 ```
+请求地址： /mscard/infos
 查看所有卡片
 参数：userID，n
 return:
-cardID,merchantID,merchantLogoURL,merchantName,points,proportion
+merchantID,merchantLogoURL,merchantName,points,proportion
 ```
 ```
 详情页
@@ -96,7 +97,7 @@ PointsNeeded最小所需积分数
 ```
 
 - 积分兑换
-
+请求地址： /points/changePoints
 
 ```
 参数:
@@ -115,8 +116,15 @@ return:
 参数：userID，orderType
 return:
 [{"points":0,"proportion":1,"logoURL":"xx","merchantName":"xxx","merchantID":"xx"}]
+
 ```
 
+
+- 返回有几张卡
+请求地址： /mscard/getNum
+参数：userID
+return:
+{"num":2}
 
 
 

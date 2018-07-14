@@ -33,12 +33,13 @@ public class PointsController {
     @Autowired
     private MerchantMapper merchantMapper;
 
+    @Autowired
+    private PointsService pointsService;
+
     @ResponseBody
     @RequestMapping("/changePoints")
     public String changePoints(String json){
-        //GSON直接解析成对象
         ResultBean resultBean = new Gson().fromJson(json,ResultBean.class);
-        //对象中拿到集合
         List<ResultBean.MerchantBean> merchantBeanList = resultBean.getMerchants();
         User user = userMapper.getInfoByUserID(resultBean.getUserID());
         List<MSCard> msCards = msCardMapper.select(user.getUserID());
@@ -47,35 +48,11 @@ public class PointsController {
         for(int i=0;i<msCards.size();i++){
            ids.add(msCards.get(i).getMerchantId());
         }
-        boolean isCanChange = true;
-        for(int i=0;i<merchantBeanList.size();i++){
-            ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
-            List<MSCard> userMSCards = msCardMapper.select(user.getUserID());
-            MSCard msCard = userMSCards.get(0);
-            if(ids.indexOf(merchantBean.getMerchantID())==-1){
-                Merchant merchant = merchantMapper.selectByID(merchantBean.getMerchantID());
-                ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "不存在此卡");
-                returnMerchants.add(returnMerchant);
-                isCanChange = false;
-            }
-            else if(msCard.getPoints()*msCard.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion()){
-                Merchant merchant = merchantMapper.selectByID(merchantBean.getMerchantID());
-                ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "卡内积分不足");
-                returnMerchants.add(returnMerchant);
-                isCanChange = false;
-            }
-        }
+        boolean isCanChange = pointsService.isCanChange(merchantBeanList,user,returnMerchants,ids);
         if(isCanChange){
-            List<MSCard> userMSCards = msCardMapper.select(user.getUserID());
-            MSCard msCard = userMSCards.get(0);
-            for(int i=0;i<merchantBeanList.size();i++){
-                ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
-                if(msCard.getPoints()*msCard.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion()){
-                    msCard.setPoints(msCard.getPoints()-Integer.valueOf(merchantBean.getSelectedMSCardPoints()));
-                    user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
-                }
-            }
+            pointsService.deductPoints(user,merchantBeanList);
         }
         return gson.toJson(returnMerchants);
     }
+
 }
