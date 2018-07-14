@@ -1,11 +1,15 @@
 package citiMerchant.mapper;
 
 import citiMerchant.vo.Order;
-//import citi.dao.OrderStateTypeHandler;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+//import citi.dao.OrderStateTypeHandler;
 
 @Repository
 public interface OrderMapper {
@@ -43,21 +47,22 @@ public interface OrderMapper {
      *
      */
     @Select(getOrderIDByUserID)
-    List<String> getOrderIDByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
+    List<String> getOrderIDByUserID(@Param("userID") String userID, @Param("intervalTime") int intervalTime);
 
     @Select(getOrderIDByMerchantID)
-    List<String> getOrderIDByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
+    List<String> getOrderIDByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") int intervalTime);
 
     @Select(getOrderByUserID)
-    List<Order> getOrderByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
+    List<Order> getOrderByUserID(@Param("userID") String userID, @Param("intervalTime") int intervalTime);
 
     @Select(getOrderByMerchantID)
-    List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
+    List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") int intervalTime);
 
 
     final String getOrderAmount = "SELECT COUNT(*) FROM huaqi.order WHERE MerchantID = #{merchantID}";
 
     @Select(getOrderAmount)
+    @ResultType(java.lang.Integer.class)
     int getOrderAmount(@Param("merchantID") String merchantID);
 
 }

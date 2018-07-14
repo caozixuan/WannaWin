@@ -57,25 +57,25 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
     }
 
     private Context context;
-    private List<AllCardItemModel> cards;
-    private List<AllCardItemModel> filteredCards;
+    private List<AllCardItemModel> sourceItems;
+    private List<AllCardItemModel> filteredItems;
 
     public AllCardAdapter(Context context) {
-        cards = new ArrayList<AllCardItemModel>();
-        filteredCards = cards;
+        sourceItems = new ArrayList<AllCardItemModel>();
+        filteredItems = sourceItems;
         this.context = context;
     }
 
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         Glide.with(context)
-                .load(filteredCards.get(position).getLogoURL())
+                .load(filteredItems.get(position).getLogoURL())
                 .placeholder(R.drawable.ic_points_black_24dp)
                 .error(R.drawable.ic_mall_black_24dp)
                 .into(holder.imageViewLogo);
-        holder.textViewName.setText(filteredCards.get(position).getName());
-        holder.textViewPoints.setText("商户卡积分：" + filteredCards.get(position).getPoint());
-        holder.textViewExchangePoints.setText("可兑换通用积分" + String.format("%.1f",filteredCards.get(position).getExchangePoint()));
+        holder.textViewName.setText(filteredItems.get(position).getName());
+        holder.textViewPoints.setText("商户卡积分：" + filteredItems.get(position).getPoint());
+        holder.textViewExchangePoints.setText("可兑换通用积分" + String.format("%.1f",filteredItems.get(position).getExchangePoint()));
         //image
 
 
@@ -83,14 +83,14 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), filteredCards.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return filteredCards.size();
+        return filteredItems.size();
     }
 
     @Override
@@ -101,9 +101,8 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
 
 
     public void addData(String name, String logoURL, int point, double proportion) {
-        AllCardItemModel newCard = new AllCardItemModel(name, logoURL, point, proportion);
-        cards.add(newCard);
-        //
+        AllCardItemModel newItem = new AllCardItemModel(name, logoURL, point, proportion);
+        sourceItems.add(newItem);
         notifyDataSetChanged();
     }
 
@@ -114,24 +113,25 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
             protected FilterResults performFiltering(CharSequence constraint) {
                 String partName = constraint.toString();
                 if(partName.isEmpty()){
-                    filteredCards = cards;
+                    filteredItems = sourceItems;
                 }else {
                     List<AllCardItemModel> newFilterCards = new ArrayList<AllCardItemModel>();
-                    for (AllCardItemModel card:cards) {
-                        if(card.getName().contains(partName))
-                            newFilterCards.add(card);
+                    for (AllCardItemModel item:sourceItems) {
+                        System.out.println(item.getName().toLowerCase() + "    " + partName.toLowerCase());
+                        if(item.getName().toLowerCase().contains(partName.toLowerCase()))
+                            newFilterCards.add(item);
                     }
-                    filteredCards = newFilterCards;
+                    filteredItems = newFilterCards;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredCards;
+                filterResults.values = filteredItems;
                 return filterResults;
 
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredCards = (ArrayList<AllCardItemModel>) results.values;
+                filteredItems = (ArrayList<AllCardItemModel>) results.values;
                 notifyDataSetChanged();
             }
         };

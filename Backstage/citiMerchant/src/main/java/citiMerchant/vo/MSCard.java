@@ -1,22 +1,15 @@
 package citiMerchant.vo;
 
-import java.util.UUID;
-
-
 public class MSCard {
-    private String cardID;
     private String userID;
     private String cardNum;
     private int points;
     private String merchantId;
 
     public MSCard() {
-        cardID = UUID.randomUUID().toString().toLowerCase();
-        //TODO:从商家获取points或其他途径
     }
 
-    public MSCard(String cardID, String userID, String cardNum, int points, String merchantId) {
-        this.cardID = cardID;
+    public MSCard(String userID, String cardNum, int points, String merchantId) {
         this.userID = userID;
         this.cardNum = cardNum;
         this.points = points;
@@ -26,10 +19,6 @@ public class MSCard {
     public static boolean checkAttribute(MSCard msCard) {
         //TODO:完整性验证
         return true;
-    }
-
-    public void setCardID(String cardID) {
-        this.cardID = cardID;
     }
 
     public void setUserID(String userID) {
@@ -54,10 +43,6 @@ public class MSCard {
 
     public void setPoints(int points) {
         this.points = points;
-    }
-
-    public String getCardID() {
-        return cardID;
     }
 
     public String getUserID() {

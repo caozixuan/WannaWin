@@ -156,15 +156,18 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
         ArrayList<String> logos = new ArrayList<>();
         ArrayList<String> names = new ArrayList<>();
         //
-        map = mAdapter.getMap();
-        for (Integer i:map.keySet()){
-            //map.keySet()返回的是所有key的值
-                used.add(mAdapter.getExchangePoints().get(i));
-                logos.add(mAdapter.getLogos().get(i));
-                names.add(mAdapter.getNames().get(i));
-                exchanged.add(mAdapter.getTargetPoints().get(i));
+        //map = mAdapter.getMap();
+        for (int i = 0;i<mAdapter.getSourceItems().size();i++){
+            if (mAdapter.getSourceItems().get(i).getChoose()){
+                //map.keySet()返回的是所有key的值
+                used.add(mAdapter.getSourceItems().get(i).getExchangePoint());
+                logos.add(mAdapter.getSourceItems().get(i).getLogo());
+                names.add(mAdapter.getSourceItems().get(i).getName());
+                exchanged.add(mAdapter.getSourceItems().get(i).getTargetPoint());
 
+            }
         }
+
         Bundle bundle = new Bundle();
         //
         //
@@ -322,11 +325,9 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
 
     @Override
     public boolean onQueryTextChange(String query) {
-        //final List<WordModel> filteredModelList = filter(mModels, query);
-        //mAdapter.edit()
-        //        .replaceAll(filteredModelList)
-        //        .commit();
+        mAdapter.getFilter().filter(query);
         return true;
+
     }
 
     @Override

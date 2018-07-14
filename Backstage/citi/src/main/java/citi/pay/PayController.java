@@ -23,10 +23,14 @@ public class PayController {
     @Autowired
     private PayService payService;
 
-    @RequestMapping("/pay")
-    public void pay(String userID,String timeStamp,String merchantID,float totalPrice){
-
-
+    @RequestMapping("")
+    @ResponseBody
+    public String pay(String userID,String timeStamp,String merchantID,float totalPrice){
+        if (payService.pay(userID,timeStamp,merchantID,totalPrice)){
+            return ResultJson.SUCCESS;
+        }else{
+            return ResultJson.FAILURE;
+        }
     }
 
     @RequestMapping("/QRCode")
