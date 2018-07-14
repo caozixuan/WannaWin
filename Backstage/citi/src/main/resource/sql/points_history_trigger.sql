@@ -8,10 +8,10 @@ BEGIN
     DECLARE _merchantID VARCHAR(45) DEFAULT NEW.MerchantID;
 	DECLARE _diff_points INT DEFAULT NEW.points - OLD.points;
     DECLARE _proportion VARCHAR(45);
-    SELECT proportion FROM merchant WHERE MercahntID = _merchantID INTO _proportion;
-	IF diff_points > 0 THEN
-		INSERT INTO points_history VALUES(_userID, _cardID, diff_points, _proportion * diff_points, "GAIN", NOW());
+    SELECT proportion FROM merchant WHERE MerchantID = _merchantID INTO _proportion;
+	IF _diff_points > 0 THEN
+		INSERT INTO points_history VALUES(_userID, _cardID, _diff_points, _proportion * _diff_points, "GAIN", NOW());
 	ELSE
-		INSERT INTO points_history VALUES(_userID, _cardID, 0 - diff_points, 0 - _proportion * diff_points, "EXCHANGE", NOW());
+		INSERT INTO points_history VALUES(_userID, _cardID, 0 - _diff_points, 0 - _proportion * _diff_points, "EXCHANGE", NOW());
     END IF;
 END;$$

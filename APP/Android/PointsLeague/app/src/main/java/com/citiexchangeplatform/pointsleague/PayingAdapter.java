@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -252,10 +253,19 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 double exchangedPoint = 0;
                 if(s.length()!=0){
                     exchangedPoint = Double.parseDouble(s.toString())*rate;
+                    exchangePoints.set(position,s.toString());
+
+                    //超出最大值，自动更新为最大值
+                    if(Double.parseDouble(s.toString()) > Double.parseDouble(maxExchangePoints.get(position))){
+                        exchangedPoint = Double.parseDouble(maxExchangePoints.get(position))*rate;
+                        exchangePoints.set(position,maxExchangePoints.get(position));
+                        holder.editPoint.setText(maxExchangePoints.get(position));
+                        Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
-                exchangePoints.set(position,s.toString());
+
                 targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
                 //notifyItemChanged(position);
@@ -268,9 +278,17 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 double exchangedPoint = 0;
                 if(s.length()!=0){
                     exchangedPoint = Double.parseDouble(s.toString())*rate;
+                    exchangePoints.set(position,s.toString());
+                    //超出最大值，自动更新为最大值
+                    if(Double.parseDouble(s.toString()) > Double.parseDouble(maxExchangePoints.get(position))){
+                        exchangedPoint = Double.parseDouble(maxExchangePoints.get(position))*rate;
+                        exchangePoints.set(position,maxExchangePoints.get(position));
+                        holder.editPoint.setText(maxExchangePoints.get(position));
+                        Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
-                exchangePoints.set(position,s.toString());
+
                 targetPoints.set(position,String.valueOf(exchangedPoint));
 
                 //修改total值
