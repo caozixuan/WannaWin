@@ -2,6 +2,7 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -120,8 +121,10 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(@NonNull final PayingAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        holder.setIsRecyclable(false);
         //设置列表中积分信息
-        holder.exchangePoint.setText(maxExchangePoints.get(position));
+        holder.editPoint.setText(exchangePoints.get(position));
+        holder.exchangePoint.setText(targetPoints.get(position));
         //设置商家图片
         Glide.with(context)
                 .load(logos.get(position))
@@ -186,6 +189,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 //用map集合保存
                 map.put(position, isChecked);
 
+                //计算选择的积分可转换成的通用积分
                 double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
 
                 if(map.get(position)){
@@ -233,30 +237,28 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
         }
 
 
-        //编辑框中输入文字监听
-        holder.editPoint.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                double rate = rates.get(position);
-                double exchangedPoint = 0;
-                if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())/rate;
-                }
-                holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+        if (holder.editPoint.getTag() instanceof TextWatcher) {
+            holder.editPoint.removeTextChangedListener((TextWatcher) holder.editPoint.getTag());
+        }
 
-            }
+        //编辑框中输入文字监听
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 double rate = rates.get(position);
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())/rate;
+                    exchangedPoint = Double.parseDouble(s.toString())*rate;
                 }
 
 
+                exchangePoints.set(position,s.toString());
+                targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
-
+                //notifyItemChanged(position);
             }
 
             @Override
@@ -265,19 +267,106 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
                 double rate = rates.get(position);
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())/rate;
+                    exchangedPoint = Double.parseDouble(s.toString())*rate;
                 }
                 holder.exchangePoint.setText(String.valueOf(exchangedPoint));
                 exchangePoints.set(position,s.toString());
                 targetPoints.set(position,String.valueOf(exchangedPoint));
 
-                holder.editPoint.addTextChangedListener(this);
+                //修改total值
+                double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
 
+                if(totals.get(position)!=null){
+                    totals.put(position,add_point);
+                }
+
+                total = 0;
+                for (Integer key : totals.keySet()) {
+                    total += totals.get(key);
+                }
+
+                //notifyItemChanged(position);
+                holder.editPoint.addTextChangedListener(this);
             }
-        });
+        };
+
+        holder.editPoint.addTextChangedListener(watcher);
+        holder.editPoint.setTag(watcher);
+
+        //编辑框中输入文字监听
+        //holder.editPoint.addTextChangedListener(new TextWatcher() {
+        //    @Override
+        //    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        //        //double rate = rates.get(position);
+        //        //double exchangedPoint = 0;
+        //        //if(s.length()!=0){
+        //        //    exchangedPoint = Double.parseDouble(s.toString())*rate;
+        //        //}
+        //        //
+        //        //holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+        //
+        //    }
+        //
+        //    @Override
+        //    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        //        double rate = rates.get(position);
+        //        double exchangedPoint = 0;
+        //        if(s.length()!=0){
+        //            exchangedPoint = Double.parseDouble(s.toString())*rate;
+        //        }
+        //
+        //
+        //        holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+        //
+        //    }
+        //
+        //    @Override
+        //    public void afterTextChanged(Editable s) {
+        //        holder.editPoint.removeTextChangedListener(this);
+        //        double rate = rates.get(position);
+        //        double exchangedPoint = 0;
+        //        if(s.length()!=0){
+        //            exchangedPoint = Double.parseDouble(s.toString())*rate;
+        //        }
+        //        holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+        //        exchangePoints.set(position,s.toString());
+        //        targetPoints.set(position,String.valueOf(exchangedPoint));
+        //        //修改total值
+        //        double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
+        //
+        //        if(totals.get(position)!=null){
+        //            totals.put(position,add_point);
+        //        }
+        //
+        //        total = 0;
+        //        for (Integer key : totals.keySet()) {
+        //            total += totals.get(key);
+        //        }
+        //
+        //
+        //        holder.editPoint.addTextChangedListener(this);
+        //
+        //    }
+        //});
 
 
     }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    //private void specialUpdate(final int item_position) {
+    //    Handler handler = new Handler();
+    //    final Runnable r = new Runnable() {
+    //        public void run() {
+    //            notifyItemChanged(item_position);
+    //        }
+    //    };
+    //    handler.post(r);
+    //}
+
 
     /*返回列表长度*/
     @Override
