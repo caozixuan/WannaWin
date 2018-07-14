@@ -23,6 +23,9 @@ public interface RecordMapper {
     @ResultType(Record.class)
     void order_record(Record record);
 
+
+    
+
 }
 
 
