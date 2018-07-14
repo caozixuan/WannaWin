@@ -11,7 +11,7 @@ public class MerchantInfo {
 
 
     private MerchantInfo(Context context){
-        sharedPreferences = context.getSharedPreferences("MerchantInfo", Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("MerchantInfoModel", Context.MODE_PRIVATE);
     }
 
     static public MerchantInfo getInstance(Context context) {

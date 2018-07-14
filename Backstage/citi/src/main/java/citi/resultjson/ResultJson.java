@@ -8,4 +8,9 @@ public class ResultJson {
 
     public final static String FAILURE="{\"status\":false}";
 
+    public final static String QRCODE_INVALID="{\"status\":\"invalid\"}";
+
+    public final static String QRCODE_UNUSED="{\"status\":\"unused\"}";
+
+
 }
