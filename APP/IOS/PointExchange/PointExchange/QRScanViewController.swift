@@ -27,15 +27,22 @@ class QRScanViewController: UIViewController {
     }
     
 
-    /*
+	
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+		// TODO: - 网络请求
+		let isSuccess = true
+		// ...
+		
+		if isSuccess {
+			// 准备“抵扣成功”数据
+		}
+		else {
+			// 准备“抵扣失败”数据
+		}
+		
+		
     }
-    */
     
 
 }
