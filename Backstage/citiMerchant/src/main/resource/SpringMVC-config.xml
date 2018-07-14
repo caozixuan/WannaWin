@@ -8,7 +8,7 @@
                             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <context:annotation-config/>
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
     <context:component-scan base-package="citiMerchant.accounting"/>
     <context:component-scan base-package="citiMerchant.history"/>
@@ -27,13 +27,15 @@
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 
-        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="defaultAutoCommit" value="true"/>
 
-        <property name="url" value="${jdbc.url}" />
+        <property name="driverClassName" value="${jdbc.driver}"/>
 
-        <property name="username" value="${jdbc.username}" />
+        <property name="url" value="${jdbc.url}"/>
 
-        <property name="password" value="${jdbc.password}" />
+        <property name="username" value="${jdbc.username}"/>
+
+        <property name="password" value="${jdbc.password}"/>
     </bean>
     <!-- mybatis会话工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

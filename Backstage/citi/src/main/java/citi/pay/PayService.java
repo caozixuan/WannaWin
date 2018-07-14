@@ -1,5 +1,6 @@
 package citi.pay;
 
+import citi.mapper.OrderMapper;
 import citi.mapper.StrategyMapper;
 import citi.mapper.UserMapper;
 import citi.vo.Order;
@@ -8,6 +9,7 @@ import citi.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,8 +27,11 @@ public class PayService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private OrderMapper orderMapper;
+
     public boolean pay(String userID,String timeStamp,String merchantID,float totalPrice){
-        long timeMillis = System.currentTimeMillis();
+        long timeMillis = System.currentTimeMillis()/1000;
         long QRTimestamp=Long.parseLong(timeStamp);
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
             return false;
@@ -47,9 +52,12 @@ public class PayService {
             if (strategyDAO.getPoints()<user.getGeneralPoints()){
                 user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
                 float priceAfter=strategyDAO.getPriceAfter();
+                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp));
+                if (orderMapper.addOrder(order)==1){
+                    return true;
+                }
             }
         }
-
         return false;
     }
 
@@ -63,8 +71,10 @@ public class PayService {
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
             return QRCodeStatus.INVALID;
         }
-        //TODO:从数据库搜索该ID和时间戳对应的订单
-        Order order=new Order();
+        Order order=orderMapper.selectOrderByID(userID);
+        if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+                return QRCodeStatus.USED;
+        }
         if (order==null){
             return QRCodeStatus.UNUSED;
         }
@@ -75,7 +85,7 @@ public class PayService {
     }
 
     public Order getOrder(String userID,String timeStamp){
-        //TODO:从数据库搜索该ID和时间戳对应的订单
+        List<Order> order=orderMapper.getOrderByUserID(userID,"100");
         return new Order();
     }
 

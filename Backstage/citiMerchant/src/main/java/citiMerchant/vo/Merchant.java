@@ -2,6 +2,9 @@ package citiMerchant.vo;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Merchant {
     private String merchantID;
     private String name;
@@ -15,8 +18,37 @@ public class Merchant {
     private double proportion;
     private String activityTheme;
     private String activityDescription;
+    private String cardType;
 
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, double proportion, String activityTheme, String activityDescription) {
+    public enum CardType {
+        cardNum, phoneNum, cardNumWithPassword, phoneNumWithPassword;
+
+        static Map<String, CardType> enumMap1 = new HashMap<>();
+        static Map<CardType, String> enumMap2 = new HashMap<>();
+
+        static {
+            enumMap1.put("cardNum", cardNum);
+            enumMap1.put("phoneNum", phoneNum);
+            enumMap1.put("cardNumWithPassword", cardNumWithPassword);
+            enumMap1.put("phoneNumWithPassword", phoneNumWithPassword);
+
+            enumMap2.put(cardNum, "cardNum");
+            enumMap2.put(phoneNum, "phoneNum");
+            enumMap2.put(cardNumWithPassword, "cardNumWithPassword");
+            enumMap2.put(phoneNumWithPassword, "phoneNumWithPassword");
+        }
+
+        public static CardType getCardType(String cardType) {
+            return enumMap1.get(cardType);
+        }
+
+        public static String getCardTypeString(CardType cardType) {
+            return enumMap2.get(cardType);
+        }
+
+    }
+
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, double proportion, String activityTheme, String activityDescription, String cardType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -28,6 +60,26 @@ public class Merchant {
         this.proportion = proportion;
         this.activityTheme = activityTheme;
         this.activityDescription = activityDescription;
+        this.cardType = cardType;
+    }
+
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, double proportion, String activityTheme, String activityDescription, CardType cardType) {
+        this.merchantID = merchantID;
+        this.name = name;
+        this.password = password;
+        this.description = description;
+        this.cardDescription = cardDescription;
+        this.address = address;
+        this.merchantLogoURL = merchantLogoURL;
+        this.cardLogoURL = cardLogoURL;
+        this.proportion = proportion;
+        this.activityTheme = activityTheme;
+        this.activityDescription = activityDescription;
+        this.cardType = CardType.getCardTypeString(cardType);
+    }
+
+    public String getCardType() {
+        return cardType;
     }
 
     public String getActivityTheme() {
