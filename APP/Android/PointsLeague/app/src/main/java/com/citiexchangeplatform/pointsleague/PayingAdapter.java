@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
+class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>implements Filterable {
     //数据源
     private List<String> maxExchangePoints;
     private List<String> exchangePoints;
@@ -86,6 +88,40 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder> {
      */
     public void buttonSetOnclick(ButtonInterface buttonInterface){
         this.buttonInterface=buttonInterface;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    //mFilterList = mSourceList;
+                } else {
+                    List<String> filteredList = new ArrayList<>();
+                    //for (String str : mSourceList) {
+                    //    //这里根据需求，添加匹配规则
+                    //    if (str.contains(charString)) {
+                    //        filteredList.add(str);
+                    //    }
+                    //}
+                    //
+                    //mFilterList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                //filterResults.values = mFilterList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                //mFilterList = (ArrayList<String>) filterResults.values;
+                //刷新数据
+                notifyDataSetChanged();
+            }
+        };
     }
 
     /**
