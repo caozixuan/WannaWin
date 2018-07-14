@@ -1,6 +1,6 @@
 package citiMerchant.test;
 
-import citiMerchant.mapper.Record;
+import citiMerchant.vo.Record;
 import citiMerchant.mapper.RecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

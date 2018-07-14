@@ -2,21 +2,17 @@
 
 package citiMerchant.mapper;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class DBHandler {
 
-    static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
+//    static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
 
     @Autowired
     public OrderMapper orderMapper;
@@ -25,19 +21,19 @@ public class DBHandler {
     @Autowired
     public StrategyMapper strategyMapper;
 
-    //@Autowired
-    private SqlSessionFactory sqlSessionFactory;
-
-    public DBHandler() {
-        try {
-            //init sqlsession
-            Reader reader = Resources.getResourceAsReader(resource);
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        } catch (IOException e) {
-            //e.printStackTrace();
-            System.out.println("\n************   fail to read mapper.xml, but it doesn't matter   ************\n");
-        }
-    }
+//    @Autowired
+//    private SqlSessionFactory sqlSessionFactory;
+//
+//    public DBHandler() {
+//        try {
+//            //init sqlsession
+//            Reader reader = Resources.getResourceAsReader(resource);
+//            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+//        } catch (IOException e) {
+//            //e.printStackTrace();
+//            System.out.println("\n************   fail to read mapper.xml, but it doesn't matter   ************\n");
+//        }
+//    }
 
 
     /****************************        初始化完成        ****************************/
