@@ -1,10 +1,7 @@
 package citiMerchant.mapper;
 
 import citiMerchant.vo.StrategyDAO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +13,7 @@ public interface StrategyMapper {
     final String getStrategyIDByMerchantID = "SELECT strategyID FROM Strategy WHERE MerchantID = #{MerchantID}";
     final String getStrategyByStrategyID = "SELECT * FROM Strategy WHERE strategyID = #{strategyID}";
     final String addStrategy = "INSERT INTO Strategy(strategyID, MerchantID, full, priceAfter, points) " +
-            "VALUES(#{strategyID}, #{MerchantID}, #{full}, #{priceAfter}, #{points})";
+            "VALUES(#{strategyID}, #{merchantID}, #{full}, #{priceAfter}, #{points})";
     final String updateStrategy = "UPDATE Strategy SET full = #{full}, priceAfter = #{priceAfter}, points = #{points} " +
             "WHERE strategyID = #{strategyID}";
     final String deleteStrategy = "DELETE FROM Strategy WHERE strategyID = #{strategyID}";
@@ -34,7 +31,7 @@ public interface StrategyMapper {
     int addStrategy(StrategyDAO strategyDAO);
 
     @Update(updateStrategy)
-    int updateStrategy(StrategyDAO strategyDAO);
+    int updateStrategy(@Param("strategyID") String strategyID, @Param("full") int full,@Param("priceAfter") int priceAfter,@Param("points") int points);
 
     @Delete(deleteStrategy)
     int deleteStrategy(String strategyID);

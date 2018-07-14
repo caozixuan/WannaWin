@@ -66,7 +66,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="../starter.html" class="logo">
+    <a href=/starter" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
