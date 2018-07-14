@@ -22,9 +22,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
     var activityIndicator:UIActivityIndicatorView?
-	//获取屏幕宽度
-	let screenWidth =  UIScreen.main.bounds.size.width
-
 	
 	//图片轮播组件
 	var imageScroller : ImageScrollerViewController!
@@ -44,6 +41,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         ServerConnector.getPointsInfo(callback: gotPointsInfo)
     }
+	
 	/// 获得积分信息后的回调函数
     func gotPointsInfo(result:Bool){
         if result {
