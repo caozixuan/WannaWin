@@ -1,64 +1,64 @@
-//
-//
-//package citiMerchant.mapper;
-//
-//import org.apache.ibatis.io.Resources;
-//import org.apache.ibatis.session.SqlSession;
-//import org.apache.ibatis.session.SqlSessionFactory;
-//import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Component;
-//
-//import java.io.IOException;
-//import java.io.Reader;
-//import java.util.*;
-//
-//@Component
-//public class DBHandler {
-//
-//    static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
-//
-//    @Autowired
-//    public OrderMapper orderMapper;
-//    @Autowired
-//    public ItemMapper itemMapper;
-//    @Autowired
-//    public StrategyMapper strategyMapper;
-//
-//    //@Autowired
-//    private SqlSessionFactory sqlSessionFactory;
-//
-//    public DBHandler() {
-//        try {
-//            //init sqlsession
-//            Reader reader = Resources.getResourceAsReader(resource);
-//            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-//        } catch (IOException e) {
-//            //e.printStackTrace();
-//            System.out.println("\n************   fail to read mapper.xml   ************\n");
-//        }
-//    }
-//
-//
-//    /****************************        初始化完成        ****************************/
-//
-//
-//    /****************************       用于商户后台的接口     ****************************/
-//
-//    /*
-//     * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
-//     */
-//    public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
-//        long time = System.currentTimeMillis();
-//        int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
-//        int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
-//        int orderAmount = orderMapper.getOrderAmount(merchantID);
-//        Log.log("getAmountByMerchantID", time);
-//        List<Integer> amount = Arrays.asList(itemAmount, stategyAmount, orderAmount);
-//        return new ArrayList(amount);
-//    }
-//
-//
+
+
+package citiMerchant.mapper;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.*;
+
+@Component
+public class DBHandler {
+
+    static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
+
+    @Autowired
+    public OrderMapper orderMapper;
+    @Autowired
+    public ItemMapper itemMapper;
+    @Autowired
+    public StrategyMapper strategyMapper;
+
+    //@Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
+    public DBHandler() {
+        try {
+            //init sqlsession
+            Reader reader = Resources.getResourceAsReader(resource);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("\n************   fail to read mapper.xml, but it doesn't matter   ************\n");
+        }
+    }
+
+
+    /****************************        初始化完成        ****************************/
+
+
+    /****************************       用于商户后台的接口     ****************************/
+
+    /*
+     * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
+     */
+    public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
+        long time = System.currentTimeMillis();
+        int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
+        int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
+        int orderAmount = orderMapper.getOrderAmount(merchantID);
+        Log.log("getAmountByMerchantID", time);
+        List<Integer> amount = Arrays.asList(itemAmount, stategyAmount, orderAmount);
+        return new ArrayList(amount);
+    }
+
+
 //    /*
 //     * 用于统计商家的积分流水信息，包含兑入和兑出。
 //     */
@@ -115,6 +115,6 @@
 //
 //
 //    }//end class Record - 统计商家积分流水
-//
-//
-//}
+
+
+}
