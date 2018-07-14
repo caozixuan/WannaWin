@@ -6,7 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-pageEncoding="UTF-8" isELIgnored="false" %>
+pageEncoding="UTF-8" isELIgnored="false" autoFlush="false" buffer="300kb"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <head>
   <meta charset="utf-8">
@@ -158,8 +158,8 @@ desired effect
               </span>
            </a>
            <ul class="treeview-menu">
-             <li><a href="/item/getItem">商品清单</a></li>
-             <li><a href="/item/addItem">添加商品</a></li>
+             <li><a href="item/getItem">商品清单</a></li>
+             <li><a href="item/addItem">添加商品</a></li>
            </ul>
          <li class="treeview">
            <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -168,10 +168,10 @@ desired effect
               </span>
            </a>
            <ul class="treeview-menu">
-             <li><a href="/strategy/getStrategyList">策略清单</a></li>
-             <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
+             <li><a href="strategy/getStrategyList">策略清单</a></li>
+             <li><a href="strategy/addStrategyRequest">添加策略</a></li>
            </ul>
-         <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+         <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
          <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
          <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
@@ -208,12 +208,12 @@ desired effect
                 <td>
                   <a href="#" class="thumbnail"><img src=${item.logoURL} alt="通用的占位符缩略图" height="50" width="50"></a>
                 </td>
-                <td>${item.ItemID}</td>
+                <td>${item.itemID}</td>
                 <td>${item.name}</td>
                 <td>${item.description}</td>
                 <td>${item.originalPrice}</td>
                 <td>${item.points}</td>
-                <a href="/item/editItem"><button type="button" class="btn btn-success">编辑</button></a><a href="/item/deleteItem"><button type="button" class="btn btn-danger">删除</button></a></td>
+                <td><a href="/item/editItem"><button type="button" class="btn btn-success">编辑</button></a><a href="/item/deleteItem"><button type="button" class="btn btn-danger">删除</button></a></td>
               </tr>
             </c:forEach>
         </tbody>

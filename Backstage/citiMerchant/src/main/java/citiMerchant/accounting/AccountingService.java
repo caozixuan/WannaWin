@@ -7,6 +7,6 @@ import citiMerchant.mapper.DBHandler;
  */
 public class AccountingService {
 
-   // long totalPoints = DBHandler.Record.coupon_record("00001", 7);
+
 
 }
