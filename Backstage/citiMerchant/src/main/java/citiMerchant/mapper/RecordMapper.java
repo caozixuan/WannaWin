@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecordMapper {
 
-    final String coupon_record = "CALL coupon_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = INT, jdbcType = INT}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
-    final String order_record = "CALL order_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = INT, jdbcType = INT}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
-    final String _points_history_user = "CALL points_record_user(#{IN_cardID, mode = IN, jdbcType = VARCHAR}, #{IN_intervalDate, mode = INT, jdbcType = INT}, #{totalPoints_card, mode = OUT, jdbcType = BIGINT}, #{totalPoints_citi, mode = OUT, jdbcType = BIGINT})";
-    final String _points_history_card = "CALL points_record_card(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_merchantID, mode = IN, jdbcType = VARCHAR}, #{IN_intervalDate, mode = INT, jdbcType = INT}, #{totalPoints_card, mode = OUT, jdbcType = BIGINT}, #{totalPoints_citi, mode = OUT, jdbcType = BIGINT})";
-    final String merchant_out_points_record = "CALL merchant_out_points_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = INT, jdbcType = INT}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
+    final String coupon_record = "CALL coupon_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
+    final String order_record = "CALL order_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
+    final String _points_history_user = "CALL points_record_user(#{IN_cardID, mode = IN, jdbcType = VARCHAR}, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints_card, mode = OUT, jdbcType = BIGINT}, #{totalPoints_citi, mode = OUT, jdbcType = BIGINT})";
+    final String _points_history_card = "CALL points_record_card(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_merchantID, mode = IN, jdbcType = VARCHAR}, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints_card, mode = OUT, jdbcType = BIGINT}, #{totalPoints_citi, mode = OUT, jdbcType = BIGINT})";
+    final String merchant_out_points_record = "CALL merchant_out_points_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
 
     //根据商户id查询优惠券积分使用
     @Select(value = coupon_record)
