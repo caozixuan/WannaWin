@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinishExchangeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class FinishExchangeViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,27 +23,11 @@ class FinishExchangeViewController: UIViewController,UITableViewDelegate,UITable
         // Dispose of any resources that can be recreated.
     }
 	
-    
-	
-	//MARK: - Table view data source
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		// FIXME: - 后面完善
-		return 3
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		// FIXME: - 后面完善
-		let cell = tableView.dequeueReusableCell(withIdentifier: "exchangedPoints")!
-		return cell
-	}
-	
-	
     // MARK: - Navigation
 	@objc func goBackToHomePage(){
 		let rootVC = self.navigationController
 		self.navigationController?.popToRootViewController(animated: false)
 		rootVC?.tabBarController?.selectedIndex = 0
 	}
-
-
+	
 }
