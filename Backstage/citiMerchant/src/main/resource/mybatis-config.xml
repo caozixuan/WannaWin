@@ -23,6 +23,7 @@
     </environments>
 
     <mappers>
+
         <package name="citiMerchant.mapper"/>
     </mappers>
 
