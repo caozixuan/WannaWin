@@ -10,35 +10,23 @@ import UIKit
 
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
-	@IBOutlet weak var tableView: UITableView!
-	var shouldSelectPoints:Double = 900
-	var selectedPoints:Double = 0
-	
 	//var dataSource:[Card]? = User.getUser().card
-	var dataSource:[Any]?
+	var dataSource:[Card]?
 	
-	
-	@IBOutlet weak var shouldSelectPointsLabel: UILabel!
-	@IBOutlet weak var selectedPointsLabel: UILabel!
-	
-	@IBOutlet weak var confirmBtn: UIButton!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var pointsSumLabel: UILabel!
+	var pointsSum:Double = 0
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		
-		selectedPointsLabel.text = String(selectedPoints)
-		shouldSelectPointsLabel.text = String(shouldSelectPoints)
-		
 		// test data
-		let user = User.getUser()
-		user.generalPoints = 1000
-		var generalPoints = user.generalPoints
 		let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
 		let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
 		let card3 = Card(merchant: Merchant(name: "耐克"), point: 300, proportion: 0.4)
-		dataSource = [generalPoints as Any,card1,card2,card3]
+		dataSource = [card1,card2,card3]
 		
     }
 
@@ -54,57 +42,30 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
 		let cell:UITableViewCell!
 		// TODO: - 测试使用，后面再修改
-		
-		if indexPath.row != 0 {
-			cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
-			if let cell1 = cell as? ExchangeItemCell {
-				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
-				cell1.delegate = self
-				cell1.editSourcePoints?.tag = indexPath.row
-				if let card = dataSource?[indexPath.row] as? Card{
-					cell1.storeName.text = card.merchant?.name
-					cell1.sourcePoints.text = String(card.point)
-					cell1.editSourcePoints.placeholder = String(card.point)
-					cell1.targetPoints.text = String(card.point * (card.proportion)!)
-					cell1.proportion = card.proportion
-				}
-			}
-			
-			
-		}
-		else {
-			cell = tableView.dequeueReusableCell(withIdentifier: "bank to store", for: indexPath)
-			if let cell1 = cell as? ExchangeItemCell {
-				cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
-				cell1.delegate = self
-				cell1.editGeneralPoints?.tag = indexPath.row
-				if let generalPoints = dataSource?[indexPath.row] as? Double{
-					cell1.generalPoints.text = String(generalPoints)
-					cell1.editGeneralPoints.placeholder = String(generalPoints)
-				}
+		cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
+		if let cell1 = cell as? ExchangeItemCell {
+			cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
+			cell1.delegate = self
+			cell1.editSourcePoints?.tag = indexPath.row
+			if let card = dataSource?[indexPath.row]{
+				cell1.storeName.text = card.merchant?.name
+				cell1.sourcePoints.text = String(card.point)
+				cell1.editSourcePoints.placeholder = String(card.point)
+				cell1.targetPoints.text = String(card.point * (card.proportion)!)
+				cell1.proportion = card.proportion
 			}
 		}
-		
-		
-        return cell
+		return cell
     }
 	
 	// MARK: - TextField delegate
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool{
 		let number = Double(textField.text!)
 		var maxPoints:Double!
-		if textField.tag == 0 {
-			if let generalPoints = self.dataSource?[textField.tag] as? Double {
-				maxPoints = generalPoints
-			}
-		}
-		else {
-			if let card = self.dataSource?[textField.tag] as? Card {
-				maxPoints = card.point
-			}
+		if let card = self.dataSource?[textField.tag] {
+			maxPoints = card.point
 		}
 		
 		if number != nil && number! <= maxPoints {
@@ -124,105 +85,21 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	func contentDidChanged(text: String, row: Int, type: changeType) {
 		switch type {
 		case .add:
-			if shouldSelectPoints - Double(text)! >= 0 {
-				shouldSelectPoints -= Double(text)!
-				shouldSelectPointsLabel.text = String(shouldSelectPoints)
-				selectedPoints += Double(text)!
-				selectedPointsLabel.text = String(selectedPoints)
-			}
-			else {
-				let indexPath = IndexPath(row: row, section: 0)
-				if let cell = self.tableView.cellForRow(at: indexPath) as? ExchangeItemCell{
-					if row == 0 {
-						cell.generalPoints.text = String(shouldSelectPoints)
-						//cell.editGeneralPoints.placeholder = cell.generalPoints.text
-					}
-					else {
-						cell.targetPoints.text = String(shouldSelectPoints)
-						cell.sourcePoints.text = String(shouldSelectPoints / cell.proportion!)
-						//cell.editSourcePoints.placeholder = cell.sourcePoints.text
-					}
-					selectedPoints += shouldSelectPoints
-					selectedPointsLabel.text = String(selectedPoints)
-					shouldSelectPoints = 0
-					shouldSelectPointsLabel.text = String(shouldSelectPoints)
-					
-				}
-			}
+			pointsSum += Double(text)!
+			pointsSumLabel.text = String(pointsSum)
+			
 		default: //minus
-			shouldSelectPoints += Double(text)!
-			shouldSelectPointsLabel.text = String(shouldSelectPoints)
-			selectedPoints -= Double(text)!
-			selectedPointsLabel.text = String(selectedPoints)
+			pointsSum -= Double(text)!
+			pointsSumLabel.text = String(pointsSum)
 			let indexPath = IndexPath(row: row, section: 0)
 			if let cell = self.tableView.cellForRow(at: indexPath) as? ExchangeItemCell{
-				if row == 0 {
-					if let generalPoints = dataSource?[row] as? Double{
-						cell.generalPoints.text = String(generalPoints)
-						cell.editGeneralPoints.placeholder = String(generalPoints)
-					}
-					
-				}
-				else {
-					if let card = dataSource?[row] as? Card{
-						cell.sourcePoints.text = String(card.point)
-						cell.editSourcePoints.placeholder = String(card.point)
-						cell.targetPoints.text = String(card.point * (card.proportion)!)
-					}
+				if let card = dataSource?[row]{
+					cell.sourcePoints.text = String(card.point)
+					cell.editSourcePoints.placeholder = String(card.point)
+					cell.targetPoints.text = String(card.point * (card.proportion)!)
 				}
 			}
 		}
-
 	}
 	
-	
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-	
-    // MARK: - Navigation
-	// FIXME: - 后期发请求，加判断条件
-//	@IBAction func pressVerifyBtn(_ sender: Any) {
-//		
-//
-//		let storyBoard = UIStoryboard(name:"Exchange", bundle:nil)
-//		let view = storyBoard.instantiateViewController(withIdentifier: "FinishExchangeViewController")
-//		self.navigationController?.pushViewController(view, animated: true)
-//	}
-//
-//	
-
 }

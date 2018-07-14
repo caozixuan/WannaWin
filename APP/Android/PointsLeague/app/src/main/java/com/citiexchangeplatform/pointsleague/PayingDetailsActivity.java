@@ -1,3 +1,4 @@
+/*
 package com.citiexchangeplatform.pointsleague;
 
 import android.animation.Animator;
@@ -37,7 +38,7 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
 
     KeyListener storedKeylistener;
     // 存储勾选框状态的map集合
-    private HashMap<Integer, Boolean> map = new HashMap<>();
+    private HashMap<Integer, Double> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
+        mAdapter = new PayingAdapter(PayingDetailsActivity.this);
 
         mRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
@@ -93,14 +94,18 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
     }
 
 
-    /*收起列表*/
+    */
+/*收起列表*//*
+
     public void click_expand_less(View view){
         //Intent intent = new Intent(this, PayingActivity.class);
         //startActivity(intent);
         finish();
     }
 
-    /*确认抵扣按钮点击事件*/
+    */
+/*确认抵扣按钮点击事件*//*
+
     public void click_finish(View view){
         Button Finish_Button = (Button) findViewById(R.id.button_finish);
         Intent intent = new Intent(this, PaymentFinishActivity.class);
@@ -112,10 +117,10 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
             map = mAdapter.getMap();
             for (Integer i:map.keySet()){
                 //map.keySet()返回的是所有key的值
-                if(map.get(i)){
+
                     Points_Result.add(data_posses_point.get(i));
                     Business_Image_Result.add(business_image.get(i));
-                }
+
 
             }
             Bundle bundle = new Bundle();
@@ -142,7 +147,9 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
 
     }
 
-    /*获得各项积分数据：商家图标、积分数*/
+    */
+/*获得各项积分数据：商家图标、积分数*//*
+
     protected void initData()
     {
         //设置需要的积分数
@@ -191,7 +198,8 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
         return false;
     }
 
-    /*private static List<WordModel> filter(List<WordModel> models, String query) {
+    */
+/*private static List<WordModel> filter(List<WordModel> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
         final List<WordModel> filteredModelList = new ArrayList<>();
@@ -203,8 +211,10 @@ public class PayingDetailsActivity extends AppCompatActivity implements SearchVi
             }
         }
         return filteredModelList;
-    }*/
+    }*//*
+
 
 
 
 }
+*/
