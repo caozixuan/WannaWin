@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 public class PayService {
 
 
+    public boolean pay(String userID,String timeStamp,String merchantID,float totalPrice){
+
+        return false;
+    }
+
     public void calc(String userID,String merchantID,float totlePrice){
 
     }
@@ -36,4 +41,6 @@ public class PayService {
         //TODO:从数据库搜索该ID和时间戳对应的订单
         return new Order();
     }
+
+
 }
