@@ -47,16 +47,16 @@ public interface OrderMapper {
      *
      */
     @Select(getOrderIDByUserID)
-    List<String> getOrderIDByUserID(@Param("userID") String userID, @Param("intervalTime") int intervalTime);
+    List<String> getOrderIDByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
 
     @Select(getOrderIDByMerchantID)
-    List<String> getOrderIDByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") int intervalTime);
+    List<String> getOrderIDByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
 
     @Select(getOrderByUserID)
-    List<Order> getOrderByUserID(@Param("userID") String userID, @Param("intervalTime") int intervalTime);
+    List<Order> getOrderByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
 
     @Select(getOrderByMerchantID)
-    List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") int intervalTime);
+    List<Order> getOrderByMerchantID(@Param("merchantID") String merchantID, @Param("intervalTime") String intervalTime);
 
 
     final String getOrderAmount = "SELECT COUNT(*) FROM huaqi.order WHERE MerchantID = #{merchantID}";
