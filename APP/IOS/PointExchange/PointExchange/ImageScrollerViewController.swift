@@ -163,7 +163,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 			self.rightImageView?.imageFromURL(self.dataSource![rightImageIndex],
 											  placeholder: placeholderImage)
 		}
-			//当前显示的是最好一张图片
+			//当前显示的是最后一张图片
 		else if self.currentIndex == (self.dataSource?.count)! - 1 {
 			self.leftImageView?.imageFromURL(self.dataSource![self.currentIndex-1],
 											 placeholder: placeholderImage)

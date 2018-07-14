@@ -105,6 +105,7 @@ class UserViewController: UITableViewController {
                     let view = storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
                     view.willUseOrders = orders
                     view.usedOrders = orders + orders2
+                    view.expireOrders = orders
                     self.navigationController?.pushViewController(view, animated: true)
                 }else{
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")

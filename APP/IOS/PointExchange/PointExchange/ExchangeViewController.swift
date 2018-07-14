@@ -102,4 +102,20 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
+	// MARK: - navigation
+	
+	
+	// TODO: - 进行网络请求
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		let isSuccess = true
+		// ...
+		if isSuccess {
+			//准备“兑换成功”数据
+		}
+		else {
+			//准备“兑换失败”数据
+		}
+		
+	}
+	
 }
