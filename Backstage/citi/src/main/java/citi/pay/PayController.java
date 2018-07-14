@@ -24,9 +24,13 @@ public class PayController {
     private PayService payService;
 
     @RequestMapping("")
-    public void pay(String userID,String timeStamp,String merchantID,float totalPrice){
-
-
+    @ResponseBody
+    public String pay(String userID,String timeStamp,String merchantID,float totalPrice){
+        if (payService.pay(userID,timeStamp,merchantID,totalPrice)){
+            return ResultJson.SUCCESS;
+        }else{
+            return ResultJson.FAILURE;
+        }
     }
 
     @RequestMapping("/QRCode")

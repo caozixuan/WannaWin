@@ -8,6 +8,7 @@ package citi.vo;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Order {
     private String orderId;
@@ -71,6 +72,17 @@ public class Order {
         this.time = time;
     }
 
+    public Order(double originalPrice, double priceAfter, double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
+        this.orderId=UUID.randomUUID().toString().toLowerCase();
+        this.originalPrice = originalPrice;
+        this.priceAfter = priceAfter;
+        this.pointsNeeded = pointsNeeded;
+        this.userId = userId;
+        this.state = state;
+        this.merchantId = merchantId;
+        this.time = time;
+    }
+
     public void setPointsNeeded(int pointsNeeded) {
         this.pointsNeeded = pointsNeeded;
     }
@@ -81,6 +93,38 @@ public class Order {
         } else {
             state = OrderState.getStateString(OrderState.FAIL);
         }
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setOriginalPrice(double originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public void setPriceAfter(double priceAfter) {
+        this.priceAfter = priceAfter;
+    }
+
+    public void setPointsNeeded(double pointsNeeded) {
+        this.pointsNeeded = pointsNeeded;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 
     public String getOrderId() {
