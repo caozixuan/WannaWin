@@ -33,6 +33,7 @@ public class PayController {
         }
     }
 
+    @ResponseBody
     @RequestMapping("/QRCode")
     public String QRCode(String userID,String timeStamp){
         switch (payService.QRCode(userID,timeStamp)){
