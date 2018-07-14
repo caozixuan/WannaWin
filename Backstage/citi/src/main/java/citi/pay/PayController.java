@@ -23,7 +23,7 @@ public class PayController {
     @Autowired
     private PayService payService;
 
-    @RequestMapping("/pay")
+    @RequestMapping("")
     public void pay(String userID,String timeStamp,String merchantID,float totalPrice){
 
 
