@@ -18,7 +18,6 @@ public class FeedbackActivity extends AppCompatActivity {
         //设置toolbar
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_feedback);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
