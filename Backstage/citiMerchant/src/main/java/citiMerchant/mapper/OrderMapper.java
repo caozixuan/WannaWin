@@ -1,11 +1,15 @@
 package citiMerchant.mapper;
 
 import citiMerchant.vo.Order;
-//import citi.dao.OrderStateTypeHandler;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+//import citi.dao.OrderStateTypeHandler;
 
 @Repository
 public interface OrderMapper {
@@ -58,6 +62,7 @@ public interface OrderMapper {
     final String getOrderAmount = "SELECT COUNT(*) FROM huaqi.order WHERE MerchantID = #{merchantID}";
 
     @Select(getOrderAmount)
+    @ResultType(java.lang.Integer.class)
     int getOrderAmount(@Param("merchantID") String merchantID);
 
 }
