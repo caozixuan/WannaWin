@@ -85,7 +85,7 @@ public class PayService {
     }
 
     public Order getOrder(String userID,String timeStamp){
-        List<Order> orders=orderMapper.getOrderByUserID(userID,100);
+        List<Order> orders=orderMapper.getOrderByUserID(userID,"0101010101");
         for (Order order :orders
                 ) {
             if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)))==0){
