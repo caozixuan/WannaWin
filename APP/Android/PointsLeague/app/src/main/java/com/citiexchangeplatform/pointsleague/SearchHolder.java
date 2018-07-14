@@ -2,13 +2,11 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.citiexchangeplatform.pointsleague.models.PayingData;
+import com.citiexchangeplatform.pointsleague.models.ExchangeModel;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +27,7 @@ public class SearchHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(PayingData data) {
+    public void bind(ExchangeModel data) {
 
         ArrayList<Integer> avatarList = new ArrayList<>();
 
