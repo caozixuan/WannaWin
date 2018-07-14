@@ -24,6 +24,14 @@
             android:layout_weight="1.5"
             app:srcCompat="@color/colorPrimary" />
 
+        <TextView
+            android:id="@+id/textview_business_name"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="1" />
+
         <EditText
             android:id="@+id/editText_points_posses"
             android:layout_width="30dp"

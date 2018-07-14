@@ -157,8 +157,8 @@ desired effect
               </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li><a href="item/getItem">商品清单</a></li>
-                     <li><a href="item/addItem">添加商品</a></li>
+                     <li><a href="/item/getItem">商品清单</a></li>
+                     <li><a href="/item/addItem">添加商品</a></li>
                  </ul>
              <li class="treeview">
                  <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -167,10 +167,10 @@ desired effect
               </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li><a href="strategy/getStrategyList">策略清单</a></li>
-                     <li><a href="strategy/addStrategyRequest">添加策略</a></li>
+                     <li><a href="/strategy/getStrategyList">策略清单</a></li>
+                     <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
                  </ul>
-             <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+             <li><a href="/history"><i class="fa fa-link"></i> <span>历史订单</span></a></li>
              <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
              <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
@@ -218,14 +218,14 @@ desired effect
 												<!--接口一所在位置-->
 
 
-                    <td><a href="strategy/editStrategyRequest"><span
+                    <td><a href="/strategy/editStrategyRequest"><span
                          >修改</span></a></td>
 
 
                          						<!--接口二所在位置-->
 
 
-                   <td><a href="strategy/deleteStrategy?strategyID=${p.strategyID}"><span
+                   <td><a href="/strategy/deleteStrategy?strategyID=${p.strategyID}"><span
                          >下架</span></a></td>
 
 

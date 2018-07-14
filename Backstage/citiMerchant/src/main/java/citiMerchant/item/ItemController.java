@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -25,7 +29,10 @@ public class ItemController {
     private ItemService itemService;
 
     @RequestMapping("getItem")
-    public ModelAndView getItemList(String merchantID){
+    public ModelAndView getItemList(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
@@ -45,42 +52,54 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         Item item = itemService.getItem(itemID);
         mv.addObject("item",item);
-        mv.setViewName("editItem");
+        mv.setViewName("item/editItem");
         return mv;
     }
 
 
     @RequestMapping("submitEdit")
-    public ModelAndView submitEdit(String merchantID, Item item){
+    public ModelAndView submitEdit(String url2, String itemID, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv =new ModelAndView();
+        myfile = "localhost:8080/picture/"+merchantID+url2;
+        overdueTime = overdueTime +" 00:00:00";
+        Item item = new Item(itemID, name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
         itemService.updateItem(item);
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("showItem");
+        mv.setViewName("item/showItem");
         return mv;
     }
 
     @RequestMapping("deleteItem")
-    public ModelAndView deleteItem(String merchantID, String itemID){
+    public ModelAndView deleteItem(String itemID){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = session.getAttribute("merchantID").toString();
         itemService.deleteItem(itemID);
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("showItem");
+        mv.setViewName("item/showItem");
         return mv;
     }
 
     @RequestMapping("addItemOperation")
-    public ModelAndView addItemOperation(String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
+    public ModelAndView addItemOperation(String url2, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
 
-        String merchantID = "123";
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = session.getAttribute("merchantID").toString();
+        myfile = "localhost:8080/picture/"+url2;
         overdueTime = overdueTime +" 00:00:00";
         Item item = new Item(name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
         itemService.addItem(item);
-        ModelAndView mv =new ModelAndView();
+        ModelAndView mv =new ModelAndView("redirect:/item/getItem");
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("showItem");
+        //mv.setViewName("/item/showItem");
         return mv;
     }
 
@@ -95,8 +114,10 @@ public class ItemController {
         String saveFilePath = "E://picture";
         // 上传图片
         if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
-            // 新的图片名称
-            String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session =request.getSession();
+            String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
+            String newFileName = merchantID + oldFileName;
             // 新图片
             File newFile = new File(saveFilePath + "\\" + newFileName);
             // 将内存中的数据写入磁盘

@@ -1,21 +1,20 @@
 package com.citiexchangeplatform.pointsleague;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.method.KeyListener;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.Button;
-
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -28,8 +27,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,21 +38,17 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PayingActivity extends AppCompatActivity {
+public class PayingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    private RecyclerView mRecyclerView;
-    private List<String> data_posses_point;
-    private List<Integer> business_image;
+    private RecyclerView msCardRecyclerView;
     private PayingAdapter mAdapter;
-    private TextView Text_NeedPoints;
-    private ImageView ImageView_Business;
+
     TextView Choose_Points;
 
-
     KeyListener storedKeylistener;
-    // 存储勾选框状态的map集合
-    private HashMap<Integer, Boolean> map = new HashMap<>();
 
+    // 存储勾选框状态的map集合
+    private HashMap<Integer, Double> map = new HashMap<>();
 
     //接口实例
     //private RecyclerViewOnItemClickListener onItemClickListener;
@@ -66,37 +59,66 @@ public class PayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paying);
 
 
+        //设置toolbar
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-        Text_NeedPoints = (TextView)findViewById(R.id.textView_points_need);
-        //通过findViewById拿到RecyclerView实例
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_points);
-
-        ImageView_Business = (ImageView)findViewById(R.id.imageView_business);
-        Choose_Points = (TextView) findViewById(R.id.textview_points_choose);
-
-
-        //初始化数据
-        initData();
+        //获取页面中的元素
+        initView();
 
         //设置RecyclerView管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingAdapter(data_posses_point,business_image,getApplicationContext());
+        setRecyclerView();
 
-        mRecyclerView.setAdapter(mAdapter);
+        //获得初始化数据
+        initData();
+
+    }
+
+    private void initView(){
+        //会员卡列表
+        msCardRecyclerView = (RecyclerView) findViewById(R.id.rv_points);
+        //用户已选择积分
+        Choose_Points = (TextView) findViewById(R.id.textview_points_choose);
+    }
+
+    /*获得各项积分卡数据：logo merchantName posses_points rate generalPoints*/
+    protected void initData()
+    {
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        //getMSCardInfoRequest();
+
+
+
+    }
+
+    protected void setRecyclerView(){
+        msCardRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new PayingAdapter(PayingActivity.this);
+
+        msCardRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        msCardRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         mAdapter.buttonSetOnclick(new PayingAdapter.ButtonInterface() {
             @Override
             public void onclick(View view, int position) {
+                //修改合计价格
+                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
                 //Toast.makeText(getApplicationContext(), "点击条目上的按钮"+position, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), data_posses_point.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "修改", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -110,10 +132,7 @@ public class PayingActivity extends AppCompatActivity {
             }
         });
 
-        getMscardInfoRequest();
-
     }
-
 
     /*判断是否显示软键盘*/
     private boolean isSoftShowing() {
@@ -126,88 +145,45 @@ public class PayingActivity extends AppCompatActivity {
         return screenHeight - rect.bottom != 0;
     }
 
-    /*展示详情点击事件*/
-    public void click_expand(View view){
-
-        Intent intent = new Intent(this, PayingDetailsActivity.class);
-        startActivity(intent);
-    }
 
     /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
 
         Intent intent = new Intent(this, PaymentFinishActivity.class);
+        //
+        ArrayList<String> used = new ArrayList<>();
+        ArrayList<String> exchanged = new ArrayList<>();
+        ArrayList<String> logos = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+        //
+        map = mAdapter.getMap();
+        for (Integer i:map.keySet()){
+            //map.keySet()返回的是所有key的值
+                used.add(mAdapter.getExchangePoints().get(i));
+                logos.add(mAdapter.getLogos().get(i));
+                names.add(mAdapter.getNames().get(i));
+                exchanged.add(mAdapter.getTargetPoints().get(i));
 
-        ArrayList<String> Points_Result = new ArrayList<>();
-        ArrayList<Integer> Business_Image_Result = new ArrayList<>();
-
-        if(Text_NeedPoints.getText().toString().equals(Choose_Points.getText().toString())){
-            map = mAdapter.getMap();
-            for (Integer i:map.keySet()){
-                //map.keySet()返回的是所有key的值
-                if(map.get(i)){
-                    Points_Result.add(data_posses_point.get(i));
-                    Business_Image_Result.add(business_image.get(i));
-                }
-
-            }
-            Bundle bundle = new Bundle();
-
-
-            //intent.putExtra("value", (Serializable)map);
-
-            SerializableHashMap myMap=new SerializableHashMap();
-            myMap.setMap(map);//将hashmap数据添加到封装的myMap中
-
-            bundle.putStringArrayList("points_result",Points_Result);
-            bundle.putIntegerArrayList("image_resource",Business_Image_Result);
-            //bundle.putSerializable("checkbox_map", myMap);
-            intent.putExtras(bundle);
-
-            startActivity(intent);
         }
-        else{
-            int diffPoints = Integer.parseInt(Text_NeedPoints.getText().toString()) - Integer.parseInt(Choose_Points.getText().toString());
-            Toast.makeText(getApplicationContext(), "所选积分不足，还需"+diffPoints, Toast.LENGTH_SHORT).show();
-        }
+        Bundle bundle = new Bundle();
+        //
+        //
+        //intent.putExtra("value", (Serializable)map);
+        //
+        //SerializableHashMap myMap=new SerializableHashMap();
+        //myMap.setMap(map);//将hashmap数据添加到封装的myMap中
+        //
+        bundle.putStringArrayList("points_used",used);
+        bundle.putStringArrayList("points_exchanged",exchanged);
+        bundle.putStringArrayList("logo_urls",logos);
+        bundle.putStringArrayList("business_names",names);
+        bundle.putDouble("total",mAdapter.getTotal());
+        //bundle.putSerializable("checkbox_map", myMap);
+        intent.putExtras(bundle);
+        //
+        startActivity(intent);
 
 
-
-    }
-
-    /*获得各项积分数据：商家图标、积分数*/
-    protected void initData()
-    {
-
-        //postStringRequest();
-        String name = MerchantInfo.getInstance(PayingActivity.this).getName();
-        String logoURL = MerchantInfo.getInstance(PayingActivity.this).getLogoURL();
-        //设置需要的积分数
-        Text_NeedPoints.setText("120");
-
-        //ImageView_Business.setImageResource(R.drawable.ic_store_24dp);
-
-        //获得并显示商家logo
-        Glide.with(PayingActivity.this)
-                .load(logoURL)
-                .override(200,200)
-                .into(ImageView_Business);
-
-
-        //设置列表项中的文字（用户拥有的积分数）
-        data_posses_point = new ArrayList<String>();
-        for (int i = 0; i < 20; i++)
-        {
-            data_posses_point.add("" + i);
-        }
-
-        //设置选择积分栏目中商家logo
-        business_image = new ArrayList<Integer>();
-
-        for (int i = 0; i < data_posses_point.size(); i++)
-        {
-            business_image.add(R.drawable.ic_mall_black_24dp);
-        }
     }
 
 
@@ -238,7 +214,7 @@ public class PayingActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void getMscardInfoRequest() {
+    private void getMSCardInfoRequest() {
         String url="http://193.112.44.141:80/citi/mscard/infos";
         RequestQueue queue = MyApplication.getHttpQueues();
         //RequestQueue queue=Volley.newRequestQueue(this);
@@ -250,9 +226,9 @@ public class PayingActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(s);
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jobj = jsonArray.getJSONObject(i);
+                        JSONObject jObj = jsonArray.getJSONObject(i);
 
-                        mAdapter.addData(jobj.getString("generalPoints"),jobj.getString("availablePoints"),jobj.getString("logoURL"));
+                        mAdapter.addData(jObj.getString("generalPoints"),jObj.getString("availablePoints"),jObj.getString("rate"),jObj.getString("merchantName"),jObj.getString("logoURL"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -332,6 +308,46 @@ public class PayingActivity extends AppCompatActivity {
         //添加到全局的请求队列
         MyApplication.getHttpQueues().add(request);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        //final List<WordModel> filteredModelList = filter(mModels, query);
+        //mAdapter.edit()
+        //        .replaceAll(filteredModelList)
+        //        .commit();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+
+    //private static List<WordModel> filter(List<WordModel> models, String query) {
+    //    final String lowerCaseQuery = query.toLowerCase();
+    //
+    //    final List<WordModel> filteredModelList = new ArrayList<>();
+    //    for (WordModel model : models) {
+    //        final String text = model.getWord().toLowerCase();
+    //        final String rank = String.valueOf(model.getRank());
+    //        if (text.contains(lowerCaseQuery) || rank.contains(lowerCaseQuery)) {
+    //            filteredModelList.add(model);
+    //        }
+    //    }
+    //    return filteredModelList;
+    //}
 
 
 

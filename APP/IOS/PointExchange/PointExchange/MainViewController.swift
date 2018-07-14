@@ -73,18 +73,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         activityIndicator?.stopAnimating()
     }
     
-    
-    
 	// MARK: - 图片轮播组件协议
-	//图片轮播组件协议方法：获取内部scrollView尺寸
-	func scrollerViewSize() -> CGSize {
-		let height = imageScrollerContainer.bounds.size.height
-		let width = imageScrollerContainer.bounds.size.width
-		return CGSize(width: width, height:height)
-
-	}
-
-	
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
 		return ["https://images.pexels.com/photos/1203705/pexels-photo-1203705.jpeg?cs=srgb&dl=adorable-animal-breed-1203705.jpg&fm=jpg",

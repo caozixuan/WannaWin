@@ -34,8 +34,10 @@
 
 #接口3.0
 
-- 登录注册：
-忘记密码
+## 登录注册
+- 忘记密码
+
+
 ```
 发送验证码：phoneNum
 return:{"status":true}
@@ -45,28 +47,37 @@ return:{"status":true}
 
 重置密码:phoneNum,newPassword
 return:{"status":true}
+
 ```
+
 - 积分
+
 ```
 数据库
 //卡片加了使用规则，返回时可通用积分
 //mscard加密码字段
 //merchant的logoURL改为merchantLogoURL
+```
+```
 查看所有卡片
 参数：userID，n
 return:
 cardID,merchantID,merchantLogoURL,merchantName,points,proportion
-
+```
+```
 详情页
 参数：cardID,merchantID
 return:
 cardLogoURL,points,cardNum,cardDescription,type
-
+```
+```
 解绑:
 参数：userID,cardID
 return {"status":true}
 ```
 - 抵扣：
+
+
 ```
 二维码：userID，timeStamp（有效期一分钟，轮询）
 return:
@@ -85,6 +96,8 @@ PointsNeeded最小所需积分数
 ```
 
 - 积分兑换
+
+
 ```
 参数:
 userID,[{merchantID，selectedMSCardPoints}]
@@ -95,7 +108,10 @@ status:true
 status:false
 [{merchantID，merchantName,merchantLogoURL,reason}]
 ```
+
 - 进入积分兑换页面
+
+
 ```
 参数：userID，orderType
 return:

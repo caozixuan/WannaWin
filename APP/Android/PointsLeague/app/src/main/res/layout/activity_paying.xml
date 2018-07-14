@@ -17,84 +17,80 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:theme="@style/ToolbarTheme">
+        app:title="积分兑换"
+        app:theme="@style/ToolbarTheme"
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="使用积分"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="使用积分"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:textSize="18sp" />-->
 
     </android.support.v7.widget.Toolbar>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--&gt;-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView_spend_points"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/need_points"-->
+                <!--android:textSize="18sp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView_points_need"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="0"-->
+                <!--android:textSize="18sp" />-->
+
+        <!--</LinearLayout>-->
+
+       <!---->
+
+    <!--</LinearLayout>-->
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView_business"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:srcCompat="@color/colorAccent" />
+            android:layout_weight="1"
+            android:text="已选择：" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textview_points_choose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView_spend_points"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/need_points"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView_points_need"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:text="0"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="已选择：" />
-
-            <TextView
-                android:id="@+id/textview_points_choose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="0"
-                android:textSize="18sp" />
-
-        </LinearLayout>
+            android:layout_weight="1"
+            android:text="0"
+            android:textSize="18sp" />
 
     </LinearLayout>
-
-
 
     <LinearLayout
         android:id="@+id/linear_bottom"
@@ -125,14 +121,6 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="4"
             />
-
-        <Button
-            android:id="@+id/button_expand"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/ic_expand_more_black_24dp"
-            android:onClick="click_expand" />
 
         <Button
             android:id="@+id/button_finish"

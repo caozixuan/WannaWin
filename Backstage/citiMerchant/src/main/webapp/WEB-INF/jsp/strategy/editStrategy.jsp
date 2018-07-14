@@ -156,8 +156,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="item/getItem">商品清单</a></li>
-            <li><a href="item/addItem">添加商品</a></li>
+            <li><a href="/item/getItem">商品清单</a></li>
+            <li><a href="/item/addItem">添加商品</a></li>
           </ul>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -166,10 +166,10 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="strategy/getStrategyList">策略清单</a></li>
-            <li><a href="strategy/addStrategyRequest">添加策略</a></li>
+            <li><a href="/strategy/getStrategyList">策略清单</a></li>
+            <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
           </ul>
-        <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+        <li><a href="/history"><i class="fa fa-link"></i> <span>历史订单</span></a></li>
         <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
         <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
@@ -191,8 +191,7 @@ desired effect
             <!-- /.box-header -->
             <div class="box-body">
               <form role="form" method="post" action="editStrategySubmit">
-                <input type="hidden" name="strategyID" value="${strategy.strategyID}">
-                <input type="hidden" name="merchantID" value="${strategy.merchantID}">
+                <input type="hidden" name="strategyID" value="${strategyID}">
 
                 <!-- text input -->
                 <div class="form-group">
@@ -205,7 +204,7 @@ desired effect
                 </div>
         <div class="form-group">
                   <label>所需积分</label>
-                  <input type="text" name = "points "class="form-control" placeholder="输入所需的积分">
+                  <input type="text" name = "points"class="form-control" placeholder="输入所需的积分">
                 </div>
                 <!-- textarea -->
 

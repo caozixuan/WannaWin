@@ -6,7 +6,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -221,7 +220,7 @@ desired effect
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" action="/item/addItemOperation">
+              <form role="form" action="submitEdit">
                 <!-- text input -->
                 <div class="form-group">
                   <label>商品名称</label>
@@ -250,11 +249,11 @@ desired effect
                 </div>
                 <div class="form-group">
                   <label>商品图片</label>
-                  <input type="file" name="logoURL" data-ref="url2"
+                  <input type="file" name="myfile" data-ref="url2"
                          class="col-sm-10 myfile" value="" /> <input type="hidden"
                                                                      name="url2" value="">
                 </div>
-                  <a href="/item/submitEdit"> <button type="submit" class="btn btn-success">提 交</button></a>
+                  <a href="submitEdit"> <button value=${item.itemID} type="submit" class="btn btn-success">提 交</button></a>
 
               </form>
 
@@ -297,9 +296,9 @@ desired effect
      user experience. -->
 </body>
 <script type="text/javascript">
-    $(".logoURL").fileinput({
+    $(".myfile").fileinput({
         //上传的地址
-        uploadUrl:"item/uploadFile",
+        uploadUrl:"uploadFile",
         uploadAsync : false, //默认异步上传
         showUpload : false, //是否显示上传按钮,跟随文本框的那个
         showRemove : false, //显示移除按钮,跟随文本框的那个
@@ -323,12 +322,12 @@ desired effect
         language : 'zh'
     })
     //异步上传返回结果处理
-    $('.logoURL').on('fileerror', function(event, data, msg) {
+    $('.myfile').on('fileerror', function(event, data, msg) {
         console.log("fileerror");
         console.log(data);
     });
     //异步上传返回结果处理
-    $(".logoURL").on("fileuploaded", function(event, data, previewId, index) {
+    $(".myfile").on("fileuploaded", function(event, data, previewId, index) {
         console.log("fileuploaded");
         var ref = $(this).attr("data-ref");
         $("input[name='" + ref + "']").val(data.response.url);
@@ -336,20 +335,20 @@ desired effect
     });
 
     //同步上传错误处理
-    $('.logoURL').on('filebatchuploaderror', function(event, data, msg) {
+    $('.myfile').on('filebatchuploaderror', function(event, data, msg) {
         console.log("filebatchuploaderror");
         console.log(data);
     });
 
     //同步上传返回结果处理
-    $(".logoURL").on("filebatchuploadsuccess",
+    $(".myfile").on("filebatchuploadsuccess",
         function(event, data, previewId, index) {
             console.log("filebatchuploadsuccess");
             console.log(data);
         });
 
     //上传前
-    $('.logoURL').on('filepreupload', function(event, data, previewId, index) {
+    $('.myfile').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
     });
 </script>

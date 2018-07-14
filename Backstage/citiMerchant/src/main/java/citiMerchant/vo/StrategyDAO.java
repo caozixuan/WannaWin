@@ -4,14 +4,18 @@ public class StrategyDAO {
     private String strategyID;
     private String merchantID;
     private int full;
-    private int discount;
+    private int priceAfter;
     private int points;
 
-    public StrategyDAO(String strategyID, String merchantID, int full, int discount, int points) {
+    public StrategyDAO() {
+
+    }
+
+    public StrategyDAO(String strategyID, String merchantID, int full, int priceAfter, int points) {
         this.strategyID = strategyID;
         this.merchantID = merchantID;
         this.full = full;
-        this.discount = discount;
+        this.priceAfter = priceAfter;
         this.points = points;
     }
 
@@ -27,12 +31,12 @@ public class StrategyDAO {
         return full;
     }
 
-    public int getDiscount() {
-        return discount;
+    public int getPriceAfter() {
+        return priceAfter;
     }
 
     public int getPoints() {
-        return points;
+        return priceAfter;
     }
 
 }
