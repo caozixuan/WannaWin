@@ -7,104 +7,167 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
-class OrdersTableViewController: UITableViewController {
+class OrdersTableViewController: UIViewController {
     
-    var ordersCount = 4
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var container: UIView!
+    var willUseOrders:[Order]?
+    var usedOrders:[Order]?
+    var expireOrders:[Order]?
     
-
+    // tableView相关
+    var willUseDataSource:RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>?
+    var disposeBag = DisposeBag()
+    /**
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(OrdersTableViewController.refreshData), for: .valueChanged)
-        self.tableView.addSubview(self.refreshControl!)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.willUseTableView.rowHeight = 85
+        self.usedTableView.rowHeight = 85
+        self.expireTableView.rowHeight = 85
     }
-    
-    @objc func refreshData(){
-        // TODO: - 下拉刷新
+    */
+    override func viewWillAppear(_ animated: Bool) {
+        //setDataSource()
+        //bindDataSource()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return ordersCount
+/**
+    /// 设置数据源
+    func setDataSource(){
+        dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>(configureCell: {(dataSource, view, indexPath, element) in
+            var cell = UITableViewCell()
+            switch self.segmentControl.selectedSegmentIndex{
+            // 创建未使用页的列表
+            case 0:
+                cell = view.dequeueReusableCell(withIdentifier: "coupon")!
+                // 简介
+                (cell.viewWithTag(1) as! UITextView).text = element.description
+                // 商家名
+                (cell.viewWithTag(2) as! UILabel).text = element.merchantName
+                // 时间
+                (cell.viewWithTag(3) as! UILabel).text = element.date
+            // 创建已使用的列表
+            case 1:
+                // TODO: 根据订单类型来选择显示
+                if element.type == "coupon"{
+                    cell = view.dequeueReusableCell(withIdentifier: "coupon")!
+                    // 简介
+                    (cell.viewWithTag(1) as! UITextView).text = element.description
+                    // 商家名
+                    (cell.viewWithTag(2) as! UILabel).text = element.merchantName
+                    // 时间
+                    (cell.viewWithTag(3) as! UILabel).text = element.date
+                }
+                else{
+                    let cell = view.dequeueReusableCell(withIdentifier: "point")
+                    // 使用的积分数
+                    (cell?.viewWithTag(1) as! UITextView).text = String(format: "%f 通用积分", arguments: [element.points!])
+                    // 商家名
+                    (cell?.viewWithTag(2) as! UILabel).text = element.merchantName
+                    // 时间
+                    (cell?.viewWithTag(3) as! UILabel).text = element.date
+                }
+            // 创建过期页的列表
+            case 2:
+                // TODO: 根据订单类型来选择显示
+                if element.type == "coupon"{
+                    cell = view.dequeueReusableCell(withIdentifier: "coupon")!
+                    // 简介
+                    (cell.viewWithTag(1) as! UITextView).text = element.description
+                    // 商家名
+                    (cell.viewWithTag(2) as! UILabel).text = element.merchantName
+                    // 时间
+                    (cell.viewWithTag(3) as! UILabel).text = element.date
+                }
+                else{
+                    cell = view.dequeueReusableCell(withIdentifier: "point")!
+                    // 使用的积分数
+                    (cell.viewWithTag(1) as! UITextView).text = String(format: "%f 通用积分", arguments: [element.points!])
+                    // 商家名
+                    (cell.viewWithTag(2) as! UILabel).text = element.merchantName
+                    // 时间
+                    (cell.viewWithTag(3) as! UILabel).text = element.date
+                }
+            default:
+                break;
+            }
+            return cell
+        })
+        
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "order")!
-        tableView.rowHeight = 119
-        return cell
+    /// 绑定数据源
+    func bindDataSource(){
+        
+        switch self.segmentControl.selectedSegmentIndex {
+        case 0:
+            if let orders = willUseOrders{
+                let obs = Observable.just([
+                    SectionModel(model:"",items:orders)
+                    ])
+                obs.bind(to: self.tableView.rx.items(dataSource: dataSource!))
+                    .disposed(by:disposeBag)
+            }
+        case 1:
+            if let orders = usedOrders{
+                var coupons=[Order]()
+                var points = [Order]()
+                for o in orders{
+                    if o.type == "coupon"{
+                        coupons.append(o)
+                    }
+                    else{
+                        points.append(o)
+                    }
+                }
+                let obs = Observable.just([
+                    SectionModel(model:"使用优惠券",items:coupons),
+                    SectionModel(model:"使用积分",items:points)
+                    ])
+                obs.bind(to: self.tableView.rx.items(dataSource: dataSource!))
+                    .disposed(by:disposeBag)
+                dataSource?.titleForHeaderInSection = { ds, index in
+                    return ds.sectionModels[index].model
+                }
+            }
+        case 2:
+            if let orders = usedOrders{
+                var coupons=[Order]()
+                var points = [Order]()
+                for o in orders{
+                    if o.type == "coupon"{
+                        coupons.append(o)
+                    }
+                    else{
+                        points.append(o)
+                    }
+                }
+                let obs = Observable.just([
+                    SectionModel(model:"使用优惠券",items:coupons),
+                    SectionModel(model:"使用积分",items:points)
+                    ])
+                obs.bind(to: self.tableView.rx.items(dataSource: dataSource!))
+                    .disposed(by:disposeBag)
+                dataSource?.titleForHeaderInSection = { ds, index in
+                    return ds.sectionModels[index].model
+                }
+            }
+        default:
+            break;
+        }
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    @IBAction func segmentControlChange(_ sender: Any) {
+        bindDataSource()
+        self.tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+*/
+ }
