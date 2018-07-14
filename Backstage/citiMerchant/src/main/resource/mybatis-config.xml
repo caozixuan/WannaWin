@@ -24,6 +24,7 @@
 
     <mappers>
     <package name="citiMerchant.mapper"/>
+
     </mappers>
 
     <!--<mappers>-->
