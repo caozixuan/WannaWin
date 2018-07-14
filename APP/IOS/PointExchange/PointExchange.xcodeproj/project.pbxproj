@@ -39,6 +39,9 @@
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
 		B66CFB2220F88AA3007165DF /* YDMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB2120F88AA3007165DF /* YDMenuDelegate.swift */; };
 		B66CFB2420F88B60007165DF /* MenuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = B66CFB2320F88B60007165DF /* MenuData.plist */; };
+		B66CFB2920F8AE2C007165DF /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB2820F8AE2C007165DF /* Order.swift */; };
+		B66CFB3120F98584007165DF /* SingleSectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */; };
+		B66CFB3320F98598007165DF /* DoubleSectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */; };
 		B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */; };
 		B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
@@ -97,6 +100,9 @@
 		B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDMenuDataSource.swift; sourceTree = "<group>"; };
 		B66CFB2120F88AA3007165DF /* YDMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenuDelegate.swift; path = YDMenu/YDMenuDelegate.swift; sourceTree = "<group>"; };
 		B66CFB2320F88B60007165DF /* MenuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MenuData.plist; path = PointExchange/MenuData.plist; sourceTree = "<group>"; };
+		B66CFB2820F8AE2C007165DF /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionOrderViewController.swift; sourceTree = "<group>"; };
+		B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSectionOrderViewController.swift; sourceTree = "<group>"; };
 		B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantChooseTableViewController.swift; sourceTree = "<group>"; };
 		B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -158,6 +164,8 @@
 				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
 				B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */,
 				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
+				B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */,
+				B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */,
 			);
 			name = UserTab;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 				C1ED982220EE1E3900A2F0C5 /* Card.swift */,
 				B6A6EC5F20F25B810079FFA4 /* Merchant.swift */,
 				B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */,
+				B66CFB2820F8AE2C007165DF /* Order.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -427,7 +436,6 @@
 				"${BUILT_PRODUCTS_DIR}/AFImageHelper/AFImageHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -442,7 +450,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFImageHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -501,9 +508,11 @@
 				B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */,
 				B66CFB2220F88AA3007165DF /* YDMenuDelegate.swift in Sources */,
 				B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */,
+				B66CFB3320F98598007165DF /* DoubleSectionOrderViewController.swift in Sources */,
 				3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */,
 				B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */,
 				B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */,
+				B66CFB3120F98584007165DF /* SingleSectionOrderViewController.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
@@ -519,6 +528,7 @@
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
 				3EBF049220F99854004D6D8E /* ExchangeHistoryTableViewController.swift in Sources */,
+				B66CFB2920F8AE2C007165DF /* Order.swift in Sources */,
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */,

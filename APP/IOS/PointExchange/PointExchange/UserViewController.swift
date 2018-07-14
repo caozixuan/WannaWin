@@ -13,6 +13,8 @@ class UserViewController: UITableViewController {
     @IBOutlet weak var portraitImageView: UIImageView!
     @IBOutlet weak var exitButton: UITableViewCell!
     @IBOutlet weak var logoutButton: UIView!
+    // 等待动画
+    var activityIndicator:UIActivityIndicatorView?
     //登录后头部
     var usernameHeadLabel:UILabel = UILabel()
     var boundingCitiCardHeadLabel:UILabel = UILabel()
@@ -77,9 +79,33 @@ class UserViewController: UITableViewController {
                     self.navigationController?.pushViewController(view, animated: true)
                 }
                 break
-            case 1:
+            case 2:
                 if let _ = User.getUser().username{
-                    let view = storyBoard.instantiateViewController(withIdentifier:"OrdersViewController")
+                    activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
+                    // TODO: 访问服务器请求订单信息
+                    // 测试数据
+                    var orders = [Order]()
+                    var orders2 = [Order]()
+                    for i in 0...10{
+                        var order = Order()
+                        order.date = "2017-7-12"
+                        order.description = "coupon"
+                        order.merchantName = "商家\(i)"
+                        order.type = "coupon"
+                        orders.append(order)
+                    }
+                    for i in 0...10{
+                        var order = Order()
+                        order.date = "2017-7-12"
+                        order.points = Double(i) + 0.5
+                        order.merchantName = "商家\(i)"
+                        order.type = "point"
+                        orders2.append(order)
+                    }
+                    let view = storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
+                    view.willUseOrders = orders
+                    view.usedOrders = orders + orders2
+                    view.expireOrders = orders
                     self.navigationController?.pushViewController(view, animated: true)
                 }else{
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
