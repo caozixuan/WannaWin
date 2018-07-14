@@ -1,13 +1,10 @@
 package citi.vo;
 
-import java.util.UUID;
-
 /*
  * 作者：曹子轩
  * TODO: 里面的很多地方需要再沟通
  */
 public class MSCard {
-    private String cardID;
     private String userID;
     private String cardNum;
     private int points;
@@ -17,12 +14,10 @@ public class MSCard {
     private String merchantName;
 
     public MSCard() {
-        cardID = UUID.randomUUID().toString().toLowerCase();
-        //TODO:从商家获取points或其他途径
+
     }
 
-    public MSCard(String cardID, String userID, String cardNum, int points, String merchantId) {
-        this.cardID = cardID;
+    public MSCard(String userID, String cardNum, int points, String merchantId) {
         this.userID = userID;
         this.cardNum = cardNum;
         this.points = points;
@@ -58,10 +53,6 @@ public class MSCard {
         this.merchantName = merchantName;
     }
 
-    public void setCardID(String cardID) {
-        this.cardID = cardID;
-    }
-
     public void setUserID(String userID) {
         this.userID = userID;
     }
@@ -84,10 +75,6 @@ public class MSCard {
 
     public void setPoints(int points) {
         this.points = points;
-    }
-
-    public String getCardID() {
-        return cardID;
     }
 
     public String getUserID() {
