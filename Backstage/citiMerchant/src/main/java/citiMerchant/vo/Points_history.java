@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class Points_history {
     private String userID;
-    private String cardID;
+    private String merchantID;
     private int points_card;
     private double points_citi;
     private String cause;
     private Timestamp time;
 
-    public Points_history(String userID, String cardID, int points_card, double points_citi, String cause, Timestamp time) {
+    public Points_history(String userID, String merchantIDs, int points_card, double points_citi, String cause, Timestamp time) {
         this.userID = userID;
-        this.cardID = cardID;
+        this.merchantID = merchantID;
         this.points_card = points_card;
         this.points_citi = points_citi;
         this.cause = cause;
@@ -25,8 +25,8 @@ public class Points_history {
         return userID;
     }
 
-    public String getCardID() {
-        return cardID;
+    public String getMerchantID() {
+        return merchantID;
     }
 
     public int getPoints_card() {
