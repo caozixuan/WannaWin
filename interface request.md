@@ -100,7 +100,7 @@ PointsNeeded最小所需积分数
 
 ```
 参数:
-userID,[{merchantID，selectedMSCardPoints}]
+{"userID":"","merchants":[{"merchantID":"","selectedMSCardPoints":""}]}
 return:
 成功：
 []
@@ -114,7 +114,7 @@ return:
 ```
 参数：userID，orderType
 return:
-[{"points":0,"proportion":1,"logoURL":"xx","merchantName":"xxx",merchantID:"xx"}]
+[{"points":0,"proportion":1,"logoURL":"xx","merchantName":"xxx","merchantID":"xx"}]
 ```
 
 
