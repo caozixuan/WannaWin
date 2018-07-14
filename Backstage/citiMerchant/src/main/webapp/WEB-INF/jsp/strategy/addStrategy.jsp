@@ -64,7 +64,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="../starter.jsp" class="logo">
+    <a href="/starter" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -191,8 +191,7 @@ desired effect
         <!-- /.box-header -->
         <div class="box-body">
           <form role="form" method="post" action="/strategy/addStrategySubmit">
-            <input type="hidden" name="strategyID" value="${strategyID}">
-            <input type="hidden" name="MerchantID" value="${merchantID}">
+
 
             <!-- text input -->
             <div class="form-group">
@@ -200,8 +199,8 @@ desired effect
               <input type="text" name = "full" class="form-control" placeholder="输入需满金额">
             </div>
             <div class="form-group">
-              <label>抵扣金额</label>
-              <input type="text" name = "discount" class="form-control" placeholder="输入抵扣金额">
+              <label>折扣后金额</label>
+              <input type="text" name = "priceAfter" class="form-control" placeholder="输入抵扣金额">
             </div>
             <div class="form-group">
               <label>所需积分</label>
