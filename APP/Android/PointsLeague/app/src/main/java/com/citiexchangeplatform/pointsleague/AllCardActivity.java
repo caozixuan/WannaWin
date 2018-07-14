@@ -2,12 +2,16 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,7 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AllCardActivity extends AppCompatActivity {
+public class AllCardActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     ProgressDialog dialog;
     AllCardAdapter allCardAdapter;
@@ -43,7 +47,7 @@ public class AllCardActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_all_card);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("全部卡列表");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,5 +103,27 @@ public class AllCardActivity extends AppCompatActivity {
                         dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡列表...");
                     }
                 });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        allCardAdapter.getFilter().filter(newText);
+        return true;
     }
 }
