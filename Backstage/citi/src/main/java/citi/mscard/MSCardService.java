@@ -57,6 +57,8 @@ public class MSCardService {
         int num = msCardMapper.select(userID).size();
         return num;
     }
+
+
     class SortByPoints implements Comparator{
         public int compare(Object o1, Object o2){
             MSCard c1 = (MSCard) o1;
@@ -97,9 +99,15 @@ public class MSCardService {
         ArrayList<BriefCard> briefCards = new ArrayList<BriefCard>();
         for(int i=0;i<cards.size();i++){
             MSCard card = cards.get(i);
-            BriefCard briefCard = new BriefCard(card.getMerchantId(),card.getLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion());
+            BriefCard briefCard = new BriefCard(card.getMerchantId(),card.getLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion(),card.getLogoURL());
             briefCards.add(briefCard);
         }
         return briefCards;
+    }
+
+    public DetailCard getDetailCard(String userID, String merchantID){
+        MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(userID, merchantID);
+        Merchant merchant = merchantMapper.selectByID(merchantID);
+        return new DetailCard(msCard.getLogoURL(),msCard.getPoints(),msCard.getCardNum(),merchant.getCardDescription(),0);
     }
 }

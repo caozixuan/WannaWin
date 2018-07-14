@@ -60,14 +60,15 @@ return:{"status":true}
 ```
 ```
 请求地址： /mscard/infos
-查看所有卡片
-参数：userID，n
+查看所有卡片，这个接口融合了后面进入积分兑换页面的接口
+参数：userID，n，orderType
 return:
-merchantID,merchantLogoURL,merchantName,points,proportion
+merchantID,merchantLogoURL,merchantName,points,proportion,logoURL
 ```
 ```
 详情页
-参数：cardID,merchantID
+请求地址： /mscard/getDetailCard
+参数：userID,merchantID
 return:
 cardLogoURL,points,cardNum,cardDescription,type
 ```
