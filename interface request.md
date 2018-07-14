@@ -103,9 +103,8 @@ PointsNeeded最小所需积分数
 userID,[{merchantID，selectedMSCardPoints}]
 return:
 成功：
-status:true
+[]
 失败：
-status:false
 [{merchantID，merchantName,merchantLogoURL,reason}]
 ```
 
