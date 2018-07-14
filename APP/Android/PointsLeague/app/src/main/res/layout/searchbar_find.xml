@@ -14,7 +14,7 @@
 
         <!--android:background="@drawable/search_edittext_shape"-->
         <EditText
-            android:id="@+id/search_et_input"
+            android:id="@+id/search_bar_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -38,14 +38,14 @@
             app:srcCompat="@drawable/ic_clear_black_24dp" />
     </FrameLayout>
 
-    <Button
-        android:id="@+id/search_btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:backgroundTint="#a8a8a8"
-        android:text="搜索"
-        android:textColor="#ffffff"
-        android:textSize="15sp" />
+    <!--<Button-->
+        <!--android:id="@+id/search_btn_back"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:backgroundTint="#a8a8a8"-->
+        <!--android:text="搜索"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="15sp" />-->
 </LinearLayout>

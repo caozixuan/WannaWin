@@ -1,4 +1,4 @@
-package citiMerchant.mapper;
+package citiMerchant.vo;
 
 public class Record {
 

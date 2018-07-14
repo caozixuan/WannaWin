@@ -1,4 +1,6 @@
 DROP PROCEDURE coupon_record;
 DROP PROCEDURE order_record;
 DROP TRIGGER points_update;
-SET SQL_SAFE_UPDATES = 1;
+DROP PROCEDURE points_record_user;
+DROP PROCEDURE points_record_card; 
+SET SQL_SAFE_UPDATES = 0;

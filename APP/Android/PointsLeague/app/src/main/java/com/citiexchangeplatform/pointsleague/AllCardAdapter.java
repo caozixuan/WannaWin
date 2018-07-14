@@ -11,11 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.models.AllCardItemModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +37,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
+public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> implements Filterable {
+
+
 
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
@@ -52,29 +57,25 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
     }
 
     private Context context;
-    private List<String> names;
-    private List<String> logos;
-    private List<Integer> points;
-    private List<Double> proportions;
+    private List<AllCardItemModel> sourceItems;
+    private List<AllCardItemModel> filteredItems;
 
     public AllCardAdapter(Context context) {
-        names = new ArrayList<String>();
-        logos = new ArrayList<String>();
-        points = new ArrayList<Integer>();
-        proportions = new ArrayList<Double>();
+        sourceItems = new ArrayList<AllCardItemModel>();
+        filteredItems = sourceItems;
         this.context = context;
     }
 
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         Glide.with(context)
-                .load(logos.get(position))
+                .load(filteredItems.get(position).getLogoURL())
                 .placeholder(R.drawable.ic_points_black_24dp)
                 .error(R.drawable.ic_mall_black_24dp)
                 .into(holder.imageViewLogo);
-        holder.textViewName.setText(names.get(position));
-        holder.textViewPoints.setText("商户卡积分：" + points.get(position));
-        holder.textViewExchangePoints.setText("可兑换通用积分" + String.format("%.1f",points.get(position)/proportions.get(position)));
+        holder.textViewName.setText(filteredItems.get(position).getName());
+        holder.textViewPoints.setText("商户卡积分：" + filteredItems.get(position).getPoint());
+        holder.textViewExchangePoints.setText("可兑换通用积分" + String.format("%.1f",filteredItems.get(position).getExchangePoint()));
         //image
 
 
@@ -82,14 +83,14 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), names.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return logos.size();
+        return filteredItems.size();
     }
 
     @Override
@@ -100,11 +101,40 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH>{
 
 
     public void addData(String name, String logoURL, int point, double proportion) {
-        names.add(name);
-        logos.add(logoURL);
-        points.add(point);
-        proportions.add(proportion);
+        AllCardItemModel newItem = new AllCardItemModel(name, logoURL, point, proportion);
+        sourceItems.add(newItem);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String partName = constraint.toString();
+                if(partName.isEmpty()){
+                    filteredItems = sourceItems;
+                }else {
+                    List<AllCardItemModel> newFilterCards = new ArrayList<AllCardItemModel>();
+                    for (AllCardItemModel item:sourceItems) {
+                        System.out.println(item.getName().toLowerCase() + "    " + partName.toLowerCase());
+                        if(item.getName().toLowerCase().contains(partName.toLowerCase()))
+                            newFilterCards.add(item);
+                    }
+                    filteredItems = newFilterCards;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredItems;
+                return filterResults;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredItems = (ArrayList<AllCardItemModel>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
 }

@@ -6,7 +6,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -254,7 +253,7 @@ desired effect
                          class="col-sm-10 myfile" value="" /> <input type="hidden"
                                                                      name="url2" value="">
                 </div>
-                  <a href="submitEdit"> <button type="submit" class="btn btn-success">提 交</button></a>
+                  <a href="submitEdit"> <button value=${item.itemID} type="submit" class="btn btn-success">提 交</button></a>
 
               </form>
 

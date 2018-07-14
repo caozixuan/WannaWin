@@ -213,7 +213,7 @@ desired effect
                 <td>${item.description}</td>
                 <td>${item.originalPrice}</td>
                 <td>${item.points}</td>
-                <td><a href="/item/editItem"><button type="button" class="btn btn-success">编辑</button></a><a href="/item/deleteItem"><button type="button" class="btn btn-danger">删除</button></a></td>
+                <td><form action="/item/editItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-success">编辑</button></form><form action="/item/deleteItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-danger">删除</button></form></td>
               </tr>
             </c:forEach>
         </tbody>
