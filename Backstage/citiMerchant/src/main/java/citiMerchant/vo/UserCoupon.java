@@ -38,6 +38,19 @@ public class UserCoupon {
 
     }
 
+    public UserCoupon() {
+
+    }
+
+    public UserCoupon(long couponID, String userID, String itemID, String state, Timestamp getTime, Timestamp useTime) {
+        this.couponID = couponID;
+        this.userID = userID;
+        ItemID = itemID;
+        this.state = state;
+        this.getTime = getTime;
+        this.useTime = useTime;
+    }
+
     public UserCoupon(String userID, String itemID, UserCoupon.CouponState state) {
         this.couponID = -1;
         this.userID = userID;
