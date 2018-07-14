@@ -50,6 +50,14 @@ public class MSCardController {
         return "{\"num\": "+ num + "}";
     }
 
+    @ResponseBody
+    @RequestMapping("/getDetailCard")
+    public String getDetailCard(String userID, String merchantID){
+        DetailCard detailCard = msCardService.getDetailCard(userID,merchantID);
+
+        return gson.toJson(detailCard);
+    }
+
 
 
     /**

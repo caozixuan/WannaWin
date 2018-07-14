@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        app:theme="@style/ToolbarTheme" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_add_card"
