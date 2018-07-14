@@ -2,10 +2,12 @@
 //
 //import android.support.annotation.NonNull;
 //
+//import com.citiexchangeplatform.pointsleague.SearchAdapter;
+//
 ////import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 //
 //
-//public class PayingModel implements SortedListAdapter.ViewModel {
+//public class PayingModel implements SearchAdapter.ViewModel {
 //
 //    //private final long mId;
 //    //private final int mRank;

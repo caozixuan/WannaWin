@@ -14,8 +14,8 @@ public class TestController {
 
     @RequestMapping("/test/record")
     public void getRecord() {
-        Record record =testService.getCouponRecord("00001",7);
-        System.out.println(record.totalPoints);
+        Record record = testService.getCouponRecord("00001", 7);
+        System.out.println(record.getTotalPoints());
 
     }
 

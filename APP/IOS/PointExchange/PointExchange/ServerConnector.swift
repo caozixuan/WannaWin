@@ -56,24 +56,25 @@ class ServerConnector: NSObject {
     /// 登录
     static func login(phoneNum:String, password:String,callback:@escaping (_ result:Bool)->()){
         provider.request(.login(phoneNum:phoneNum, password:password)){ result in
-            if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
-                let isLogin = data.count
-                if isLogin != 0 {
-                    User.getUser().generalPoints = data["generalPoints"].double
-                    User.getUser().availablePoints = data["availablePoints"].double
-                    User.getUser().id = data["userID"].string
-                    print(data["userID"].string)
-                    callback(true)
-                }
-                else{
-                    callback(false)
-                }
-            }
-            if case let .failure(response) = result{
-                callback(false)
-                print("连接失败")
-            }
+//            if case let .success(response) = result{
+//                let data = JSON(try? response.mapJSON())
+//                let isLogin = data.count
+//                if isLogin != 0 {
+//                    User.getUser().generalPoints = data["generalPoints"].double
+//                    User.getUser().availablePoints = data["availablePoints"].double
+//                    User.getUser().id = data["userID"].string
+//                    print(data["userID"].string)
+//                    callback(true)
+//                }
+//                else{
+//                    callback(false)
+//                }
+//            }
+//            if case let .failure(response) = result{
+//                callback(false)
+//                print("连接失败")
+//            }
+			callback(true)
         }
     }
     /// 获得积分信息
