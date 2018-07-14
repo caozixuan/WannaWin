@@ -45,6 +45,9 @@ public class Order {
 
     }
 
+    public Order() {
+    }
+
     public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
