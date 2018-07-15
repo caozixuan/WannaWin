@@ -71,17 +71,17 @@ public class PayService {
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
             return QRCodeStatus.INVALID;
         }
-        Order order=orderMapper.selectOrderByID(userID);
-        if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+        List<Order> orders=orderMapper.getOrderByUserID(userID,"10");
+
+        for (Order order:orders){
+            if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+                if (order.getState()==Order.OrderState.FAIL){
+                    return QRCodeStatus.USEFAIL;
+                }
                 return QRCodeStatus.USED;
+            }
         }
-        if (order==null){
-            return QRCodeStatus.UNUSED;
-        }
-        if (order.getState()==Order.OrderState.FAIL){
-            return QRCodeStatus.USEFAIL;
-        }
-        return QRCodeStatus.USED;
+        return QRCodeStatus.UNUSED;
     }
 
     public Order getOrder(String userID,String timeStamp){
