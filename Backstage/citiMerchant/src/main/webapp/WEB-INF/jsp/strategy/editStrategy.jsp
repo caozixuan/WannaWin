@@ -190,21 +190,21 @@ desired effect
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="post" action="/strategy/editStrategySubmit">
+              <form role="form" method="post" action="/strategy/editStrategySubmit" onsubmit="return compare()">
                 <input type="hidden" name="strategyID" value="${strategy.strategyID}">
 
                 <!-- text input -->
                 <div class="form-group">
                   <label>需满金额</label>
-                  <input type="text" name="full" value =${strategy.full} class="form-control" placeholder="输入需满金额">
+                  <input type="text" name="full" value =${strategy.full} class="form-control" placeholder="输入需满金额" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
         <div class="form-group">
                   <label>折扣后金额</label>
-                  <input type="text" name = "priceAfter" value =${strategy.priceAfter} class="form-control" placeholder="输入抵扣金额">
+                  <input type="text" name = "priceAfter" value =${strategy.priceAfter} class="form-control" placeholder="输入抵扣金额" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
         <div class="form-group">
                   <label>所需积分</label>
-                  <input type="text" name = "points" class="form-control" value =${strategy.points} placeholder="输入所需的积分">
+                  <input type="text" name = "points" class="form-control" value =${strategy.points} placeholder="输入所需的积分" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
                 <!-- textarea -->
 
@@ -255,4 +255,16 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+<script>
+    function compare(){
+        var full = document.getElementById("full");
+        var priceAfter = document.getElementById("priceAfter");
+        if(priceAfter>=full){
+            alert("折扣后价格应低于原价！");
+            return false;
+        }
+        return true;
+    }
+
+</script>
 </html>

@@ -139,7 +139,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -190,25 +190,25 @@ desired effect
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <form role="form" method="post" action="/strategy/addStrategySubmit">
+          <form role="form" method="post" action="/strategy/addStrategySubmit" onsubmit="return compare()">
 
 
             <!-- text input -->
             <div class="form-group">
               <label>需满金额</label>
-              <input type="text" name = "full" class="form-control" placeholder="输入需满金额">
+              <input id="full" type="text" name = "full" class="form-control" placeholder="输入需满金额" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
             </div>
             <div class="form-group">
               <label>折扣后金额</label>
-              <input type="text" name = "priceAfter" class="form-control" placeholder="输入抵扣金额">
+              <input id="priceAfter" type="text" name = "priceAfter" class="form-control" placeholder="输入抵扣金额" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
             </div>
             <div class="form-group">
               <label>所需积分</label>
-              <input type="text" name = "points" class="form-control" placeholder="输入所需的积分">
+              <input id="points" type="text" name = "points" class="form-control" placeholder="输入所需的积分" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
             </div>
             <!-- textarea -->
 
-            <button type="submit" class="btn btn-success">提 交</button></td>
+            <button type="submit" class="btn btn-success" >提 交</button></td>
 
           </form>
 
@@ -255,4 +255,17 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+<script>
+    function compare(){
+        var full = document.getElementById("full");
+        var priceAfter = document.getElementById("priceAfter");
+        if(priceAfter>=full){
+            alert("折扣后价格应低于原价！");
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
 </html>
