@@ -5,6 +5,7 @@ import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.vo.Item;
 import citiMerchant.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -14,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.List;
-
+@Controller
+@RequestMapping("/merchant")
 public class MerchantController {
 
     @Autowired
@@ -36,19 +38,20 @@ public class MerchantController {
     }
 
     @RequestMapping("submitEditMerchantInformation")
-    public ModelAndView submitEditMerchantInformation(String name, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL){
+    public ModelAndView submitEditMerchantInformation(String name, String description, String cardDescription, String address, String url2, String url3){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
         Merchant merchantOdd = merchantMapper.selectByID(merchantID);
         ModelAndView mv =new ModelAndView();
-        merchantLogoURL = "localhost:8080/picture/"+merchantID+merchantLogoURL;
+        url2 = "localhost:8080/picture/"+merchantID+url2;
+        url3 = "localhost:8080/picture/"+merchantID+url3;
         merchantOdd.setName(name);
         merchantOdd.setDescription(description);
         merchantOdd.setCardDescription(cardDescription);
         merchantOdd.setAddress(address);
-        merchantOdd.setMerchantLogoURL(merchantLogoURL);
-        merchantOdd.setCardLogoURL(cardLogoURL);
+        merchantOdd.setMerchantLogoURL(url2);
+        merchantOdd.setCardLogoURL(url3);
         //TODO:这里缺数据库方法
         merchantMapper.addMerchant(merchantOdd);
         mv.setViewName("redirect:starter.jsp");

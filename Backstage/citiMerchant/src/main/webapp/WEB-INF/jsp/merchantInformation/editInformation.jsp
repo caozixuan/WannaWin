@@ -240,17 +240,17 @@ desired effect
                 </div>
                 <div class="form-group">
                   <label>商户LOGO</label>
-                  <input type="file" name="merchantLogoURL" data-ref="url2"
-                         class="col-sm-10 merchantLogoURL" value="" /> <input type="hidden"
+                  <input type="file" name="myfile" data-ref="url2"
+                         class="col-sm-10 myfile" value="" /> <input type="hidden"
                                                                      name="url2" value="">
                 </div>
                 <div class="form-group">
                   <label>卡LOGO</label>
-                  <input type="file" name="cardLogoURL" data-ref="url3"
+                  <input type="file" name="myfile" data-ref="url3"
                          class="col-sm-10 myfile" value="" /> <input type="hidden"
                                                                      name="url3" value="">
                 </div>
-                  <a href="submitEdit"> <button value=${item.itemID} type="submit" class="btn btn-success">提 交</button></a>
+                   <button value=${merchant.merchantID} type="submit" class="btn btn-success">提 交</button>
 
               </form>
 
