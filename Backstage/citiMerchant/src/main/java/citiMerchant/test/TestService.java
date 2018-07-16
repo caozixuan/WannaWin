@@ -16,6 +16,8 @@ public class TestService {
         return record;
     }
 
+
+
     public Record getOrderRecord(String merchantID, int intervalDate) {
         Record record = new Record(merchantID, intervalDate);
         recordMapper.order_record(record);
