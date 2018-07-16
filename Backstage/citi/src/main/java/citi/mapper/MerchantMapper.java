@@ -19,11 +19,15 @@ public interface MerchantMapper {
 
     final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, merchantLogoURL, cardLogoURL, proportion, activityTheme, activityDescription, cardType) " +
             "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{merchantLogoURL}, #{cardLogoURL}, #{proportion}, #{activityTheme}, #{activityDescription}, #{cardType})";
+    final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
+    final String updateMerchantName = "UPDATE merchant SET name = #{name} WHERE merchantID = #{merchantID}";
+    final String updateMercahntDescription = "UPDATE merchant SET description = #{description} WHERE merchantID = #{merchantID}";
+    final String updateMerchantCardDescription = "UPDATE merchant SET cardDescription = #{cardDescription} WHERE merchantID = #{merchantID}";
+    final String updateMercahntAddress = "UPDATE merchant SET address = #{address} WHERE merchantID = #{merchantID}";
     final String updateMerchantLogo = "UPDATE merchant SET merchantLogoURL = #{merchantLogoURL} WHERE MerchantID = #{merchantID}";
     final String updateMerchantCardLogo = "UPDATE merchant SET cardLogoURL = #{cardLogoURL} WHERE MerchantID = #{merchantID}";
     final String updateActivityTheme = "UPDATE merchant SET activityTheme = #{activityTheme} WHERE MerchantID = #{merchnatID}";
     final String updateActivityDescription = "\"UPDATE merchant SET activityDescription = #{activityDescription} WHERE MerchantID = #{merchnatID}";
-    final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
     final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
     final String changePassword = "UPDATE merchant SET password = #{password} WHERE MerchantID = #{merchantID}";
@@ -33,6 +37,18 @@ public interface MerchantMapper {
 
     @Select(loginMerchant)
     Merchant loginMerchant(@Param("merchantID") String merchantID, @Param("password") String password);
+
+    @Update(updateMerchantName)
+    int updateMerchantName(@Param("merchantID") String merchantID, @Param("name") String name);
+
+    @Update(updateMercahntDescription)
+    int updateMercahntDescription(@Param("merchantID") String merchantID, @Param("description") String description);
+
+    @Update(updateMerchantCardDescription)
+    int updateMerchantCardDescription(@Param("merchantID") String merchantID, @Param("cardDescription") String cardDescription);
+
+    @Update(updateMercahntAddress)
+    int updateMercahntAddress(@Param("merchantID") String merchantID, @Param("address") String address);
 
     @Update(updateMerchantLogo)
     int updateMerchantLogo(@Param("merchantLogoURL") String merchantLogoURL, @Param("merchantID") String merchantID);
