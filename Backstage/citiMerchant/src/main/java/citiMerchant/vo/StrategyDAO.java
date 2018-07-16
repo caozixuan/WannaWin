@@ -36,7 +36,7 @@ public class StrategyDAO {
     }
 
     public int getPoints() {
-        return priceAfter;
+        return points;
     }
 
 }

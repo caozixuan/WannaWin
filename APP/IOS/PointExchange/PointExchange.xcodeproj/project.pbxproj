@@ -42,6 +42,8 @@
 		B66CFB2920F8AE2C007165DF /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB2820F8AE2C007165DF /* Order.swift */; };
 		B66CFB3120F98584007165DF /* SingleSectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */; };
 		B66CFB3320F98598007165DF /* DoubleSectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */; };
+		B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */; };
+		B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */; };
 		B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */; };
 		B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
@@ -103,6 +105,8 @@
 		B66CFB2820F8AE2C007165DF /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionOrderViewController.swift; sourceTree = "<group>"; };
 		B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSectionOrderViewController.swift; sourceTree = "<group>"; };
+		B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryViewController.swift; sourceTree = "<group>"; };
+		B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantChooseTableViewController.swift; sourceTree = "<group>"; };
 		B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
 				B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */,
 				B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */,
+				B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */,
 			);
 			name = UserTab;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */,
+				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFImageHelper/AFImageHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/ExpyTableView/ExpyTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -450,6 +457,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFImageHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpyTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -497,6 +505,7 @@
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
+				B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
 				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
 				3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */,
@@ -516,6 +525,7 @@
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
+				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,

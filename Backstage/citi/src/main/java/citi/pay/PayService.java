@@ -1,5 +1,6 @@
 package citi.pay;
 
+import citi.mapper.OrderMapper;
 import citi.mapper.StrategyMapper;
 import citi.mapper.UserMapper;
 import citi.vo.Order;
@@ -8,6 +9,7 @@ import citi.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,8 +27,11 @@ public class PayService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private OrderMapper orderMapper;
+
     public boolean pay(String userID,String timeStamp,String merchantID,float totalPrice){
-        long timeMillis = System.currentTimeMillis();
+        long timeMillis = System.currentTimeMillis()/1000;
         long QRTimestamp=Long.parseLong(timeStamp);
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
             return false;
@@ -47,9 +52,12 @@ public class PayService {
             if (strategyDAO.getPoints()<user.getGeneralPoints()){
                 user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
                 float priceAfter=strategyDAO.getPriceAfter();
+                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp));
+                if (orderMapper.addOrder(order)==1){
+                    return true;
+                }
             }
         }
-
         return false;
     }
 
@@ -63,20 +71,28 @@ public class PayService {
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
             return QRCodeStatus.INVALID;
         }
-        //TODO:从数据库搜索该ID和时间戳对应的订单
-        Order order=new Order();
-        if (order==null){
-            return QRCodeStatus.UNUSED;
+        List<Order> orders=orderMapper.getOrderByUserID(userID,"10");
+
+        for (Order order:orders){
+            if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+                if (order.getState()==Order.OrderState.FAIL){
+                    return QRCodeStatus.USEFAIL;
+                }
+                return QRCodeStatus.USED;
+            }
         }
-        if (order.getState()==Order.OrderState.FAIL){
-            return QRCodeStatus.USEFAIL;
-        }
-        return QRCodeStatus.USED;
+        return QRCodeStatus.UNUSED;
     }
 
     public Order getOrder(String userID,String timeStamp){
-        //TODO:从数据库搜索该ID和时间戳对应的订单
-        return new Order();
+        List<Order> orders=orderMapper.getOrderByUserID(userID,"0101010101");
+        for (Order order :orders
+                ) {
+            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)))==0){
+                return order;
+            }
+        }
+        return null;
     }
 
 

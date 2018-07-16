@@ -61,7 +61,6 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //设置toolbar
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying_finish);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

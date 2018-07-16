@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface StrategyMapper {
 
-    final String getStrategysByMerchantID = "SELECT * FROM Strategy WHERE MerchantID = #{merchantID}";
+    final String getStrategysByMerchantID = "SELECT * FROM Strategy WHERE MerchantID = #{merchantID} ORDER BY full DESC";
     final String getStrategyIDByMerchantID = "SELECT strategyID FROM Strategy WHERE MerchantID = #{MerchantID}";
     final String getStrategyByStrategyID = "SELECT * FROM Strategy WHERE strategyID = #{strategyID}";
     final String addStrategy = "INSERT INTO Strategy(strategyID, MerchantID, full, priceAfter, points) " +

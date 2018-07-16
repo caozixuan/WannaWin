@@ -78,7 +78,14 @@ class UserViewController: UITableViewController {
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
                     self.navigationController?.pushViewController(view, animated: true)
                 }
-                break
+            case 1:
+                if let _ = User.getUser().username{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }else{
+                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+                    self.navigationController?.pushViewController(view, animated: true)
+                }
             case 2:
                 if let _ = User.getUser().username{
                     activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)

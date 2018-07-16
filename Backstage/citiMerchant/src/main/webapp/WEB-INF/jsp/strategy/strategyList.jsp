@@ -13,23 +13,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../js/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../../js/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../js/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../../../js/dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
   <![endif]-->
 
   <!-- Google Font -->
@@ -65,7 +67,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="../starter.jsp" class="logo">
+    <a href="/starter" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -87,14 +89,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="../../../js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -140,7 +142,7 @@ desired effect
          <!-- Sidebar user panel (optional) -->
          <div class="user-panel">
              <div class="pull-left image">
-                 <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                 <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
              </div>
              <div class="pull-left info">
                  <p>Alexander Pierce</p>
@@ -191,6 +193,16 @@ desired effect
     </section>
 
     <!-- Main content -->
+      <script type="text/javascript">
+          function show_confirm()
+          {
+              var r=confirm("Delete this strategy?");
+              if (r==true)
+              {
+                  alert("Finished.");
+              }
+          }
+      </script>
     <section class="content container-fluid">
     	<div class="box">
             <div class="box-header">
@@ -202,31 +214,29 @@ desired effect
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>需满金额</th>
-                  <th>抵扣金额</th>
+                  <th>折扣后金额</th>
                   <th>所需积分</th>
-                  <th style="width: 80px"></th>
+                  <th style="width: 80px">操作</th>
                   <th style="width: 80px"></th>
                 </tr>
             <c:forEach items="${strategies}" var="p">
                 <tr>
                     <td>${p.strategyID}</td>
                     <td>${p.full}</td>
-                    <td>${p.discount}</td>
+                    <td>${p.priceAfter}</td>
                     <td>${p.points}</td>
 
 
 												<!--接口一所在位置-->
 
 
-                    <td><a href="/strategy/editStrategyRequest"><span
-                         >修改</span></a></td>
+                    <td><a href="/strategy/editStrategyRequest?strategyID=${p.strategyID}"><button type="button" class="btn btn-success" >修改</button></a></td>
 
 
                          						<!--接口二所在位置-->
 
 
-                   <td><a href="/strategy/deleteStrategy?strategyID=${p.strategyID}"><span
-                         >下架</span></a></td>
+                    <td><a href="/strategy/deleteStrategy?strategyID=${p.strategyID}"><button type="button" class="btn btn-success" onclick="show_confirm()">下架</button></a></td>
 
 
                 </tr>
@@ -261,11 +271,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../dist/js/adminlte.min.js"></script>
+<script src="../../../js/dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

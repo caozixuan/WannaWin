@@ -61,21 +61,19 @@ public class StrategyController {
     @RequestMapping("/strategy/editStrategyRequest")
     public ModelAndView editStrategyRequest(String strategyID){
         ModelAndView mv = new ModelAndView();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
-        String merchantID = (String)session.getAttribute("merchantID");
-        mv.addObject("strategyID",strategyID);
+        StrategyDAO strategyDAO = strategyService.editStrategyRequest(strategyID);
+        mv.addObject("strategy",strategyDAO);
         mv.setViewName("strategy/editStrategy");
         return mv;
     }
 
     @RequestMapping("/strategy/editStrategySubmit")
-    public ModelAndView editStrategySubmit(String strategyID, int full, int discount,int points){
+    public ModelAndView editStrategySubmit(String strategyID, int full, int priceAfter,int points){
         ModelAndView mv = new ModelAndView();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
-        StrategyDAO strategyDAO = new StrategyDAO(strategyID,merchantID,full,discount,points);
+        StrategyDAO strategyDAO = new StrategyDAO(strategyID,merchantID,full,priceAfter,points);
         strategyService.editStrategySubmit(strategyDAO);
         mv.addObject("strategies",strategyService.getStrategyList(strategyDAO.getMerchantID()));
         mv.setViewName("strategy/strategyList");
@@ -95,13 +93,13 @@ public class StrategyController {
     }
 
     @RequestMapping("/strategy/addStrategySubmit")
-    public ModelAndView addStrategySubmit( int full,int discount,int points){
+    public ModelAndView addStrategySubmit( int full,int priceAfter,int points){
         ModelAndView mv = new ModelAndView();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
         mv.addObject("merchantID",merchantID);
-        StrategyDAO strategyDAO = new StrategyDAO(UUID.randomUUID().toString(),merchantID,full,discount,points);
+        StrategyDAO strategyDAO = new StrategyDAO(UUID.randomUUID().toString(),merchantID,full,priceAfter,points);
         strategyService.addStrategy(strategyDAO);
 
         List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);

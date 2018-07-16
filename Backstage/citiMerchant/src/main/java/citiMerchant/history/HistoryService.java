@@ -22,7 +22,7 @@ public class HistoryService {
     OrderMapper orderMapper;
 
     public List<Order> getHistory(String merchantID){
-        return orderMapper.getOrderByMerchantID(merchantID,"0101010101010101");
+        return orderMapper.getOrderByMerchantID(merchantID,"101010101010");
     }
 
 }

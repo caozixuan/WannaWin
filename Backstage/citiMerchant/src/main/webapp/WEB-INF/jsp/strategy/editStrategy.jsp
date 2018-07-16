@@ -13,17 +13,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../js/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../../js/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../../js/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../../../js/dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,7 +64,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="../starter.jsp" class="logo">
+    <a href="/starter" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -93,7 +93,7 @@ desired effect
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -139,7 +139,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -190,21 +190,21 @@ desired effect
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="post" action="editStrategySubmit">
-                <input type="hidden" name="strategyID" value="${strategyID}">
+              <form role="form" method="post" action="/strategy/editStrategySubmit" onsubmit="return compare()">
+                <input type="hidden" name="strategyID" value="${strategy.strategyID}">
 
                 <!-- text input -->
                 <div class="form-group">
                   <label>需满金额</label>
-                  <input type="text" name="full" class="form-control" placeholder="输入需满金额">
+                  <input type="text" name="full" value =${strategy.full} class="form-control" placeholder="输入需满金额" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
         <div class="form-group">
-                  <label>抵扣金额</label>
-                  <input type="text" name = "discount" class="form-control" placeholder="输入抵扣金额">
+                  <label>折扣后金额</label>
+                  <input type="text" name = "priceAfter" value =${strategy.priceAfter} class="form-control" placeholder="输入抵扣金额" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
         <div class="form-group">
                   <label>所需积分</label>
-                  <input type="text" name = "points"class="form-control" placeholder="输入所需的积分">
+                  <input type="text" name = "points" class="form-control" value =${strategy.points} placeholder="输入所需的积分" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
                 <!-- textarea -->
 
@@ -245,14 +245,26 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../dist/js/adminlte.min.js"></script>
+<script src="../../../js/dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+<script>
+    function compare(){
+        var full = parseInt(document.getElementById("full"));
+        var priceAfter = parseInt(document.getElementById("priceAfter"));
+        if(priceAfter>=full){
+            alert("折扣后价格应低于原价！");
+            return false;
+        }
+        return true;
+    }
+
+</script>
 </html>
