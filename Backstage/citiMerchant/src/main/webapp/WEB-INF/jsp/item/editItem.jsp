@@ -226,11 +226,15 @@ desired effect
                 </div>
 				<div class="form-group">
                   <label>商品原价</label>
-                  <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价" value=${item.originalPrice}>
+                  <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价" value=${item.originalPrice}
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                 </div>
 				<div class="form-group">
                   <label>抵扣积分</label>
-                  <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分" value=${item.points}>
+                  <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分" value=${item.points}
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                 </div>
                 <div class="form-group">
                   <label>库存数量</label>
@@ -238,7 +242,9 @@ desired effect
                 </div>
                 <div class="form-group">
                   <label>抵扣券有效时间</label>
-                  <input name="overdueTime" type="text" class="form-control" placeholder="抵扣券有效时间" value=${item.overdueTime}>
+                  <input name="overdueTime" type="text" class="form-control" placeholder="抵扣券有效时间" value=${item.overdueTime}
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                 </div>
                 <!-- textarea -->
                 <div class="form-group">

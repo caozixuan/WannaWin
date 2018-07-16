@@ -223,15 +223,21 @@ desired effect
             </div>
             <div class="form-group">
               <label>商品原价</label>
-              <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价">
+              <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价"
+                     onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                     onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
             </div>
             <div class="form-group">
               <label>抵扣积分</label>
-              <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分">
+              <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分"
+                     onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                     onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
             </div>
             <div class="form-group">
               <label>库存数量</label>
-              <input name="stock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填">
+              <input name="stock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填"
+                     onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                     onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
             </div>
             <div class="form-group">
               <label>抵扣券有效时间</label>
@@ -347,5 +353,6 @@ desired effect
     $('.myfile').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
     });
+
 </script>
 </html>
