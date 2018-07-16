@@ -25,7 +25,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -93,19 +95,20 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
     /*获得各项积分卡数据：logo merchantName posses_points rate generalPoints*/
     protected void initData()
     {
-        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        getMSCardInfoRequest();
+        //mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        //mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        //mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        //mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        //mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        //mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        //mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        //mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        //mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        //mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        //mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        //mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        //mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
         //getMSCardInfoRequest();
 
 
@@ -156,7 +159,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
 
     /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
-        //exchangePostJSON();
+        exchangePostJSON();
         if(state){
             Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
 
@@ -174,8 +177,8 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
 
             Bundle bundle = new Bundle();
 
-            bundle.putBoolean("state",state);
             bundle.putStringArrayList("points_used",used);
+            bundle.putBoolean("state",state);
             bundle.putStringArrayList("points_exchanged",exchanged);
             bundle.putStringArrayList("logo_urls",logos);
             bundle.putStringArrayList("business_names",names);
@@ -247,7 +250,9 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
-                        mAdapter.addData(jObj.getString("generalPoints"),jObj.getString("availablePoints"),jObj.getString("rate"),jObj.getString("merchantID"),jObj.getString("merchantName"),jObj.getString("logoURL"));
+                        String generalPoints = String.valueOf(jObj.getInt("points"));
+                        String availablePoints = String.valueOf(jObj.getInt("points")*jObj.getDouble("proportion"));
+                        mAdapter.addData(generalPoints,availablePoints,jObj.getString("merchantID"),jObj.getString("proportion"),jObj.getString("merchantName"),jObj.getString("merchantLogoURL"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -263,8 +268,8 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
-                map.put("userId",LogStateInfo.getInstance(PayingActivity.this).getUserID());
-                map.put("n", "10");
+                map.put("userID",LogStateInfo.getInstance(PayingActivity.this).getUserID());
+                map.put("n", "20");
                 return map;
             }
         };
@@ -349,47 +354,54 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
             e.printStackTrace();
         }
         final String jsonString = jsonObj.toString();
-        String url="http://193.112.44.141:80/citi/mscard/infos";
+        String url="http://193.112.44.141:80/citi/points/changePoints";
         RequestQueue queue = MyApplication.getHttpQueues();
 
-        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                Log.e("success",s);
-                System.out.println(s);
-                try {
-                    if (s!=null){
-                        state = false;
-                        JSONArray jsonArray = new JSONArray(s);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jObj = jsonArray.getJSONObject(i);
+        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.POST, url, jsonObj,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("success",response.toString());
+                        System.out.println("jsonRequest"+response.toString());
+                        try {
+                            if(response.length()>0){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jObj = jsonArray.getJSONObject(i);
 
-                            names.add(jObj.getString("merchantName"));
-                            logos.add(jObj.getString("merchantLogoURL"));
-                            reasons.add("reason");
+                                    String merchantName = String.valueOf(jObj.getInt("merchantName"));
+                                    String merchantLogoURL = String.valueOf(jObj.getInt("merchantLogoURL"));
+                                    String reason = String.valueOf(jObj.getString("reason"));
+                                    names.add(merchantName);
+                                    logos.add(merchantLogoURL);
+                                    reasons.add(reason);
 
+                                }
+                            }
+
+                        }
+                         catch (JSONException e1) {
+                            e1.printStackTrace();
                         }
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
+            public void onErrorResponse(VolleyError error) {
+                Log.d("#JsonObject...:Error#", error.toString());
 
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
-                map.put("param",jsonString);
-                return map;
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+
+                headers.put("Content-Type", "application/json");
+
+                return headers;
             }
         };
-        queue.add(request);
+
+        queue.add(jsonRequest);
 
     }
 

@@ -34,7 +34,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
     private ImageView ImageView_Business;
     private HashMap<Integer, Boolean> map = new HashMap<>();
     private double total;
-    private  Boolean state;
+    private  Boolean state = true;
 
     //控件的声明
     private ViewPager viewPager;
