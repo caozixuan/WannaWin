@@ -64,7 +64,7 @@ public class MerchantController {
     @RequestMapping("/getNum")
     public String getNum(){
         int num = merchantSerivce.getNum();
-        return "{num: "+num+"}";
+        return "{\"num\": "+num+"}";
     }
 
 
