@@ -5,10 +5,12 @@ import java.util.List;
 public class ExchangeModel {
 
     private Boolean choose;
+
     private String maxExchangePoint;
     private String exchangePoint;
     private String targetPoint;
     private String name;
+    private String merchantID;
     private double rate;
     private String logo;
 
@@ -16,7 +18,7 @@ public class ExchangeModel {
     //private HashMap<Integer, Boolean> map = new HashMap<>();
 
 
-    public ExchangeModel(Boolean choose, String general_point, String posses_point, Double rate, String logo_url, String name) {
+    public ExchangeModel(Boolean choose, String general_point, String posses_point, Double rate, String logo_url, String name, String merchantID) {
         this.choose = choose;
         this.maxExchangePoint = general_point;
         this.exchangePoint = general_point;
@@ -24,6 +26,15 @@ public class ExchangeModel {
         this.rate = rate;
         this.logo = logo_url;
         this.name = name;
+        this.merchantID = merchantID;
+    }
+
+    public String getMerchantID() {
+        return merchantID;
+    }
+
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
     }
 
     public double getRate() {

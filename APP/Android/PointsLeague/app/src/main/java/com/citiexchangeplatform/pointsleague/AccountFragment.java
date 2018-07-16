@@ -70,7 +70,8 @@ public class AccountFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
-                        Toast.makeText(getContext(),"历史订单",Toast.LENGTH_SHORT).show();
+                        Intent intentToOrder = new Intent(getContext(), MyOrderActivity.class);
+                        startActivity(intentToOrder);
                         break;
                     case 1:
                         Toast.makeText(getContext(),"绑定",Toast.LENGTH_SHORT).show();

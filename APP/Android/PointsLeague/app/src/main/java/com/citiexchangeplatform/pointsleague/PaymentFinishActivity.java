@@ -24,6 +24,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private List<String> points_used;
     private List<String> points_exchanged;
+    private List<String> reasons;
     private List<String> names;
     private List<String> logos;
     private List<String> data_posses_point;
@@ -33,6 +34,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
     private ImageView ImageView_Business;
     private HashMap<Integer, Boolean> map = new HashMap<>();
     private double total;
+    private  Boolean state = true;
 
     //控件的声明
     private ViewPager viewPager;
@@ -88,13 +90,23 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map");
         //map = serializableHashMap.getMap();
 
-        points_used = (List) bundle.get("points_used");
-        points_exchanged = (List) bundle.get("points_exchanged");
+        state = (Boolean) bundle.get("state");
         logos = (List) bundle.get("logo_urls");
         names = (List) bundle.get("business_names");
-        total = (Double) bundle.get("total");
+        if(state){
+            points_used = (List) bundle.get("points_used");
+            points_exchanged = (List) bundle.get("points_exchanged");
+            total = (Double) bundle.get("total");
+            Text_NeedPoints.setText(String.valueOf(total));
+        }
+        else {
+            reasons = (List) bundle.get("reasons");
+        }
 
-        Text_NeedPoints.setText(String.valueOf(total));
+
+
+
+
 
         //初始化数据
         initView();
@@ -103,7 +115,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
         //设置RecyclerView管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingFinishAdapter(names,logos,points_used,points_exchanged,getApplicationContext());
+        mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
 

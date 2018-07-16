@@ -61,13 +61,13 @@ public class MSCardController {
 
 
     /**
-     *@param msCard 会员卡
+     *@param userID 会员卡
      * @return 成功：{"state":true}，失败：{"state":false}
      */
     @ResponseBody
     @RequestMapping("/addcard")
-    public String addMSCard(MSCard msCard){
-        boolean flag = msCardService.addMSCard(msCard);
+    public String addMSCard(String userID, String merchantID, String cardNum, String password){
+        boolean flag = msCardService.addMSCard(userID,merchantID,cardNum,password);
         return "{state: "+flag+"}";
     }
 }

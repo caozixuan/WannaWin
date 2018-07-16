@@ -52,7 +52,7 @@ public class PayService {
             if (strategyDAO.getPoints()<user.getGeneralPoints()){
                 user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
                 float priceAfter=strategyDAO.getPriceAfter();
-                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp));
+                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp*1000));
                 if (orderMapper.addOrder(order)==1){
                     return true;
                 }
@@ -66,27 +66,33 @@ public class PayService {
     }
 
     public QRCodeStatus QRCode(String userID,String timestamp){
-        long timeMillis = System.currentTimeMillis();
+        long timeMillis = System.currentTimeMillis()/1000;
         long QRTimestamp=Long.parseLong(timestamp);
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
             return QRCodeStatus.INVALID;
         }
-        Order order=orderMapper.selectOrderByID(userID);
-        if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+        List<Order> orders=orderMapper.getOrderByUserID(userID,"01010101");
+
+        for (Order order:orders){
+            if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+                if (order.getState()==Order.OrderState.FAIL){
+                    return QRCodeStatus.USEFAIL;
+                }
                 return QRCodeStatus.USED;
+            }
         }
-        if (order==null){
-            return QRCodeStatus.UNUSED;
-        }
-        if (order.getState()==Order.OrderState.FAIL){
-            return QRCodeStatus.USEFAIL;
-        }
-        return QRCodeStatus.USED;
+        return QRCodeStatus.UNUSED;
     }
 
     public Order getOrder(String userID,String timeStamp){
-        List<Order> order=orderMapper.getOrderByUserID(userID,"100");
-        return new Order();
+        List<Order> orders=orderMapper.getOrderByUserID(userID,"0101010101");
+        for (Order order :orders
+                ) {
+            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)))==0){
+                return order;
+            }
+        }
+        return null;
     }
 
 

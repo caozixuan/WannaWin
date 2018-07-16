@@ -17,17 +17,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="../../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="js/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="js/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../../dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="js/dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -68,7 +66,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="../starter.jsp" class="logo">
+    <a href="/starter" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -90,14 +88,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -143,7 +141,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -206,16 +204,16 @@ desired effect
                   <th style="width: 10px">#</th>
                   <th>原价</th>
                   <th>抵扣后价格</th>
-                  <th>所用积分</th> 
+                  <th>所用积分</th>
                   <th style="width: 150px">时间</th>
                   <th style="width: 80px">状态</th>
                 </tr>
             <c:forEach items="${orders}" var="p">
                 <tr>
-                    <td>${p.orderID}</td>
+                    <td>${p.orderId}</td>
                     <td>${p.originalPrice}</td>
-                    <td>${p.discountPrice}</td>
-                    <td>${p.points}</td>
+                    <td>${p.priceAfter}</td>
+                    <td>${p.pointsNeeded}</td>
                     <td>${p.time}</td>
                     <td>${p.state}</td>
                 </tr>
@@ -239,7 +237,7 @@ desired effect
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
- 
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
@@ -250,11 +248,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="js/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../dist/js/adminlte.min.js"></script>
+<script src="js/dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

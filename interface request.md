@@ -70,7 +70,7 @@ merchantID,merchantLogoURL,merchantName,points,proportion,logoURL
 请求地址： /mscard/getDetailCard
 参数：userID,merchantID
 return:
-cardLogoURL,points,cardNum,cardDescription,type
+cardLogoURL,points,cardNum,cardDescription,type, proportion
 ```
 ```
 解绑:
@@ -126,6 +126,17 @@ return:
 参数：userID
 return:
 {"num":2}
+
+- 单张卡兑换记录
+
+
+
+
+- 显示地点
+- 反馈
+
+
+
 
 
 

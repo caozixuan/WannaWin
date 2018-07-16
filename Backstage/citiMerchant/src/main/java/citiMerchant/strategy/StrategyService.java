@@ -31,7 +31,8 @@ public class StrategyService {
     }
 
     public void editStrategySubmit(StrategyDAO strategyDAO){
-        strategyMapper.updateStrategy(strategyDAO);
+        int i = strategyMapper.updateStrategy(strategyDAO.getStrategyID(),strategyDAO.getFull(),strategyDAO.getPriceAfter(),strategyDAO.getPoints());
+        System.out.println(i);
     }
 
     public void addStrategy(StrategyDAO strategyDAO){

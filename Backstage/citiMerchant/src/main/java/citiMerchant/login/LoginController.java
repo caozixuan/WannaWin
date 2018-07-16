@@ -52,12 +52,17 @@ public class LoginController {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session =request.getSession();
             session.setAttribute("merchantID",merchantID);
+            session.setAttribute("password",password);
             return mv;
         }
 
     }
     @RequestMapping("/starter")
-    public ModelAndView starter(String merchantID,String password){
+    public ModelAndView starter(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = (String)session.getAttribute("merchantID");
+        String password = (String)session.getAttribute("password");
         return loginSubmit(merchantID,password);
     }
 
