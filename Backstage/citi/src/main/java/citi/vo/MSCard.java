@@ -13,6 +13,16 @@ public class MSCard {
     private String logoURL;
     private String merchantName;
 
+    public MSCard(String userID, String cardNum, int points, String merchantId, double proportion, String logoURL, String merchantName) {
+        this.userID = userID;
+        this.cardNum = cardNum;
+        this.points = points;
+        this.merchantId = merchantId;
+        this.proportion = proportion;
+        this.logoURL = logoURL;
+        this.merchantName = merchantName;
+    }
+
     public MSCard() {
 
     }

@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     private void tryLogin() {
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/login")
+                .url("http://193.112.44.141:80/citi/account/login")
                 .addParam("phoneNum", strAccount)
                 .addParam("password", strPassword)
                 .build()
@@ -114,13 +114,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                 String accountPhoneNum = jsonObject.getString("phoneNum");
                                 String userID = jsonObject.getString("userID");
-                                int generalPoint = jsonObject.getInt("generalPoints");
-                                int availablePoints = jsonObject.getInt("availablePoints");
 
-                                LogStateInfo.getInstance(LoginActivity.this).setAccount(accountPhoneNum)
-                                        .setUserID(userID)
-                                        .setGeneralPoint(generalPoint)
-                                        .setAvailablePoints(availablePoints);
+                                LogStateInfo.getInstance(LoginActivity.this).setAccount(strAccount)
+                                        .setUserID(userID);
 
                                 logSuccess = true;
                             }

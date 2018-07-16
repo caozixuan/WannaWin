@@ -3,73 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_main"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="0dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:text="积分兑"
-            />
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content">
 
-    <ScrollView
-        android:layout_below="@+id/toolbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        <RelativeLayout
+            android:id="@+id/points_banner_main"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.daimajia.slider.library.Indicators.PagerIndicator
+                    style="@style/AndroidImageSlider_Corner_Oval_Orange"
+                    android:id="@+id/custom_indicator_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="40dp"
+                    />
+
+            </com.daimajia.slider.library.SliderLayout>
+        </RelativeLayout>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearlayout_account_info_points"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:background="@drawable/background_points"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/points_banner_main"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="150dp">
-
-                <com.daimajia.slider.library.SliderLayout
-                    android:id="@+id/slider_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp">
-
-                    <com.daimajia.slider.library.Indicators.PagerIndicator
-                        android:id="@+id/custom_indicator_main"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="20dp" />
-
-                </com.daimajia.slider.library.SliderLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/linearlayout_account_info_points"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/points_banner_main"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-
-
-            </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </RelativeLayout>
+
 
 </RelativeLayout>
