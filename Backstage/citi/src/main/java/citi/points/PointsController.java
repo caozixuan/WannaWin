@@ -56,6 +56,11 @@ public class PointsController {
         return gson.toJson(returnMerchants);
     }
 
+    /*
+     * @url:/points/generalPoints
+     * @param: userID
+     * @return: {"generalPoints": 0.0}
+     */
     @ResponseBody
     @RequestMapping("/generalPoints")
     public String getGeneralPoints(String userID){
@@ -64,6 +69,11 @@ public class PointsController {
         return "{\"generalPoints\": "+points+"}";
     }
 
+    /*
+     * @url:/points/availablePoints
+     * @param: userID
+     * @return: {"availablePoints": 0.0}
+     */
     @ResponseBody
     @RequestMapping("/availablePoints")
     public String getAvailablePoints(String userID){
