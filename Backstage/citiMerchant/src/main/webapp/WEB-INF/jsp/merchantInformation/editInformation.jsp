@@ -5,7 +5,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-pageEncoding="UTF-8" isELIgnored="false" %>
+         pageEncoding="UTF-8" isELIgnored="false" autoFlush="false" buffer="300kb"%>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -194,7 +194,7 @@ desired effect
          </ul>
        <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
        <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-       <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
+       <li class="active"><a href="/merchant/editMerchantInformation"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
      </ul>
      <!-- /.sidebar-menu -->
@@ -236,7 +236,7 @@ desired effect
                 </div>
                 <div class="form-group">
                   <label>地址</label>
-                  <input name="atock" type="text" class="form-control" placeholder="商家所在地址" value=${merchant.adress}>
+                  <input name="atock" type="text" class="form-control" placeholder="商家所在地址" value=${merchant.address}>
                 </div>
                 <div class="form-group">
                   <label>商户LOGO</label>

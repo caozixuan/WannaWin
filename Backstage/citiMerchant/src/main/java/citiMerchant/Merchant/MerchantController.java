@@ -53,8 +53,13 @@ public class MerchantController {
         merchantOdd.setMerchantLogoURL(url2);
         merchantOdd.setCardLogoURL(url3);
         //TODO:这里缺数据库方法
-        merchantMapper.addMerchant(merchantOdd);
-        mv.setViewName("redirect:starter.jsp");
+        merchantMapper.updateMerchantName(merchantID, name);
+        merchantMapper.updateMercahntAddress(merchantID,address);
+        merchantMapper.updateMercahntDescription(merchantID,description);
+        merchantMapper.updateMerchantCardDescription(merchantID,cardDescription);
+        merchantMapper.updateMerchantLogo(merchantID,url2);
+        merchantMapper.updateActivityTheme(merchantID,url3);
+        mv.setViewName("redirect:/starter");
         return mv;
     }
 }
