@@ -257,8 +257,8 @@ desired effect
 </body>
 <script>
     function compare(){
-        var full = document.getElementById("full");
-        var priceAfter = document.getElementById("priceAfter");
+        var full = parseInt(document.getElementById("full"));
+        var priceAfter = parseInt(document.getElementById("priceAfter"));
         if(priceAfter>=full){
             alert("折扣后价格应低于原价！");
             return false;
