@@ -15,7 +15,8 @@ public interface UserMapper {
             "VALUES (#{userID}, #{password}, #{citiCardID}, #{phoneNum}, #{generalPoints}, #{availablePoints}, #{rewardLinkCode})";
     final String bindCitiCard = "UPDATE user SET CitiCardID = #{CitiCardID} WHERE userID = #{userID}";
     final String addLinkCode = "UPDATE user SET rewardLinkCode = #{rewardLinkCode} WHERE userID = #{userID}";
-
+    final String changePasswordByPhone="UPDATE user SET password=#{newPassword} WHERE phoneNum=#{phoneNum}";
+    final String changePasswordByUserID="UPDATE user SET password=#{password} WHERE userID=#{userID}";
     @Select(getInfoByPhoneNum)
     User getInfoByPhone(String phoneNum);
 
@@ -37,4 +38,9 @@ public interface UserMapper {
     @Update(addLinkCode)
     int addLinkCode(@Param("userID") String userID, @Param("rewardLinkCode") String rewardLinkCode);
 
+    @Update(changePasswordByPhone)
+    int changePasswordByPhoneNum(@Param("phoneNum")String phoneNum, @Param("newPassword")String newPassword);
+
+    @Update(changePasswordByUserID)
+    int changePasswdByUserID(@Param("userID")String userID,@Param("password")String password);
 }

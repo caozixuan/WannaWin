@@ -54,5 +54,4 @@ public class PointsController {
         }
         return gson.toJson(returnMerchants);
     }
-
 }
