@@ -12,31 +12,31 @@ pageEncoding="UTF-8" isELIgnored="false" %>
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../../js/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../js/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../js/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../../js/dist/css/skins/skin-blue.min.css">
-<link href="../../../js/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/dist/css/skins/skin-blue.min.css">
+<link href="${pageContext.request.contextPath}/js/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
-<link href="../../../js/bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
-<script src="../../../js/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
-<script src="../../../js/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
-    <script src="../../../js/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
-    <script src="../../../js/bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
-     <script src="../../../js/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
-    <script src="../../../js/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
-    <script src="../../../js/bootstrap-fileinput/js/locales/zh.js"></script>
+<link href="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+<script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
+     <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/zh.js"></script>
   <!-- jQuery 3 -->
-  <script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
-  <script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="../../../js/dist/js/adminlte.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/dist/js/adminlte.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -50,13 +50,13 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 
 
 
-  <link href="../../../js/bootstrap-fileinput/css/xlstyle.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/js/bootstrap-fileinput/css/xlstyle.css" rel="stylesheet">
 
   <!-- 图片上传即使预览插件 -->
   <link rel="stylesheet"
-        href="../../../js/bootstrap-fileinput/css/fileinput.min.css">
+        href="${pageContext.request.contextPath}/js/bootstrap-fileinput/css/fileinput.min.css">
   <script type="text/javascript"
-          src="../../../js/bootstrap-fileinput/js/fileinput.min.js"></script>
+          src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/fileinput.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -107,14 +107,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../../js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -160,7 +160,7 @@ desired effect
      <!-- Sidebar user panel (optional) -->
      <div class="user-panel">
        <div class="pull-left image">
-         <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+         <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
        </div>
        <div class="pull-left info">
          <p>Alexander Pierce</p>
