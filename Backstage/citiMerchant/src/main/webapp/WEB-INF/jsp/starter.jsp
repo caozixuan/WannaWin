@@ -85,14 +85,14 @@ desired effect
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
                 <!--此处应该替换成用户上传的头像-->
-              <img src="../../../js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="../../js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -138,7 +138,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -252,11 +252,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../js/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../js/dist/js/adminlte.min.js"></script>
+<script src="../../js/dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

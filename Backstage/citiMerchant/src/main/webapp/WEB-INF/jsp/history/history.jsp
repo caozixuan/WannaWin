@@ -210,10 +210,10 @@ desired effect
                 </tr>
             <c:forEach items="${orders}" var="p">
                 <tr>
-                    <td>${p.orderID}</td>
+                    <td>${p.orderId}</td>
                     <td>${p.originalPrice}</td>
-                    <td>${p.discountPrice}</td>
-                    <td>${p.points}</td>
+                    <td>${p.priceAfter}</td>
+                    <td>${p.pointsNeeded}</td>
                     <td>${p.time}</td>
                     <td>${p.state}</td>
                 </tr>
