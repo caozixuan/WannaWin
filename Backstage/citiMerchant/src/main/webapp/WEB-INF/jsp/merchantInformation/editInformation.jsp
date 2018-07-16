@@ -222,6 +222,7 @@ desired effect
             <div class="box-body">
               <form role="form" action="submitEditMerchantInformation">
                 <!-- text input -->
+
                 <div class="form-group">
                   <label>商户名称</label>
                   <input name="name" type="text" class="form-control" placeholder="输入商户名称" value=${merchant.name}>

@@ -220,15 +220,20 @@ desired effect
             <div class="box-body">
               <form role="form" action="submitEdit">
                 <!-- text input -->
+                  <div class="form-group">
+                      <label>商品ID</label>
+                      <input name="itemID" type="text" class="form-control" placeholder="" value=${item.itemID} >
+                  </div>
                 <div class="form-group">
                   <label>商品名称</label>
                   <input name="name" type="text" class="form-control" placeholder="输入商品名称" value=${item.name}>
                 </div>
 				<div class="form-group">
                   <label>商品原价</label>
-                  <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价" value=${item.originalPrice}
+                  <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价"
                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                         onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                         onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         value=${item.originalPrice}>
                 </div>
 				<div class="form-group">
                   <label>抵扣积分</label>
@@ -238,7 +243,7 @@ desired effect
                 </div>
                 <div class="form-group">
                   <label>库存数量</label>
-                  <input name="atock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填" value=${item.stock}>
+                  <input name="stock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填" value=${item.stock}>
                 </div>
                 <div class="form-group">
                   <label>抵扣券有效时间</label>
