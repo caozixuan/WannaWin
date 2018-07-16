@@ -20,6 +20,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
@@ -75,33 +76,27 @@ public class PointsFragment extends Fragment {
 
         //准备好要显示的数据
         List<String> imageUrls = new ArrayList<>();
-        final List<String> descriptions = new ArrayList<>();
-        imageUrls.add("http://m.360buyimg.com/mobilecms/s300x98_jfs/t2416/102/20949846/13425/a3027ebc/55e6d1b9Ne6fd6d8f.jpg");
-        imageUrls.add("http://m.360buyimg.com/mobilecms/s300x98_jfs/t1507/64/486775407/55927/d72d78cb/558d2fbaNb3c2f349.jpg");
-        imageUrls.add("http://m.360buyimg.com/mobilecms/s300x98_jfs/t1363/77/1381395719/60705/ce91ad5c/55dd271aN49efd216.jpg");
-        descriptions.add("新品推荐");
-        descriptions.add("时尚男装");
-        descriptions.add("家电秒杀");
+        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic1.png");
+        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic2.png");
+        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic3.png");
+
 
         for (int i = 0; i < imageUrls.size(); i++) {
-            //新建三个展示View，并且添加到SliderLayout
-            TextSliderView tsv = new TextSliderView(getActivity());
-            tsv.image(imageUrls.get(i)).description(descriptions.get(i));
-            final int finalI = i;
-            tsv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+            DefaultSliderView sv = new DefaultSliderView(getActivity());
+            sv.image(imageUrls.get(i));
+            sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getActivity(), descriptions.get(finalI), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "~", Toast.LENGTH_SHORT).show();
                 }
             });
-            sliderLayout.addSlider(tsv);
+            sliderLayout.addSlider(sv);
         }
 
         //对SliderLayout自定义配置
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
         sliderLayout.setDuration(3000);
-        //      sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomIndicator(indicator);
     }
 
@@ -121,14 +116,14 @@ public class PointsFragment extends Fragment {
                     startActivity(intentToAllCard);
                 }
             });
-            Button buttonAddCard = (Button) content.findViewById(R.id.button_add_card_main);
-            buttonAddCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intentToAddCard = new Intent(getActivity(), AddCardActivity.class);
-                    startActivity(intentToAddCard);
-                }
-            });
+//            Button buttonAddCard = (Button) content.findViewById(R.id.button_add_card_main);
+//            buttonAddCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intentToAddCard = new Intent(getActivity(), AddCardActivity.class);
+//                    startActivity(intentToAddCard);
+//                }
+//            });
             Button buttonExchangePoint = (Button) content.findViewById(R.id.button_exchange_points_main);
             buttonExchangePoint.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,10 +132,10 @@ public class PointsFragment extends Fragment {
                     startActivity(intentToExchangePoint);
                 }
             });
-            TextView textViewGeneralPoint = (TextView) content.findViewById(R.id.textView_all_points_main);
-            textViewGeneralPoint.setText("当前通用积分 : " + LogStateInfo.getInstance(getContext()).getGeneralPoint());
-            TextView textViewAvailablePoint = (TextView) content.findViewById(R.id.textView_remain_points_main);
-            textViewAvailablePoint.setText("剩余可抵积分 : " + LogStateInfo.getInstance(getContext()).getAvailablePoints());
+//            TextView textViewGeneralPoint = (TextView) content.findViewById(R.id.textView_all_points_main);
+//            textViewGeneralPoint.setText("当前通用积分 : " + LogStateInfo.getInstance(getContext()).getGeneralPoint());
+//            TextView textViewAvailablePoint = (TextView) content.findViewById(R.id.textView_remain_points_main);
+//            textViewAvailablePoint.setText("剩余可抵积分 : " + LogStateInfo.getInstance(getContext()).getAvailablePoints());
 
         } else {
 

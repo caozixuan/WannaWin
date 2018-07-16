@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.gson.JsonObject;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -139,14 +140,24 @@ public class RegisterActivity extends AppCompatActivity {
     private void getMsgVerification() {
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/login/getVCode")
+                .url("http://193.112.44.141:80/citi/account/getVCode")
                 .addParam("phoneNum", strAccount)
                 .build()
                 .execute(RegisterActivity.this, new CallBack<String>() {
                     @Override
                     public void onSuccess(Context context, String response) {
                         System.out.println(response);
-                        if (response.length() == 2) {
+
+                        boolean getMSg = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            getMSg = jsonObject.getBoolean("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (getMSg) {
                             getVerification = true;
                             Toast.makeText(RegisterActivity.this, "验证码已发送", Toast.LENGTH_SHORT).show();
 
@@ -178,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void tryRegister(){
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/login/sendVCode")
+                .url("http://193.112.44.141:80/citi/account/sendVCode")
                 .addParam("phoneNum", strAccount)
                 .addParam("vcode", strMsgVerification)
                 .addParam("password", strPassword)
@@ -188,15 +199,13 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onSuccess(Context context, String response) {
                         System.out.println(response);
                         boolean registerSuccess = false;
-                        JSONObject jsonObject = null;
                         try {
-                            jsonObject = new JSONObject(response);
+                            JSONObject jsonObject = new JSONObject(response);
                             registerSuccess = jsonObject.getBoolean("isCreate");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        dialog.dismiss();
 
                         if (registerSuccess) {
                             Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
@@ -204,6 +213,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }else {
                             Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                         }
+
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -231,119 +242,3 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 }
-
-
-//    class getMsgVerification implements Runnable {
-//
-//        @Override
-//        public void run() {
-//            boolean getSuccess = false;
-//
-//            HttpURLConnection connection = null;
-//            BufferedReader reader = null;
-//            try {
-//                URL url = new URL("http://193.112.44.141:80/citi/login/getVCode");
-//                connection = (HttpURLConnection) url.openConnection();
-//                connection.setRequestMethod("POST");
-//
-//                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-//                out.writeBytes("phoneNum=" + strAccount);
-//
-//                connection.setConnectTimeout(5000);
-//                connection.setReadTimeout(5000);
-//
-//                InputStream in = connection.getInputStream();
-//                reader = new BufferedReader(new InputStreamReader(in));
-//                String json = reader.readLine();
-//                System.out.println(json);
-//                if (json.length() == 2)
-//                    getSuccess = true;
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//            }
-//
-//            dialog.dismiss();
-//
-//            if (getSuccess) {
-//                getVerification = true;
-//                remainSecond = WAITING_TIME_FOR_EACH_MSG;
-//                Message message = new Message();
-//                message.what = 0;
-//                handler.sendMessage(message);
-//
-//            } else {
-//                Looper.prepare();
-//                Toast.makeText(RegisterActivity.this, "获得短信验证码失败", Toast.LENGTH_SHORT).show();
-//                Looper.loop();
-//            }
-//        }
-//    }
-//
-//    class tryRegister implements Runnable {
-//
-//        @Override
-//        public void run() {
-//            boolean registerSuccess = false;
-//
-//            HttpURLConnection connection = null;
-//            BufferedReader reader = null;
-//            try {
-//                URL url = new URL("http://193.112.44.141:80/citi/login/sendVCode");
-//                connection = (HttpURLConnection) url.openConnection();
-//                connection.setRequestMethod("POST");
-//
-//                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-//                out.writeBytes("phoneNum=" + strAccount + "&vcode=" + strMsgVerification + "&password=" + strPassword);
-//
-//                connection.setConnectTimeout(5000);
-//                connection.setReadTimeout(5000);
-//
-//                InputStream in = connection.getInputStream();
-//                reader = new BufferedReader(new InputStreamReader(in));
-//                String json = reader.readLine();
-//                System.out.println(json);
-//                JSONObject jsonObject = new JSONObject(json);
-//                registerSuccess = jsonObject.getBoolean("isCreate");
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//            }
-//
-//            dialog.dismiss();
-//            if (registerSuccess) {
-//                //返回并填充账户
-//                finish();
-//
-//            } else {
-//                Looper.prepare();
-//                Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG).show();
-//                Looper.loop();
-//            }
-//        }
-//    }
-//
-//
-//}

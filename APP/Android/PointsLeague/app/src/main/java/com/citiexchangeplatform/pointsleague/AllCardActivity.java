@@ -2,6 +2,8 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,6 +63,14 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
         allCardAdapter.addData("中国移动账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png",142,1.5);
         allCardAdapter.addData("中国电信账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/dianxin_logo.png",1322,0.8);
 
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton_all_card);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToAddCard = new Intent(AllCardActivity.this, AddCardActivity.class);
+                startActivity(intentToAddCard);
+            }
+        });
     }
 
     private void getInfos() {
