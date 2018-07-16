@@ -23,8 +23,16 @@
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mvc:default-servlet-handler/>
-
-
+    <mvc:resources mapping="/dist/**" location="/dist/"/>
+    <mvc:resources mapping="/build/**" location="/build/"/>
+    <mvc:interceptors>
+    <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <mvc:exclude-mapping path="/login/**"/>
+        <!--<mvc:exclude-mapping path="/citi/account/**" />-->
+        <bean class="citiMerchant.interceptor.AuthInterceptorAdapter" />
+    </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 

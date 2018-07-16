@@ -87,6 +87,7 @@ public class AccountSerivce {
             userMapper.insert(d);
             return true;
         }catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }
@@ -100,12 +101,15 @@ public class AccountSerivce {
 
     }
 
-    public void resetPassword(String phoneNum,String password){
+    public boolean resetPassword(String phoneNum,String password){
         User user=userMapper.getInfoByPhone(phoneNum);
         if (user==null){
-            return;
+            return false;
         }
-        //TODO:数据库更新,通过手机号更新密码
+        if (userMapper.changePasswordByPhoneNum(phoneNum,password)==1){
+            return true;
+        }
+        return false;
     }
 
     public boolean changePassword(String userID,String oldPassword,String newPassword){
@@ -114,8 +118,10 @@ public class AccountSerivce {
             return false;
         }
         if (user.getPassword().equals(oldPassword)){
-            //TODO:数据库更新，通过userID更新密码
-            return true;
+            if (userMapper.changePasswdByUserID(userID,newPassword)==1){
+                return true;
+            }
+            return false;
         }
         return false;
     }
