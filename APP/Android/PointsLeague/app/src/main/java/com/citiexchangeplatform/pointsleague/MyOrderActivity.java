@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
 
 public class MyOrderActivity extends AppCompatActivity {
 
@@ -53,9 +52,9 @@ public class MyOrderActivity extends AppCompatActivity {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         //设置tablayout距离上下左右的距离
         //tab_title.setPadding(20,20,20,20);
-        mFragmentArrays[0] = OrderTabFragment.newInstance();
-        mFragmentArrays[1] = OrderTabFragment.newInstance();
-        mFragmentArrays[2] = OrderTabFragment.newInstance();
+        mFragmentArrays[0] = OrderTabUsedFragment.newInstance();
+        mFragmentArrays[1] = OrderTabUnusedFragment.newInstance();
+        mFragmentArrays[2] = OrderTabOverdueFragment.newInstance();
 
         PagerAdapter pagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
