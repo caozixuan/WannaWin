@@ -55,4 +55,25 @@ public class PointsController {
         }
         return gson.toJson(returnMerchants);
     }
+
+    @ResponseBody
+    @RequestMapping("/generalPoints")
+    public String getGeneralPoints(String userID){
+        User user = userMapper.getInfoByUserID(userID);
+        double points = user.getGeneralPoints();
+        return "{\"generalPoints\": "+points+"}";
+    }
+
+    @ResponseBody
+    @RequestMapping("/availablePoints")
+    public String getAvailablePoints(String userID){
+        User user = userMapper.getInfoByUserID(userID);
+        List<MSCard> msCards = msCardMapper.select(user.getUserID());
+        double availablePoints = 0.0;
+        for(int i=0;i<msCards.size();i++){
+            availablePoints+=msCards.get(i).getPoints()*msCards.get(i).getProportion();
+        }
+        user.setAvailablePoints(availablePoints);
+        return "{\"availablePoints\": "+availablePoints+"}";
+    }
 }
