@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 代码填充：彭璇
  * bug修复：刘钟博
  */
-@RequestMapping("/login")
+@RequestMapping("/account")
 @Controller
 public class AccountController {
 
@@ -69,7 +69,7 @@ public class AccountController {
      *          失败：{}
      */
     @ResponseBody
-    @RequestMapping("")
+    @RequestMapping("/login")
     public String Login(String phoneNum,String password){
         User user  = accountSerivce.login(phoneNum,password);
         if(user==null){
@@ -89,8 +89,12 @@ public class AccountController {
     @ResponseBody
     @RequestMapping("/resetPassword")
     public String resetPassword(String phoneNum,String newPassword){
-        accountSerivce.resetPassword(phoneNum,newPassword);
-        return ResultJson.SUCCESS;
+        if (accountSerivce.resetPassword(phoneNum,newPassword)){
+            return ResultJson.SUCCESS;
+        }else {
+            return ResultJson.FAILURE;
+        }
+
     }
 
     @ResponseBody

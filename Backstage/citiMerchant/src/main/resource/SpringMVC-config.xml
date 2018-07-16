@@ -16,14 +16,23 @@
     <context:component-scan base-package="citiMerchant.item"/>
     <context:component-scan base-package="citiMerchant.login"/>
     <context:component-scan base-package="citiMerchant.strategy"/>
+    <context:component-scan base-package="citiMerchant.Merchant"/>
     <context:component-scan base-package="citiMerchant.mapper"/>
     <!--<context:component-scan base-package="citiMerchant.dao"/>-->
     <context:component-scan base-package="citiMerchant.vo"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mvc:default-servlet-handler/>
-
-
+    <mvc:resources mapping="/dist/**" location="/dist/"/>
+    <mvc:resources mapping="/build/**" location="/build/"/>
+    <mvc:interceptors>
+    <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <mvc:exclude-mapping path="/login/**"/>
+        <!--<mvc:exclude-mapping path="/citi/account/**" />-->
+        <bean class="citiMerchant.interceptor.AuthInterceptorAdapter" />
+    </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 

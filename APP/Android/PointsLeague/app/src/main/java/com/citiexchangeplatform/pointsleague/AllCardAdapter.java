@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -83,7 +84,9 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intentToCardInfo = new Intent(context, CardInfoActivity.class);
+                context.startActivity(intentToCardInfo);
             }
         });
     }

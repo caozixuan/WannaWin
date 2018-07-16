@@ -21,8 +21,8 @@ public interface MerchantMapper {
     final String updateMercahntAddress = "UPDATE merchant SET address = #{address} WHERE merchantID = #{merchantID}";
     final String updateMerchantLogo = "UPDATE merchant SET merchantLogoURL = #{merchantLogoURL} WHERE MerchantID = #{merchantID}";
     final String updateMerchantCardLogo = "UPDATE merchant SET cardLogoURL = #{cardLogoURL} WHERE MerchantID = #{merchantID}";
-    final String updateActivityTheme = "UPDATE merchant SET activityTheme = #{activityTheme} WHERE MerchantID = #{merchnatID}";
-    final String updateActivityDescription = "UPDATE merchant SET activityDescription = #{activityDescription} WHERE MerchantID = #{merchnatID}";
+    final String updateActivityTheme = "UPDATE merchant SET activityTheme = #{activityTheme} WHERE MerchantID = #{merchantID}";
+    final String updateActivityDescription = "UPDATE merchant SET activityDescription = #{activityDescription} WHERE MerchantID = #{merchantID}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
     final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
     final String changePassword = "UPDATE merchant SET password = #{password} WHERE MerchantID = #{merchantID}";
