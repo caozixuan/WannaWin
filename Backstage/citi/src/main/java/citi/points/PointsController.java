@@ -9,6 +9,7 @@ import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,8 +39,8 @@ public class PointsController {
 
     @ResponseBody
     @RequestMapping("/changePoints")
-    public String changePoints(String json){
-        ResultBean resultBean = new Gson().fromJson(json,ResultBean.class);
+    public String changePoints(@RequestBody ResultBean resultBean){
+        //ResultBean resultBean = new Gson().fromJson(information,ResultBean.class);
         List<ResultBean.MerchantBean> merchantBeanList = resultBean.getMerchants();
         User user = userMapper.getInfoByUserID(resultBean.getUserID());
         List<MSCard> msCards = msCardMapper.select(user.getUserID());
