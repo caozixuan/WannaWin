@@ -36,7 +36,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("item/showItem");
+        mv.setViewName("/item/showItem");
         return mv;
     }
 
@@ -52,7 +52,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         Item item = itemService.getItem(itemID);
         mv.addObject("item",item);
-        mv.setViewName("item/editItem");
+        mv.setViewName("/item/editItem");
         return mv;
     }
 
@@ -82,7 +82,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
-        mv.setViewName("item/showItem");
+        mv.setViewName("/item/showItem");
         return mv;
     }
 
