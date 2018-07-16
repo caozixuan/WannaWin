@@ -54,5 +54,11 @@ public class MerchantController {
             return gson.toJson(m);
     }
 
+    @ResponseBody
+    @RequestMapping("/getNum")
+    public String getNum(){
+        return "{num: 1}";
+    }
+
 
 }

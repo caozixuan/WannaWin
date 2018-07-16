@@ -4,36 +4,38 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+         pageEncoding="UTF-8" isELIgnored="false" %>
 <head>
   <meta charset="utf-8">
   <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../../js/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../js/bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../../../js/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../../js/dist/css/skins/skin-blue.min.css">
-  <link href="../../../js/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/dist/css/skins/skin-blue.min.css">
+  <link href="${pageContext.request.contextPath}/js/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
-  <link href="../../../js/bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
-  <script src="../../../js/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
-  <script src="../../../js/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
-  <script src="../../../js/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
-  <script src="../../../js/bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
-  <script src="../../../js/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
-  <script src="../../../js/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
-  <script src="../../../js/bootstrap-fileinput/js/locales/zh.js"></script>
+  <link href="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/zh.js"></script>
   <!-- jQuery 3 -->
-  <script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
-  <script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="../../../js/adminlte.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/adminlte.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -47,13 +49,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-  <link href="../../../js/bootstrap-fileinput/css/xlstyle.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/js/bootstrap-fileinput/css/xlstyle.css" rel="stylesheet">
 
   <!-- 图片上传即使预览插件 -->
   <link rel="stylesheet"
-        href="../../../js/bootstrap-fileinput/css/fileinput.min.css">
+        href="${pageContext.request.contextPath}/js/bootstrap-fileinput/css/fileinput.min.css">
   <script type="text/javascript"
-          src="../../../js/bootstrap-fileinput/js/fileinput.min.js"></script>
+          src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/fileinput.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -104,14 +106,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../../js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -157,7 +159,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -188,7 +190,7 @@ desired effect
             <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
           </ul>
         <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-        <li class="active"><a href="../showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li class="active"><a href="/showData/showData.jsp"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
         <li class="active"><a href="/merchant/editMerchantInformation"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
       </ul>
@@ -223,15 +225,21 @@ desired effect
             </div>
             <div class="form-group">
               <label>商品原价</label>
-              <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价">
+              <input name="originalPrice" type="text" class="form-control" placeholder="输入商品原价"
+                     onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                     onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
             </div>
             <div class="form-group">
               <label>抵扣积分</label>
-              <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分">
+              <input name="points" type="text" class="form-control" placeholder="输入抵扣的花旗积分"
+                     onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                     onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
             </div>
             <div class="form-group">
               <label>库存数量</label>
-              <input name="stock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填">
+              <input name="stock" type="text" class="form-control" placeholder="可兑换总数，若没有限制可不填"
+                     onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                     onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
             </div>
             <div class="form-group">
               <label>抵扣券有效时间</label>
@@ -347,5 +355,6 @@ desired effect
     $('.myfile').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
     });
+
 </script>
 </html>

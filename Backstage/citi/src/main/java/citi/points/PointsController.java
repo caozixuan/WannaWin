@@ -38,7 +38,7 @@ public class PointsController {
     private PointsService pointsService;
 
     @ResponseBody
-    @RequestMapping("/changePoints")
+    @RequestMapping(value = "/changePoints",produces={"text/html;charset=UTF-8","application/json"})
     public String changePoints(@RequestBody ResultBean resultBean){
         //ResultBean resultBean = new Gson().fromJson(information,ResultBean.class);
         List<ResultBean.MerchantBean> merchantBeanList = resultBean.getMerchants();
