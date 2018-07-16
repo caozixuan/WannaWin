@@ -52,7 +52,7 @@ public class PayService {
             if (strategyDAO.getPoints()<user.getGeneralPoints()){
                 user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
                 float priceAfter=strategyDAO.getPriceAfter();
-                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp));
+                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp*1000));
                 if (orderMapper.addOrder(order)==1){
                     return true;
                 }
