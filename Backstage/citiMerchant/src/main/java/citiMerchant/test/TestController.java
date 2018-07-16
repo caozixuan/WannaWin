@@ -12,10 +12,13 @@ public class TestController {
     TestService testService;
 
 
-    @RequestMapping("/test/record")
+    @RequestMapping("/test")
     public void getRecord() {
-        Record record = testService.getCouponRecord("123", 7);
-        System.out.println(record.getTotalPoints());
+        System.out.println("aaaaa");
+        Record record1 = testService.getCouponRecord("00001", 7);
+        System.out.println("totalPoints of coupons in 7 days: " + record1.getTotalPoints());
+        Record record2 = testService.getOrderRecord("00002", 7);
+        System.out.println("totalPoints of orders in 7 days: " + record2.getTotalPoints());
 
     }
 

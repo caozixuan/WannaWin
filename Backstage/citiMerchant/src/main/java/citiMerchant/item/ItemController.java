@@ -22,13 +22,13 @@ import java.util.*;
  * Created by zhong on 2018/7/11 19:51
  */
 @Controller
-@RequestMapping("/item")
+
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping("getItem")
+    @RequestMapping("/item/getItem")
     public ModelAndView getItemList(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
@@ -40,14 +40,14 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("addItem")
+    @RequestMapping("/item/addItem")
     public ModelAndView addItem(String merchantID){
         ModelAndView mv =new ModelAndView();
         mv.setViewName("item/addItem");
         return mv;
     }
 
-    @RequestMapping("editItem")
+    @RequestMapping("/item/editItem")
     public ModelAndView editItem(String itemID){
         ModelAndView mv =new ModelAndView();
         Item item = itemService.getItem(itemID);
@@ -57,7 +57,7 @@ public class ItemController {
     }
 
 
-    @RequestMapping("submitEdit")
+    @RequestMapping("/item/submitEdit")
     public ModelAndView submitEdit(String url2, String itemID, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
@@ -73,7 +73,7 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("deleteItem")
+    @RequestMapping("/item/deleteItem")
     public ModelAndView deleteItem(String itemID){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
@@ -86,7 +86,7 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("addItemOperation")
+    @RequestMapping("/item/addItemOperation")
     public ModelAndView addItemOperation(String url2, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -103,7 +103,7 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("uploadFile")
+    @RequestMapping("/item/uploadFile")
     @ResponseBody
     public Map<String, Object> uploadFile(MultipartFile myfile)
             throws IllegalStateException, IOException {

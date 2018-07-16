@@ -52,7 +52,6 @@ public class MerchantController {
         merchantOdd.setAddress(address);
         merchantOdd.setMerchantLogoURL(url2);
         merchantOdd.setCardLogoURL(url3);
-        //TODO:这里缺数据库方法
         merchantMapper.updateMerchantName(merchantID, name);
         merchantMapper.updateMercahntAddress(merchantID,address);
         merchantMapper.updateMercahntDescription(merchantID,description);

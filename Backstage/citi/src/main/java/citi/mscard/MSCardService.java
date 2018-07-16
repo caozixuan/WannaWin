@@ -127,6 +127,6 @@ public class MSCardService {
             cardNum="default";
         if(description==null)
             description="default";
-        return new DetailCard(logoURL,points,cardNum,description,0);
+        return new DetailCard(logoURL,points,cardNum,description,0, merchant.getProportion());
     }
 }

@@ -54,5 +54,18 @@ public class MerchantController {
             return gson.toJson(m);
     }
 
+    /*
+     * 获取商户数量
+     * @url /merchant/getNum
+     * @param 无
+     * @return {num: 42}
+     */
+    @ResponseBody
+    @RequestMapping("/getNum")
+    public String getNum(){
+        int num = merchantSerivce.getNum();
+        return "{\"num\": "+num+"}";
+    }
+
 
 }
