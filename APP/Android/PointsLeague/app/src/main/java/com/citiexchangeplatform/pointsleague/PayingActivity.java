@@ -44,11 +44,19 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
     private PayingAdapter mAdapter;
 
     TextView Choose_Points;
+    Boolean state = true;
+
+    //存放抵扣结果
+    ArrayList<String> used = new ArrayList<>();
+    ArrayList<String> exchanged = new ArrayList<>();
+    ArrayList<String> logos = new ArrayList<>();
+    ArrayList<String> names = new ArrayList<>();
+    ArrayList<String> reasons = new ArrayList<>();
 
     KeyListener storedKeylistener;
 
     // 存储勾选框状态的map集合
-    private HashMap<Integer, Double> map = new HashMap<>();
+    //private HashMap<Integer, Double> map = new HashMap<>();
 
     //接口实例
     //private RecyclerViewOnItemClickListener onItemClickListener;
@@ -85,19 +93,19 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
     /*获得各项积分卡数据：logo merchantName posses_points rate generalPoints*/
     protected void initData()
     {
-        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("1000", "100","0.1","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        mAdapter.addData("2000","20","0.01","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
-        mAdapter.addData("3000","30","0.01","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
+        mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
+        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        mAdapter.addData("3000","30","0.01","qwe","Nike","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
         //getMSCardInfoRequest();
 
 
@@ -148,43 +156,51 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
 
     /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
+        //exchangePostJSON();
+        if(state){
+            Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
 
-        Intent intent = new Intent(this, PaymentFinishActivity.class);
-        //
-        ArrayList<String> used = new ArrayList<>();
-        ArrayList<String> exchanged = new ArrayList<>();
-        ArrayList<String> logos = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
-        //
-        //map = mAdapter.getMap();
-        for (int i = 0;i<mAdapter.getSourceItems().size();i++){
-            if (mAdapter.getSourceItems().get(i).getChoose()){
-                //map.keySet()返回的是所有key的值
-                used.add(mAdapter.getSourceItems().get(i).getExchangePoint());
-                logos.add(mAdapter.getSourceItems().get(i).getLogo());
-                names.add(mAdapter.getSourceItems().get(i).getName());
-                exchanged.add(mAdapter.getSourceItems().get(i).getTargetPoint());
+            //map = mAdapter.getMap();
+            for (int i = 0;i<mAdapter.getSourceItems().size();i++){
+                if (mAdapter.getSourceItems().get(i).getChoose()){
+                    //map.keySet()返回的是所有key的值
+                    used.add(mAdapter.getSourceItems().get(i).getExchangePoint());
+                    logos.add(mAdapter.getSourceItems().get(i).getLogo());
+                    names.add(mAdapter.getSourceItems().get(i).getName());
+                    exchanged.add(mAdapter.getSourceItems().get(i).getTargetPoint());
 
+                }
             }
+
+            Bundle bundle = new Bundle();
+
+            bundle.putBoolean("state",state);
+            bundle.putStringArrayList("points_used",used);
+            bundle.putStringArrayList("points_exchanged",exchanged);
+            bundle.putStringArrayList("logo_urls",logos);
+            bundle.putStringArrayList("business_names",names);
+            bundle.putDouble("total",mAdapter.getTotal());
+            //bundle.putSerializable("checkbox_map", myMap);
+            intent.putExtras(bundle);
+            //
+            startActivity(intent);
+        }
+        else {
+
+            Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
+            Bundle bundle = new Bundle();
+
+            bundle.putStringArrayList("reasons",reasons);
+            bundle.putStringArrayList("logo_urls",logos);
+            bundle.putStringArrayList("business_names",names);
+
+            intent.putExtras(bundle);
+            //
+            startActivity(intent);
+
         }
 
-        Bundle bundle = new Bundle();
-        //
-        //
-        //intent.putExtra("value", (Serializable)map);
-        //
-        //SerializableHashMap myMap=new SerializableHashMap();
-        //myMap.setMap(map);//将hashmap数据添加到封装的myMap中
-        //
-        bundle.putStringArrayList("points_used",used);
-        bundle.putStringArrayList("points_exchanged",exchanged);
-        bundle.putStringArrayList("logo_urls",logos);
-        bundle.putStringArrayList("business_names",names);
-        bundle.putDouble("total",mAdapter.getTotal());
-        //bundle.putSerializable("checkbox_map", myMap);
-        intent.putExtras(bundle);
-        //
-        startActivity(intent);
+
 
 
     }
@@ -231,7 +247,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
-                        mAdapter.addData(jObj.getString("generalPoints"),jObj.getString("availablePoints"),jObj.getString("rate"),jObj.getString("merchantName"),jObj.getString("logoURL"));
+                        mAdapter.addData(jObj.getString("generalPoints"),jObj.getString("availablePoints"),jObj.getString("rate"),jObj.getString("merchantID"),jObj.getString("merchantName"),jObj.getString("logoURL"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -312,6 +328,72 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
         MyApplication.getHttpQueues().add(request);
     }
 
+    public void exchangePostJSON() {
+        //定义一个JSON，用于向服务器提交数据
+        final JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
+        try {
+            for (int i = 0;i<mAdapter.getSourceItems().size();i++){
+                if (mAdapter.getSourceItems().get(i).getChoose()){
+                    JSONObject item = new JSONObject();
+                    item.put("merchantID",mAdapter.getSourceItems().get(i).getMerchantID());
+                    item.put("selectedMSCardPoints",mAdapter.getSourceItems().get(i).getExchangePoint());
+                    jsonArray.put(item);
+                }
+            }
+
+            jsonObj.put("userID", LogStateInfo.getInstance(PayingActivity.this).getUserID())
+                    .put("merchants", jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final String jsonString = jsonObj.toString();
+        String url="http://193.112.44.141:80/citi/mscard/infos";
+        RequestQueue queue = MyApplication.getHttpQueues();
+
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("success",s);
+                System.out.println(s);
+                try {
+                    if (s!=null){
+                        state = false;
+                        JSONArray jsonArray = new JSONArray(s);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jObj = jsonArray.getJSONObject(i);
+
+                            names.add(jObj.getString("merchantName"));
+                            logos.add(jObj.getString("merchantLogoURL"));
+                            reasons.add("reason");
+
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("param",jsonString);
+                return map;
+            }
+        };
+        queue.add(request);
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -336,19 +418,6 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
     }
 
 
-    //private static List<WordModel> filter(List<WordModel> models, String query) {
-    //    final String lowerCaseQuery = query.toLowerCase();
-    //
-    //    final List<WordModel> filteredModelList = new ArrayList<>();
-    //    for (WordModel model : models) {
-    //        final String text = model.getWord().toLowerCase();
-    //        final String rank = String.valueOf(model.getRank());
-    //        if (text.contains(lowerCaseQuery) || rank.contains(lowerCaseQuery)) {
-    //            filteredModelList.add(model);
-    //        }
-    //    }
-    //    return filteredModelList;
-    //}
 
 
 

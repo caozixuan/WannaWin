@@ -84,11 +84,20 @@ public class MSCardService {
      * @param msCard
      * @return
      */
-    public boolean addMSCard(MSCard msCard){
+    private String userID;
+    private String cardNum;
+    private int points;
+    private String merchantId;
+    private double proportion;
+    private String logoURL;
+    private String merchantName;
+    public boolean addMSCard(String userID, String merchantID, String cardNum, String password){
         // TODO:请求相关商家接口，做验证
-        boolean isNoBlank = MSCard.checkAttribute(msCard);
-        if(!isNoBlank)
-            return false;
+        //boolean isNoBlank = MSCard.checkAttribute(msCard);
+        //if(!isNoBlank)
+            //return false;
+        Merchant merchant = merchantMapper.selectByID(merchantID);
+        MSCard msCard = new MSCard(userID, cardNum, 0, merchantID, merchant.getProportion(),merchant.getCardLogoURL(),merchant.getName() );
         int flag = msCardMapper.insert(msCard);
         if(flag>0)
             return true;
@@ -108,6 +117,16 @@ public class MSCardService {
     public DetailCard getDetailCard(String userID, String merchantID){
         MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(userID, merchantID);
         Merchant merchant = merchantMapper.selectByID(merchantID);
-        return new DetailCard(msCard.getLogoURL(),msCard.getPoints(),msCard.getCardNum(),merchant.getCardDescription(),0);
+        String logoURL = msCard.getLogoURL();
+        int points = msCard.getPoints();
+        String cardNum = msCard.getCardNum();
+        String description = merchant.getCardDescription();
+        if(logoURL==null)
+            logoURL="default";
+        if(cardNum==null)
+            cardNum="default";
+        if(description==null)
+            description="default";
+        return new DetailCard(logoURL,points,cardNum,description,0);
     }
 }

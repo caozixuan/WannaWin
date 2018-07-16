@@ -73,7 +73,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         initMap();
     }
 
-    public void addData(String posses, String target,String rate, String name, String logoURL) {
+    public void addData(String posses, String target,String rate, String ID, String name, String logoURL) {
         //maxExchangePoints.add(posses);
         //exchangePoints.add(posses);
         //targetPoints.add(target);
@@ -81,7 +81,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         //names.add(name);
         //logos.add(logoURL);
 
-        ExchangeModel newItem = new ExchangeModel(false, posses, target,Double.parseDouble(rate), logoURL,name);
+        ExchangeModel newItem = new ExchangeModel(false, posses, target,Double.parseDouble(rate), logoURL,name, ID);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }

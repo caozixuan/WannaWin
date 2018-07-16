@@ -24,7 +24,6 @@
 
     <mvc:default-servlet-handler/>
 
-
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 
