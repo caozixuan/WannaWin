@@ -6,13 +6,15 @@ public class DetailCard {
     private String cardNum;
     private String cardDescription;
     private int type=0;
+    private double proportion;
 
-    public DetailCard(String cardLogoURL, int points, String cardNum, String cardDescription, int type) {
+    public DetailCard(String cardLogoURL, int points, String cardNum, String cardDescription, int type, double proportion) {
         this.cardLogoURL = cardLogoURL;
         this.points = points;
         this.cardNum = cardNum;
         this.cardDescription = cardDescription;
         this.type = type;
+        this.proportion = proportion;
     }
 
     public String getCardLogoURL() {
