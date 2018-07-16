@@ -38,4 +38,7 @@ public class MerchantSerivce {
         return merchantMapper.selectByID(merchantID);
     }
 
+    public int getNum(){
+        return merchantMapper.getMerchantAmount();
+    }
 }
