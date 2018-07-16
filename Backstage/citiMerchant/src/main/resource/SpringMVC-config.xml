@@ -18,6 +18,7 @@
     <context:component-scan base-package="citiMerchant.strategy"/>
     <context:component-scan base-package="citiMerchant.Merchant"/>
     <context:component-scan base-package="citiMerchant.mapper"/>
+    <context:component-scan base-package="citiMerchant.test"/>
     <!--<context:component-scan base-package="citiMerchant.dao"/>-->
     <context:component-scan base-package="citiMerchant.vo"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
