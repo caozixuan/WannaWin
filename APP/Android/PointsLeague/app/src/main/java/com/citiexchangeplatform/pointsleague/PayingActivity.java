@@ -290,7 +290,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
                     jsonArray = new JSONArray(response.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String name= jsonObject.getString("name");
+                        String name= jsonObject.getString("totalPoints");
                         String merchantID= jsonObject.getString("merchantID");
                         String logoURL= jsonObject.getString("logoURL");
                         String description= jsonObject.getString("description");

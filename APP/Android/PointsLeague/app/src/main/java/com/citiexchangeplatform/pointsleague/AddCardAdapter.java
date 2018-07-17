@@ -92,8 +92,8 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
         return new VH(v);
     }
 
-    public void addData(String name, String description, String logoURL) {
-        AddCardItemModel newItem = new AddCardItemModel(name, description, logoURL);
+    public void addData(String merchantID, String name, String description, String logoURL) {
+        AddCardItemModel newItem = new AddCardItemModel(merchantID, name, description, logoURL);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }
