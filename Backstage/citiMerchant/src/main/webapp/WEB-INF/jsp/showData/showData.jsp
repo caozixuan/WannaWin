@@ -288,14 +288,16 @@ desired effect
 <!-- AdminLTE for demo purposes -->
 <script src="${pageContext.request.contextPath}/js/dist/js/demo.js"></script>
 <!-- page script -->
+<%
+    String tempPoint = (String) session.getAttribute("points_json");
+%>
 <script>
+    var Points = $.parseJSON("<%=tempPoint %>");
+    for (var i = 0; i < 12; ++i)
+        document.write(Points[i]+"  ");
+
     $(function () {
         "use strict";
-
-        var Points = new Array();
-        <logic:iterate id="item" name="points"  indexId="index">
-        Points[<bean:write name="index" />] = '${item}';
-        </logic:iterate>
 
         // LINE CHART
         var line = new Morris.Line({

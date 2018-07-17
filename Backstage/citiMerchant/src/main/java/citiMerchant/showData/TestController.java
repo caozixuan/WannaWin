@@ -31,9 +31,9 @@ public class TestController {
         ModelAndView mv = new ModelAndView();
         List<Long> points = testService.show_order_points_chronology("00002", "2018");
         String points_json = gson.toJson(points);
-        System.out.println(points_json);
-        session.setAttribute("points", points);
-        mv.addObject("points", points);
+        session.setAttribute("points_json", points_json);
+        //System.out.println(points_json);
+        //mv.addObject("points", points);
         mv.setViewName("/showData/showData");
         return mv;
     }
