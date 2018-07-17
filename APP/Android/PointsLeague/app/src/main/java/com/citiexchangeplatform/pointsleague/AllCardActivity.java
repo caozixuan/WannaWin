@@ -29,6 +29,7 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
 
     ProgressDialog dialog;
     AllCardAdapter allCardAdapter;
+    int cardCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,11 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //getInfos();
+        getCardCount();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_all_card);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("全部卡列表");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +58,6 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                 finish();
             }
         });
-
-        allCardAdapter.addData("Nike旗舰店购物积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png",123,2);
-        allCardAdapter.addData("APPLE中国","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png",555,0.5);
-        allCardAdapter.addData("中国移动账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png",142,1.5);
-        allCardAdapter.addData("中国电信账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/dianxin_logo.png",1322,0.8);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton_all_card);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +72,9 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
     private void getInfos() {
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/getMSInfo")
+                .url("http://193.112.44.141:80/citi/mscard/infos")
                 .addParam("userID", LogStateInfo.getInstance(AllCardActivity.this).getUserID())
-                .addParam("n", "40")
+                .addParam("n", String.valueOf(cardCount))
                 .build()
                 .execute(AllCardActivity.this, new CallBack<String>() {
                     @Override
@@ -92,7 +88,8 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                                 String logoURL = jobj.getString("logoURL");
                                 int point = jobj.getInt("points");
                                 double proportion = jobj.getDouble("proportion");
-                                allCardAdapter.addData(name, logoURL, point, proportion);
+                                String merchantID = jobj.getString("merchantID");
+                                allCardAdapter.addData(merchantID, name, logoURL, point, proportion);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -111,6 +108,43 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                     public void onBefore() {
                         super.onBefore();
                         dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡列表...");
+                    }
+                });
+    }
+
+    private void getCardCount(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/mscard/getNum")
+                .addParam("userID", LogStateInfo.getInstance(AllCardActivity.this).getUserID())
+                .build()
+                .execute(AllCardActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            cardCount = jsonObject.getInt("num");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+
+                        getInfos();
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(AllCardActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡数量...");
                     }
                 });
     }

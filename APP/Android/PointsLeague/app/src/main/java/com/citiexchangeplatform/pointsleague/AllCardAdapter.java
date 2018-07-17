@@ -40,8 +40,6 @@ import java.util.ListIterator;
 
 public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> implements Filterable {
 
-
-
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
         public final ImageView imageViewLogo;
@@ -86,6 +84,7 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
             public void onClick(View v) {
                 //Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
                 Intent intentToCardInfo = new Intent(context, CardInfoActivity.class);
+                intentToCardInfo.putExtra("merchantID",filteredItems.get(position).getMerchantID());
                 context.startActivity(intentToCardInfo);
             }
         });
@@ -103,8 +102,8 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
     }
 
 
-    public void addData(String name, String logoURL, int point, double proportion) {
-        AllCardItemModel newItem = new AllCardItemModel(name, logoURL, point, proportion);
+    public void addData(String merchantID, String name, String logoURL, int point, double proportion) {
+        AllCardItemModel newItem = new AllCardItemModel(merchantID, name, logoURL, point, proportion);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }

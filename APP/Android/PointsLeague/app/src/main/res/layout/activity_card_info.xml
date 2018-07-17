@@ -13,16 +13,16 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ToolbarTheme">
+        android:theme="@style/ToolbarTheme">
 
         <TextView
             android:id="@+id/textView_history_exchange_card_info"
-            android:textColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:gravity="end"
             android:text="历史兑换记录"
-            android:layout_marginEnd="20dp"/>
+            android:textColor="@color/colorWhite" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="2000" />
+                        android:text="0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="1000" />
+                        android:text="0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -106,18 +106,18 @@
                     android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/textView_account_card_info"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="会员卡号/手机号" />
 
                     <TextView
+                        android:id="@+id/textView_account_card_info"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="123456788" />
+                        android:text="00000000" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -135,10 +135,11 @@
                         android:text="使用规则" />
 
                     <TextView
+                        android:id="@+id/textView_description_card_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="213131231asdadasddddddddddddddasdwaeasdcasd" />
+                        android:text="- -" />
                 </LinearLayout>
             </LinearLayout>
 

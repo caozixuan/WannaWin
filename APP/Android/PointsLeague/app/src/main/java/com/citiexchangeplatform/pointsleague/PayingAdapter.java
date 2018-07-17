@@ -78,7 +78,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         //exchangePoints.add(posses);
         //targetPoints.add(target);
         //rates.add(Double.parseDouble(rate));
-        //names.add(name);
+        //names.add(totalPoints);
         //logos.add(logoURL);
 
         ExchangeModel newItem = new ExchangeModel(false, posses, target,Double.parseDouble(rate), logoURL,name,merchantID);

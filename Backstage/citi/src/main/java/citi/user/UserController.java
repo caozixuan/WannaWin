@@ -31,7 +31,7 @@ public class UserController {
         sb.append("{\"generalPoints\":");
         sb.append(u.getGeneralPoints());
         sb.append(",\"availablePoints\":");
-        sb.append(u.getAvailablePoints());
+        sb.append(userService.getAvailablePoints(u));
         sb.append("}");
         return  sb.toString();
     }
