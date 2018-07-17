@@ -13,7 +13,7 @@ public interface ItemMapper {
     final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, logoURL, originalPrice, points, overdueTime, stock) " +
             "VALUES(#{ItemID}, #{name}, #{description}, #{merchantID}, #{logoURL}, #{originalPrice}, #{points}, #{overdueTime}, #{stock})";
     final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID}";
-    final String updateItemByID = "UPDATE item SET name = #{name}, description = #{description}, logoURL = #{logoURL}, originalPrice = #{originalPrice}, points = #{points}, overdueTime = #{overdueTime}, stock = #{stock}" +
+    final String updateItemByID = "UPDATE item SET name = #{name}, description = #{description}, logoURL = #{logoURL}, originalPrice = #{originalPrice}, points = #{points}, overdueTime = #{overdueTime}, stock = #{stock} " +
             "WHERE ItemID = #{ItemID}";
     final String updateItemOverdueTimeByID = "UPDATE item SET overdueTime = #{overdueTime} WHERE ItemID = #{ItemID}";
     final String updateItemLogoURLByID = "UPDATE item SET logoURL = #{logoURL} WHERE ItemID = #{ItemID}";
