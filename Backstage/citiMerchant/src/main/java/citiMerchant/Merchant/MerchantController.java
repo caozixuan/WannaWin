@@ -47,31 +47,31 @@ public class MerchantController {
     }
 
     @RequestMapping("submitEditMerchantInformation")
-    public ModelAndView submitEditMerchantInformation(String name, String description, String cardDescription, String address, String url2, String url3){
+    public ModelAndView submitEditMerchantInformation(String name, String description, String cardDescription, String address, String myfile1, String myfile2){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
         Merchant merchantOdd = merchantMapper.selectByID(merchantID);
         ModelAndView mv =new ModelAndView();
-        url2 = url+merchantID+url2;
-        url3 = url+merchantID+url3;
+        myfile1 = url+merchantID+myfile1;
+        myfile2 = url+merchantID+myfile2;
         merchantOdd.setName(name);
         merchantOdd.setDescription(description);
         merchantOdd.setCardDescription(cardDescription);
         merchantOdd.setAddress(address);
-        merchantOdd.setMerchantLogoURL(url2);
-        merchantOdd.setCardLogoURL(url3);
+        merchantOdd.setMerchantLogoURL(myfile1);
+        merchantOdd.setCardLogoURL(myfile2);
         merchantMapper.updateMerchantName(merchantID, name);
         merchantMapper.updateMercahntAddress(merchantID,address);
         merchantMapper.updateMercahntDescription(merchantID,description);
         merchantMapper.updateMerchantCardDescription(merchantID,cardDescription);
-        merchantMapper.updateMerchantLogo(merchantID,url2);
-        merchantMapper.updateActivityTheme(merchantID,url3);
+        merchantMapper.updateMerchantLogo(myfile1,merchantID);
+        merchantMapper.updateMerchantCardLogo(myfile2, merchantID);
         mv.setViewName("redirect:/starter");
         return mv;
     }
 
-    @RequestMapping("/merchant/uploadFile")
+    @RequestMapping("/uploadFile")
     @ResponseBody
     public Map<String, Object> uploadFile(MultipartFile myfile)
             throws IllegalStateException, IOException {
@@ -87,7 +87,7 @@ public class MerchantController {
             String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
             String newFileName = merchantID + oldFileName;
             // 新图片
-            File newFile = new File(saveFilePath + "\\" + newFileName);
+            File newFile = new File(saveFilePath + "/" + newFileName);
             // 将内存中的数据写入磁盘
             myfile.transferTo(newFile);
             // 将新图片名称返回到前端
