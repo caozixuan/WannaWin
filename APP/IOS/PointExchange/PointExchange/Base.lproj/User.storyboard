@@ -1446,7 +1446,7 @@
         <scene sceneID="MyA-uA-yHq">
             <objects>
                 <navigationController storyboardIdentifier="UINavigationController-fGz-YH-H6L" title="个人设置nav" id="fGz-YH-H6L" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" id="5BB-gH-jfj"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="MyUnselected" selectedImage="MyActive" id="5BB-gH-jfj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ge2-Zf-cHQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1857,6 +1857,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MyActive" width="24" height="24"/>
+        <image name="MyUnselected" width="24" height="24"/>
         <image name="下箭头" width="24" height="24"/>
         <image name="通讯录" width="100" height="100"/>
     </resources>
