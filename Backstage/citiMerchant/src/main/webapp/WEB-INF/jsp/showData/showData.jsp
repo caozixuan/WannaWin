@@ -334,12 +334,7 @@ desired effect
                 {value: 30, label: "In-Store Sales"},
                 {value: 20, label: "Mail-Order Sales"}
             ],
-            hideHover: 'auto',
-            formatter: function (x) {
-                return x + "%"
-            }
-        }).on('click', function (i, row) {
-            console.log(i, row);
+            hideHover: 'auto'
         });
 
     });
