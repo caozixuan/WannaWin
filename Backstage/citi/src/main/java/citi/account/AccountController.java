@@ -1,6 +1,7 @@
 package citi.account;
 
 import citi.resultjson.ResultJson;
+import citi.user.UserService;
 import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class AccountController {
 
     @Autowired
     private AccountSerivce accountSerivce;
+    @Autowired
+    private UserService userService;
 
     /**
      * 前端请求发送验证码
@@ -76,6 +79,7 @@ public class AccountController {
             return "{}";
         }
         else{
+            user.setAvailablePoints(userService.getAvailablePoints(user));
             return gson.toJson(user);
         }
     }
