@@ -14,7 +14,7 @@
         <scene sceneID="klH-VJ-woC">
             <objects>
                 <navigationController title="显示二维码nav" id="5zr-dd-bEb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="二维码" id="tAR-Li-zdY"/>
+                    <tabBarItem key="tabBarItem" title="扫码支付" image="pay" landscapeImage="pay" selectedImage="pay" id="tAR-Li-zdY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aUh-bE-FZ8">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -154,5 +154,6 @@
     <resources>
         <image name="Grand Canal III" width="682" height="483"/>
         <image name="nike_store" width="64" height="64"/>
+        <image name="pay" width="24" height="23"/>
     </resources>
 </document>

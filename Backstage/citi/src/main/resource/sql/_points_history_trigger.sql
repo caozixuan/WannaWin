@@ -9,7 +9,7 @@ BEGIN
     DECLARE _proportion VARCHAR(45);
     SELECT proportion FROM merchant WHERE MerchantID = _merchantID INTO _proportion;
 	IF _diff_points > 0 THEN
-		INSERT INTO points_history VALUES(_userID, _merchantID, _diff_points, _proportion * _diff_points, "GAIN", NOW());
+		INSERT INTO points_history VALUES(_userID, _merchantID, _diff_points, 0, "GAIN", NOW());
 	ELSEIF _diff_points < 0 THEN
 		INSERT INTO points_history VALUES(_userID, _merchantID, 0 - _diff_points, 0 - _proportion * _diff_points, "EXCHANGE", NOW());
     END IF;
