@@ -8,10 +8,10 @@
 import java.io.IOException;
 import java.io.StringReader;
 
-import com.google.gson.*;
+import com.google.GSON.*;
 //import org.apache.commons.*;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
+import com.google.GSON.stream.JsonReader;
+import com.google.GSON.stream.JsonToken;
 
 public class MSCardType {
     private String MerchantID;
@@ -29,9 +29,9 @@ public class MSCardType {
     //
     public String toString() {
         GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        //System.out.println(gson.toJson(this));
-        return gson.toJson(this);
+        Gson GSON = builder.create();
+        //System.out.println(GSON.toJson(this));
+        return GSON.toJson(this);
     }
 
     public MSCardType(String merchantID, String MType, String cardTypeID, Double proportion, String miniExpense) {

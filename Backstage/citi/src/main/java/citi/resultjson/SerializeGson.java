@@ -7,8 +7,8 @@ import com.google.gson.GsonBuilder;
  * Created by zhong on 2018/7/17 10:33
  */
 public class SerializeGson {
-    public static final Gson gson;
+    public static final Gson GSON;
     static {
-        gson=new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        GSON =new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
 }

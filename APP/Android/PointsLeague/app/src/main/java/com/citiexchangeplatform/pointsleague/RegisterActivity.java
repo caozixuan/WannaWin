@@ -201,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
                         boolean registerSuccess = false;
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            registerSuccess = jsonObject.getBoolean("isCreate");
+                            registerSuccess = jsonObject.getBoolean("status");
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -6,14 +6,15 @@ import java.util.List;
  * Created by wanjian on 2018/1/29.
  */
 
-public class Shop {
+public class RecordParent {
 
     //public static final int TYPE_ALL = 3;
 
-    public String shopName;
+    public String totalExchangePoint;
     public int index;
+    public String date;
 
-    public int reBindTimes = 0;
-    public List<Goods> goods;
+
+    public List<RecordChild> goods;
 
 }
