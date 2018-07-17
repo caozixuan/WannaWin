@@ -33,12 +33,12 @@ public class MerchantInfo {
     }
 
     public String getName() {
-        return sharedPreferences.getString("name", "load error");
+        return sharedPreferences.getString("totalPoints", "load error");
     }
 
     public MerchantInfo setName(String name) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", name);
+        editor.putString("totalPoints", name);
         editor.apply();
         return merchantInfo;
     }

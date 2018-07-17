@@ -96,7 +96,7 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
                                 JSONObject jobj = jsonArray.getJSONObject(i);
                                 //jobj.getString("merchantID");
                                 //jobj.getString("address")
-                                addCardAdapter.addData(jobj.getString("name"),jobj.getString("description"),jobj.getString("logoURL"));
+                                addCardAdapter.addData(jobj.getString("totalPoints"),jobj.getString("description"),jobj.getString("logoURL"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -168,7 +168,7 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
 //                    JSONObject jobj = jsonArray.getJSONObject(i);
 //                    //jobj.getString("merchantID");
 //                    //jobj.getString("address")
-//                    addCardAdapter.addData(jobj.getString("name"),jobj.getString("description"),jobj.getString("logoURL"));
+//                    addCardAdapter.addData(jobj.getString("totalPoints"),jobj.getString("description"),jobj.getString("logoURL"));
 //                }
 //
 //            } catch (Exception e) {

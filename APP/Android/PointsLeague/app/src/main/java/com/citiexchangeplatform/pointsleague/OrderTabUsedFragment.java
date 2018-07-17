@@ -46,7 +46,7 @@ public class OrderTabUsedFragment extends Fragment {
         return view;
     }
 
-    /*订单：name,description,date*/
+    /*订单：totalPoints,description,date*/
     protected void initData()
     {
         orderAdapter.addData("niki","5元代金券","2018-7-23");
