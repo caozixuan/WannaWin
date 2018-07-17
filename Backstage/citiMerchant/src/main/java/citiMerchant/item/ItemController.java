@@ -121,7 +121,7 @@ public class ItemController {
             String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
             String newFileName = merchantID + oldFileName;
             // 新图片
-            File newFile = new File(saveFilePath + "\\" + newFileName);
+            File newFile = new File(saveFilePath + "/" + newFileName);
             // 将内存中的数据写入磁盘
             myfile.transferTo(newFile);
             // 将新图片名称返回到前端

@@ -83,12 +83,7 @@ public class PointsController {
     @RequestMapping("/availablePoints")
     public String getAvailablePoints(String userID){
         User user = userMapper.getInfoByUserID(userID);
-        List<MSCard> msCards = msCardMapper.select(user.getUserID());
-        double availablePoints = 0.0;
-        for(int i=0;i<msCards.size();i++){
-            availablePoints+=msCards.get(i).getPoints()*msCards.get(i).getProportion();
-        }
-        user.setAvailablePoints(availablePoints);
+        double availablePoints = user.getAvailablePoints();
         return "{\"availablePoints\": "+availablePoints+"}";
     }
 
