@@ -98,27 +98,33 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(s);
 
-                    List<RecordChild> recordChildList = new ArrayList<>();
-                    RecordParent recordParent = new RecordParent();
+
 
                     for (int i = 0; i < jsonArray.length(); i++) {
+                        List<RecordChild> recordChildList = new ArrayList<>();
+                        String date = "";
                         JSONObject jObj = jsonArray.getJSONObject(i);
-                        RecordChild recordChild = new RecordChild();
+                        JSONArray children = jObj.getJSONArray("points_history_merchants");
 
-                        //String pointsCiti = String.valueOf(jObj.getDouble("points_citi"));
-                        //String merchantID = String.valueOf(jObj.getDouble("merchantID"));
+                        for (int j = 0; j < children.length(); j++) {
 
-                        recordChild.name = "使用积分: " + String.valueOf(jObj.getInt("points_card"));;
+                            JSONObject child = children.getJSONObject(j);
+                            RecordChild recordChild = new RecordChild();
+                            recordChild.name = "使用积分: " + String.valueOf(child.getInt("points_card"));
+                            date = String.valueOf(child.getString("time"));
+                            recordChildList.add(recordChild);
 
+                        }
+                        RecordParent recordParent = new RecordParent();
+                        recordParent.totalExchangePoint = "兑换积分" + String.valueOf(jObj.getDouble("totalPoints"));
+                        recordParent.date = date;
+                        recordParent.childs = recordChildList;
+                        expandableAdapter.addData(recordParent);
 
-                        recordChildList.add(recordChild);
 
                     }
 
-                    recordParent.totalExchangePoint = "兑换积分" + 1000;
-                    recordParent.date = "2018-7-17";
-                    recordParent.childs = recordChildList;
-                    expandableAdapter.addData(recordParent);
+
 
 
                 } catch (JSONException e) {
