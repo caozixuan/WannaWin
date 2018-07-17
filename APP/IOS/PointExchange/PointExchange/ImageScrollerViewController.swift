@@ -73,13 +73,15 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.configureAutoScrollTimer()
 		
 		self.view.backgroundColor = UIColor.black
+		
+		
 	}
 	
 	//设置scrollerView
 	func configureScrollerView(){
 		//self.scrollerView = UIScrollView(frame: CGRect(x: 0,y: 0, width: self.scrollerViewWidth!, height: self.scrollerViewHeight!))
 		self.scrollerView = UIScrollView()
-		self.scrollerView?.backgroundColor = UIColor.red
+		self.scrollerView?.backgroundColor = UIColor.gray
 		self.scrollerView?.delegate = self
 		self.scrollerView?.contentSize = CGSize(width: self.scrollerViewWidth! * 3,
 												height: self.scrollerViewHeight!)
@@ -90,7 +92,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.view.addSubview(self.scrollerView!)
 		self.scrollerView?.snp.makeConstraints { (make) -> Void in
 			make.size.equalTo(self.view.bounds.size)
-			make.center.equalTo(self.view)
+			//make.center.equalTo(self.view)
 		}
 	}
 	
@@ -111,6 +113,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.rightImageView = UIImageView(frame: CGRect(x: 2*self.scrollerViewWidth!, y: 0,
 														width: self.scrollerViewWidth!, height: self.scrollerViewHeight!));
 		self.scrollerView?.showsHorizontalScrollIndicator = false
+		self.scrollerView?.showsVerticalScrollIndicator = false
 		
 		//设置初始时左中右三个imageView的图片（分别时数据源中最后一张，第一张，第二张图片）
 		if(self.dataSource?.count != 0){
@@ -120,7 +123,10 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.scrollerView?.addSubview(self.leftImageView!)
 		self.scrollerView?.addSubview(self.middleImageView!)
 		self.scrollerView?.addSubview(self.rightImageView!)
+		
+		
 	}
+	
 	
 	//设置页控制器
 	func configurePageController() {
@@ -133,7 +139,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 			make.width.equalTo(120)
 			make.height.equalTo(20)
 			make.centerX.equalTo(self.view.snp.centerX)
-			make.bottom.equalTo(self.view).offset(-5)
+			make.bottom.equalTo(self.view).offset(-30)
 		}
 	}
 	
