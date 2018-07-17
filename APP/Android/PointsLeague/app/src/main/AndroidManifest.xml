@@ -53,16 +53,19 @@
         <activity android:name=".HttpActivity">
 
             <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <action android:totalPoints="android.intent.action.MAIN" /> -->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- <category android:totalPoints="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".AllCardActivity" />
         <activity android:name=".DetailFindActivity" />
         <activity android:name=".CardInfoActivity" />
-        <activity android:name=".HistoryExchangeActivity"></activity>
+        <activity android:name=".HistoryExchangeActivity" />
+        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".PointsExchangeExpandListActivity" />
+        <activity android:name=".PointsExchangeRecordActivity"></activity>
     </application>
 
 </manifest>

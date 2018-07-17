@@ -56,24 +56,24 @@ class ServerConnector: NSObject {
     /// 登录
     static func login(phoneNum:String, password:String,callback:@escaping (_ result:Bool)->()){
         provider.request(.login(phoneNum:phoneNum, password:password)){ result in
-//            if case let .success(response) = result{
-//                let data = JSON(try? response.mapJSON())
-//                let isLogin = data.count
-//                if isLogin != 0 {
-//                    User.getUser().generalPoints = data["generalPoints"].double
-//                    User.getUser().availablePoints = data["availablePoints"].double
-//                    User.getUser().id = data["userID"].string
-//                    print(data["userID"].string)
-//                    callback(true)
-//                }
-//                else{
-//                    callback(false)
-//                }
-//            }
-//            if case let .failure(response) = result{
-//                callback(false)
-//                print("连接失败")
-//            }
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let isLogin = data.count
+                if isLogin != 0 {
+                    User.getUser().generalPoints = data["generalPoints"].double
+                    User.getUser().availablePoints = data["availablePoints"].double
+                    User.getUser().id = data["userID"].string
+                    print(data["userID"].string)
+                    callback(true)
+                }
+                else{
+                    callback(false)
+                }
+            }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
+            }
 			callback(true)
         }
     }
@@ -105,6 +105,62 @@ class ServerConnector: NSObject {
         
     }
     
+    /// 修改密码
+    static func changePassword(oldPassword:String, newPassword:String, callback:@escaping (_ result:Bool)->()){
+        provider.request(.changePassword(old: oldPassword, new: newPassword)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let status = data["status"].bool
+                if status != false {
+                    callback(true)
+                }
+                else{
+                    callback(false)
+                }
+            }
+            if case let .failure(response) = result{
+                callback(false)
+                print("连接失败")
+            }
+        }
+    }
+    /// 重置密码
+    static func resetPassword(phoneNum:String, newPassword:String,callback:@escaping (_ result:Bool)->()){
+        provider.request(.resetPassword(phoneNum: phoneNum, newPassword: newPassword)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let status = data["status"].bool
+                if status != false {
+                    callback(true)
+                }
+                else{
+                    callback(false)
+                }
+            }
+            if case let .failure(response) = result{
+                callback(false)
+            }
+        }
+    }
+    
+    /// 获取重置密码的验证码
+    static func getResetVCode(phoneNum:String, vcode:String, callback:@escaping (_ result:Bool)->()){
+        provider.request(.getResetVCode(phoneNum:phoneNum, vcode: vcode)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let status = data["status"].bool
+                if status != false {
+                    callback(true)
+                }
+                else{
+                    callback(false)
+                }
+            }
+            if case let .failure(response) = result{
+                callback(false)
+            }
+        }
+    }
     //花旗卡相关
     /// 绑定花旗银行卡
     static func bindCard(citiCardNum:String,phoneNum:String,ID:String,password:String,callback:@escaping (_ result:Bool)->()){
@@ -201,7 +257,7 @@ class ServerConnector: NSObject {
     // 会员卡相关
     /// 获取指定用户积分最多的n张卡
     static func getMostPointCards(userID:String, n:Int, callback:@escaping (_ result:Bool, _ cards:[Card])->()){
-        provider.request(.getMostPointCards(userID:userID,n:n)){ result in
+        provider.request(.getMostPointCards(n:n)){ result in
             if case let .success(response) = result{
                 let dataJSON = try? response.mapJSON()
                 var cards = [Card]()
@@ -228,49 +284,21 @@ class ServerConnector: NSObject {
             
         }
     }
-    /// 返回商户所有卡的类型
-    static func getCardTypeByUserID(merchantID:String, callback:@escaping (_ result:Bool, _ cardTypes:[CardType])->()){
-        // TODO: 返回商户所有卡的类型
-        provider.request(.getCardTypeByUserID(merchantID:merchantID)){ result in
-            if case let .success(response) = result{
-                let dataJSON = try? response.mapJSON()
-                var types = [CardType]()
-                if let json = dataJSON {
-                    let datas = JSON(json).array
-                    for data in datas! {
-                        var cardType = CardType()
-                        cardType.merchantID = data["MerchantID"].string
-                        cardType.mType = data["MType"].string
-                        cardType.cardType = data["CardType"].string
-                        cardType.proportion = data["Proportion"].double
-                        cardType.miniExpense = data["MiniExpense"].string
-                        types.append(cardType)
-                    }
-                    callback(true,types)
-                }else{
-                    callback(false,types)
-                }
-            }
-            if case let .failure(response) = result{
-                callback(false,[CardType]())
-                print("连接失败")
-            }
-        }
-    }
+    
     /// 添加会员卡
-    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
-        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
-            if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
-                if data["isCreate"].bool == true{
-                    callback(true)
-                }else{
-                    callback(false)
-                }
-                
-            }
-            
-        }
-        
-    }
+//    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
+//        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
+//            if case let .success(response) = result{
+//                let data = JSON(try? response.mapJSON())
+//                if data["isCreate"].bool == true{
+//                    callback(true)
+//                }else{
+//                    callback(false)
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
 }

@@ -29,6 +29,9 @@ public class PointsService {
 
     public boolean isCanChange(List<ResultBean.MerchantBean> merchantBeanList, User user, ArrayList<ReturnMerchant> returnMerchants, ArrayList<String> ids){
         boolean isCanChange = true;
+        if(merchantBeanList==null||user==null||returnMerchants==null||ids==null){
+            return false;
+        }
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
             MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(user.getUserID(), merchantBean.getMerchantID());

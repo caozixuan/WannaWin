@@ -35,23 +35,38 @@ public class MerchantController {
     @RequestMapping("/getInfos")
     public String getMerchantInfos(int start,int n){
         List<Merchant> merchants= merchantSerivce.getMerchants(start,n);
+        if(merchants==null)
+            return "[]";
         return gson.toJson(merchants);
     }
 
     /**
      * 获取该ID的商家信息
      * @url /merchant/{MerchantID}
-     * @param MerchantID 商户ID
+     * @param merchantID 商户ID
      * @return {"merchantID":"00001","name":"apple","description":"to eat","address":"WHU","logoURL":"http://.png"}
      */
     @ResponseBody
-    @RequestMapping("/{MerchantID}")
-    public String getMerchant(@PathVariable String MerchantID){
-        Merchant m = merchantSerivce.getMerchant(MerchantID);
+    @RequestMapping("/{merchantID}")
+    public String getMerchant(@PathVariable String merchantID){
+        Merchant m = merchantSerivce.getMerchant(merchantID);
         if(m==null)
             return "{}";
         else
             return gson.toJson(m);
+    }
+
+    /*
+     * 获取商户数量
+     * @url /merchant/getNum
+     * @param 无
+     * @return {num: 42}
+     */
+    @ResponseBody
+    @RequestMapping("/getNum")
+    public String getNum(){
+        int num = merchantSerivce.getNum();
+        return "{\"num\": "+num+"}";
     }
 
 

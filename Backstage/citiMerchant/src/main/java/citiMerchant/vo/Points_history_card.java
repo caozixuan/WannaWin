@@ -15,14 +15,6 @@ public class Points_history_card {
         this.totalPoints_citi = -1;
     }
 
-    public Points_history_card(String IN_userID, String IN_merchantID, int IN_intervalDate, long totalPoints_card, long totalPoints_citi) {
-        this.IN_userID = IN_userID;
-        this.IN_merchantID = IN_merchantID;
-        this.IN_intervalDate = IN_intervalDate;
-        this.totalPoints_card = totalPoints_card;
-        this.totalPoints_citi = totalPoints_citi;
-    }
-
     public String getIN_userID() {
         return IN_userID;
     }

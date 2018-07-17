@@ -97,6 +97,8 @@ public class MSCardService {
         //if(!isNoBlank)
             //return false;
         Merchant merchant = merchantMapper.selectByID(merchantID);
+        if(merchant==null)
+            return false;
         MSCard msCard = new MSCard(userID, cardNum, 0, merchantID, merchant.getProportion(),merchant.getCardLogoURL(),merchant.getName() );
         int flag = msCardMapper.insert(msCard);
         if(flag>0)
@@ -117,7 +119,7 @@ public class MSCardService {
     public DetailCard getDetailCard(String userID, String merchantID){
         MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(userID, merchantID);
         Merchant merchant = merchantMapper.selectByID(merchantID);
-        String logoURL = msCard.getLogoURL();
+        String logoURL = merchant.getCardLogoURL();
         int points = msCard.getPoints();
         String cardNum = msCard.getCardNum();
         String description = merchant.getCardDescription();
@@ -127,6 +129,6 @@ public class MSCardService {
             cardNum="default";
         if(description==null)
             description="default";
-        return new DetailCard(logoURL,points,cardNum,description,0);
+        return new DetailCard(logoURL,points,cardNum,description,0, merchant.getProportion());
     }
 }

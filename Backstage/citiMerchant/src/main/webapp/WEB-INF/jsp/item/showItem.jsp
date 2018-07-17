@@ -14,19 +14,19 @@ pageEncoding="UTF-8" isELIgnored="false" autoFlush="false" buffer="300kb"%>
   <title>商户管理界面 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <link rel="stylesheet" href="../../../js/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../js/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../../js/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../js/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../../../js/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/js/dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -88,14 +88,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../../../js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -141,7 +141,7 @@ desired effect
        <!-- Sidebar user panel (optional) -->
        <div class="user-panel">
          <div class="pull-left image">
-           <img src="../../../js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+           <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
          </div>
          <div class="pull-left info">
            <p>Alexander Pierce</p>
@@ -168,10 +168,10 @@ desired effect
               </span>
            </a>
            <ul class="treeview-menu">
-             <li><a href="strategy/getStrategyList">策略清单</a></li>
-             <li><a href="strategy/addStrategyRequest">添加策略</a></li>
+             <li><a href="/strategy/getStrategyList">策略清单</a></li>
+             <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
            </ul>
-         <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+         <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
          <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
          <li class="active"><a href="/merchant/editMerchantInformation"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
 
@@ -198,10 +198,6 @@ desired effect
         </thead>
         <tbody>
             <tr><td>
-			<a href="#" class="thumbnail"><img src="1.jpg" alt="通用的占位符缩略图" height="50" width="50"></a>
-			</td><td>001</td><td>毛巾</td><td>毛巾是一种清洁用品，特征为方形纯棉纺织品。</td><td>100￥</td><td>100</td><td><button type="button" class="btn btn-success">编辑</button><button type="button" class="btn btn-danger">删除</button></td></tr>
-            <tr><td><a href="#" class="thumbnail"><img src="2.jpg" alt="通用的占位符缩略图" height="50" width="50"></a></td><td>002</td><td>棉被</td><td>被子是床上用品的一种，是面积足以覆盖人体、长方形的布料。</td><td>100￥</td><td>100</td><td><button type="button" class="btn btn-success">编辑</button><button type="button" class="btn btn-danger">删除</button></td></tr>
-            <tr><td><a href="#" class="thumbnail"><img src="3.jpg" alt="通用的占位符缩略图" height="50" width="50"></a></td><td>003</td><td>零食</td><td>零食，通常是指一日三餐时间点之外的时间里所食用的食品。</td><td>100￥</td><td>100</td><td><button type="button" class="btn btn-success">编辑</button><button type="button" class="btn btn-danger">删除</button></td></tr>
 
             <c:forEach items="${items}" var="item">
               <tr>
@@ -213,7 +209,8 @@ desired effect
                 <td>${item.description}</td>
                 <td>${item.originalPrice}</td>
                 <td>${item.points}</td>
-                <td><form action="/item/editItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-success">编辑</button></form><form action="/item/deleteItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-danger">删除</button></form></td>
+              <td><form action="/item/editItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-success">编辑</button></form></td>
+              <td><form action="/item/deleteItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-danger">删除</button></form></td>
               </tr>
             </c:forEach>
         </tbody>
@@ -248,11 +245,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../../js/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../../js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../js/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/dist/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

@@ -23,6 +23,8 @@ public class User {
     @Expose
     private String rewardLinkCode;
 
+
+
     public User(String phoneNum, String password) {
         userID = UUID.randomUUID().toString().toLowerCase();
         citiCardID = "";
@@ -42,6 +44,8 @@ public class User {
         this.availablePoints = availablePoints;
         this.rewardLinkCode = rewardLinkCode;
     }
+
+
 
     public String getPassword() {
         return password;

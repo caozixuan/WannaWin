@@ -65,19 +65,22 @@ class UserSettingViewController: UITableViewController, UIImagePickerControllerD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let view = segue.destination as! EditTableViewController
-        switch segue.identifier {
-        case "edit username":
-            view.textPlaceholder = User.getUser().username
-            view.title = "设置用户名"
-            view.changedType = "username"
-        case "edit nickname":
-            view.textPlaceholder = User.getUser().nickname
-            view.title = "设置昵称"
-            view.changedType = "nickname"
-        default:
-            break;
+        if segue.destination.isKind(of: EditTableViewController.self){
+            let view = segue.destination as! EditTableViewController
+            switch segue.identifier {
+            case "edit username":
+                view.textPlaceholder = User.getUser().username
+                view.title = "设置用户名"
+                view.changedType = "username"
+            case "edit nickname":
+                view.textPlaceholder = User.getUser().nickname
+                view.title = "设置昵称"
+                view.changedType = "nickname"
+            default:
+                break;
+            }
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
