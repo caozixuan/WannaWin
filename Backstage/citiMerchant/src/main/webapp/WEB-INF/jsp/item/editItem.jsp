@@ -219,11 +219,7 @@ desired effect
             <!-- /.box-header -->
             <div class="box-body">
               <form role="form" action="submitEdit">
-                <!-- text input -->
-                  <div class="form-group">
-                      <label>商品ID</label>
-                      <input name="itemID" type="text" class="form-control" placeholder="" value=${item.itemID} >
-                  </div>
+                <input type="hidden" name="itemID" value="${item.itemID}">
                 <div class="form-group">
                   <label>商品名称</label>
                   <input name="name" type="text" class="form-control" placeholder="输入商品名称" value=${item.name}>

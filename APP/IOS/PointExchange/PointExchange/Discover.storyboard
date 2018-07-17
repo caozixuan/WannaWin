@@ -116,7 +116,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1vg-n1-HwL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="发现" id="8bv-oH-NiX"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="SearchUnselected" selectedImage="SearchActive" id="8bv-oH-NiX"/>
                     <navigationItem key="navigationItem" id="clD-fC-Sfo"/>
                     <connections>
                         <outlet property="searchBar" destination="CzU-Vx-gXy" id="Gh6-hX-ml7"/>
@@ -146,6 +146,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SearchActive" width="25" height="25"/>
+        <image name="SearchUnselected" width="25" height="25"/>
         <image name="imageView:7G1-je-BjU:image" width="682" height="455">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGVVZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEgcI
