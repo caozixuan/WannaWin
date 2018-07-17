@@ -4,12 +4,12 @@ public class Record {
 
     private String IN_MerchantID;
     private int IN_intervalDate;
-    private long totalPoints;
+    private Long totalPoints;
 
     public Record(String IN_MerchantID, int IN_intervalDate) {
         this.IN_MerchantID = IN_MerchantID;
         this.IN_intervalDate = IN_intervalDate;
-        this.totalPoints = -1;
+        this.totalPoints = -1L;
     }
 
     public String getIN_MerchantID() {
@@ -20,7 +20,7 @@ public class Record {
         return IN_intervalDate;
     }
 
-    public long getTotalPoints() {
+    public Long getTotalPoints() {
         return totalPoints;
     }
 

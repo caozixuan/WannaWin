@@ -290,7 +290,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
                     jsonArray = new JSONArray(response.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String name= jsonObject.getString("name");
+                        String name= jsonObject.getString("totalPoints");
                         String merchantID= jsonObject.getString("merchantID");
                         String logoURL= jsonObject.getString("logoURL");
                         String description= jsonObject.getString("description");
@@ -354,6 +354,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
             e.printStackTrace();
         }
         final String jsonString = jsonObj.toString();
+        System.out.println(jsonString);
         String url="http://193.112.44.141:80/citi/points/changePoints";
         RequestQueue queue = MyApplication.getHttpQueues();
 

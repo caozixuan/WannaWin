@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-    <com.luseen.spacenavigation.SpaceNavigationView
-        android:id="@+id/space"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        app:active_item_color="@color/colorAccent"
-        app:centre_button_color="@color/colorPrimary"
-        app:centre_button_icon="@drawable/ic_qrcode_black_24dp"
-        app:inactive_item_color="#ffffff"
-        app:space_background_color="#464646"
-        app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
-        app:space_item_icon_size="@dimen/space_item_icon_default_size"
-        app:space_item_text_size="@dimen/space_item_text_default_size" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/tb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-</FrameLayout>
+
+        </LinearLayout>
+
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
+            android:id="@+id/bottom_navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

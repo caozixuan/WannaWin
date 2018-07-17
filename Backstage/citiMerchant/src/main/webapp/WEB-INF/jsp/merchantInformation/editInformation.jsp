@@ -87,7 +87,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/starter" class="logo">
+    <a href="../starter" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -179,8 +179,8 @@ desired effect
               </span>
          </a>
          <ul class="treeview-menu">
-           <li><a href="/item/getItem">商品清单</a></li>
-           <li><a href="/item/addItem">添加商品</a></li>
+           <li><a href="../item/getItem">商品清单</a></li>
+           <li><a href="../item/addItem">添加商品</a></li>
          </ul>
        <li class="treeview">
          <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -189,12 +189,13 @@ desired effect
               </span>
          </a>
          <ul class="treeview-menu">
-           <li><a href="/strategy/getStrategyList">策略清单</a></li>
-           <li><a href="/strategy/addStrategyRequest">添加策略</a></li>
+           <li><a href="../strategy/getStrategyList">策略清单</a></li>
+           <li><a href="../strategy/addStrategyRequest">添加策略</a></li>
          </ul>
-       <li><a href=/history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-       <li class="active"><a href="showData/showData.html"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-       <li class="active"><a href="/merchant/editMerchantInformation"><i class="fa fa-link"></i> <span>商户信息</span></a></li>
+       <li><a href=../history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+       <li class="active"><a href="../showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+       <li class="active"><a href="../merchant/editMerchantInformation"><i class="fa fa-link"></i>
+         <span>商户信息</span></a></li>
 
      </ul>
      <!-- /.sidebar-menu -->
@@ -296,7 +297,7 @@ desired effect
 <script type="text/javascript">
     $(".myfile").fileinput({
         //上传的地址
-        uploadUrl:"uploadFile",
+        uploadUrl:"/merchant/uploadFile",
         uploadAsync : false, //默认异步上传
         showUpload : false, //是否显示上传按钮,跟随文本框的那个
         showRemove : false, //显示移除按钮,跟随文本框的那个

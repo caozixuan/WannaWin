@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Points_history {
-    private String userID;
-    private String merchantID;
-    private int points_card;
-    private double points_citi;
-    private String cause;
-    private Timestamp time;
+    protected String userID;
+    protected String merchantID;
+    protected int points_card;
+    protected double points_citi;
+    protected String cause;
+    protected Timestamp time;
 
     public Points_history(String userID, String merchantIDs, int points_card, double points_citi, String cause, Timestamp time) {
         this.userID = userID;

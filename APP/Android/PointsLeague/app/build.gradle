@@ -17,7 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
+
 
 
 dependencies {
@@ -41,4 +43,7 @@ dependencies {
     implementation 'com.github.sdfdzx:XVolley:v1.0.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+    implementation 'rouchuan.viewpagerlayoutmanager:viewpagerlayoutmanager:2.0.19'
 }
