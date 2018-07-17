@@ -39,6 +39,8 @@ public class MSCardController {
             return "[]";
         }
         ArrayList<BriefCard> briefCards = msCardService.changeToBriefCards(cards);
+        if(briefCards==null)
+            return "[]";
         String jsonStr = gson.toJson(briefCards);
         return jsonStr;
     }

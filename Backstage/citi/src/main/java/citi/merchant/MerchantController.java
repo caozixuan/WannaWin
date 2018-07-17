@@ -35,6 +35,8 @@ public class MerchantController {
     @RequestMapping("/getInfos")
     public String getMerchantInfos(int start,int n){
         List<Merchant> merchants= merchantSerivce.getMerchants(start,n);
+        if(merchants==null)
+            return "[]";
         return gson.toJson(merchants);
     }
 
