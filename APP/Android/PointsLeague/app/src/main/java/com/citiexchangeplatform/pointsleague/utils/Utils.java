@@ -37,7 +37,7 @@ public class Utils {
             recordParent.date = "2018-7-17";
 
 
-            recordParent.goods = geneGoodsInfo(i);
+            recordParent.childs = geneChildsInfo(i);
 
             recordList.add(recordParent);
         }
@@ -46,7 +46,7 @@ public class Utils {
 
     }
 
-    private static List<RecordChild> geneGoodsInfo(int i) {
+    private static List<RecordChild> geneChildsInfo(int i) {
         List<RecordChild> recordChildList = new ArrayList<>();
 
         int count = (int) (Math.random() * 5);

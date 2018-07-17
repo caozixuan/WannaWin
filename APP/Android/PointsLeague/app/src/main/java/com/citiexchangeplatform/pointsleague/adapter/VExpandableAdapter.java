@@ -14,17 +14,32 @@ import com.citiexchangeplatform.pointsleague.vh.ChildVH;
 import com.citiexchangeplatform.pointsleague.vh.GroupVH;
 
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
 
 
-    private List<RecordParent> recordList;
+    private List<RecordParent> recordList = new ArrayList<>();
+    private Context context;
 
-    public VExpandableAdapter(List<RecordParent> recordList) {
+
+    public VExpandableAdapter(Context context) {
         super();
+        this.context = context;
+    }
+
+    public void addData(RecordParent recordParent){
+        recordList.add(recordParent);
+        notifyDataSetChanged();
+    }
+
+    public List<RecordParent> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<RecordParent> recordList) {
         this.recordList = recordList;
     }
 
@@ -35,7 +50,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
 
     @Override
     public int getChildCount(int groupIndex) {
-        return recordList.get(groupIndex).goods.size();
+        return recordList.get(groupIndex).childs.size();
     }
 
     @Override
@@ -87,7 +102,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
         Log.d(TAG, "onBindChildViewHolder: " + groupIndex + ":" + childIndex);
         int type = getChildItemViewType(groupIndex, childIndex);
         ChildVH vh = (ChildVH) holder;
-        RecordChild recordChild = recordList.get(groupIndex).goods.get(childIndex);
+        RecordChild recordChild = recordList.get(groupIndex).childs.get(childIndex);
 
         vh.name.setText(recordChild.name);
 
