@@ -11,9 +11,9 @@ import java.sql.Date;
 
 @Controller
 public class TestController {
+
     @Autowired
     TestService testService;
-
 
     @RequestMapping("/test")
     public void getRecord() {
