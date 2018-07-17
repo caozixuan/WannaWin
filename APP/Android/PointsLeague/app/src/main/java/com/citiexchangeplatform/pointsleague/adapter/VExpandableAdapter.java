@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.citiexchangeplatform.pointsleague.R;
-import com.citiexchangeplatform.pointsleague.data.Goods;
-import com.citiexchangeplatform.pointsleague.data.Shop;
+import com.citiexchangeplatform.pointsleague.data.RecordChild;
+import com.citiexchangeplatform.pointsleague.data.RecordParent;
 
 import com.citiexchangeplatform.pointsleague.vh.ChildVH;
 import com.citiexchangeplatform.pointsleague.vh.GroupVH;
@@ -21,21 +21,21 @@ import java.util.List;
 public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
 
 
-    private List<Shop> shopList;
+    private List<RecordParent> recordList;
 
-    public VExpandableAdapter(List<Shop> shopList) {
+    public VExpandableAdapter(List<RecordParent> recordList) {
         super();
-        this.shopList = shopList;
+        this.recordList = recordList;
     }
 
     @Override
     public int getGroupCount() {
-        return shopList.size();
+        return recordList.size();
     }
 
     @Override
     public int getChildCount(int groupIndex) {
-        return shopList.get(groupIndex).goods.size();
+        return recordList.get(groupIndex).goods.size();
     }
 
     @Override
@@ -65,7 +65,8 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
 
         GroupVH vh = ((GroupVH) holder);
         vh.date.setText(String.valueOf(getChildCount(position)));
-        vh.totalPoints.setText(shopList.get(position).shopName);
+        vh.totalPoints.setText(recordList.get(position).totalExchangePoint);
+        vh.date.setText(recordList.get(position).date);
         vh.refresh.setOnClickListener(listener);
         //vh.refresh.setText(isExpanded(position) ? "Close" : "Open");
 
@@ -86,9 +87,9 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
         Log.d(TAG, "onBindChildViewHolder: " + groupIndex + ":" + childIndex);
         int type = getChildItemViewType(groupIndex, childIndex);
         ChildVH vh = (ChildVH) holder;
-        Goods goods = shopList.get(groupIndex).goods.get(childIndex);
+        RecordChild recordChild = recordList.get(groupIndex).goods.get(childIndex);
 
-        vh.name.setText(goods.name);
+        vh.name.setText(recordChild.name);
 
 
 

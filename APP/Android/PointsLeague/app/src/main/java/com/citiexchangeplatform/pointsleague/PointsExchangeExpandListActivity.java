@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.citiexchangeplatform.pointsleague.adapter.ExpandableAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.VExpandableAdapter;
-import com.citiexchangeplatform.pointsleague.data.Shop;
+import com.citiexchangeplatform.pointsleague.data.RecordParent;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import static com.citiexchangeplatform.pointsleague.utils.Utils.showJson;
  * Created by wanjian on 2018/1/29.
  */
 public class PointsExchangeExpandListActivity extends AppCompatActivity {
-    List<Shop> shopList;
+    List<RecordParent> shopList;
     ExpandableAdapter adapter;
 
     @Override
@@ -41,7 +41,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Shop> newData = geneRandomData();
+                List<RecordParent> newData = geneRandomData();
                 shopList.clear();
 
                 shopList.addAll(newData);

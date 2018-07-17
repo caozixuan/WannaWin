@@ -1,6 +1,6 @@
 package com.citiexchangeplatform.pointsleague.data;
 
-public class Goods {
+public class RecordChild {
 
 
     //public static final int TYPE_CLOTHES = 2;
@@ -12,10 +12,10 @@ public class Goods {
 
     public int reBindTimes = 0;
 
-    public Goods() {
+    public RecordChild() {
     }
 
-    public Goods(String name, int index, int reBindTimes) {
+    public RecordChild(String name, int index, int reBindTimes) {
         this.name = name;
         this.index = index;
         this.reBindTimes = reBindTimes;
