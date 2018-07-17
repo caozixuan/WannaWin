@@ -25,6 +25,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="卡积分"/>
         <View
             android:layout_width="3dp"
@@ -36,6 +37,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="通用点"/>
     </LinearLayout>
 

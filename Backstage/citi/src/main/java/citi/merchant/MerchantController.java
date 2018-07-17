@@ -43,13 +43,13 @@ public class MerchantController {
     /**
      * 获取该ID的商家信息
      * @url /merchant/{MerchantID}
-     * @param MerchantID 商户ID
+     * @param merchantID 商户ID
      * @return {"merchantID":"00001","name":"apple","description":"to eat","address":"WHU","logoURL":"http://.png"}
      */
     @ResponseBody
-    @RequestMapping("/{MerchantID}")
-    public String getMerchant(@PathVariable String MerchantID){
-        Merchant m = merchantSerivce.getMerchant(MerchantID);
+    @RequestMapping("/{merchantID}")
+    public String getMerchant(@PathVariable String merchantID){
+        Merchant m = merchantSerivce.getMerchant(merchantID);
         if(m==null)
             return "{}";
         else
