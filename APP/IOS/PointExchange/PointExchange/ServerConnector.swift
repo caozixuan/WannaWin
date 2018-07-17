@@ -257,7 +257,7 @@ class ServerConnector: NSObject {
     // 会员卡相关
     /// 获取指定用户积分最多的n张卡
     static func getMostPointCards(userID:String, n:Int, callback:@escaping (_ result:Bool, _ cards:[Card])->()){
-        provider.request(.getMostPointCards(userID:userID,n:n)){ result in
+        provider.request(.getMostPointCards(n:n)){ result in
             if case let .success(response) = result{
                 let dataJSON = try? response.mapJSON()
                 var cards = [Card]()
@@ -284,49 +284,21 @@ class ServerConnector: NSObject {
             
         }
     }
-    /// 返回商户所有卡的类型
-    static func getCardTypeByUserID(merchantID:String, callback:@escaping (_ result:Bool, _ cardTypes:[CardType])->()){
-        // TODO: 返回商户所有卡的类型
-        provider.request(.getCardTypeByUserID(merchantID:merchantID)){ result in
-            if case let .success(response) = result{
-                let dataJSON = try? response.mapJSON()
-                var types = [CardType]()
-                if let json = dataJSON {
-                    let datas = JSON(json).array
-                    for data in datas! {
-                        var cardType = CardType()
-                        cardType.merchantID = data["MerchantID"].string
-                        cardType.mType = data["MType"].string
-                        cardType.cardType = data["CardType"].string
-                        cardType.proportion = data["Proportion"].double
-                        cardType.miniExpense = data["MiniExpense"].string
-                        types.append(cardType)
-                    }
-                    callback(true,types)
-                }else{
-                    callback(false,types)
-                }
-            }
-            if case let .failure(response) = result{
-                callback(false,[CardType]())
-                print("连接失败")
-            }
-        }
-    }
+    
     /// 添加会员卡
-    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
-        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
-            if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
-                if data["isCreate"].bool == true{
-                    callback(true)
-                }else{
-                    callback(false)
-                }
-                
-            }
-            
-        }
-        
-    }
+//    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
+//        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
+//            if case let .success(response) = result{
+//                let data = JSON(try? response.mapJSON())
+//                if data["isCreate"].bool == true{
+//                    callback(true)
+//                }else{
+//                    callback(false)
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
 }
