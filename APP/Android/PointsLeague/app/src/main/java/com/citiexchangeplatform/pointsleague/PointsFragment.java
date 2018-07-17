@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -21,21 +23,13 @@ import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +40,9 @@ public class PointsFragment extends Fragment {
     View view;
     LinearLayout accountInfoLayout;
     ProgressDialog dialog;
+
+    RecyclerView recyclerView;
+    CardPointsAdapter cardPointsAdapter;
 
     @Nullable
     @Override
@@ -116,14 +113,6 @@ public class PointsFragment extends Fragment {
                     startActivity(intentToAllCard);
                 }
             });
-//            Button buttonAddCard = (Button) content.findViewById(R.id.button_add_card_main);
-//            buttonAddCard.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intentToAddCard = new Intent(getActivity(), AddCardActivity.class);
-//                    startActivity(intentToAddCard);
-//                }
-//            });
             Button buttonExchangePoint = (Button) content.findViewById(R.id.button_exchange_points_main);
             buttonExchangePoint.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -132,10 +121,26 @@ public class PointsFragment extends Fragment {
                     startActivity(intentToExchangePoint);
                 }
             });
-//            TextView textViewGeneralPoint = (TextView) content.findViewById(R.id.textView_all_points_main);
-//            textViewGeneralPoint.setText("当前通用积分 : " + LogStateInfo.getInstance(getContext()).getGeneralPoint());
-//            TextView textViewAvailablePoint = (TextView) content.findViewById(R.id.textView_remain_points_main);
-//            textViewAvailablePoint.setText("剩余可抵积分 : " + LogStateInfo.getInstance(getContext()).getAvailablePoints());
+
+            cardPointsAdapter = new CardPointsAdapter(getContext());
+            recyclerView = (RecyclerView) content.findViewById(R.id.recyclerView_cards_points);
+            //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(
+                    new ScaleLayoutManager
+                    .Builder(getContext(),2)
+                    .setOrientation(OrientationHelper. HORIZONTAL)
+                    .build());
+            //layoutManager.setOrientation(OrientationHelper. HORIZONTAL);
+            recyclerView.setAdapter(cardPointsAdapter);
+            recyclerView.setItemAnimator( new DefaultItemAnimator());
+
+            cardPointsAdapter.addData("nike", 99, 2, "123");
+            cardPointsAdapter.addData("apple", 129, 1, "123");
+            cardPointsAdapter.addData("中国移动", 200, 3, "123");
+            cardPointsAdapter.addData("中国电信", 77, 0.5, "123");
+            cardPointsAdapter.addData("Anta", 233, 1, "123");
+
+            recyclerView.scrollToPosition(cardPointsAdapter.getItemCount()/2);
 
         } else {
 
@@ -215,54 +220,3 @@ public class PointsFragment extends Fragment {
                 });
     }
 }
-
-
-//    class getCardsInfo implements Runnable {
-//
-//        @Override
-//        public void run() {
-//            boolean getInfoSuccess = false;
-//
-//            HttpURLConnection connection = null;
-//            BufferedReader reader = null;
-//            try {
-//                URL url = new URL("http://193.112.44.141:80/citi/mscard/infos");
-//                connection = (HttpURLConnection) url.openConnection();
-//                connection.setRequestMethod("POST");
-//                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-//                out.writeBytes("userId=" + LogStateInfo.getInstance(getContext()).getUserID() +"&n=20");
-//                connection.setConnectTimeout(5000);
-//                connection.setReadTimeout(5000);
-//
-//                InputStream in = connection.getInputStream();
-//                reader = new BufferedReader(new InputStreamReader(in));
-//                String json = reader.readLine();
-//                System.out.println(json);
-//
-//                JSONArray jsonArray = new JSONArray(json);
-//                for(int i = 0; i < jsonArray.length(); i++){
-//                    JSONObject jobj = jsonArray.getJSONObject(i);
-//                    String cardID = jobj.getString("cardID");
-//                    String merchantId = jobj.getString("merchantId");
-//                    int points = jobj.getInt("points");
-//                    System.out.println(cardID+ " "+merchantId+" "+points);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//
-//            } finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//            }
-//            dialog.dismiss();
-//        }
-//    }
-//

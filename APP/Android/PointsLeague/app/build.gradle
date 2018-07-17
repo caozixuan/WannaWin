@@ -48,5 +48,6 @@ dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+    implementation 'rouchuan.viewpagerlayoutmanager:viewpagerlayoutmanager:2.0.19'
 }

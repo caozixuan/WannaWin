@@ -2,10 +2,10 @@ package com.citiexchangeplatform.pointsleague.models;
 
 public class HistoryExchangeItemModel {
     private int point;
-    private int exchangePoint;
+    private double exchangePoint;
     private String date;
 
-    public HistoryExchangeItemModel(int point, int exchangePoint, String date) {
+    public HistoryExchangeItemModel(int point, double exchangePoint, String date) {
         this.point = point;
         this.exchangePoint = exchangePoint;
         this.date = date;
@@ -15,7 +15,7 @@ public class HistoryExchangeItemModel {
         return point;
     }
 
-    public int getExchangePoint() {
+    public double getExchangePoint() {
         return exchangePoint;
     }
 
