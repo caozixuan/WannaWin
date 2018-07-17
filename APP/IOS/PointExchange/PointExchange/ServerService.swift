@@ -158,16 +158,17 @@ extension ServerService:TargetType {
             params["password"] = password
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
+        // 商户
         case .getMerchantsInfos(let start, let n):
             var params:[String:String] = [:]
             params["start"] = String(start)
             params["n"] = String(n)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-            
-        case .getCardTypeByUserID(let merchantID):
+        case .getMerchantInfoByID(let id):
             var params:[String:String] = [:]
-            params["merchantID"] = merchantID
+            params["MerchantID"] = id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
         case .getMostPointCards(let n):
             var params:[String:String] = [:]
             params["userId"] = User.getUser().id
@@ -177,6 +178,8 @@ extension ServerService:TargetType {
             var params:[String:String] = [:]
             params["userId"] = User.getUser().id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
+        // 会员卡
         case .getCardDetail(let merchantID):
             var params:[String:String] = [:]
             params["userId"] = User.getUser().id
@@ -192,7 +195,13 @@ extension ServerService:TargetType {
         case .changePoints(let merchants):
             var params:[String:String] = [:]
             params["userId"] = User.getUser().id
-            params["merchants"] = merchants
+            let encoder = JSONEncoder()
+            let encoded = try? encoder.encode(merchants)
+            if encoded != nil {
+                if let json = String(data:encoded!,encoding:.utf8){
+                    params["merchants"] = json
+                }
+            }
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         default:
