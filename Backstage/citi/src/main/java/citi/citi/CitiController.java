@@ -3,10 +3,12 @@ package citi.citi;
 import citi.API.Authorize;
 import citi.mapper.CitiMapper;
 import citi.mapper.TokenMapper;
+import citi.resultjson.ResultJson;
 import citi.vo.CitiCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,12 +35,12 @@ public class CitiController {
      */
     @ResponseBody
     @RequestMapping("/bindCard")
-    public String bindCard(String code){
+    public String bindCard(String code, @PathVariable String userID){
         CitiCard citiCard = citiService.getCardToBeBind(code);
         if(citiService.binding(citiCard)){
             return gson.toJson(citiCard);
         }
-        return "{status: fail}";
+        return ResultJson.FAILURE;
     }
 
     @ResponseBody
@@ -58,7 +60,7 @@ public class CitiController {
         String refreshAccessToken = tokenMapper.select(citiCard.getUserID());
         Authorize.revokeToken(refreshAccessToken,"refresh_token");
         citiMapper.delete(citiCard.getCitiCardNum());
-        return "{status: success}";
+        return ResultJson.SUCCESS;
     }
 
     @RequestMapping("/refreshToekn")

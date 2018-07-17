@@ -1,6 +1,7 @@
 package citi.account;
 
 import citi.resultjson.ResultJson;
+import citi.resultjson.SerializeGson;
 import citi.user.UserService;
 import citi.vo.User;
 import com.google.gson.Gson;
@@ -21,7 +22,6 @@ public class AccountController {
 
     @Autowired
     private Gson gson;
-
     @Autowired
     private AccountSerivce accountSerivce;
     @Autowired
@@ -80,7 +80,7 @@ public class AccountController {
         }
         else{
             user.setAvailablePoints(userService.getAvailablePoints(user));
-            return gson.toJson(user);
+            return SerializeGson.GSON.toJson(user);
         }
     }
 
