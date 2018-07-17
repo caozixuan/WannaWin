@@ -5,6 +5,7 @@ import java.util.List;
 public class ExchangeModel {
 
     private Boolean choose;
+
     private String maxExchangePoint;
     private String exchangePoint;
     private String targetPoint;

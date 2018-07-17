@@ -62,7 +62,10 @@
         <activity android:name=".AllCardActivity" />
         <activity android:name=".DetailFindActivity" />
         <activity android:name=".CardInfoActivity" />
-        <activity android:name=".HistoryExchangeActivity"></activity>
+        <activity android:name=".HistoryExchangeActivity" />
+        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".models.PointsExchangeRecordActivity" />
+        <activity android:name=".PointsExchangeRecordActivity"></activity>
     </application>
 
 </manifest>

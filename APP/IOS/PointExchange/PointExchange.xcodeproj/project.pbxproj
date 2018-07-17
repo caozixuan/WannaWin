@@ -44,6 +44,9 @@
 		B66CFB3320F98598007165DF /* DoubleSectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */; };
 		B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */; };
 		B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */; };
+		B66CFB3B20FC2D7C007165DF /* ModifyPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3A20FC2D7C007165DF /* ModifyPasswordTableViewController.swift */; };
+		B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */; };
+		B66CFB3F20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */; };
 		B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */; };
 		B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */; };
 		B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */; };
@@ -107,6 +110,9 @@
 		B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSectionOrderViewController.swift; sourceTree = "<group>"; };
 		B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryViewController.swift; sourceTree = "<group>"; };
 		B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		B66CFB3A20FC2D7C007165DF /* ModifyPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ModifyPasswordTableViewController.swift; path = /Users/panyy/Desktop/PAN/HQ/APP/IOS/PointExchange/PointExchange/ModifyPasswordTableViewController.swift; sourceTree = "<absolute>"; };
+		B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordTableViewController.swift; sourceTree = "<group>"; };
+		B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordFinishTableViewController.swift; sourceTree = "<group>"; };
 		B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantChooseTableViewController.swift; sourceTree = "<group>"; };
 		B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -157,6 +163,7 @@
 		3E46B77820F254C900843193 /* UserTab */ = {
 			isa = PBXGroup;
 			children = (
+				B66CFB3A20FC2D7C007165DF /* ModifyPasswordTableViewController.swift */,
 				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
 				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
 				3E4C155B20EE0117000743C0 /* SettingViewController.swift */,
@@ -171,6 +178,8 @@
 				B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */,
 				B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */,
 				B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */,
+				B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */,
+				B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */,
 			);
 			name = UserTab;
 			sourceTree = "<group>";
@@ -527,6 +536,7 @@
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
 				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
+				B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */,
@@ -541,8 +551,10 @@
 				B66CFB2920F8AE2C007165DF /* Order.swift in Sources */,
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
+				B66CFB3B20FC2D7C007165DF /* ModifyPasswordTableViewController.swift in Sources */,
 				B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */,
 				B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */,
+				B66CFB3F20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
