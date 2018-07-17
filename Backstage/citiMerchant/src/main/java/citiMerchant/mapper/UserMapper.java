@@ -55,9 +55,9 @@ public interface UserMapper {
     int changePasswdByUserID(@Param("userID") String userID, @Param("password") String password);
 
     @Update(exchangeGeneralPoints)
-    int exchangeGeneralPoints(@Param("userID") String userID, @Param("points") int points);
+    int exchangeGeneralPoints(@Param("userID") String userID, @Param("points") double points);
 
     @Update(useGeneralPoints)
-    int useGeneralPoints(@Param("userID") String userID, @Param("points") int points);
+    int useGeneralPoints(@Param("userID") String userID, @Param("points") double points);
 
 }

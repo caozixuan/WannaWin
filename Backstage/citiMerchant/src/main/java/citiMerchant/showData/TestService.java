@@ -1,4 +1,4 @@
-package citiMerchant.test;
+package citiMerchant.showData;
 
 import citiMerchant.mapper.RecordMapper;
 import citiMerchant.vo.Record;
@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class TestService {
@@ -50,6 +54,35 @@ public class TestService {
     //return "...ms" since 1970-01-01
     public static long Date2UNIXTime(String dateStr) {
         return Date2TimeStamp(dateStr, "yyyy-MM-dd");
+    }
+
+    //year should be like "2017", "2018", the caller should promise the "year" meets the format.
+    //return 12 Integers, which represents the total points of 12 months respectively.
+    public List<Long> show_order_points_chronology(final String merchantID, final String year) {
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = new java.util.Date();
+        try {
+            date = format.parse(year + "-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        List<Long> points = new ArrayList<>(12);
+
+        for (int i = 0; i < 12; ++i) {
+            String start_day = format.format(calendar.getTime());
+            calendar.add(Calendar.MONTH, 1);
+            String end_day = format.format(calendar.getTime());
+            java.sql.Date start = new java.sql.Date(Date2UNIXTime(start_day));
+            java.sql.Date end = new java.sql.Date(Date2UNIXTime(end_day));
+            RecordOrder recordOrder = getOrderRecord_ByDate(merchantID, start, end);
+            //System.out.println(start_day + " to " + end_day + " " + recordOrder.getTotalPoints());//
+            points.add(recordOrder.getTotalPoints() == null ? 0 : recordOrder.getTotalPoints());
+        }
+        return points;
     }
 
 
