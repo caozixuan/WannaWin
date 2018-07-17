@@ -20,6 +20,13 @@ enum ServerService {
     /// 获得积分信息
     case getPointsInfo(userID:String)
     
+    /// 修改密码
+    case changePassword(old:String,new:String)
+    /// 重置密码验证码
+    case getResetVCode(phoneNum:String, vcode:String)
+    /// 重置密码
+    case resetPassword(phoneNum:String, newPassword:String)
+    
     //花旗卡相关
     /// 绑定花旗银行卡
     case bindCard(citiCardNum:String,phoneNum:String,ID:String,password:String)
@@ -50,13 +57,19 @@ extension ServerService:TargetType {
     var path : String {
         switch self {
         case .getVCode:
-            return "/login/getVCode"
+            return "/account/getVCode"
         case .sendPassword:
-            return "/login/sendVCode"
+            return "/account/sendVCode"
         case .login:
-            return "/login"
+            return "/account/login"
+        case .changePassword:
+            return "/account/changePassword"
+        case .getResetVCode:
+            return "/account/vfcode"
+        case .resetPassword:
+            return "/account/resetPassword"
         case .getPointsInfo:
-            return "user/getInfo"
+            return "/user/getInfo"
         case .getMerchantsInfos:
             return "/merchant/getInfos"
         case .getMerchantInfoByID(let merchantID):
@@ -95,6 +108,25 @@ extension ServerService:TargetType {
             var params:[String:String] = [:]
             params["phoneNum"] = phoneNum
             params["password"] = password
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
+        case .changePassword(let old, let new):
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            params["oldPassword"] = old
+            params["newPassword"] = new
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
+        case .getResetVCode(let phoneNum, let vcode):
+            var params:[String:String] = [:]
+            params["phoneNum"] = phoneNum
+            params["vcode"] = vcode
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
+        case .resetPassword(let phoneNum, let newPassword):
+            var params:[String:String] = [:]
+            params["phoneNUm"] = phoneNum
+            params["newPassword"] = newPassword
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         case .getPointsInfo(let userID):
