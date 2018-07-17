@@ -21,6 +21,10 @@ public class Points_history {
         this.time = time;
     }
 
+    public boolean isEXCHANGE() {
+        return Cause.getCause(cause) == Cause.EXCHANGE;
+    }
+
     public String getUserID() {
         return userID;
     }
