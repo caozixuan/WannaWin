@@ -1,6 +1,7 @@
 package citiMerchant.showData;
 
 import citiMerchant.vo.Record;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,9 @@ public class TestController {
     @Autowired
     TestService testService;
 
+    @Autowired
+    Gson gson;
+
     @RequestMapping("/showData")
     public ModelAndView getInfo() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -26,6 +30,9 @@ public class TestController {
         String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv = new ModelAndView();
         List<Long> points = testService.show_order_points_chronology("00002", "2018");
+        String points_json = gson.toJson(points);
+        System.out.println(points_json);
+        session.setAttribute("points", points);
         mv.addObject("points", points);
         mv.setViewName("/showData/showData");
         return mv;

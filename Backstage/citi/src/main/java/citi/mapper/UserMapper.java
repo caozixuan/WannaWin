@@ -50,10 +50,10 @@ public interface UserMapper {
     int addLinkCode(@Param("userID") String userID, @Param("rewardLinkCode") String rewardLinkCode);
 
     @Update(exchangeGeneralPoints)
-    int exchangeGeneralPoints(@Param("userID") String userID, @Param("points") int points);
+    int exchangeGeneralPoints(@Param("userID") String userID, @Param("points") double points);
 
     @Update(useGeneralPoints)
-    int useGeneralPoints(@Param("userID") String userID, @Param("points") int points);
+    int useGeneralPoints(@Param("userID") String userID, @Param("points") double points);
 
     @Update(changePasswordByPhone)
     int changePasswordByPhoneNum(@Param("phoneNum") String phoneNum, @Param("newPassword") String newPassword);

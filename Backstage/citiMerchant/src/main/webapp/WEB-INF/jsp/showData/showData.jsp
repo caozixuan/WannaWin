@@ -292,23 +292,28 @@ desired effect
     $(function () {
         "use strict";
 
+        var Points = new Array();
+        <logic:iterate id="item" name="points"  indexId="index">
+        Points[<bean:write name="index" />] = '${item}';
+        </logic:iterate>
+
         // LINE CHART
         var line = new Morris.Line({
             element: 'line-chart',
             resize: true,
             data: [
-                {y: '2018 01', item1: points[0]},
-                {y: '2018 02', item1: points[1]},
-                {y: '2018 03', item1: 4912},
-                {y: '2018 04', item1: 3767},
-                {y: '2018 05', item1: 6810},
-                {y: '2018 06', item1: 5670},
-                {y: '2018 07', item1: 4820},
-                {y: '2018 08', item1: 15073},
-                {y: '2018 09', item1: 10687},
-                {y: '2018 10', item1: 8432},
-                {y: '2018 11', item1: 4820},
-                {y: '2018 12', item1: 8432}
+                {y: '2018 01', item1: Points[0]},
+                {y: '2018 02', item1: Points[1]},
+                {y: '2018 03', item1: Points[2]},
+                {y: '2018 04', item1: Points[3]},
+                {y: '2018 05', item1: Points[4]},
+                {y: '2018 06', item1: Points[5]},
+                {y: '2018 07', item1: Points[6]},
+                {y: '2018 08', item1: Points[7]},
+                {y: '2018 09', item1: Points[8]},
+                {y: '2018 10', item1: Points[9]},
+                {y: '2018 11', item1: Points[10]},
+                {y: '2018 12', item1: Points[11]}
             ],
             xkey: 'y',
             ykeys: ['item1'],
