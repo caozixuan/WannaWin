@@ -32,7 +32,6 @@ public class CitiService {
     @Autowired
     private Gson gson;
 
-    public String userID;  // 测试用
 
     /**
      * 绑定操作
@@ -117,17 +116,17 @@ public class CitiService {
         return creditCardNum;
     }
 
-    public CitiCard getCardToBeBind(String code){
+    public CitiCard getCardToBeBind(String code, String state){
         String phoneNum = null;
         String creditCardNum = null;
         String citiCardID = null;
         String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");
         String accessToken = Authorize.getToken(accessInformation);
-        saveRefreshToken(accessInformation, userID);
+        saveRefreshToken(accessInformation, state);
         phoneNum = getPhoneNum(accessToken);
         creditCardNum = getCardNum(accessToken);
         citiCardID = getCardID(accessToken);
-        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,userID,0.0);
+        CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,state,0.0);
         return citiCard;
     }
 

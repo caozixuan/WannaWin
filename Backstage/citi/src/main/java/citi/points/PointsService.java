@@ -57,6 +57,7 @@ public class PointsService {
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
             if(msCard.getPoints()*msCard.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion()){
+
                 msCard.setPoints(msCard.getPoints()-Integer.valueOf(merchantBean.getSelectedMSCardPoints()));
                 user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
             }
