@@ -190,7 +190,7 @@ desired effect
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <form role="form" method="post" action="/strategy/addStrategySubmit" onsubmit="return compare()">
+          <form role="form" method="post" action="../strategy/addStrategySubmit" onsubmit="return compare()">
 
 
             <!-- text input -->

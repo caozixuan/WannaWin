@@ -229,7 +229,7 @@ desired effect
 												<!--接口一所在位置-->
 
 
-                    <td><a href="/strategy/editStrategyRequest?strategyID=${p.strategyID}"><button type="button" class="btn btn-success" >修改</button></a></td>
+                    <td><a href="../strategy/editStrategyRequest?strategyID=${p.strategyID}"><button type="button" class="btn btn-success" >修改</button></a></td>
 
 
                          						<!--接口二所在位置-->
