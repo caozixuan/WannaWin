@@ -26,10 +26,11 @@ class ServerConnector: NSObject {
         return MoyaProvider<ServerService>(manager:manager,plugins: [NetworkLoggerPlugin(verbose: true)])
     }
     
+    // 账户
     /// 获取验证码
     static func getVCode(phoneNumber:String){
         provider.request(.getVCode(phoneNumber:phoneNumber)){result in
-            if case let .success(response) = result {
+            if case .success(_) = result {
                 print("发送验证码成功")
             }
         }
@@ -46,7 +47,7 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
                 print("连接失败")
             }
@@ -70,7 +71,7 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
                 print("连接失败")
             }
@@ -92,7 +93,7 @@ class ServerConnector: NSObject {
                     }
                     
                 }
-                if case let .failure(response) = result{
+                if case .failure(_) = result{
                     callback(false)
                     print("连接失败")
                 }
@@ -118,7 +119,7 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
                 print("连接失败")
             }
@@ -137,7 +138,7 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
             }
         }
@@ -156,11 +157,12 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
             }
         }
     }
+    
     //花旗卡相关
     /// 绑定花旗银行卡
     static func bindCard(citiCardNum:String,phoneNum:String,ID:String,password:String,callback:@escaping (_ result:Bool)->()){
@@ -175,7 +177,7 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
                 print("连接失败")
             }
@@ -194,7 +196,7 @@ class ServerConnector: NSObject {
                     callback(false)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false)
                 print("连接失败")
             }
@@ -224,7 +226,7 @@ class ServerConnector: NSObject {
                     callback(false,merchants)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false,[Merchant]())
                 print("连接失败")
             }
@@ -247,8 +249,27 @@ class ServerConnector: NSObject {
                     callback(false,merchant)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false,Merchant())
+                print("连接失败")
+            }
+        }
+    }
+    /// 获得商户数量
+    static func getMerchantCount(callback:@escaping (_ result:Bool, _ num:Int)->()){
+        provider.request(.getMerchantCount()){ result in
+            if case let .success(response) = result{
+                let dataJSON = try? response.mapJSON()
+                if let json = dataJSON {
+                    let data = JSON(json)
+                    let num = data["num"].int
+                    callback(true,num!)
+                }else{
+                    callback(false, 0)
+                }
+            }
+            if case .failure(_) = result{
+                callback(false, 0)
                 print("连接失败")
             }
         }
@@ -256,7 +277,7 @@ class ServerConnector: NSObject {
     
     // 会员卡相关
     /// 获取指定用户积分最多的n张卡
-    static func getMostPointCards(userID:String, n:Int, callback:@escaping (_ result:Bool, _ cards:[Card])->()){
+    static func getMostPointCards(n:Int, callback:@escaping (_ result:Bool, _ cards:[Card])->()){
         provider.request(.getMostPointCards(n:n)){ result in
             if case let .success(response) = result{
                 let dataJSON = try? response.mapJSON()
@@ -266,10 +287,14 @@ class ServerConnector: NSObject {
                     
                     for data in datas! {
                         let card = Card()
-                        card.id = data["cardID"].string
-                        card.userID = data["userID"].string
-                        card.number = data["cardNo"].string
-                        card.point = data["points"].double!
+                        let merchant = Merchant()
+                        merchant.id = data["merchantID"].string!
+                        merchant.logoURL = data["merchantLogoURL"].string
+                        merchant.name = data["merchantName"].string!
+                        card.merchant = merchant
+                        card.points = data["points"].double!
+                        card.proportion = data["proportion"].double
+                        card.logoURL = data["logoURL"].string
                         cards.append(card)
                     }
                     callback(true,cards)
@@ -277,7 +302,7 @@ class ServerConnector: NSObject {
                     callback(false,cards)
                 }
             }
-            if case let .failure(response) = result{
+            if case .failure(_) = result{
                 callback(false,[Card]())
                 print("连接失败")
             }
@@ -285,20 +310,172 @@ class ServerConnector: NSObject {
         }
     }
     
-    /// 添加会员卡
-//    static func addCard(cardID:String, userID:String, cardNo:String, msCardType:String, callback:@escaping (_ result:Bool)->()){
-//        provider.request(.addCard(cardID: cardID, UserID: userID, cardNo: cardNo, msCardType: msCardType)){ result in
-//            if case let .success(response) = result{
-//                let data = JSON(try? response.mapJSON())
-//                if data["isCreate"].bool == true{
-//                    callback(true)
-//                }else{
-//                    callback(false)
-//                }
-//
-//            }
-//
-//        }
-//
-//    }
+    /// 绑定会员卡
+    static func addCard(merchantID:String, cardID:String, cardNum:String, password:String, callback:@escaping (_ result:Bool)->()){
+        provider.request(.addCard(merchantID: merchantID, cardNum: cardNum, password: password)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                if data["status"].bool == true{
+                    callback(true)
+                }else{
+                    callback(false)
+                }
+
+            }
+
+        }
+
+    }
+
+    /// 获取用户卡数量
+    static func getCardCount(callback:@escaping (_ result:Bool, _ num:Int)->()){
+        provider.request(.getCardCount()){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let num = data["num"].int
+                if let count = num {
+                    callback(true,count)
+                }
+                else{
+                    callback(false,0)
+                }
+            }
+            if case .failure(_) = result{
+                callback(false,0)
+            }
+            
+        }
+    }
+
+    /// 获取卡详情
+    static func getCardDetail(merchantID:String, callback:@escaping (_ result:Bool, _ card:Card)->()){
+        provider.request(.getCardDetail(merchantID: merchantID)){ result in
+            let card = Card()
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                card.logoURL = data["cardLogoURL"].string
+                card.points = data["points"].double!
+                card.number = data["cardNum"].string
+                card.description = data["cardDescription"].string
+                card.type = data["type"].int
+                callback(true,card)
+            }
+            if case .failure(_) = result{
+                callback(false,card)
+            }
+            
+        }
+    }
+
+    // 积分相关
+    /// 积分兑换
+    static func changePoints(merchants:[JSON],callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>)->()){
+        provider.request(.changePoints(merchants: merchants)){ result in
+            
+            if case let .success(response) = result{
+                let dataJson = try? response.mapJSON()
+                var failureMerchants = Dictionary<String,String>()
+                if let json = dataJson {
+                    let datas = JSON(json).array
+                    for data in datas! {
+                        let merchantID = data["merchantID"].string
+                        let reason = data["reason"].string
+                        failureMerchants[merchantID!] = reason
+                    }
+            }
+            if case .failure(_) = result{
+                
+            }
+            
+        }
+    }
+
+}
+
+    /// 获取通用积分
+    static func getGeneralPoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){
+        provider.request(.getGeneralPoints()){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let generalPoint = data["generalPoints"].double
+                if let point = generalPoint{
+                    callback(true,point)
+                }else{
+                    callback(false,0.0)
+                }
+            }
+            if case .failure(_) = result {
+                callback(false,0.0)
+            }
+        }
+    }
+    
+    /// 获取可兑换积分
+    static func getAvailablePoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){
+        provider.request(.getAvailablePoints()){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                let generalPoint = data["availablePoints"].double
+                if let point = generalPoint{
+                    callback(true,point)
+                }else{
+                    callback(false,0.0)
+                }
+            }
+            if case .failure(_) = result {
+                callback(false,0.0)
+            }
+        }
+    }
+
+    /// 获取一个人所有积分兑换记录
+    static func getAllPointsHistory(callback:@escaping (_ result:Bool,_ pointsHistory:[PointsHistory])->()){
+        provider.request(.getAllPointsHistory()){ result in
+            var pointsHistory = [PointsHistory]()
+            if case let .success(response) = result{
+                let decoder = JSONDecoder()
+                do{
+                    pointsHistory = try decoder.decode([PointsHistory].self, from: response.data)
+                    callback(true,pointsHistory)
+                }catch{
+                    callback(false,pointsHistory)
+                }
+                
+            }
+            if case .failure(_) = result {
+                callback(false,pointsHistory)
+            }
+        }
+    }
+    
+    /// 获取一个人某张卡的积分兑换记录
+    static func getPointsHistoryByMerchantID(merchantID:String, callback:@escaping (_ result:Bool,_ pointsHistory:PointsHistory)->()){
+        provider.request(.getPointsHistoryByMerchantID(merchantID:merchantID)){ result in
+            var pointsHistory = PointsHistory()
+            if case let .success(response) = result{
+                let decoder = JSONDecoder()
+                do{
+                    pointsHistory = try decoder.decode(PointsHistory.self, from: response.data)
+                }catch{
+                    callback(false,pointsHistory)
+                }
+                
+                
+            }
+            if case .failure(_) = result {
+                callback(false,pointsHistory)
+            }
+        }
+    }
+    
+    
+    // 支付相关
+    /// TODO: 二维码轮询
+    static func pollizngQR(timestamp:String,callback:@escaping (_ result:Bool)->()){
+        provider.request(.pollingQR(timestamp: timestamp)){ result in
+            if case let .success(response) = result{
+                
+            }
+        }
+    }
 }
