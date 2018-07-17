@@ -15,6 +15,6 @@ public class RecordParent {
     public String date;
 
 
-    public List<RecordChild> goods;
+    public List<RecordChild> childs;
 
 }
