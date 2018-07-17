@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,5 +63,27 @@ public class PointsService {
                 user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
             }
         }
+    }
+
+    public ArrayList<ReturnInformation> dividePointsHistory(ArrayList<Points_history_merchant> points_history_merchants){
+        ArrayList<ReturnInformation> returnInformations = new ArrayList<ReturnInformation>();
+        ArrayList<Timestamp> timestamps = new ArrayList<Timestamp>();
+        for(Points_history_merchant points_history_merchant:points_history_merchants){
+            if(timestamps.indexOf(points_history_merchant.getTime())<0){
+                timestamps.add(points_history_merchant.getTime());
+            }
+        }
+        for(Timestamp timestamp:timestamps){
+            returnInformations.add(new ReturnInformation());
+        }
+        ReturnInformation returnInformation = new ReturnInformation();
+        for(Points_history_merchant points_history_merchant:points_history_merchants){
+            returnInformation = returnInformations.get(timestamps.indexOf(points_history_merchant.getTime()));
+            returnInformation.points_history_merchants.add(points_history_merchant);
+        }
+        for(ReturnInformation returnIn:returnInformations){
+            returnIn.setTotalPoints();
+        }
+        return returnInformations;
     }
 }
