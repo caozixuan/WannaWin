@@ -20,6 +20,7 @@
     <context:component-scan base-package="citi.mapper"/>
     <context:component-scan base-package="citi.points"/>
     <context:component-scan base-package="citi.user"/>
+    <context:component-scan base-package="citi.order"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mvc:default-servlet-handler/>

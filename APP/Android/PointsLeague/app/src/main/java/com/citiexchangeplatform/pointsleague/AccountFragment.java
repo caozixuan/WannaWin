@@ -31,8 +31,8 @@ public class AccountFragment extends Fragment {
     Button buttonLogout;
 
     ListView listViewMenu;
-    ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("查看历史订单","绑定花旗账户","通用","反馈","关于"));
-    ArrayList<Integer> menuIcon = new ArrayList<Integer>(Arrays.asList(R.drawable.ic_mall_black_24dp, R.drawable.ic_account_black_24dp, R.drawable.ic_settings_black_24dp, R.drawable.ic_search_black_24dp, R.drawable.ic_points_black_24dp));
+    ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("积分兑换记录","查看历史订单","绑定花旗账户","通用","反馈","关于"));
+    ArrayList<Integer> menuIcon = new ArrayList<Integer>(Arrays.asList(R.drawable.ic_mall_black_24dp,R.drawable.ic_mall_black_24dp, R.drawable.ic_account_black_24dp, R.drawable.ic_settings_black_24dp, R.drawable.ic_search_black_24dp, R.drawable.ic_points_black_24dp));
 
 
     @Nullable
@@ -70,21 +70,25 @@ public class AccountFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
+                        Intent intentToRecord = new Intent(getContext(), PointsExchangeRecordActivity.class);
+                        startActivity(intentToRecord);
+                        break;
+                    case 1:
                         Intent intentToOrder = new Intent(getContext(), MyOrderActivity.class);
                         startActivity(intentToOrder);
                         break;
-                    case 1:
+                    case 2:
                         Toast.makeText(getContext(),"绑定",Toast.LENGTH_SHORT).show();
                         break;
-                    case 2:
+                    case 3:
                         Intent intentToGeneral = new Intent(getContext(), GeneralSettingActivity.class);
                         startActivity(intentToGeneral);
                         break;
-                    case 3:
+                    case 4:
                         Intent intentToFeedback = new Intent(getContext(), FeedbackActivity.class);
                         startActivity(intentToFeedback);
                         break;
-                    case 4:
+                    case 5:
                         Intent intentToAbout = new Intent(getContext(), AboutUsActivity.class);
                         startActivity(intentToAbout);
                         break;

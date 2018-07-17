@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 public class Points_history_card {
     private String IN_userID;

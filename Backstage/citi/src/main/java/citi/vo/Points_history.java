@@ -1,4 +1,4 @@
-package citiMerchant.vo;
+package citi.vo;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
