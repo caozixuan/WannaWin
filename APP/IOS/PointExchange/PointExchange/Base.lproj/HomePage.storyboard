@@ -16,7 +16,7 @@
         <scene sceneID="AZ4-go-ZHv">
             <objects>
                 <navigationController storyboardIdentifier="UINavigationController-gc2-wu-Sgc" title="积分nav" id="gc2-wu-Sgc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="积分" id="6SU-5u-A30"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="HomeUnselected" selectedImage="HomeActive" id="6SU-5u-A30"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FRz-tc-q5k">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -884,6 +884,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="HomeActive" width="27" height="25"/>
+        <image name="HomeUnselected" width="27" height="25"/>
         <image name="check_off" width="48" height="48"/>
         <image name="check_on" width="48" height="48"/>
         <image name="周黑鸭" width="607" height="385"/>

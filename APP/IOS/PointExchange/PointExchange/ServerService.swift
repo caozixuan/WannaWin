@@ -8,6 +8,7 @@
 
 import Foundation
 import Moya
+import SwiftyJSON
 
 enum ServerService {
     //登录相关
@@ -36,15 +37,24 @@ enum ServerService {
     // 商户相关
     /// 获取从start开始的n条商户信息
     case getMerchantsInfos(start:Int,n:Int)
+    /// 获取指定商家详细信息
     case getMerchantInfoByID(id:String)
+    /// 获得商户数量
+    case getMerchantCount()
     
     // 会员卡相关
     /// 获取指定用户积分最多的n张卡
-    case getMostPointCards(userID:String, n:Int)
-    /// 返回商户所有卡的类型
-    case getCardTypeByUserID(merchantID:String)
-    /// 添加会员卡
-    case addCard(cardID:String, UserID:String, cardNo:String, msCardType:String)
+    case getMostPointCards(n:Int)
+    /// 获取用户会员卡数量
+    case getCardCount()
+    /// 获取卡详情
+    case getCardDetail(merchantID:String)
+    /// 绑定会员卡
+    case addCard(merchantID:String, cardNum:String,password:String)
+    
+    // 积分相关
+    /// 积分兑换
+    case changePoints(merchants:[JSON])
 }
 
 
@@ -74,16 +84,22 @@ extension ServerService:TargetType {
             return "/merchant/getInfos"
         case .getMerchantInfoByID(let merchantID):
             return "/merchant/\(merchantID)"
+        case .getMerchantCount:
+            return "/merchant/getNum"
         case .bindCard:
             return "/citi/bindCard"
         case .unbind:
             return "/citi/unbind"
         case .getMostPointCards:
             return "/mscard/infos"
-        case .getCardTypeByUserID:
-            return "/mscard/cardtype"
+        case .getCardCount:
+            return "/mscard/getNum"
+        case .getCardDetail:
+            return "/mscard/getDetailCard"
         case .addCard:
             return "/mscard/addcard"
+        case .changePoints:
+            return "/points/changePoints"
         }
     }
     
@@ -152,17 +168,31 @@ extension ServerService:TargetType {
             var params:[String:String] = [:]
             params["merchantID"] = merchantID
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-        case .getMostPointCards(let userID, let n):
+        case .getMostPointCards(let n):
             var params:[String:String] = [:]
-            params["userId"] = userID
+            params["userId"] = User.getUser().id
             params["n"] = String(n)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-        case .addCard(let cardID, let UserID, let cardNo, let msCardType):
+        case .getCardCount():
             var params:[String:String] = [:]
-            params["cardID"] = cardID
-            params["UserID"] = UserID
-            params["cardNo"] = cardNo
-            params["msCardType"] = msCardType
+            params["userId"] = User.getUser().id
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .getCardDetail(let merchantID):
+            var params:[String:String] = [:]
+            params["userId"] = User.getUser().id
+            params["merchantID"] = merchantID
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .addCard(let merchantID, let cardNum, let password):
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            params["merchantID"] = merchantID
+            params["cardNum"] = cardNum
+            params["password"] = password
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .changePoints(let merchants):
+            var params:[String:String] = [:]
+            params["userId"] = User.getUser().id
+            params["merchants"] = merchants
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         default:
