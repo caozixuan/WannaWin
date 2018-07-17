@@ -1,5 +1,6 @@
 package citi.points;
 
+import citi.mapper.CitiMapper;
 import citi.mapper.MSCardMapper;
 import citi.mapper.MerchantMapper;
 import citi.mapper.UserMapper;
@@ -27,6 +28,7 @@ public class PointsService {
 
     @Autowired
     private MerchantMapper merchantMapper;
+
 
     public boolean isCanChange(List<ResultBean.MerchantBean> merchantBeanList, User user, ArrayList<ReturnMerchant> returnMerchants, ArrayList<String> ids){
         boolean isCanChange = true;
@@ -58,7 +60,8 @@ public class PointsService {
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
             if(msCard.getPoints()*msCard.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion()){
-
+                msCardMapper.exchangePoints(Integer.valueOf(merchantBean.getSelectedMSCardPoints()),user.getUserID(), merchantBean.getMerchantID());
+                userMapper.exchangeGeneralPoints(user.getUserID(), Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
                 msCard.setPoints(msCard.getPoints()-Integer.valueOf(merchantBean.getSelectedMSCardPoints()));
                 user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
             }
