@@ -35,8 +35,8 @@ public class CitiController {
      */
     @ResponseBody
     @RequestMapping("/bindCard")
-    public String bindCard(String code, @PathVariable String userID){
-        CitiCard citiCard = citiService.getCardToBeBind(code);
+    public String bindCard(String code, String state){
+        CitiCard citiCard = citiService.getCardToBeBind(code, state);
         if(citiService.binding(citiCard)){
             return gson.toJson(citiCard);
         }
@@ -46,8 +46,7 @@ public class CitiController {
     @ResponseBody
     @RequestMapping("/requestBind")
     public String requestBind(String userID){
-        citiService.userID = userID;
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US","123456","http://193.112.44.141/citi/citi/bindCard");
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US",userID,"http://193.112.44.141/citi/citi/bindCard");
     }
 
     /**

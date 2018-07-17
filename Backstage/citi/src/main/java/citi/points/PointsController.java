@@ -121,10 +121,11 @@ public class PointsController {
     @RequestMapping("/getPointsHistoryByMerchantID")
     public String getPointsHistoryByID(String userID, String merchantID){
         List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryBy_userID_AND_merchantID(userID, merchantID);
-        ArrayList<Points_history> returnHistories = new ArrayList<Points_history>();
+        ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
         for(Points_history points_history:pointsHistories){
             if(points_history.getCause().equals(Points_history.Cause.EXCHANGE)){
-                returnHistories.add(points_history);
+                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchantID);
+                returnHistories.add(points_history_merchant);
             }
         }
         if(returnHistories==null)
