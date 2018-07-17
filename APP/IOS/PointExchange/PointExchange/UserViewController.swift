@@ -80,8 +80,16 @@ class UserViewController: UITableViewController {
                 }
             case 1:
                 if let _ = User.getUser().username{
-                    let view = storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController")
-                    self.navigationController?.pushViewController(view, animated: true)
+                    ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
+                        if result {
+                            let view = storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController") as! PointHistoryViewController
+                            view.pointsHistoryArray = pointsHistory
+                            self.navigationController?.pushViewController(view, animated: true)
+                            
+                        }
+                        
+                    }
+                    
                 }else{
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
                     self.navigationController?.pushViewController(view, animated: true)

@@ -1,5 +1,6 @@
 package citi.mscard;
 
+import citi.resultjson.ResultJson;
 import citi.vo.MSCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,8 @@ public class MSCardController {
     @RequestMapping("/addcard")
     public String addMSCard(String userID, String merchantID, String cardNum, String password){
         boolean flag = msCardService.addMSCard(userID,merchantID,cardNum,password);
-        return "{state: "+flag+"}";
+        if(flag)
+            return ResultJson.SUCCESS;
+        return ResultJson.FAILURE;
     }
 }

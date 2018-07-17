@@ -61,11 +61,8 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //new Thread(new getInfos()).start();
-        //getInfos();
-        addCardAdapter.addData("Apple中国", "苹果中国会员积分卡","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
-        addCardAdapter.addData("中国移动","中国移动账户积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
-        addCardAdapter.addData("Nike","Nike旗舰店购物积分","http://www.never-give-it-up.top/wp-content/uploads/2018/07/nike_logo.png");
+        getInfos();
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_add_card);
         setSupportActionBar(toolbar);
@@ -82,9 +79,9 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
     private void getInfos() {
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/getInfos")
+                .url("http://193.112.44.141:80/citi/merchant/getInfos")
                 .addParam("start", "0")
-                .addParam("n", "40")
+                .addParam("n", "20")
                 .build()
                 .execute(AddCardActivity.this, new CallBack<String>() {
                     @Override
@@ -93,10 +90,13 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jobj = jsonArray.getJSONObject(i);
-                                //jobj.getString("merchantID");
-                                //jobj.getString("address")
-                                addCardAdapter.addData(jobj.getString("name"),jobj.getString("description"),jobj.getString("logoURL"));
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String merchantID = jsonObject.getString("merchantID");
+                                String name = jsonObject.getString("name");
+                                String description = jsonObject.getString("description");
+                                //String address = jsonObject.getString("address");
+                                String merchantLogoURL = jsonObject.getString("merchantLogoURL");
+                                addCardAdapter.addData(merchantID, name, description, merchantLogoURL);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -141,51 +141,4 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
         return true;
     }
 
-//    class getInfos implements Runnable {
-//
-//        @Override
-//        public void run() {
-//            boolean getInfoSuccess = false;
-//
-//            HttpURLConnection connection = null;
-//            BufferedReader reader = null;
-//            try {
-//                URL url = new URL("http://193.112.44.141:80/citi/getInfos");
-//                connection = (HttpURLConnection) url.openConnection();
-//                connection.setRequestMethod("POST");
-//                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-//                out.writeBytes("start=0&n=50");
-//                connection.setConnectTimeout(5000);
-//                connection.setReadTimeout(5000);
-//
-//                InputStream in = connection.getInputStream();
-//                reader = new BufferedReader(new InputStreamReader(in));
-//                String json = reader.readLine();
-//                System.out.println(json);
-//
-//                JSONArray jsonArray = new JSONArray(json);
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jobj = jsonArray.getJSONObject(i);
-//                    //jobj.getString("merchantID");
-//                    //jobj.getString("address")
-//                    addCardAdapter.addData(jobj.getString("name"),jobj.getString("description"),jobj.getString("logoURL"));
-//                }
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//            }
-//            dialog.dismiss();
-//        }
-//    }
 }

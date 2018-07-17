@@ -16,6 +16,7 @@ public interface MSCardMapper {
     final String getByuserId = "SELECT * FROM m_card WHERE userID = #{userID}";
     final String getBy_userID_AND_merchantID = "SELECT * FROM m_card WHERE UserID = #{userID} AND MerchantID = #{merchantID}";
     final String grantPoints = "UPDATE m_card SET Points = Points + #{points} WHERE UserID = #{userID} AND MerchantID = #{merchantID}";
+    final String exchangePoints="UPDATE m_card SET Points = Points - #{points} WHERE UserID = #{userID} AND MerchantID = #{merchantID}";
 
     //插入一个会员卡d
     @Insert(insert)
@@ -30,5 +31,8 @@ public interface MSCardMapper {
 
     @Update(grantPoints)
     int grantPoints(@Param("points") int points, @Param("userID") String userID, @Param("merchantID") String merchantID);
+
+    @Update(exchangePoints)
+    int exchangePoints(@Param("points") int points, @Param("userID") String userID, @Param("merchantID") String merchantID);
 
 }

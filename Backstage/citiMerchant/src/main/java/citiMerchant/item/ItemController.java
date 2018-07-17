@@ -28,6 +28,8 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    private static String url = "http://www.byzhong.cn/image/item/";
+
     @RequestMapping("/item/getItem")
     public ModelAndView getItemList(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -63,7 +65,7 @@ public class ItemController {
         HttpSession session =request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv =new ModelAndView();
-        myfile = "localhost:8080/picture/"+merchantID+url2;
+        myfile = url+merchantID+url2;
         overdueTime = overdueTime +" 00:00:00";
         Item item = new Item(itemID, name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
         itemService.updateItem(item);
@@ -92,7 +94,7 @@ public class ItemController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
-        myfile = "localhost:8080/picture/"+url2;
+        myfile = url+url2;
         overdueTime = overdueTime +" 00:00:00";
         Item item = new Item(name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
         itemService.addItem(item);
@@ -111,7 +113,7 @@ public class ItemController {
         String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
 //      System.out.println(oldFileName);
         // 存储图片的虚拟本地路径（这里需要配置tomcat的web模块路径，双击猫进行配置）
-        String saveFilePath = "E://picture";
+        String saveFilePath = "/usr/share/tomcat7/image/item";
         // 上传图片
         if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -119,7 +121,7 @@ public class ItemController {
             String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
             String newFileName = merchantID + oldFileName;
             // 新图片
-            File newFile = new File(saveFilePath + "\\" + newFileName);
+            File newFile = new File(saveFilePath + "/" + newFileName);
             // 将内存中的数据写入磁盘
             myfile.transferTo(newFile);
             // 将新图片名称返回到前端

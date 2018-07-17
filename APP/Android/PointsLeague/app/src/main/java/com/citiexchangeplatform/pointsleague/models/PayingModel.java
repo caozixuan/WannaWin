@@ -12,16 +12,16 @@
 //    //private final long mId;
 //    //private final int mRank;
 //    //private final String mWord;
-//    private final String name;
+//    private final String totalPoints;
 //
-//    public PayingModel(String name) {
+//    public PayingModel(String totalPoints) {
 //        //mId = id;
 //        //mRank = rank;
-//        this.name = name;
+//        this.totalPoints = totalPoints;
 //    }
 //
 //    public String getName() {
-//        return name;
+//        return totalPoints;
 //    }
 //
 //    /*public long getId() {
@@ -41,7 +41,7 @@
 //    public <T> boolean isSameModelAs(@NonNull T item) {
 //        if (item instanceof PayingModel) {
 //            final PayingModel payingModel = (PayingModel) item;
-//            return payingModel.name.equals(getName());
+//            return payingModel.totalPoints.equals(getName());
 //        }
 //        return false;
 //    }
@@ -50,10 +50,10 @@
 //    public <T> boolean isContentTheSameAs(@NonNull T item) {
 //        if (item instanceof PayingModel) {
 //            final PayingModel other = (PayingModel) item;
-//            if (!other.name.equals(getName())) {
+//            if (!other.totalPoints.equals(getName())) {
 //                return false;
 //            }
-//            return name != null ? name.equals(other.name) : other.name.isEmpty();
+//            return totalPoints != null ? totalPoints.equals(other.totalPoints) : other.totalPoints.isEmpty();
 //        }
 //        return false;
 //    }

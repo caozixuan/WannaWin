@@ -2,9 +2,11 @@ package citi.points;
 
 import citi.mapper.MSCardMapper;
 import citi.mapper.MerchantMapper;
+import citi.mapper.PointsHistoryMapper;
 import citi.mapper.UserMapper;
 import citi.vo.MSCard;
 import citi.vo.Merchant;
+import citi.vo.Points_history;
 import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class PointsController {
 
     @Autowired
     private PointsService pointsService;
+
+    @Autowired
+    private PointsHistoryMapper pointsHistoryMapper;
 
     @ResponseBody
     @RequestMapping(value = "/changePoints",produces={"text/html;charset=UTF-8","application/json"})
@@ -78,12 +83,51 @@ public class PointsController {
     @RequestMapping("/availablePoints")
     public String getAvailablePoints(String userID){
         User user = userMapper.getInfoByUserID(userID);
-        List<MSCard> msCards = msCardMapper.select(user.getUserID());
-        double availablePoints = 0.0;
-        for(int i=0;i<msCards.size();i++){
-            availablePoints+=msCards.get(i).getPoints()*msCards.get(i).getProportion();
-        }
-        user.setAvailablePoints(availablePoints);
+        double availablePoints = user.getAvailablePoints();
         return "{\"availablePoints\": "+availablePoints+"}";
+    }
+
+    /*
+     * url: /points/getPointsHistoryByID
+     * param: userID
+     * return:[{"userID":"5503b50f-2312-4156-92b3-ec6dcea74656","merchantID":"4","points_card":295,"points_citi":0.0,"cause":"EXCHANGE","time":"Jul 14, 2018 2:41:44 PM"}]
+     */
+    @ResponseBody
+    @RequestMapping("/getPointsHistoryByID")
+    public String getPointsHistoryByID(String userID){
+        List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryByID(userID);
+        ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
+        for(Points_history points_history:pointsHistories){
+            if(points_history.getCause().equals(Points_history.Cause.EXCHANGE)){
+                Merchant merchant = merchantMapper.selectByID(points_history.getMerchantID());
+                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchant.getName());
+                returnHistories.add(points_history_merchant);
+            }
+        }
+        ArrayList<ReturnInformation> returnInformations = pointsService.dividePointsHistory(returnHistories);
+        if(returnInformations==null)
+            return "[]";
+        return gson.toJson(returnInformations);
+    }
+
+    /*
+     * url: /points/getPointsHistoryByMerchantID
+     * param: userID, merchantID
+     * return: [{"userID":"5503b50f-2312-4156-92b3-ec6dcea74656","merchantID":"4","points_card":295,"points_citi":0.0,"cause":"EXCHANGE","time":"Jul 14, 2018 2:41:44 PM"}]
+     */
+    @ResponseBody
+    @RequestMapping("/getPointsHistoryByMerchantID")
+    public String getPointsHistoryByID(String userID, String merchantID){
+        List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryBy_userID_AND_merchantID(userID, merchantID);
+        ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
+        for(Points_history points_history:pointsHistories){
+            if(points_history.getCause().equals(Points_history.Cause.EXCHANGE)){
+                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchantID);
+                returnHistories.add(points_history_merchant);
+            }
+        }
+        if(returnHistories==null)
+            return "[]";
+        return gson.toJson(returnHistories);
     }
 }

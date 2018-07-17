@@ -55,6 +55,22 @@ enum ServerService {
     // 积分相关
     /// 积分兑换
     case changePoints(merchants:[JSON])
+    /// 获取通用积分
+    case getGeneralPoints()
+    /// 获取可兑换积分
+    case getAvailablePoints()
+    /// 获取一个人所有积分兑换记录
+    case getAllPointsHistory()
+    /// 获取一个人某张卡的积分兑换记录
+    case getPointsHistoryByMerchantID(merchantID:String)
+    
+    // 支付相关
+    /// 二维码轮询
+    case pollingQR(timestamp:String)
+    
+    // 订单相关
+    /// 获取历史订单
+    case getOrders(intervalTime:String)
 }
 
 
@@ -66,6 +82,7 @@ extension ServerService:TargetType {
     
     var path : String {
         switch self {
+        // 登录
         case .getVCode:
             return "/account/getVCode"
         case .sendPassword:
@@ -78,18 +95,24 @@ extension ServerService:TargetType {
             return "/account/vfcode"
         case .resetPassword:
             return "/account/resetPassword"
+            
         case .getPointsInfo:
             return "/user/getInfo"
+            
+        // 商户
         case .getMerchantsInfos:
             return "/merchant/getInfos"
         case .getMerchantInfoByID(let merchantID):
             return "/merchant/\(merchantID)"
         case .getMerchantCount:
             return "/merchant/getNum"
+            
         case .bindCard:
             return "/citi/bindCard"
         case .unbind:
             return "/citi/unbind"
+        
+        // 会员卡
         case .getMostPointCards:
             return "/mscard/infos"
         case .getCardCount:
@@ -98,8 +121,26 @@ extension ServerService:TargetType {
             return "/mscard/getDetailCard"
         case .addCard:
             return "/mscard/addcard"
+        
+        // 积分
         case .changePoints:
             return "/points/changePoints"
+        case .getGeneralPoints:
+            return "/points/generalPoints"
+        case .getAvailablePoints:
+            return "/points/availablePoints"
+        case .getAllPointsHistory:
+            return "/points/getPointsHistoryByID"
+        case .getPointsHistoryByMerchantID:
+            return "/points/getPointsHistoryByMerchantID"
+            
+        //支付
+        case .pollingQR:
+            return "/pay/QRCode"
+            
+        //订单相关
+        case .getOrders:
+            return "/order/getOrders"
         }
     }
     
@@ -109,6 +150,7 @@ extension ServerService:TargetType {
     
     var task : Task {
         switch self {
+        // 账户
         case .sendPassword(let phoneNum, let vcode, let password):
             var params:[String:String] = [:]
             params["phoneNum"] = phoneNum
@@ -166,14 +208,9 @@ extension ServerService:TargetType {
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getMerchantInfoByID(let id):
             var params:[String:String] = [:]
-            params["MerchantID"] = id
+            params["merchantID"] = id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
-        case .getMostPointCards(let n):
-            var params:[String:String] = [:]
-            params["userId"] = User.getUser().id
-            params["n"] = String(n)
-            return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getCardCount():
             var params:[String:String] = [:]
             params["userId"] = User.getUser().id
@@ -192,9 +229,16 @@ extension ServerService:TargetType {
             params["cardNum"] = cardNum
             params["password"] = password
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-        case .changePoints(let merchants):
+        case .getMostPointCards(let n):
             var params:[String:String] = [:]
             params["userId"] = User.getUser().id
+            params["n"] = String(n)
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
+        // 积分相关
+        case .changePoints(let merchants):
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
             let encoder = JSONEncoder()
             let encoded = try? encoder.encode(merchants)
             if encoded != nil {
@@ -202,6 +246,22 @@ extension ServerService:TargetType {
                     params["merchants"] = json
                 }
             }
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .getAllPointsHistory():
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .getPointsHistoryByMerchantID(let merchantID):
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            params["merchantID"] = merchantID
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        
+        //支付相关
+        case .pollingQR(let timestamp):
+            var params:[String:String] = [:]
+            params["userId"] = User.getUser().id
+            params["timestamp"] = timestamp
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         default:
@@ -214,7 +274,12 @@ extension ServerService:TargetType {
     }
     
     var headers: [String:String]? {
-        return nil
+        switch self{
+        case .changePoints:
+            return ["Content-Type":"application/json;charset=UTF-8"]
+        default:
+            return nil
+        }
     }
     
     
