@@ -100,6 +100,9 @@ public class MSCardService {
         if(merchant==null)
             return false;
         MSCard msCard = new MSCard(userID, cardNum, 0, merchantID, merchant.getProportion(),merchant.getCardLogoURL(),merchant.getName() );
+        MSCard cardOdd = msCardMapper.getBy_userID_AND_merchantID(userID, merchantID);
+        if(cardOdd!=null)
+            return false;
         int flag = msCardMapper.insert(msCard);
         if(flag>0)
             return true;

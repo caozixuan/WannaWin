@@ -1,5 +1,6 @@
 package citi.item;
 
+import citi.support.resultjson.ResultJson;
 import citi.vo.Item;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,30 @@ public class ItemController {
         return gson.toJson(items);
     }
 
-    public void buy(String userID,String itemID){
+    @ResponseBody
+    @RequestMapping("/buy")
+    public String buy(String userID,String itemID){
+        if (itemService.buy(userID,itemID,1).getState()){
+            return ResultJson.SUCCESS;
+        }else {
+            return ResultJson.FAILURE;
+        }
+    }
+    @ResponseBody
+    @RequestMapping("/getMerchantItems")
+    public String getMerchantItems(String merchantID,int start,int length){
+        List<Item> items=itemService.getMerchantItems(merchantID,start,length);
+        return gson.toJson(items);
+    }
 
+    @ResponseBody
+    @RequestMapping("/buyMultiple")
+    public String buy(String userID,String itemID,int count){
+        if (itemService.buy(userID,itemID,count).getState()){
+            return ResultJson.SUCCESS;
+        }else {
+            return ResultJson.FAILURE;
+        }
     }
 
 
