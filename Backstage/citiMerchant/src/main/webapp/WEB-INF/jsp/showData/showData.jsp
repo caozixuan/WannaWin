@@ -289,10 +289,12 @@ desired effect
 <script src="${pageContext.request.contextPath}/js/dist/js/demo.js"></script>
 <!-- page script -->
 <%
-    String tempPoint = (String) session.getAttribute("points_json");
+    String Point = (String) session.getAttribute("points_json");
+    String timeStamp = (String) session.getAttribute("timeStamp_json");
 %>
 <script>
-    var Points = $.parseJSON("<%=tempPoint %>");
+    var Points = $.parseJSON("<%=Point %>");
+    var timeStamps = $.parseJSON("<%=timeStamp %>");
     for (var i = 0; i < 12; ++i)
         document.write(Points[i] + "  ");
 
@@ -304,25 +306,26 @@ desired effect
             element: 'line-chart',
             resize: true,
             data: [
-                {y: '2018 01', item1: 123},//Points[0]},
-                {y: '2018 02', item1: 212},//Points[1]},
-                {y: '2018 03', item1: 1832},//Points[2]},
-                {y: '2018 04', item1: 822},//Points[3]},
-                {y: '2018 05', item1: 3687},//Points[4]},
-                {y: '2018 06', item1: 483},//Points[5]},
-                {y: '2018 07', item1: 1223},//Points[6]},
-                {y: '2018 08', item1: 682},//Points[7]},
-                {y: '2018 09', item1: 456},//Points[8]},
-                {y: '2018 10', item1: 3807},//Points[9]},
-                {y: '2018 11', item1: 123},//Points[10]},
-                {y: '2018 12', item1: 2394}//Points[11]}
+                {timeStamp: timeStamps[0], item1: Points[0]},
+                {timeStamp: timeStamps[1], item1: Points[1]},
+                {timeStamp: timeStamps[2], item1: Points[2]},
+                {timeStamp: timeStamps[3], item1: Points[3]},
+                {timeStamp: timeStamps[4], item1: Points[4]},
+                {timeStamp: timeStamps[5], item1: Points[5]},
+                {timeStamp: timeStamps[6], item1: Points[6]},
+                {timeStamp: timeStamps[7], item1: Points[7]},
+                {timeStamp: timeStamps[8], item1: Points[8]},
+                {timeStamp: timeStamps[9], item1: Points[9]},
+                {timeStamp: timeStamps[10], item1: Points[10]},
+                {timeStamp: timeStamps[11], item1: Points[11]}
             ],
-            xkey: 'y',
+            xkey: 'timeStamp',
             ykeys: ['item1'],
-            labels: ['Item 1'],
+            labels: ['订单使用积分'],
             lineColors: ['#3c8dbc'],
             hideHover: 'auto'
         });
+
 
         //DONUT CHART
         var donut = new Morris.Donut({
@@ -336,6 +339,7 @@ desired effect
             ],
             hideHover: 'auto'
         });
+
 
     });
 </script>

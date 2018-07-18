@@ -1,6 +1,6 @@
 package citi.mscard;
 
-import citi.resultjson.ResultJson;
+import citi.support.resultjson.ResultJson;
 import citi.vo.MSCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 //Membership card
 @Controller
-@RequestMapping("/mscard")
+@RequestMapping(value = {"/mscard"},produces = {"text/html;charset=UTF-8"})
 public class MSCardController {
 
     @Autowired

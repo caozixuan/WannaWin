@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by zhong on 2018/7/11 19:20
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping(value = {"/user"},produces = {"text/html;charset=UTF-8"})
 public class UserController {
 
     @Autowired
