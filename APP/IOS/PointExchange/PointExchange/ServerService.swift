@@ -264,6 +264,13 @@ extension ServerService:TargetType {
             params["timestamp"] = timestamp
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
+        // 订单相关
+        case .getOrders(let intervalTime):
+            var params:[String:String] = [:]
+            params["userId"] = User.getUser().id
+            params["intervaltime"] = intervalTime
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
         default:
             return .requestPlain
         }

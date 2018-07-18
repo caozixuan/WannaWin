@@ -468,7 +468,6 @@ class ServerConnector: NSObject {
         }
     }
     
-    
     // 支付相关
     /// TODO: 二维码轮询
     static func pollizngQR(timestamp:String,callback:@escaping (_ result:Bool)->()){
@@ -478,4 +477,15 @@ class ServerConnector: NSObject {
             }
         }
     }
+
+    // 订单相关
+    static func getOrders(intervalTime:String,callback:@escaping (_ result:Bool, _ orders:[Order])->()){
+        provider.request(.getOrders(intervalTime: intervalTime)){ result in
+            if case let .success(response) = result{
+                // TODO: 获得历史订单
+            }
+            
+        }
+    }
+
 }
