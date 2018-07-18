@@ -326,6 +326,7 @@ desired effect
             hideHover: 'auto'
         });
 
+
         //DONUT CHART
         var donut = new Morris.Donut({
             element: 'sales-chart',
@@ -338,6 +339,7 @@ desired effect
             ],
             hideHover: 'auto'
         });
+
 
     });
 </script>

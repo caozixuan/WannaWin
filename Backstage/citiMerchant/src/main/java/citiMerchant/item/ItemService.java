@@ -18,7 +18,7 @@ public class ItemService {
     private ItemMapper itemMapper;
 
     public List<Item> getInfo(String merchantID){
-        List<Item> items = itemMapper.getItemByMerchantID(merchantID);
+        List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,100);
         return items;
     }
 
