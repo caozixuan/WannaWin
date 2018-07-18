@@ -1,5 +1,6 @@
 package citiMerchant.showData;
 
+import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.vo.Record;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class TestController {
     @Autowired
     Gson gson;
 
+    @Autowired
+    MerchantMapper merchantMapper;
+
     @RequestMapping("/showData")
     public ModelAndView getInfo() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -42,7 +46,7 @@ public class TestController {
         session.setAttribute("timeStamp_json", timeStamp_json);
         String points_exchange_json = gson.toJson(points_exchange);
         session.setAttribute("points_exchange_json", points_exchange_json);
-
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         //System.out.println(points_json);
         mv.setViewName("/showData/showData");
         return mv;
