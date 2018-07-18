@@ -10,14 +10,16 @@ import UIKit
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
+
+	@IBOutlet weak var cardScrollView: UIScrollView!
 	
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var generalPointsLabel: UILabel!
-//    @IBOutlet weak var cardImage1: UIImageView!
-//	
-//	@IBOutlet weak var cardImage2: UIImageView!
-//	
-//	@IBOutlet weak var cardImage3: UIImageView!
+    @IBOutlet weak var cardImage1: UIImageView!
+	
+	@IBOutlet weak var cardImage2: UIImageView!
+	
+	@IBOutlet weak var cardImage3: UIImageView!
 	
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
@@ -30,19 +32,28 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         super.viewDidLoad()
 		
 		//添加积分卡添加点击手势事件
-//		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-//		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-//		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-//		cardImage1.addGestureRecognizer(cardTap1)
-//		cardImage2.addGestureRecognizer(cardTap2)
-//		cardImage3.addGestureRecognizer(cardTap3)
+		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+		cardImage1.addGestureRecognizer(cardTap1)
+		cardImage2.addGestureRecognizer(cardTap2)
+		cardImage3.addGestureRecognizer(cardTap3)
 		
     }
     override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
         //ServerConnector.getPointsInfo(callback: gotPointsInfo)
-		
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		// 调整卡片滑动视图
+		let width = cardImage1.bounds.size.width * 3 + 32
+		let height = cardImage1.bounds.size.height
+		self.cardScrollView.contentSize = CGSize(width: width, height: height)
+		self.cardScrollView.contentOffset = CGPoint(x: cardImage1.bounds.size.width/2+16, y: 0)
+	}
 	
 	/// 获得积分信息后的回调函数
 //    func gotPointsInfo(result:Bool){
@@ -95,7 +106,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		alertController.addAction(cancelAction)
 		self.present(alertController, animated: true, completion: nil)
 	}
-	/**
+	
 	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
 		let storyBoard:UIStoryboard!
 		let view:UIViewController!
@@ -135,24 +146,24 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		}
 	}
 	
-	@IBAction func addCard(_ sender: AnyObject){
-		
-		if User.getUser().username != nil {
-            // 加载动画
-            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-            self.activityIndicator?.startAnimating()
-            
-            // 获得商家信息
-            ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
-            
-		}
-		else{
-            let storyBoard = UIStoryboard(name:"User", bundle:nil)
-			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
-			self.navigationController!.pushViewController(view, animated: true)
-		}
-	}
-*/
+//	@IBAction func addCard(_ sender: AnyObject){
+//
+//		if User.getUser().username != nil {
+//            // 加载动画
+//            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+//            self.activityIndicator?.startAnimating()
+//
+//            // 获得商家信息
+//            ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
+//
+//		}
+//		else{
+//            let storyBoard = UIStoryboard(name:"User", bundle:nil)
+//			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+//			self.navigationController!.pushViewController(view, animated: true)
+//		}
+//	}
+
     
     // MARK: - Navigation
     // 初始化图片轮播组件，为嵌入的图片轮播VC做数据准备
