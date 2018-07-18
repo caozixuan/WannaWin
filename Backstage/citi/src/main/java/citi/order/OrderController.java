@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping(value = {"/order"},produces = {"text/html;charset=UTF-8"})
 public class OrderController {
 
     @Autowired

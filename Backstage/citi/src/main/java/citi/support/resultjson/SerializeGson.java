@@ -1,4 +1,4 @@
-package citi.resultjson;
+package citi.support.resultjson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
