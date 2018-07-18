@@ -12,56 +12,59 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.CardInfoActivity;
+import com.citiexchangeplatform.pointsleague.DetailFindActivity;
 import com.citiexchangeplatform.pointsleague.R;
-import com.citiexchangeplatform.pointsleague.models.AddCardItemModel;
-import com.citiexchangeplatform.pointsleague.BindCardActivity;
+import com.citiexchangeplatform.pointsleague.models.AllCardItemModel;
+import com.citiexchangeplatform.pointsleague.models.FindItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> implements Filterable {
+public class FindAdapter extends RecyclerView.Adapter<FindAdapter.VH> implements Filterable {
 
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
-        public final TextView textViewDesc;
+        public final TextView textViewType;
+        public final TextView textViewDescription;
         public final ImageView imageViewLogo;
 
         public VH(View v) {
             super(v);
-            textViewName = (TextView) v.findViewById(R.id.textView_merchant_name_item);
-            textViewDesc = (TextView) v.findViewById(R.id.textView_merchant_description_item);
-            imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_item);
+            textViewName = (TextView) v.findViewById(R.id.textView_name_find);
+            textViewType = (TextView) v.findViewById(R.id.textView_type_find);
+            textViewDescription = (TextView) v.findViewById(R.id.textView_description_find);
+            imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_find);
         }
     }
 
     private Context context;
-    private List<AddCardItemModel> sourceItems;
-    private List<AddCardItemModel> filteredItems;
+    private List<FindItemModel> sourceItems;
+    private List<FindItemModel> filteredItems;
 
-    public AddCardAdapter(Context context) {
-        sourceItems = new ArrayList<AddCardItemModel>();
+    public FindAdapter(Context context) {
+        sourceItems = new ArrayList<FindItemModel>();
         filteredItems = sourceItems;
         this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(VH holder, final int position) {
-        holder.textViewName.setText(filteredItems.get(position).getName());
-        holder.textViewDesc.setText(filteredItems.get(position).getDescription());
+    public void onBindViewHolder(FindAdapter.VH holder, final int position) {
         Glide.with(context)
                 .load(filteredItems.get(position).getLogoURL())
                 .placeholder(R.drawable.ic_points_black_24dp)
-                .error(R.drawable.ic_mall_black_24dp)
+                .error(R.drawable.ic_points_black_24dp)
                 .into(holder.imageViewLogo);
+        holder.textViewName.setText(filteredItems.get(position).getName());
+        holder.textViewType.setText(filteredItems.get(position).getType());
+        holder.textViewDescription.setText(filteredItems.get(position).getDescription());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
-                Intent intentToBindCard = new Intent(context, BindCardActivity.class);
-                intentToBindCard.putExtra("merchantID",filteredItems.get(position).getMerchantID());
-                intentToBindCard.putExtra("logoURL",filteredItems.get(position).getLogoURL());
-                context.startActivity(intentToBindCard);
+                Intent intentToDetailFind = new Intent(context, DetailFindActivity.class);
+                intentToDetailFind.putExtra("merchantID",filteredItems.get(position).getMerchantID());
+                context.startActivity(intentToDetailFind);
             }
         });
     }
@@ -72,13 +75,14 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
     }
 
     @Override
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_card, parent, false);
-        return new VH(v);
+    public FindAdapter.VH onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_find, parent, false);
+        return new FindAdapter.VH(v);
     }
 
-    public void addData(String merchantID, String name, String description, String logoURL) {
-        AddCardItemModel newItem = new AddCardItemModel(merchantID, name, description, logoURL);
+
+    public void addData(String name, String merchantID, String logoURL, String type, String description) {
+        FindItemModel newItem = new FindItemModel(name, merchantID,logoURL, type, description);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }
@@ -92,8 +96,8 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
                 if(partName.isEmpty()){
                     filteredItems = sourceItems;
                 }else {
-                    List<AddCardItemModel> newFilterCards = new ArrayList<AddCardItemModel>();
-                    for (AddCardItemModel item:sourceItems) {
+                    List<FindItemModel> newFilterCards = new ArrayList<FindItemModel>();
+                    for (FindItemModel item:sourceItems) {
                         System.out.println(item.getName().toLowerCase() + "    " + partName.toLowerCase());
                         if(item.getName().toLowerCase().contains(partName.toLowerCase()))
                             newFilterCards.add(item);
@@ -103,13 +107,15 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredItems;
                 return filterResults;
+
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredItems = (ArrayList<AddCardItemModel>) results.values;
+                filteredItems = (ArrayList<FindItemModel>) results.values;
                 notifyDataSetChanged();
             }
         };
     }
+
 }
