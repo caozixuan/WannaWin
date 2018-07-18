@@ -210,9 +210,10 @@ desired effect
 
         <!-- Main content -->
         <section class="content container-fluid">
+
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">积分消费情况统计</h3>
+                    <h3 class="box-title">订单积分消费情况统计</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -223,10 +224,29 @@ desired effect
                     </div>
                 </div>
                 <div class="box-body chart-responsive">
-                    <div class="chart" id="line-chart" style="height: 300px;"></div>
+                    <div class="chart" id="line-chart1" style="height: 300px;"></div>
                 </div>
                 <!-- /.box-body -->
             </div>
+
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">会员卡积分兑换情况统计</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="line-chart2" style="height: 300px;"></div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h3 class="box-title">Donut Chart</h3>
@@ -295,15 +315,17 @@ desired effect
 <script>
     var Points = $.parseJSON("<%=Point %>");
     var timeStamps = $.parseJSON("<%=timeStamp %>");
-    for (var i = 0; i < 12; ++i)
-        document.write(Points[i] + "  ");
+
+
+    //for (var i = 0; i < 12; ++i)
+    //    document.write(Points[i] + "  ");
 
     $(function () {
         "use strict";
 
-        // LINE CHART
-        var line = new Morris.Line({
-            element: 'line-chart',
+        // LINE CHART 订单积分消费情况统计
+        var line1 = new Morris.Line({
+            element: 'line-chart1',
             resize: true,
             data: [
                 {timeStamp: timeStamps[0], item1: Points[0]},
@@ -322,6 +344,32 @@ desired effect
             xkey: 'timeStamp',
             ykeys: ['item1'],
             labels: ['订单使用积分'],
+            lineColors: ['#3c8dbc'],
+            hideHover: 'auto'
+        });
+
+
+        // LINE CHART 会员卡积分兑换情况统计
+        var line1 = new Morris.Line({
+            element: 'line-chart2',
+            resize: true,
+            data: [
+                {timeStamp: timeStamps[0], item1: Points[0]},
+                {timeStamp: timeStamps[1], item1: Points[1]},
+                {timeStamp: timeStamps[2], item1: Points[2]},
+                {timeStamp: timeStamps[3], item1: Points[3]},
+                {timeStamp: timeStamps[4], item1: Points[4]},
+                {timeStamp: timeStamps[5], item1: Points[5]},
+                {timeStamp: timeStamps[6], item1: Points[6]},
+                {timeStamp: timeStamps[7], item1: Points[7]},
+                {timeStamp: timeStamps[8], item1: Points[8]},
+                {timeStamp: timeStamps[9], item1: Points[9]},
+                {timeStamp: timeStamps[10], item1: Points[10]},
+                {timeStamp: timeStamps[11], item1: Points[11]}
+            ],
+            xkey: 'timeStamp',
+            ykeys: ['item1'],
+            labels: ['会员卡兑换积分'],
             lineColors: ['#3c8dbc'],
             hideHover: 'auto'
         });

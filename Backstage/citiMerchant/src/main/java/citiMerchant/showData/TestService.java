@@ -24,17 +24,27 @@ public class TestService {
         return record;
     }
 
+
     public RecordOrder getOrderRecord_ByDate(String merchantID, Date start_time, Date end_time) {
         RecordOrder recordOrder = new RecordOrder(merchantID, start_time, end_time);
         recordMapper.order_record_date(recordOrder);
         return recordOrder;
     }
 
+
     public Record getOrderRecord(String merchantID, int intervalDate) {
         Record record = new Record(merchantID, intervalDate);
         recordMapper.order_record(record);
         return record;
     }
+
+
+    public RecordOrder getPointsHistory(String merchantID, Date start_time, Date end_time) {
+        RecordOrder recordOrder = new RecordOrder(merchantID, start_time, end_time);
+        recordMapper.MSCard_record_date(recordOrder);
+        return recordOrder;
+    }
+
 
     //format is set default to "yyyy-MM-dd HH:mm:ss"
     //@return "...ms" since 1970-01-01
