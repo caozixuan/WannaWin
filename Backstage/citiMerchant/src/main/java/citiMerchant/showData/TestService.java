@@ -85,5 +85,23 @@ public class TestService {
         return points;
     }
 
+    public List<Long> getMonthTimeStamp(String year) {
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = new java.util.Date();
+        try {
+            date = format.parse(year + "-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        List<Long> timestamp = new ArrayList<>(12);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        for (int i = 0; i < 12; ++i) {
+            String start_day = format.format(calendar.getTime());
+            calendar.add(Calendar.MONTH, 1);
+            timestamp.add(Date2UNIXTime(start_day));
+        }
+        return timestamp;
+    }
 
 }

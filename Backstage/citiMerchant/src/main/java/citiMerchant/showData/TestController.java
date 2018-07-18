@@ -29,11 +29,18 @@ public class TestController {
         HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv = new ModelAndView();
-        List<Long> points = testService.show_order_points_chronology("00002", "2018");
+
+        //
+        List<Long> points = testService.show_order_points_chronology("1", "2018");
+        List<Long> timestamp = testService.getMonthTimeStamp("2018");
+
+        //set attribute
         String points_json = gson.toJson(points);
         session.setAttribute("points_json", points_json);
+        String timeStamp_json = gson.toJson(timestamp);
+        session.setAttribute("timeStamp_json", timeStamp_json);
+
         //System.out.println(points_json);
-        //mv.addObject("points", points);
         mv.setViewName("/showData/showData");
         return mv;
     }
