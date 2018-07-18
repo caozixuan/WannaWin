@@ -76,10 +76,15 @@ public class MSCardController {
         return ResultJson.FAILURE;
     }
 
+    /*
+     *@param userID, merchantID, cardNum
+     */
     @ResponseBody
     @RequestMapping("/unbindcard")
     public String unbindcard(String userID, String merchantID, String cardNum){
         boolean flag = msCardService.unbindcard(userID, merchantID, cardNum);
-        return "";
+        if(flag)
+            return ResultJson.SUCCESS;
+        return ResultJson.FAILURE;
     }
 }

@@ -43,6 +43,7 @@ public class MerchantController {
         mv.setViewName("merchantInformation/editInformation");
         Merchant merchant = merchantMapper.selectByID(merchantID);
         mv.addObject(merchant);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         return mv;
     }
 
@@ -67,6 +68,7 @@ public class MerchantController {
         merchantMapper.updateMerchantCardDescription(merchantID,cardDescription);
         merchantMapper.updateMerchantLogo(myfile1,merchantID);
         merchantMapper.updateMerchantCardLogo(myfile2, merchantID);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("redirect:/starter");
         return mv;
     }
