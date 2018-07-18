@@ -1,4 +1,4 @@
-package com.citiexchangeplatform.pointsleague;
+package com.citiexchangeplatform.pointsleague.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.citiexchangeplatform.pointsleague.R;
 import com.citiexchangeplatform.pointsleague.models.HistoryExchangeItemModel;
 
 import java.util.ArrayList;
