@@ -95,6 +95,7 @@ public class TestService {
         return points;
     }
 
+
     public List<Long> getMonthTimeStamp(String year) {
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = new java.util.Date();
@@ -114,4 +115,31 @@ public class TestService {
         return timestamp;
     }
 
+
+    public List<Long> show__points_exchange_chronology(final String merchantID, final String year) {
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = new java.util.Date();
+        try {
+            date = format.parse(year + "-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        List<Long> points = new ArrayList<>(12);
+
+        for (int i = 0; i < 12; ++i) {
+            String start_day = format.format(calendar.getTime());
+            calendar.add(Calendar.MONTH, 1);
+            String end_day = format.format(calendar.getTime());
+            java.sql.Date start = new java.sql.Date(Date2UNIXTime(start_day));
+            java.sql.Date end = new java.sql.Date(Date2UNIXTime(end_day));
+            RecordOrder recordOrder = getPointsHistory(merchantID, start, end);
+            //System.out.println(start_day + " to " + end_day + " " + recordOrder.getTotalPoints());//
+            points.add(recordOrder.getTotalPoints() == null ? 0 : recordOrder.getTotalPoints());
+        }
+        return points;
+    }
 }

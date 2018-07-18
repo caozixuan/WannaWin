@@ -36,7 +36,7 @@ public interface CouponMapper {
 
     @Select(get_OVERDUED_Coupon)
     List<UserCoupon> get_OVERDUED_Coupon(String userID);
-    
+
     @Select(getCouponsBy_UserID_AND_ItemID)
     List<UserCoupon> getCouponsBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("ItemID") String ItemID);
 

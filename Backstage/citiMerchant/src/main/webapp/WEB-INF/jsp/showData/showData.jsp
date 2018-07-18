@@ -311,11 +311,12 @@ desired effect
 <%
     String Point = (String) session.getAttribute("points_json");
     String timeStamp = (String) session.getAttribute("timeStamp_json");
+    String Points_EXCHANGE = (String) session.getAttribute("points_exchange_json");
 %>
 <script>
     var Points = $.parseJSON("<%=Point %>");
     var timeStamps = $.parseJSON("<%=timeStamp %>");
-
+    var Points_EXCHANGES = $.parseJSON("<%=Points_EXCHANGE %>");
 
     //for (var i = 0; i < 12; ++i)
     //    document.write(Points[i] + "  ");
@@ -354,18 +355,18 @@ desired effect
             element: 'line-chart2',
             resize: true,
             data: [
-                {timeStamp: timeStamps[0], item1: Points[0]},
-                {timeStamp: timeStamps[1], item1: Points[1]},
-                {timeStamp: timeStamps[2], item1: Points[2]},
-                {timeStamp: timeStamps[3], item1: Points[3]},
-                {timeStamp: timeStamps[4], item1: Points[4]},
-                {timeStamp: timeStamps[5], item1: Points[5]},
-                {timeStamp: timeStamps[6], item1: Points[6]},
-                {timeStamp: timeStamps[7], item1: Points[7]},
-                {timeStamp: timeStamps[8], item1: Points[8]},
-                {timeStamp: timeStamps[9], item1: Points[9]},
-                {timeStamp: timeStamps[10], item1: Points[10]},
-                {timeStamp: timeStamps[11], item1: Points[11]}
+                {timeStamp: timeStamps[0], item1: Points_EXCHANGES[0]},
+                {timeStamp: timeStamps[1], item1: Points_EXCHANGES[1]},
+                {timeStamp: timeStamps[2], item1: Points_EXCHANGES[2]},
+                {timeStamp: timeStamps[3], item1: Points_EXCHANGES[3]},
+                {timeStamp: timeStamps[4], item1: Points_EXCHANGES[4]},
+                {timeStamp: timeStamps[5], item1: Points_EXCHANGES[5]},
+                {timeStamp: timeStamps[6], item1: Points_EXCHANGES[6]},
+                {timeStamp: timeStamps[7], item1: Points_EXCHANGES[7]},
+                {timeStamp: timeStamps[8], item1: Points_EXCHANGES[8]},
+                {timeStamp: timeStamps[9], item1: Points_EXCHANGES[9]},
+                {timeStamp: timeStamps[10], item1: Points_EXCHANGES[10]},
+                {timeStamp: timeStamps[11], item1: Points_EXCHANGES[11]}
             ],
             xkey: 'timeStamp',
             ykeys: ['item1'],

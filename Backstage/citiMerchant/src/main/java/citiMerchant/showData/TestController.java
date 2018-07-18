@@ -33,12 +33,15 @@ public class TestController {
         //
         List<Long> points = testService.show_order_points_chronology("1", "2018");
         List<Long> timestamp = testService.getMonthTimeStamp("2018");
+        List<Long> points_exchange = testService.show__points_exchange_chronology("1", "2018");
 
         //set attribute
         String points_json = gson.toJson(points);
         session.setAttribute("points_json", points_json);
         String timeStamp_json = gson.toJson(timestamp);
         session.setAttribute("timeStamp_json", timeStamp_json);
+        String points_exchange_json = gson.toJson(points_exchange);
+        session.setAttribute("points_exchange_json", points_exchange_json);
 
         //System.out.println(points_json);
         mv.setViewName("/showData/showData");
