@@ -294,7 +294,7 @@ desired effect
 <script>
     var Points = $.parseJSON("<%=tempPoint %>");
     for (var i = 0; i < 12; ++i)
-        document.write(Points[i]+"  ");
+        document.write(Points[i] + "  ");
 
     $(function () {
         "use strict";
@@ -304,18 +304,18 @@ desired effect
             element: 'line-chart',
             resize: true,
             data: [
-                {y: '2018 01', item1: Points[0]},
-                {y: '2018 02', item1: Points[1]},
-                {y: '2018 03', item1: Points[2]},
-                {y: '2018 04', item1: Points[3]},
-                {y: '2018 05', item1: Points[4]},
-                {y: '2018 06', item1: Points[5]},
-                {y: '2018 07', item1: Points[6]},
-                {y: '2018 08', item1: Points[7]},
-                {y: '2018 09', item1: Points[8]},
-                {y: '2018 10', item1: Points[9]},
-                {y: '2018 11', item1: Points[10]},
-                {y: '2018 12', item1: Points[11]}
+                {y: '2018 01', item1: 123},//Points[0]},
+                {y: '2018 02', item1: 212},//Points[1]},
+                {y: '2018 03', item1: 1832},//Points[2]},
+                {y: '2018 04', item1: 822},//Points[3]},
+                {y: '2018 05', item1: 3687},//Points[4]},
+                {y: '2018 06', item1: 483},//Points[5]},
+                {y: '2018 07', item1: 1223},//Points[6]},
+                {y: '2018 08', item1: 682},//Points[7]},
+                {y: '2018 09', item1: 456},//Points[8]},
+                {y: '2018 10', item1: 3807},//Points[9]},
+                {y: '2018 11', item1: 123},//Points[10]},
+                {y: '2018 12', item1: 2394}//Points[11]}
             ],
             xkey: 'y',
             ykeys: ['item1'],
@@ -323,15 +323,16 @@ desired effect
             lineColors: ['#3c8dbc'],
             hideHover: 'auto'
         });
-//DONUT CHART
+
+        //DONUT CHART
         var donut = new Morris.Donut({
             element: 'sales-chart',
             resize: true,
             colors: ["#3c8dbc", "#f56954", "#00a65a"],
             data: [
-                {label: "Download Sales", value: 12},
-                {label: "In-Store Sales", value: 30},
-                {label: "Mail-Order Sales", value: 20}
+                {value: 12, label: "Download Sales"},
+                {value: 30, label: "In-Store Sales"},
+                {value: 20, label: "Mail-Order Sales"}
             ],
             hideHover: 'auto'
         });

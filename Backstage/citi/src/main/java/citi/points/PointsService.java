@@ -59,11 +59,12 @@ public class PointsService {
         MSCard msCard = userMSCards.get(0);
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
-            if(msCard.getPoints()*msCard.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion()){
+            Merchant merchant = merchantMapper.selectByID(msCard.getMerchantId());
+            if(msCard.getPoints()*merchant.getProportion()>=Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion()){
                 msCardMapper.exchangePoints(Integer.valueOf(merchantBean.getSelectedMSCardPoints()),user.getUserID(), merchantBean.getMerchantID());
-                userMapper.exchangeGeneralPoints(user.getUserID(), Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
+                userMapper.exchangeGeneralPoints(user.getUserID(), Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion());
                 msCard.setPoints(msCard.getPoints()-Integer.valueOf(merchantBean.getSelectedMSCardPoints()));
-                user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion());
+                user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion());
             }
         }
     }

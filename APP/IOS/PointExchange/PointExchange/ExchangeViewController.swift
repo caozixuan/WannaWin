@@ -23,10 +23,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		self.tableView.dataSource = self
 		
 		// test data
-		let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
-		let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
-		let card3 = Card(merchant: Merchant(name: "耐克"), point: 300, proportion: 0.4)
-		dataSource = [card1,card2,card3]
+//        let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
+//        let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
+//        let card3 = Card(merchant: Merchant(name: "耐克"), point: 300, proportion: 0.4)
+//        dataSource = [card1,card2,card3]
 		
     }
 
@@ -51,9 +51,9 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			cell1.editSourcePoints?.tag = indexPath.row
 			if let card = dataSource?[indexPath.row]{
 				cell1.storeName.text = card.merchant?.name
-				cell1.sourcePoints.text = String(card.point)
-				cell1.editSourcePoints.placeholder = String(card.point)
-				cell1.targetPoints.text = String(card.point * (card.proportion)!)
+				cell1.sourcePoints.text = String(card.points)
+				cell1.editSourcePoints.placeholder = String(card.points)
+				cell1.targetPoints.text = String(card.points * (card.proportion)!)
 				cell1.proportion = card.proportion
 			}
 		}
@@ -65,7 +65,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		let number = Double(textField.text!)
 		var maxPoints:Double!
 		if let card = self.dataSource?[textField.tag] {
-			maxPoints = card.point
+			maxPoints = card.points
 		}
 		
 		if number != nil && number! <= maxPoints {
@@ -94,9 +94,9 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			let indexPath = IndexPath(row: row, section: 0)
 			if let cell = self.tableView.cellForRow(at: indexPath) as? ExchangeItemCell{
 				if let card = dataSource?[row]{
-					cell.sourcePoints.text = String(card.point)
-					cell.editSourcePoints.placeholder = String(card.point)
-					cell.targetPoints.text = String(card.point * (card.proportion)!)
+					cell.sourcePoints.text = String(card.points)
+					cell.editSourcePoints.placeholder = String(card.points)
+					cell.targetPoints.text = String(card.points * (card.proportion)!)
 				}
 			}
 		}
