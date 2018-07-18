@@ -55,10 +55,9 @@ public class PointsService {
     }
 
     public void deductPoints(User user, List<ResultBean.MerchantBean> merchantBeanList){
-        List<MSCard> userMSCards = msCardMapper.select(user.getUserID());
-        MSCard msCard = userMSCards.get(0);
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
+            MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(user.getUserID(), merchantBean.getMerchantID());
             Merchant merchant = merchantMapper.selectByID(msCard.getMerchantId());
             if(msCard.getPoints()*merchant.getProportion()>=Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion()){
                 msCardMapper.exchangePoints(Integer.valueOf(merchantBean.getSelectedMSCardPoints()),user.getUserID(), merchantBean.getMerchantID());
