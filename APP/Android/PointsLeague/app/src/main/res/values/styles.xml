@@ -22,4 +22,10 @@
     </style>
 
 
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_style</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+
 </resources>

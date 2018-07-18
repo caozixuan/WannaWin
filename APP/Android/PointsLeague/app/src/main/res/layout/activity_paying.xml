@@ -19,6 +19,7 @@
         app:theme="@style/ToolbarTheme"
         >
     </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:id="@+id/search_bar_exchange"
         android:layout_width="match_parent"
@@ -29,30 +30,41 @@
         android:background="@drawable/bg_search_bar"
         android:layout_below="@+id/toolbar_paying"
         android:orientation="horizontal">
-        <FrameLayout
+        <!--<FrameLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30px"-->
+            <!--&gt;-->
+            <!--<ImageView-->
+                <!--android:layout_width="42px"-->
+                <!--android:layout_height="42px"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:background="@drawable/search"/>-->
+
+        <!--</FrameLayout>-->
+        <SearchView
+            android:id="@+id/editText_search_paying"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30px"
-            >
-            <ImageView
-                android:layout_width="42px"
-                android:layout_height="42px"
-                android:layout_gravity="center"
-                android:background="@drawable/search"/>
-        </FrameLayout>
-
-
-        <EditText
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="21px"
-            android:textSize="51px"
-            android:hint="Search"
-            android:textColorHint="#8E8E93"
-            android:background="@null"
-            android:id="@+id/et_search"
-             />
+            android:queryHint="Search"
+            android:background="@null">
+
+
+        </SearchView>
+
+
+        <!--<EditText-->
+
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="21px"-->
+            <!--android:textSize="51px"-->
+            <!--android:hint="Search"-->
+            <!--android:textColorHint="#8E8E93"-->
+            <!--android:background="@null"-->
+
+             <!--/>-->
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
@@ -64,14 +76,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="140px"
+            android:layout_marginEnd="10px"
             android:orientation="horizontal"
             android:gravity="center">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.3"
                 android:text="商户名"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/colorWhite"
@@ -80,8 +93,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="积分"
+                android:layout_weight="0.47"
+                android:text="积分(可编辑)"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="42px" />
@@ -89,9 +102,9 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.33"
                 android:text="可兑花旗点"
-                android:textAlignment="viewEnd"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorWhite"
                 android:textSize="42px" />
 
@@ -168,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="123"
+                        android:text="0"
                         android:textColor="@color/colorOrange"
                         android:textSize="84px" />
                 </LinearLayout>
