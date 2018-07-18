@@ -282,7 +282,7 @@ desired effect
 <script type="text/javascript">
     $(".myfile1").fileinput({
         //上传的地址
-        uploadUrl:"uploadFile",
+        uploadUrl:"uploadFile1",
         uploadAsync : false, //默认异步上传
         showUpload : false, //是否显示上传按钮,跟随文本框的那个
         showRemove : false, //显示移除按钮,跟随文本框的那个
@@ -338,7 +338,7 @@ desired effect
 
     $(".myfile2").fileinput({
         //上传的地址
-        uploadUrl:"uploadFile",
+        uploadUrl:"uploadFile2",
         uploadAsync : false, //默认异步上传
         showUpload : false, //是否显示上传按钮,跟随文本框的那个
         showRemove : false, //显示移除按钮,跟随文本框的那个
