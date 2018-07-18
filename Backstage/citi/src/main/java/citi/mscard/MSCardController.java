@@ -64,13 +64,28 @@ public class MSCardController {
 
 
     /**
-     *@param userID 会员卡
-     * @return 成功：{"state":true}，失败：{"state":false}
+     * @ url:/mscard/addcard
+     *@param userID
+     * @return 成功：{"status":true}, {"status":false}
      */
     @ResponseBody
     @RequestMapping("/addcard")
     public String addMSCard(String userID, String merchantID, String cardNum, String password){
         boolean flag = msCardService.addMSCard(userID,merchantID,cardNum,password);
+        if(flag)
+            return ResultJson.SUCCESS;
+        return ResultJson.FAILURE;
+    }
+
+    /*
+     *@param userID, merchantID, cardNum
+     * @url: /mscard/unbindcard
+     * return: {"status":true}, {"status":false}
+     */
+    @ResponseBody
+    @RequestMapping("/unbindcard")
+    public String unbindcard(String userID, String merchantID, String cardNum){
+        boolean flag = msCardService.unbindcard(userID, merchantID, cardNum);
         if(flag)
             return ResultJson.SUCCESS;
         return ResultJson.FAILURE;

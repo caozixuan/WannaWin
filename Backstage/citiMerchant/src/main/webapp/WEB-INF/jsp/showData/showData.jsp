@@ -102,36 +102,21 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg"
+                            <img src="${merchant.merchantLogoURL}"
                                  class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">${merchant.name}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg"
+                                <img src="${merchant.merchantLogoURL}"
                                      class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    ${merchant.name}
+                                    <small>${merchant.description}</small>
                                 </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -157,11 +142,11 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle"
+                    <img src="${merchant.merchantLogoURL}" class="img-circle"
                          alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>${merchant.name}</p>
                 </div>
             </div>
 
@@ -210,9 +195,10 @@ desired effect
 
         <!-- Main content -->
         <section class="content container-fluid">
+
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">积分消费情况统计</h3>
+                    <h3 class="box-title">订单积分消费情况统计</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -223,10 +209,29 @@ desired effect
                     </div>
                 </div>
                 <div class="box-body chart-responsive">
-                    <div class="chart" id="line-chart" style="height: 300px;"></div>
+                    <div class="chart" id="line-chart1" style="height: 300px;"></div>
                 </div>
                 <!-- /.box-body -->
             </div>
+
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">会员卡积分兑换情况统计</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="line-chart2" style="height: 300px;"></div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h3 class="box-title">Donut Chart</h3>
@@ -258,7 +263,7 @@ desired effect
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+            感谢大家的支持！
         </div>
         <!-- Default to the left -->
         <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
@@ -291,19 +296,22 @@ desired effect
 <%
     String Point = (String) session.getAttribute("points_json");
     String timeStamp = (String) session.getAttribute("timeStamp_json");
+    String Points_EXCHANGE = (String) session.getAttribute("points_exchange_json");
 %>
 <script>
     var Points = $.parseJSON("<%=Point %>");
     var timeStamps = $.parseJSON("<%=timeStamp %>");
-    for (var i = 0; i < 12; ++i)
-        document.write(Points[i] + "  ");
+    var Points_EXCHANGES = $.parseJSON("<%=Points_EXCHANGE %>");
+
+    //for (var i = 0; i < 12; ++i)
+    //    document.write(Points[i] + "  ");
 
     $(function () {
         "use strict";
 
-        // LINE CHART
-        var line = new Morris.Line({
-            element: 'line-chart',
+        // LINE CHART 订单积分消费情况统计
+        var line1 = new Morris.Line({
+            element: 'line-chart1',
             resize: true,
             data: [
                 {timeStamp: timeStamps[0], item1: Points[0]},
@@ -326,6 +334,33 @@ desired effect
             hideHover: 'auto'
         });
 
+
+        // LINE CHART 会员卡积分兑换情况统计
+        var line1 = new Morris.Line({
+            element: 'line-chart2',
+            resize: true,
+            data: [
+                {timeStamp: timeStamps[0], item1: Points_EXCHANGES[0]},
+                {timeStamp: timeStamps[1], item1: Points_EXCHANGES[1]},
+                {timeStamp: timeStamps[2], item1: Points_EXCHANGES[2]},
+                {timeStamp: timeStamps[3], item1: Points_EXCHANGES[3]},
+                {timeStamp: timeStamps[4], item1: Points_EXCHANGES[4]},
+                {timeStamp: timeStamps[5], item1: Points_EXCHANGES[5]},
+                {timeStamp: timeStamps[6], item1: Points_EXCHANGES[6]},
+                {timeStamp: timeStamps[7], item1: Points_EXCHANGES[7]},
+                {timeStamp: timeStamps[8], item1: Points_EXCHANGES[8]},
+                {timeStamp: timeStamps[9], item1: Points_EXCHANGES[9]},
+                {timeStamp: timeStamps[10], item1: Points_EXCHANGES[10]},
+                {timeStamp: timeStamps[11], item1: Points_EXCHANGES[11]}
+            ],
+            xkey: 'timeStamp',
+            ykeys: ['item1'],
+            labels: ['会员卡兑换积分'],
+            lineColors: ['#3c8dbc'],
+            hideHover: 'auto'
+        });
+
+
         //DONUT CHART
         var donut = new Morris.Donut({
             element: 'sales-chart',
@@ -338,6 +373,7 @@ desired effect
             ],
             hideHover: 'auto'
         });
+
 
     });
 </script>

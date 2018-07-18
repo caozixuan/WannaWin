@@ -57,7 +57,7 @@ public class CitiController {
     public String unBind(CitiCard citiCard){
         String refreshAccessToken = tokenMapper.select(citiCard.getUserID());
         Authorize.revokeToken(refreshAccessToken,"refresh_token");
-        citiMapper.delete(citiCard.getCitiCardNum());
+        citiMapper.delete(citiCard.getCitiCardID(),citiCard.getUserID());
         return ResultJson.SUCCESS;
     }
 

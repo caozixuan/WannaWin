@@ -9,6 +9,7 @@ DROP PROCEDURE points_record_user;
 DROP PROCEDURE points_record_card; 
 DROP PROCEDURE merchant_out_points_record;
 DROP PROCEDURE order_record_date;
+DROP PROCEDURE MSCard_record_date;
 
 DROP TRIGGER user_points_update;
 DROP TRIGGER user_points_insert;

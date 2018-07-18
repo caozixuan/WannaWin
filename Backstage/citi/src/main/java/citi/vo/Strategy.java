@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 制定消费策略
  */
 public class Strategy {
-    private String merchantId;
+    private String merchantID;
     private ArrayList<String> discountCommodityIDs;
     // 默认这三个应该是递增顺序
     private ArrayList<Double> priceOriginal;
@@ -19,7 +19,7 @@ public class Strategy {
 
 
     public Strategy(String merchantId, ArrayList<String> discountCommodityIDs, ArrayList<Double> priceOriginal, ArrayList<Double> pricePaid, ArrayList<Integer> pointsNeed) {
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
         this.discountCommodityIDs = discountCommodityIDs;
         this.priceOriginal = priceOriginal;
         this.pricePaid = pricePaid;
