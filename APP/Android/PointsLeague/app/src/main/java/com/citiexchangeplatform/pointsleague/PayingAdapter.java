@@ -171,12 +171,12 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         holder.editPoint.setText(filteredItems.get(position).getExchangePoint());
         holder.exchangePoint.setText(filteredItems.get(position).getTargetPoint());
         //设置商家图片
-        Glide.with(context)
+        /*Glide.with(context)
                 .load(filteredItems.get(position).getLogo())
                 .placeholder(R.drawable.ic_points_black_24dp)
                 .error(R.drawable.ic_mall_black_24dp)
                 .override(60,60)
-                .into(holder.logo);
+                .into(holder.logo);*/
         //holder.logo.setImageResource(img_list.get(position));
         //设置商户名
         holder.name.setText(filteredItems.get(position).getName());
@@ -184,7 +184,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         holder.editPoint.setFocusable(false);
         holder.editPoint.setFocusableInTouchMode(false);
 
-        holder.modifyButton.setOnClickListener(new View.OnClickListener() {
+        /*holder.modifyButton.setOnClickListener(new View.OnClickListener() {
             Boolean button_status = false;
             @Override
             public void onClick(View v) {
@@ -210,7 +210,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 }
 
             }
-        });
+        });*/
 
         holder.Checkbox_Choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,10 +265,17 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 }
 
                 if (filteredItems.get(position).getChoose()) {
-                    holder.modifyButton.setVisibility(View.VISIBLE);
+                    //holder.modifyButton.setVisibility(View.VISIBLE);
+                    holder.editPoint.setBackgroundResource(R.drawable.bg_edit_points_focused);
+                    //编辑框可修改
+                    holder.editPoint.setFocusableInTouchMode(true);
+                    holder.editPoint.setFocusable(true);
+                    holder.editPoint.requestFocus();
+
 
                 } else {
-                    holder.modifyButton.setVisibility(View.INVISIBLE);
+                    //holder.modifyButton.setVisibility(View.INVISIBLE);
+                    holder.editPoint.setBackgroundResource(R.drawable.bg_edit_points);
                     //取消选择后编辑框为不可编辑状态
                     holder.editPoint.setFocusable(false);
                     holder.editPoint.setFocusableInTouchMode(false);
@@ -287,9 +294,19 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         }
         holder.Checkbox_Choose.setChecked(filteredItems.get(position).getChoose());
         if (filteredItems.get(position).getChoose()) {
-            holder.modifyButton.setVisibility(View.VISIBLE);
+            //holder.modifyButton.setVisibility(View.VISIBLE);
+            //编辑框可修改
+            holder.editPoint.setFocusableInTouchMode(true);
+            holder.editPoint.setFocusable(true);
+            holder.editPoint.requestFocus();
+
         } else {
-            holder.modifyButton.setVisibility(View.INVISIBLE);
+            //holder.modifyButton.setVisibility(View.INVISIBLE);
+            //编辑框可修改
+            holder.editPoint.setFocusableInTouchMode(false);
+            holder.editPoint.setFocusable(false);
+            holder.editPoint.requestFocus();
+
         }
 
 
@@ -504,11 +521,11 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         //转换的通用积分
         TextView exchangePoint;
         //会员卡商家logo
-        ImageView logo;
+        //ImageView logo;
         //选择框
         CheckBox Checkbox_Choose;
         //修改按钮
-        Button modifyButton;
+        //Button modifyButton;
         //输入使用的会员卡积分数
         EditText editPoint;
         //会员卡商户名
@@ -519,9 +536,9 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         public MyViewHolder(View view) {
             super(view);
             exchangePoint = view.findViewById(R.id.textview_points_transfer);
-            logo = view.findViewById(R.id.image_business);
+            //logo = view.findViewById(R.id.image_business);
             Checkbox_Choose = view.findViewById(R.id.checkbox_choose);
-            modifyButton = view.findViewById(R.id.button_modify);
+            //modifyButton = view.findViewById(R.id.button_modify);
             editPoint = view.findViewById(R.id.editText_points_posses);
             name = view.findViewById(R.id.textview_business_name);
 
