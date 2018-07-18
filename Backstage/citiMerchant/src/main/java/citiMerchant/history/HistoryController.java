@@ -1,5 +1,6 @@
 package citiMerchant.history;
 
+import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.vo.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class HistoryController {
     @Autowired
     HistoryService historyService;
 
+    @Autowired
+    private MerchantMapper merchantMapper;
+
     @RequestMapping("/history")
     public ModelAndView getHistory(){
         ModelAndView mv = new ModelAndView();
@@ -31,6 +35,7 @@ public class HistoryController {
         HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
         List<Order> orders = historyService.getHistory(merchantID);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         if(orders==null)
             mv.addObject("orders", new ArrayList<Order>());
         else

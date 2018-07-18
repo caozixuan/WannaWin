@@ -18,7 +18,7 @@ public interface CitiMapper {
     final String updateCiti = "UPDATE citicard " +
             "SET citiCardID = #{citiCardID}, citiCardNum = #{citiCardNum}, phoneNum = #{phoneNum}, miniExpense = #{miniExpense}" +
             "WHERE userID = #{userID}";
-    final String deleteCiti = "DELETE FROM citicard WHERE citiCardID = #{citiCardID}";
+    final String deleteCiti = "DELETE FROM citicard WHERE citiCardID = #{citiCardID} AND userID = #{userID}";
 
     @Select(getCardByID)
     CitiCard getCardByID(String userID);
@@ -30,6 +30,6 @@ public interface CitiMapper {
     int update(CitiCard citiCard);
 
     @Delete(deleteCiti)
-    int delete(String citiNum);
+    int delete(@Param("citiCardID") String citiCardID, @Param("userID") String userID);
 
 }
