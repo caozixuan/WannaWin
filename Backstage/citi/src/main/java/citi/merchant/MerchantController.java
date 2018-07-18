@@ -39,7 +39,7 @@ public class MerchantController {
         List<Merchant> merchants= merchantSerivce.getMerchants(start,n);
         if(merchants==null)
             return "[]";
-        return gson.toJson(merchants);
+        return SerializeGson.GSON.toJson(merchants);
     }
 
     /**
@@ -55,7 +55,7 @@ public class MerchantController {
         if(m==null)
             return "{}";
         else
-            return gson.toJson(m);
+            return SerializeGson.GSON.toJson(m);
     }
 
     /*

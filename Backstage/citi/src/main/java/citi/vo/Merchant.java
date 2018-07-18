@@ -6,19 +6,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Merchant {
+    @Expose
     private String merchantID;
+    @Expose
     private String name;
     @Expose(serialize = false)
     private String password;
+    @Expose
     private String description;
+    @Expose
     private String cardDescription;
+    @Expose
     private String address;
+    @Expose
     private String merchantLogoURL;
+    @Expose
     private String cardLogoURL;
+    @Expose
     private double proportion;
+    @Expose
     private String activityTheme;
+    @Expose
     private String activityDescription;
+    @Expose
     private String cardType;
+    @Expose
     private String businessType;
 
     public enum CardType {
