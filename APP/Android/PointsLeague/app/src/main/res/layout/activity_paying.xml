@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,8 +8,6 @@
     tools:context=".PayingActivity"
     android:orientation="vertical"
     android:gravity="center">
-
-
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_paying"
@@ -20,118 +18,177 @@
         app:title="积分兑换"
         app:theme="@style/ToolbarTheme"
         >
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="使用积分"-->
-            <!--android:layout_marginStart="10dp"-->
-            <!--android:textColor="@color/colorWhite"-->
-            <!--android:textSize="18sp" />-->
-
     </android.support.v7.widget.Toolbar>
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--&gt;-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/textView_spend_points"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/need_points"-->
-                <!--android:textSize="18sp" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/textView_points_need"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="0"-->
-                <!--android:textSize="18sp" />-->
-
-        <!--</LinearLayout>-->
-
-       <!---->
-
-    <!--</LinearLayout>-->
-
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:id="@+id/search_bar_exchange"
+        android:layout_width="match_parent"
+        android:layout_height="108px"
+        android:layout_marginHorizontal="24px"
+        android:layout_marginTop="15px"
+        android:layout_marginBottom="15px"
+        android:background="@drawable/bg_search_bar"
+        android:layout_below="@+id/toolbar_paying"
         android:orientation="horizontal">
-
-        <TextView
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="已选择：" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            >
+            <ImageView
+                android:layout_width="42px"
+                android:layout_height="42px"
+                android:layout_gravity="center"
+                android:background="@drawable/search"/>
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/textview_points_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
-            android:textSize="18sp" />
 
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="21px"
+            android:textSize="51px"
+            android:hint="Search"
+            android:textColorHint="#8E8E93"
+            android:background="@null"
+            android:id="@+id/et_search"
+             />
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="72px"
+        android:id="@+id/Linear_meta_data_paying"
+        android:background="#CDCDCD"
+        android:layout_below="@+id/search_bar_exchange">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="商户名"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/colorWhite"
+                android:textSize="42px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="积分"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="42px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="可兑花旗点"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/colorWhite"
+                android:textSize="42px" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+
 
     <LinearLayout
         android:id="@+id/linear_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/Linear_meta_data_paying"
         android:gravity="center"
+        android:layout_marginTop="30px"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/textView_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_gravity="start"
-            android:text="使用积分:"
-            android:textColor="@color/default_inactive_item_color"
-            android:textSize="18sp"
 
-            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_points"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="4"
+
+            android:layout_weight="1"
             />
 
-        <Button
-            android:id="@+id/button_finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_bg"
-            android:onClick="click_finish"
-            android:text="@string/Button_Paying"
-            android:textColor="@color/colorWhite"
-            android:layout_marginBottom="15dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/button_finish"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/button_bg"-->
+            <!--android:onClick="click_finish"-->
+            <!--android:text="@string/Button_Paying"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:layout_marginBottom="15dp"/>-->
 
     </LinearLayout>
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="168px"
+            android:orientation="horizontal"
+            >
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.8"
+                android:background="#cc3a3a3a"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="兑换花旗点:"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="54px" />
+
+                    <TextView
+                        android:id="@+id/textview_points_choose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="123"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="84px" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/button_finish"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="54px"
+                android:onClick="click_finish"
+                android:text="@string/Button_Paying"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorLightOrange"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
