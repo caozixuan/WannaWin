@@ -11,13 +11,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Order {
-    private String orderId;
+    private String orderID;
     private double originalPrice;
     private double priceAfter;
     private double pointsNeeded;
-    private String userId;
+    private String userID;
     private String state;   //2018-07-10 从 OrderState 改为 String - 任思远
-    private String merchantId;
+    private String merchantID;
     private Timestamp time;
 
     public enum OrderState {
@@ -51,35 +51,35 @@ public class Order {
     }
 
     public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
-        this.orderId = orderId;
+        this.orderID = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
         this.pointsNeeded = pointsNeeded;
-        this.userId = userId;
+        this.userID = userId;
         this.state = state;
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
         this.time = time;
     }
 
     public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
-        this.orderId = orderId;
+        this.orderID = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
         this.pointsNeeded = pointsNeeded;
-        this.userId = userId;
+        this.userID = userId;
         this.state = OrderState.getStateString(state);
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
         this.time = time;
     }
 
     public Order(double originalPrice, double priceAfter, double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
-        this.orderId=UUID.randomUUID().toString().toLowerCase();
+        this.orderID=UUID.randomUUID().toString().toLowerCase();
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
         this.pointsNeeded = pointsNeeded;
-        this.userId = userId;
+        this.userID = userId;
         this.state = state;
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
         this.time = time;
     }
 
@@ -96,7 +96,7 @@ public class Order {
     }
 
     public void setOrderId(String orderId) {
-        this.orderId = orderId;
+        this.orderID = orderId;
     }
 
     public void setOriginalPrice(double originalPrice) {
@@ -112,7 +112,7 @@ public class Order {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userID = userId;
     }
 
     public void setState(String state) {
@@ -120,7 +120,7 @@ public class Order {
     }
 
     public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
     }
 
     public void setTime(Timestamp time) {
@@ -128,7 +128,7 @@ public class Order {
     }
 
     public String getOrderId() {
-        return orderId;
+        return orderID;
     }
 
     public double getOriginalPrice() {
@@ -144,7 +144,7 @@ public class Order {
     }
 
     public String getUserId() {
-        return userId;
+        return userID;
     }
 
     public OrderState getState() {
@@ -152,7 +152,7 @@ public class Order {
     }
 
     public String getMerchantId() {
-        return merchantId;
+        return merchantID;
     }
 
     public Timestamp getTime() {

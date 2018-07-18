@@ -13,6 +13,7 @@ public class AuthIeterceptor extends HandlerInterceptorAdapter {
         if (userID==null){
             return true;
         }
+        //response.setHeader("Content-Type","text/html; charset=UTF-8");
         return true;
     }
 
@@ -20,11 +21,12 @@ public class AuthIeterceptor extends HandlerInterceptorAdapter {
                            HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
 
+        //response.setHeader("Content-Type","text/html; charset=UTF-8");
     }
 
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-
+        //response.setHeader("Content-Type","text/html; charset=UTF-8");
     }
 }

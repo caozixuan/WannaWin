@@ -1,5 +1,6 @@
 package citiMerchant.strategy;
 
+import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.mapper.StrategyMapper;
 import citiMerchant.vo.Strategy;
 import citiMerchant.vo.StrategyDAO;
@@ -24,8 +25,11 @@ import java.util.UUID;
  */
 @Controller
 public class StrategyController {
-    @Autowired StrategyService strategyService;
+    @Autowired
+    StrategyService strategyService;
 
+    @Autowired
+    MerchantMapper merchantMapper;
 
     @RequestMapping("/strategy/getStrategyList")
     public ModelAndView getStrategyList(){
@@ -34,6 +38,7 @@ public class StrategyController {
         HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
         List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         if(strategies==null)
             mv.addObject("strategies",new ArrayList<StrategyDAO>());
         else
@@ -50,6 +55,7 @@ public class StrategyController {
         HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
         List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         if(strategies==null)
             mv.addObject("strategies",new ArrayList<StrategyDAO>());
         else
@@ -60,9 +66,13 @@ public class StrategyController {
 
     @RequestMapping("/strategy/editStrategyRequest")
     public ModelAndView editStrategyRequest(String strategyID){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = (String)session.getAttribute("merchantID");
         ModelAndView mv = new ModelAndView();
         StrategyDAO strategyDAO = strategyService.editStrategyRequest(strategyID);
         mv.addObject("strategy",strategyDAO);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("strategy/editStrategy");
         return mv;
     }
@@ -75,6 +85,7 @@ public class StrategyController {
         String merchantID = (String)session.getAttribute("merchantID");
         StrategyDAO strategyDAO = new StrategyDAO(strategyID,merchantID,full,priceAfter,points);
         strategyService.editStrategySubmit(strategyDAO);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.addObject("strategies",strategyService.getStrategyList(strategyDAO.getMerchantID()));
         mv.setViewName("strategy/strategyList");
         return mv;
@@ -89,6 +100,7 @@ public class StrategyController {
         HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
         mv.addObject("merchantID",merchantID);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         return mv;
     }
 
@@ -104,6 +116,7 @@ public class StrategyController {
 
         List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);
         mv.addObject("strategies",strategies);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("strategy/strategyList");
         return mv;
     }

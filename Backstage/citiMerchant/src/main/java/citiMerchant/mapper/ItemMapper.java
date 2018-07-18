@@ -12,7 +12,8 @@ public interface ItemMapper {
     final String getItemByItemID = "SELECT * FROM item WHERE ItemID = #{ItemID}";
     final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, logoURL, originalPrice, points, overdueTime, stock) " +
             "VALUES(#{ItemID}, #{name}, #{description}, #{merchantID}, #{logoURL}, #{originalPrice}, #{points}, #{overdueTime}, #{stock})";
-    final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID}";
+    final String getItem = "SELECT * FROM item LIMIT #{start}, #{length}";
+    final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID} LIMIT #{start}, #{length}";
     final String updateItemByID = "UPDATE item SET name = #{name}, description = #{description}, logoURL = #{logoURL}, originalPrice = #{originalPrice}, points = #{points}, overdueTime = #{overdueTime}, stock = #{stock} " +
             "WHERE ItemID = #{ItemID}";
     final String updateItemOverdueTimeByID = "UPDATE item SET overdueTime = #{overdueTime} WHERE ItemID = #{ItemID}";
@@ -26,8 +27,11 @@ public interface ItemMapper {
     @Insert(addItem)
     int addItem(Item item);
 
+    @Select(getItem)
+    List<Item> getItem(@Param("start") int start, @Param("length") int length);
+
     @Select(getItemByMerchantID)
-    List<Item> getItemByMerchantID(String merchantID);
+    List<Item> getItemByMerchantID(@Param("merchantID") String merchantID, @Param("start") int start, @Param("length") int length);
 
     @Update(updateItemByID)
     int updateItemByID(Item item);

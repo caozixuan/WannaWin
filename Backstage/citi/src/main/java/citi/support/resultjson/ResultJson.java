@@ -1,4 +1,4 @@
-package citi.resultjson;
+package citi.support.resultjson;
 
 /**
  * Created by zhong on 2018/7/13 14:23

@@ -1,6 +1,6 @@
 package citi.mscard;
 
-import citi.resultjson.ResultJson;
+import citi.support.resultjson.ResultJson;
 import citi.vo.MSCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 //Membership card
 @Controller
-@RequestMapping("/mscard")
+@RequestMapping(value = {"/mscard"},produces = {"text/html;charset=UTF-8"})
 public class MSCardController {
 
     @Autowired
@@ -64,13 +64,28 @@ public class MSCardController {
 
 
     /**
-     *@param userID 会员卡
-     * @return 成功：{"state":true}，失败：{"state":false}
+     * @ url:/mscard/addcard
+     *@param userID
+     * @return 成功：{"status":true}, {"status":false}
      */
     @ResponseBody
     @RequestMapping("/addcard")
     public String addMSCard(String userID, String merchantID, String cardNum, String password){
         boolean flag = msCardService.addMSCard(userID,merchantID,cardNum,password);
+        if(flag)
+            return ResultJson.SUCCESS;
+        return ResultJson.FAILURE;
+    }
+
+    /*
+     *@param userID, merchantID, cardNum
+     * @url: /mscard/unbindcard
+     * return: {"status":true}, {"status":false}
+     */
+    @ResponseBody
+    @RequestMapping("/unbindcard")
+    public String unbindcard(String userID, String merchantID, String cardNum){
+        boolean flag = msCardService.unbindcard(userID, merchantID, cardNum);
         if(flag)
             return ResultJson.SUCCESS;
         return ResultJson.FAILURE;
