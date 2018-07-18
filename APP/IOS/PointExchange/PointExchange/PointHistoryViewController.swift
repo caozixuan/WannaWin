@@ -28,17 +28,26 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
         // This cell will be displayed at IndexPath with (section: section and row: 0)
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PointHistoryTableViewCell.self)) as! PointHistoryTableViewCell
+        cell.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray![section].totalPoints!)
+        cell.dateLabel.text = pointsHistoryArray![section].historyMerchants![0].time!
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return pointsHistoryArray!.count
     }
     
     // 点击展开后的单元格
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "detailCell")
         cell?.hideSeparator()
+        // 商家名
+        (cell?.viewWithTag(1) as! UILabel).text = pointsHistoryArray![indexPath.section].historyMerchants![indexPath.row-1].merchantName
+        // 商家积分
+        (cell?.viewWithTag(2) as! UILabel).text = String(stringInterpolationSegment: pointsHistoryArray![indexPath.section].historyMerchants![indexPath.row-1].pointsCard!)
+        // 通用点
+        (cell?.viewWithTag(3) as! UILabel).text = String(stringInterpolationSegment: pointsHistoryArray![indexPath.section].historyMerchants![indexPath.row-1].pointsCiti!)
+        
         return cell!
     }
     
@@ -48,7 +57,7 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return pointsHistoryArray![section].historyMerchants!.count+1
     }
     
 
