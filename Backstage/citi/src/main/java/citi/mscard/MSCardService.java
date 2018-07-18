@@ -135,7 +135,7 @@ public class MSCardService {
     }
 
     public boolean unbindcard(String userID, String merchantID, String cardNum){
-        int flag = msCardMapper.unBind(userID,merchantID);
+        int flag = msCardMapper.unBind(userID,merchantID,cardNum);
         if(flag>0)
             return true;
         return false;

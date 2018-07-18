@@ -50,6 +50,7 @@ public class ItemController {
     @RequestMapping("/item/addItem")
     public ModelAndView addItem(String merchantID){
         ModelAndView mv =new ModelAndView();
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("item/addItem");
         return mv;
     }

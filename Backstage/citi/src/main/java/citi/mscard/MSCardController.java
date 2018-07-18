@@ -64,8 +64,9 @@ public class MSCardController {
 
 
     /**
-     *@param userID 会员卡
-     * @return 成功：{"state":true}，失败：{"state":false}
+     * @ url:/mscard/addcard
+     *@param userID
+     * @return 成功：{"status":true}, {"status":false}
      */
     @ResponseBody
     @RequestMapping("/addcard")
@@ -78,6 +79,8 @@ public class MSCardController {
 
     /*
      *@param userID, merchantID, cardNum
+     * @url: /mscard/unbindcard
+     * return: {"status":true}, {"status":false}
      */
     @ResponseBody
     @RequestMapping("/unbindcard")
