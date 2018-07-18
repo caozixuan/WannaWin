@@ -19,6 +19,8 @@ public interface RecordMapper {
     final String _points_history_user = "CALL points_record_user(#{IN_cardID, mode = IN, jdbcType = VARCHAR}, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints_card, mode = OUT, jdbcType = BIGINT}, #{totalPoints_citi, mode = OUT, jdbcType = BIGINT})";
     final String _points_history_card = "CALL points_record_card(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_merchantID, mode = IN, jdbcType = VARCHAR}, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints_card, mode = OUT, jdbcType = BIGINT}, #{totalPoints_citi, mode = OUT, jdbcType = BIGINT})";
     final String merchant_out_points_record = "CALL merchant_out_points_record(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR }, #{IN_intervalDate, mode = IN, jdbcType = INTEGER}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
+    final String MSCard_record_date = "CALL MSCard_record_date(#{IN_MerchantID, mode = IN, jdbcType = VARCHAR}, #{IN_start_date, mode = IN, jdbcType = DATE}, #{IN_end_date, mode = IN, jdbcType = DATE}, #{totalPoints, mode = OUT, jdbcType = BIGINT})";
+
 
     //根据"商户id" 和 "间隔时间" 查询优惠券积分使用
     @Insert(value = coupon_record)
@@ -55,6 +57,12 @@ public interface RecordMapper {
     @Options(statementType = StatementType.CALLABLE)
     @ResultType(Record.class)
     void merchant_out_points_record(Record record);
+
+    //根据 "商户id"，"起始时间"，"终止时间" 查询会员卡积分兑换情况
+    @Insert(value = MSCard_record_date)
+    @Options(statementType = StatementType.CALLABLE)
+    @ResultType(RecordOrder.class)
+    void MSCard_record_date(RecordOrder eecordOrder);
 
 }
 
