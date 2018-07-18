@@ -16,7 +16,7 @@ class MaskView: UIView {
 		color.set() // 设置线条颜色
 		let width = self.bounds.size.width
 		let height = self.bounds.size.height
-		let h = 2*height/7
+		let h = 1*height/15
 		let d = (width/2)/CGFloat(tan(15*Double.pi/180))
 		let center = CGPoint(x: width/2 , y: d + h)
 		let radius = (width/2)/CGFloat(sin(15*Double.pi/180))
