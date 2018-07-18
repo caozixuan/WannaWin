@@ -30,6 +30,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
   <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
   <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+  <link href="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/js/bower_components/bootstrap/less/dropdowns.less" rel="stylesheet" />
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/moment-with-locales.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
   <!-- jQuery 3 -->
   <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
@@ -244,7 +250,7 @@ desired effect
             </div>
             <div class="form-group">
               <label>抵扣券有效时间</label>
-              <input name="overdueTime" type="text" class="form-control" placeholder="抵扣券有效时间">
+              <input name="overdueTime" type="date" class="form-control" placeholder="抵扣券有效时间">
             </div>
             <!-- textarea -->
             <div class="form-group">
@@ -356,6 +362,15 @@ desired effect
     $('.myfile').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
     });
-
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn')
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'YYYY-MM-DD hh:mm',
+            locale: moment.locale('zh-cn')
+        });
+    });
 </script>
 </html>
