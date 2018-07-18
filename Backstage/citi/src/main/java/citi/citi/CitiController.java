@@ -3,16 +3,15 @@ package citi.citi;
 import citi.API.Authorize;
 import citi.mapper.CitiMapper;
 import citi.mapper.TokenMapper;
-import citi.resultjson.ResultJson;
+import citi.support.resultjson.ResultJson;
 import citi.vo.CitiCard;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@RequestMapping("/citi")
+@RequestMapping(value = {"/citi"},produces = {"text/html;charset=UTF-8"})
 @Controller
 public class CitiController {
 
