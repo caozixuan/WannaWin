@@ -13,11 +13,11 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var generalPointsLabel: UILabel!
-    @IBOutlet weak var cardImage1: UIImageView!
-	
-	@IBOutlet weak var cardImage2: UIImageView!
-	
-	@IBOutlet weak var cardImage3: UIImageView!
+//    @IBOutlet weak var cardImage1: UIImageView!
+//	
+//	@IBOutlet weak var cardImage2: UIImageView!
+//	
+//	@IBOutlet weak var cardImage3: UIImageView!
 	
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
@@ -30,30 +30,30 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         super.viewDidLoad()
 		
 		//添加积分卡添加点击手势事件
-		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-		cardImage1.addGestureRecognizer(cardTap1)
-		cardImage2.addGestureRecognizer(cardTap2)
-		cardImage3.addGestureRecognizer(cardTap3)
-        
+//		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+//		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+//		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+//		cardImage1.addGestureRecognizer(cardTap1)
+//		cardImage2.addGestureRecognizer(cardTap2)
+//		cardImage3.addGestureRecognizer(cardTap3)
+		
     }
     override func viewWillAppear(_ animated: Bool) {
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
-        ServerConnector.getPointsInfo(callback: gotPointsInfo)
+        //ServerConnector.getPointsInfo(callback: gotPointsInfo)
 		
     }
 	
 	/// 获得积分信息后的回调函数
-    func gotPointsInfo(result:Bool){
-        if result {
-            availablePointsLabel.text = String(User.getUser().availablePoints!)
-            generalPointsLabel.text = String(User.getUser().generalPoints!)
-        }else{
-            availablePointsLabel.text = "---"
-            generalPointsLabel.text = "---"
-        }
-    }
+//    func gotPointsInfo(result:Bool){
+//        if result {
+//            availablePointsLabel.text = String(User.getUser().availablePoints!)
+//            generalPointsLabel.text = String(User.getUser().generalPoints!)
+//        }else{
+//            availablePointsLabel.text = "---"
+//            generalPointsLabel.text = "---"
+//        }
+//    }
     /// 获得商户信息后的回调函数
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
@@ -95,7 +95,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		alertController.addAction(cancelAction)
 		self.present(alertController, animated: true, completion: nil)
 	}
-	
+	/**
 	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
 		let storyBoard:UIStoryboard!
 		let view:UIViewController!
@@ -152,7 +152,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 			self.navigationController!.pushViewController(view, animated: true)
 		}
 	}
-
+*/
     
     // MARK: - Navigation
     // 初始化图片轮播组件，为嵌入的图片轮播VC做数据准备
