@@ -316,12 +316,18 @@ desired effect
     String Point = (String) session.getAttribute("points_json");
     String timeStamp = (String) session.getAttribute("timeStamp_json");
     String Points_EXCHANGE = (String) session.getAttribute("points_exchange_json");
+    String total_order_points_json = (String) session.getAttribute("total_order_points_json");
+    String total_points_exchange_json = (String) session.getAttribute("total_points_exchange_json");
+    String total_merchant_coupon_record_json = (String) session.getAttribute("total_merchant_coupon_record_json");
     //String merchant_coupon_record = (String) session.getAttribute("merchant_coupon_record_json");
 %>
 <script>
     var Points = $.parseJSON("<%=Point %>");
     var timeStamps = $.parseJSON("<%=timeStamp %>");
     var Points_EXCHANGES = $.parseJSON("<%=Points_EXCHANGE %>");
+    var Total_order_points_json = $.parseJSON("<%=total_order_points_json %>");
+    var Total_points_exchange_json = $.parseJSON("<%=total_points_exchange_json %>");
+    var Total_merchant_coupon_record_json = $.parseJSON("<%=total_merchant_coupon_record_json %>");
     <%--//var Merchant_coupon_record = $.parseJSON("<%=merchant_coupon_record %>");--%>
 
     // for (var i = 0; i < 12; ++i)
@@ -414,9 +420,9 @@ desired effect
             resize: true,
             colors: ["#3c8dbc", "#f56954", "#00a65a"],
             data: [
-                {value: 12, label: "Download Sales"},
-                {value: 30, label: "In-Store Sales"},
-                {value: 20, label: "Mail-Order Sales"}
+                {value: Total_order_points_json, label: "订单积分使用"},
+                {value: Total_points_exchange_json, label: "会员卡积分兑换"},
+                {value: Total_merchant_coupon_record_json, label: "优惠券积分使用"}
             ],
             hideHover: 'auto'
         });

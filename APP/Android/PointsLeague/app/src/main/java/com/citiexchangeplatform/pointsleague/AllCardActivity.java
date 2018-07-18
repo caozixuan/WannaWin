@@ -30,7 +30,6 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
 
     ProgressDialog dialog;
     AllCardAdapter allCardAdapter;
-    int cardCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +45,6 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
         recyclerView.setAdapter(allCardAdapter);
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        getCardCount();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_all_card);
         setSupportActionBar(toolbar);
@@ -70,7 +67,14 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
         });
     }
 
-    private void getInfos() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        allCardAdapter.clearAll();
+        getCardCount();
+    }
+
+    private void getInfos(int cardCount) {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/mscard/infos")
@@ -95,20 +99,12 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        dialog.dismiss();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         super.onError(error);
-                        dialog.dismiss();
                         Toast.makeText(AllCardActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onBefore() {
-                        super.onBefore();
-                        dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡列表...");
                     }
                 });
     }
@@ -125,14 +121,12 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                         System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            cardCount = jsonObject.getInt("num");
+                            getInfos(jsonObject.getInt("num"));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         dialog.dismiss();
-
-                        getInfos();
                     }
 
                     @Override
@@ -145,7 +139,7 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                     @Override
                     public void onBefore() {
                         super.onBefore();
-                        dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡数量...");
+                        dialog = ProgressDialog.show(AllCardActivity.this, "", "正在获取卡信息...");
                     }
                 });
     }

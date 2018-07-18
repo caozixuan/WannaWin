@@ -7,16 +7,17 @@
 //
 
 import Foundation
-struct Order{
+struct Order:Codable{
+    var merchantName:String?
     var orderID:String?
     var originalPrice:Double?
     var priceAfter:Double?
     var pointsNeeded:Double?
-    var state:OrderState?
     var userID:String?
-    var merchant:Merchant?
+    var state:OrderState?
+    var merchantID:String?
     var time:String?
 }
 enum OrderState:String,Codable{
-    case SUCCESS = "success"
+    case SUCCESS = "SUCCESS"
 }

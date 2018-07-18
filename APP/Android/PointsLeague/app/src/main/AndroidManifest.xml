@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.citiexchangeplatform.pointsleague">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <!-- if you want to load images from the internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -65,7 +60,8 @@
         <activity android:name=".HistoryExchangeActivity" />
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".PointsExchangeExpandListActivity" />
-        <activity android:name=".PointsExchangeRecordActivity"></activity>
+        <activity android:name=".PointsExchangeRecordActivity" />
+        <activity android:name=".BindCardActivity"></activity>
     </application>
 
 </manifest>

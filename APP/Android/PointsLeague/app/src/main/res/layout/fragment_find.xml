@@ -100,22 +100,12 @@
             android:background="#33000000" />
     </FrameLayout>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_find"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/content_activity_find"></include>
-            <include layout="@layout/content_activity_find"></include>
-            <include layout="@layout/content_activity_find"></include>
-
-        </LinearLayout>
-    </ScrollView>
+    </android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

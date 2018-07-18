@@ -11,9 +11,9 @@
 
     <!-- ToolBar菜单样式 -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/black</item>
         <!--toolbar标题文字颜色-->
-        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="TabStyle" parent="TextAppearance.Design.Tab">
