@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                         }
                     }
 

@@ -93,7 +93,7 @@ public class PointsController {
      * return:[{"userID":"5503b50f-2312-4156-92b3-ec6dcea74656","merchantID":"4","points_card":295,"points_citi":0.0,"cause":"EXCHANGE","time":"Jul 14, 2018 2:41:44 PM"}]
      */
     @ResponseBody
-    @RequestMapping("/getPointsHistoryByID")
+    @RequestMapping(value="/getPointsHistoryByID",produces={"text/html;charset=UTF-8","application/json"})
     public String getPointsHistoryByID(String userID){
         List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryByID(userID);
         ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
@@ -116,13 +116,13 @@ public class PointsController {
      * return: [{"userID":"5503b50f-2312-4156-92b3-ec6dcea74656","merchantID":"4","points_card":295,"points_citi":0.0,"cause":"EXCHANGE","time":"Jul 14, 2018 2:41:44 PM"}]
      */
     @ResponseBody
-    @RequestMapping("/getPointsHistoryByMerchantID")
+    @RequestMapping(value = "/getPointsHistoryByMerchantID",produces={"text/html;charset=UTF-8","application/json"})
     public String getPointsHistoryByID(String userID, String merchantID){
         List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryBy_userID_AND_merchantID(userID, merchantID);
         ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
         for(Points_history points_history:pointsHistories){
             if(points_history.getCause().equals(Points_history.Cause.EXCHANGE)){
-                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchantID);
+                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchantMapper.selectByID(merchantID).getName());
                 returnHistories.add(points_history_merchant);
             }
         }

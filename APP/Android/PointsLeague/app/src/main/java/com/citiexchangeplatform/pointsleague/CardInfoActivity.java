@@ -2,11 +2,14 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +69,24 @@ public class CardInfoActivity extends AppCompatActivity {
             }
         });
 
+        Button buttonUnbind = (Button) findViewById(R.id.button_unbind_card_info);
+        buttonUnbind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(CardInfoActivity.this);
+                alertDialog.setTitle("解除绑定").setMessage("确定要解除该卡绑定吗")
+                    .setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    tryUnbind();
+                                }
+                            })
+                    .setNegativeButton("取消", null)
+                    .show();
+            }
+        });
+
         getInfos();
     }
 
@@ -117,6 +138,51 @@ public class CardInfoActivity extends AppCompatActivity {
                     public void onBefore() {
                         super.onBefore();
                         dialog = ProgressDialog.show(CardInfoActivity.this, "", "正在获取卡信息...");
+                    }
+                });
+    }
+
+    private void tryUnbind(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/mscard/unbindcard")
+                .addParam("userID", LogStateInfo.getInstance(CardInfoActivity.this).getUserID())
+                .addParam("merchantID", merchantID)
+                .addParam("cardNum", textViewAccount.getText().toString())
+                .build()
+                .execute(CardInfoActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean unindSuccess = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            unindSuccess = jsonObject.getBoolean("status");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        dialog.dismiss();
+
+                        if (unindSuccess) {
+                            Toast.makeText(CardInfoActivity.this, "解除绑定成功", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(CardInfoActivity.this, "解除绑定失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(CardInfoActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(CardInfoActivity.this, "", "正在请求服务器...");
                     }
                 });
     }

@@ -44,7 +44,7 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
         //设置增加或删除条目的动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        getInfos();
+        getCount();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_add_card);
@@ -59,7 +59,41 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
         });
     }
 
-    private void getInfos() {
+    private void getCount(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/merchant/getNum")
+                .build()
+                .execute(AddCardActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            getInfos(jsonObject.getInt("num"));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(AddCardActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(AddCardActivity.this, "", "正在获取商家信息...");
+                    }
+                });
+    }
+
+    private void getInfos(int n) {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/merchant/getInfos")
@@ -77,27 +111,18 @@ public class AddCardActivity extends AppCompatActivity implements SearchView.OnQ
                                 String merchantID = jsonObject.getString("merchantID");
                                 String name = jsonObject.getString("name");
                                 String description = jsonObject.getString("description");
-                                //String address = jsonObject.getString("address");
                                 String merchantLogoURL = jsonObject.getString("merchantLogoURL");
                                 addCardAdapter.addData(merchantID, name, description, merchantLogoURL);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        dialog.dismiss();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         super.onError(error);
-                        dialog.dismiss();
                         Toast.makeText(AddCardActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onBefore() {
-                        super.onBefore();
-                        dialog = ProgressDialog.show(AddCardActivity.this, "", "正在获取商家列表...");
                     }
                 });
     }
