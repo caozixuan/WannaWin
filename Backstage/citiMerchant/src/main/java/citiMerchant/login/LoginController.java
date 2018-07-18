@@ -47,6 +47,7 @@ public class LoginController {
         }
         else{
             mv.addObject("nums",nums);
+            mv.addObject("merchant",loginService.getMerchant(merchantID));
             mv.setViewName("starter");
             //添加session
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

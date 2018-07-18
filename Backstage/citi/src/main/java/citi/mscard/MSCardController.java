@@ -79,6 +79,7 @@ public class MSCardController {
     @ResponseBody
     @RequestMapping("/unbindcard")
     public String unbindcard(String userID, String merchantID, String cardNum){
+        boolean flag = msCardService.unbindcard(userID, merchantID, cardNum);
         return "";
     }
 }
