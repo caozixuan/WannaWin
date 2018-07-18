@@ -234,19 +234,19 @@ desired effect
 
 
             <%--<div class="box box-info">--%>
-                <%--<div class="box-header with-border">--%>
-                    <%--<h3 class="box-title">优惠券积分兑换情况统计</h3>--%>
-                    <%--<div class="box-tools pull-right">--%>
-                        <%--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i--%>
-                                <%--class="fa fa-minus"></i>--%>
-                        <%--</button>--%>
-                        <%--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>--%>
-                        <%--</button>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="box-body chart-responsive">--%>
-                    <%--<div class="chart" id="line-chart3" style="height: 300px;"></div>--%>
-                <%--</div>--%>
+            <%--<div class="box-header with-border">--%>
+            <%--<h3 class="box-title">优惠券积分兑换情况统计</h3>--%>
+            <%--<div class="box-tools pull-right">--%>
+            <%--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i--%>
+            <%--class="fa fa-minus"></i>--%>
+            <%--</button>--%>
+            <%--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>--%>
+            <%--</button>--%>
+            <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="box-body chart-responsive">--%>
+            <%--<div class="chart" id="line-chart3" style="height: 300px;"></div>--%>
+            <%--</div>--%>
             <%--</div>--%>
             <%--<!-- /.box-body -->--%>
 
@@ -316,13 +316,13 @@ desired effect
     String Point = (String) session.getAttribute("points_json");
     String timeStamp = (String) session.getAttribute("timeStamp_json");
     String Points_EXCHANGE = (String) session.getAttribute("points_exchange_json");
-    String merchant_coupon_record = (String) session.getAttribute("merchant_coupon_record_json");
+    //String merchant_coupon_record = (String) session.getAttribute("merchant_coupon_record_json");
 %>
 <script>
     var Points = $.parseJSON("<%=Point %>");
     var timeStamps = $.parseJSON("<%=timeStamp %>");
     var Points_EXCHANGES = $.parseJSON("<%=Points_EXCHANGE %>");
-    var Merchant_coupon_record = $.parseJSON("<%=merchant_coupon_record %>");
+    <%--//var Merchant_coupon_record = $.parseJSON("<%=merchant_coupon_record %>");--%>
 
     // for (var i = 0; i < 12; ++i)
     //     document.write(Merchant_coupon_record[i] + "  ");

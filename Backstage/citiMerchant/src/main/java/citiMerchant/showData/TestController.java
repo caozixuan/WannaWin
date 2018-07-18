@@ -35,7 +35,7 @@ public class TestController {
         List<Long> points = testService.show_order_points_chronology("1", "2018");
         List<Long> timestamp = testService.getMonthTimeStamp("2018");
         List<Long> points_exchange = testService.show_points_exchange_chronology("1", "2018");
-        List<List<Merchant_coupon_record>> merchant_coupon_record = testService.show_Merchant_coupon_record("1", "2018");
+        //List<List<Merchant_coupon_record>> merchant_coupon_record = testService.show_Merchant_coupon_record("1", "2018");
 
         //set attribute
         String points_json = gson.toJson(points);
@@ -47,10 +47,10 @@ public class TestController {
         String points_exchange_json = gson.toJson(points_exchange);
         session.setAttribute("points_exchange_json", points_exchange_json);
 
-        String merchant_coupon_record_json = gson.toJson(merchant_coupon_record);
-        session.setAttribute("merchant_coupon_record_json", merchant_coupon_record_json);
+        //String merchant_coupon_record_json = gson.toJson(merchant_coupon_record);
+        //session.setAttribute("merchant_coupon_record_json", merchant_coupon_record_json);
 
-        System.out.println(merchant_coupon_record_json);
+        //System.out.println(merchant_coupon_record_json);
 
         mv.setViewName("/showData/showData");
         return mv;
