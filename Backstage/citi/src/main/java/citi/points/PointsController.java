@@ -83,12 +83,7 @@ public class PointsController {
     @RequestMapping("/availablePoints")
     public String getAvailablePoints(String userID){
         User user = userMapper.getInfoByUserID(userID);
-        List<MSCard> msCards = msCardMapper.select(user.getUserID());
-        double availablePoints = 0.0;
-        for(int i=0;i<msCards.size();i++){
-            availablePoints+=msCards.get(i).getPoints()*msCards.get(i).getProportion();
-        }
-        user.setAvailablePoints(availablePoints);
+        double availablePoints = user.getAvailablePoints();
         return "{\"availablePoints\": "+availablePoints+"}";
     }
 
@@ -101,15 +96,18 @@ public class PointsController {
     @RequestMapping("/getPointsHistoryByID")
     public String getPointsHistoryByID(String userID){
         List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryByID(userID);
-        ArrayList<Points_history> returnHistories = new ArrayList<Points_history>();
+        ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
         for(Points_history points_history:pointsHistories){
             if(points_history.getCause().equals(Points_history.Cause.EXCHANGE)){
-                returnHistories.add(points_history);
+                Merchant merchant = merchantMapper.selectByID(points_history.getMerchantID());
+                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchant.getName());
+                returnHistories.add(points_history_merchant);
             }
         }
-        if(returnHistories==null)
+        ArrayList<ReturnInformation> returnInformations = pointsService.dividePointsHistory(returnHistories);
+        if(returnInformations==null)
             return "[]";
-        return gson.toJson(returnHistories);
+        return gson.toJson(returnInformations);
     }
 
     /*
@@ -121,10 +119,11 @@ public class PointsController {
     @RequestMapping("/getPointsHistoryByMerchantID")
     public String getPointsHistoryByID(String userID, String merchantID){
         List<Points_history> pointsHistories = pointsHistoryMapper.getPointsHistoryBy_userID_AND_merchantID(userID, merchantID);
-        ArrayList<Points_history> returnHistories = new ArrayList<Points_history>();
+        ArrayList<Points_history_merchant> returnHistories = new ArrayList<Points_history_merchant>();
         for(Points_history points_history:pointsHistories){
             if(points_history.getCause().equals(Points_history.Cause.EXCHANGE)){
-                returnHistories.add(points_history);
+                Points_history_merchant points_history_merchant = new Points_history_merchant(points_history, merchantID);
+                returnHistories.add(points_history_merchant);
             }
         }
         if(returnHistories==null)

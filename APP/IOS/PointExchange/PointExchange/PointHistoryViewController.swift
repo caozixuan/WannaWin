@@ -11,6 +11,7 @@ import ExpyTableView
 
 class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     
+    var pointsHistoryArray:[PointsHistory]?
     @IBOutlet weak var tableView: ExpyTableView!
     override func viewDidLoad() {
         super.viewDidLoad()

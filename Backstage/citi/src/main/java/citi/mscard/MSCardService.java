@@ -107,10 +107,12 @@ public class MSCardService {
     }
 
     public ArrayList<BriefCard> changeToBriefCards(List<MSCard> cards){
+
         ArrayList<BriefCard> briefCards = new ArrayList<BriefCard>();
         for(int i=0;i<cards.size();i++){
             MSCard card = cards.get(i);
-            BriefCard briefCard = new BriefCard(card.getMerchantId(),card.getLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion(),card.getLogoURL());
+            Merchant merchant = merchantMapper.selectByID(card.getMerchantId());
+            BriefCard briefCard = new BriefCard(card.getMerchantId(),merchant.getMerchantLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion(),merchant.getCardLogoURL());
             briefCards.add(briefCard);
         }
         return briefCards;

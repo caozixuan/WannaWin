@@ -45,7 +45,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
     public MyOrderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         /*列表布局*/
         return new MyOrderAdapter.MyViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.item_history_exchange, parent, false));
+                context).inflate(R.layout.item_my_order, parent, false));
     }
 
     @Override

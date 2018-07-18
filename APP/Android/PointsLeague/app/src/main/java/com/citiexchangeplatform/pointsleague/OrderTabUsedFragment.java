@@ -5,9 +5,28 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.citiexchangeplatform.pointsleague.data.RecordChild;
+import com.citiexchangeplatform.pointsleague.data.RecordParent;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -49,12 +68,13 @@ public class OrderTabUsedFragment extends Fragment {
     /*订单：totalPoints,description,date*/
     protected void initData()
     {
-        orderAdapter.addData("niki","5元代金券","2018-7-23");
-        orderAdapter.addData("中国联通","5元代金券","2018-7-26");
-        orderAdapter.addData("中国移动","5元代金券","2018-7-25");
-        orderAdapter.addData("中国电信","5元代金券","2018-7-27");
-        orderAdapter.addData("niki","5元代金券","2018-7-25");
-        orderAdapter.addData("中国联通","5元代金券","2018-7-27");
+        //orderAdapter.addData("niki","5元代金券","2018-7-23");
+        //orderAdapter.addData("中国联通","5元代金券","2018-7-26");
+        //orderAdapter.addData("中国移动","5元代金券","2018-7-25");
+        //orderAdapter.addData("中国电信","5元代金券","2018-7-27");
+        //orderAdapter.addData("niki","5元代金券","2018-7-25");
+        //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
+        getHistory();
 
 
 
@@ -68,6 +88,59 @@ public class OrderTabUsedFragment extends Fragment {
         usedOrderRecyclerView.setLayoutManager(layoutManager);
         orderAdapter = new MyOrderAdapter(getActivity());
         usedOrderRecyclerView.setAdapter(orderAdapter);
+    }
+
+    private void getHistory() {
+        String url="http://193.112.44.141:80/citi/order/getOrders";
+        RequestQueue queue = MyApplication.getHttpQueues();
+        //RequestQueue queue=Volley.newRequestQueue(this);
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+
+                Log.e("success",s);
+                System.out.println(s);
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+
+
+                        String pointsNeeded = jObj.getString("pointsNeeded");
+                        String merchantId = jObj.getString("merchantId");
+                        String time = jObj.getString("time");
+
+                        orderAdapter.addData(merchantId,pointsNeeded,time);
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+
+                map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+                map.put("intervalTime","1101010101");
+
+
+                return map;
+            }
+        };
+        queue.add(request);
+
+
     }
 
 }

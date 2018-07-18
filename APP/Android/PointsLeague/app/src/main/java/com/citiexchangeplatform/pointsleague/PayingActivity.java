@@ -354,6 +354,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
             e.printStackTrace();
         }
         final String jsonString = jsonObj.toString();
+        System.out.println(jsonString);
         String url="http://193.112.44.141:80/citi/points/changePoints";
         RequestQueue queue = MyApplication.getHttpQueues();
 
