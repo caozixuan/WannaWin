@@ -75,4 +75,10 @@ public class MSCardController {
             return ResultJson.SUCCESS;
         return ResultJson.FAILURE;
     }
+
+    @ResponseBody
+    @RequestMapping("/unbindcard")
+    public String unbindcard(String userID, String merchantID, String cardNum){
+        return "";
+    }
 }
