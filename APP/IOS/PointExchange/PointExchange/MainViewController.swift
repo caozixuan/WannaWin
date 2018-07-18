@@ -39,7 +39,9 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+		self.navigationController?.setNavigationBarHidden(true, animated: true)
         ServerConnector.getPointsInfo(callback: gotPointsInfo)
+		
     }
 	
 	/// 获得积分信息后的回调函数
@@ -159,8 +161,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 			if segue.destination .isKind(of: ImageScrollerViewController.self){
 				imageScroller = segue.destination as! ImageScrollerViewController
 				imageScroller.delegate = self
-				imageScroller.view.layer.cornerRadius = 20;
-				imageScroller.view.layer.masksToBounds = true;
+				//imageScroller.view.layer.cornerRadius = 20;
+				//imageScroller.view.layer.masksToBounds = true;
 				
 				//为图片添加点击手势事件
 				let tap = UITapGestureRecognizer(target: self,

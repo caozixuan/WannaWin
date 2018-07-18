@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.citiexchangeplatform.pointsleague.adapter.CardPointsAdapter;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
@@ -39,6 +40,7 @@ public class PointsFragment extends Fragment {
 
     View view;
     LinearLayout accountInfoLayout;
+    View content;
     ProgressDialog dialog;
 
     RecyclerView recyclerView;
@@ -52,7 +54,7 @@ public class PointsFragment extends Fragment {
         accountInfoLayout = (LinearLayout) view.findViewById(R.id.linearlayout_account_info_points);
 
         initImageSlider();
-        loadAccountInfo();
+        //loadAccountInfo();
 
         return view;
     }
@@ -103,7 +105,7 @@ public class PointsFragment extends Fragment {
         isLogin = LogStateInfo.getInstance(getContext()).isLogin();
 
         if (isLogin) {
-            View content = LayoutInflater.from(getContext()).inflate(R.layout.content_cards_points, null);
+            content = LayoutInflater.from(getContext()).inflate(R.layout.content_cards_points, null);
             accountInfoLayout.addView(content);
             Button buttonAllCard = (Button) content.findViewById(R.id.button_all_card_main);
             buttonAllCard.setOnClickListener(new View.OnClickListener() {
@@ -124,27 +126,17 @@ public class PointsFragment extends Fragment {
 
             cardPointsAdapter = new CardPointsAdapter(getContext());
             recyclerView = (RecyclerView) content.findViewById(R.id.recyclerView_cards_points);
-            //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(
                     new ScaleLayoutManager
                     .Builder(getContext(),2)
                     .setOrientation(OrientationHelper. HORIZONTAL)
                     .build());
-            //layoutManager.setOrientation(OrientationHelper. HORIZONTAL);
             recyclerView.setAdapter(cardPointsAdapter);
             recyclerView.setItemAnimator( new DefaultItemAnimator());
 
-            cardPointsAdapter.addData("nike", 99, 2, "123");
-            cardPointsAdapter.addData("apple", 129, 1, "123");
-            cardPointsAdapter.addData("中国移动", 200, 3, "123");
-            cardPointsAdapter.addData("中国电信", 77, 0.5, "123");
-            cardPointsAdapter.addData("Anta", 233, 1, "123");
-
-            recyclerView.scrollToPosition(cardPointsAdapter.getItemCount()/2);
-
         } else {
 
-            View content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_button_points, null);
+            content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_button_points, null);
             accountInfoLayout.addView(content);
 
             Button button = (Button) view.findViewById(R.id.button_login_points);
@@ -161,26 +153,23 @@ public class PointsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (LogStateInfo.getInstance(getContext()).isLogin() != isLogin) {
-            loadAccountInfo();
-        }
+        System.out.println("12345");
+        loadAccountInfo();
 
-        loadCardsInfo();
-
-    }
-
-    private void loadCardsInfo() {
         if (isLogin) {
-            getCardInfo();
+            showCardInfo();
+            showPoints(content);
         }
+
     }
 
-    private void getCardInfo() {
+
+    private void showCardInfo() {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/mscard/infos")
-                .addParam("userId", LogStateInfo.getInstance(getContext()).getUserID())
-                .addParam("n", "3")
+                .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
+                .addParam("n", "5")
                 .build()
                 .execute(getContext(), new CallBack<String>() {
                     @Override
@@ -190,13 +179,19 @@ public class PointsFragment extends Fragment {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jobj = jsonArray.getJSONObject(i);
-                                String cardID = jobj.getString("cardID");
-                                String merchantId = jobj.getString("merchantId");
-                                int points = jobj.getInt("points");
-                                System.out.println(cardID + " " + merchantId + " " + points);
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String merchantName = jsonObject.getString("merchantName");
+                                String merchantID = jsonObject.getString("merchantID");
+                                int points = jsonObject.getInt("points");
+                                double proportion = jsonObject.getDouble("proportion");
+                                String logoURL = jsonObject.getString("logoURL");
+                                cardPointsAdapter.addData(merchantName, merchantID, points, proportion, logoURL);
                             }
-                            //显示前n
+                            if(cardPointsAdapter.getItemCount() > 0){
+                                recyclerView.scrollToPosition(cardPointsAdapter.getItemCount()/2);
+                            }else {
+
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -217,6 +212,64 @@ public class PointsFragment extends Fragment {
                         dialog = ProgressDialog.show(getContext(), "", "正在获取卡片信息...");
                     }
 
+                });
+    }
+
+    private void showPoints(final View view) {
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/points/generalPoints")
+                .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean logSuccess = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            double generalPoints = jsonObject.getDouble("generalPoints");
+                            TextView textView = (TextView)view.findViewById(R.id.textView_generalPoints_main);
+                            textView.setText(String.valueOf(generalPoints));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/points/availablePoints")
+                .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean logSuccess = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            double availablePoints = jsonObject.getDouble("availablePoints");
+                            TextView textView = (TextView)view.findViewById(R.id.textView_availablePoints_main);
+                            textView.setText(String.valueOf(availablePoints));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
                 });
     }
 }

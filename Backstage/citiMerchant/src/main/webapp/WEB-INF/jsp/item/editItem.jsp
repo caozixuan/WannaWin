@@ -31,6 +31,13 @@ pageEncoding="UTF-8" isELIgnored="false" %>
      <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+  <link href="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/js/bower_components/bootstrap/less/dropdowns.less" rel="stylesheet" />
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/moment-with-locales.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+
   <!-- jQuery 3 -->
   <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
@@ -107,42 +114,28 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${merchant.merchantLogoURL}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${merchant.merchantLogoURL}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  ${merchant.name}
+                  <small>${merchant.description}</small>
                 </p>
               </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
+
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -160,10 +153,10 @@ desired effect
      <!-- Sidebar user panel (optional) -->
      <div class="user-panel">
        <div class="pull-left image">
-         <img src="${pageContext.request.contextPath}/js/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+         <img src="${merchant.merchantLogoURL}" class="img-circle" alt="User Image">
        </div>
        <div class="pull-left info">
-         <p>Alexander Pierce</p>
+         <p>${merchant.name}</p>
        </div>
      </div>
 
@@ -244,11 +237,10 @@ desired effect
                 </div>
                 <div class="form-group">
                   <label>抵扣券有效时间</label>
-                  <input name="overdueTime" type="text" class="form-control" placeholder="抵扣券有效时间" value=${item.overdueTime}
-                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                         onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                  <input name="overdueTime" type="date" class="form-control" placeholder="抵扣券有效时间" value=${item.overdueTime}>
                 </div>
-                <!-- textarea -->
+
+                  <!-- textarea -->
                 <div class="form-group">
                   <label>商品描述</label>
                   <textarea name="description" class="form-control" rows="3" placeholder="输入商品描述">${item.description}</textarea>
@@ -279,7 +271,7 @@ desired effect
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+      感谢大家的支持！
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
@@ -356,6 +348,17 @@ desired effect
     //上传前
     $('.myfile').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
+    });
+
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn')
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'YYYY-MM-DD hh:mm',
+            locale: moment.locale('zh-cn')
+        });
     });
 </script>
 </html>

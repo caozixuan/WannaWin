@@ -1,12 +1,6 @@
-package com.citiexchangeplatform.pointsleague;
+package com.citiexchangeplatform.pointsleague.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcel;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,25 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.R;
 import com.citiexchangeplatform.pointsleague.models.AddCardItemModel;
-import com.citiexchangeplatform.pointsleague.models.AllCardItemModel;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> implements Filterable {
 

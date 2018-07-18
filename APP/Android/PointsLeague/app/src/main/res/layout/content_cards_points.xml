@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="15dp">
+    android:paddingTop="15dp"
+    android:paddingBottom="5dp">
 
     <FrameLayout
+        android:id="@+id/re1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,16 +19,20 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="250dp"
+        android:id="@+id/re2"
+        android:layout_width="210dp"
         android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_below="@+id/re1"
+        android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
-        android:background="@drawable/rect_large_white">
+        android:background="@drawable/rect_large_white"
+        android:gravity="center">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <LinearLayout
                 android:id="@+id/linear_first_line"
                 android:layout_width="wrap_content"
@@ -39,21 +44,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:shadowColor="#50000000"
+                    android:shadowRadius="20"
                     android:text="当前花旗点:"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/textView_generalPoints_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="47"
+                    android:shadowColor="#50FFDD22"
+                    android:shadowRadius="20"
+                    android:text="0.0"
                     android:textColor="@color/colorOrange"
                     android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_below="@+id/linear_first_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_first_line"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="15dp"
                 android:orientation="horizontal">
@@ -61,14 +72,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:shadowColor="#50000000"
+                    android:shadowRadius="20"
                     android:text="可兑花旗点:"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/textView_availablePoints_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="422"
+                    android:shadowColor="#50FFDD22"
+                    android:shadowRadius="20"
+                    android:text="0.0"
                     android:textColor="@color/colorOrange"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -77,20 +93,24 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/re2"
+        android:layout_above="@+id/re3"
         android:id="@+id/recyclerView_cards_points"
         android:layout_width="wrap_content"
         android:layout_height="270dp"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        >
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
     </android.support.v7.widget.RecyclerView>
 
 
     <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/re3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/button_all_card_main"
@@ -101,4 +121,4 @@
     </FrameLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -10,12 +10,12 @@
         <RelativeLayout
             android:id="@+id/points_banner_main"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="180dp">
 
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/slider_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="180dp">
 
                 <com.daimajia.slider.library.Indicators.PagerIndicator
                     style="@style/AndroidImageSlider_Corner_Oval_Orange"
@@ -24,7 +24,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="60dp"
+                    android:layout_marginBottom="70dp"
                     />
 
             </com.daimajia.slider.library.SliderLayout>
@@ -34,7 +34,7 @@
             android:id="@+id/linearlayout_account_info_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:background="@drawable/background_points"
             android:orientation="vertical">
 

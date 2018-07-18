@@ -43,6 +43,7 @@ public class MerchantController {
         mv.setViewName("merchantInformation/editInformation");
         Merchant merchant = merchantMapper.selectByID(merchantID);
         mv.addObject(merchant);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         return mv;
     }
 
@@ -53,8 +54,8 @@ public class MerchantController {
         String merchantID = session.getAttribute("merchantID").toString();
         Merchant merchantOdd = merchantMapper.selectByID(merchantID);
         ModelAndView mv =new ModelAndView();
-        url2 = url+merchantID+url2;
-        url3 = url+merchantID+url3;
+        url2 = url+url2;
+        url3 = url+url3;
         merchantOdd.setName(name);
         merchantOdd.setDescription(description);
         merchantOdd.setCardDescription(cardDescription);
@@ -65,31 +66,65 @@ public class MerchantController {
         merchantMapper.updateMercahntAddress(merchantID,address);
         merchantMapper.updateMercahntDescription(merchantID,description);
         merchantMapper.updateMerchantCardDescription(merchantID,cardDescription);
-        merchantMapper.updateMerchantLogo(merchantID,url2);
-        merchantMapper.updateActivityTheme(merchantID,url3);
+        merchantMapper.updateMerchantLogo(url2,merchantID);
+        merchantMapper.updateMerchantCardLogo(url3, merchantID);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("redirect:/starter");
         return mv;
     }
 
-    @RequestMapping("/merchant/uploadFile")
+    @RequestMapping("/uploadFile1")
     @ResponseBody
-    public Map<String, Object> uploadFile(MultipartFile myfile)
+    public Map<String, Object> uploadFile1(MultipartFile myfile1)
             throws IllegalStateException, IOException {
         // 原始名称
-        String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
+        String oldFileName = myfile1.getOriginalFilename(); // 获取上传文件的原名
 //      System.out.println(oldFileName);
         // 存储图片的虚拟本地路径（这里需要配置tomcat的web模块路径，双击猫进行配置）
         String saveFilePath = "/usr/share/tomcat7/image/merchant";
+        //String saveFilePath = "E:\\picture";
         // 上传图片
-        if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
+        if (myfile1 != null && oldFileName != null && oldFileName.length() > 0) {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session =request.getSession();
             String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
             String newFileName = merchantID + oldFileName;
             // 新图片
-            File newFile = new File(saveFilePath + "\\" + newFileName);
+            File newFile = new File(saveFilePath + "/" + newFileName);
             // 将内存中的数据写入磁盘
-            myfile.transferTo(newFile);
+            myfile1.transferTo(newFile);
+            // 将新图片名称返回到前端
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "成功啦");
+            map.put("url", newFileName);
+            return map;
+        } else {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "图片不合法");
+            return map;
+        }
+    }
+
+    @RequestMapping("/uploadFile2")
+    @ResponseBody
+    public Map<String, Object> uploadFile2(MultipartFile myfile2)
+            throws IllegalStateException, IOException {
+        // 原始名称
+        String oldFileName = myfile2.getOriginalFilename(); // 获取上传文件的原名
+//      System.out.println(oldFileName);
+        // 存储图片的虚拟本地路径（这里需要配置tomcat的web模块路径，双击猫进行配置）
+        String saveFilePath = "/usr/share/tomcat7/image/merchant";
+        //String saveFilePath = "E:\\picture";
+        // 上传图片
+        if (myfile2 != null && oldFileName != null && oldFileName.length() > 0) {
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session =request.getSession();
+            String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
+            String newFileName = merchantID + oldFileName;
+            // 新图片
+            File newFile = new File(saveFilePath + "/" + newFileName);
+            // 将内存中的数据写入磁盘
+            myfile2.transferTo(newFile);
             // 将新图片名称返回到前端
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("success", "成功啦");

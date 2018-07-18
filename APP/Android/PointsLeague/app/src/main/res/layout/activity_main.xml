@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/tb"
+            android:layout_above="@+id/bottom_navigation_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">

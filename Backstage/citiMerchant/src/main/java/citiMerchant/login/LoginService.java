@@ -29,5 +29,9 @@ public class LoginService {
             return dBhandler.getAmountByMerchantID(m.getMerchantID());
     }
 
+    public Merchant getMerchant(String merchantID){
+        return merchantMapper.selectByID(merchantID);
+    }
+
 
 }

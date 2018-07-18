@@ -109,7 +109,7 @@ public class OrderTabUsedFragment extends Fragment {
 
                         String pointsNeeded = jObj.getString("pointsNeeded");
                         String merchantId = jObj.getString("merchantId");
-                        String time = String.valueOf(jObj.getDouble("time"));
+                        String time = jObj.getString("time");
 
                         orderAdapter.addData(merchantId,pointsNeeded,time);
 
@@ -130,8 +130,10 @@ public class OrderTabUsedFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
-                map.put("userID",LogStateInfo.getInstance(getActivity()).getUserID());
+
+                map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
                 map.put("intervalTime","1101010101");
+
 
                 return map;
             }

@@ -34,6 +34,8 @@
 		3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */; };
 		3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */; };
 		3EBF049220F99854004D6D8E /* ExchangeHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049120F99854004D6D8E /* ExchangeHistoryTableViewController.swift */; };
+		3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */; };
+		3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049720FDAD13004D6D8E /* MaskView.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -44,7 +46,6 @@
 		B66CFB3320F98598007165DF /* DoubleSectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */; };
 		B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */; };
 		B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */; };
-		B66CFB3B20FC2D7C007165DF /* ModifyPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3A20FC2D7C007165DF /* ModifyPasswordTableViewController.swift */; };
 		B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */; };
 		B66CFB3F20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */; };
 		B66CFB4120FE2D45007165DF /* PointsHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB4020FE2D45007165DF /* PointsHistory.swift */; };
@@ -98,6 +99,8 @@
 		3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardTableViewController.swift; sourceTree = "<group>"; };
 		3EBF049120F99854004D6D8E /* ExchangeHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeHistoryTableViewController.swift; sourceTree = "<group>"; };
+		3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordTableViewController.swift; sourceTree = "<group>"; };
+		3EBF049720FDAD13004D6D8E /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,7 +114,6 @@
 		B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSectionOrderViewController.swift; sourceTree = "<group>"; };
 		B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryViewController.swift; sourceTree = "<group>"; };
 		B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		B66CFB3A20FC2D7C007165DF /* ModifyPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ModifyPasswordTableViewController.swift; path = /Users/panyy/Desktop/PAN/HQ/APP/IOS/PointExchange/PointExchange/ModifyPasswordTableViewController.swift; sourceTree = "<absolute>"; };
 		B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordTableViewController.swift; sourceTree = "<group>"; };
 		B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordFinishTableViewController.swift; sourceTree = "<group>"; };
 		B66CFB4020FE2D45007165DF /* PointsHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsHistory.swift; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 		3E46B77820F254C900843193 /* UserTab */ = {
 			isa = PBXGroup;
 			children = (
-				B66CFB3A20FC2D7C007165DF /* ModifyPasswordTableViewController.swift */,
+				3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */,
 				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
 				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
 				3E4C155B20EE0117000743C0 /* SettingViewController.swift */,
@@ -259,6 +261,7 @@
 			children = (
 				3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */,
 				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
+				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/ExpyTableView/ExpyTableView.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -470,6 +474,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpyTableView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -539,6 +544,7 @@
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
 				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
+				3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */,
 				B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
@@ -553,6 +559,7 @@
 				3EBF049220F99854004D6D8E /* ExchangeHistoryTableViewController.swift in Sources */,
 				B66CFB2920F8AE2C007165DF /* Order.swift in Sources */,
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
+				3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				B66CFB4120FE2D45007165DF /* PointsHistory.swift in Sources */,
 				B66CFB3B20FC2D7C007165DF /* ModifyPasswordTableViewController.swift in Sources */,

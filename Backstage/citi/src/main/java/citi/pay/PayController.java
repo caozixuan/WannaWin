@@ -1,5 +1,5 @@
 package citi.pay;
-import citi.resultjson.ResultJson;
+import citi.support.resultjson.ResultJson;
 import citi.vo.Order;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-
 /**
  * @author zhong
  * @date 2018-7-11
  */
-@RequestMapping("/pay")
+@RequestMapping(value = {"/pay"},produces = {"text/html;charset=UTF-8"})
 @Controller
 public class PayController {
     @Autowired

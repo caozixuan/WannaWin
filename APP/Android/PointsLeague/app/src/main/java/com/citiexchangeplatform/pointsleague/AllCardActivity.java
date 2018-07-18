@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.citiexchangeplatform.pointsleague.adapter.AllCardAdapter;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -85,11 +86,11 @@ public class AllCardActivity extends AppCompatActivity implements SearchView.OnQ
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jobj = jsonArray.getJSONObject(i);
                                 String name = jobj.getString("merchantName");
-                                String logoURL = jobj.getString("logoURL");
+                                String merchantLogoURL = jobj.getString("merchantLogoURL");
                                 int point = jobj.getInt("points");
                                 double proportion = jobj.getDouble("proportion");
                                 String merchantID = jobj.getString("merchantID");
-                                allCardAdapter.addData(merchantID, name, logoURL, point, proportion);
+                                allCardAdapter.addData(merchantID, name, merchantLogoURL, point, proportion);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
