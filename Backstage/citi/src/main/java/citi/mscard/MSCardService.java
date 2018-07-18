@@ -133,4 +133,9 @@ public class MSCardService {
             description="default";
         return new DetailCard(logoURL,points,cardNum,description,0, merchant.getProportion());
     }
+
+    public boolean unbindcard(String userID, String merchantID, String cardNum){
+
+        return true;
+    }
 }
