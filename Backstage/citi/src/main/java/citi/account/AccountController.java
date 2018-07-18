@@ -1,7 +1,7 @@
 package citi.account;
 
-import citi.resultjson.ResultJson;
-import citi.resultjson.SerializeGson;
+import citi.support.resultjson.ResultJson;
+import citi.support.resultjson.SerializeGson;
 import citi.user.UserService;
 import citi.vo.User;
 import com.google.gson.Gson;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 代码填充：彭璇
  * bug修复：刘钟博
  */
-@RequestMapping("/account")
+@RequestMapping(value = {"/account"},produces = {"text/html;charset=UTF-8"})
 @Controller
 public class AccountController {
 

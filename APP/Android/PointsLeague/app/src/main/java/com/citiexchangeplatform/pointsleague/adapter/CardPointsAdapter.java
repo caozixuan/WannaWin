@@ -1,7 +1,7 @@
-package com.citiexchangeplatform.pointsleague;
+package com.citiexchangeplatform.pointsleague.adapter;
 
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.CardInfoActivity;
+import com.citiexchangeplatform.pointsleague.R;
 import com.citiexchangeplatform.pointsleague.models.CardPointsModel;
 
 import java.util.ArrayList;
@@ -44,11 +46,20 @@ public class CardPointsAdapter extends RecyclerView.Adapter<CardPointsAdapter.VH
         holder.textViewName.setText(items.get(position).getName());
         holder.textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
         holder.textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()/items.get(position).getProportion()));
-//        Glide.with(context)
-//                .load(items.get(position).getCardLogoURL())
-//                .placeholder(R.drawable.store_card)
-//                .error(R.drawable.store_card)
-//                .into(holder.imageView);
+        Glide.with(context)
+                .load(items.get(position).getCardLogoURL())
+                .centerCrop()
+                .placeholder(R.drawable.loading_card)
+                .error(R.drawable.loading_card)
+                .into(holder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToCardInfo = new Intent(context, CardInfoActivity.class);
+                intentToCardInfo.putExtra("merchantID",items.get(position).getMerchantID());
+                context.startActivity(intentToCardInfo);
+            }
+        });
     }
 
     @Override
@@ -63,8 +74,8 @@ public class CardPointsAdapter extends RecyclerView.Adapter<CardPointsAdapter.VH
     }
 
 
-    public void addData(String name, int point, double proportion, String cardLogoURL) {
-        CardPointsModel newItem = new CardPointsModel(name, point, proportion, cardLogoURL);
+    public void addData(String name, String merchantName, int point, double proportion, String cardLogoURL) {
+        CardPointsModel newItem = new CardPointsModel(name, merchantName, point, proportion, cardLogoURL);
         items.add(newItem);
         notifyDataSetChanged();
     }

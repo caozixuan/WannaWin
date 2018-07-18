@@ -28,6 +28,8 @@ public interface MerchantMapper {
     final String updateMerchantCardLogo = "UPDATE merchant SET cardLogoURL = #{cardLogoURL} WHERE MerchantID = #{merchantID}";
     final String updateActivityTheme = "UPDATE merchant SET activityTheme = #{activityTheme} WHERE MerchantID = #{merchnatID}";
     final String updateActivityDescription = "\"UPDATE merchant SET activityDescription = #{activityDescription} WHERE MerchantID = #{merchnatID}";
+    final String updateCardType = "UPDATE merchat SET cardType = #{cardType} WHERE MerchantID = #{merchantID}";
+    final String updateBusinessType = "UPDATE merchat SET businessType = #{businessType} WHERE MerchantID = #{merchantID}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
     final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
     final String changePassword = "UPDATE merchant SET password = #{password} WHERE MerchantID = #{merchantID}";
@@ -63,6 +65,12 @@ public interface MerchantMapper {
 
     @Update(updateActivityDescription)
     int updateActivityDescription(@Param("merchantID") String merchantID, @Param("activityDescription") String activityDescription);
+
+    @Update(updateCardType)
+    int updateCardType(Merchant merchant);
+
+    @Update(updateBusinessType)
+    int updateBusinessType(Merchant merchant);
 
     //The return sequence will be [start+1, start+2, ,,, start+length].
     @Select(getSome)

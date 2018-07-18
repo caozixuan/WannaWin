@@ -1,10 +1,7 @@
 package citi.mapper;
 
 import citi.vo.MSCard;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,6 +14,7 @@ public interface MSCardMapper {
     final String getBy_userID_AND_merchantID = "SELECT * FROM m_card WHERE UserID = #{userID} AND MerchantID = #{merchantID}";
     final String grantPoints = "UPDATE m_card SET Points = Points + #{points} WHERE UserID = #{userID} AND MerchantID = #{merchantID}";
     final String exchangePoints = "UPDATE m_card SET Points = Points - #{points} WHERE UserID = #{userID} AND MerchantID = #{merchantID}";
+    final String unBind = "DELETE FROM m_card WHERE UserID = #{userID} AND MerchantID = #{merchantID} AND cardNum = #{cardNum}";
 
     //插入一个会员卡d
     @Insert(insert)
@@ -34,5 +32,8 @@ public interface MSCardMapper {
 
     @Update(exchangePoints)
     int exchangePoints(@Param("points") int points, @Param("userID") String userID, @Param("merchantID") String merchantID);
+
+    @Delete(unBind)
+    int unBind(@Param("userID") String userID, @Param("merchantID") String merchantID, @Param("cardNum") String cardNum);
 
 }

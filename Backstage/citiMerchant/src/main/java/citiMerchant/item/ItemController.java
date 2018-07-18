@@ -1,5 +1,6 @@
 package citiMerchant.item;
 
+import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.vo.Item;
 import citiMerchant.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private MerchantMapper merchantMapper;
+
     private static String url = "http://www.byzhong.cn/image/item/";
 
     @RequestMapping("/item/getItem")
@@ -38,6 +42,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("/item/showItem");
         return mv;
     }
@@ -45,15 +50,20 @@ public class ItemController {
     @RequestMapping("/item/addItem")
     public ModelAndView addItem(String merchantID){
         ModelAndView mv =new ModelAndView();
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("item/addItem");
         return mv;
     }
 
     @RequestMapping("/item/editItem")
     public ModelAndView editItem(String itemID){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session =request.getSession();
+        String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv =new ModelAndView();
         Item item = itemService.getItem(itemID);
         mv.addObject("item",item);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("/item/editItem");
         return mv;
     }
@@ -71,6 +81,7 @@ public class ItemController {
         itemService.updateItem(item);
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("item/showItem");
         return mv;
     }
@@ -84,6 +95,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         mv.setViewName("/item/showItem");
         return mv;
     }
@@ -101,6 +113,7 @@ public class ItemController {
         ModelAndView mv =new ModelAndView("redirect:/item/getItem");
         List<Item> items = itemService.getInfo(merchantID);
         mv.addObject("items",items);
+        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
         //mv.setViewName("/item/showItem");
         return mv;
     }

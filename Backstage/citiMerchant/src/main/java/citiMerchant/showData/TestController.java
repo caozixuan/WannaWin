@@ -1,5 +1,6 @@
 package citiMerchant.showData;
 
+import citiMerchant.vo.Merchant_coupon_record;
 import citiMerchant.vo.Record;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,28 @@ public class TestController {
         HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv = new ModelAndView();
-        List<Long> points = testService.show_order_points_chronology("00002", "2018");
+
+        //
+        List<Long> points = testService.show_order_points_chronology("1", "2018");
+        List<Long> timestamp = testService.getMonthTimeStamp("2018");
+        List<Long> points_exchange = testService.show_points_exchange_chronology("1", "2018");
+        //List<List<Merchant_coupon_record>> merchant_coupon_record = testService.show_Merchant_coupon_record("1", "2018");
+
+        //set attribute
         String points_json = gson.toJson(points);
         session.setAttribute("points_json", points_json);
-        //System.out.println(points_json);
-        //mv.addObject("points", points);
+
+        String timeStamp_json = gson.toJson(timestamp);
+        session.setAttribute("timeStamp_json", timeStamp_json);
+
+        String points_exchange_json = gson.toJson(points_exchange);
+        session.setAttribute("points_exchange_json", points_exchange_json);
+
+        //String merchant_coupon_record_json = gson.toJson(merchant_coupon_record);
+        //session.setAttribute("merchant_coupon_record_json", merchant_coupon_record_json);
+
+        //System.out.println(merchant_coupon_record_json);
+
         mv.setViewName("/showData/showData");
         return mv;
     }

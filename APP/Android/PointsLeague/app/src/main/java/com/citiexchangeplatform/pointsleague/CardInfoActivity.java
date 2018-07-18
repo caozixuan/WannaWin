@@ -61,6 +61,7 @@ public class CardInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentToHistory = new Intent(CardInfoActivity.this, HistoryExchangeActivity.class);
+                intentToHistory.putExtra("merchantID",merchantID);
                 startActivity(intentToHistory);
             }
         });

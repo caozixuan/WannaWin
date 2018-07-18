@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.home_unselected, "首页"))
                 .addItem(new BottomNavigationItem(R.drawable.search_unselected, "发现"))
-                .addItem(new BottomNavigationItem(R.drawable.qrcode, "二维码").setInActiveColor(R.color.colorOrange))
+                .addItem(new BottomNavigationItem(R.drawable.qrcode, "二维码").setInActiveColor("#FF8022"))
                 .addItem(new BottomNavigationItem(R.drawable.store_unselected, "商城"))
                 .addItem(new BottomNavigationItem(R.drawable.my_unselected, "我的"))
                 .setFirstSelectedPosition(lastSelectedPosition)

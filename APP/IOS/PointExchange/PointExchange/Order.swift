@@ -8,10 +8,15 @@
 
 import Foundation
 struct Order{
-    var id:String?
-    var type:String?
-    var merchantName:String?
-    var description:String?
-    var points:Double?
-    var date:String?
+    var orderID:String?
+    var originalPrice:Double?
+    var priceAfter:Double?
+    var pointsNeeded:Double?
+    var state:OrderState?
+    var userID:String?
+    var merchant:Merchant?
+    var time:String?
+}
+enum OrderState:String,Codable{
+    case SUCCESS = "success"
 }

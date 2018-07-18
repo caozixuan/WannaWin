@@ -14,7 +14,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     
     var rowCount = 4;
-    var discountArray = ["东方航空","南方航空","北京烤鸭","宫保鸡丁"]
+    var merchantArray = ["东方航空","南方航空","北京烤鸭","宫保鸡丁"]
     @IBOutlet weak var tableView: UITableView!
     
     var tableCellIdentifier:String = "local discount"
@@ -138,7 +138,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier:self.tableCellIdentifier, for: indexPath)
-        (cell.viewWithTag(2) as! UILabel).text = discountArray[indexPath.row]
+        (cell.viewWithTag(2) as! UILabel).text = merchantArray[indexPath.row]
         
         return cell
     }

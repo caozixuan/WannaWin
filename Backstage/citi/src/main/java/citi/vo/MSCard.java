@@ -8,7 +8,7 @@ public class MSCard {
     private String userID;
     private String cardNum;
     private int points;
-    private String merchantId;
+    private String merchantID;
     private double proportion;
     private String logoURL;
     private String merchantName;
@@ -17,7 +17,7 @@ public class MSCard {
         this.userID = userID;
         this.cardNum = cardNum;
         this.points = points;
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
         this.proportion = proportion;
         this.logoURL = logoURL;
         this.merchantName = merchantName;
@@ -31,7 +31,7 @@ public class MSCard {
         this.userID = userID;
         this.cardNum = cardNum;
         this.points = points;
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
     }
 
     public static boolean checkAttribute(MSCard msCard) {
@@ -76,11 +76,11 @@ public class MSCard {
     }
 
     public String getMerchantId() {
-        return merchantId;
+        return merchantID;
     }
 
     public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+        this.merchantID = merchantId;
     }
 
     public void setPoints(int points) {
