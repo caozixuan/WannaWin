@@ -3,10 +3,10 @@ package citiMerchant.vo;
 public class Record {
 
     private String IN_MerchantID;
-    private int IN_intervalDate;
+    private Integer IN_intervalDate;
     private Long totalPoints;
 
-    public Record(String IN_MerchantID, int IN_intervalDate) {
+    public Record(String IN_MerchantID, Integer IN_intervalDate) {
         this.IN_MerchantID = IN_MerchantID;
         this.IN_intervalDate = IN_intervalDate;
         this.totalPoints = -1L;
@@ -16,7 +16,7 @@ public class Record {
         return IN_MerchantID;
     }
 
-    public int getIN_intervalDate() {
+    public Integer getIN_intervalDate() {
         return IN_intervalDate;
     }
 

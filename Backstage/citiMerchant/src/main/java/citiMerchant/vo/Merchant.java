@@ -23,7 +23,7 @@ public class Merchant {
     @Expose
     private String cardLogoURL;
     @Expose
-    private double proportion;
+    private Double proportion;
     @Expose
     private String activityTheme;
     @Expose
@@ -90,7 +90,7 @@ public class Merchant {
     }
 
     //for DB
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, double proportion, String activityTheme, String activityDescription, String cardType, String businessType) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, String cardType, String businessType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -108,7 +108,7 @@ public class Merchant {
 
 
     //for programmer
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, double proportion, String activityTheme, String activityDescription, CardType cardType) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, CardType cardType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -163,11 +163,11 @@ public class Merchant {
         this.cardLogoURL = cardLogoURL;
     }
 
-    public double getProportion() {
+    public Double getProportion() {
         return proportion;
     }
 
-    public void setProportion(double proportion) {
+    public void setProportion(Double proportion) {
         this.proportion = proportion;
     }
 
