@@ -224,6 +224,7 @@ public class PayCodeActivity extends AppCompatActivity {
                         intentToFinish.putExtras(bundle);
                         //
                         startActivity(intentToFinish);
+                        finish();
                     }
 
                 } catch (JSONException e) {

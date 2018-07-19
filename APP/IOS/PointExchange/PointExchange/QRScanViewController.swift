@@ -12,13 +12,37 @@ class QRScanViewController: UIViewController {
 
     @IBOutlet weak var barCodeView: UIImageView!
     @IBOutlet weak var qrCodeView: UIImageView!
+    
+    var timeStamp = String(Int(Date().timeIntervalSince1970))
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let codeManager = ScanCodeManager()
-        barCodeView.image=codeManager.createBarCode(url: "hello")
-        qrCodeView.image=codeManager.createQRCode(url: "hello")
-
+        let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id))\",\"timeStamp\":\"\(timeStamp)\"}"
+        print(timeStamp)
+        barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
+        qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
+        let timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(refreshCode), userInfo: nil, repeats: true)
+        timer.fire()
+        
         // Do any additional setup after loading the view.
+    }
+    @objc func refreshCode(){
+        ServerConnector.pollizngQR(timestamp: timeStamp, callback: refreshCallback)
+    }
+    func refreshCallback(result:String, order:Order?){
+        if result == "invalid" {
+            timeStamp = String(Int(Date().timeIntervalSince1970))
+            let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id))\",\"timeStamp\":\"\(timeStamp)\"}"
+            barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
+            qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
+        }
+        else if result == "success" {
+            let sb = UIStoryboard(name: "Exchange", bundle: nil)
+            let view = sb.instantiateViewController(withIdentifier: "FinishExchangeViewController") as! FinishExchangeViewController
+            view.order = order!
+            self.navigationController?.pushViewController(view, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
