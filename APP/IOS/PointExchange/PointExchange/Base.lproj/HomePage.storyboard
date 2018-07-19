@@ -292,7 +292,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="174"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="周黑鸭" translatesAutoresizingMaskIntoConstraints="NO" id="GGf-mo-ilJ">
+                                        <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="周黑鸭" translatesAutoresizingMaskIntoConstraints="NO" id="GGf-mo-ilJ">
                                             <rect key="frame" x="32" y="8" width="311" height="158"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <userDefinedRuntimeAttributes>

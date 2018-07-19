@@ -369,6 +369,21 @@ class ServerConnector: NSObject {
         }
     }
 
+    /// 解绑会员卡
+    static func unbindCard(merchantID:String, cardNum:String,callback:@escaping (_ result:Bool)->()){
+        provider.request(.unbindCard(merchantID:merchantID, cardNum: cardNum)){ result in
+            if case let .success(response) = result{
+                let data = JSON(try? response.mapJSON())
+                if data["status"].bool == true{
+                    callback(true)
+                }else{
+                    callback(false)
+                }
+                
+            }
+            
+        }
+    }
     // 积分相关
     /// 积分兑换
     static func changePoints(merchants:[JSON],callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>)->()){
@@ -478,10 +493,23 @@ class ServerConnector: NSObject {
     
     // 支付相关
     /// TODO: 二维码轮询
-    static func pollizngQR(timestamp:String,callback:@escaping (_ result:Bool)->()){
+    static func pollizngQR(timestamp:String,callback:@escaping (_ result:String,_ order:Order?)->()){
         provider.request(.pollingQR(timestamp: timestamp)){ result in
             if case let .success(response) = result{
-                
+                let data = JSON(try? response.mapJSON())
+                let status = data["status"].string
+                if let r = status{
+                    callback(r,nil)
+                }
+                else{
+                    do{
+                        let order = try JSONDecoder().decode(Order.self, from: response.data)
+                        callback("used",order)
+                    }catch{
+                        print("json解析失败")
+                    }
+                    
+                }
             }
         }
     }
