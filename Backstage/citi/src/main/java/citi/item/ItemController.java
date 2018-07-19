@@ -25,8 +25,8 @@ public class ItemController {
 
     @ResponseBody
     @RequestMapping("/getItems")
-    public String getItems(int start,int length){
-        List<Item> items=itemService.getItems(start,length);
+    public String getItems(int start,int n){
+        List<Item> items=itemService.getItems(start,n);
         return gson.toJson(items);
     }
 
