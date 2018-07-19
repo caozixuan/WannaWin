@@ -16,6 +16,7 @@ public class GroupVH extends RecyclerView.ViewHolder implements RecyclerView.OnC
 
 
 
+    public TextView id;
     public TextView totalPoints;
     public TextView date;
     public Button refresh;
@@ -28,6 +29,7 @@ public class GroupVH extends RecyclerView.ViewHolder implements RecyclerView.OnC
         this.mListener = myItemClickListener;
         itemView.setOnClickListener(this);
 
+        id = itemView.findViewById(R.id.textView_id);
         totalPoints = itemView.findViewById(R.id.textView_total_exchange_points);
         date = itemView.findViewById(R.id.textView_exchange_date);
         refresh = itemView.findViewById(R.id.refresh);
@@ -36,7 +38,7 @@ public class GroupVH extends RecyclerView.ViewHolder implements RecyclerView.OnC
     @Override
     public void onClick(View v) {
         if (mListener != null) {
-            mListener.onItemClick(v, getPosition());
+            mListener.onItemClick(v, Integer.parseInt(id.getText().toString()));
         }
     }
 }

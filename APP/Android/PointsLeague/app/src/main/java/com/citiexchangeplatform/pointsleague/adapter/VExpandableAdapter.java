@@ -107,6 +107,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
 
         GroupVH vh = ((GroupVH) holder);
         //vh.date.setText(String.valueOf(getChildCount(position)));
+        vh.id.setText(String.valueOf(position));
         vh.totalPoints.setText(recordList.get(position).totalExchangePoint);
         vh.date.setText(recordList.get(position).date);
         vh.refresh.setOnClickListener(listener);
