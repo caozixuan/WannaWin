@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -34,7 +35,9 @@ public class MSCardController {
      */
     @ResponseBody
     @RequestMapping("/infos")
-    public String getMSInfo(String userID,int n){
+    public String getMSInfo(String userID,Integer n){
+        if(n==null)
+            return "[]";
         List<MSCard> cards = msCardService.getInfo(userID, n);
         if(cards==null){
             return "[]";
@@ -42,6 +45,7 @@ public class MSCardController {
         ArrayList<BriefCard> briefCards = msCardService.changeToBriefCards(cards);
         if(briefCards==null)
             return "[]";
+        Collections.sort(briefCards);
         String jsonStr = gson.toJson(briefCards);
         return jsonStr;
     }
