@@ -8,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -42,6 +45,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     private List<ExchangeModel> sourceItems;
     private List<ExchangeModel> filteredItems;
     private Context context;
+    private PayingAdapter.MyViewHolder viewHolder;
     //是否显示单选框,默认false
     //private boolean isshowBox = false;
     private int total;
@@ -50,6 +54,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     private HashMap<Integer, Double> totals = new HashMap<>();
     private ButtonInterface buttonInterface;
     private CheckBoxInterface checkBoxInterface;
+    private EditTextInterface editTextInterface;
 
     KeyListener storedKeylistener;
 
@@ -94,12 +99,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     }
 
 
-    /**
-     *按钮点击事件需要的方法
-     */
-    public void buttonSetOnclick(ButtonInterface buttonInterface){
-        this.buttonInterface=buttonInterface;
-    }
+
 
     @Override
     public Filter getFilter() {
@@ -133,10 +133,31 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     }
 
     /**
+     *按钮点击事件需要的方法
+     */
+    public void buttonSetOnclick(ButtonInterface buttonInterface){
+        this.buttonInterface=buttonInterface;
+    }
+
+    /**
      * 按钮点击事件对应的接口
      */
     public interface ButtonInterface{
         public void onclick( View view,int position);
+    }
+
+    /**
+     *editText监听接口
+     */
+    public void editTextComplete(EditTextInterface editTextInterface){
+        this.editTextInterface = editTextInterface;
+    }
+
+    /**
+     * checkbox点击事件对应的接口
+     */
+    public interface EditTextInterface{
+        public void onComplete(View view, int position);
     }
 
 
@@ -155,10 +176,15 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     }
 
 
+
+
+
     @NonNull
     @Override
     public PayingAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         /*列表布局*/
+        viewHolder = new MyViewHolder(LayoutInflater.from(
+                context).inflate(R.layout.item_paying, parent, false));
         return new MyViewHolder(LayoutInflater.from(
                 context).inflate(R.layout.item_paying, parent, false));
     }
@@ -166,6 +192,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(@NonNull final PayingAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        viewHolder = holder;
         holder.setIsRecyclable(false);
         //设置列表中积分信息
         holder.editPoint.setText(filteredItems.get(position).getExchangePoint());
@@ -211,6 +238,29 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
 
             }
         });*/
+
+        holder.editPoint.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                /*判断是否是“GO”键*/
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+
+                    /*隐藏软键盘*/
+
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(imm.isActive()) {
+                        imm.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
+                    }
+                    if (editTextInterface != null) {
+                        //接口实例化后的而对象，调用重写后的方法
+                        editTextInterface.onComplete(v, position);
+                    }
+
+                    return true;
+                }
+                return false;
+            }
+        });
 
         holder.Checkbox_Choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -466,6 +516,9 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         return sourceItems;
     }
 
+    public MyViewHolder getHolder() {
+        return viewHolder;
+    }
 
     //private void specialUpdate(final int item_position) {
     //    Handler handler = new Handler();
@@ -546,6 +599,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
             storedKeylistener = editPoint.getKeyListener();
         }
 
-
+        public EditText getEditPoint() {
+            return editPoint;
+        }
     }
 }

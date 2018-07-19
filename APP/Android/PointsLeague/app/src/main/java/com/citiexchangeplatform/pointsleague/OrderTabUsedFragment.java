@@ -65,7 +65,7 @@ public class OrderTabUsedFragment extends Fragment {
         return view;
     }
 
-    /*订单：totalPoints,description,date*/
+    /*订单：totalPoints,description,usePoints*/
     protected void initData()
     {
         //orderAdapter.addData("niki","5元代金券","2018-7-23");
@@ -107,11 +107,11 @@ public class OrderTabUsedFragment extends Fragment {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
 
-                        String pointsNeeded = jObj.getString("pointsNeeded");
-                        String merchantId = jObj.getString("merchantId");
+                        String pointsNeeded = "使用花旗点：" + jObj.getString("pointsNeeded");
+                        String merchantName = jObj.getString("merchantName");
                         String time = jObj.getString("time");
 
-                        orderAdapter.addData(merchantId,pointsNeeded,time);
+                        orderAdapter.addData(merchantName,pointsNeeded,time);
 
                     }
 

@@ -1,5 +1,6 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -117,6 +119,7 @@ public class PayingActivity extends AppCompatActivity {
 
         //让键盘的回车键设置成搜索
         search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        search.clearFocus();
 
         getWindow().getDecorView().findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
 
@@ -132,6 +135,7 @@ public class PayingActivity extends AppCompatActivity {
                 return false;
             }
         });
+
 
     }
 
@@ -193,7 +197,17 @@ public class PayingActivity extends AppCompatActivity {
             }
         });
 
+        mAdapter.editTextComplete(new PayingAdapter.EditTextInterface(){
+            @Override
+            public void onComplete(View view, int position) {
+                //修改合计价格
+                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
+            }
+        });
+
     }
+
+
 
     /*判断是否显示软键盘*/
     private boolean isSoftShowing() {

@@ -29,31 +29,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="简介"
                     android:layout_weight="1"
-                    android:textColor="@color/colorBlack"/>
+                    android:text="简介"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack" />
 
                 <TextView
                     android:id="@+id/textView_order_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:text="商家名"
                     android:layout_weight="1"
+                    android:text="商家名"
+                    android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_order_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="兑换时间"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"
-                    />
+                    android:text="兑换时间"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
         </LinearLayout>
 
