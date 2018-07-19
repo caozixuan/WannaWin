@@ -2,10 +2,7 @@ package citi.pay;
 import citi.support.resultjson.ResultJson;
 import citi.vo.Merchant;
 import citi.vo.Order;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +22,7 @@ public class PayController {
 
     @RequestMapping("")
     @ResponseBody
-    public String pay(String userID,String timeStamp,String merchantID,float totalPrice){
+    public String pay(String userID,String timeStamp,String merchantID,Double totalPrice){
         if (payService.pay(userID,timeStamp,merchantID,totalPrice)){
             return ResultJson.SUCCESS;
         }else{

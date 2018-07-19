@@ -37,6 +37,7 @@ public class AccountController {
     @ResponseBody
     @RequestMapping("/getVCode")
     public String getVCode(String phoneNum){
+        //加入手机号的正则验证
         String pattern = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\\\d{8}$";
         boolean isMatch = Pattern.matches(pattern,phoneNum);
         if(!isMatch){
