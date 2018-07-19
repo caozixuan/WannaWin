@@ -2,8 +2,10 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -46,6 +50,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,9 +87,11 @@ public class PayingActivity extends AppCompatActivity {
 
 
         //设置toolbar
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying);
+        //setSupportActionBar(mToolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolBar();
 
         //获取页面中的元素
         initView();
@@ -120,6 +127,21 @@ public class PayingActivity extends AppCompatActivity {
         //让键盘的回车键设置成搜索
         search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         search.clearFocus();
+        //隐藏下划线
+        if (search != null) {
+            try {        //--拿到字节码
+                Class<?> argClass = search.getClass();
+                //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+                Field ownField = argClass.getDeclaredField("mSearchPlate");
+                //--暴力反射,只有暴力反射才能拿到私有属性
+                ownField.setAccessible(true);
+                View mView = (View) ownField.get(search);
+                //--设置背景
+                mView.setBackgroundColor(Color.TRANSPARENT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         getWindow().getDecorView().findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
 
@@ -137,6 +159,64 @@ public class PayingActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void toolBar(){
+        boolean isImmersive = false;
+        if (hasKitKat() && !hasLollipop()) {
+            isImmersive = true;
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        } else if (hasLollipop()) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            isImmersive = true;
+        }
+
+        final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setDividerColor(Color.GRAY);
+        //左侧
+        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        titleBar.setLeftText("首页");
+        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        titleBar.setTitle("兑换积分");
+        titleBar.setTitleColor(Color.BLACK);
+
+        titleBar.setActionTextColor(Color.BLACK);
+
+        //右侧
+        titleBar.addAction(new TitleBar.TextAction("全选") {
+            @Override
+            public void performAction(View view) {
+
+            }
+        });
+
+        //沉浸式
+        titleBar.setImmersive(isImmersive);
+    }
+
+    public static boolean hasKitKat() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    }
+
+    public static boolean hasLollipop() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     private void initView(){

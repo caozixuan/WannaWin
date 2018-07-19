@@ -2,15 +2,21 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,23 +48,78 @@ public class PayCodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay_code);
 
         //设置toolbar
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_pay_code);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_pay_code);
+        //setSupportActionBar(mToolbar);
+        //getSupportActionBar().setTitle("");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolBar();
 
         iv_bar = (ImageView)findViewById(R.id.imageview_barcode);
         iv_qr = (ImageView)findViewById(R.id.imageview_qr);
 
 
-        String content = "{\"userID\":"+ LogStateInfo.getInstance(PayCodeActivity.this).getUserID() +",\"timeStamp\":"+ times +"\"}";
+        times = (int)(System.currentTimeMillis() / 1000);
+        String content = "{\"userID\":"+ "\""+ LogStateInfo.getInstance(PayCodeActivity.this).getUserID() +"\""+ ",\"timeStamp\":"+ "\""+ times +"\"}";
         createBitMap(content);
+        System.out.println(content);
 
         //handler.post(task);
         run = true;
         handler.postDelayed(task, 1000);
 
 
+    }
+
+
+    public void toolBar(){
+        boolean isImmersive = false;
+        if (hasKitKat() && !hasLollipop()) {
+            isImmersive = true;
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        } else if (hasLollipop()) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            isImmersive = true;
+        }
+
+        final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setDividerColor(Color.GRAY);
+        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        titleBar.setLeftText("返回");
+        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                run = false;
+                finish();
+            }
+        });
+
+        titleBar.setTitle("付款码");
+        titleBar.setTitleColor(Color.BLACK);
+
+        titleBar.setActionTextColor(Color.BLACK);
+
+
+        titleBar.addAction(new TitleBar.TextAction("发布") {
+            @Override
+            public void performAction(View view) {
+                Toast.makeText(PayCodeActivity.this, "点击了发布", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //沉浸式
+        titleBar.setImmersive(isImmersive);
     }
 
     public void createBitMap(String content) {
@@ -79,7 +140,7 @@ public class PayCodeActivity extends AppCompatActivity {
         //iv_qr.setImageBitmap(bitmap_qr);
 
         Bitmap bitmap_qr = ZXingUtils.createQRImage(content, 300,  300);
-        //times = (int)(System.currentTimeMillis() / 1000)-65;
+        times = (int)(System.currentTimeMillis() / 1000);
         iv_qr.setImageBitmap(bitmap_qr);
 
     }
@@ -94,7 +155,7 @@ public class PayCodeActivity extends AppCompatActivity {
             if (run) {
                 handler.postDelayed(this, 1000);
                 count++;
-                times = (int)(System.currentTimeMillis() / 1000);
+                //times = (int)(System.currentTimeMillis() / 1000);
             }
             getMSCardInfoRequest();
             if(count==60){
@@ -112,13 +173,13 @@ public class PayCodeActivity extends AppCompatActivity {
     };
 
 
-    public void onClick(View view){
-        Button Gt_Choose_Point = (Button)findViewById(R.id.button_gt_choose_point);
-        Intent intent = new Intent(PayCodeActivity.this,PayingActivity.class);
-        startActivity(intent);
-    }
+    //public void onClick(View view){
+    //    Button Gt_Choose_Point = (Button)findViewById(R.id.button_gt_choose_point);
+    //    Intent intent = new Intent(PayCodeActivity.this,PayingActivity.class);
+    //    startActivity(intent);
+    //}
 
-    //获得二维码状态
+    //获得二维码返回结果
     private void getMSCardInfoRequest() {
         String url="http://193.112.44.141:80/citi/pay/QRCode";
         RequestQueue queue = MyApplication.getHttpQueues();
@@ -130,8 +191,30 @@ public class PayCodeActivity extends AppCompatActivity {
                 System.out.println(s);
                 try {
                     JSONObject jObj = new JSONObject(s);
-                    String status = jObj.getString("status");
-                    System.out.println(status);
+
+                    if(jObj.has("status")){
+                        String status = jObj.getString("status");
+                        System.out.println(status);
+                    }
+                    else {
+                        //"originalPrice":1.0,"priceAfter":180.0,"pointsNeeded":200.0
+                        run = false;
+                        double originalPrice = jObj.getDouble("originalPrice");
+                        double priceAfter = jObj.getDouble("priceAfter");
+                        double pointsNeeded = jObj.getDouble("pointsNeeded");
+
+                        Intent intentToFinish = new Intent(PayCodeActivity.this,PayCodeFinishActivity.class);
+                        Bundle bundle = new Bundle();
+
+                        bundle.putDouble("originalPrice",originalPrice);
+                        bundle.putDouble("priceAfter",priceAfter);
+                        bundle.putDouble("pointsNeeded",pointsNeeded);
+
+                        intentToFinish.putExtras(bundle);
+                        //
+                        startActivity(intentToFinish);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -148,10 +231,25 @@ public class PayCodeActivity extends AppCompatActivity {
                 Map<String,String> map=new HashMap<>();
                 map.put("userID",LogStateInfo.getInstance(PayCodeActivity.this).getUserID());
                 map.put("timeStamp", String.valueOf(times));
+                System.out.println("请求userID:"+ LogStateInfo.getInstance(PayCodeActivity.this).getUserID()+"timeStamp"+String.valueOf(times));
                 return map;
             }
         };
         queue.add(request);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public static boolean hasKitKat() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    }
+
+    public static boolean hasLollipop() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
 }
