@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.regex.*;
 
 
 /**
@@ -31,11 +32,16 @@ public class AccountController {
      * 前端请求发送验证码
      * @url /account/getVCode
      * @param phoneNum 请求手机号
-     * @return {} 成功与否都返回空
+     *
      */
     @ResponseBody
     @RequestMapping("/getVCode")
     public String getVCode(String phoneNum){
+        String pattern = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\\\d{8}$";
+        boolean isMatch = Pattern.matches(pattern,phoneNum);
+        if(!isMatch){
+            return ResultJson.FAILURE;
+        }
         if (accountSerivce.sendMs(phoneNum)){
             return ResultJson.SUCCESS;
         }else {
