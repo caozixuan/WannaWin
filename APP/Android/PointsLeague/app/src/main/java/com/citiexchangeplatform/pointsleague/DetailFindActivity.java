@@ -7,15 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.adapter.DetailFindAdapter;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +32,8 @@ public class DetailFindActivity extends AppCompatActivity {
     ImageView imageViewLogo;
     TextView textViewName;
     TextView textViewDescription;
+    ListView listView;
+    DetailFindAdapter detailFindAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,14 @@ public class DetailFindActivity extends AppCompatActivity {
             }
         });
 
+        listView = (ListView) findViewById(R.id.listView_detail_find);
+        listView.setEmptyView(findViewById(R.id.view_detail_find_empty));
+        detailFindAdapter = new DetailFindAdapter(DetailFindActivity.this);
+        listView.setAdapter(detailFindAdapter);
+
         getInfos();
+
+        loadListItems();
 
     }
 
@@ -99,6 +112,44 @@ public class DetailFindActivity extends AppCompatActivity {
                     public void onBefore() {
                         super.onBefore();
                         dialog = ProgressDialog.show(DetailFindActivity.this, "", "正在获取商家信息...");
+                    }
+                });
+    }
+
+    private void loadListItems(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/item/getMerchantItems")
+                .addParam("merchantID", merchantID)
+                .addParam("start", "0")
+                .addParam("n", "40")
+                .build()
+                .execute(DetailFindActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String itemID = jsonObject.getString("ItemID");
+                                String name = jsonObject.getString("name");
+                                String time = jsonObject.getString("overdueTime");
+                                String description = jsonObject.getString("description");
+                                String logoURL = jsonObject.getString("logoURL");
+                                int points = jsonObject.getInt("points");
+                                detailFindAdapter.addData(itemID, name, time, description, logoURL, points);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(DetailFindActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
                     }
                 });
     }
