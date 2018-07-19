@@ -8,23 +8,10 @@
     android:gravity="center"
     tools:context=".PaymentFinishActivity">
 
-
     <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar_paying_finish"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--app:title= "兑换结果"-->
-        <!--app:theme="@style/ToolbarTheme"-->
-        <!--&gt;-->
-
-    <!--</android.support.v7.widget.Toolbar>-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,7 +21,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView_finish_business"
+            android:id="@+id/imageView_scan_finish_business"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -54,7 +41,7 @@
             android:layout_alignBottom="@+id/textView_points_usedTotal"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
-            android:text="@string/paying_success"
+            android:text="支付成功"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,19 +54,36 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="TextView"
+            android:text="使用通用积分数"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/rv_finish_points"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/textView_original_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="原价"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView_current_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="现价"
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="358dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_weight="2"
@@ -87,22 +91,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_finish_points"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="40dp"
-            android:layout_weight="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </android.support.v7.widget.RecyclerView>
-
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_ad"
