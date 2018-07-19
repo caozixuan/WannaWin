@@ -13,13 +13,15 @@ import com.citiexchangeplatform.pointsleague.R;
 public class ChildVH extends RecyclerView.ViewHolder {
 
     public TextView name;
-    public TextView date;
+    public TextView usePoints;
+    public TextView exchangePoints;
 
     public ChildVH (View itemView) {
         super(itemView);
 
-        name = itemView.findViewById(R.id.textView_exchange_company_name);
-        date = itemView.findViewById(R.id.textView_use_card_points);
+        name = itemView.findViewById(R.id.textView_points_record_name);
+        usePoints = itemView.findViewById(R.id.textView_use_card_points);
+        exchangePoints = itemView.findViewById(R.id.textView_exchange_points);
 
     }
 }

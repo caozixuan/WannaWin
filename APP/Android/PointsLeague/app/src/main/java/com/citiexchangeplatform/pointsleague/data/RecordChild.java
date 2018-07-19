@@ -7,6 +7,8 @@ public class RecordChild {
 
 
     public String name;
+    public String usePoints;
+    public String exchangePoints;
     public int index;
 
 
@@ -15,8 +17,10 @@ public class RecordChild {
     public RecordChild() {
     }
 
-    public RecordChild(String name, int index, int reBindTimes) {
+    public RecordChild(String name, String usePoints, String exchangePoints, int index, int reBindTimes) {
         this.name = name;
+        this.usePoints = usePoints;
+        this.exchangePoints = exchangePoints;
         this.index = index;
         this.reBindTimes = reBindTimes;
     }

@@ -1,5 +1,7 @@
 package citi.merchant;
 
+import citi.support.resultjson.ResultJson;
+import citi.support.resultjson.SerializeGson;
 import citi.vo.Merchant;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +34,12 @@ public class MerchantController {
      * @return [{"merchantID":"1","name":"1","description":"520d9479","address":"7ea18369","logoURL":"http://xx.png"}]
      */
     @ResponseBody
-    @RequestMapping(value = {"/getInfos"})
+    @RequestMapping(value = {"/getInfos"},produces = {"text/html;charset=UTF-8"})
     public String getMerchantInfos(int start,int n){
         List<Merchant> merchants= merchantSerivce.getMerchants(start,n);
         if(merchants==null)
             return "[]";
-        return gson.toJson(merchants);
+        return SerializeGson.GSON.toJson(merchants);
     }
 
     /**
@@ -47,13 +49,13 @@ public class MerchantController {
      * @return {"merchantID":"00001","name":"apple","description":"to eat","address":"WHU","logoURL":"http://.png"}
      */
     @ResponseBody
-    @RequestMapping("/{merchantID}")
-    public String getMerchant(@PathVariable String merchantID){
+    @RequestMapping("/getSingleInfo")
+    public String getMerchant(String merchantID){
         Merchant m = merchantSerivce.getMerchant(merchantID);
         if(m==null)
             return "{}";
         else
-            return gson.toJson(m);
+            return SerializeGson.GSON.toJson(m);
     }
 
     /*

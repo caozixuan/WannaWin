@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static citi.vo.Order.OrderState.FAIL;
+
 /**
  * @author zhong
  * @date 2018-7-11
@@ -49,14 +51,18 @@ public class PayService {
         });
         User user=userMapper.getInfoByUserID(userID);
         for (StrategyDAO strategyDAO:strategyDAOList){
-            if (strategyDAO.getPoints()<user.getGeneralPoints()){
+            if (strategyDAO.getPoints()<user.getGeneralPoints()&&strategyDAO.getFull()<=totalPrice){
                 user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
                 float priceAfter=strategyDAO.getPriceAfter();
-                Order order=new Order(totalPrice,strategyDAO.getPriceAfter(),strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp*1000));
+                Order order=new Order(totalPrice,priceAfter,strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp*1000));
                 if (orderMapper.addOrder(order)==1){
                     return true;
                 }
             }
+        }
+        Order order=new Order(totalPrice,totalPrice,0,userID,"FAIL",merchantID,new Timestamp(QRTimestamp*1000));
+        if (orderMapper.addOrder(order)==1){
+            return true;
         }
         return false;
     }
@@ -74,8 +80,8 @@ public class PayService {
         List<Order> orders=orderMapper.getOrderByUserID(userID,"01010101");
 
         for (Order order:orders){
-            if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
-                if (order.getState()==Order.OrderState.FAIL){
+            if (order.getTime().compareTo(new Timestamp(QRTimestamp*1000))==0){
+                if (order.getState()==FAIL){
                     return QRCodeStatus.USEFAIL;
                 }
                 return QRCodeStatus.USED;
@@ -88,7 +94,7 @@ public class PayService {
         List<Order> orders=orderMapper.getOrderByUserID(userID,"0101010101");
         for (Order order :orders
                 ) {
-            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)))==0){
+            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)*1000))==0){
                 return order;
             }
         }

@@ -57,7 +57,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
     public GroupVH onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, ">>> onCreateGroupViewHolder: " + viewType);
         Context context = parent.getContext();
-        return new GroupVH(LayoutInflater.from(context).inflate(R.layout.h_item_group_all, parent, false));
+        return new GroupVH(LayoutInflater.from(context).inflate(R.layout.item_points_record_parent, parent, false));
 
     }
 
@@ -79,7 +79,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
         };
 
         GroupVH vh = ((GroupVH) holder);
-        vh.date.setText(String.valueOf(getChildCount(position)));
+        //vh.date.setText(String.valueOf(getChildCount(position)));
         vh.totalPoints.setText(recordList.get(position).totalExchangePoint);
         vh.date.setText(recordList.get(position).date);
         vh.refresh.setOnClickListener(listener);
@@ -93,7 +93,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
     public ChildVH onCreateChildViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, ">>> onCreateChildViewHolder: " + viewType);
         Context context = parent.getContext();
-        return new ChildVH(LayoutInflater.from(context).inflate(R.layout.h_item_child_clothes, parent, false));
+        return new ChildVH(LayoutInflater.from(context).inflate(R.layout.item_points_record_child, parent, false));
 
     }
 
@@ -105,6 +105,9 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
         RecordChild recordChild = recordList.get(groupIndex).childs.get(childIndex);
 
         vh.name.setText(recordChild.name);
+        vh.usePoints.setText(recordChild.usePoints);
+        vh.exchangePoints.setText(recordChild.exchangePoints);
+
 
 
 

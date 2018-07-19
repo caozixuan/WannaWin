@@ -9,16 +9,21 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_paying"
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar_paying"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--app:title="积分兑换"-->
+        <!--app:theme="@style/ToolbarTheme"-->
+        <!--&gt;-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <com.citiexchangeplatform.pointsleague.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:title="积分兑换"
-        app:theme="@style/ToolbarTheme"
-        >
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/search_bar_exchange"
@@ -28,7 +33,7 @@
         android:layout_marginTop="15px"
         android:layout_marginBottom="15px"
         android:background="@drawable/bg_search_bar"
-        android:layout_below="@+id/toolbar_paying"
+        android:layout_below="@+id/title_bar"
         android:orientation="horizontal">
         <!--<FrameLayout-->
             <!--android:layout_width="wrap_content"-->
@@ -44,10 +49,13 @@
         <!--</FrameLayout>-->
         <SearchView
             android:id="@+id/editText_search_paying"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
             android:queryHint="Search"
-            android:background="@null">
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
 
 
         </SearchView>

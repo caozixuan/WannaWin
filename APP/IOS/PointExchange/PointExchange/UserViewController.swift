@@ -101,9 +101,16 @@ class UserViewController: UITableViewController {
                 if let _ = User.getUser().username{
                     activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
                     // TODO: 访问服务器请求订单信息(intervalTime)
-                    ServerConnector.getOrders(intervalTime: "100"){ (result, merchants) in
+                    ServerConnector.getOrders(intervalTime: "1101010101"){ (result, orders) in
                         let view = storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
                         // TODO: 根据状态分订单数组
+                        var successOrders = [Order]()
+                        for order in orders{
+                            if order.state == OrderState.SUCCESS{
+                                successOrders.append(order)
+                            }
+                        }
+                        view.willUseOrders = successOrders
                         self.navigationController?.pushViewController(view, animated: true)
                         
                     }
