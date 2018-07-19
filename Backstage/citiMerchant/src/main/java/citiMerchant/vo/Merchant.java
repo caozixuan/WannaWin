@@ -68,21 +68,21 @@ public class Merchant {
         static Map<BusinessType, String> enumMap2 = new HashMap<>();
 
         static {
-            enumMap1.put("一般", normal);
-            enumMap1.put("餐饮", catering);
-            enumMap1.put("运动", exercise);
-            enumMap1.put("银行", bank);
-            enumMap1.put("服饰", costume);
-            enumMap1.put("教育", education);
-            enumMap1.put("通讯", communication);
+            enumMap1.put("normal", normal);
+            enumMap1.put("catering", catering);
+            enumMap1.put("exercise", exercise);
+            enumMap1.put("bank", bank);
+            enumMap1.put("costume", costume);
+            enumMap1.put("education", education);
+            enumMap1.put("communication", communication);
 
-            enumMap2.put(normal, "一般");
-            enumMap2.put(catering, "餐饮");
-            enumMap2.put(exercise, "运动");
-            enumMap2.put(bank, "银行");
-            enumMap2.put(costume, "服饰");
-            enumMap2.put(education, "教育");
-            enumMap2.put(communication, "通讯");
+            enumMap2.put(normal, "normal");
+            enumMap2.put(catering, "catering");
+            enumMap2.put(exercise, "exercise");
+            enumMap2.put(bank, "bank");
+            enumMap2.put(costume, "costume");
+            enumMap2.put(education, "education");
+            enumMap2.put(communication, "communication");
         }
 
         public static BusinessType getBusinessType(String businessType) {
@@ -217,8 +217,12 @@ public class Merchant {
         this.merchantLogoURL = logoURL;
     }
 
-    public BusinessType getBusinessType() {
+    public BusinessType getBusinessTypeEnum() {
         return BusinessType.getBusinessType(businessType);
+    }
+
+    public String getBusinessType() {
+        return businessType;
     }
 
     public void setCardType(CardType cardType) {
