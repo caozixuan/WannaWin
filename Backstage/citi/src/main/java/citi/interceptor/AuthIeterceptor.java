@@ -13,8 +13,11 @@ public class AuthIeterceptor extends HandlerInterceptorAdapter {
         if (userID==null){
             return true;
         }
-        //response.setHeader("Content-Type","text/html; charset=UTF-8");
-        return true;
+        String user= request.getParameter("userID");
+        if (user==null||user.equals(userID)){
+            return true;
+        }
+        return false;
     }
 
     public void postHandle(HttpServletRequest request,

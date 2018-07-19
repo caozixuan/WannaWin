@@ -1,8 +1,10 @@
 package citi.pay;
 
+import citi.mapper.MerchantMapper;
 import citi.mapper.OrderMapper;
 import citi.mapper.StrategyMapper;
 import citi.mapper.UserMapper;
+import citi.vo.Merchant;
 import citi.vo.Order;
 import citi.vo.StrategyDAO;
 import citi.vo.User;
@@ -32,7 +34,10 @@ public class PayService {
     @Autowired
     private OrderMapper orderMapper;
 
-    public boolean pay(String userID,String timeStamp,String merchantID,float totalPrice){
+    @Autowired
+    private MerchantMapper merchantMapper;
+
+    public boolean pay(String userID,String timeStamp,String merchantID,Double totalPrice){
         long timeMillis = System.currentTimeMillis()/1000;
         long QRTimestamp=Long.parseLong(timeStamp);
         if(timeMillis-QRTimestamp>60||timeMillis<QRTimestamp){
@@ -53,14 +58,14 @@ public class PayService {
         for (StrategyDAO strategyDAO:strategyDAOList){
             if (strategyDAO.getPoints()<user.getGeneralPoints()&&strategyDAO.getFull()<=totalPrice){
                 user.setGeneralPoints(user.getAvailablePoints()-strategyDAO.getPoints());
-                float priceAfter=strategyDAO.getPriceAfter();
+                Double priceAfter=strategyDAO.getPriceAfter();
                 Order order=new Order(totalPrice,priceAfter,strategyDAO.getPoints(),userID,"SUCCESS",merchantID,new Timestamp(QRTimestamp*1000));
                 if (orderMapper.addOrder(order)==1){
                     return true;
                 }
             }
         }
-        Order order=new Order(totalPrice,totalPrice,0,userID,"FAIL",merchantID,new Timestamp(QRTimestamp*1000));
+        Order order=new Order(totalPrice,totalPrice,0.0,userID,"FAIL",merchantID,new Timestamp(QRTimestamp*1000));
         if (orderMapper.addOrder(order)==1){
             return true;
         }
@@ -99,6 +104,10 @@ public class PayService {
             }
         }
         return null;
+    }
+
+    public Merchant getMerchant(Order order){
+        return merchantMapper.selectByID(order.getMerchantId());
     }
 
 

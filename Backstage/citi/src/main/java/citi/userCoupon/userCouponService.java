@@ -2,6 +2,7 @@ package citi.userCoupon;
 
 import citi.mapper.CouponMapper;
 import citi.mapper.ItemMapper;
+import citi.vo.Item;
 import citi.vo.UserCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class userCouponService {
     public ArrayList<ReturnUserCoupon> changeToReturnUserCoupon(List<UserCoupon> userCoupons){
         ArrayList<ReturnUserCoupon> returnUserCoupons = new ArrayList<ReturnUserCoupon>();
         for(UserCoupon userCoupon:userCoupons){
-            returnUserCoupons.add(new ReturnUserCoupon(userCoupon.getCouponID(),userCoupon.getUserID(),userCoupon.getItemID(),userCoupon.getState().toString(),userCoupon.getGetTime(),userCoupon.getUseTime(),itemMapper.getItemByItemID(userCoupon.getItemID()).getName()));
+            Item item = itemMapper.getItemByItemID(userCoupon.getItemID());
+            returnUserCoupons.add(new ReturnUserCoupon(userCoupon.getCouponID(),userCoupon.getUserID(),userCoupon.getItemID(),userCoupon.getState().toString(),userCoupon.getGetTime(),userCoupon.getUseTime(),itemMapper.getItemByItemID(userCoupon.getItemID()).getName(),item.getPoints(),item.getDescription()));
         }
         return returnUserCoupons;
     }

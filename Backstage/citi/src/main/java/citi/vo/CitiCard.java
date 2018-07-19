@@ -5,9 +5,9 @@ public class CitiCard {
     private String citiCardNum;
     private String phoneNum;
     private String userID;
-    private double miniExpense;
+    private Double miniExpense;
 
-    public CitiCard(String citiCardID, String citiCardNum, String phoneNum, String userID, double miniExpense) {
+    public CitiCard(String citiCardID, String citiCardNum, String phoneNum, String userID, Double miniExpense) {
         this.citiCardID = citiCardID;
         this.citiCardNum = citiCardNum;
         this.phoneNum = phoneNum;
@@ -31,7 +31,7 @@ public class CitiCard {
         return userID;
     }
 
-    public double getMiniExpense() {
+    public Double getMiniExpense() {
         return miniExpense;
     }
 

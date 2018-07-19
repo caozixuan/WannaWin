@@ -1,6 +1,6 @@
 package citi.mscard;
 
-public class DetailCard {
+public class DetailCard implements  Comparable<DetailCard>{
     private String cardLogoURL;
     private int points;
     private String cardNum;
@@ -35,5 +35,10 @@ public class DetailCard {
 
     public int getType() {
         return type;
+    }
+
+    @Override
+    public int compareTo(DetailCard o) {
+        return o.points-this.points;
     }
 }

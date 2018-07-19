@@ -17,8 +17,8 @@ import java.util.List;
 @Repository
 public interface MerchantMapper {
 
-    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, merchantLogoURL, cardLogoURL, proportion, activityTheme, activityDescription, cardType) " +
-            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{merchantLogoURL}, #{cardLogoURL}, #{proportion}, #{activityTheme}, #{activityDescription}, #{cardType})";
+    final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, merchantLogoURL, cardLogoURL, proportion, activityTheme, activityDescription, cardType, businessType) " +
+            "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{merchantLogoURL}, #{cardLogoURL}, #{proportion}, #{activityTheme}, #{activityDescription}, #{cardType}, #{businessType})";
     final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
     final String updateMerchantName = "UPDATE merchant SET name = #{name} WHERE merchantID = #{merchantID}";
     final String updateMercahntDescription = "UPDATE merchant SET description = #{description} WHERE merchantID = #{merchantID}";
