@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.citiexchangeplatform.pointsleague.adapter.CardPointsAdapter;
+import com.citiexchangeplatform.pointsleague.models.CardPointsModel;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
@@ -200,6 +201,7 @@ public class PointsFragment extends Fragment {
                         boolean logSuccess = false;
                         try {
                             JSONArray jsonArray = new JSONArray(response);
+                            ArrayList<CardPointsModel> items = new ArrayList<CardPointsModel>();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String merchantName = jsonObject.getString("merchantName");
@@ -207,13 +209,41 @@ public class PointsFragment extends Fragment {
                                 int points = jsonObject.getInt("points");
                                 double proportion = jsonObject.getDouble("proportion");
                                 String logoURL = jsonObject.getString("logoURL");
-                                cardPointsAdapter.addData(merchantName, merchantID, points, proportion, logoURL);
+                                CardPointsModel item = new CardPointsModel(merchantName, merchantID, points, proportion, logoURL);
+                                items.add(item);
                             }
-                            if(cardPointsAdapter.getItemCount() > 0){
-                                recyclerView.scrollToPosition(cardPointsAdapter.getItemCount()/2);
-                            }else {
 
+                            switch (items.size()){
+                                case 1:
+                                    cardPointsAdapter.addData(items.get(0));
+                                    break;
+                                case 2:
+                                    cardPointsAdapter.addData(items.get(1));
+                                    cardPointsAdapter.addData(items.get(0));
+                                    break;
+                                case 3:
+                                    cardPointsAdapter.addData(items.get(1));
+                                    cardPointsAdapter.addData(items.get(0));
+                                    cardPointsAdapter.addData(items.get(2));
+                                    break;
+                                case 4:
+                                    cardPointsAdapter.addData(items.get(3));
+                                    cardPointsAdapter.addData(items.get(1));
+                                    cardPointsAdapter.addData(items.get(0));
+                                    cardPointsAdapter.addData(items.get(2));
+                                    break;
+                                case 5:
+                                    cardPointsAdapter.addData(items.get(3));
+                                    cardPointsAdapter.addData(items.get(1));
+                                    cardPointsAdapter.addData(items.get(0));
+                                    cardPointsAdapter.addData(items.get(2));
+                                    cardPointsAdapter.addData(items.get(4));
+                                    break;
+                                default:
                             }
+
+                            recyclerView.scrollToPosition(cardPointsAdapter.getItemCount()/2);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

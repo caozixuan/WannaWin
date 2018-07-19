@@ -61,7 +61,9 @@
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".PointsExchangeExpandListActivity" />
         <activity android:name=".PointsExchangeRecordActivity" />
-        <activity android:name=".BindCardActivity"></activity>
+        <activity android:name=".BindCardActivity" />
+        <activity android:name=".DetailFindPayActivity"></activity>
+        <activity android:name=".PayCodeFinishActivity"></activity>
     </application>
 
 </manifest>

@@ -9,17 +9,22 @@
     tools:context=".PaymentFinishActivity">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_paying_finish"
+    <com.citiexchangeplatform.pointsleague.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:title= "兑换结果"
-        app:theme="@style/ToolbarTheme"
-        >
+        android:layout_height="wrap_content"/>
 
-    </android.support.v7.widget.Toolbar>
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar_paying_finish"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--app:title= "兑换结果"-->
+        <!--app:theme="@style/ToolbarTheme"-->
+        <!--&gt;-->
+
+    <!--</android.support.v7.widget.Toolbar>-->
 
     <LinearLayout
         android:layout_width="wrap_content"

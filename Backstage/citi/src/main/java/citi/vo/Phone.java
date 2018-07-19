@@ -3,12 +3,12 @@ package citi.vo;
 public class Phone {
     private String phoneType;
     private String areaCode;
-    private int extension;
-    private int phoneKey;
-    private int phoneNumber;
-    private int phoneCountryCode;
+    private Integer extension;
+    private Integer phoneKey;
+    private Integer phoneNumber;
+    private Integer phoneCountryCode;
 
-    public Phone(String phoneType, String areaCode, int extension, int phoneKey, int phoneNum, int phoneCountryCode) {
+    public Phone(String phoneType, String areaCode, Integer extension, Integer phoneKey, Integer phoneNum, Integer phoneCountryCode) {
         this.phoneType = phoneType;
         this.areaCode = areaCode;
         this.extension = extension;
@@ -25,19 +25,20 @@ public class Phone {
         return areaCode;
     }
 
-    public int getExtension() {
+    public Integer getExtension() {
         return extension;
     }
 
-    public int getPhoneKey() {
+    public Integer getPhoneKey() {
         return phoneKey;
     }
 
-    public int getPhoneNum() {
+    public Integer getPhoneNum() {
         return phoneNumber;
     }
 
-    public int getPhoneCountryCode() {
+    public Integer getPhoneCountryCode() {
         return phoneCountryCode;
     }
+
 }

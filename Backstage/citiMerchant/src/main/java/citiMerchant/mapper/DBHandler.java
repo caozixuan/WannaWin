@@ -14,12 +14,31 @@ public class DBHandler {
 
 //    static final private String resource = "./src/main/java/citiMerchant/mapper/citiMerchant/mapper.xml";
 
+    public static OrderMapper orderMapper;
+    public static ItemMapper itemMapper;
+    public static StrategyMapper strategyMapper;
+    public static RecordMapper recordMapper;
+
     @Autowired
-    public OrderMapper orderMapper;
+    public void setOrderMapper(OrderMapper orderMapper) {
+        DBHandler.orderMapper = orderMapper;
+    }
+
     @Autowired
-    public ItemMapper itemMapper;
+    public void setItemMapper(ItemMapper itemMapper) {
+        this.itemMapper = itemMapper;
+    }
+
     @Autowired
-    public StrategyMapper strategyMapper;
+    public void setStrategyMapper(StrategyMapper strategyMapper) {
+        this.strategyMapper = strategyMapper;
+    }
+
+    @Autowired
+    public void setRecordMapper(RecordMapper recordMapper) {
+        this.recordMapper = recordMapper;
+    }
+
 
 //    @Autowired
 //    private SqlSessionFactory sqlSessionFactory;
@@ -45,11 +64,11 @@ public class DBHandler {
      * 返回一个列表：包含该商家的“优惠商品”，“减免策略”，“历史订单”的数量。
      */
     public ArrayList<Integer> getAmountByMerchantID(String merchantID) {
-        long time = System.currentTimeMillis();
+        //long time = System.currentTimeMillis();
         int itemAmount = itemMapper.getItemAmountByMerchantID(merchantID);
         int stategyAmount = strategyMapper.getStrategyAmountByMerchantID(merchantID);
         int orderAmount = orderMapper.getOrderAmount(merchantID);
-        Log.log("getAmountByMerchantID", time);
+        //Log.log("getAmountByMerchantID", time);
         List<Integer> amount = Arrays.asList(itemAmount, stategyAmount, orderAmount);
         return new ArrayList(amount);
     }

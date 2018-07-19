@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface PointsHistoryMapper {
 
-    final String getPointsHistoryByID = "SELECT * FROM points_history WHERE userID = #{userID}";
-    final String getPointsHistoryBy_userID_AND_merchantID = "SELECT * FROM points_history WHERE userID = #{userID} AND merchantID = #{merchantID}";
+    final String getPointsHistoryByID = "SELECT * FROM points_history WHERE userID = #{userID} ORDER BY time DESC";
+    final String getPointsHistoryBy_userID_AND_merchantID = "SELECT * FROM points_history WHERE userID = #{userID} AND merchantID = #{merchantID} ORDER BY time DESC";
 
     @Select(getPointsHistoryByID)
     List<Points_history> getPointsHistoryByID(String userID);

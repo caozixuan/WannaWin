@@ -1,6 +1,10 @@
 package citi.mscard;
 
-public class BriefCard {
+import citi.points.ReturnInformation;
+
+import java.sql.Timestamp;
+
+public class BriefCard implements  Comparable<BriefCard>{
     private String merchantID;
     private String merchantLogoURL;
     private String merchantName;
@@ -39,5 +43,10 @@ public class BriefCard {
 
     public double getProportion() {
         return proportion;
+    }
+
+    @Override
+    public int compareTo(BriefCard o) {
+        return o.points-this.points;
     }
 }

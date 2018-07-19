@@ -17,9 +17,9 @@ public class User {
     @Expose
     private String phoneNum;
     @Expose
-    private double generalPoints;
+    private Double generalPoints;
     @Expose
-    private double availablePoints;
+    private Double availablePoints;
     @Expose
     private String rewardLinkCode;
 
@@ -28,12 +28,12 @@ public class User {
         citiCardID = "";
         this.password = password;
         this.phoneNum = phoneNum;
-        generalPoints = 0;
-        availablePoints = 0;
+        generalPoints = 0.0;
+        availablePoints = 0.0;
         rewardLinkCode = "";
     }
 
-    public User(String userID, String citiCardID, String password, String phoneNum, double generalPoints, double availablePoints, String rewardLinkCode) {
+    public User(String userID, String citiCardID, String password, String phoneNum, Double generalPoints, Double availablePoints, String rewardLinkCode) {
         this.userID = userID;
         this.citiCardID = citiCardID;
         this.password = password;
@@ -59,19 +59,19 @@ public class User {
         this.phoneNum = phoneNum;
     }
 
-    public double getGeneralPoints() {
+    public Double getGeneralPoints() {
         return generalPoints;
     }
 
-    public void setGeneralPoints(double generalPoints) {
+    public void setGeneralPoints(Double generalPoints) {
         this.generalPoints = generalPoints;
     }
 
-    public double getAvailablePoints() {
+    public Double getAvailablePoints() {
         return availablePoints;
     }
 
-    public void setAvailablePoints(double availablePoints) {
+    public void setAvailablePoints(Double availablePoints) {
         this.availablePoints = availablePoints;
     }
 
