@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class PayCodeFinishActivity extends AppCompatActivity {
     private TextView usePoints;
     private TextView originalPrice;
     private TextView currentPrice;
+    private TextView name;
+
     private ImageView logo;
 
 
@@ -26,6 +30,8 @@ public class PayCodeFinishActivity extends AppCompatActivity {
     private double originalPrices;
     private double currentPrices;
     private String logoURL;
+    private String merchantName;
+
 
 
     private double total;
@@ -83,6 +89,8 @@ public class PayCodeFinishActivity extends AppCompatActivity {
         originalPrices = (Double) bundle.get("originalPrice");
         currentPrices = (Double) bundle.get("priceAfter");
         usePoint = (Double) bundle.get("pointsNeeded");
+        merchantName = (String) bundle.get("merchantName");
+        logoURL = (String) bundle.get("merchantLogoURL");
 
         //初始化数据
         initView();
@@ -101,10 +109,20 @@ public class PayCodeFinishActivity extends AppCompatActivity {
         originalPrice = (TextView)findViewById(R.id.textView_original_price);
         //当前价格
         currentPrice = (TextView)findViewById(R.id.textView_current_price);
+        //商家名称
+        name = (TextView)findViewById(R.id.textView_merchant_name_paying_finish);
 
+        name.setText(merchantName);
         usePoints.setText("-"+usePoint+"通用积分");
         originalPrice.setText("原价 ￥"+originalPrices);
         currentPrice.setText("抵后 ￥"+currentPrices);
+
+        Glide.with(PayCodeFinishActivity.this)
+                .load(logoURL)
+                .placeholder(R.drawable.ic_points_black_24dp)
+                .error(R.drawable.ic_mall_black_24dp)
+                .override(60,60)
+                .into(logo);
 
         //广告栏
         viewPager = (ViewPager) findViewById(R.id.vp_ad);

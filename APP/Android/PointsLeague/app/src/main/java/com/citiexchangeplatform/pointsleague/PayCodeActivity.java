@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -109,18 +110,18 @@ public class PayCodeActivity extends AppCompatActivity {
             }
         });
 
-        titleBar.setTitle("付款码");
+        titleBar.setTitle("积分码");
         titleBar.setTitleColor(Color.BLACK);
 
-        titleBar.setActionTextColor(Color.BLACK);
-
-
-        titleBar.addAction(new TitleBar.TextAction("发布") {
-            @Override
-            public void performAction(View view) {
-                Toast.makeText(PayCodeActivity.this, "点击了发布", Toast.LENGTH_SHORT).show();
-            }
-        });
+        //titleBar.setActionTextColor(Color.BLACK);
+        //
+        //
+        //titleBar.addAction(new TitleBar.TextAction("发布") {
+        //    @Override
+        //    public void performAction(View view) {
+        //        Toast.makeText(PayCodeActivity.this, "点击了发布", Toast.LENGTH_SHORT).show();
+        //    }
+        //});
 
         //沉浸式
         titleBar.setImmersive(isImmersive);
@@ -160,8 +161,10 @@ public class PayCodeActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000);
                 count++;
                 //times = (int)(System.currentTimeMillis() / 1000);
+                getMSCardInfoRequest();
             }
-            getMSCardInfoRequest();
+
+
             if(count==60){
                 String content = "{\"userID\":"+ "\""+ LogStateInfo.getInstance(PayCodeActivity.this).getUserID() +"\""+ ",\"timeStamp\":"+ "\""+ times +"\"}";
                 createBitMap(content);
@@ -206,6 +209,8 @@ public class PayCodeActivity extends AppCompatActivity {
                         double originalPrice = jObj.getDouble("originalPrice");
                         double priceAfter = jObj.getDouble("priceAfter");
                         double pointsNeeded = jObj.getDouble("pointsNeeded");
+                        String merchantName = jObj.getString("merchantName");
+                        String logoURL = jObj.getString("merchantLogoURL");
 
                         Intent intentToFinish = new Intent(PayCodeActivity.this,PayCodeFinishActivity.class);
                         Bundle bundle = new Bundle();
@@ -213,6 +218,8 @@ public class PayCodeActivity extends AppCompatActivity {
                         bundle.putDouble("originalPrice",originalPrice);
                         bundle.putDouble("priceAfter",priceAfter);
                         bundle.putDouble("pointsNeeded",pointsNeeded);
+                        bundle.putString("merchantName",merchantName);
+                        bundle.putString("merchantLogoURL",logoURL);
 
                         intentToFinish.putExtras(bundle);
                         //
@@ -255,5 +262,15 @@ public class PayCodeActivity extends AppCompatActivity {
 
     public static boolean hasLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    @Override
+    //重写onKeyDown方法,对按键(不一定是返回按键)监听
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
+            run = false;
+            finish();
+        }
+        return false;
     }
 }

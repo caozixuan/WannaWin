@@ -5,11 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
+import com.citiexchangeplatform.pointsleague.ItemClickListener;
 import com.citiexchangeplatform.pointsleague.R;
 import com.citiexchangeplatform.pointsleague.data.RecordChild;
 import com.citiexchangeplatform.pointsleague.data.RecordParent;
 
+import com.citiexchangeplatform.pointsleague.models.PointsExchangeModel;
 import com.citiexchangeplatform.pointsleague.vh.ChildVH;
 import com.citiexchangeplatform.pointsleague.vh.GroupVH;
 
@@ -25,6 +28,10 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
     private Context context;
 
 
+    //点击
+    private MyItemClickListener mItemClickListener;
+
+
     public VExpandableAdapter(Context context) {
         super();
         this.context = context;
@@ -34,6 +41,23 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
         recordList.add(recordParent);
         notifyDataSetChanged();
     }
+
+    /**
+     * 创建一个回调接口
+     */
+    public interface MyItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    /**
+     * 在activity里面adapter就是调用的这个方法,将点击事件监听传递过来,并赋值给全局的监听
+     *
+     * @param myItemClickListener
+     */
+    public void setItemClickListener(MyItemClickListener myItemClickListener) {
+        this.mItemClickListener = myItemClickListener;
+    }
+
 
     public List<RecordParent> getRecordList() {
         return recordList;
@@ -57,7 +81,8 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
     public GroupVH onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, ">>> onCreateGroupViewHolder: " + viewType);
         Context context = parent.getContext();
-        return new GroupVH(LayoutInflater.from(context).inflate(R.layout.item_points_record_parent, parent, false));
+        //将全局的监听传递给holder
+        return new GroupVH(LayoutInflater.from(context).inflate(R.layout.item_points_record_parent, parent, false),mItemClickListener);
 
     }
 
@@ -77,6 +102,8 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
                 }
             }
         };
+
+
 
         GroupVH vh = ((GroupVH) holder);
         //vh.date.setText(String.valueOf(getChildCount(position)));
@@ -108,10 +135,8 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
         vh.usePoints.setText(recordChild.usePoints);
         vh.exchangePoints.setText(recordChild.exchangePoints);
 
-
-
-
     }
+
 
 
 }

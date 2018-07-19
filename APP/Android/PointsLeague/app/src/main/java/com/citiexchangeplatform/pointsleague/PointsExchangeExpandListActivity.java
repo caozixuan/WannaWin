@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.android.volley.AuthFailureError;
@@ -74,6 +75,21 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
             }
         });
 
+
+        //调用方法,传入一个接口回调
+        expandableAdapter.setItemClickListener(new VExpandableAdapter.MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(PointsExchangeExpandListActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
+                if (expandableAdapter.isExpanded(position)) {
+                    expandableAdapter.collapseGroup(position);
+                    //((Button) v).setText("Open");
+                } else {
+                    expandableAdapter.expandGroup(position);
+                    //((Button) v).setText("Close");
+                }
+            }
+        });
     }
 
 
