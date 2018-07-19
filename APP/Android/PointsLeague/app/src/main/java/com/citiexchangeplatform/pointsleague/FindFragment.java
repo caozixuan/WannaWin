@@ -105,9 +105,9 @@ public class FindFragment extends Fragment {
                                 String merchantID = jsonObject.getString("merchantID");
                                 String name = jsonObject.getString("name");
                                 String description = jsonObject.getString("description");
-                                //String type = jsonObject.getString("type");
+                                String businessType = jsonObject.getString("businessType");
                                 String merchantLogoURL = jsonObject.getString("merchantLogoURL");
-                                findAdapter.addData(name, merchantID, merchantLogoURL, "type", description);
+                                findAdapter.addData(name, merchantID, merchantLogoURL, businessType, description);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
