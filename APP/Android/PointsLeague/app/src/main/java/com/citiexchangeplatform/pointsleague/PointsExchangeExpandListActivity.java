@@ -131,6 +131,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
                             String businessName = child.getString("merchantName");
                             int usePoints = child.getInt("points_card");
                             double exchangePoints = child.getInt("points_citi");
+
                             //保留两位小数
                             NumberFormat nf = NumberFormat.getNumberInstance();
                             // 保留两位小数
@@ -138,6 +139,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
                             // 如果不需要四舍五入，可以使用RoundingMode.DOWN
                             nf.setRoundingMode(RoundingMode.UP);
                             String result = nf.format(exchangePoints);
+
                             recordChild.name = businessName;
                             recordChild.usePoints = "使用积分: " + String.valueOf(usePoints);
                             recordChild.exchangePoints = "兑换积分: " + result;
