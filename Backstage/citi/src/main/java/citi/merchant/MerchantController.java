@@ -49,8 +49,8 @@ public class MerchantController {
      * @return {"merchantID":"00001","name":"apple","description":"to eat","address":"WHU","logoURL":"http://.png"}
      */
     @ResponseBody
-    @RequestMapping("/{merchantID}")
-    public String getMerchant(@PathVariable String merchantID){
+    @RequestMapping("/getSingleInfo")
+    public String getMerchant(String merchantID){
         Merchant m = merchantSerivce.getMerchant(merchantID);
         if(m==null)
             return "{}";

@@ -74,7 +74,7 @@ public class PayService {
         List<Order> orders=orderMapper.getOrderByUserID(userID,"01010101");
 
         for (Order order:orders){
-            if (order.getTime().compareTo(new Timestamp(QRTimestamp))==0){
+            if (order.getTime().compareTo(new Timestamp(QRTimestamp*1000))==0){
                 if (order.getState()==Order.OrderState.FAIL){
                     return QRCodeStatus.USEFAIL;
                 }
@@ -88,7 +88,7 @@ public class PayService {
         List<Order> orders=orderMapper.getOrderByUserID(userID,"0101010101");
         for (Order order :orders
                 ) {
-            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)))==0){
+            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp)*1000))==0){
                 return order;
             }
         }
