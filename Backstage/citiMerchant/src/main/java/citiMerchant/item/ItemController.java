@@ -2,7 +2,6 @@ package citiMerchant.item;
 
 import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.vo.Item;
-import citiMerchant.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhong on 2018/7/11 19:51
@@ -35,85 +36,85 @@ public class ItemController {
     private static String url = "http://www.byzhong.cn/image/item/";
 
     @RequestMapping("/item/getItem")
-    public ModelAndView getItemList(){
+    public ModelAndView getItemList() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
-        ModelAndView mv =new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
-        mv.addObject("items",items);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
+        mv.addObject("items", items);
+        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("/item/showItem");
         return mv;
     }
 
     @RequestMapping("/item/addItem")
-    public ModelAndView addItem(String merchantID){
-        ModelAndView mv =new ModelAndView();
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
+    public ModelAndView addItem(String merchantID) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("item/addItem");
         return mv;
     }
 
     @RequestMapping("/item/editItem")
-    public ModelAndView editItem(String itemID){
+    public ModelAndView editItem(String itemID) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
-        ModelAndView mv =new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         Item item = itemService.getItem(itemID);
-        mv.addObject("item",item);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
+        mv.addObject("item", item);
+        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("/item/editItem");
         return mv;
     }
 
 
     @RequestMapping("/item/submitEdit")
-    public ModelAndView submitEdit(String url2, String itemID, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
+    public ModelAndView submitEdit(String url2, String itemID, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
-        ModelAndView mv =new ModelAndView();
-        myfile = url+merchantID+url2;
-        overdueTime = overdueTime +" 00:00:00";
-        Item item = new Item(itemID, name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
+        ModelAndView mv = new ModelAndView();
+        myfile = url + merchantID + url2;
+        overdueTime = overdueTime + " 00:00:00";
+        Item item = new Item(itemID, name, description, merchantID, myfile, Double.valueOf(originalPrice), Integer.valueOf(points), Timestamp.valueOf(overdueTime), Long.valueOf(stock));
         itemService.updateItem(item);
         List<Item> items = itemService.getInfo(merchantID);
-        mv.addObject("items",items);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
+        mv.addObject("items", items);
+        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("item/showItem");
         return mv;
     }
 
     @RequestMapping("/item/deleteItem")
-    public ModelAndView deleteItem(String itemID){
+    public ModelAndView deleteItem(String itemID) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
         itemService.deleteItem(itemID);
-        ModelAndView mv =new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
-        mv.addObject("items",items);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
+        mv.addObject("items", items);
+        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("/item/showItem");
         return mv;
     }
 
     @RequestMapping("/item/addItemOperation")
-    public ModelAndView addItemOperation(String url2, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile){
+    public ModelAndView addItemOperation(String url2, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile) {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
-        myfile = url+url2;
-        overdueTime = overdueTime +" 00:00:00";
-        Item item = new Item(name, description, merchantID, myfile, Double.valueOf(originalPrice),Integer.valueOf(points), Timestamp.valueOf(overdueTime), Integer.valueOf(stock));
+        myfile = url + url2;
+        overdueTime = overdueTime + " 00:00:00";
+        Item item = new Item(name, description, merchantID, myfile, Double.valueOf(originalPrice), Integer.valueOf(points), Timestamp.valueOf(overdueTime), Long.valueOf(stock));
         itemService.addItem(item);
-        ModelAndView mv =new ModelAndView("redirect:/item/getItem");
+        ModelAndView mv = new ModelAndView("redirect:/item/getItem");
         List<Item> items = itemService.getInfo(merchantID);
-        mv.addObject("items",items);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
+        mv.addObject("items", items);
+        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         //mv.setViewName("/item/showItem");
         return mv;
     }
@@ -130,7 +131,7 @@ public class ItemController {
         // 上传图片
         if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            HttpSession session =request.getSession();
+            HttpSession session = request.getSession();
             String merchantID = session.getAttribute("merchantID").toString();            // 新的图片名称
             String newFileName = merchantID + oldFileName;
             // 新图片

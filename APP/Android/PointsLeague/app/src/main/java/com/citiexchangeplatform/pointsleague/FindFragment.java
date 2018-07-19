@@ -105,7 +105,29 @@ public class FindFragment extends Fragment {
                                 String merchantID = jsonObject.getString("merchantID");
                                 String name = jsonObject.getString("name");
                                 String description = jsonObject.getString("description");
-                                String businessType = jsonObject.getString("businessType");
+                                String businessType;
+                                switch (jsonObject.getString("businessType")){
+                                    case "catering":
+                                        businessType = "餐饮";
+                                        break;
+                                    case "exercise":
+                                        businessType = "运动";
+                                        break;
+                                    case "bank":
+                                        businessType = "银行";
+                                        break;
+                                    case "costume":
+                                        businessType = "服饰";
+                                        break;
+                                    case "education":
+                                        businessType = "教育";
+                                        break;
+                                    case "communication":
+                                        businessType = "通讯";
+                                        break;
+                                    default:
+                                        businessType = "一般";
+                                }
                                 String merchantLogoURL = jsonObject.getString("merchantLogoURL");
                                 findAdapter.addData(name, merchantID, merchantLogoURL, businessType, description);
                             }
