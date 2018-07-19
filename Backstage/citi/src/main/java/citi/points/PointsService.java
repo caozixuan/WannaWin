@@ -38,14 +38,13 @@ public class PointsService {
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
             MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(user.getUserID(), merchantBean.getMerchantID());
+            Merchant merchant = merchantMapper.selectByID(merchantBean.getMerchantID());
             if(ids.indexOf(merchantBean.getMerchantID())==-1){
-                Merchant merchant = merchantMapper.selectByID(merchantBean.getMerchantID());
                 ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "不存在此卡");
                 returnMerchants.add(returnMerchant);
                 isCanChange = false;
             }
-            else if(msCard.getPoints()*msCard.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*msCard.getProportion()){
-                Merchant merchant = merchantMapper.selectByID(merchantBean.getMerchantID());
+            else if(msCard.getPoints()*merchant.getProportion()<Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion()){
                 ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "卡内积分不足");
                 returnMerchants.add(returnMerchant);
                 isCanChange = false;
@@ -55,10 +54,9 @@ public class PointsService {
     }
 
     public void deductPoints(User user, List<ResultBean.MerchantBean> merchantBeanList){
-        List<MSCard> userMSCards = msCardMapper.select(user.getUserID());
-        MSCard msCard = userMSCards.get(0);
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
+            MSCard msCard = msCardMapper.getBy_userID_AND_merchantID(user.getUserID(), merchantBean.getMerchantID());
             Merchant merchant = merchantMapper.selectByID(msCard.getMerchantId());
             if(msCard.getPoints()*merchant.getProportion()>=Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion()){
                 msCardMapper.exchangePoints(Integer.valueOf(merchantBean.getSelectedMSCardPoints()),user.getUserID(), merchantBean.getMerchantID());

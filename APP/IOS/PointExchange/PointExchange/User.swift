@@ -18,6 +18,7 @@ class User: Codable{
     var portraitPath:String?
     var generalPoints: Double?
     var availablePoints: Double?
+    var citiCardID:String?
 }
 
 extension User{

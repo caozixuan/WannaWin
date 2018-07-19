@@ -24,6 +24,7 @@ class LoginViewController: UITableViewController{
         usernameField.delegate=self
         // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,9 +75,6 @@ class LoginViewController: UITableViewController{
     
     // 设置当前用户的用户名和密码，并存储到keychain
     func saveUserInfo(){
-        User.getUser().username = usernameField.text
-        User.getUser().password = passwordField.text
-        
         User.saveToKeychain()
     }
     

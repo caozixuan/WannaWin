@@ -267,8 +267,8 @@ extension ServerService:TargetType {
         // 订单相关
         case .getOrders(let intervalTime):
             var params:[String:String] = [:]
-            params["userId"] = User.getUser().id
-            params["intervaltime"] = intervalTime
+            params["userID"] = User.getUser().id
+            params["intervalTime"] = intervalTime
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         default:

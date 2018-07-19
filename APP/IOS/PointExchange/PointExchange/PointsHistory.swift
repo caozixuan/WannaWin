@@ -9,8 +9,18 @@
 import Foundation
 
 class PointsHistory:Codable{
+    var historyMerchants:[PointsHistoryItem]?
+    var totalPoints:Double?
+    
+    enum CodingKeys:String, CodingKey {
+        case historyMerchants = "points_history_merchants"
+        case totalPoints
+    }
+}
+
+struct PointsHistoryItem:Codable{
     var userID:String?
-    var merchantID:String?
+    var merchantName:String?
     var pointsCard:Double?
     var pointsCiti:Double?
     var cause:String?
@@ -21,7 +31,7 @@ class PointsHistory:Codable{
         case pointsCiti = "points_citi"
         
         case userID
-        case merchantID
+        case merchantName
         case cause
         case time
     }
