@@ -35,4 +35,52 @@ public class OrderController {
             return "[]";
         return gson.toJson(returnOrders);
     }
+
+    @ResponseBody
+    @RequestMapping("/getSuccessOrders")
+    public String getSuccessOrders(String userID, String intervalTime){
+        List<Order> orders = orderService.getOrders(userID,intervalTime);
+        ArrayList<ReturnOrder> returnOrders = orderService.changeToReturnOrders(orders);
+        ArrayList<ReturnOrder> returnSuccessOrders = new ArrayList<ReturnOrder>();
+        for(ReturnOrder returnOrder:returnOrders){
+            if(returnOrder.getState()== Order.OrderState.SUCCESS){
+                returnSuccessOrders.add(returnOrder);
+            }
+        }
+        if(orders==null)
+            return "[]";
+        return gson.toJson(returnSuccessOrders);
+    }
+
+    @ResponseBody
+    @RequestMapping("/getToBeFinishedOrders")
+    public String getUnfinishedOrders(String userID, String intervalTime){
+        List<Order> orders = orderService.getOrders(userID,intervalTime);
+        ArrayList<ReturnOrder> returnOrders = orderService.changeToReturnOrders(orders);
+        ArrayList<ReturnOrder> returnToBeFinishedOrders = new ArrayList<ReturnOrder>();
+        for(ReturnOrder returnOrder:returnOrders){
+            if(returnOrder.getState()== Order.OrderState.TOBEFINISHED){
+                returnToBeFinishedOrders.add(returnOrder);
+            }
+        }
+        if(orders==null)
+            return "[]";
+        return gson.toJson(returnToBeFinishedOrders);
+    }
+
+    @ResponseBody
+    @RequestMapping("/getFailOrders")
+    public String getFailOrders(String userID, String intervalTime){
+        List<Order> orders = orderService.getOrders(userID,intervalTime);
+        ArrayList<ReturnOrder> returnOrders = orderService.changeToReturnOrders(orders);
+        ArrayList<ReturnOrder> returnFailOrders = new ArrayList<ReturnOrder>();
+        for(ReturnOrder returnOrder:returnOrders){
+            if(returnOrder.getState()== Order.OrderState.FAIL){
+                returnFailOrders.add(returnOrder);
+            }
+        }
+        if(orders==null)
+            return "[]";
+        return gson.toJson(returnFailOrders);
+    }
 }

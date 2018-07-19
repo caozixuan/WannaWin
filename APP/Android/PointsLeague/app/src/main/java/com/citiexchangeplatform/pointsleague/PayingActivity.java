@@ -184,12 +184,23 @@ public class PayingActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
+        int toolBarHeight = UnitConverter.px2dip(getApplicationContext(),132);
+        int actionTitleSize = UnitConverter.px2sp(getApplicationContext(),51);
+        int titleSize = UnitConverter.px2sp(getApplicationContext(),51);
+
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
+        titleBar.setDividerColor(Color.parseColor("#d3d3d3"));
+        //设置字体大小
+        titleBar.setHeight(toolBarHeight*2);
+        titleBar.setTitleSize(titleSize);
+        titleBar.setLeftTextSize(actionTitleSize);
+        titleBar.setSubTitleSize(actionTitleSize);
+
         //左侧
         titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
         titleBar.setLeftText("首页");
         titleBar.setLeftTextColor(Color.BLACK);
+
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
