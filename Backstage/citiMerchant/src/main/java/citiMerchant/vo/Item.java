@@ -9,12 +9,12 @@ public class Item {
     private String description;
     private String merchantID;
     private String logoURL;
-    private double originalPrice;
-    private int points;
+    private Double originalPrice;
+    private Integer points;
     private Timestamp overdueTime;
-    private long stock;
+    private Long stock;
 
-    public Item(String itemID, String name, String description, String merchantID, String logoURL, double originalPrice, int points, Timestamp overdueTime, long stock) {
+    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
         ItemID = itemID;
         this.name = name;
         this.description = description;
@@ -26,11 +26,11 @@ public class Item {
         this.stock = stock;
     }
 
-    public Item(){
+    public Item() {
         this.ItemID = UUID.randomUUID().toString();
     }
 
-    public Item(String name, String description, String merchantID, String logoURL, double originalPrice, int points, Timestamp overdueTime, long stock) {
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
         this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
@@ -62,11 +62,11 @@ public class Item {
         return logoURL;
     }
 
-    public double getOriginalPrice() {
+    public Double getOriginalPrice() {
         return originalPrice;
     }
 
-    public int getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
@@ -74,7 +74,7 @@ public class Item {
         return overdueTime;
     }
 
-    public long getStock() {
+    public Long getStock() {
         return stock;
     }
 

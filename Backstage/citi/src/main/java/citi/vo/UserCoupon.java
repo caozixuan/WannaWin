@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserCoupon {
-    private long couponID;
-    private String userID;
-    private String ItemID;
-    private String state;
-    private Timestamp getTime;
-    private Timestamp useTime;
+    protected Long couponID;
+    protected String userID;
+    protected String ItemID;
+    protected String state;
+    protected Timestamp getTime;
+    protected Timestamp useTime;
 
     public enum CouponState {
         USED, UNUSED, OVERDUED;
@@ -38,11 +38,23 @@ public class UserCoupon {
 
     }
 
+    public Long getCouponID() {
+        return couponID;
+    }
+
+    public Timestamp getGetTime() {
+        return getTime;
+    }
+
+    public Timestamp getUseTime() {
+        return useTime;
+    }
+
     public UserCoupon() {
 
     }
 
-    public UserCoupon(long couponID, String userID, String itemID, String state, Timestamp getTime, Timestamp useTime) {
+    public UserCoupon(Long couponID, String userID, String itemID, String state, Timestamp getTime, Timestamp useTime) {
         this.couponID = couponID;
         this.userID = userID;
         ItemID = itemID;
@@ -52,7 +64,7 @@ public class UserCoupon {
     }
 
     public UserCoupon(String userID, String itemID, UserCoupon.CouponState state) {
-        this.couponID = -1;
+        this.couponID = -1L;
         this.userID = userID;
         ItemID = itemID;
         this.state = CouponState.getStateString(state);

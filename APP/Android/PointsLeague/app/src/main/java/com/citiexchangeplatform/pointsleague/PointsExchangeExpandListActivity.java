@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.android.volley.AuthFailureError;
@@ -24,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +75,21 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
             }
         });
 
+
+        //调用方法,传入一个接口回调
+        expandableAdapter.setItemClickListener(new VExpandableAdapter.MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(PointsExchangeExpandListActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
+                if (expandableAdapter.isExpanded(position)) {
+                    expandableAdapter.collapseGroup(position);
+                    //((Button) v).setText("Open");
+                } else {
+                    expandableAdapter.expandGroup(position);
+                    //((Button) v).setText("Close");
+                }
+            }
+        });
     }
 
 
@@ -110,13 +128,33 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
 
                             JSONObject child = children.getJSONObject(j);
                             RecordChild recordChild = new RecordChild();
-                            recordChild.name = "使用积分: " + String.valueOf(child.getInt("points_card"));
+                            String businessName = child.getString("merchantName");
+                            int usePoints = child.getInt("points_card");
+                            double exchangePoints = child.getInt("points_citi");
+                            //保留两位小数
+                            NumberFormat nf = NumberFormat.getNumberInstance();
+                            // 保留两位小数
+                            nf.setMaximumFractionDigits(2);
+                            // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+                            nf.setRoundingMode(RoundingMode.UP);
+                            String result = nf.format(exchangePoints);
+                            recordChild.name = businessName;
+                            recordChild.usePoints = "使用积分: " + String.valueOf(usePoints);
+                            recordChild.exchangePoints = "兑换积分: " + result;
                             date = String.valueOf(child.getString("time"));
                             recordChildList.add(recordChild);
 
                         }
                         RecordParent recordParent = new RecordParent();
-                        recordParent.totalExchangePoint = "兑换积分" + String.valueOf(jObj.getDouble("totalPoints"));
+                        Double total = jObj.getDouble("totalPoints");
+                        //保留两位小数
+                        NumberFormat nf = NumberFormat.getNumberInstance();
+                        // 保留两位小数
+                        nf.setMaximumFractionDigits(2);
+                        // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+                        nf.setRoundingMode(RoundingMode.UP);
+                        String result = nf.format(total);
+                        recordParent.totalExchangePoint = "总兑换积分" + result;
                         recordParent.date = date;
                         recordParent.childs = recordChildList;
                         expandableAdapter.addData(recordParent);

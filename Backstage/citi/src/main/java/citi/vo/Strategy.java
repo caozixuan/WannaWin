@@ -49,13 +49,13 @@ public class Strategy {
         if (order.getOriginalPrice() >= strategy.priceOriginal.get(strategy.priceOriginal.size() - 1)) {
             points = strategy.pointsNeed.get(strategy.pointsNeed.size() - 1);
             points = isPointsEnough(points, user);
-            order.setPointsNeeded(points);
+            order.setPointsNeeded(Double.valueOf(points));
         }
         for (int i = 0; i < strategy.priceOriginal.size() - 1; i++) {
             if (order.getOriginalPrice() >= strategy.priceOriginal.get(i) && order.getOriginalPrice() < strategy.priceOriginal.get(i + 1)) {
                 points = strategy.pointsNeed.get(i);
                 points = isPointsEnough(points, user);
-                order.setPointsNeeded(points);
+                order.setPointsNeeded(Double.valueOf(points));
             }
         }
         return points;

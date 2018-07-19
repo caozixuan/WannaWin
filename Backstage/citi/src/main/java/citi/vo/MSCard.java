@@ -7,13 +7,13 @@ package citi.vo;
 public class MSCard {
     private String userID;
     private String cardNum;
-    private int points;
+    private Integer points;
     private String merchantID;
-    private double proportion;
+    private Double proportion;
     private String logoURL;
     private String merchantName;
 
-    public MSCard(String userID, String cardNum, int points, String merchantId, double proportion, String logoURL, String merchantName) {
+    public MSCard(String userID, String cardNum, Integer points, String merchantId, Double proportion, String logoURL, String merchantName) {
         this.userID = userID;
         this.cardNum = cardNum;
         this.points = points;
@@ -27,7 +27,7 @@ public class MSCard {
 
     }
 
-    public MSCard(String userID, String cardNum, int points, String merchantId) {
+    public MSCard(String userID, String cardNum, Integer points, String merchantId) {
         this.userID = userID;
         this.cardNum = cardNum;
         this.points = points;
@@ -39,11 +39,11 @@ public class MSCard {
         return true;
     }
 
-    public double getProportion() {
+    public Double getProportion() {
         return proportion;
     }
 
-    public void setProportion(double proportion) {
+    public void setProportion(Double proportion) {
         this.proportion = proportion;
     }
 
@@ -83,7 +83,7 @@ public class MSCard {
         this.merchantID = merchantId;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(Integer points) {
         this.points = points;
     }
 
@@ -91,7 +91,7 @@ public class MSCard {
         return userID;
     }
 
-    public int getPoints() {
+    public Integer getPoints() {
         return points;
     }
 

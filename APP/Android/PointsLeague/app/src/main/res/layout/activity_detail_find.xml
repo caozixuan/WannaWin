@@ -50,7 +50,7 @@
         <View
             android:background="@color/colorUnable"
             android:layout_width="match_parent"
-            android:layout_height="3dp"></View>
+            android:layout_height="3dp"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -73,7 +73,7 @@
         <View
             android:background="@color/colorUnable"
             android:layout_width="match_parent"
-            android:layout_height="3dp"></View>
+            android:layout_height="3dp"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -87,56 +87,33 @@
                 android:textSize="24sp"
                 android:layout_marginBottom="5dp"/>
 
-
-            <LinearLayout
-                android:background="@drawable/rectangle"
-                android:orientation="vertical"
+            <ListView
+                android:id="@+id/listView_detail_find"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_margin="5dp">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="item_name"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:gravity="center_vertical|end"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="time"
-                        android:textSize="12sp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="item_description"
-                        android:textSize="12sp"/>
+                android:layout_height="180dp"
+                android:padding="10dp">
 
-                </LinearLayout>
+            </ListView>
 
-
-            </LinearLayout>
-
-
+            <FrameLayout
+                android:id="@+id/view_detail_find_empty"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:padding="20dp">
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商家似乎还没有活动哦"
+                    android:textSize="18sp"/>
+            </FrameLayout>
 
         </LinearLayout>
 
         <View
             android:background="@color/colorUnable"
             android:layout_width="match_parent"
-            android:layout_height="3dp"></View>
+            android:layout_height="3dp"/>
 
         <LinearLayout
             android:orientation="vertical"

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -107,6 +108,7 @@ public class PointsController {
         ArrayList<ReturnInformation> returnInformations = pointsService.dividePointsHistory(returnHistories);
         if(returnInformations==null)
             return "[]";
+        Collections.sort(returnInformations);
         return gson.toJson(returnInformations);
     }
 

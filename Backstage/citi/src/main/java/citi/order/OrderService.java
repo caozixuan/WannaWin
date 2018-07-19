@@ -27,6 +27,8 @@ public class OrderService {
         ArrayList<ReturnOrder> returnOrders = new ArrayList<ReturnOrder>();
         for(int i=0;i<orders.size();i++){
             Order order = orders.get(i);
+            if(order.getState()==null)
+                order.setState(Order.OrderState.FAIL.toString());
             returnOrders.add(new ReturnOrder(order.getOrderId(),order.getOriginalPrice(),order.getPriceAfter(),order.getPointsNeeded(),order.getUserId(),order.getState().toString(),order.getMerchantId(),order.getTime(),merchantMapper));
         }
         return returnOrders;

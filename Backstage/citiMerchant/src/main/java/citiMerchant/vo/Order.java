@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class Order {
     private String orderId;
-    private double originalPrice;
-    private double priceAfter;
-    private double pointsNeeded;
+    private Double originalPrice;
+    private Double priceAfter;
+    private Double pointsNeeded;
     private String userId;
     private String state;   //2018-07-10 从 OrderState 改为 String - 任思远
     private String merchantId;
@@ -44,7 +44,7 @@ public class Order {
 
     }
 
-    public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
+    public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
@@ -55,7 +55,7 @@ public class Order {
         this.time = time;
     }
 
-    public Order(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
+    public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
         this.orderId = orderId;
         this.originalPrice = originalPrice;
         this.priceAfter = priceAfter;
@@ -66,7 +66,7 @@ public class Order {
         this.time = time;
     }
 
-    public void setPointsNeeded(int pointsNeeded) {
+    public void setPointsNeeded(Double pointsNeeded) {
         this.pointsNeeded = pointsNeeded;
     }
 
@@ -82,15 +82,15 @@ public class Order {
         return orderId;
     }
 
-    public double getOriginalPrice() {
+    public Double getOriginalPrice() {
         return originalPrice;
     }
 
-    public double getPriceAfter() {
+    public Double getPriceAfter() {
         return priceAfter;
     }
 
-    public double getPointsNeeded() {
+    public Double getPointsNeeded() {
         return pointsNeeded;
     }
 

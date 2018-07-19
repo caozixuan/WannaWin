@@ -140,7 +140,6 @@ public class AccountFragment extends Fragment {
             Button button = new Button(getActivity());
             button.setText("登录");
             button.setTextSize(18);
-            button.setTextColor(getResources().getColor(R.color.colorWhite));
             button.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));

@@ -3,16 +3,16 @@ package citiMerchant.vo;
 public class Points_history_card {
     private String IN_userID;
     private String IN_merchantID;
-    private int IN_intervalDate;
-    private long totalPoints_card;
-    private long totalPoints_citi;
+    private Integer IN_intervalDate;
+    private Long totalPoints_card;
+    private Long totalPoints_citi;
 
-    public Points_history_card(String IN_userID, String IN_merchantID, int IN_intervalDate) {
+    public Points_history_card(String IN_userID, String IN_merchantID, Integer IN_intervalDate) {
         this.IN_userID = IN_userID;
         this.IN_merchantID = IN_merchantID;
         this.IN_intervalDate = IN_intervalDate;
-        this.totalPoints_card = -1;
-        this.totalPoints_citi = -1;
+        this.totalPoints_card = -1L;
+        this.totalPoints_citi = -1L;
     }
 
     public String getIN_userID() {
@@ -23,15 +23,15 @@ public class Points_history_card {
         return IN_merchantID;
     }
 
-    public int getIN_intervalDate() {
+    public Integer getIN_intervalDate() {
         return IN_intervalDate;
     }
 
-    public long getTotalPoints_card() {
+    public Long getTotalPoints_card() {
         return totalPoints_card;
     }
 
-    public long getTotalPoints_citi() {
+    public Long getTotalPoints_citi() {
         return totalPoints_citi;
     }
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -55,13 +56,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.home_unselected, "首页"))
                 .addItem(new BottomNavigationItem(R.drawable.search_unselected, "发现"))
-                .addItem(new BottomNavigationItem(R.drawable.qrcode, "二维码").setInActiveColor("#FF8022"))
+                .addItem(new BottomNavigationItem(R.drawable.qrcode, "二维码").setInActiveColor("#FF8022").setActiveColor("#FF8022"))
                 .addItem(new BottomNavigationItem(R.drawable.store_unselected, "商城"))
                 .addItem(new BottomNavigationItem(R.drawable.my_unselected, "我的"))
                 .setFirstSelectedPosition(lastSelectedPosition)
                 .initialise(); //initialise 一定要放在 所有设置的最后一项
 
         setDefaultFragment();//设置默认导航栏
+
     }
 
     private void setDefaultFragment() {
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 transaction.replace(R.id.tb, findFragment);
                 break;
             case 2:
+                if(!LogStateInfo.getInstance(MainActivity.this).isLogin()){
+                    Toast.makeText(MainActivity.this, "请登录后使用二维码", Toast.LENGTH_LONG).show();
+                }
                 Intent intentToPayCode = new Intent(MainActivity.this, PayCodeActivity.class);
                 startActivity(intentToPayCode);
                 break;
@@ -121,77 +126,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     public void onTabReselected(int position) {
-
+        if(position == 2){
+            Intent intentToPayCode = new Intent(MainActivity.this, PayCodeActivity.class);
+            startActivity(intentToPayCode);
+        }
     }
 }
-
-
-/*
-
-    private ViewPager viewPager;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-
-        final SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
-        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
-        spaceNavigationView.addSpaceItem(new SpaceItem("积分", R.drawable.ic_points_black_24dp));
-        spaceNavigationView.addSpaceItem(new SpaceItem("发现", R.drawable.ic_search_black_24dp));
-        spaceNavigationView.addSpaceItem(new SpaceItem("商城", R.drawable.ic_mall_black_24dp));
-        spaceNavigationView.addSpaceItem(new SpaceItem("我的", R.drawable.ic_account_black_24dp));
-
-        spaceNavigationView.setCentreButtonRippleColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-
-        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
-            @Override
-            public void onCentreButtonClick() {
-                Intent toPayCode = new Intent(MainActivity.this, PayCodeActivity.class);
-                startActivity(toPayCode);
-            }
-
-            @Override
-            public void onItemClick(int itemIndex, String itemName) {
-                viewPager.setCurrentItem(itemIndex);
-            }
-
-            @Override
-            public void onItemReselected(int itemIndex, String itemName) {
-            }
-        });
-
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                spaceNavigationView.changeCurrentItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
-        setupViewPager(viewPager);
-    }
-
-
-    private void setupViewPager(ViewPager viewPager) {
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        adapter.addFragment(new PointsFragment());
-        adapter.addFragment(new FindFragment());
-        adapter.addFragment(BaseFragment.newInstance("商城"));
-        adapter.addFragment(new AccountFragment());
-        viewPager.setAdapter(adapter);
-    }
- */

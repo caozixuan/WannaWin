@@ -1,12 +1,14 @@
 package citiMerchant.showData;
 
+import citiMerchant.mapper.DBHandler;
 import citiMerchant.mapper.RecordMapper;
 import citiMerchant.vo.Merchant_coupon_record;
 import citiMerchant.vo.Record;
 import citiMerchant.vo.RecordOrder;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,8 +18,11 @@ import java.util.List;
 
 @Service
 public class TestService {
-    @Autowired
-    RecordMapper recordMapper;
+
+    final RecordMapper recordMapper = DBHandler.recordMapper;
+
+    final Gson gson = new Gson();
+
 
     public Record getCouponRecord(String merchantID, int intervalDate) {
         Record record = new Record(merchantID, intervalDate);
@@ -59,7 +64,7 @@ public class TestService {
             e.printStackTrace();
             System.out.println("Date2TimeStamp fails\n");
         }
-        return 0l;
+        return 0L;
     }
 
     //return "...ms" since 1970-01-01
@@ -144,6 +149,8 @@ public class TestService {
         return points;
     }
 
+
+    //
     public List<List<Merchant_coupon_record>> show_Merchant_coupon_record(final String merchantID, final String year) {
         List<List<Merchant_coupon_record>> merchant_coupon_record = new ArrayList<>();
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -166,5 +173,64 @@ public class TestService {
         }
         return merchant_coupon_record;
     }
+
+
+    public boolean isPrapared(String merchantID) {
+        return Session_store.getSession(merchantID).getAttribute("method_prepare") != null;
+    }
+
+
+    //prepare satistics information
+    public void prepare(String merchantID) {
+
+        HttpSession session = Session_store.getSession(merchantID);
+        if (session.getAttribute("method_prepare") != null)
+            return;
+
+        //judge whether the method has been invoked
+        session.setAttribute("method_prepare", "233");
+
+
+        //prepare statistics information
+        String year = "" + Calendar.getInstance().get(Calendar.YEAR);
+
+        List<Long> points = show_order_points_chronology(merchantID, year);
+        List<Long> timestamp = getMonthTimeStamp(year);
+        List<Long> points_exchange = show_points_exchange_chronology(merchantID, year);
+
+        Long total_order_points = 0L;
+        Long total_points_exchange = 0L;
+        for (Long l : points) total_order_points += l;
+        for (Long l : points_exchange) total_points_exchange += l;
+
+        List<List<Merchant_coupon_record>> merchant_coupon_record = show_Merchant_coupon_record(merchantID, year);
+        Long total_merchant_coupon_record = 0L;
+        for (List<Merchant_coupon_record> list : merchant_coupon_record)
+            for (Merchant_coupon_record record : list)
+                total_merchant_coupon_record += record.getTotalPoints();
+
+
+        //set attribute
+        String points_json = gson.toJson(points);
+        session.setAttribute("points_json", points_json);
+
+        String timeStamp_json = gson.toJson(timestamp);
+        session.setAttribute("timeStamp_json", timeStamp_json);
+
+        String points_exchange_json = gson.toJson(points_exchange);
+        session.setAttribute("points_exchange_json", points_exchange_json);
+
+        String total_order_points_json = gson.toJson(total_order_points);
+        session.setAttribute("total_order_points_json", total_order_points_json);
+        String total_points_exchange_json = gson.toJson(total_points_exchange);
+        session.setAttribute("total_points_exchange_json", total_points_exchange_json);
+        String total_merchant_coupon_record_json = gson.toJson(total_merchant_coupon_record);
+        session.setAttribute("total_merchant_coupon_record_json", total_merchant_coupon_record_json);
+
+        //String merchant_coupon_record_json = gson.toJson(merchant_coupon_record);
+        //session.setAttribute("merchant_coupon_record_json", merchant_coupon_record_json);
+
+    }//end method void prepare(HttpSession session);
+
 
 }
