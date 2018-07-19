@@ -80,7 +80,7 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="../starter" class="logo">
+        <a href="starter" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>商</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -124,7 +124,7 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="logout" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -160,8 +160,8 @@ desired effect
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../item/getItem">商品清单</a></li>
-                        <li><a href="../item/addItem">添加商品</a></li>
+                        <li><a href="item/getItem">商品清单</a></li>
+                        <li><a href="item/addItem">添加商品</a></li>
                     </ul>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>减免策略</span>
@@ -170,12 +170,12 @@ desired effect
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../strategy/getStrategyList">策略清单</a></li>
-                        <li><a href="../strategy/addStrategyRequest">添加策略</a></li>
+                        <li><a href="strategy/getStrategyList">策略清单</a></li>
+                        <li><a href="strategy/addStrategyRequest">添加策略</a></li>
                     </ul>
-                <li><a href=../history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-                <li class="active"><a href="../showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-                <li class="active"><a href="../merchant/editMerchantInformation"><i class="fa fa-link"></i>
+                <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+                <li class="active"><a href="showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+                <li class="active"><a href="merchant/editMerchantInformation"><i class="fa fa-link"></i>
                     <span>商户信息</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -196,10 +196,10 @@ desired effect
         <!-- Main content -->
         <section class="content container-fluid">
 
+
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">订单积分消费情况统计</h3>
-
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                 class="fa fa-minus"></i>
@@ -211,13 +211,13 @@ desired effect
                 <div class="box-body chart-responsive">
                     <div class="chart" id="line-chart1" style="height: 300px;"></div>
                 </div>
-                <!-- /.box-body -->
             </div>
+            <!-- /.box-body -->
+
 
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">会员卡积分兑换情况统计</h3>
-
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                 class="fa fa-minus"></i>
@@ -229,8 +229,27 @@ desired effect
                 <div class="box-body chart-responsive">
                     <div class="chart" id="line-chart2" style="height: 300px;"></div>
                 </div>
-                <!-- /.box-body -->
             </div>
+            <!-- /.box-body -->
+
+
+            <%--<div class="box box-info">--%>
+            <%--<div class="box-header with-border">--%>
+            <%--<h3 class="box-title">优惠券积分兑换情况统计</h3>--%>
+            <%--<div class="box-tools pull-right">--%>
+            <%--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i--%>
+            <%--class="fa fa-minus"></i>--%>
+            <%--</button>--%>
+            <%--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>--%>
+            <%--</button>--%>
+            <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="box-body chart-responsive">--%>
+            <%--<div class="chart" id="line-chart3" style="height: 300px;"></div>--%>
+            <%--</div>--%>
+            <%--</div>--%>
+            <%--<!-- /.box-body -->--%>
+
 
             <div class="box box-danger">
                 <div class="box-header with-border">
@@ -247,8 +266,8 @@ desired effect
                 <div class="box-body chart-responsive">
                     <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
                 </div>
-                <!-- /.box-body -->
             </div>
+            <!-- /.box-body -->
 
             <!--------------------------
               | Your Page Content Here |
@@ -297,19 +316,27 @@ desired effect
     String Point = (String) session.getAttribute("points_json");
     String timeStamp = (String) session.getAttribute("timeStamp_json");
     String Points_EXCHANGE = (String) session.getAttribute("points_exchange_json");
+    String total_order_points_json = (String) session.getAttribute("total_order_points_json");
+    String total_points_exchange_json = (String) session.getAttribute("total_points_exchange_json");
+    String total_merchant_coupon_record_json = (String) session.getAttribute("total_merchant_coupon_record_json");
+    //String merchant_coupon_record = (String) session.getAttribute("merchant_coupon_record_json");
 %>
 <script>
     var Points = $.parseJSON("<%=Point %>");
     var timeStamps = $.parseJSON("<%=timeStamp %>");
     var Points_EXCHANGES = $.parseJSON("<%=Points_EXCHANGE %>");
+    var Total_order_points_json = $.parseJSON("<%=total_order_points_json %>");
+    var Total_points_exchange_json = $.parseJSON("<%=total_points_exchange_json %>");
+    var Total_merchant_coupon_record_json = $.parseJSON("<%=total_merchant_coupon_record_json %>");
+    <%--//var Merchant_coupon_record = $.parseJSON("<%=merchant_coupon_record %>");--%>
 
-    //for (var i = 0; i < 12; ++i)
-    //    document.write(Points[i] + "  ");
+    // for (var i = 0; i < 12; ++i)
+    //     document.write(Merchant_coupon_record[i] + "  ");
 
     $(function () {
         "use strict";
 
-        // LINE CHART 订单积分消费情况统计
+        // LINE CHART1 订单积分消费情况统计
         var line1 = new Morris.Line({
             element: 'line-chart1',
             resize: true,
@@ -335,8 +362,8 @@ desired effect
         });
 
 
-        // LINE CHART 会员卡积分兑换情况统计
-        var line1 = new Morris.Line({
+        // LINE CHART2 会员卡积分兑换情况统计
+        var line2 = new Morris.Line({
             element: 'line-chart2',
             resize: true,
             data: [
@@ -361,15 +388,41 @@ desired effect
         });
 
 
+        // // LINE CHART3 优惠券积分兑换情况统计
+        // var line3 = new Morris.Line({
+        //     element: 'line-chart3',
+        //     resize: true,
+        //     data: [
+        //         {timeStamp: timeStamps[0], item1: Points_EXCHANGES[0]},
+        //         {timeStamp: timeStamps[1], item1: Points_EXCHANGES[1]},
+        //         {timeStamp: timeStamps[2], item1: Points_EXCHANGES[2]},
+        //         {timeStamp: timeStamps[3], item1: Points_EXCHANGES[3]},
+        //         {timeStamp: timeStamps[4], item1: Points_EXCHANGES[4]},
+        //         {timeStamp: timeStamps[5], item1: Points_EXCHANGES[5]},
+        //         {timeStamp: timeStamps[6], item1: Points_EXCHANGES[6]},
+        //         {timeStamp: timeStamps[7], item1: Points_EXCHANGES[7]},
+        //         {timeStamp: timeStamps[8], item1: Points_EXCHANGES[8]},
+        //         {timeStamp: timeStamps[9], item1: Points_EXCHANGES[9]},
+        //         {timeStamp: timeStamps[10], item1: Points_EXCHANGES[10]},
+        //         {timeStamp: timeStamps[11], item1: Points_EXCHANGES[11]}
+        //     ],
+        //     xkey: 'timeStamp',
+        //     ykeys: ['item1'],
+        //     labels: ['优惠券积分兑换'],
+        //     lineColors: ['#3c8dbc'],
+        //     hideHover: 'auto'
+        // });
+
+
         //DONUT CHART
         var donut = new Morris.Donut({
             element: 'sales-chart',
             resize: true,
             colors: ["#3c8dbc", "#f56954", "#00a65a"],
             data: [
-                {value: 12, label: "Download Sales"},
-                {value: 30, label: "In-Store Sales"},
-                {value: 20, label: "Mail-Order Sales"}
+                {value: Total_order_points_json, label: "订单积分使用"},
+                {value: Total_points_exchange_json, label: "会员卡积分兑换"},
+                {value: Total_merchant_coupon_record_json, label: "优惠券积分使用"}
             ],
             hideHover: 'auto'
         });

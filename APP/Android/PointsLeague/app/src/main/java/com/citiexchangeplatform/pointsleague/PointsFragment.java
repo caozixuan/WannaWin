@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -139,12 +140,33 @@ public class PointsFragment extends Fragment {
             content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_button_points, null);
             accountInfoLayout.addView(content);
 
-            Button button = (Button) view.findViewById(R.id.button_login_points);
-            button.setOnClickListener(new View.OnClickListener() {
+            final EditText editTextAccount = (EditText) content.findViewById(R.id.editText_account_card_points);
+            final EditText editTextPassword = (EditText) content.findViewById(R.id.editText_password_card_points);
+
+            Button buttonLogin = (Button) content.findViewById(R.id.button_login_card_points);
+            buttonLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
+                    if (editTextAccount.getText().length() == 0) {
+                        Toast.makeText(getContext(), "请输入账号", Toast.LENGTH_SHORT).show();
+                    } else if (editTextPassword.getText().length() == 0) {
+                        Toast.makeText(getContext(), "请输入密码", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        String strAccount = editTextAccount.getText().toString();
+                        String strPassword = editTextPassword.getText().toString();
+
+                        tryLogin(strAccount, strPassword);
+                    }
+                }
+            });
+
+            TextView buttonRegister = (TextView) content.findViewById(R.id.textView_register_card_points);
+            buttonRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToRegister = new Intent(getContext(), RegisterActivity.class);
+                    startActivity(intentToRegister);
                 }
             });
         }
@@ -230,7 +252,7 @@ public class PointsFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             double generalPoints = jsonObject.getDouble("generalPoints");
                             TextView textView = (TextView)view.findViewById(R.id.textView_generalPoints_main);
-                            textView.setText(String.valueOf(generalPoints));
+                            textView.setText(String.format("%.1f",generalPoints));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -258,7 +280,7 @@ public class PointsFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             double availablePoints = jsonObject.getDouble("availablePoints");
                             TextView textView = (TextView)view.findViewById(R.id.textView_availablePoints_main);
-                            textView.setText(String.valueOf(availablePoints));
+                            textView.setText(String.format("%.1f",availablePoints));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -269,6 +291,62 @@ public class PointsFragment extends Fragment {
                     public void onError(VolleyError error) {
                         super.onError(error);
                         Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void tryLogin(final String account, String password) {
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/account/login")
+                .addParam("phoneNum", account)
+                .addParam("password", password)
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean logSuccess = false;
+                        try {
+                            if (response.length() > 2) {
+                                JSONObject jsonObject = new JSONObject(response);
+
+                                String accountPhoneNum = jsonObject.getString("phoneNum");
+                                String userID = jsonObject.getString("userID");
+
+                                LogStateInfo.getInstance(getContext())
+                                        .setAccount(account)
+                                        .setUserID(userID);
+
+                                logSuccess = true;
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        dialog.dismiss();
+
+                        if (logSuccess) {
+                            LogStateInfo.getInstance(getContext()).login();
+                            Toast.makeText(getContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                            onResume();
+                        } else {
+                            Toast.makeText(getContext(), "账号或密码错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(getContext(), "", "登录中...");
                     }
                 });
     }

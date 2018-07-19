@@ -1,6 +1,7 @@
 package citiMerchant.showData;
 
 import citiMerchant.mapper.RecordMapper;
+import citiMerchant.vo.Merchant_coupon_record;
 import citiMerchant.vo.Record;
 import citiMerchant.vo.RecordOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,7 +117,7 @@ public class TestService {
     }
 
 
-    public List<Long> show__points_exchange_chronology(final String merchantID, final String year) {
+    public List<Long> show_points_exchange_chronology(final String merchantID, final String year) {
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = new java.util.Date();
         try {
@@ -142,4 +143,28 @@ public class TestService {
         }
         return points;
     }
+
+    public List<List<Merchant_coupon_record>> show_Merchant_coupon_record(final String merchantID, final String year) {
+        List<List<Merchant_coupon_record>> merchant_coupon_record = new ArrayList<>();
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = new java.util.Date();
+        try {
+            date = format.parse(year + "-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        for (int i = 0; i < 12; ++i) {
+            String start_day = format.format(calendar.getTime());
+            calendar.add(Calendar.MONTH, 1);
+            String end_day = format.format(calendar.getTime());
+            java.sql.Date start = new java.sql.Date(Date2UNIXTime(start_day));
+            java.sql.Date end = new java.sql.Date(Date2UNIXTime(end_day));
+            List<Merchant_coupon_record> month_conpon_record = recordMapper.merchant_coupon_record_date(merchantID, start, end);
+            merchant_coupon_record.add(month_conpon_record);
+        }
+        return merchant_coupon_record;
+    }
+
 }

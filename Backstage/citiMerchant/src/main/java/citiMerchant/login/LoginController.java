@@ -58,6 +58,16 @@ public class LoginController {
         }
 
     }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(){
+        ModelAndView mv = new ModelAndView();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        request.getSession().invalidate();
+        mv.setViewName("login/login");
+        return mv;
+    }
+
     @RequestMapping("/starter")
     public ModelAndView starter(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

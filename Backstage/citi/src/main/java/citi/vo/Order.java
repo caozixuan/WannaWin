@@ -11,14 +11,14 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Order {
-    private String orderID;
-    private double originalPrice;
-    private double priceAfter;
-    private double pointsNeeded;
-    private String userID;
-    private String state;   //2018-07-10 从 OrderState 改为 String - 任思远
-    private String merchantID;
-    private Timestamp time;
+    protected String orderID;
+    protected double originalPrice;
+    protected double priceAfter;
+    protected double pointsNeeded;
+    protected String userID;
+    protected String state;   //2018-07-10 从 OrderState 改为 String - 任思远
+    protected String merchantID;
+    protected Timestamp time;
 
     public enum OrderState {
         SUCCESS, FAIL, TOBEFINISHED;

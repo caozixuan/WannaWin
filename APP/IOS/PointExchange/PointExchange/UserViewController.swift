@@ -70,6 +70,7 @@ class UserViewController: UITableViewController {
         else if indexPath.section == 1 {
             let storyBoard = UIStoryboard(name: "User", bundle: nil)
             switch indexPath.row{
+            // 绑定花旗账户
             case 0:
                 if let _ = User.getUser().username{
                     let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
@@ -78,6 +79,7 @@ class UserViewController: UITableViewController {
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
                     self.navigationController?.pushViewController(view, animated: true)
                 }
+            // 查看积分兑换记录
             case 1:
                 if let _ = User.getUser().username{
                     ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
@@ -94,34 +96,44 @@ class UserViewController: UITableViewController {
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
                     self.navigationController?.pushViewController(view, animated: true)
                 }
+            // 查看我的订单
             case 2:
                 if let _ = User.getUser().username{
                     activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
-                    // TODO: 访问服务器请求订单信息
+                    // TODO: 访问服务器请求订单信息(intervalTime)
+                    ServerConnector.getOrders(intervalTime: "1101010101"){ (result, orders) in
+                        let view = storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
+                        // TODO: 根据状态分订单数组
+                        var successOrders = [Order]()
+                        for order in orders{
+                            if order.state == OrderState.SUCCESS{
+                                successOrders.append(order)
+                            }
+                        }
+                        view.willUseOrders = successOrders
+                        self.navigationController?.pushViewController(view, animated: true)
+                        
+                    }
                     // 测试数据
-                    var orders = [Order]()
-                    var orders2 = [Order]()
-                    for i in 0...10{
-                        var order = Order()
-                        order.date = "2017-7-12"
-                        order.description = "coupon"
-                        order.merchantName = "商家\(i)"
-                        order.type = "coupon"
-                        orders.append(order)
-                    }
-                    for i in 0...10{
-                        var order = Order()
-                        order.date = "2017-7-12"
-                        order.points = Double(i) + 0.5
-                        order.merchantName = "商家\(i)"
-                        order.type = "point"
-                        orders2.append(order)
-                    }
-                    let view = storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
-                    view.willUseOrders = orders
-                    view.usedOrders = orders + orders2
-                    view.expireOrders = orders
-                    self.navigationController?.pushViewController(view, animated: true)
+//                    var orders = [Order]()
+//                    var orders2 = [Order]()
+//                    for i in 0...10{
+//                        var order = Order()
+//                        order.date = "2017-7-12"
+//                        order.description = "coupon"
+//                        order.merchantName = "商家\(i)"
+//                        order.type = "coupon"
+//                        orders.append(order)
+//                    }
+//                    for i in 0...10{
+//                        var order = Order()
+//                        order.date = "2017-7-12"
+//                        order.points = Double(i) + 0.5
+//                        order.merchantName = "商家\(i)"
+//                        order.type = "point"
+//                        orders2.append(order)
+//                    }
+                    
                 }else{
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
                     self.navigationController?.pushViewController(view, animated: true)

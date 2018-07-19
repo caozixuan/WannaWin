@@ -1,20 +1,32 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.KeyListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -40,7 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PayingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class PayingActivity extends AppCompatActivity {
 
     private RecyclerView msCardRecyclerView;
     private PayingAdapter mAdapter;
@@ -83,6 +95,48 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
         //获得初始化数据
         initData();
 
+        SearchView search = this.findViewById(R.id.editText_search_paying);
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+        search.setIconified(false);
+        search.setQueryHint("Search");
+        //搜索图标是否显示在搜索框内
+        search.setIconifiedByDefault(false);
+
+        //设置搜索框展开时是否显示提交按钮，可不显示
+        search.setSubmitButtonEnabled(false);
+
+        //让键盘的回车键设置成搜索
+        search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        search.clearFocus();
+
+        getWindow().getDecorView().findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(null != PayingActivity.this.getCurrentFocus()){
+                    /**
+                     * 点击空白位置 隐藏软键盘
+                     */
+                    InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    return mInputMethodManager.hideSoftInputFromWindow(PayingActivity.this.getCurrentFocus().getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
+
+
     }
 
     private void initView(){
@@ -121,7 +175,7 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
 
         msCardRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
-        msCardRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        //msCardRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         mAdapter.buttonSetOnclick(new PayingAdapter.ButtonInterface() {
             @Override
@@ -143,7 +197,17 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
             }
         });
 
+        mAdapter.editTextComplete(new PayingAdapter.EditTextInterface(){
+            @Override
+            public void onComplete(View view, int position) {
+                //修改合计价格
+                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
+            }
+        });
+
     }
+
+
 
     /*判断是否显示软键盘*/
     private boolean isSoftShowing() {
@@ -407,28 +471,28 @@ public class PayingActivity extends AppCompatActivity implements SearchView.OnQu
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    //@Override
+    //public boolean onCreateOptionsMenu(Menu menu) {
+    //    getMenuInflater().inflate(R.menu.menu_main, menu);
+    //
+    //    final MenuItem searchItem = menu.findItem(R.id.action_search);
+    //    final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+    //    searchView.setOnQueryTextListener(this);
+    //
+    //    return true;
+    //}
 
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(this);
-
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String query) {
-        mAdapter.getFilter().filter(query);
-        return true;
-
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
+    //@Override
+    //public boolean onQueryTextChange(String query) {
+    //    mAdapter.getFilter().filter(query);
+    //    return true;
+    //
+    //}
+    //
+    //@Override
+    //public boolean onQueryTextSubmit(String query) {
+    //    return false;
+    //}
 
 
 

@@ -25,7 +25,7 @@
 
         <EditText
             android:background="@drawable/edit_login"
-            android:id="@+id/editText_account_login"
+            android:id="@+id/editText_account_card_points"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
@@ -33,11 +33,12 @@
             android:inputType="phone"
             android:textAlignment="center"
             android:textColorHint="#CECECE"
+            android:textSize="16sp"
             android:hint="请输入账户"/>
 
         <EditText
             android:background="@drawable/edit_login"
-            android:id="@+id/editText_password_login"
+            android:id="@+id/editText_password_card_points"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
@@ -45,6 +46,7 @@
             android:inputType="textPassword"
             android:textAlignment="center"
             android:textColorHint="#CECECE"
+            android:textSize="16sp"
             android:hint="请输入密码"/>
 
     </LinearLayout>
@@ -53,7 +55,7 @@
         android:layout_margin="5dp"
         android:background="@drawable/login_button"
         android:layout_gravity="center"
-        android:id="@+id/button_login_points"
+        android:id="@+id/button_login_card_points"
         android:layout_width="250dp"
         android:layout_height="50dp" />
 
@@ -67,9 +69,10 @@
             android:layout_centerVertical="true"
             android:layout_width="100dp"
             android:layout_height="1dp"
-            android:background="#8B8B8B"
+            android:background="#508B8B8B"
             />
         <TextView
+            android:id="@+id/textView_register_card_points"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +85,7 @@
             android:layout_centerVertical="true"
             android:layout_width="100dp"
             android:layout_height="1dp"
-            android:background="#8B8B8B"
+            android:background="#508B8B8B"
             />
     </RelativeLayout>
 </LinearLayout>

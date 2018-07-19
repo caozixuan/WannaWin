@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.citiexchangeplatform.pointsleague.R;
 import com.citiexchangeplatform.pointsleague.models.AddCardItemModel;
+import com.citiexchangeplatform.pointsleague.BindCardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,11 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intentToBindCard = new Intent(context, BindCardActivity.class);
+                intentToBindCard.putExtra("merchantID",filteredItems.get(position).getMerchantID());
+                intentToBindCard.putExtra("logoURL",filteredItems.get(position).getLogoURL());
+                context.startActivity(intentToBindCard);
             }
         });
     }

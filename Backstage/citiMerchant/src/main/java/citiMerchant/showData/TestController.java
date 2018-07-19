@@ -1,6 +1,6 @@
 package citiMerchant.showData;
 
-import citiMerchant.mapper.MerchantMapper;
+import citiMerchant.vo.Merchant_coupon_record;
 import citiMerchant.vo.Record;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,9 +25,6 @@ public class TestController {
     @Autowired
     Gson gson;
 
-    @Autowired
-    MerchantMapper merchantMapper;
-
     @RequestMapping("/showData")
     public ModelAndView getInfo() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -34,20 +32,46 @@ public class TestController {
         String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv = new ModelAndView();
 
-        //
-        List<Long> points = testService.show_order_points_chronology("1", "2018");
-        List<Long> timestamp = testService.getMonthTimeStamp("2018");
-        List<Long> points_exchange = testService.show__points_exchange_chronology("1", "2018");
+        String year = "" + Calendar.getInstance().get(Calendar.YEAR);
+
+        List<Long> points = testService.show_order_points_chronology(merchantID, year);
+        List<Long> timestamp = testService.getMonthTimeStamp(year);
+        List<Long> points_exchange = testService.show_points_exchange_chronology(merchantID, year);
+
+        Long total_order_points = 0L;
+        Long total_points_exchange = 0L;
+        for (Long l : points) total_order_points += l;
+        for (Long l : points_exchange) total_points_exchange += l;
+
+        List<List<Merchant_coupon_record>> merchant_coupon_record = testService.show_Merchant_coupon_record(merchantID, year);
+        Long total_merchant_coupon_record = 0L;
+        for (List<Merchant_coupon_record> list : merchant_coupon_record)
+            for (Merchant_coupon_record record : list)
+                total_merchant_coupon_record += record.getTotalPoints();
 
         //set attribute
         String points_json = gson.toJson(points);
         session.setAttribute("points_json", points_json);
+
         String timeStamp_json = gson.toJson(timestamp);
         session.setAttribute("timeStamp_json", timeStamp_json);
+
         String points_exchange_json = gson.toJson(points_exchange);
         session.setAttribute("points_exchange_json", points_exchange_json);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
-        //System.out.println(points_json);
+
+        String total_order_points_json = gson.toJson(total_order_points);
+        session.setAttribute("total_order_points_json", total_order_points_json);
+        String total_points_exchange_json = gson.toJson(total_points_exchange);
+        session.setAttribute("total_points_exchange_json", total_points_exchange_json);
+        String total_merchant_coupon_record_json = gson.toJson(total_merchant_coupon_record);
+        session.setAttribute("total_merchant_coupon_record_json", total_merchant_coupon_record_json);
+
+
+        //String merchant_coupon_record_json = gson.toJson(merchant_coupon_record);
+        //session.setAttribute("merchant_coupon_record_json", merchant_coupon_record_json);
+
+        //System.out.println(merchant_coupon_record_json);
+
         mv.setViewName("/showData/showData");
         return mv;
     }

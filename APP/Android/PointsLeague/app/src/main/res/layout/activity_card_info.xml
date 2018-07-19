@@ -21,8 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:gravity="end"
-            android:text="历史兑换记录"
-            android:textColor="@color/colorWhite" />
+            android:text="历史兑换记录" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView

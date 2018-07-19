@@ -105,7 +105,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -126,7 +126,7 @@ desired effect
           <img src="${merchant.merchantLogoURL}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>${merchant.name}</p>
         </div>
       </div>
 
@@ -157,7 +157,7 @@ desired effect
         <li class="active"><a href="showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
         <li class="active"><a href="merchant/editMerchantInformation"><i class="fa fa-link"></i>
           <span>商户信息</span></a></li>
-       
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -184,7 +184,7 @@ desired effect
     <span class="info-box-number">${nums[0]}</span>
   </div>
   <!-- /.info-box-content -->
-  
+
 </div>
 <!-- /.info-box -->
 <div class="info-box">
@@ -227,7 +227,7 @@ desired effect
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
- 
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->

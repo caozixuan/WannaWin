@@ -89,6 +89,11 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
         notifyDataSetChanged();
     }
 
+    public void clearAll(){
+        sourceItems.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public Filter getFilter() {
         return new Filter() {

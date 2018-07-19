@@ -139,7 +139,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 			make.width.equalTo(120)
 			make.height.equalTo(20)
 			make.centerX.equalTo(self.view.snp.centerX)
-			make.bottom.equalTo(self.view).offset(-30)
+			make.bottom.equalTo(self.view).offset(-45)
 		}
 	}
 	

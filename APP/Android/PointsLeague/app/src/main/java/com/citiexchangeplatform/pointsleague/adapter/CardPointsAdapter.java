@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.AddCardActivity;
 import com.citiexchangeplatform.pointsleague.CardInfoActivity;
 import com.citiexchangeplatform.pointsleague.R;
 import com.citiexchangeplatform.pointsleague.models.CardPointsModel;
@@ -17,7 +18,7 @@ import com.citiexchangeplatform.pointsleague.models.CardPointsModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardPointsAdapter extends RecyclerView.Adapter<CardPointsAdapter.VH> {
+public class CardPointsAdapter extends RecyclerView.Adapter {
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
         public final TextView textViewPoints;
@@ -33,6 +34,15 @@ public class CardPointsAdapter extends RecyclerView.Adapter<CardPointsAdapter.VH
         }
     }
 
+    public static class VHEmpty extends RecyclerView.ViewHolder{
+
+        public VHEmpty(View v) {
+            super(v);
+        }
+    }
+
+    private final int EMPTY_VIEW_TYPE = -1;
+
     private Context context;
     private List<CardPointsModel> items;
 
@@ -42,35 +52,62 @@ public class CardPointsAdapter extends RecyclerView.Adapter<CardPointsAdapter.VH
     }
 
     @Override
-    public void onBindViewHolder(CardPointsAdapter.VH holder, final int position) {
-        holder.textViewName.setText(items.get(position).getName());
-        holder.textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
-        holder.textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()/items.get(position).getProportion()));
-        Glide.with(context)
-                .load(items.get(position).getCardLogoURL())
-                .centerCrop()
-                .placeholder(R.drawable.loading_card)
-                .error(R.drawable.loading_card)
-                .into(holder.imageView);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentToCardInfo = new Intent(context, CardInfoActivity.class);
-                intentToCardInfo.putExtra("merchantID",items.get(position).getMerchantID());
-                context.startActivity(intentToCardInfo);
-            }
-        });
+    public int getItemViewType(int position) {
+        if (items.size() <= 0) {
+            return EMPTY_VIEW_TYPE;
+        }
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof CardPointsAdapter.VH){
+            ((CardPointsAdapter.VH)holder).textViewName.setText(items.get(position).getName());
+            ((CardPointsAdapter.VH)holder).textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
+            ((CardPointsAdapter.VH)holder).textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()/items.get(position).getProportion()));
+            Glide.with(context)
+                    .load(items.get(position).getCardLogoURL())
+                    .centerCrop()
+                    .placeholder(R.drawable.loading_card)
+                    .error(R.drawable.loading_card)
+                    .into(((CardPointsAdapter.VH)holder).imageView);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToCardInfo = new Intent(context, CardInfoActivity.class);
+                    intentToCardInfo.putExtra("merchantID",items.get(position).getMerchantID());
+                    context.startActivity(intentToCardInfo);
+                }
+            });
+        }else if (holder instanceof CardPointsAdapter.VHEmpty){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentToAddCard = new Intent(context, AddCardActivity.class);
+                    context.startActivity(intentToAddCard);
+                }
+            });
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.size()<=0? 1 : items.size() ;
     }
 
     @Override
-    public CardPointsAdapter.VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_points, parent, false);
-        return new CardPointsAdapter.VH(v);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        if (EMPTY_VIEW_TYPE == viewType) {
+            view = inflater.inflate(R.layout.item_card_points_empty, parent, false);
+            return new CardPointsAdapter.VHEmpty(view);
+        }else {
+            view = inflater.inflate(R.layout.item_card_points, parent, false);
+            return new CardPointsAdapter.VH(view);
+        }
     }
 
 

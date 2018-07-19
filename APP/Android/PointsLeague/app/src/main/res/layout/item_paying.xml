@@ -2,65 +2,95 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/colorBackgroundHighlightWhite"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_marginTop="33px">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_marginEnd="60px"
+        android:layout_marginStart="24px"
+        >
 
         <CheckBox
             android:id="@+id/checkbox_choose"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5" />
-
-        <ImageView
-            android:id="@+id/image_business"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            app:srcCompat="@color/colorPrimary" />
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            style="@style/CustomCheckboxTheme"/>
 
-        <TextView
-            android:id="@+id/textview_business_name"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="108px"
+            android:layout_gravity="center"
+            android:layout_marginStart="30px"
+            android:background="@drawable/background_with_shadow">
+            <!--<ImageView-->
+                <!--android:id="@+id/image_business"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1.5"-->
+                <!--app:srcCompat="@color/colorPrimary" />-->
 
-        <EditText
-            android:id="@+id/editText_points_posses"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="200"
-            android:imeOptions="actionDone"/>
+            <TextView
+                android:id="@+id/textview_business_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="中国移动"
+                android:textSize="42px"
+                android:textColor="#FF676262"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.47"
+                android:layout_height="match_parent"
+                android:elevation="12px"
+                android:layout_marginBottom="1.5dp"
+                android:background="@drawable/bg_edit_points">
+                <EditText
+                    android:id="@+id/editText_points_posses"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:background="@null"
+                    android:textAlignment="center"
+                    android:text="200"
+                    android:textSize="54px"
+                    android:textColor="#FF9A8616"
+                    android:imeOptions="actionDone"/>
 
-        <TextView
-            android:id="@+id/textview_points_transfer"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="1" />
+            </FrameLayout>
+
+
+
+            <TextView
+                android:id="@+id/textview_points_transfer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.23"
+                android:gravity="center"
+                android:textColor="#FFFF8022"
+                android:textSize="54px"
+                android:text="1" />
 
 
 
 
-        <Button
-            android:id="@+id/button_modify"
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_weight="1"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/ic_modify_24dp"
-            android:visibility="visible" />
+            <!--<Button-->
+                <!--android:id="@+id/button_modify"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:layout_weight="1"-->
+
+                <!--android:background="@drawable/ic_modify_24dp"-->
+                <!--android:visibility="visible" />-->
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

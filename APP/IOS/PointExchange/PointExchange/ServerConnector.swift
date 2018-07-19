@@ -64,7 +64,10 @@ class ServerConnector: NSObject {
                     User.getUser().generalPoints = data["generalPoints"].double
                     User.getUser().availablePoints = data["availablePoints"].double
                     User.getUser().id = data["userID"].string
-                    print(data["userID"].string)
+                    User.getUser().password = data["password"].string
+                    User.getUser().citiCardID = data["citiCardID"].string
+                    User.getUser().username = data["phoneNum"].string
+                    
                     callback(true)
                 }
                 else{
@@ -75,7 +78,6 @@ class ServerConnector: NSObject {
                 callback(false)
                 print("连接失败")
             }
-			callback(true)
         }
     }
     /// 获得积分信息
@@ -431,19 +433,25 @@ class ServerConnector: NSObject {
     /// 获取一个人所有积分兑换记录
     static func getAllPointsHistory(callback:@escaping (_ result:Bool,_ pointsHistory:[PointsHistory])->()){
         provider.request(.getAllPointsHistory()){ result in
-            var pointsHistory = [PointsHistory]()
+            var pointsHistories = [PointsHistory]()
             if case let .success(response) = result{
                 let decoder = JSONDecoder()
-                do{
-                    pointsHistory = try decoder.decode([PointsHistory].self, from: response.data)
-                    callback(true,pointsHistory)
-                }catch{
-                    callback(false,pointsHistory)
+                let datas = JSON(try? response.mapJSON()).array
+                for data in datas!{
+                    do{
+//                        let historyData = try data["points_history_merchants"].rawData()
+                        let pointsHistory = try decoder.decode(PointsHistory.self, from: data.rawData())
+                        pointsHistories.append(pointsHistory)
+                    }catch{
+                        callback(false,pointsHistories)
+                        return
+                    }
                 }
+                callback(true,pointsHistories)
                 
             }
             if case .failure(_) = result {
-                callback(false,pointsHistory)
+                callback(false,pointsHistories)
             }
         }
     }
@@ -468,7 +476,6 @@ class ServerConnector: NSObject {
         }
     }
     
-    
     // 支付相关
     /// TODO: 二维码轮询
     static func pollizngQR(timestamp:String,callback:@escaping (_ result:Bool)->()){
@@ -478,4 +485,31 @@ class ServerConnector: NSObject {
             }
         }
     }
+
+    // 订单相关
+    static func getOrders(intervalTime:String,callback:@escaping (_ result:Bool, _ orders:[Order])->()){
+        provider.request(.getOrders(intervalTime: intervalTime)){ result in
+            var orders = [Order]()
+            if case let .success(response) = result{
+                let decoder = JSONDecoder()
+                let datas = JSON(try? response.mapJSON()).array
+                for data in datas!{
+                    do{
+                        let order = try decoder.decode(Order.self, from: data.rawData())
+                        orders.append(order)
+                    }catch{
+                        callback(false,orders)
+                        return
+                    }
+                }
+                callback(true,orders)
+                
+            }
+            if case .failure(_) = result {
+                callback(false,orders)
+            }
+            
+        }
+    }
+
 }
