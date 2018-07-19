@@ -41,8 +41,8 @@ public class ItemController {
     }
     @ResponseBody
     @RequestMapping("/getMerchantItems")
-    public String getMerchantItems(String merchantID,int start,int length){
-        List<Item> items=itemService.getMerchantItems(merchantID,start,length);
+    public String getMerchantItems(String merchantID,int start,int n){
+        List<Item> items=itemService.getMerchantItems(merchantID,start,n);
         return gson.toJson(items);
     }
 
