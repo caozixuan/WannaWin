@@ -1,8 +1,10 @@
 package citi.pay;
 
+import citi.mapper.MerchantMapper;
 import citi.mapper.OrderMapper;
 import citi.mapper.StrategyMapper;
 import citi.mapper.UserMapper;
+import citi.vo.Merchant;
 import citi.vo.Order;
 import citi.vo.StrategyDAO;
 import citi.vo.User;
@@ -31,6 +33,9 @@ public class PayService {
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private MerchantMapper merchantMapper;
 
     public boolean pay(String userID,String timeStamp,String merchantID,float totalPrice){
         long timeMillis = System.currentTimeMillis()/1000;
@@ -99,6 +104,10 @@ public class PayService {
             }
         }
         return null;
+    }
+
+    public Merchant getMerchant(Order order){
+        return merchantMapper.selectByID(order.getMerchantId());
     }
 
 
