@@ -38,8 +38,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		super.viewWillAppear(animated)
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
         //ServerConnector.getPointsInfo(callback: gotPointsInfo)
-        generalPointsLabel.text = String(stringInterpolationSegment: User.getUser().generalPoints!)
-        availablePointsLabel.text = String(stringInterpolationSegment: User.getUser().availablePoints!)
+       // generalPointsLabel.text = String(stringInterpolationSegment: User.getUser().generalPoints!)
+       // availablePointsLabel.text = String(stringInterpolationSegment: User.getUser().availablePoints!)
 		// 如果登录
 		if User.getUser().username != nil {
 			setUpView()
@@ -65,12 +65,12 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	func setUpView(){
 		self.loginView.removeFromSuperview()
 		//添加积分卡添加点击手势事件
-		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-		cardImage1.addGestureRecognizer(cardTap1)
-		cardImage2.addGestureRecognizer(cardTap2)
-		cardImage3.addGestureRecognizer(cardTap3)
+//		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+//		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+//		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+//		cardImage1.addGestureRecognizer(cardTap1)
+//		cardImage2.addGestureRecognizer(cardTap2)
+//		cardImage3.addGestureRecognizer(cardTap3)
 	}
 	
 	/// 获得积分信息后的回调函数
