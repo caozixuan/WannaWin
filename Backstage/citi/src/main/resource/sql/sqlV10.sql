@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `huaqi`.`user_coupon` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 49
+AUTO_INCREMENT = 57
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -425,25 +425,30 @@ USE `huaqi`$$
 CREATE DEFINER=`huaqi`@`%` PROCEDURE `user_coupon_update`(IN IN_userID VARCHAR(45), IN IN_itemID VARCHAR(45), OUT ifUsed INTEGER)
 BEGIN
 	
+    DECLARE _overdueTime Timestamp;
+    SELECT overdueTime FROM item WHERE ItemID = IN_itemID INTO _overdueTime;
     SET ifUsed = 0;
     
-    UPDATE user_coupon SET state = 'OVERDUED' 
-    WHERE userID = IN_userID AND ItemID = IN_itemID AND state = 'UNUSED' 
-    AND now() > (SELECT overdueTime FROM item WHERE ItemID = IN_itemID);
-
-	SELECT COUNT(*) FROM user_coupon 
-    WHERE userID = IN_userID AND ItemID = IN_itemID AND state = 'UNUSED'
-    INTO ifUsed;
+    IF now() > _overdueTime THEN #OVERDUED
     
-    IF ifUsed > 0 THEN
-		SET ifUsed = 1;
-	END IF;
+		UPDATE user_coupon SET state = 'OVERDUED' 
+		WHERE userID = IN_userID AND ItemID = IN_itemID AND state = 'UNUSED' 
+		AND now() > _overdueTime;
+        
+	ELSE # change 1 UNUSED to USED if possible
+    
+		IF EXISTS (SELECT * FROM user_coupon 
+				   WHERE userID = IN_userID AND ItemID = IN_itemID AND state = 'UNUSED')
+		THEN 
+			SET ifUsed = 1;
+			UPDATE user_coupon SET state = 'USED', useTime = now()
+			WHERE userID = IN_userID AND ItemID = IN_itemID AND state = 'UNUSED'
+			ORDER BY userID ASC LIMIT 1;
+        END IF;
+        
+    END IF;
     
     SELECT ifUsed;
-
-	UPDATE user_coupon SET state = 'USED', useTime = now()
-	WHERE userID = IN_userID AND ItemID = IN_itemID AND state = 'UNUSED'
-	ORDER BY userID ASC LIMIT 1;
     
 END$$
 

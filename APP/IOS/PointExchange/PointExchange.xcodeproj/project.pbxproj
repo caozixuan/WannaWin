@@ -29,6 +29,7 @@
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
 		3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4C320EDAFB300915561 /* Main.storyboard */; };
 		3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */; };
+		3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CD002100ED8B00B0392E /* ShadowView.swift */; };
 		3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */; };
 		3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */; };
 		3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155320EDFF5A000743C0 /* MainViewController.swift */; };
@@ -67,6 +68,10 @@
 		B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */; };
 		B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Merchant.swift */; };
 		B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */; };
+		B6B866562101768700CE0339 /* HomepagePartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B866552101768700CE0339 /* HomepagePartViewController.swift */; };
+		B6C480662100C143002ED9C9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C480652100C143002ED9C9 /* LoginView.xib */; };
+		B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C480672100F189002ED9C9 /* HomepageStackView.xib */; };
+		B6C4806A2100F1A3002ED9C9 /* HomepageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */; };
 		C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982020EE1C7900A2F0C5 /* User.swift */; };
 		C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED982220EE1E3900A2F0C5 /* Card.swift */; };
 /* End PBXBuildFile section */
@@ -96,6 +101,7 @@
 		3E8AB4BC20EDAEDE00915561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E8AB4C420EDAFB300915561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		3EA3CD002100ED8B00B0392E /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishExchangeViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollerViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +143,10 @@
 		B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
 		B6A6EC5F20F25B810079FFA4 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
 		B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantList.swift; sourceTree = "<group>"; };
+		B6B866552101768700CE0339 /* HomepagePartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepagePartViewController.swift; sourceTree = "<group>"; };
+		B6C480652100C143002ED9C9 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		B6C480672100F189002ED9C9 /* HomepageStackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomepageStackView.xib; sourceTree = "<group>"; };
+		B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageStackView.swift; sourceTree = "<group>"; };
 		C1ED982020EE1C7900A2F0C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1ED982220EE1E3900A2F0C5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,10 +271,14 @@
 		3E8AB4C720EDBAAF00915561 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B6C480642100C132002ED9C9 /* xib */,
 				3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */,
 				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
+				3EA3CD002100ED8B00B0392E /* ShadowView.swift */,
+				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
+				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -370,6 +384,15 @@
 			name = YDMenu;
 			sourceTree = "<group>";
 		};
+		B6C480642100C132002ED9C9 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				B6C480652100C143002ED9C9 /* LoginView.xib */,
+				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
+			);
+			name = xib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -443,6 +466,8 @@
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
+				B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */,
+				B6C480662100C143002ED9C9 /* LoginView.xib in Resources */,
 				3E46B75E20EFE00400843193 /* Discover.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,11 +565,13 @@
 				B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */,
 				B66CFB3320F98598007165DF /* DoubleSectionOrderViewController.swift in Sources */,
 				3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */,
+				B6C4806A2100F1A3002ED9C9 /* HomepageStackView.swift in Sources */,
 				B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */,
 				B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */,
 				B66CFB3120F98584007165DF /* SingleSectionOrderViewController.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
+				3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
 				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
@@ -554,6 +581,7 @@
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
+				B6B866562101768700CE0339 /* HomepagePartViewController.swift in Sources */,
 				B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */,
 				B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
