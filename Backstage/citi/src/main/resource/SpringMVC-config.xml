@@ -15,8 +15,9 @@
     <mvc:resources mapping="/citi/img/**" location="/img/"/>
     <!-- 扫描的包路径，所有需要自动装配的包都需要扫描 -->
     <context:component-scan base-package="citi.*"/>
+    <!-- 引入资源文件，在引入的地方可以使用占位符使用value值 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-
+    <!-- 启动web容器服务器默认服务器，将静态资源请求交给它处理 -->
     <mvc:default-servlet-handler/>
 
     <!-- 拦截器配置-->
