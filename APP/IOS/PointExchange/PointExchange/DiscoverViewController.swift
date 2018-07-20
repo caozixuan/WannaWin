@@ -14,21 +14,23 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     
     var rowCount = 4;
-    var merchantArray = ["东方航空","南方航空","北京烤鸭","宫保鸡丁"]
+    var merchantArray:[Merchant]?
     @IBOutlet weak var tableView: UITableView!
     
     var tableCellIdentifier:String = "local discount"
     
+    var activityIndicator:UIActivityIndicatorView?
+    
     var menu = YDMenu(origin:CGPoint(x:0, y:120),menuheight:50)
     var data = [String: AnyObject]()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated:Bool) {
+        super.viewWillAppear(animated)
         
         self.tableView.delegate=self
         self.tableView.dataSource=self
         
-        self.tableView.rowHeight = 185
+        self.tableView.rowHeight = 68
         let dataUrl = Bundle.main.url(forResource: "MenuData", withExtension: "plist")
         
         if dataUrl != nil {
@@ -39,6 +41,16 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         self.menu.dataSource = self
         view.addSubview(self.menu)
         // Do any additional setup after loading the view.
+        
+        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+        activityIndicator?.startAnimating()
+        ServerConnector.getMerchantsInfos(start: 0, n: 5){ (result,merchants) in
+            if result {
+                self.merchantArray = merchants
+                self.tableView.reloadData()
+            }
+            self.activityIndicator?.stopAnimating()
+        }
     }
 
     // 下拉菜单
@@ -46,7 +58,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         menu.selectedAtIndex(YDMenu.Index(column: 1, row: 2))
     }
     @IBAction func selectedDefaultBtnClick(_ sender: Any) {
-        
         menu.selectDeafult()
     }
     
@@ -81,8 +92,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func menu(_ menu: YDMenu, titleForItemsInRowAtIndexPath indexPath: YDMenu.Index) -> String {
-        
-        
         switch indexPath.column {
             
         case 0:
@@ -133,13 +142,21 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// TODO: - 设置发现页行数
-        return rowCount
+        if merchantArray != nil {
+            return (merchantArray?.count)!
+        }else{
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier:self.tableCellIdentifier, for: indexPath)
-        (cell.viewWithTag(2) as! UILabel).text = merchantArray[indexPath.row]
+        let cell = self.tableView.dequeueReusableCell(withIdentifier:"local discount", for: indexPath)
         
+        (cell.viewWithTag(1) as! UIImageView).imageFromURL((merchantArray?[indexPath.row].logoURL)!, placeholder: UIImage())
+        (cell.viewWithTag(2) as! UILabel).text = merchantArray![indexPath.row].name
+        (cell.viewWithTag(3) as! UILabel).text = merchantArray?[indexPath.row].description
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = UIColor(red: 255/255.0, green: 149/255.0, blue: 70/255.0, alpha: 0.7)
         return cell
     }
     

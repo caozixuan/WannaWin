@@ -35,9 +35,6 @@ class LoginView: UIView{
         self.view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         self.view.frame = bounds
         self.addSubview(view)
-        
-        // Do any additional setup after loading the view.
-        
     }
     
     
