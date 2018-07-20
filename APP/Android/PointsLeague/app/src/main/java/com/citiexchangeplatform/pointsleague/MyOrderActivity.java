@@ -85,4 +85,9 @@ public class MyOrderActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
 }

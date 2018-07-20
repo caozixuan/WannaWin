@@ -13,13 +13,14 @@ class QRScanViewController: UIViewController {
     @IBOutlet weak var barCodeView: UIImageView!
     @IBOutlet weak var qrCodeView: UIImageView!
     
-    var timeStamp = String(Int(Date().timeIntervalSince1970))
+    var timeStamp = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id))\",\"timeStamp\":\"\(timeStamp)\"}"
-        print(timeStamp)
+        timeStamp = String(Int(Date().timeIntervalSince1970))
+        let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id!))\",\"timeStamp\":\"\(timeStamp)\"}"
+        print(codeInfo)
         barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
         qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
         let timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(refreshCode), userInfo: nil, repeats: true)

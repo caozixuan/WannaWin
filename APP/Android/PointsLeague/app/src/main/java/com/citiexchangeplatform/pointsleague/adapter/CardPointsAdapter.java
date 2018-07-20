@@ -64,7 +64,7 @@ public class CardPointsAdapter extends RecyclerView.Adapter {
         if (holder instanceof CardPointsAdapter.VH){
             ((CardPointsAdapter.VH)holder).textViewName.setText(items.get(position).getName());
             ((CardPointsAdapter.VH)holder).textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
-            ((CardPointsAdapter.VH)holder).textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()/items.get(position).getProportion()));
+            ((CardPointsAdapter.VH)holder).textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()*items.get(position).getProportion()));
             Glide.with(context)
                     .load(items.get(position).getCardLogoURL())
                     .centerCrop()

@@ -37,6 +37,6 @@ public class AllCardItemModel {
     }
 
     public double getExchangePoint(){
-        return getPoint()/getProportion();
+        return getPoint()*getProportion();
     }
 }

@@ -9,7 +9,10 @@
 import UIKit
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
-	@IBOutlet weak var loginView: UIView!
+    
+    @IBOutlet weak var container: UIView!
+    @IBOutlet weak var mainView: MaskView!
+    @IBOutlet weak var loginView: UIView!
 	
 	@IBOutlet weak var stackView: UIStackView!
 	
@@ -41,25 +44,21 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
        // generalPointsLabel.text = String(stringInterpolationSegment: User.getUser().generalPoints!)
        // availablePointsLabel.text = String(stringInterpolationSegment: User.getUser().availablePoints!)
 		// 如果登录
-		if User.getUser().username != nil {
-			setUpView()
-		}
-		else{
-			if self.stackView != nil {
-				self.stackView.removeFromSuperview()
-			}
-		}
+//        if User.getUser().username != nil {
+//            setUpView()
+//
+//        }
+//        else{
+//            if self.stackView != nil {
+//                self.stackView.removeFromSuperview()
+//            }
+//        }
+        
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		if User.getUser().username != nil {
-			// 调整卡片滑动视图
-			let width = cardImage1.bounds.size.width * 3 + 32
-			let height = cardImage1.bounds.size.height
-			self.cardScrollView.contentSize = CGSize(width: width, height: height)
-			self.cardScrollView.contentOffset = CGPoint(x: cardImage1.bounds.size.width/2+16, y: 0)
-		}
+
 	}
 	
 	func setUpView(){
@@ -200,7 +199,22 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 				
 			}
 		}
+        else if segue.identifier == "container" {
+            
+//            if User.getUser().username == nil {
+//                let controller = segue.destination
+//                controller.view.addSubview(LoginView(frame: CGRect(x: 0, y: 0, width: container.frame.width, height: container.frame.height)))
+//            }
+//            else{
+//                let controller = segue.destination as! HomepagePartViewController
+//                let view = HomepageStackView(frame: CGRect(x: 0, y: 0, width: container.frame.width, height: container.frame.height))
+//                controller.view.addSubview(view)
+//
+//            }
+            
+        }
     }
 	
+    
 
 }
