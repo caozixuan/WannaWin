@@ -93,10 +93,11 @@ public class DetailFindPayActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         if(paySuccess){
-                            Toast.makeText(DetailFindPayActivity.this, "支付成功", Toast.LENGTH_LONG).show();
+                            Intent intentToPayFinish = new Intent(DetailFindPayActivity.this, DetailFindPayFinishActivity.class);
+                            startActivity(intentToPayFinish);
                             finish();
                         }else {
-                            Toast.makeText(DetailFindPayActivity.this, "支付失败", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DetailFindPayActivity.this, "兑换失败", Toast.LENGTH_LONG).show();
                         }
                     }
 

@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             case 2:
                 if(!LogStateInfo.getInstance(MainActivity.this).isLogin()){
                     Toast.makeText(MainActivity.this, "请登录后使用二维码", Toast.LENGTH_LONG).show();
+                    return;
                 }
                 Intent intentToPayCode = new Intent(MainActivity.this, PayCodeActivity.class);
                 startActivity(intentToPayCode);
