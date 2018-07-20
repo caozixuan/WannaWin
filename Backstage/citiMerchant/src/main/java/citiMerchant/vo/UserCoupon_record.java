@@ -11,6 +11,12 @@ public class UserCoupon_record {
         this.ifUsed = ifUsed;
     }
 
+    public UserCoupon_record(String IN_userID, String IN_itemID) {
+        this.IN_userID = IN_userID;
+        this.IN_itemID = IN_itemID;
+        this.ifUsed = 0;
+    }
+
     public String getIN_userID() {
         return IN_userID;
     }
