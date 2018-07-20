@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE Procedure user_coupon_update(IN IN_userID VARCHAR(45), IN IN_itemID INT, OUT ifUsed INTEGER)
+CREATE Procedure user_coupon_update(IN IN_userID VARCHAR(45), IN IN_itemID VARCHAR(45), OUT ifUsed INTEGER)
 BEGIN
 	
     UPDATE user_coupon SET state = 'OVERDUED' 
