@@ -198,6 +198,14 @@ public class TestService {
         List<Long> timestamp = getMonthTimeStamp(year);
         List<Long> points_exchange = show_points_exchange_chronology(merchantID, year);
 
+        System.out.println(merchantID);
+        for (Long l : points)
+            System.out.print(l + "  ");
+        System.out.println("\n");
+        for (Long l : points_exchange)
+            System.out.print(l + "  ");
+        System.out.println("\n");
+
         Long total_order_points = 0L;
         Long total_points_exchange = 0L;
         for (Long l : points) total_order_points += l;
