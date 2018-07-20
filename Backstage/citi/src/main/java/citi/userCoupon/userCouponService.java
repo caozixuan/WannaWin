@@ -6,6 +6,7 @@ import citi.mapper.MerchantMapper;
 import citi.vo.Item;
 import citi.vo.Merchant;
 import citi.vo.UserCoupon;
+import citi.vo.UserCoupon_record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,9 @@ public class userCouponService {
     }
 
     public boolean use(String userID,String itemID){
-        if (couponMapper.deleteOneUserCouponBy_UserID_AND_ItemID(userID,itemID)==1){
+        UserCoupon_record userCoupon_record=new UserCoupon_record(userID,itemID);
+        couponMapper.deleteOneUserCouponBy_UserID_AND_ItemID(userCoupon_record);
+        if (userCoupon_record.getIfUsed()==1){
             return true;
         }else {
             return false;

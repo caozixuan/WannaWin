@@ -69,7 +69,7 @@ public class OrderTabUnusedFragment extends Fragment {
         //orderAdapter.addData("niki","5元代金券","2018-7-25");
         //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
 
-        getHistoryOrderByQRCode();
+        //getHistoryOrderByQRCode();
 
         getHistoryOrderByCoupon();
 
@@ -86,58 +86,58 @@ public class OrderTabUnusedFragment extends Fragment {
     }
 
 
-    private void getHistoryOrderByQRCode() {
-        String url="http://193.112.44.141:80/citi/order/getOrders";
-        RequestQueue queue = MyApplication.getHttpQueues();
-        //RequestQueue queue=Volley.newRequestQueue(this);
-        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-
-                Log.e("success",s);
-                System.out.println(s);
-                try {
-                    JSONArray jsonArray = new JSONArray(s);
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jObj = jsonArray.getJSONObject(i);
-
-
-                        String pointsNeeded = "使用花旗点：" + jObj.getString("pointsNeeded");
-                        String merchantName = jObj.getString("merchantName");
-                        String time = jObj.getString("time");
-
-                        orderAdapter.addData(merchantName,pointsNeeded,time);
-
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
-
-                map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
-                map.put("intervalTime","1101010101");
-
-
-                return map;
-            }
-        };
-        queue.add(request);
-
-
-    }
+    //private void getHistoryOrderByQRCode() {
+    //    String url="http://193.112.44.141:80/citi/order/getOrders";
+    //    RequestQueue queue = MyApplication.getHttpQueues();
+    //    //RequestQueue queue=Volley.newRequestQueue(this);
+    //    StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+    //        @Override
+    //        public void onResponse(String s) {
+    //
+    //            Log.e("success",s);
+    //            System.out.println(s);
+    //            try {
+    //                JSONArray jsonArray = new JSONArray(s);
+    //
+    //                for (int i = 0; i < jsonArray.length(); i++) {
+    //                    JSONObject jObj = jsonArray.getJSONObject(i);
+    //
+    //
+    //                    String pointsNeeded = "使用花旗点：" + jObj.getString("pointsNeeded");
+    //                    String merchantName = jObj.getString("merchantName");
+    //                    String time = jObj.getString("time");
+    //
+    //                    orderAdapter.addData(merchantName,pointsNeeded,time);
+    //
+    //                }
+    //
+    //
+    //            } catch (JSONException e) {
+    //                e.printStackTrace();
+    //            }
+    //
+    //        }
+    //    }, new Response.ErrorListener() {
+    //        @Override
+    //        public void onErrorResponse(VolleyError volleyError) {
+    //
+    //        }
+    //    }){
+    //        @Override
+    //        protected Map<String, String> getParams() throws AuthFailureError {
+    //            Map<String,String> map=new HashMap<>();
+    //
+    //            map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+    //            map.put("intervalTime","1101010101");
+    //
+    //
+    //            return map;
+    //        }
+    //    };
+    //    queue.add(request);
+    //
+    //
+    //}
     private void getHistoryOrderByCoupon() {
         String url="http://193.112.44.141:80/citi/userCoupon/getUnusedCoupons";
         RequestQueue queue = MyApplication.getHttpQueues();
@@ -154,12 +154,15 @@ public class OrderTabUnusedFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
-
                         String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
-                        String time = jObj.getString("getTime");
+                        String time = "兑换日期："+jObj.getString("getTime");
+                        String validityTerm = "有效期："+jObj.getString("overdueTime");
+                        //String validityTerm = jObj.getString("overdueTime");
+                        String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
+                        String itemID = jObj.getString("ItemID");
 
-                        orderAdapter.addData(itemName,description,time);
+                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"unused");
 
                     }
 

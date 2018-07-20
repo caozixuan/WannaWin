@@ -105,9 +105,12 @@ public class OrderTabUsedFragment extends Fragment {
 
                         String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
-                        String time = jObj.getString("getTime");
+                        String time = "兑换时间：" +jObj.getString("getTime");
+                        String validityTerm = "使用时间：" +jObj.getString("useTime");
+                        String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
+                        String itemID = jObj.getString("ItemID");
 
-                        orderAdapter.addData(itemName,description,time);
+                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"used");
 
                     }
 
