@@ -31,7 +31,7 @@ public interface StrategyMapper {
     int addStrategy(StrategyDAO strategyDAO);
 
     @Update(updateStrategy)
-    int updateStrategy(@Param("strategyID") String strategyID, @Param("full") int full,@Param("priceAfter") int priceAfter,@Param("points") int points);
+    int updateStrategy(@Param("strategyID") String strategyID, @Param("full") Double full,@Param("priceAfter") Double priceAfter,@Param("points") Double points);
 
     @Delete(deleteStrategy)
     int deleteStrategy(String strategyID);
