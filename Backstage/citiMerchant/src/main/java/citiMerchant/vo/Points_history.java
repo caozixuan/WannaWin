@@ -16,7 +16,7 @@ public class Points_history {
         this.userID = userID;
         this.merchantID = merchantID;
         this.points_card = points_card;
-        this.points_citi = points_citi;
+        this.points_citi = Double.parseDouble(String.format("%.2f",points_citi));
         this.cause = cause;
         this.time = time;
     }

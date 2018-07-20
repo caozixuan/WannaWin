@@ -39,8 +39,8 @@ public class User {
         this.citiCardID = citiCardID;
         this.password = password;
         this.phoneNum = phoneNum;
-        this.generalPoints = generalPoints;
-        this.availablePoints = availablePoints;
+        this.generalPoints = Double.parseDouble(String.format("%.2f", generalPoints));
+        this.availablePoints = Double.parseDouble(String.format("%.2f", availablePoints));
         this.rewardLinkCode = rewardLinkCode;
     }
 
