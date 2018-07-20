@@ -27,4 +27,12 @@ public class userCouponService {
         }
         return returnUserCoupons;
     }
+
+    public boolean use(String userID,String itemID){
+        if (couponMapper.deleteOneUserCouponBy_UserID_AND_ItemID(userID,itemID)==1){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

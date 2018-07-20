@@ -44,6 +44,6 @@ public interface CouponMapper {
     int addUserCoupon(UserCoupon userCoupon);
 
     @Update(deleteOneUserCouponBy_UserID_AND_ItemID)
-    int deleteOneUserCouponBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("ItemID") String itemID);
+    int deleteOneUserCouponBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("itemID") String itemID);
 
 }
