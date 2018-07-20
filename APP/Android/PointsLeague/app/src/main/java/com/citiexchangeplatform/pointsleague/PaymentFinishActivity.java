@@ -76,12 +76,12 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
 
         //广告栏
-        imageIds = new int[]{R.drawable.ad1, R.drawable.ad2, R.drawable.ad1};
+        imageIds = new int[]{R.drawable.ad1, R.drawable.ad1, R.drawable.ad1};
 
         imageDescriptions = new String[]{
-                "巩俐不低俗，我就不能低俗",
-                "扑树又回来啦！再唱经典老歌引万人大合唱",
-                "乐视网TV版大派送"
+                "banner1",
+                "banner2",
+                "banner3"
         };
         //保存
         List<ImageView> imageList = new ArrayList<ImageView>();
