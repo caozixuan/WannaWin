@@ -30,6 +30,7 @@ public class CouponsDetailsActivity extends AppCompatActivity {
     private TextView TExchangeDate;
     private TextView TDescription;
     private TextView TName;
+    private TextView hint;
     private ImageView logo;
     private ImageView qrCode;
 
@@ -117,6 +118,7 @@ public class CouponsDetailsActivity extends AppCompatActivity {
         qrCode = findViewById(R.id.imageview_qr);
 
 
+
         createBitMap();
 
     }
@@ -127,6 +129,8 @@ public class CouponsDetailsActivity extends AppCompatActivity {
         TDescription = findViewById(R.id.textView_coupon_description);
         TValidityDate = findViewById(R.id.textView_validity_term);
         TExchangeDate = findViewById(R.id.textView_coupon_exchange_date);
+        hint = findViewById(R.id.textView_hint);
+        hint.setText("");
 
     }
 
