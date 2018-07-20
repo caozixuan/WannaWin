@@ -2,6 +2,7 @@ package citi.userCoupon;
 
 
 import citi.mapper.CouponMapper;
+import citi.support.resultjson.ResultJson;
 import citi.vo.UserCoupon;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,15 @@ public class userCouponContoller {
         List<UserCoupon> userCoupons = couponMapper.get_OVERDUED_Coupon(userID);
         ArrayList<ReturnUserCoupon> returnUserCoupons = userCouponService.changeToReturnUserCoupon(userCoupons);
         return gson.toJson(returnUserCoupons);
+    }
+
+    @ResponseBody
+    @RequestMapping("/use")
+    public String use(String userID,String itemID){
+        if (userCouponService.use(userID,itemID)){
+            return ResultJson.SUCCESS;
+        }else {
+            return ResultJson.FAILURE;
+        }
     }
 }

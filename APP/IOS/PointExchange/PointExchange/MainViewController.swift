@@ -38,6 +38,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		super.viewWillAppear(animated)
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
         //ServerConnector.getPointsInfo(callback: gotPointsInfo)
+        generalPointsLabel.text = String(stringInterpolationSegment: User.getUser().generalPoints!)
+        availablePointsLabel.text = String(stringInterpolationSegment: User.getUser().availablePoints!)
 		// 如果登录
 		if User.getUser().username != nil {
 			setUpView()

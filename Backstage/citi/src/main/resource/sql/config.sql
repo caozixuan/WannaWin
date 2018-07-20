@@ -17,4 +17,6 @@ DROP TRIGGER user_points_delete;
 
 DROP TRIGGER item_stock_update;
 
+DROP PROCEDURE user_coupon_update;
+
 SET SQL_SAFE_UPDATES = 0;

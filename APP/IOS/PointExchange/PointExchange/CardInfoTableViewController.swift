@@ -1,4 +1,5 @@
-//
+ 
+ //
 //  CardInfoTableViewController.swift
 //  PointExchange
 //
@@ -7,17 +8,30 @@
 //
 
 import UIKit
+import AFImageHelper
 
 class CardInfoTableViewController: UITableViewController {
 
 	var activityIndicator:UIActivityIndicatorView?
+    
+    var cardArray:[Card]?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		// 加入“添加”按钮在导航栏右边
 		let addBtn = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.add , target: self, action: #selector(goAddVC))
 		self.navigationItem.rightBarButtonItem = addBtn
+        ServerConnector.getMostPointCards(n: 3, callback: getCardCallback)
+        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+        activityIndicator?.startAnimating()
 		
+    }
+    func getCardCallback(result:Bool,cards:[Card]){
+        if result {
+            cardArray = cards
+            tableView.reloadData()
+        }
+        activityIndicator?.stopAnimating()
     }
 	
 	/// 跳转到“添加银行卡”页面
@@ -55,19 +69,27 @@ class CardInfoTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// FIXME: - Incomplete implementation, return the number of rows
-		return 3
+        if let array = cardArray {
+            return array.count
+        }
+        else{
+            return 0
+        }
 	}
 	
 	 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "card", for: indexPath)
+		let cell  = tableView.dequeueReusableCell(withIdentifier: "card", for: indexPath)
+        if cardArray != nil {
+            (cell.viewWithTag(1) as! UIImageView).imageFromURL(cardArray![indexPath.row].logoURL!, placeholder: UIImage())
+        }
 		return cell
 		
 	}
 	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-		let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
-		self.navigationController!.pushViewController(view, animated: true)
-	}
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+//        let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
+//        self.navigationController!.pushViewController(view, animated: true)
+//    }
 
 }

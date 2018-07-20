@@ -373,7 +373,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="174"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="周黑鸭" translatesAutoresizingMaskIntoConstraints="NO" id="GGf-mo-ilJ">
+                                        <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="周黑鸭" translatesAutoresizingMaskIntoConstraints="NO" id="GGf-mo-ilJ">
                                             <rect key="frame" x="32" y="8" width="311" height="158"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <userDefinedRuntimeAttributes>
@@ -397,15 +397,15 @@
             </objects>
             <point key="canvasLocation" x="2908" y="-1184"/>
         </scene>
-        <!--兑换通用积分-->
+        <!--兑换积分-->
         <scene sceneID="Kt6-Ir-B8l">
             <objects>
-                <viewController title="兑换通用积分" hidesBottomBarWhenPushed="YES" id="MRG-2t-LdV" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="兑换积分" hidesBottomBarWhenPushed="YES" id="MRG-2t-LdV" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M6x-hg-rXY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="25u-Qw-uuo">
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="25u-Qw-uuo">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
