@@ -29,6 +29,7 @@
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
 		3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4C320EDAFB300915561 /* Main.storyboard */; };
 		3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */; };
+		3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CD002100ED8B00B0392E /* ShadowView.swift */; };
 		3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */; };
 		3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */; };
 		3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155320EDFF5A000743C0 /* MainViewController.swift */; };
@@ -100,6 +101,7 @@
 		3E8AB4BC20EDAEDE00915561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E8AB4C420EDAFB300915561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		3EA3CD002100ED8B00B0392E /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishExchangeViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollerViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
+				3EA3CD002100ED8B00B0392E /* ShadowView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
 				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
 			);
@@ -568,6 +571,7 @@
 				B66CFB3120F98584007165DF /* SingleSectionOrderViewController.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
+				3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
 				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,

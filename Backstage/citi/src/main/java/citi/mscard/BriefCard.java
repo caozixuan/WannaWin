@@ -47,6 +47,8 @@ public class BriefCard implements  Comparable<BriefCard>{
 
     @Override
     public int compareTo(BriefCard o) {
-        return o.points-this.points;
+        if(o.points*o.proportion-this.points*this.proportion>0)
+            return 1;
+        return -1;
     }
 }
