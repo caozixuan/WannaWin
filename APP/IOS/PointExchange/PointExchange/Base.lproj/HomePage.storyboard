@@ -234,10 +234,10 @@
                                                             <state key="normal" image="Circle"/>
                                                             <state key="selected" image="Float"/>
                                                         </button>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hje-2c-GI3" customClass="ShadowView">
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hje-2c-GI3" customClass="ShadowView" customModule="PointExchange" customModuleProvider="target">
                                                             <rect key="frame" x="48" y="11" width="312" height="38"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" red="1" green="0.54901960780000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
                                                     </subviews>
                                                 </tableViewCellContentView>
