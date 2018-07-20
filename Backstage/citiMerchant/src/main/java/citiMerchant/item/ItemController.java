@@ -104,7 +104,7 @@ public class ItemController {
         return mv;
     }
 
-    @RequestMapping("/item/addItemOperation")
+    @RequestMapping(value = {"/item/addItemOperation"})
     public ModelAndView addItemOperation(String url2, String name, String description, String originalPrice, String points, String stock, String overdueTime, String myfile) {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
