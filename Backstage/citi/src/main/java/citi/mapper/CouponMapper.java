@@ -23,7 +23,7 @@ public interface CouponMapper {
             "WHERE userID = #{userID} AND ItemID = #{ItemID} AND state = 'UNUSED'";
     final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state, getTime, useTime) " +
             "VALUES(NULL, #{userID}, #{ItemID}, #{state}, now(), null)";
-    final String deleteOneUserCouponBy_UserID_AND_ItemID = "CALL user_coupon_update(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_itemID, mode = IN, jdbcType = INTEGER}, #{ifUsed, mode = OUT, jdbcType = INTEGER})";
+    final String deleteOneUserCouponBy_UserID_AND_ItemID = "CALL user_coupon_update(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_itemID, mode = IN, jdbcType = VARCHAR}, #{ifUsed, mode = OUT, jdbcType = INTEGER})";
 
     @Select(getCouponsByUserID)
     List<UserCoupon> getCouponsByUserID(String userID);
