@@ -30,6 +30,7 @@
 		3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4C320EDAFB300915561 /* Main.storyboard */; };
 		3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */; };
 		3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CD002100ED8B00B0392E /* ShadowView.swift */; };
+		3EA3CD052102472000B0392E /* ShadowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA3CD042102472000B0392E /* ShadowView.xib */; };
 		3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */; };
 		3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */; };
 		3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155320EDFF5A000743C0 /* MainViewController.swift */; };
@@ -102,6 +103,7 @@
 		3E8AB4C420EDAFB300915561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		3EA3CD002100ED8B00B0392E /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		3EA3CD042102472000B0392E /* ShadowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShadowView.xib; sourceTree = "<group>"; };
 		3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishExchangeViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollerViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewController.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			children = (
 				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
+				3EA3CD042102472000B0392E /* ShadowView.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
+				3EA3CD052102472000B0392E /* ShadowView.xib in Resources */,
 				B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */,
 				B6C480662100C143002ED9C9 /* LoginView.xib in Resources */,
 				3E46B75E20EFE00400843193 /* Discover.storyboard in Resources */,
