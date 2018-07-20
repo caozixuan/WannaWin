@@ -9,4 +9,5 @@
     <color name="colorOrange">#FF8022</color>
     <color name="colorLightOrange">#FFFF9546</color>
     <color name="colorUnable">#c3c3c3</color>
+    <color name="colorToolBar">#cfcccccc</color>
 </resources>
