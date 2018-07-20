@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +105,15 @@ public class PaymentFinishActivity extends AppCompatActivity {
             points_used = (List) bundle.get("points_used");
             points_exchanged = (List) bundle.get("points_exchanged");
             total = (Double) bundle.get("total");
-            Text_NeedPoints.setText(String.valueOf(total));
+            //保留两位小数
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            // 保留两位小数
+            nf.setMaximumFractionDigits(2);
+            // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+            nf.setRoundingMode(RoundingMode.UP);
+            String result = nf.format(total);
+
+            Text_NeedPoints.setText(result);
         }
         else {
             reasons = (List) bundle.get("reasons");
@@ -172,8 +182,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
         titleBar.addAction(new TitleBar.TextAction("完成") {
             @Override
             public void performAction(View view) {
-                Intent intentToHome = new Intent(PaymentFinishActivity.this,MainActivity.class);
-                startActivity(intentToHome);
+                finish();
             }
         });
 

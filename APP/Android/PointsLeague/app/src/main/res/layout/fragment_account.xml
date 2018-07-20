@@ -56,8 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="退出登录"/>
+            android:backgroundTint="@color/colorOrange"
+            android:text="退出登录"
+            android:textColor="@color/colorWhite"/>
 
     </LinearLayout>
 

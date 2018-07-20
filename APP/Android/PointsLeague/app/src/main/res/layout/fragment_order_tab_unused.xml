@@ -5,15 +5,12 @@
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="未使用" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_myOrder_unused"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp">
 
     </android.support.v7.widget.RecyclerView>
 

@@ -111,8 +111,7 @@ public class CardPointsAdapter extends RecyclerView.Adapter {
     }
 
 
-    public void addData(String name, String merchantName, int point, double proportion, String cardLogoURL) {
-        CardPointsModel newItem = new CardPointsModel(name, merchantName, point, proportion, cardLogoURL);
+    public void addData(CardPointsModel newItem) {
         items.add(newItem);
         notifyDataSetChanged();
     }

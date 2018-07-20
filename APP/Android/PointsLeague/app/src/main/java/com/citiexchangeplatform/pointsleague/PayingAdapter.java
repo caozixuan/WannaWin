@@ -2,7 +2,6 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -14,20 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.citiexchangeplatform.pointsleague.models.AddCardItemModel;
 import com.citiexchangeplatform.pointsleague.models.ExchangeModel;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +45,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     private PayingAdapter.MyViewHolder viewHolder;
     //是否显示单选框,默认false
     //private boolean isshowBox = false;
-    private int total;
+    private double total;
 
     private HashMap<Integer, Boolean> map = new HashMap<>();
     private HashMap<Integer, Double> totals = new HashMap<>();
@@ -382,16 +379,24 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                     if(Double.parseDouble(s.toString()) > max){
 
                         exchangedPoint = max * rate;
+
                         filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
                         holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
                         Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
                 }
 
+                //保留两位小数
+                NumberFormat nf = NumberFormat.getNumberInstance();
+                // 保留两位小数
+                nf.setMaximumFractionDigits(2);
+                // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+                nf.setRoundingMode(RoundingMode.UP);
+                String result = nf.format(exchangedPoint);
 
                 filteredItems.get(position).setTargetPoint(String.valueOf(exchangedPoint));
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
-                holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+                holder.exchangePoint.setText(result);
                 //notifyItemChanged(position);
             }
 
@@ -416,9 +421,17 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 }
 
 
+                //保留两位小数
+                NumberFormat nf = NumberFormat.getNumberInstance();
+                // 保留两位小数
+                nf.setMaximumFractionDigits(2);
+                // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+                nf.setRoundingMode(RoundingMode.UP);
+                String result = nf.format(exchangedPoint);
+
                 filteredItems.get(position).setTargetPoint(String.valueOf(exchangedPoint));
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
-                holder.exchangePoint.setText(String.valueOf(exchangedPoint));
+                holder.exchangePoint.setText(result);
 
 
 
@@ -544,7 +557,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     //}
 
     /*返回总计价格*/
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
