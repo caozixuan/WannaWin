@@ -77,9 +77,9 @@ public class PointsFragment extends Fragment {
 
         //准备好要显示的数据
         List<String> imageUrls = new ArrayList<>();
-        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic1.png");
-        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic2.png");
-        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic3.png");
+        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic1.jpg");
+        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic2.jpg");
+        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic3.jpg");
 
 
         for (int i = 0; i < imageUrls.size(); i++) {

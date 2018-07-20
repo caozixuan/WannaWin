@@ -39,8 +39,8 @@ class ExchangeItemCell: UITableViewCell{
 		editSourcePoints.isHidden = true
 		sourcePoints.isHidden = false
 		checkbox1.addTarget(self, action: #selector(checkboxClick), for: .touchUpInside)
-		editBtn1.addTarget(self, action: #selector(editBtnClick), for: .touchUpInside)
-		editBtn1.isHidden = true
+		//editBtn1.addTarget(self, action: #selector(editBtnClick), for: .touchUpInside)
+		//editBtn1.isHidden = true
     }
 
 	/// 点击选中按钮的触发动作
