@@ -36,7 +36,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PayingActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity
@@ -62,8 +63,10 @@
         <activity android:name=".PointsExchangeExpandListActivity" />
         <activity android:name=".PointsExchangeRecordActivity" />
         <activity android:name=".BindCardActivity" />
-        <activity android:name=".DetailFindPayActivity"></activity>
-        <activity android:name=".PayCodeFinishActivity"></activity>
+        <activity android:name=".DetailFindPayActivity" />
+        <activity android:name=".PayCodeFinishActivity" />
+        <activity android:name=".DetailFindPayFinishActivity"></activity>
+        <activity android:name=".CouponsDetailsActivity"></activity>
     </application>
 
 </manifest>
