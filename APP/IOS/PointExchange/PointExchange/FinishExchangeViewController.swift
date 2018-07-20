@@ -10,6 +10,7 @@ import UIKit
 
 class FinishExchangeViewController: UIViewController{
 
+    var order:Order?
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.navigationItem.hidesBackButton = true

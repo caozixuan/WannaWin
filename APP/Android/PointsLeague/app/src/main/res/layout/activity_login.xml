@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
 
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorOrange"
             android:text="登录"
             android:textColor="@color/colorWhite" />
 
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorOrange"
             android:text="注册"
             android:textColor="@color/colorWhite" />
     </LinearLayout>

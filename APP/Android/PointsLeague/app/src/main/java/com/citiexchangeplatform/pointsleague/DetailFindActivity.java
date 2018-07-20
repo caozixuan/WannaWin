@@ -89,8 +89,8 @@ public class DetailFindActivity extends AppCompatActivity {
 
                             Glide.with(DetailFindActivity.this)
                                     .load(merchantLogoURL)
-                                    .placeholder(R.drawable.store_card)
-                                    .error(R.drawable.store_card)
+                                    .placeholder(R.drawable.ic_points_black_24dp)
+                                    .error(R.drawable.ic_points_black_24dp)
                                     .into(imageViewLogo);
                             textViewName.setText(String.valueOf(name));
                             textViewDescription.setText(description);

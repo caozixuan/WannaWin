@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:background="@color/colorPrimary"
+                android:backgroundTint="@color/colorOrange"
                 android:text="获取验证码"
                 android:textColor="@color/colorWhite" />
         </LinearLayout>
@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorOrange"
             android:text="注册"
             android:textColor="@color/colorWhite" />
     </LinearLayout>

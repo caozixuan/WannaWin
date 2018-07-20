@@ -51,6 +51,8 @@ enum ServerService {
     case getCardDetail(merchantID:String)
     /// 绑定会员卡
     case addCard(merchantID:String, cardNum:String,password:String)
+    /// 解绑会员卡
+    case unbindCard(merchantID:String,cardNum:String)
     
     // 积分相关
     /// 积分兑换
@@ -71,6 +73,10 @@ enum ServerService {
     // 订单相关
     /// 获取历史订单
     case getOrders(intervalTime:String)
+    
+    // 发现页item
+    /// 发现页获取所有item从start的n个请求
+    
 }
 
 
@@ -121,6 +127,8 @@ extension ServerService:TargetType {
             return "/mscard/getDetailCard"
         case .addCard:
             return "/mscard/addcard"
+        case .unbindCard:
+            return "/mscard/unbindcard"
         
         // 积分
         case .changePoints:
@@ -213,13 +221,13 @@ extension ServerService:TargetType {
             
         case .getCardCount():
             var params:[String:String] = [:]
-            params["userId"] = User.getUser().id
+            params["userID"] = User.getUser().id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 会员卡
         case .getCardDetail(let merchantID):
             var params:[String:String] = [:]
-            params["userId"] = User.getUser().id
+            params["userID"] = User.getUser().id
             params["merchantID"] = merchantID
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .addCard(let merchantID, let cardNum, let password):
@@ -231,8 +239,14 @@ extension ServerService:TargetType {
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getMostPointCards(let n):
             var params:[String:String] = [:]
-            params["userId"] = User.getUser().id
+            params["userID"] = User.getUser().id
             params["n"] = String(n)
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .unbindCard(let merchantID, let cardNum):
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            params["merchantID"] = merchantID
+            params["cardNum"] = cardNum
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 积分相关
@@ -260,8 +274,8 @@ extension ServerService:TargetType {
         //支付相关
         case .pollingQR(let timestamp):
             var params:[String:String] = [:]
-            params["userId"] = User.getUser().id
-            params["timestamp"] = timestamp
+            params["userID"] = User.getUser().id
+            params["timeStamp"] = timestamp
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 订单相关
