@@ -3,6 +3,7 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:layout_marginHorizontal="10dp"
     android:orientation="horizontal"
     android:padding="2dp">
 
@@ -23,15 +24,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_order_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="简介"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorBlack" />
+
 
                 <TextView
                     android:id="@+id/textView_order_name"
@@ -44,16 +37,33 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textView_order_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:text="简介"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorBlack" />
 
-                <TextView
-                    android:id="@+id/textView_order_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="兑换时间"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black" />
+                    <TextView
+                        android:id="@+id/textView_order_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="兑换时间"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+
             </LinearLayout>
         </LinearLayout>
 
