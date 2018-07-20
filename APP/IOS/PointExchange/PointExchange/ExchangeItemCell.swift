@@ -36,8 +36,8 @@ class ExchangeItemCell: UITableViewCell{
 	override func awakeFromNib() {
         super.awakeFromNib()
 		
-		editSourcePoints.isHidden = true
-		sourcePoints.isHidden = false
+		//editSourcePoints.isHidden = true
+		//sourcePoints.isHidden = false
 		checkbox1.addTarget(self, action: #selector(checkboxClick), for: .touchUpInside)
 		//editBtn1.addTarget(self, action: #selector(editBtnClick), for: .touchUpInside)
 		//editBtn1.isHidden = true
@@ -119,7 +119,7 @@ class ExchangeItemCell: UITableViewCell{
 	
 	/// 让viewController成为textField的delegate来控制键盘收回
 	@objc func setTextFieldDelegateWith(_ viewController:UIViewController){
-		editSourcePoints.delegate = viewController
+		//editSourcePoints.delegate = viewController
 	}
 
 }

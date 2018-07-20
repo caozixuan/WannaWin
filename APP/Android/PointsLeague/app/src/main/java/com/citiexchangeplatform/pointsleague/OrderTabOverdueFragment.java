@@ -118,8 +118,9 @@ public class OrderTabOverdueFragment extends Fragment {
                         String time = "兑换日期："+jObj.getString("getTime");
                         String validityTerm = "有效期："+jObj.getString("overdueTime");
                         //String validityTerm = jObj.getString("overdueTime");
-                        String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
+                        //String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
                         String itemID = jObj.getString("ItemID");
+                        String logoURL = jObj.getString("logoURL");
 
                         orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"overdue");
 

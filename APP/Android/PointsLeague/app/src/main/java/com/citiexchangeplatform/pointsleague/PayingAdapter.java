@@ -46,6 +46,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
     //是否显示单选框,默认false
     //private boolean isshowBox = false;
     private double total;
+    private String totalPoints;
 
     private HashMap<Integer, Boolean> map = new HashMap<>();
     private HashMap<Integer, Double> totals = new HashMap<>();
@@ -434,7 +435,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 holder.exchangePoint.setText(result);
 
 
-
+                //方法1
                 //修改total值
                 //double add_point = Double.parseDouble(holder.exchangePoint.getText().toString());
                 //
@@ -446,12 +447,14 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 //for (Integer key : totals.keySet()) {
                 //    total += totals.get(key);
                 //}
-                total = 0;
-                for(int i = 0;i<sourceItems.size();i++){
-                    if(sourceItems.get(i).getChoose()){
-                        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
-                    }
-                }
+
+                //方法2
+                //total = 0;
+                //for(int i = 0;i<sourceItems.size();i++){
+                //    if(sourceItems.get(i).getChoose()){
+                //        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
+                //    }
+                //}
 
                 //notifyItemChanged(position);
                 holder.editPoint.addTextChangedListener(this);
@@ -558,9 +561,29 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
 
     /*返回总计价格*/
     public double getTotal() {
+        total = 0;
+        for (int i = 0;i<sourceItems.size();i++){
+            if(sourceItems.get(i).getChoose()){
+                total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
+            }
+        }
+
         return total;
     }
 
+
+    public String getTotalPoints() {
+        getTotal();
+        //保留两位小数
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        // 保留两位小数
+        nf.setMaximumFractionDigits(2);
+        // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+        nf.setRoundingMode(RoundingMode.UP);
+        String result = nf.format(total);
+
+        return result;
+    }
 
     //点击item选中CheckBox
     public void setSelectItem(int position) {
