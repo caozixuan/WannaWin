@@ -49,7 +49,10 @@ public class ItemController {
     }
 
     @RequestMapping("/item/addItem")
-    public ModelAndView addItem(String merchantID) {
+    public ModelAndView addItem() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String merchantID = session.getAttribute("merchantID").toString();
         ModelAndView mv = new ModelAndView();
         mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("item/addItem");
