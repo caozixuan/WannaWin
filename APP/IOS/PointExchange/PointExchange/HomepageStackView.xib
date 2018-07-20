@@ -17,7 +17,8 @@
                 <outlet property="cardImage2" destination="LAF-bV-xyb" id="GyJ-ix-zIc"/>
                 <outlet property="cardImage3" destination="4Db-OO-ZrJ" id="vwL-Tm-KoU"/>
                 <outlet property="cardScrollView" destination="kjJ-VY-RPH" id="57S-w0-upJ"/>
-                <outlet property="view" destination="UEa-Bk-Odu" id="41u-g2-cgE"/>
+                <outlet property="exchangeBtn" destination="Bqt-0E-Vcu" id="cfd-zX-PSK"/>
+                <outlet property="view" destination="UEa-Bk-Odu" id="CES-tO-f1n"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,7 +30,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-0E-Vcu">
-                            <rect key="frame" x="131" y="1.5" width="112" height="46"/>
+                            <rect key="frame" x="131" y="1" width="112" height="46"/>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             <state key="normal" image="兑换">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
