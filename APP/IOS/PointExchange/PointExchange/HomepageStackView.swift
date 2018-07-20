@@ -15,6 +15,9 @@ class HomepageStackView: UIStackView{
     @IBOutlet weak var cardImage1: UIImageView!
     @IBOutlet weak var cardImage3: UIImageView!
     @IBOutlet weak var cardImage2: UIImageView!
+	
+	@IBOutlet weak var exchangeBtn: UIButton!
+	
     override init(frame: CGRect) {
         super.init(frame: frame)
         initViewFromNib()
@@ -31,12 +34,11 @@ class HomepageStackView: UIStackView{
         self.view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView as! UIStackView
         self.view.frame = bounds
         self.addSubview(view)
-        
         // Do any additional setup after loading the view.
         
     }
     
     
-    
+	
 
 }

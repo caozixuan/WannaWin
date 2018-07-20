@@ -57,7 +57,7 @@ public class PayService {
         User user = userMapper.getInfoByUserID(userID);
         for (StrategyDAO strategyDAO : strategyDAOList) {
             if (strategyDAO.getPoints() < user.getGeneralPoints() && strategyDAO.getFull() <= totalPrice) {
-                user.setGeneralPoints(user.getAvailablePoints() - strategyDAO.getPoints());
+                userMapper.useGeneralPoints(userID,strategyDAO.getPoints());
                 Double priceAfter = strategyDAO.getPriceAfter();
                 Order order = new Order(totalPrice, priceAfter, strategyDAO.getPoints(), userID, Order.OrderState.SUCCESS, merchantID, new Timestamp(QRTimestamp * 1000));
                 if (orderMapper.addOrder(order) == 1) {

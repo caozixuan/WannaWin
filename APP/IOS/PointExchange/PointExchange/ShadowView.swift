@@ -12,11 +12,16 @@ class ShadowView: UIView {
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		self.setUp()
+		//self.setUp()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		self.setUp()
 	}
 	
 	func setUp() {

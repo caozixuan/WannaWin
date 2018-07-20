@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -142,13 +143,13 @@
         <!--兑换积分-->
         <scene sceneID="Kt6-Ir-B8l">
             <objects>
-                <viewController title="兑换积分" hidesBottomBarWhenPushed="YES" id="MRG-2t-LdV" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExchangeViewController" title="兑换积分" hidesBottomBarWhenPushed="YES" id="MRG-2t-LdV" customClass="ExchangeViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M6x-hg-rXY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vfr-nh-MiV">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="25u-Qw-uuo">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -188,7 +189,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Zw-OS-0vT">
-                                        <rect key="frame" x="0.0" y="88" width="375" height="515"/>
+                                        <rect key="frame" x="0.0" y="88" width="375" height="559"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="store to bank" rowHeight="60" id="uI5-Sn-TaV" customClass="ExchangeItemCell" customModule="PointExchange" customModuleProvider="target">
@@ -753,6 +754,7 @@
                 <viewController id="cme-Fl-azE" customClass="HomepagePartViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-H9-XcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="402" y="-99"/>
         </scene>
     </scenes>
     <resources>
@@ -760,17 +762,6 @@
         <image name="Float" width="66" height="66"/>
         <image name="HomeActive" width="27" height="25"/>
         <image name="HomeUnselected" width="27" height="25"/>
-        <image name="Mask" width="648" height="792"/>
-        <image name="login" width="221" height="46"/>
-        <image name="兑换" width="112" height="46"/>
         <image name="周黑鸭" width="607" height="385"/>
-        <image name="查看" width="102" height="38"/>
-        <image name="花旗点信息" width="630" height="213"/>
-        <image name="输入框" width="660" height="138"/>
-        <image name="check_off" width="48" height="48"/>
-        <image name="check_on" width="48" height="48"/>
-        <image name="周黑鸭" width="607" height="385"/>
-        <image name="确认" width="24" height="24"/>
-        <image name="编辑" width="48" height="48"/>
     </resources>
 </document>

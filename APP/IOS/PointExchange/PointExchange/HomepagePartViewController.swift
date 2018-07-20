@@ -13,6 +13,11 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate {
     var loginView:LoginView?
     var homepageStackView:HomepageStackView?
     var activityIndicator:UIActivityIndicatorView?
+	
+//	@IBOutlet weak var cardScrollView: UIScrollView!
+//	@IBOutlet weak var cardImage1: UIImageView!
+//	@IBOutlet weak var cardImage3: UIImageView!
+//	@IBOutlet weak var cardImage2: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +61,8 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate {
                 v.cardImage1.addGestureRecognizer(cardTap1)
                 v.cardImage2.addGestureRecognizer(cardTap2)
                 v.cardImage3.addGestureRecognizer(cardTap3)
+				
+				v.exchangeBtn.addTarget(self, action: #selector(HomepagePartViewController.gotoExchangeVC), for: .touchUpInside)
             }
         }
     }
@@ -96,6 +103,14 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate {
             
         }
     }
+	
+	
+	@objc func gotoExchangeVC(_ sender: Any) {
+		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "ExchangeViewController")
+		self.navigationController!.pushViewController(view, animated: true)
+		self.navigationController!.setNavigationBarHidden(false, animated: true)
+	}
 
     /*
     // MARK: - Navigation
