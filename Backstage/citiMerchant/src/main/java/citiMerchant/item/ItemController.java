@@ -107,9 +107,9 @@ public class ItemController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         String merchantID = session.getAttribute("merchantID").toString();
-        myfile = url + url2;
+        url2 = url + url2;
         overdueTime = overdueTime + " 00:00:00";
-        Item item = new Item(name, description, merchantID, myfile, Double.valueOf(originalPrice), Integer.valueOf(points), Timestamp.valueOf(overdueTime), Long.valueOf(stock));
+        Item item = new Item(name, description, merchantID, url2, Double.valueOf(originalPrice), Integer.valueOf(points), Timestamp.valueOf(overdueTime), Long.valueOf(stock));
         itemService.addItem(item);
         ModelAndView mv = new ModelAndView("redirect:/item/getItem");
         List<Item> items = itemService.getInfo(merchantID);
