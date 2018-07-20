@@ -36,6 +36,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PayingActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".FeedbackActivity" />
