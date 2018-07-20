@@ -92,7 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if (strAccount.length() != 11) {
                     showAlert("请输入正确的电话号码");
                 } else {
-
                     getMsgVerification();
                 }
             }
@@ -109,6 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
                     showAlert("请先获得验证码");
                 } else if (!strAccount.equals(editTextAccount.getText().toString())) {
                     Toast.makeText(RegisterActivity.this, "电话号码不匹配，注册失败", Toast.LENGTH_LONG).show();
+                } else if (strPassword.isEmpty()){
+                    showAlert("请输入密码");
                 } else if (!strPassword.equals(strPasswordVerification)) {
                     showAlert("两次输入密码不相同");
                 } else if (strMsgVerification.length() != 6) {
