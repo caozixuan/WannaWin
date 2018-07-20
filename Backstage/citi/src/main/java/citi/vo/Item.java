@@ -19,7 +19,7 @@ public class Item {
         this.description = description;
         this.merchantID = merchantID;
         this.logoURL = logoURL;
-        this.originalPrice = originalPrice;
+        this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;

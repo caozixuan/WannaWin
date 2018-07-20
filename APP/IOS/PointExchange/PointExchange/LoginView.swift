@@ -8,14 +8,60 @@
 
 import UIKit
 
-class LoginView: UIStackView,UITextFieldDelegate {
+class LoginView: UIView{
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet var view: UIView!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var signUpButton: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var passwordField: UITextField!
+    
+    var delegate:LoginViewDelegate?
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initViewFromNib()
     }
-    */
-	
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initViewFromNib()
+    }
+    
+    private func initViewFromNib(){
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: "LoginView", bundle: bundle)
+        self.view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+        self.view.frame = bounds
+        self.addSubview(view)
+        
+        // Do any additional setup after loading the view.
+        
+    }
+    
+    
+    @IBAction func usernameInputCheck(_ sender: Any) {
+        if usernameField.text?.count != 11 {
+            usernameField.shake()
+        }
+        else{
+            if passwordField.text != "" {
+                loginButton.isEnabled = true
+            }
+        }
+    }
+    
+    @IBAction func passwordInputCheck(_ sender: Any) {
+        if passwordField.text != "" && usernameField.text != ""{
+            loginButton.isEnabled = true
+        }
+    }
+    @IBAction func login(_ sender: Any) {
+        delegate?.login()
+    }
+}
+
+protocol LoginViewDelegate {
+    func login()
 }

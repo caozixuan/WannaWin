@@ -9,10 +9,10 @@ public class StrategyDAO {
 
     public StrategyDAO(String strategyID, String merchantID, Double full, Double priceAfter, Double points) {
         this.strategyID = strategyID;
-        MerchantID = merchantID;
-        this.full = full;
-        this.priceAfter = priceAfter;
-        this.points = points;
+        this.MerchantID = merchantID;
+        this.full = Double.parseDouble(String.format("%.2f", full));
+        this.priceAfter = Double.parseDouble(String.format("%.2f", priceAfter));
+        this.points = Double.parseDouble(String.format("%.2f", points));
     }
 
     public String getStrategyID() {
