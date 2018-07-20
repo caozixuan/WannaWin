@@ -112,11 +112,17 @@ public class OrderTabOverdueFragment extends Fragment {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
 
+
                         String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
-                        String time = jObj.getString("getTime");
+                        String time = "兑换日期："+jObj.getString("getTime");
+                        String validityTerm = "有效期："+jObj.getString("overdueTime");
+                        //String validityTerm = jObj.getString("overdueTime");
+                        String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
+                        String itemID = jObj.getString("ItemID");
 
-                        orderAdapter.addData(itemName,description,time);
+                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"overdue");
+
 
                     }
 
@@ -146,5 +152,9 @@ public class OrderTabOverdueFragment extends Fragment {
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getHistoryOrderByCoupon();
+    }
 }

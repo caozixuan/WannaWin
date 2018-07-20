@@ -70,5 +70,3 @@ public interface RecordMapper {
     List<Merchant_coupon_record> merchant_coupon_record_date(@Param("merchantID") String merchantID, @Param("start_date") Date start_date, @Param("end_date") Date end_date);
 
 }
-
-

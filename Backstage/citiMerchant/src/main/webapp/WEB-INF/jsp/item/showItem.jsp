@@ -16,6 +16,12 @@ pageEncoding="UTF-8" isELIgnored="false" autoFlush="false" buffer="300kb"%>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- jQuery 3 -->
+  <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="${pageContext.request.contextPath}/js/dist/js/adminlte.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bower_components/font-awesome/css/font-awesome.min.css">
@@ -66,14 +72,13 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href=/starter" class="logo">
+    <a href=../starter class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>商</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>商户管理界面</b></span>
     </a>
 
-    <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -90,7 +95,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="${merchant.merchantLogoURL}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">${merchant.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -108,7 +113,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="logout" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="../logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -195,8 +200,8 @@ desired effect
                 <td>${item.description}</td>
                 <td>${item.originalPrice}</td>
                 <td>${item.points}</td>
-              <td><form action="/item/editItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-success">编辑</button></form></td>
-              <td><form action="/item/deleteItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-danger">删除</button></form></td>
+              <td><form action="../item/editItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-success">编辑</button></form></td>
+              <td><form action="../item/deleteItem"><button name="itemID" value=${item.itemID} type="submit" class="btn btn-danger">删除</button></form></td>
               </tr>
             </c:forEach>
         </tbody>
@@ -217,7 +222,7 @@ desired effect
       感谢大家的支持！
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
  
@@ -230,12 +235,7 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 3 -->
-<script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/js/dist/js/adminlte.min.js"></script>
+
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

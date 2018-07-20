@@ -1,6 +1,8 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,9 +22,8 @@ import java.util.List;
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHolder> {
     //数据源
     private List<MyOrderItemModel> items;
-    private List<String> merchantNames;
-    private List<String> descriptions;
-    private List<String> dates;
+    private String type;
+
     private Context context;
     //构造方法
 
@@ -33,9 +34,10 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         this.context = context;
     }
 
-    public void addData(String name, String description,String date){
-        MyOrderItemModel itemModel = new MyOrderItemModel(name,description,date);
+    public void addData(String name, String description,String date,String validityTerm,String logoURL,String itemID,String type){
+        MyOrderItemModel itemModel = new MyOrderItemModel(name,description,date,validityTerm,logoURL,itemID);
         items.add(itemModel);
+        this.type = type;
         notifyDataSetChanged();
 
     }
@@ -53,7 +55,37 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         //设置订单信息
         holder.name.setText(items.get(position).getMerchantName());
         holder.description.setText(items.get(position).getDescription());
-        holder.date.setText(items.get(position).getDate());
+        holder.date.setText(items.get(position).getExchangeDate());
+
+        final String logoURL = items.get(position).getLogoURL();
+        final String name = items.get(position).getMerchantName();
+        final String exchangeDate = items.get(position).getExchangeDate();
+        final String validityDate = items.get(position).getValidityDate();
+        final String itemID = items.get(position).getItemID();
+        final String description = items.get(position).getDescription();
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToDetails = new Intent(context,CouponsDetailsActivity.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("logoURL",logoURL);
+                bundle.putString("name",name);
+                bundle.putString("exchangeDate",exchangeDate);
+                bundle.putString("validityDate",validityDate);
+                bundle.putString("itemID",itemID);
+                bundle.putString("description",description);
+                bundle.putString("type",type);
+
+                intentToDetails.putExtras(bundle);
+                //
+                context.startActivity(intentToDetails);
+
+
+            }
+        });
     }
 
     @Override

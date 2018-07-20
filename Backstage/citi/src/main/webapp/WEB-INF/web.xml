@@ -28,7 +28,6 @@
       <param-value>classpath:SpringMVC-config.xml</param-value>
     </init-param>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>

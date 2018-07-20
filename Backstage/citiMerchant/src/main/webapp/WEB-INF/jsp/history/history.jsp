@@ -156,8 +156,8 @@ desired effect
             <li><a href="strategy/getStrategyList">策略清单</a></li>
             <li><a href="strategy/addStrategyRequest">添加策略</a></li>
           </ul>
-        <li><a href=../history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
-        <li class="active"><a href="../showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
+        <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
+        <li class="active"><a href="showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
         <li class="active"><a href="../merchant/editMerchantInformation"><i class="fa fa-link"></i>
           <span>商户信息</span></a></li>
 
@@ -220,7 +220,7 @@ desired effect
       感谢大家的支持！
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
 

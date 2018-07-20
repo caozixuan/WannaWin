@@ -33,8 +33,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link href="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet" />
   <link href="${pageContext.request.contextPath}/js/bower_components/bootstrap/less/dropdowns.less" rel="stylesheet" />
-  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/moment-with-locales.js"></script>
-  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/moment-with-.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetilocalesmepicker.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/bower_components/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
   <!-- jQuery 3 -->
   <script src="${pageContext.request.contextPath}/js/bower_components/jquery/dist/jquery.min.js"></script>
@@ -132,7 +132,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="logout" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="../logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -272,7 +272,7 @@ desired effect
       感谢大家的支持！
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
 
