@@ -3,11 +3,11 @@ package citi.vo;
 public class StrategyDAO {
     private String strategyID;
     private String MerchantID;
-    private Double full;
-    private Double priceAfter;
-    private Double points;
+    private Integer full;
+    private Integer priceAfter;
+    private Integer points;
 
-    public StrategyDAO(String strategyID, String merchantID, Double full, Double priceAfter, Double points) {
+    public StrategyDAO(String strategyID, String merchantID, Integer full, Integer priceAfter, Integer points) {
         this.strategyID = strategyID;
         MerchantID = merchantID;
         this.full = full;
@@ -23,15 +23,15 @@ public class StrategyDAO {
         return MerchantID;
     }
 
-    public Double getFull() {
+    public Integer getFull() {
         return full;
     }
 
-    public Double getPriceAfter() {
+    public Integer getPriceAfter() {
         return priceAfter;
     }
 
-    public Double getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
