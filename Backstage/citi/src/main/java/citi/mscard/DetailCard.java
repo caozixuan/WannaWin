@@ -39,6 +39,8 @@ public class DetailCard implements  Comparable<DetailCard>{
 
     @Override
     public int compareTo(DetailCard o) {
-        return o.points-this.points;
+        if(o.points*o.proportion-this.points*this.proportion>0)
+            return 1;
+        return -1;
     }
 }
