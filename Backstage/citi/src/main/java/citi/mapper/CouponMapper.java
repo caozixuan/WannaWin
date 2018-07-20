@@ -1,10 +1,9 @@
 package citi.mapper;
 
 import citi.vo.UserCoupon;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import citi.vo.UserCoupon_record;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,9 +23,7 @@ public interface CouponMapper {
             "WHERE userID = #{userID} AND ItemID = #{ItemID} AND state = 'UNUSED'";
     final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state, getTime, useTime) " +
             "VALUES(NULL, #{userID}, #{ItemID}, #{state}, now(), null)";
-    final String deleteOneUserCouponBy_UserID_AND_ItemID = "UPDATE user_coupon SET state = 'USED', useTime = now() " +
-            "WHERE userID = #{userID} AND ItemID = #{itemID} AND state = 'UNUSED'" +
-            "ORDER BY userID ASC LIMIT 1";
+    final String deleteOneUserCouponBy_UserID_AND_ItemID = "CALL user_coupon_update(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_itemID, mode = IN, jdbcType = VARCHAR}, #{ifUsed, mode = OUT, jdbcType = INTEGER})";
 
     @Select(getCouponsByUserID)
     List<UserCoupon> getCouponsByUserID(String userID);
@@ -43,7 +40,9 @@ public interface CouponMapper {
     @Insert(addUserCoupon)
     int addUserCoupon(UserCoupon userCoupon);
 
-    @Update(deleteOneUserCouponBy_UserID_AND_ItemID)
-    int deleteOneUserCouponBy_UserID_AND_ItemID(@Param("userID") String userID, @Param("ItemID") String itemID);
+    @Insert(value = deleteOneUserCouponBy_UserID_AND_ItemID)
+    @Options(statementType = StatementType.CALLABLE)
+    @ResultType(UserCoupon_record.class)
+    void deleteOneUserCouponBy_UserID_AND_ItemID(UserCoupon_record userCoupon_record);
 
 }

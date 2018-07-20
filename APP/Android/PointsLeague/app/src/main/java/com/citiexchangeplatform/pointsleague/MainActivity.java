@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -132,4 +133,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             startActivity(intentToPayCode);
         }
     }
+
+    @Override
+    //重写onKeyDown方法,对按键(不一定是返回按键)监听
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
+            finish();
+        }
+        return false;
+    }
+
 }

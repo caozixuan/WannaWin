@@ -52,8 +52,8 @@ public class MyOrderActivity extends AppCompatActivity {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         //设置tablayout距离上下左右的距离
         //tab_title.setPadding(20,20,20,20);
-        mFragmentArrays[0] = OrderTabUsedFragment.newInstance();
-        mFragmentArrays[1] = OrderTabUnusedFragment.newInstance();
+        mFragmentArrays[0] = OrderTabUnusedFragment.newInstance();
+        mFragmentArrays[1] = OrderTabUsedFragment.newInstance();
         mFragmentArrays[2] = OrderTabOverdueFragment.newInstance();
 
         PagerAdapter pagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
@@ -85,4 +85,9 @@ public class MyOrderActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
 }

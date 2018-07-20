@@ -16,16 +16,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.citiexchangeplatform.pointsleague.data.RecordChild;
-import com.citiexchangeplatform.pointsleague.data.RecordParent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -52,7 +48,7 @@ public class OrderTabUsedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_order_tab, container, false);
+        View view = inflater.inflate(R.layout.fragment_order_tab_used, container, false);
 
         usedOrderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder);
 
@@ -74,7 +70,7 @@ public class OrderTabUsedFragment extends Fragment {
         //orderAdapter.addData("中国电信","5元代金券","2018-7-27");
         //orderAdapter.addData("niki","5元代金券","2018-7-25");
         //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
-        getHistory();
+        getHistoryOrderByCoupon();
 
 
 
@@ -90,8 +86,8 @@ public class OrderTabUsedFragment extends Fragment {
         usedOrderRecyclerView.setAdapter(orderAdapter);
     }
 
-    private void getHistory() {
-        String url="http://193.112.44.141:80/citi/order/getOrders";
+    private void getHistoryOrderByCoupon() {
+        String url="http://193.112.44.141:80/citi/userCoupon/getUsedCoupons";
         RequestQueue queue = MyApplication.getHttpQueues();
         //RequestQueue queue=Volley.newRequestQueue(this);
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -107,11 +103,14 @@ public class OrderTabUsedFragment extends Fragment {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
 
-                        String pointsNeeded = "使用花旗点：" + jObj.getString("pointsNeeded");
-                        String merchantName = jObj.getString("merchantName");
-                        String time = jObj.getString("time");
+                        String description = jObj.getString("description");
+                        String itemName = jObj.getString("itemName");
+                        String time = "兑换时间：" +jObj.getString("getTime");
+                        String validityTerm = "使用时间：" +jObj.getString("useTime");
+                        String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
+                        String itemID = jObj.getString("ItemID");
 
-                        orderAdapter.addData(merchantName,pointsNeeded,time);
+                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"used");
 
                     }
 
@@ -132,7 +131,6 @@ public class OrderTabUsedFragment extends Fragment {
                 Map<String,String> map=new HashMap<>();
 
                 map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
-                map.put("intervalTime","1101010101");
 
 
                 return map;
