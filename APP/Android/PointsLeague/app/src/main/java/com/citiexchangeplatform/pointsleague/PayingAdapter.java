@@ -386,6 +386,9 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                         Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
                 }
+                else{
+                    filteredItems.get(position).setExchangePoint("0");
+                }
 
                 //保留两位小数
                 NumberFormat nf = NumberFormat.getNumberInstance();
@@ -419,6 +422,11 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                         holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
                         Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
+                }
+
+                else{
+                    filteredItems.get(position).setExchangePoint("0");
+                    holder.editPoint.setText("0");
                 }
 
 
