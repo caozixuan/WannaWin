@@ -75,7 +75,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                         self.cards = cards
                         v.cardImage1.imageFromURL((self.cards?[0].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
                         v.cardImage2.imageFromURL((self.cards?[1].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
-                        v.cardImage1.imageFromURL((self.cards?[2].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+                        v.cardImage3.imageFromURL((self.cards?[2].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
                         ServerConnector.getGeneralPoints(){ (result, points) in
                             if result {
                                 v.currentCitiPointLabel.text = String(stringInterpolationSegment: points)
@@ -114,7 +114,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 self.activityIndicator?.stopAnimating()
                 let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
                 let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    self.navigationController?.popViewController(animated: true)
+                    
                 })
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)

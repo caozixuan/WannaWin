@@ -24,14 +24,14 @@
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Close All"
+            android:text="收起"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Open All"
+            android:text="展开全部"
             android:textAllCaps="false" />
 
         <Button

@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
-    android:background="#e1e1e1"
+    android:background="#213a3a3a"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="10dp">
-
+    android:padding="20dp">
 
 
     <TextView
         android:id="@+id/textView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         />
+        android:visibility="invisible" />
 
 
     <TextView

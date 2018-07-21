@@ -87,6 +87,9 @@ class CardInfoTableViewController: UITableViewController {
 		let cell  = tableView.dequeueReusableCell(withIdentifier: "card", for: indexPath)
         if cardArray != nil {
             (cell.viewWithTag(1) as! UIImageView).imageFromURL(cardArray![indexPath.row].logoURL!, placeholder: UIImage())
+            (cell.viewWithTag(2) as! UILabel).text = String(stringInterpolationSegment: cardArray![indexPath.row].points)
+            (cell.viewWithTag(3) as! UILabel).text = String(stringInterpolationSegment: cardArray![indexPath.row].points*cardArray![indexPath.row].proportion!)
+            
         }
 		return cell
 		

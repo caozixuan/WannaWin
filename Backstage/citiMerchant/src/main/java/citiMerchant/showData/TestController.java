@@ -1,6 +1,7 @@
 package citiMerchant.showData;
 
 import citiMerchant.mapper.MerchantMapper;
+import citiMerchant.vo.Merchant;
 import citiMerchant.vo.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,17 @@ public class TestController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
 
+        Merchant merchant = merchantMapper.selectByID((String) session.getAttribute("merchantID"));
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("merchant", merchant);
+        mv.setViewName("/showData/showData");
+
         //prepare statistics information to display
         Prepare_info prepare = new Prepare_info();
         prepare.set((String) session.getAttribute("merchantID"));
         new Thread(prepare).start();
 
-        return new ModelAndView("/showData/showData");
+        return mv;
     }
 
 

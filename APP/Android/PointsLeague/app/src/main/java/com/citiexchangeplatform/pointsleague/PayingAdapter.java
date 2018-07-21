@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
 import android.view.KeyEvent;
@@ -194,6 +195,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         holder.setIsRecyclable(false);
         //设置列表中积分信息
         holder.editPoint.setText(filteredItems.get(position).getExchangePoint());
+        //holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER);
         holder.exchangePoint.setText(filteredItems.get(position).getTargetPoint());
         //设置商家图片
         /*Glide.with(context)
@@ -372,20 +375,33 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 double rate = filteredItems.get(position).getRate();
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())*rate;
-                    filteredItems.get(position).setExchangePoint(s.toString());
+                    if(Double.parseDouble(s.toString())<0){
+                        exchangedPoint = 0;
+                        filteredItems.get(position).setExchangePoint("0");
+                        Toast.makeText(context, "输入不得小于0", Toast.LENGTH_SHORT).show();
 
-                    //超出最大值，自动更新为最大值
-                    double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
-                    if(Double.parseDouble(s.toString()) > max){
-
-                        exchangedPoint = max * rate;
-
-                        filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
-                        holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
-                        Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
+                    else {
+                        exchangedPoint = Double.parseDouble(s.toString())*rate;
+                        filteredItems.get(position).setExchangePoint(s.toString());
+
+                        //超出最大值，自动更新为最大值
+                        double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
+                        if(Double.parseDouble(s.toString()) > max){
+
+                            exchangedPoint = max * rate;
+
+                            filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
+                            holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
+                            Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
                 }
+                if(s.length()==0){
+                    filteredItems.get(position).setExchangePoint("0");
+                }
+
 
                 //保留两位小数
                 NumberFormat nf = NumberFormat.getNumberInstance();
@@ -407,18 +423,32 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 double rate = filteredItems.get(position).getRate();
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    exchangedPoint = Double.parseDouble(s.toString())*rate;
-                    filteredItems.get(position).setExchangePoint(s.toString());
+                    if(Double.parseDouble(s.toString())<0){
+                        exchangedPoint = 0;
+                        filteredItems.get(position).setExchangePoint("0");
+                        Toast.makeText(context, "输入不得小于0", Toast.LENGTH_SHORT).show();
 
-                    //超出最大值，自动更新为最大值
-                    double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
-                    if(Double.parseDouble(s.toString()) > max){
-
-                        exchangedPoint = max * rate;
-                        filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
-                        holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
-                        Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                     }
+                    else {
+                        exchangedPoint = Double.parseDouble(s.toString())*rate;
+                        filteredItems.get(position).setExchangePoint(s.toString());
+
+                        //超出最大值，自动更新为最大值
+                        double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
+                        if(Double.parseDouble(s.toString()) > max){
+
+                            exchangedPoint = max * rate;
+                            filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
+                            holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
+                            Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+
+                else{
+                    filteredItems.get(position).setExchangePoint("0");
+                    holder.editPoint.setText("0");
                 }
 
 

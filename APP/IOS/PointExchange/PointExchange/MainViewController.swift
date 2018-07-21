@@ -40,20 +40,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
-        //ServerConnector.getPointsInfo(callback: gotPointsInfo)
-       // generalPointsLabel.text = String(stringInterpolationSegment: User.getUser().generalPoints!)
-       // availablePointsLabel.text = String(stringInterpolationSegment: User.getUser().availablePoints!)
-		// 如果登录
-//        if User.getUser().username != nil {
-//            setUpView()
-//
-//        }
-//        else{
-//            if self.stackView != nil {
-//                self.stackView.removeFromSuperview()
-//            }
-//        }
-        
+       
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -62,26 +49,9 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	}
 	
 	func setUpView(){
-		self.loginView.removeFromSuperview()
-		//添加积分卡添加点击手势事件
-//		let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-//		let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-//		let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-//		cardImage1.addGestureRecognizer(cardTap1)
-//		cardImage2.addGestureRecognizer(cardTap2)
-//		cardImage3.addGestureRecognizer(cardTap3)
 	}
 	
-	/// 获得积分信息后的回调函数
-//    func gotPointsInfo(result:Bool){
-//        if result {
-//            availablePointsLabel.text = String(User.getUser().availablePoints!)
-//            generalPointsLabel.text = String(User.getUser().generalPoints!)
-//        }else{
-//            availablePointsLabel.text = "---"
-//            generalPointsLabel.text = "---"
-//        }
-//    }
+	
     /// 获得商户信息后的回调函数
     func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
         if result {
@@ -189,8 +159,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 			if segue.destination .isKind(of: ImageScrollerViewController.self){
 				imageScroller = segue.destination as! ImageScrollerViewController
 				imageScroller.delegate = self
-				//imageScroller.view.layer.cornerRadius = 20;
-				//imageScroller.view.layer.masksToBounds = true;
 				
 				//为图片添加点击手势事件
 				let tap = UITapGestureRecognizer(target: self,
@@ -201,16 +169,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		}
         else if segue.identifier == "container" {
             
-//            if User.getUser().username == nil {
-//                let controller = segue.destination
-//                controller.view.addSubview(LoginView(frame: CGRect(x: 0, y: 0, width: container.frame.width, height: container.frame.height)))
-//            }
-//            else{
-//                let controller = segue.destination as! HomepagePartViewController
-//                let view = HomepageStackView(frame: CGRect(x: 0, y: 0, width: container.frame.width, height: container.frame.height))
-//                controller.view.addSubview(view)
-//
-//            }
+
             
         }
     }

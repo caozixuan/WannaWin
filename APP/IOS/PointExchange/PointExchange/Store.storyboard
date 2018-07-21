@@ -13,34 +13,33 @@
         <!--商城-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="商城" id="BYZ-38-t0r" customClass="ViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="商城" id="BYZ-38-t0r" customClass="HuaQiStoreWebViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NeE-SZ-eYv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BFP-Rg-Vke">
-                                <rect key="frame" x="16" y="129" width="343" height="29"/>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DCK-bE-fX4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="分类"/>
-                                    <segment title="筛选"/>
-                                </segments>
-                            </segmentedControl>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="商城" image="StoreUnselected" selectedImage="StoreActive" id="EXB-9K-g9C"/>
                     <navigationItem key="navigationItem" title="花旗积分商城" id="G5w-9z-8YQ"/>
+                    <connections>
+                        <outlet property="webView" destination="DCK-bE-fX4" id="tC2-I9-21T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1974" y="1130"/>
+            <point key="canvasLocation" x="1973.5999999999999" y="1129.385307346327"/>
         </scene>
         <!--商城nav-->
         <scene sceneID="jXw-Hd-0Zx">
