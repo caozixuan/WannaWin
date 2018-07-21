@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapter.MyViewHolder> {
@@ -58,6 +60,7 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
             //使用的积分
             holder.pointsUsed.setText(points_used.get(position));
             //设置列表中积分信息
+
             holder.pointsExchange.setText(points_exchanged.get(position));
         }
         else {
