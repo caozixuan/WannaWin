@@ -76,7 +76,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
 
         //广告栏
-        imageIds = new int[]{R.drawable.ad1, R.drawable.ad1, R.drawable.ad1};
+        imageIds = new int[]{R.drawable.ad1, R.drawable.ad2, R.drawable.ad3};
 
         imageDescriptions = new String[]{
                 "banner1",
