@@ -11,21 +11,8 @@ import UIKit
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     
     @IBOutlet weak var container: UIView!
-    @IBOutlet weak var mainView: MaskView!
-    @IBOutlet weak var loginView: UIView!
-	
-	@IBOutlet weak var stackView: UIStackView!
 	
 	@IBOutlet weak var cardScrollView: UIScrollView!
-	
-    @IBOutlet weak var availablePointsLabel: UILabel!
-    @IBOutlet weak var generalPointsLabel: UILabel!
-    @IBOutlet weak var cardImage1: UIImageView!
-	
-	@IBOutlet weak var cardImage2: UIImageView!
-	
-	@IBOutlet weak var cardImage3: UIImageView!
-	
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
     var activityIndicator:UIActivityIndicatorView?
@@ -100,17 +87,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		if User.getUser().username != nil {
 			storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 			view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
-			switch tap.view {
-			case cardImage1:
-				// FIXME: - 后期用来判断点击了那张卡，用来传递数据
-				let a = 1
-			case cardImage2:
-				// FIXME: - 后期用来判断点击了那张卡，用来传递数据
-				let a = 1
-			default:
-				// FIXME: - 后期用来判断点击了那张卡，用来传递数据
-				let a = 1
-			}
+			
 		}
 		else {
 			storyBoard = UIStoryboard(name:"User", bundle:nil)
@@ -133,24 +110,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		}
 	}
 	
-//	@IBAction func addCard(_ sender: AnyObject){
-//
-//		if User.getUser().username != nil {
-//            // 加载动画
-//            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-//            self.activityIndicator?.startAnimating()
-//
-//            // 获得商家信息
-//            ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
-//
-//		}
-//		else{
-//            let storyBoard = UIStoryboard(name:"User", bundle:nil)
-//			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
-//			self.navigationController!.pushViewController(view, animated: true)
-//		}
-//	}
-
     
     // MARK: - Navigation
     // 初始化图片轮播组件，为嵌入的图片轮播VC做数据准备

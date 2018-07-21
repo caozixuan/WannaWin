@@ -33,7 +33,6 @@ class ModifyPasswordTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1{
-            // TODO: 点击修改密码后网络请求
             ServerConnector.changePassword(oldPassword: oldPswField.text!, newPassword: newPswField.text!, callback: changedCallback)
         }
     }

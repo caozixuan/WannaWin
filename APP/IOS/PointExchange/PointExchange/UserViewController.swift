@@ -22,6 +22,8 @@ class UserViewController: UITableViewController {
     //未登录时登录按钮
     var loginButton:UIButton = UIButton()
     
+    let storyBoard = UIStoryboard(name: "User", bundle: nil)
+    
     @IBOutlet weak var userTableCell: UITableViewCell?
 
     override func viewDidLoad() {
@@ -67,58 +69,17 @@ class UserViewController: UITableViewController {
             }
         }
         else if indexPath.section == 1 {
-            let storyBoard = UIStoryboard(name: "User", bundle: nil)
+            
             switch indexPath.row{
             // 绑定花旗账户
             case 0:
-                if let _ = User.getUser().username{
-                    let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
-                    self.navigationController?.pushViewController(view, animated: true)
-                }else{
-                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
-                    self.navigationController?.pushViewController(view, animated: true)
-                }
+                bindAccount()
             // 查看积分兑换记录
             case 1:
-                if let _ = User.getUser().username{
-                    ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
-                        if result {
-                            let view = storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController") as! PointHistoryViewController
-                            view.pointsHistoryArray = pointsHistory
-                            self.navigationController?.pushViewController(view, animated: true)
-                            
-                        }
-                        
-                    }
-                    
-                }else{
-                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
-                    self.navigationController?.pushViewController(view, animated: true)
-                }
+                checkPointRecord()
             // 查看我的订单
             case 2:
-                if let _ = User.getUser().username{
-                    activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
-                    // TODO: 访问服务器请求订单信息(intervalTime)
-                    ServerConnector.getOrders(intervalTime: "1101010101"){ (result, orders) in
-                        let view = storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
-                        // TODO: 根据状态分订单数组
-                        var successOrders = [Order]()
-                        for order in orders{
-                            if order.state == OrderState.SUCCESS{
-                                successOrders.append(order)
-                            }
-                        }
-                        view.willUseOrders = successOrders
-                        self.navigationController?.pushViewController(view, animated: true)
-                        
-                    }
-                   
-                    
-                }else{
-                    let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
-                    self.navigationController?.pushViewController(view, animated: true)
-                }
+                checkHistory()
             default:
                 break;
             }
@@ -128,11 +89,11 @@ class UserViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            // 如果登录，显示用户名，若未登录，显示登录按钮
             if let name = User.getUser().username{
                 usernameLabel.textColor=UIColor.darkGray
                 usernameLabel.frame=CGRect(x:143, y:47, width:200, height:21)
                 usernameLabel.text=name
-                
                 boundingCitiCardHeadLabel.text = {() -> String in
                     if let card = User.getUser().card{
                         return "银行卡："
@@ -195,7 +156,7 @@ class UserViewController: UITableViewController {
         
     }
 
-    
+    /// 退出登录
     func logout(){
         User.logout()
         print("logout")
@@ -203,4 +164,59 @@ class UserViewController: UITableViewController {
         
     }
 
+    
+    /// 绑定花旗账户
+    func bindAccount(){
+        if let _ = User.getUser().username{
+            let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
+            self.navigationController?.pushViewController(view, animated: true)
+        }else{
+            let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+            self.navigationController?.pushViewController(view, animated: true)
+        }
+    }
+    
+    /// 查看积分兑换记录
+    func checkPointRecord(){
+        if let _ = User.getUser().username{
+            ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
+                if result {
+                    let view = self.storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController") as! PointHistoryViewController
+                    view.pointsHistoryArray = pointsHistory
+                    self.navigationController?.pushViewController(view, animated: true)
+                    
+                }
+                
+            }
+            
+        }else{
+            let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+            self.navigationController?.pushViewController(view, animated: true)
+        }
+    }
+    
+    /// 查看历史订单
+    func checkHistory(){
+        if let _ = User.getUser().username{
+            activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
+            
+            ServerConnector.getOrders(intervalTime: "1101010101"){ (result, orders) in
+                let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
+                var successOrders = [Order]()
+                for order in orders{
+                    if order.state == OrderState.SUCCESS{
+                        successOrders.append(order)
+                    }
+                }
+                view.willUseOrders = successOrders
+                self.navigationController?.pushViewController(view, animated: true)
+                
+            }
+            
+            
+        }else{
+            let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
+            self.navigationController?.pushViewController(view, animated: true)
+        }
+    }
 }

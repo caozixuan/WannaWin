@@ -1,7 +1,7 @@
 //
 //  SingleSectionOrderViewController.swift
 //  PointExchange
-//
+//  未使用和过期订单的tableview
 //  Created by panyy on 2018/7/14.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
@@ -30,14 +30,6 @@ class SingleSectionOrderViewController: UIViewController {
         super.viewWillAppear(animated)
         dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>(configureCell: {(dataSource, view, indexPath, element) in
             var cell = UITableViewCell()
-//            // 创建列表
-//            cell = view.dequeueReusableCell(withIdentifier: "coupon")!
-//            // 简介
-//            (cell.viewWithTag(1) as! UITextView).text = element.description
-//            // 商家名
-//            (cell.viewWithTag(2) as! UILabel).text = element.merchantName
-//            // 时间
-//            (cell.viewWithTag(3) as! UILabel).text = element.date
             return cell
         })
         if let order = orders{
