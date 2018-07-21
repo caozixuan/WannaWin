@@ -85,7 +85,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
         expandableAdapter.setItemClickListener(new VExpandableAdapter.MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(PointsExchangeExpandListActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PointsExchangeExpandListActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
                 if (expandableAdapter.isExpanded(position)) {
                     expandableAdapter.collapseGroup(position);
                     //((Button) v).setText("Open");

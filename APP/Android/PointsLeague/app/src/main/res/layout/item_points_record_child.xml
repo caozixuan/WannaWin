@@ -7,7 +7,7 @@
     android:background="#fff"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="20dp">
 
     <FrameLayout
         android:layout_width="0dp"
