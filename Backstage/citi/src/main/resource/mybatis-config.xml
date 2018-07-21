@@ -22,6 +22,6 @@
     </environments>
 
     <mappers>
-        <package name="citi.mapper"/>
+        <package name="citi.persist.mapper"/>
     </mappers>
 </configuration>

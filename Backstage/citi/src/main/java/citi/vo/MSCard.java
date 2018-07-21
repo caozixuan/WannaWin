@@ -2,7 +2,6 @@ package citi.vo;
 
 /*
  * 作者：曹子轩
- * TODO: 里面的很多地方需要再沟通
  */
 public class MSCard {
     private String userID;
