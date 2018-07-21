@@ -185,7 +185,7 @@ desired effect
     <section class="content container-fluid">
     <table class="table table-striped">
         <thead>
-            <tr><th>图片</th><th>编号</th><th>名称</th><th>简述</th><th>原价</th><th>抵扣积分</th><th>操作</th></tr>
+            <tr><th>图片</th><th>名称</th><th>简述</th><th>原价</th><th>抵扣积分</th><th>操作</th></tr>
         </thead>
         <tbody>
             <tr><td>
@@ -195,7 +195,6 @@ desired effect
                 <td>
                   <a href="#" class="thumbnail"><img src=${item.logoURL} alt="通用的占位符缩略图" height="50" width="50"></a>
                 </td>
-                <td>${item.itemID}</td>
                 <td>${item.name}</td>
                 <td>${item.description}</td>
                 <td>${item.originalPrice}</td>

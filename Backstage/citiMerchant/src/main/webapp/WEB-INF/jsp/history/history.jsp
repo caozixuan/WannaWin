@@ -158,7 +158,7 @@ desired effect
           </ul>
         <li><a href=history><i class="fa fa-link"></i> <span>历史订单</span></a></li>
         <li class="active"><a href="showData"><i class="fa fa-link"></i> <span>统计信息</span></a></li>
-        <li class="active"><a href="../merchant/editMerchantInformation"><i class="fa fa-link"></i>
+        <li class="active"><a href="merchant/editMerchantInformation"><i class="fa fa-link"></i>
           <span>商户信息</span></a></li>
 
       </ul>
@@ -187,7 +187,6 @@ desired effect
             <div class="box-body no-padding">
               <table class="table table-striped">
                 <tr>
-                  <th style="width: 10px">#</th>
                   <th>原价</th>
                   <th>抵扣后价格</th>
                   <th>所用积分</th>
@@ -196,7 +195,6 @@ desired effect
                 </tr>
             <c:forEach items="${orders}" var="p">
                 <tr>
-                    <td>${p.orderId}</td>
                     <td>${p.originalPrice}</td>
                     <td>${p.priceAfter}</td>
                     <td>${p.pointsNeeded}</td>
