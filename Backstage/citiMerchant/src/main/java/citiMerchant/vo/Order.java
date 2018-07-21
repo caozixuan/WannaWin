@@ -46,9 +46,9 @@ public class Order {
 
     public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
         this.orderId = orderId;
-        this.originalPrice = originalPrice;
-        this.priceAfter = priceAfter;
-        this.pointsNeeded = pointsNeeded;
+        this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
+        this.priceAfter = Double.parseDouble(String.format("%.2f", priceAfter));
+        this.pointsNeeded = Double.parseDouble(String.format("%.2f", pointsNeeded));
         this.userId = userId;
         this.state = state;
         this.merchantId = merchantId;
@@ -57,9 +57,9 @@ public class Order {
 
     public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
         this.orderId = orderId;
-        this.originalPrice = originalPrice;
-        this.priceAfter = priceAfter;
-        this.pointsNeeded = pointsNeeded;
+        this.originalPrice = Double.parseDouble(String.format("%.2f",originalPrice));
+        this.priceAfter = Double.parseDouble(String.format("%.2f",priceAfter));
+        this.pointsNeeded = Double.parseDouble(String.format("%.2f",pointsNeeded));
         this.userId = userId;
         this.state = OrderState.getStateString(state);
         this.merchantId = merchantId;

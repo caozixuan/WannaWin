@@ -21,7 +21,13 @@ class CardInfoTableViewController: UITableViewController {
 		// 加入“添加”按钮在导航栏右边
 		let addBtn = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.add , target: self, action: #selector(goAddVC))
 		self.navigationItem.rightBarButtonItem = addBtn
-        ServerConnector.getMostPointCards(n: 3, callback: getCardCallback)
+        
+        ServerConnector.getCardCount(){ (result,num) in
+            if result{
+                ServerConnector.getMostPointCards(n: num, callback: self.getCardCallback)
+            }
+        }
+        
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         activityIndicator?.startAnimating()
 		

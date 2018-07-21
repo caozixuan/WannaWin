@@ -219,8 +219,7 @@ class ServerConnector: NSObject {
                         merchant.id = data["merchantID"].string!
                         merchant.name = data["name"].string!
                         merchant.description = data["description"].string!
-                        merchant.logoURL = data["logoURL"].string!
-                        merchant.address = data["address"].string!
+                        merchant.logoURL = data["merchantLogoURL"].string!
                         merchants.append(merchant)
                     }
                     callback(true,merchants)

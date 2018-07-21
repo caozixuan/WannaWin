@@ -37,7 +37,7 @@ class MerchantChooseTableViewController: UIViewController {
                 let cell = tv.dequeueReusableCell(withIdentifier: "cell")!
                 (cell.viewWithTag(1) as? UILabel)?.text = element
                 let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
-                cell.imageView?.imageFromURL(MerchantList.list[indexPath.row].logoURL!, placeholder: UIImage(named: "周黑鸭")!)
+                (cell.viewWithTag(2) as? UIImageView)?.imageFromURL(MerchantList.list[indexPath.row].logoURL!, placeholder: UIImage())
                 return cell
             })
         result.bind(to: self.tableView.rx.items(dataSource: dataSource))

@@ -78,7 +78,7 @@ public class PayingActivity extends AppCompatActivity {
         //setSupportActionBar(mToolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolBar();
+
 
         //获取页面中的元素
         initView();
@@ -88,6 +88,8 @@ public class PayingActivity extends AppCompatActivity {
 
         //获得初始化数据
         initData();
+
+        toolBar();
 
         SearchView search = this.findViewById(R.id.editText_search_paying);
 
@@ -190,6 +192,12 @@ public class PayingActivity extends AppCompatActivity {
         titleBar.addAction(new TitleBar.TextAction("全选") {
             @Override
             public void performAction(View view) {
+                for(int i = 0;i<mAdapter.getSourceItems().size();i++){
+                    mAdapter.getSourceItems().get(i).setChoose(true);
+                }
+
+
+                Choose_Points.setText(mAdapter.getTotalPoints());
 
             }
         });
@@ -248,7 +256,7 @@ public class PayingActivity extends AppCompatActivity {
             @Override
             public void onclick(View view, int position) {
                 //修改合计价格
-                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
+                Choose_Points.setText(mAdapter.getTotalPoints());
                 //Toast.makeText(getApplicationContext(), "点击条目上的按钮"+position, Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "修改", Toast.LENGTH_SHORT).show();
             }
@@ -257,7 +265,7 @@ public class PayingActivity extends AppCompatActivity {
         mAdapter.checkBoxSetOnclick(new PayingAdapter.CheckBoxInterface() {
             @Override
             public void onclick(View view, int position) {
-                Choose_Points.setText(String.valueOf(mAdapter.getTotal()));
+                Choose_Points.setText(mAdapter.getTotalPoints());
                 if(isSoftShowing()){
 
                 }
@@ -267,15 +275,8 @@ public class PayingActivity extends AppCompatActivity {
         mAdapter.editTextComplete(new PayingAdapter.EditTextInterface(){
             @Override
             public void onComplete(View view, int position) {
-                //保留两位小数
-                NumberFormat nf = NumberFormat.getNumberInstance();
-                // 保留两位小数
-                nf.setMaximumFractionDigits(2);
-                // 如果不需要四舍五入，可以使用RoundingMode.DOWN
-                nf.setRoundingMode(RoundingMode.UP);
-                String result = nf.format(mAdapter.getTotal());
                 //修改合计价格
-                Choose_Points.setText(result);
+                Choose_Points.setText(mAdapter.getTotalPoints());
             }
         });
 
