@@ -2,6 +2,7 @@ package citi.funcModule.item;
 
 import citi.persist.mapper.CouponMapper;
 import citi.persist.mapper.ItemMapper;
+import citi.persist.mapper.UserMapper;
 import citi.support.status.Status;
 import citi.vo.Item;
 import citi.vo.UserCoupon;
@@ -20,6 +21,8 @@ public class ItemService {
     private ItemMapper itemMapper;
     @Autowired
     private CouponMapper couponMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     public List<Item> getItems(int start,int length){
         return itemMapper.getItem(start,length);
@@ -36,6 +39,7 @@ public class ItemService {
         }
         if (itemMapper.updateItemStockByID(itemID,item.getStock()-count)==1){
             UserCoupon userCoupon=new UserCoupon(userID,itemID,UserCoupon.CouponState.UNUSED);
+            userMapper.useGeneralPoints(userID,item.getPoints()*count);
             for (int i=0;i<count;i++){
                 couponMapper.addUserCoupon(userCoupon);
             }
