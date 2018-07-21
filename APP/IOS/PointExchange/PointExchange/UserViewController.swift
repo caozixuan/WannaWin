@@ -16,7 +16,6 @@ class UserViewController: UITableViewController {
     // 等待动画
     var activityIndicator:UIActivityIndicatorView?
     //登录后头部
-    var usernameHeadLabel:UILabel = UILabel()
     var boundingCitiCardHeadLabel:UILabel = UILabel()
     var usernameLabel:UILabel = UILabel()
     
@@ -114,25 +113,7 @@ class UserViewController: UITableViewController {
                         self.navigationController?.pushViewController(view, animated: true)
                         
                     }
-                    // 测试数据
-//                    var orders = [Order]()
-//                    var orders2 = [Order]()
-//                    for i in 0...10{
-//                        var order = Order()
-//                        order.date = "2017-7-12"
-//                        order.description = "coupon"
-//                        order.merchantName = "商家\(i)"
-//                        order.type = "coupon"
-//                        orders.append(order)
-//                    }
-//                    for i in 0...10{
-//                        var order = Order()
-//                        order.date = "2017-7-12"
-//                        order.points = Double(i) + 0.5
-//                        order.merchantName = "商家\(i)"
-//                        order.type = "point"
-//                        orders2.append(order)
-//                    }
+                   
                     
                 }else{
                     let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
@@ -148,12 +129,8 @@ class UserViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if let name = User.getUser().username{
-                usernameHeadLabel.text="用户名："
-                usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
-                usernameHeadLabel.textColor=UIColor.darkGray
-                
                 usernameLabel.textColor=UIColor.darkGray
-                usernameLabel.frame=CGRect(x:220, y:47, width:100, height:21)
+                usernameLabel.frame=CGRect(x:143, y:47, width:200, height:21)
                 usernameLabel.text=name
                 
                 boundingCitiCardHeadLabel.text = {() -> String in
@@ -168,7 +145,6 @@ class UserViewController: UITableViewController {
                 boundingCitiCardHeadLabel.frame=CGRect(x:143, y:70, width:200, height:21)
                 
                 userTableCell?.addSubview(usernameLabel)
-                userTableCell?.addSubview(usernameHeadLabel)
                 userTableCell?.addSubview(boundingCitiCardHeadLabel)
                 
                 userTableCell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -193,7 +169,6 @@ class UserViewController: UITableViewController {
                 
                 boundingCitiCardHeadLabel.removeFromSuperview()
                 usernameLabel.removeFromSuperview()
-                usernameHeadLabel.removeFromSuperview()
                 
                 
                 
