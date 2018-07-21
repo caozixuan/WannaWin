@@ -2,16 +2,22 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -24,7 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FindFragment extends Fragment {
+import java.lang.reflect.Field;
+
+public class FindFragment extends Fragment{
 
     View view;
     RecyclerView recyclerView;
@@ -42,6 +50,29 @@ public class FindFragment extends Fragment {
         findAdapter = new FindAdapter(getContext());
         recyclerView.setAdapter(findAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        android.widget.SearchView search = view.findViewById(R.id.searchView_find);
+
+        search.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                findAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+        search.setIconified(false);
+        search.setQueryHint("请输入商家名");
+        //设置搜索框展开时是否显示提交按钮，可不显示
+        search.setSubmitButtonEnabled(false);
+        //让键盘的回车键设置成搜索
+        search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        search.clearFocus();
+
 
         getCount();
 
@@ -143,4 +174,5 @@ public class FindFragment extends Fragment {
                     }
                 });
     }
+
 }
