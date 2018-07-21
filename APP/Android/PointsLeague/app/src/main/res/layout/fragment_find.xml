@@ -12,8 +12,13 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
-        <include layout="@layout/searchbar_find"></include>
+        app:theme="@style/ToolbarTheme" >
+        <SearchView
+            android:id="@+id/searchView_find"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </SearchView>
     </android.support.v7.widget.Toolbar>
 
 
