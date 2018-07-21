@@ -22,19 +22,6 @@
 
     <!-- 拦截器配置-->
     <mvc:interceptors>
-        <!--
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="citi.interceptor.DecryptIeterceptor"/>
-        </mvc:interceptor>
-
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="citi.interceptor.EncryptIeterceptor"/>
-        </mvc:interceptor>
-        -->
-
-
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login/**"/>
