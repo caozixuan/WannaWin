@@ -187,7 +187,6 @@ desired effect
             <div class="box-body no-padding">
               <table class="table table-striped">
                 <tr>
-                  <th style="width: 10px">#</th>
                   <th>原价</th>
                   <th>抵扣后价格</th>
                   <th>所用积分</th>
@@ -196,7 +195,6 @@ desired effect
                 </tr>
             <c:forEach items="${orders}" var="p">
                 <tr>
-                    <td>${p.orderId}</td>
                     <td>${p.originalPrice}</td>
                     <td>${p.priceAfter}</td>
                     <td>${p.pointsNeeded}</td>
