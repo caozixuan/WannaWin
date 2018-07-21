@@ -22,6 +22,9 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		
+		// 加入“全选”按钮在导航栏右边
+		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: view, action: #selector(ExchangeViewController.selectAllCell))
+		self.navigationItem.rightBarButtonItem = selectBtn
 		// test data
 //        let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
 //        let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
@@ -39,7 +42,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         //return (dataSource?.count)!
-		return 3
+		return 8 //test
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,6 +80,11 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			textField.text = String(maxPoints)
 			return false
 		}
+	}
+	
+	//MARK: - Target Action
+	@objc func selectAllCell() {
+		//TODO: - 全选逻辑
 	}
 	
 	

@@ -150,9 +150,9 @@ class UserViewController: UITableViewController {
             if let name = User.getUser().username{
                 usernameHeadLabel.text="用户名："
                 usernameHeadLabel.frame=CGRect(x:143, y:47, width:70, height:21)
-                usernameHeadLabel.textColor=UIColor.white
+                usernameHeadLabel.textColor=UIColor.darkGray
                 
-                usernameLabel.textColor=UIColor.white
+                usernameLabel.textColor=UIColor.darkGray
                 usernameLabel.frame=CGRect(x:220, y:47, width:100, height:21)
                 usernameLabel.text=name
                 
@@ -164,7 +164,7 @@ class UserViewController: UITableViewController {
                         return "您尚未绑定银行卡"
                     }
                 }()
-                boundingCitiCardHeadLabel.textColor=UIColor.white
+                boundingCitiCardHeadLabel.textColor=UIColor.darkGray
                 boundingCitiCardHeadLabel.frame=CGRect(x:143, y:70, width:200, height:21)
                 
                 userTableCell?.addSubview(usernameLabel)
@@ -206,7 +206,7 @@ class UserViewController: UITableViewController {
             if let _ = User.getUser().username{
                 exitButton.isUserInteractionEnabled = true
                 exitButton.backgroundColor = UIColor.white
-                exitButton.textLabel?.textColor = UIColor.black
+                exitButton.textLabel?.textColor = UIColor.white
             }else{
                 exitButton.isUserInteractionEnabled = false
                 exitButton.backgroundColor = UIColor.lightGray

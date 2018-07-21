@@ -261,6 +261,14 @@ extension ServerService:TargetType {
                 }
             }
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .getGeneralPoints():
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .getAvailablePoints():
+            var params:[String:String] = [:]
+            params["userID"] = User.getUser().id
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getAllPointsHistory():
             var params:[String:String] = [:]
             params["userID"] = User.getUser().id
