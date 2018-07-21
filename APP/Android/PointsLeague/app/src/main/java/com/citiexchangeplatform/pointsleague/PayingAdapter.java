@@ -395,7 +395,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 nf.setRoundingMode(RoundingMode.UP);
                 String result = nf.format(exchangedPoint);
 
-                filteredItems.get(position).setTargetPoint(String.valueOf(exchangedPoint));
+                filteredItems.get(position).setTargetPoint(result);
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(result);
                 //notifyItemChanged(position);
@@ -430,7 +430,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 nf.setRoundingMode(RoundingMode.UP);
                 String result = nf.format(exchangedPoint);
 
-                filteredItems.get(position).setTargetPoint(String.valueOf(exchangedPoint));
+                filteredItems.get(position).setTargetPoint(result);
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(result);
 

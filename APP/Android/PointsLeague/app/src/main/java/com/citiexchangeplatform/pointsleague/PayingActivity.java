@@ -321,7 +321,7 @@ public class PayingActivity extends AppCompatActivity {
             bundle.putStringArrayList("points_exchanged",exchanged);
             bundle.putStringArrayList("logo_urls",logos);
             bundle.putStringArrayList("business_names",names);
-            bundle.putDouble("total",mAdapter.getTotal());
+            bundle.putString("total",mAdapter.getTotalPoints());
             //bundle.putSerializable("checkbox_map", myMap);
             intent.putExtras(bundle);
             //

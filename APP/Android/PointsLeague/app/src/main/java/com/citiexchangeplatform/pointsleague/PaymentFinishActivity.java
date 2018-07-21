@@ -40,7 +40,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
     private HashMap<Integer, Boolean> map = new HashMap<>();
-    private double total;
+    private String total;
     private  Boolean state = true;
 
     //控件的声明
@@ -104,16 +104,9 @@ public class PaymentFinishActivity extends AppCompatActivity {
         if(state){
             points_used = (List) bundle.get("points_used");
             points_exchanged = (List) bundle.get("points_exchanged");
-            total = (Double) bundle.get("total");
-            //保留两位小数
-            NumberFormat nf = NumberFormat.getNumberInstance();
-            // 保留两位小数
-            nf.setMaximumFractionDigits(2);
-            // 如果不需要四舍五入，可以使用RoundingMode.DOWN
-            nf.setRoundingMode(RoundingMode.UP);
-            String result = nf.format(total);
+            total = (String) bundle.get("total");
 
-            Text_NeedPoints.setText(result);
+            Text_NeedPoints.setText(total);
         }
         else {
             reasons = (List) bundle.get("reasons");
