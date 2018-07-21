@@ -26,6 +26,7 @@ public class ItemService {
     }
 
     public Status<Boolean,String> buy(String userID, String itemID,int count){
+        if (count<=0)return ItemStatus.INVALID;
         Item item=itemMapper.getItemByItemID(itemID);
         if (item==null){
             return ItemStatus.INVALID;

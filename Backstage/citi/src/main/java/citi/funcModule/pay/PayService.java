@@ -38,6 +38,7 @@ public class PayService {
     private MerchantMapper merchantMapper;
 
     public boolean pay(String userID, String timeStamp, String merchantID, Double totalPrice) {
+        if(totalPrice<=0)return false;
         long timeMillis = System.currentTimeMillis() / 1000;
         long QRTimestamp = Long.parseLong(timeStamp);
         if (timeMillis - QRTimestamp > 60 || timeMillis < QRTimestamp) {
