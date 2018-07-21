@@ -195,7 +195,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         holder.setIsRecyclable(false);
         //设置列表中积分信息
         holder.editPoint.setText(filteredItems.get(position).getExchangePoint());
-        holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        //holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER);
         holder.exchangePoint.setText(filteredItems.get(position).getTargetPoint());
         //设置商家图片
         /*Glide.with(context)

@@ -32,7 +32,11 @@ public class ItemService {
     }
 
     public void deleteItem(String itemID){
-        itemMapper.deleteItemByID(itemID);
+        try{
+            itemMapper.deleteItemByID(itemID);
+        }catch (Exception e){
+            System.out.println("不能删除");
+        }
     }
 
     public void addItem(Item item){
