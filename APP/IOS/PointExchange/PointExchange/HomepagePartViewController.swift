@@ -114,7 +114,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 self.activityIndicator?.stopAnimating()
                 let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
                 let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    self.navigationController?.popViewController(animated: true)
+                     
                 })
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
