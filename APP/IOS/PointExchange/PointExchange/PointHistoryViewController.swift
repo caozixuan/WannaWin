@@ -26,7 +26,6 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     
     // 可展开的cell
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
-        // This cell will be displayed at IndexPath with (section: section and row: 0)
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PointHistoryTableViewCell.self)) as! PointHistoryTableViewCell
         cell.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray![section].totalPoints!)
         cell.dateLabel.text = pointsHistoryArray![section].historyMerchants![0].time!

@@ -89,8 +89,6 @@ class SignUpViewController: UITableViewController {
             phoneNumberField.layer.borderWidth = 0.5
             phoneNumberField.layer.cornerRadius = 5
             phoneNumberField.layer.borderColor=UIColor.red.cgColor
-            // TODO: - 验证手机号是否注册过
-            
             phoneNumberField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
             return false
         }

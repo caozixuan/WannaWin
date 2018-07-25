@@ -31,7 +31,6 @@ class ResetPasswordTableViewController: UITableViewController {
     
     @IBAction func clickGetVCode(_ sender: Any) {
         ServerConnector.getResetVCode(phoneNum: phoneNumField.text!, vcode: vcodeField.text!, callback: getVCodeCallbak)
-        // TODO: 获取验证码按钮倒计时 
     }
     func getVCodeCallbak(result:Bool){
         if !result {

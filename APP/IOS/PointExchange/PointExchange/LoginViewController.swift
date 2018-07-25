@@ -22,7 +22,6 @@ class LoginViewController: UITableViewController{
         super.viewDidLoad()
         passwordField.delegate=self
         usernameField.delegate=self
-        // Do any additional setup after loading the view.
     }
     
 

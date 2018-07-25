@@ -65,7 +65,6 @@ class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIP
 				alert.addAction(okAction)
 			}
 			else {
-				// TODO: - message后期完善
 				alert = UIAlertController(title:"绑定失败", message:nil, preferredStyle:.alert)
 				let cancelAction = UIAlertAction(title:"取消", style:.cancel, handler:nil)
 				alert.addAction(cancelAction)
