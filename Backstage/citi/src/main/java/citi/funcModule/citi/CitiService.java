@@ -17,6 +17,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * 构架：刘钟博
+ * 作者：曹子轩
+ */
 @Service
 public class CitiService {
 
@@ -129,6 +133,8 @@ public class CitiService {
         CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,state,0.0);
         return citiCard;
     }
+
+
 
     public String openPointsService(String userID){
         String  formerRefreshToken = tokenMapper.select(userID);
