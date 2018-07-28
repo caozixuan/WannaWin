@@ -16,7 +16,6 @@
 		3E46B76420EFE0B400843193 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B76220EFE0B400843193 /* User.storyboard */; };
 		3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */; };
 		3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B76C20F09E7900843193 /* ExchangeViewController.swift */; };
-		3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */; };
 		3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46B77220F0BD5C00843193 /* UIViewControllerExtension.swift */; };
 		3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */; };
 		3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155720EE0087000743C0 /* QRScanViewController.swift */; };
@@ -28,8 +27,8 @@
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
 		3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4C320EDAFB300915561 /* Main.storyboard */; };
 		3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */; };
-		3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CD002100ED8B00B0392E /* ShadowView.swift */; };
-		3EA3CD052102472000B0392E /* ShadowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA3CD042102472000B0392E /* ShadowView.xib */; };
+		3EA3CD012100ED8B00B0392E /* ExchangeItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */; };
+		3EA3CD052102472000B0392E /* ExchangeItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */; };
 		3EA3CD0721033D6A00B0392E /* HuaQiStoreWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CD0621033D6A00B0392E /* HuaQiStoreWebViewController.swift */; };
 		3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */; };
 		3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */; };
@@ -90,7 +89,6 @@
 		3E46B76320EFE0B400843193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/User.storyboard; sourceTree = "<group>"; };
 		3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewController.swift; sourceTree = "<group>"; };
 		3E46B76C20F09E7900843193 /* ExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
-		3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItemCell.swift; sourceTree = "<group>"; };
 		3E46B77220F0BD5C00843193 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		3E4C155320EDFF5A000743C0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
@@ -105,8 +103,8 @@
 		3E8AB4BC20EDAEDE00915561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E8AB4C420EDAFB300915561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		3EA3CD002100ED8B00B0392E /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		3EA3CD042102472000B0392E /* ShadowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShadowView.xib; sourceTree = "<group>"; };
+		3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItemCellView.swift; sourceTree = "<group>"; };
+		3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExchangeItemCellView.xib; sourceTree = "<group>"; };
 		3EA3CD0621033D6A00B0392E /* HuaQiStoreWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuaQiStoreWebViewController.swift; sourceTree = "<group>"; };
 		3EBA7A9320F8D4E600D31D47 /* FinishExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishExchangeViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollerViewController.swift; sourceTree = "<group>"; };
@@ -282,11 +280,10 @@
 			isa = PBXGroup;
 			children = (
 				B6C480642100C132002ED9C9 /* xib */,
-				3E46B77020F0A80F00843193 /* ExchangeItemCell.swift */,
 				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
-				3EA3CD002100ED8B00B0392E /* ShadowView.swift */,
+				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
 				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
@@ -402,7 +399,7 @@
 			children = (
 				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
-				3EA3CD042102472000B0392E /* ShadowView.xib */,
+				3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */,
 				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
 			);
 			name = xib;
@@ -482,7 +479,7 @@
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
-				3EA3CD052102472000B0392E /* ShadowView.xib in Resources */,
+				3EA3CD052102472000B0392E /* ExchangeItemCellView.xib in Resources */,
 				B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */,
 				B6C480662100C143002ED9C9 /* LoginView.xib in Resources */,
 				3E46B75E20EFE00400843193 /* Discover.storyboard in Resources */,
@@ -588,8 +585,7 @@
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
 				3EFEFA0E210B004600BC760E /* Item.swift in Sources */,
-				3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */,
-				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
+				3EA3CD012100ED8B00B0392E /* ExchangeItemCellView.swift in Sources */,
 				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
 				3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */,

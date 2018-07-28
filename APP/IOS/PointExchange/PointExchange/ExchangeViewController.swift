@@ -25,40 +25,36 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		// 加入“全选”按钮在导航栏右边
 		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: view, action: #selector(ExchangeViewController.selectAllCell))
 		self.navigationItem.rightBarButtonItem = selectBtn
-		// test data
-//        let card1 = Card(merchant: Merchant(name: "星巴克"), point: 200, proportion: 0.5)
-//        let card2 = Card(merchant: Merchant(name: "南方航空"), point: 400, proportion: 0.2)
-//        let card3 = Card(merchant: Merchant(name: "耐克"), point: 300, proportion: 0.4)
-//        dataSource = [card1,card2,card3]
+		 //test data
+		let card1 = Card(merchant: Merchant(name: "星巴克"), points: 200, proportion: 0.5)
+		let card2 = Card(merchant: Merchant(name: "南方航空"), points: 400, proportion: 0.2)
+		let card3 = Card(merchant: Merchant(name: "耐克"), points: 300, proportion: 0.4)
+        dataSource = [card1,card2,card3]
 		
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        //return (dataSource?.count)!
-		return 8 //test
+        return (dataSource?.count)!
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell:UITableViewCell!
 		// TODO: - 测试使用，后面再修改
 		cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
-		if let cell1 = cell as? ExchangeItemCell {
-			cell1.perform(#selector(ExchangeItemCell.setTextFieldDelegateWith), with: self)
-			cell1.delegate = self
-			cell1.editSourcePoints?.tag = indexPath.row
-			if let card = dataSource?[indexPath.row]{
-				cell1.storeName.text = card.merchant?.name
-				cell1.sourcePoints.text = String(card.points)
-				cell1.editSourcePoints.placeholder = String(card.points)
-				cell1.targetPoints.text = String(card.points * (card.proportion)!)
-				cell1.proportion = card.proportion
+		for subview in cell.contentView.subviews{
+			if subview .isKind(of: ExchangeItemCellView.self){
+				let exchangeItemCellView = subview as! ExchangeItemCellView
+				exchangeItemCellView.perform(#selector(ExchangeItemCellView.setTextFieldDelegateWith), with: self)
+				exchangeItemCellView.delegate = self
+				exchangeItemCellView.editSourcePoints?.tag = indexPath.row
+				if let card = dataSource?[indexPath.row]{
+					exchangeItemCellView.storeName.text = card.merchant?.name
+					exchangeItemCellView.sourcePoints.text = String(card.points)
+					exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
+					exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
+					exchangeItemCellView.proportion = card.proportion
+				}
 			}
 		}
 		return cell
@@ -86,9 +82,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	@objc func selectAllCell() {
 		//TODO: - 全选逻辑
 	}
-	
-	
-	
+
 	// MARK: - ExchangeItemCell delegate
 	/// 获得输入框值并统计积分总数
 	func contentDidChanged(text: String, row: Int, type: changeType) {
@@ -101,11 +95,15 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			pointsSum -= Double(text)!
 			pointsSumLabel.text = String(pointsSum)
 			let indexPath = IndexPath(row: row, section: 0)
-			if let cell = self.tableView.cellForRow(at: indexPath) as? ExchangeItemCell{
-				if let card = dataSource?[row]{
-					cell.sourcePoints.text = String(card.points)
-					cell.editSourcePoints.placeholder = String(card.points)
-					cell.targetPoints.text = String(card.points * (card.proportion)!)
+			let cell = self.tableView.cellForRow(at: indexPath)
+			for subview in (cell?.contentView.subviews)!{
+				if subview .isKind(of: ExchangeItemCellView.self){
+					let exchangeItemCellView = subview as! ExchangeItemCellView
+					if let card = dataSource?[row]{
+						exchangeItemCellView.sourcePoints.text = String(card.points)
+						exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
+						exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
+					}
 				}
 			}
 		}

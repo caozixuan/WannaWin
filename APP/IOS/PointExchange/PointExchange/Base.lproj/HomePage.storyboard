@@ -240,30 +240,20 @@
                                         <rect key="frame" x="0.0" y="88" width="375" height="559"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="store to bank" rowHeight="60" id="uI5-Sn-TaV" customClass="ExchangeItemCell" customModule="PointExchange" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="store to bank" rowHeight="60" id="uI5-Sn-TaV">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uI5-Sn-TaV" id="wJ8-bM-Ggo">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jz-2h-MFt">
-                                                            <rect key="frame" x="21" y="19" width="22" height="22"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <directionalEdgeInsets key="directionalLayoutMargins" top="10" leading="12" bottom="10" trailing="12"/>
-                                                            <state key="normal" image="Circle"/>
-                                                            <state key="selected" image="Float"/>
-                                                        </button>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJ9-ws-VNm" customClass="ShadowView" customModule="PointExchange" customModuleProvider="target">
-                                                            <rect key="frame" x="60" y="11" width="300" height="38"/>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJ9-ws-VNm" customClass="ExchangeItemCellView" customModule="PointExchange" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="11" width="375" height="38"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="checkbox1" destination="2Jz-2h-MFt" id="zKQ-5I-8nB"/>
-                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -783,8 +773,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Circle" width="66" height="66"/>
-        <image name="Float" width="66" height="66"/>
         <image name="HomeActive" width="27" height="25"/>
         <image name="HomeUnselected" width="27" height="25"/>
         <image name="周黑鸭" width="607" height="385"/>
