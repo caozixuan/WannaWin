@@ -4,6 +4,9 @@ import citi.vo.Points_history;
 
 import java.sql.Timestamp;
 
+/**
+ * @author:曹子轩
+ */
 public class Points_history_merchant extends Points_history {
     private String merchantName;
     public Points_history_merchant(String userID, String merchantIDs, int points_card, double points_citi, String cause, Timestamp time, String merchantName){
