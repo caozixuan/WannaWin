@@ -14,7 +14,9 @@ import RxDataSources
 class SingleSectionOrderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var orders:[Order]?
+    var items = [Item]()
+	
+	var tag:String?
     
     // tableView设置相关
     var dataSource:RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>?
@@ -28,17 +30,32 @@ class SingleSectionOrderViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>(configureCell: {(dataSource, view, indexPath, element) in
-            var cell = UITableViewCell()
-            return cell
-        })
-        if let order = orders{
+		if tag == "unuse" {
+			ServerConnector.getUnusedCoupons(){(result, items) in
+				if result {
+					self.items = items
+					self.tableView.reloadData()
+				}
+			}
+		}else{
+			ServerConnector.getOverdueCoupons(){(result, items) in
+				if result {
+					self.items = items
+					self.tableView.reloadData()
+				}
+			}
+		}
             let obs = Observable.just([
-                SectionModel(model:"",items:order)
+                SectionModel(model:"",items:items)
                 ])
-            obs.bind(to: self.tableView.rx.items(dataSource: dataSource!))
-                .disposed(by:disposeBag)
-        }
+			obs.bind(to:tableView.rx.items(cellIdentifier: "coupon")){(row, element, cell) in
+				if self.items.count != 0 {
+					(cell.viewWithTag(1) as! UITextView).text = self.items[row].description!
+					(cell.viewWithTag(2) as! UILabel).text = self.items[row].itemName!
+					(cell.viewWithTag(3) as! UILabel).text = self.items[row].getTime!
+				}
+			}.disposed(by: disposeBag)
+        
     }
 
     override func didReceiveMemoryWarning() {

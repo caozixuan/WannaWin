@@ -39,6 +39,10 @@
 		3EBF049220F99854004D6D8E /* ExchangeHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049120F99854004D6D8E /* ExchangeHistoryTableViewController.swift */; };
 		3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */; };
 		3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049720FDAD13004D6D8E /* MaskView.swift */; };
+		3EFEFA02210AF72900BC760E /* MerchantDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailTableViewController.swift */; };
+		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
+		3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */; };
+		3EFEFA0E210B004600BC760E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0D210B004600BC760E /* Item.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -111,6 +115,10 @@
 		3EBF049120F99854004D6D8E /* ExchangeHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeHistoryTableViewController.swift; sourceTree = "<group>"; };
 		3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordTableViewController.swift; sourceTree = "<group>"; };
 		3EBF049720FDAD13004D6D8E /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
+		3EFEFA01210AF72900BC760E /* MerchantDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailTableViewController.swift; sourceTree = "<group>"; };
+		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
+		3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountTableViewCell.xib; sourceTree = "<group>"; };
+		3EFEFA0D210B004600BC760E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
@@ -281,6 +289,7 @@
 				3EA3CD002100ED8B00B0392E /* ShadowView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
 				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
+				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -294,6 +303,7 @@
 				B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */,
 				B66CFB2820F8AE2C007165DF /* Order.swift */,
 				B66CFB4020FE2D45007165DF /* PointsHistory.swift */,
+				3EFEFA0D210B004600BC760E /* Item.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -314,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				3E4C155520EDFF87000743C0 /* DiscoverViewController.swift */,
+				3EFEFA01210AF72900BC760E /* MerchantDetailTableViewController.swift */,
 			);
 			name = DiscoverTab;
 			sourceTree = "<group>";
@@ -350,8 +361,8 @@
 			children = (
 				B66CFB1C20F889FF007165DF /* YDMenu */,
 				B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */,
-				3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */,
 				B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */,
+				3EBB5D1120EE1D0000B559BA /* ImageScrollerViewController.swift */,
 				B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */,
 				B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */,
 				B61D90AE20F43A9400A66662 /* Component.swift */,
@@ -392,6 +403,7 @@
 				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
 				3EA3CD042102472000B0392E /* ShadowView.xib */,
+				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -462,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */,
+				3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */,
 				3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */,
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
 				B66CFB2420F88B60007165DF /* MenuData.plist in Resources */,
@@ -574,6 +587,7 @@
 				B66CFB3120F98584007165DF /* SingleSectionOrderViewController.swift in Sources */,
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
+				3EFEFA0E210B004600BC760E /* Item.swift in Sources */,
 				3EA3CD012100ED8B00B0392E /* ShadowView.swift in Sources */,
 				3E46B77120F0A80F00843193 /* ExchangeItemCell.swift in Sources */,
 				B66CFB3720F9D6B2007165DF /* PointHistoryTableViewCell.swift in Sources */,
@@ -585,6 +599,7 @@
 				3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
 				B6B866562101768700CE0339 /* HomepagePartViewController.swift in Sources */,
+				3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */,
 				B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */,
 				B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */,
 				3EA3CD0721033D6A00B0392E /* HuaQiStoreWebViewController.swift in Sources */,
@@ -592,6 +607,7 @@
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
+				3EFEFA02210AF72900BC760E /* MerchantDetailTableViewController.swift in Sources */,
 				3EBF049220F99854004D6D8E /* ExchangeHistoryTableViewController.swift in Sources */,
 				B66CFB2920F8AE2C007165DF /* Order.swift in Sources */,
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,

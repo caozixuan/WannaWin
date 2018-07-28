@@ -9,16 +9,34 @@
 import UIKit
 
 class CardDetailTableViewController: UITableViewController {
-
-    override func viewDidLoad() {
+	
+	var merchantID:String?
+	var indicator:UIActivityIndicatorView?
+	
+	@IBOutlet weak var cardImageView: UIImageView!
+	@IBOutlet weak var pointLabel: UILabel!
+	@IBOutlet weak var numberLabel: UILabel!
+	@IBOutlet weak var citiPointLabelView: UILabel!
+	override func viewDidLoad() {
         super.viewDidLoad()
 		
 		// 加入“历史积分兑换记录”按钮在导航栏右边
 		let historyBtn = UIBarButtonItem(title: "兑换记录", style: .plain, target: self, action: #selector(goExchangeHistoryVC))
 		self.navigationItem.rightBarButtonItem = historyBtn
+		indicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		indicator?.startAnimating()
+		ServerConnector.getCardDetail(merchantID: self.merchantID!){(result,card) in
+			if result {
+				self.cardImageView.imageFromURL(card.logoURL!, placeholder: UIImage())
+				self.pointLabel.text = String(stringInterpolationSegment: card.points)
+				self.citiPointLabelView.text = String(stringInterpolationSegment: card.points * card.proportion!)
+				self.numberLabel.text = card.number
+			}
+			self.indicator?.stopAnimating()
+		}
     }
 
-    // MARK: - Navigation
+    // MARK: - Navigations
 	@objc func goExchangeHistoryVC() {
 		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "ExchangeHistoryTableViewController")

@@ -95,10 +95,11 @@ class CardInfoTableViewController: UITableViewController {
 		
 	}
 	
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-//        let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
-//        self.navigationController!.pushViewController(view, animated: true)
-//    }
-
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let sb = UIStoryboard(name: "HomePage", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailTableViewController
+		vc.merchantID = cardArray?[indexPath.row].merchant?.id
+		
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
 }

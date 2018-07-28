@@ -43,7 +43,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
             }
             
         }
-        
+
         
         
         
@@ -61,9 +61,9 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 v.cardScrollView.contentOffset = CGPoint(x: v.cardImage1.bounds.size.width/2+16, y: 0)
                 
                 //添加积分卡添加点击手势事件
-                let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-                let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
-                let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.goToCardDetail(_:)))
+                let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
+                let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
+                let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
                 v.cardImage1.addGestureRecognizer(cardTap1)
                 v.cardImage2.addGestureRecognizer(cardTap2)
                 v.cardImage3.addGestureRecognizer(cardTap3)
@@ -73,9 +73,11 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 ServerConnector.getMostPointCards(n: 3){(result,cards) in
                     if result {
                         self.cards = cards
-                        v.cardImage1.imageFromURL((self.cards?[0].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
-                        v.cardImage2.imageFromURL((self.cards?[1].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
-                        v.cardImage3.imageFromURL((self.cards?[2].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+						if cards.count != 0{
+							v.cardImage1.imageFromURL((self.cards?[0].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+							v.cardImage2.imageFromURL((self.cards?[1].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+							v.cardImage3.imageFromURL((self.cards?[2].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+						}
                         ServerConnector.getGeneralPoints(){ (result, points) in
                             if result {
                                 v.currentCitiPointLabel.text = String(stringInterpolationSegment: points)
@@ -100,6 +102,28 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
             }
         }
     }
+	
+	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
+		let storyBoard:UIStoryboard!
+		
+		if User.getUser().username != nil {
+			storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+			let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailTableViewController
+			
+			let tag = tap.view?.tag
+			view.merchantID = cards?[tag!-1].merchant?.id
+			self.navigationController!.pushViewController(view, animated: true)
+			self.navigationController?.setNavigationBarHidden(false, animated: true)
+			
+		}
+		else {
+			storyBoard = UIStoryboard(name:"User", bundle:nil)
+			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+			self.navigationController!.pushViewController(view, animated: true)
+		}
+		
+		
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -114,7 +138,10 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 self.activityIndicator?.stopAnimating()
                 let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
                 let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                    
+					self.loginView?.removeFromSuperview()
+					self.homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+					self.homepageStackView?.delegate = self
+					self.view.addSubview(self.homepageStackView!)
                 })
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
@@ -129,6 +156,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                     alert = UIAlertController(title:"登录", message:"登录失败！请检查用户名和密码是否正确", preferredStyle:.alert)
                 }
                 let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
+					
                 })
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)

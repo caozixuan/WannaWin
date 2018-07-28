@@ -61,11 +61,12 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
-		return ["https://images.pexels.com/photos/1203705/pexels-photo-1203705.jpeg?cs=srgb&dl=adorable-animal-breed-1203705.jpg&fm=jpg",
-				"https://images.pexels.com/photos/977736/pexels-photo-977736.jpeg?cs=srgb&dl=beach-cliffs-evening-977736.jpg&fm=jpg",
-				"https://images.pexels.com/photos/459554/pexels-photo-459554.jpeg?cs=srgb&dl=4th-of-july-berries-berry-459554.jpg&fm=jpg",
-				"https://images.pexels.com/photos/968245/pexels-photo-968245.jpeg?cs=srgb&dl=beverage-brew-citrus-968245.jpg&fm=jpg",
-				"https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?cs=srgb&dl=adult-book-business-297755.jpg&fm=jpg"]
+//		return ["https://images.pexels.com/photos/1203705/pexels-photo-1203705.jpeg?cs=srgb&dl=adorable-animal-breed-1203705.jpg&fm=jpg",
+//				"https://images.pexels.com/photos/977736/pexels-photo-977736.jpeg?cs=srgb&dl=beach-cliffs-evening-977736.jpg&fm=jpg",
+//				"https://images.pexels.com/photos/459554/pexels-photo-459554.jpeg?cs=srgb&dl=4th-of-july-berries-berry-459554.jpg&fm=jpg",
+//				"https://images.pexels.com/photos/968245/pexels-photo-968245.jpeg?cs=srgb&dl=beverage-brew-citrus-968245.jpg&fm=jpg",
+//				"https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?cs=srgb&dl=adult-book-business-297755.jpg&fm=jpg"]
+		return ["https://photo.tuchong.com/3505293/ft640/165347608.jpg"]
 	}
 	
 	// MARK: - 所有的点击事件响应动作
@@ -81,21 +82,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		self.present(alertController, animated: true, completion: nil)
 	}
 	
-	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
-		let storyBoard:UIStoryboard!
-		let view:UIViewController!
-		if User.getUser().username != nil {
-			storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-			view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController")
-			
-		}
-		else {
-			storyBoard = UIStoryboard(name:"User", bundle:nil)
-			view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
-		}
-		
-		self.navigationController!.pushViewController(view, animated: true)
-	}
+	
 	
 	@IBAction func showCardInfo(_ sender: AnyObject){
 		if User.getUser().username != nil {

@@ -8,13 +8,15 @@
 
 import UIKit
 
-class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class AddCardTableViewController: UITableViewController {
 
-    
-    var cardTypeCount:Int?
+	
     var merchant:Merchant?
+	
+	var activityIndicator:UIActivityIndicatorView?
 
-    @IBOutlet weak var pickerView: UIPickerView!
+	@IBOutlet weak var passwordField: UITextField!
+	
 	@IBOutlet weak var cardId: UITextField!
 	
 	@IBOutlet weak var finishBtn: UITableViewCell!
@@ -23,12 +25,8 @@ class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIP
         super.viewDidLoad()
 		cardId.delegate = self
 		finishBtn.isUserInteractionEnabled = false
-        
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
-        
-        
+		
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
     }
 
 	// MARK: - TextField delegate
@@ -55,45 +53,28 @@ class AddCardTableViewController: UITableViewController,UIPickerViewDelegate,UIP
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 1 && indexPath.row == 0 {
-			let alert:UIAlertController!
-			if checkBindVaild() {
-				alert = UIAlertController(title:"绑定成功", message:nil, preferredStyle:.alert)
-				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
-					self.navigationController!.popViewController(animated: true)
-					self.navigationController?.popViewController(animated: true)
-				})
-				alert.addAction(okAction)
+			activityIndicator?.startAnimating()
+			ServerConnector.addCard(merchantID: (merchant?.id)!, cardNum: cardId.text!, password: passwordField.text!){ result in
+				let alert:UIAlertController!
+				if result {
+					alert = UIAlertController(title:"绑定成功", message:nil, preferredStyle:.alert)
+					let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+						self.navigationController!.popViewController(animated: true)
+						self.navigationController?.popViewController(animated: true)
+					})
+					alert.addAction(okAction)
+				}
+				else {
+					alert = UIAlertController(title:"绑定失败", message:nil, preferredStyle:.alert)
+					let cancelAction = UIAlertAction(title:"取消", style:.cancel, handler:nil)
+					alert.addAction(cancelAction)
+				}
+				self.present(alert, animated: true, completion: nil)
 			}
-			else {
-				alert = UIAlertController(title:"绑定失败", message:nil, preferredStyle:.alert)
-				let cancelAction = UIAlertAction(title:"取消", style:.cancel, handler:nil)
-				alert.addAction(cancelAction)
-			}
-			self.present(alert, animated: true, completion: nil)
+			
 		}
 	}
     
-    // pickerView相关
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if let number = cardTypeCount {
-            return number
-        }
-        else{
-            return 1
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if let count = cardTypeCount {
-            return count
-        }
-        return 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let m = merchant?.cardTypes {
-            return m[row].cardType
-        }
-        return "null"
-    }
+	
 	
 }

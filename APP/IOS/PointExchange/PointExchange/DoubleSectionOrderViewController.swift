@@ -15,6 +15,7 @@ class DoubleSectionOrderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var orders:[Order]?
+	var items:[Item]?
     
     // tableView相关
     var dataSource:RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>?
@@ -31,8 +32,9 @@ class DoubleSectionOrderViewController: UIViewController {
         super.viewWillAppear(animated)
         dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>(configureCell: {(dataSource, view, indexPath, element) in
             // TODO: 根据订单类型来选择显示
+			
             let cell = UITableViewCell()
-//
+			
             return cell
         })
         //设置分区头标题
@@ -41,16 +43,10 @@ class DoubleSectionOrderViewController: UIViewController {
         }
         
         // 绑定数据源
-        if let orders = orders{
-            let coupons=[Order]()
-            let points = [Order]()
-            let obs = Observable.just([
-                SectionModel(model:"使用优惠券",items:coupons),
-                SectionModel(model:"使用积分",items:points)
+		let obs = Observable.just([
+				SectionModel(model:"使用优惠券",items:items!),
+				SectionModel(model:"使用积分",items:orders!)
                 ])
-            obs.bind(to: self.tableView.rx.items(dataSource: dataSource!))
-                .disposed(by:disposeBag)
-        }
         
     }
 

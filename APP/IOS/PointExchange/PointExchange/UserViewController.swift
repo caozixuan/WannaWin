@@ -199,19 +199,9 @@ class UserViewController: UITableViewController {
     func checkHistory(){
         if let _ = User.getUser().username{
             activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
-            
-            ServerConnector.getOrders(intervalTime: "1101010101"){ (result, orders) in
-                let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
-                var successOrders = [Order]()
-                for order in orders{
-                    if order.state == OrderState.SUCCESS{
-                        successOrders.append(order)
-                    }
-                }
-                view.willUseOrders = successOrders
-                self.navigationController?.pushViewController(view, animated: true)
-                
-            }
+            let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
+			self.navigationController?.pushViewController(view, animated: true)
+			
             
             
         }else{

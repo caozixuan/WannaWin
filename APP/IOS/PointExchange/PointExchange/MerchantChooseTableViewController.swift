@@ -36,13 +36,19 @@ class MerchantChooseTableViewController: UIViewController {
                 (dataSource, tv, indexPath, element) in
                 let cell = tv.dequeueReusableCell(withIdentifier: "cell")!
                 (cell.viewWithTag(1) as? UILabel)?.text = element
-                let data = try? Data(contentsOf: URL(string:MerchantList.list[indexPath.row].logoURL!)!)
                 (cell.viewWithTag(2) as? UIImageView)?.imageFromURL(MerchantList.list[indexPath.row].logoURL!, placeholder: UIImage())
                 return cell
             })
         result.bind(to: self.tableView.rx.items(dataSource: dataSource))
             .disposed(by:disposeBag)
-        
+		self.tableView.rx.itemSelected.map{ indexPath in
+			return (indexPath,dataSource[indexPath])
+		}.subscribe(onNext: { indexPath, model in
+			let sb = UIStoryboard(name: "HomePage", bundle: nil)
+			let view = sb.instantiateViewController(withIdentifier: "AddCardTableView") as! AddCardTableViewController
+			view.merchant = MerchantList.list[indexPath.row]
+			self.navigationController?.pushViewController(view, animated: true)
+		}).disposed(by:disposeBag)
         
     }
     
@@ -111,10 +117,11 @@ class MerchantChooseTableViewController: UIViewController {
                 let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
                 let view = storyboard.instantiateViewController(withIdentifier: "AddCardTableView") as? AddCardTableViewController
                 view?.merchant = MerchantList.get(merchantID: cardTypes[0].merchantID!)
-                view?.cardTypeCount = cardTypes.count
                 self.navigationController?.pushViewController(view!, animated: true)
             }
         }
     }
+	
+	
 
 }

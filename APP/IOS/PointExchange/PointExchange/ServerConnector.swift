@@ -41,7 +41,7 @@ class ServerConnector: NSObject {
         provider.request(.sendPassword(phoneNumber:phoneNumber, vcode:vcode, password: password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
-                if data["isCreate"].bool == true{
+                if data["status"].bool == true{
                     callback(true)
                 }else{
                     callback(false)
@@ -312,7 +312,7 @@ class ServerConnector: NSObject {
     }
     
     /// 绑定会员卡
-    static func addCard(merchantID:String, cardID:String, cardNum:String, password:String, callback:@escaping (_ result:Bool)->()){
+    static func addCard(merchantID:String, cardNum:String, password:String, callback:@escaping (_ result:Bool)->()){
         provider.request(.addCard(merchantID: merchantID, cardNum: cardNum, password: password)){ result in
             if case let .success(response) = result{
                 let data = JSON(try? response.mapJSON())
@@ -359,6 +359,7 @@ class ServerConnector: NSObject {
                 card.number = data["cardNum"].string
                 card.description = data["cardDescription"].string
                 card.type = data["type"].int
+				card.proportion = data["proportion"].double
                 callback(true,card)
             }
             if case .failure(_) = result{
@@ -538,5 +539,108 @@ class ServerConnector: NSObject {
             
         }
     }
+
+	// 发现页
+	/// 获取指定商家从start的n个item
+	static func getMerchantItems(merchantID:String, start:Int, n:Int, callback:@escaping (_ result:Bool, _ items:[Item]?)->()){
+		provider.request(.getMerchantItems(merchntID:merchantID, start: start, n: n)){ result in
+			
+			if case let .success(response) = result{
+				var items = [Item]()
+				let decoder = JSONDecoder()
+				let datas = JSON(try? response.mapJSON()).array
+				for data in datas!{
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						items.append(item)
+					}catch{
+						callback(false,nil)
+						return
+					}
+				}
+				callback(true,items)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+
+	// 优惠券
+	/// 获取已使用优惠券
+	static func getUsedCoupons(callback:@escaping (_ result:Bool, _ items:[Item])->()){
+		provider.request(.getUsedCoupons()){ result in
+			var items = [Item]()
+			if case let .success(response) = result{
+				let decoder = JSONDecoder()
+				let datas = JSON(try? response.mapJSON()).array
+				for data in datas!{
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						items.append(item)
+					}catch{
+						callback(false,items)
+						return
+					}
+				}
+				callback(true,items)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,items)
+			}
+		}
+	}
+	
+	/// 获取未使用优惠券
+	static func getUnusedCoupons(callback:@escaping (_ result:Bool, _ items:[Item])->()){
+		provider.request(.getUnusedCoupons()){ result in
+			var items = [Item]()
+			if case let .success(response) = result{
+				let decoder = JSONDecoder()
+				let datas = JSON(try? response.mapJSON()).array
+				for data in datas!{
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						items.append(item)
+					}catch{
+						callback(false,items)
+						return
+					}
+				}
+				callback(true,items)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,items)
+			}
+		}
+	}
+
+	/// 获取过期优惠券
+	static func getOverdueCoupons(callback:@escaping (_ result:Bool, _ items:[Item])->()){
+		provider.request(.getOverduedCoupons()){ result in
+			var items = [Item]()
+			if case let .success(response) = result{
+				let decoder = JSONDecoder()
+				let datas = JSON(try? response.mapJSON()).array
+				for data in datas!{
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						items.append(item)
+					}catch{
+						callback(false,items)
+						return
+					}
+				}
+				callback(true,items)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,items)
+			}
+		}
+	}
 
 }

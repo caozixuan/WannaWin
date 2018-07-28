@@ -36,11 +36,20 @@ class ExchangeItemCell: UITableViewCell{
 	override func awakeFromNib() {
         super.awakeFromNib()
 		
+//		let bundle = Bundle(for: type(of: self))
+//		let nib = UINib(nibName: "ShadowView", bundle: bundle)
+//		shadowView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView as! ShadowView
+//		self.addSubview(shadowView)
+
+		
+		
 		//editSourcePoints.isHidden = true
 		//sourcePoints.isHidden = false
 		checkbox1.addTarget(self, action: #selector(checkboxClick), for: .touchUpInside)
 		//editBtn1.addTarget(self, action: #selector(editBtnClick), for: .touchUpInside)
 		//editBtn1.isHidden = true
+		
+		
     }
 
 	/// 点击选中按钮的触发动作

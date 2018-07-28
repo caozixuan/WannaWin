@@ -21,10 +21,11 @@ class OrdersTableViewController: UIViewController {
     @IBOutlet weak var usedContainer: UIView!
     
     // 数据数组
-    var willUseOrders:[Order]?
+    var willUseItems:[Item]?
     var usedOrders:[Order]?
-    var expireOrders:[Order]?
-    
+	var usedItems:[Item]?
+    var expireItems:[Item]?
+	
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -57,15 +58,16 @@ class OrdersTableViewController: UIViewController {
         switch segue.identifier {
         case "willUseView":
             if let view = segue.destination as? SingleSectionOrderViewController{
-                view.orders = self.willUseOrders
+				view.tag = "unuse"
             }
         case "usedView":
             if let view = segue.destination as? DoubleSectionOrderViewController{
                 view.orders = self.usedOrders
+				view.items = self.usedItems
             }
         case "expireView":
             if let view = segue.destination as? SingleSectionOrderViewController{
-                view.orders = self.expireOrders
+				view.tag = "expire"
             }
         default:
             break

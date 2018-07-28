@@ -75,7 +75,16 @@ enum ServerService {
     case getOrders(intervalTime:String)
     
     // 发现页item
-    /// 发现页获取所有item从start的n个请求
+    /// 获取指定商家从start的n个item
+	case getMerchantItems(merchntID:String, start:Int, n:Int)
+	
+	// 优惠券
+	/// 获取已使用优惠劵
+	case getUsedCoupons()
+	/// 获取未使用优惠券
+	case getUnusedCoupons()
+	/// 获取已过期优惠券
+	case getOverduedCoupons()
     
 }
 
@@ -149,6 +158,18 @@ extension ServerService:TargetType {
         //订单相关
         case .getOrders:
             return "/order/getOrders"
+			
+		// 发现页
+		case .getMerchantItems:
+			return "/item/getMerchantItems"
+			
+		// 优惠券
+		case .getUsedCoupons():
+			return "/userCoupon/getUsedCoupons"
+		case .getUnusedCoupons():
+			return "/userCoupon/getUnusedCoupons"
+		case .getOverduedCoupons():
+			return "/userCoupon/getOverduedCoupons"
         }
     }
     
@@ -292,7 +313,28 @@ extension ServerService:TargetType {
             params["userID"] = User.getUser().id
             params["intervalTime"] = intervalTime
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-            
+			
+		// 发现页
+		case .getMerchantItems(let merchantID, let start, let n):
+			var params:[String:String] = [:]
+			params["merchantID"] = merchantID
+			params["start"] = String(start)
+			params["n"] = String(n)
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+			
+		// 优惠券
+		case .getUsedCoupons():
+			var params:[String:String] = [:]
+			params["userID"] = User.getUser().id
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .getUnusedCoupons():
+			var params:[String:String] = [:]
+			params["userID"] = User.getUser().id
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .getOverduedCoupons():
+			var params:[String:String] = [:]
+			params["userID"] = User.getUser().id
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
