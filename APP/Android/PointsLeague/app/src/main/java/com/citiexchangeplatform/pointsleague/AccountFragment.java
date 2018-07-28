@@ -76,7 +76,8 @@ public class AccountFragment extends Fragment {
                         startActivity(intentToOrder);
                         break;
                     case 2:
-                        Toast.makeText(getContext(),"绑定",Toast.LENGTH_SHORT).show();
+                        Intent intentToBind = new Intent(getContext(), BindAccountActivity.class);
+                        startActivity(intentToBind);
                         break;
                     case 3:
                         Intent intentToGeneral = new Intent(getContext(), GeneralSettingActivity.class);

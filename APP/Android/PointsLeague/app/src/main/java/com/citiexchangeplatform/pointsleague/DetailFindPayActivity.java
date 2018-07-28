@@ -54,9 +54,9 @@ public class DetailFindPayActivity extends AppCompatActivity {
         TextView textViewDescription = (TextView) findViewById(R.id.textView_description_detail_find_pay);
         textViewDescription.setText("内容："+info[3]);
         TextView textViewTime = (TextView) findViewById(R.id.textView_time_detail_find_pay);
-        textViewTime.setText("有效时间至"+info[4]);
+        textViewTime.setText("有效时间至："+info[4]);
         TextView textViewPoints = (TextView) findViewById(R.id.textView_points_detail_find_pay);
-        textViewPoints.setText("消耗花旗点"+info[5]);
+        textViewPoints.setText("消耗花旗点："+info[5]);
         Button button = (Button) findViewById(R.id.button_detail_find_pay);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
