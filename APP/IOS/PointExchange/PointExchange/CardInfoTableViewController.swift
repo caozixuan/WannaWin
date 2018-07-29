@@ -35,6 +35,7 @@ class CardInfoTableViewController: UITableViewController {
     func getCardCallback(result:Bool,cards:[Card]){
         if result {
             cardArray = cards
+			User.getUser().card = cards
             tableView.reloadData()
         }
         activityIndicator?.stopAnimating()

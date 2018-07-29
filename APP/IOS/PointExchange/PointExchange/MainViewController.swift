@@ -7,6 +7,7 @@
 //  reference: http://www.hangge.com/blog/cache/detail_1314.html
 
 import UIKit
+import ESPullToRefresh
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     
@@ -22,7 +23,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
     }
     override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

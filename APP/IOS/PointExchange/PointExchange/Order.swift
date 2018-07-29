@@ -17,7 +17,9 @@ struct Order:Codable{
     var state:OrderState?
     var merchantID:String?
     var time:String?
+	var merchantLogoURL:String?
 }
 enum OrderState:String,Codable{
     case SUCCESS = "SUCCESS"
+	case FAIL = "FAIL"
 }

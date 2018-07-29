@@ -34,15 +34,25 @@ class QRScanViewController: UIViewController {
     func refreshCallback(result:String, order:Order?){
         if result == "invalid" {
             timeStamp = String(Int(Date().timeIntervalSince1970))
-            let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id))\",\"timeStamp\":\"\(timeStamp)\"}"
+            let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id!))\",\"timeStamp\":\"\(timeStamp)\"}"
             barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
             qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
         }
-        else if result == "success" {
-            let sb = UIStoryboard(name: "Exchange", bundle: nil)
-            let view = sb.instantiateViewController(withIdentifier: "FinishExchangeViewController") as! FinishExchangeViewController
-            view.order = order!
-            self.navigationController?.pushViewController(view, animated: true)
+        else if result == "used" {
+			if order?.state == OrderState.SUCCESS{
+				let sb = UIStoryboard(name: "Exchange", bundle: nil)
+				let view = sb.instantiateViewController(withIdentifier: "FinishExchangeViewController") as! FinishExchangeViewController
+				view.order = order!
+				self.navigationController?.pushViewController(view, animated: true)
+			}
+			else{
+				let alert = UIAlertController(title:"支付", message:"支付失败！请重新支付", preferredStyle:.alert)
+				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+				})
+				alert.addAction(okAction)
+				self.present(alert, animated: true, completion: nil)
+			}
+			
         }
     }
 

@@ -10,7 +10,6 @@ import UIKit
 
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
-	//var dataSource:[Card]? = User.getUser().card
 	var dataSource:[Card]?
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -21,21 +20,36 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-		
+		if User.getUser().card == nil {
+			ServerConnector.getCardCount{ (result,num) in
+				if result {
+					ServerConnector.getMostPointCards(n: num){(result,cards) in
+						if result{
+							User.getUser().card = cards
+							self.dataSource = cards
+							self.tableView.reloadData()
+						}
+					}
+				}
+			}
+		}else{
+			dataSource = User.getUser().card
+		}
 		// 加入“全选”按钮在导航栏右边
 		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: view, action: #selector(ExchangeViewController.selectAllCell))
 		self.navigationItem.rightBarButtonItem = selectBtn
-		 //test data
-		let card1 = Card(merchant: Merchant(name: "星巴克"), points: 200, proportion: 0.5)
-		let card2 = Card(merchant: Merchant(name: "南方航空"), points: 400, proportion: 0.2)
-		let card3 = Card(merchant: Merchant(name: "耐克"), points: 300, proportion: 0.4)
-        dataSource = [card1,card2,card3]
+		
 		
     }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataSource?.count)!
+		if dataSource != nil {
+			return (dataSource?.count)!
+		}else {
+			return 0
+		}
+		
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

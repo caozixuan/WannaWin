@@ -32,7 +32,8 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 homepageStackView?.delegate = self
                 view.addSubview(homepageStackView!)
                 loginView?.removeFromSuperview()
-            }
+				loginView = nil
+			}
         }
         else {
             if loginView == nil {
@@ -40,25 +41,18 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 loginView?.delegate = self
                 view.addSubview(loginView!)
                 homepageStackView?.removeFromSuperview()
-            }
+				homepageStackView = nil
+			}
             
         }
-
-        
-        
-        
+		
     }
+	
     override func viewWillLayoutSubviews() {
         
         for subview in view.subviews{
             if subview .isKind(of: HomepageStackView.self){
-                // 调整卡片滑动视图
                 let v = subview as! HomepageStackView
-                let width = v.cardImage1.bounds.size.width * 3 + 32
-                let height = v.cardImage1.bounds.size.height
-                print("width:\(width), height:\(height)")
-                v.cardScrollView.contentSize = CGSize(width: width, height: height)
-                v.cardScrollView.contentOffset = CGPoint(x: v.cardImage1.bounds.size.width/2+16, y: 0)
                 
                 //添加积分卡添加点击手势事件
                 let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
@@ -102,6 +96,8 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
             }
         }
     }
+
+	
 	
 	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
 		let storyBoard:UIStoryboard!
@@ -139,6 +135,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
                 let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
 					self.loginView?.removeFromSuperview()
+					self.loginView = nil
 					self.homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
 					self.homepageStackView?.delegate = self
 					self.view.addSubview(self.homepageStackView!)

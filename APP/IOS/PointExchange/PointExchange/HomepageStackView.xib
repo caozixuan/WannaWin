@@ -156,6 +156,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="4g5-FI-MWS" firstAttribute="width" secondItem="4Db-OO-ZrJ" secondAttribute="width" id="1oa-cB-Xkw"/>
+                                <constraint firstAttribute="width" constant="615" id="DaN-9d-tup"/>
                                 <constraint firstItem="4Db-OO-ZrJ" firstAttribute="bottom" secondItem="4g5-FI-MWS" secondAttribute="bottom" id="ENn-V4-2KA"/>
                                 <constraint firstItem="4g5-FI-MWS" firstAttribute="leading" secondItem="4ox-Ia-HHM" secondAttribute="leading" id="Jkv-rp-Oc2"/>
                                 <constraint firstItem="LAF-bV-xyb" firstAttribute="leading" secondItem="4Db-OO-ZrJ" secondAttribute="trailing" constant="7" id="T2a-RZ-dWj"/>
@@ -171,12 +172,11 @@
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="4ox-Ia-HHM" firstAttribute="centerX" secondItem="kjJ-VY-RPH" secondAttribute="centerX" constant="120" id="2QN-t3-qSf"/>
                         <constraint firstAttribute="bottom" secondItem="4ox-Ia-HHM" secondAttribute="bottom" id="ESr-yM-n48"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="top" secondItem="kjJ-VY-RPH" secondAttribute="top" id="UmX-nI-cki"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="leading" secondItem="kjJ-VY-RPH" secondAttribute="leading" id="h9J-mg-lC5"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="height" secondItem="kjJ-VY-RPH" secondAttribute="height" id="mIf-0Q-jAl"/>
-                        <constraint firstItem="4ox-Ia-HHM" firstAttribute="trailing" secondItem="kjJ-VY-RPH" secondAttribute="trailing" constant="240" id="mNj-rt-zKy"/>
+                        <constraint firstItem="4ox-Ia-HHM" firstAttribute="trailing" secondItem="kjJ-VY-RPH" secondAttribute="trailing" id="mNj-rt-zKy"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="centerY" secondItem="kjJ-VY-RPH" secondAttribute="centerY" id="t1w-Kh-UCZ"/>
                     </constraints>
                 </scrollView>
