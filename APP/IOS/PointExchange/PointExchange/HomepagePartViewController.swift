@@ -19,8 +19,8 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-        // Do any additional setup after loading the view.
     }
+	
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -53,8 +53,12 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
         for subview in view.subviews{
             if subview .isKind(of: HomepageStackView.self){
                 let v = subview as! HomepageStackView
+				
+				// 设置会员卡偏移量---显示中间卡
+				let xOffset = v.cardScrollView.contentSize.width/2 - UIScreen.main.bounds.size.width/2
+				v.cardScrollView.contentOffset = CGPoint(x: xOffset, y: 0)
                 
-                //添加积分卡添加点击手势事件
+                // 添加会员卡点击手势事件
                 let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
                 let cardTap2 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
                 let cardTap3 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
@@ -97,8 +101,6 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
         }
     }
 
-	
-	
 	@objc func goToCardDetail(_ tap:UITapGestureRecognizer)->Void{
 		let storyBoard:UIStoryboard!
 		
@@ -163,7 +165,6 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
         }
     }
 	
-	
 	@objc func gotoExchangeVC(_ sender: Any) {
 		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "ExchangeViewController")
@@ -171,7 +172,6 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 		self.navigationController!.setNavigationBarHidden(false, animated: true)
 	}
 
-    
     func checkAllCards() {
         let sb = UIStoryboard(name: "HomePage", bundle: nil)
         let view = sb.instantiateViewController(withIdentifier: "CardInfoTableViewController")

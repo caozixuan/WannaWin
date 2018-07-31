@@ -14,7 +14,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
-	var pointsSum:Double = 0
+	var pointsSum:Double = 0.0
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +35,13 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}else{
 			dataSource = User.getUser().card
 		}
+		
 		// 加入“全选”按钮在导航栏右边
 		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: view, action: #selector(ExchangeViewController.selectAllCell))
 		self.navigationItem.rightBarButtonItem = selectBtn
 		
+		// 设置初始总积分数
+		pointsSumLabel.text = String(pointsSum)
 		
     }
 
@@ -49,7 +52,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}else {
 			return 0
 		}
-		
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,6 +68,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 					exchangeItemCellView.storeName.text = card.merchant?.name
 					exchangeItemCellView.sourcePoints.text = String(card.points)
 					exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
+					exchangeItemCellView.editSourcePoints.text = String(card.points)
 					exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
 					exchangeItemCellView.proportion = card.proportion
 				}
@@ -122,10 +125,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			}
 		}
 	}
-	
-	// MARK: - navigation
-	
-	
+
 	// TODO: - 进行网络请求
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let isSuccess = true

@@ -171,6 +171,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E23A74C210DA1AA00D19749 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
 		3E46B76520EFE1F200843193 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				3E4C155320EDFF5A000743C0 /* MainViewController.swift */,
+				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
 				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
 				B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */,
 				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
@@ -256,12 +265,13 @@
 				B6A6EC5220F0CAE90079FFA4 /* PointExchange.entitlements */,
 				3E8AB4B720EDAEDE00915561 /* Assets.xcassets */,
 				3E46B76520EFE1F200843193 /* storyboard */,
+				B6C480642100C132002ED9C9 /* xib */,
 				3EBB5D1020EE1CC300B559BA /* Utility */,
 				3EA0334920EDCDF700D05A03 /* Extensions */,
 				3E8AB4C720EDBAAF00915561 /* View */,
-				3EA0334C20EDCEA000D05A03 /* Application */,
 				3E8AB4C920EDBABF00915561 /* Controller */,
 				3E8AB4C820EDBABB00915561 /* Model */,
+				3E23A74C210DA1AA00D19749 /* Application */,
 				3E8AB4C220EDAF0600915561 /* Supporting Files */,
 			);
 			path = PointExchange;
@@ -279,13 +289,11 @@
 		3E8AB4C720EDBAAF00915561 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B6C480642100C132002ED9C9 /* xib */,
 				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
 				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
-				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
 			);
 			name = View;
@@ -343,14 +351,6 @@
 				B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		3EA0334C20EDCEA000D05A03 /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */,
-			);
-			name = Application;
 			sourceTree = "<group>";
 		};
 		3EBB5D1020EE1CC300B559BA /* Utility */ = {

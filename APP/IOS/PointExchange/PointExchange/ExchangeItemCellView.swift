@@ -32,9 +32,10 @@ class ExchangeItemCellView: UIView {
 	@IBOutlet weak var targetPoints: UILabel!
 	@IBOutlet weak var storeName: UILabel!
 	@IBOutlet weak var checkbox: UIButton!
-	
 	@IBOutlet weak var barView: UIView!
 	
+	
+	// MARK: - setup view and layout
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		initViewFromNib()
@@ -78,6 +79,7 @@ class ExchangeItemCellView: UIView {
 		middleView.layer.shadowRadius = 4;
 	}
 	
+	// MARK: - select logic
 	/// 点击选中按钮的触发动作
 	@objc func checkboxClick(button:UIButton){
 		button.isSelected = !button.isSelected
@@ -85,6 +87,7 @@ class ExchangeItemCellView: UIView {
 		if button.isSelected {
 			editSourcePoints?.isHidden = false
 			sourcePoints?.isHidden = true
+			editSourcePoints.text = sourcePoints.text
 			
 			// 触发代理获得转换后的通用积分，统计积分总数
 			if let text = targetPoints?.text {

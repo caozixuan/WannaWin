@@ -1,5 +1,6 @@
 //
 //  MaskView.swift
+//  作用：半圆弧view
 //  PointExchange
 //
 //  Created by yiner on 2018/7/17.

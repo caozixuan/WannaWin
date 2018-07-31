@@ -10,7 +10,6 @@ import UIKit
 
 class AddCardTableViewController: UITableViewController {
 
-	
     var merchant:Merchant?
 	
 	var activityIndicator:UIActivityIndicatorView?
@@ -74,7 +73,5 @@ class AddCardTableViewController: UITableViewController {
 			
 		}
 	}
-    
-	
-	
+
 }

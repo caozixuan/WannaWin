@@ -32,7 +32,8 @@ class CardInfoTableViewController: UITableViewController {
         activityIndicator?.startAnimating()
 		
     }
-    func getCardCallback(result:Bool,cards:[Card]){
+	
+	func getCardCallback(result:Bool,cards:[Card]){
         if result {
             cardArray = cards
 			User.getUser().card = cards
@@ -70,7 +71,6 @@ class CardInfoTableViewController: UITableViewController {
 		}
 		activityIndicator?.stopAnimating()
 	}
-	
 	
 	//MARK: - Table view data source
 	

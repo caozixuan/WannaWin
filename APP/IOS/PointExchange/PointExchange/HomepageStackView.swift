@@ -43,8 +43,6 @@ class HomepageStackView: UIStackView{
     @IBAction func checkAllCards(_ sender: Any) {
         delegate?.checkAllCards()
     }
-    
-	
 
 }
 

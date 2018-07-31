@@ -183,9 +183,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bu7-kK-vQe" userLabel="ButtonView">
                     <rect key="frame" x="0.0" y="403.5" width="375" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-hb-6z0">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-hb-6z0">
                             <rect key="frame" x="136" y="0.0" width="102" height="38"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             <state key="normal" image="查看">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -202,7 +201,9 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="q4M-hb-6z0" firstAttribute="centerX" secondItem="bu7-kK-vQe" secondAttribute="centerX" id="anh-Tr-hhQ"/>
                         <constraint firstAttribute="height" constant="50" id="ixw-sX-OTn"/>
+                        <constraint firstItem="q4M-hb-6z0" firstAttribute="top" secondItem="bu7-kK-vQe" secondAttribute="top" id="u8K-wm-t1u"/>
                     </constraints>
                     <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                 </view>
