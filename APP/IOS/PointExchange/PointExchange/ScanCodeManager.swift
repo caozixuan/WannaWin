@@ -39,7 +39,7 @@ class ScanCodeManager: NSObject {
         return nil
     }
     
-    func createHighQRCode(_ image: CIImage, size:CGFloat)->UIImage{
+    private func createHighQRCode(_ image: CIImage, size:CGFloat)->UIImage{
         let integral:CGRect = image.extent.integral
         let proportion: CGFloat = min(size/integral.width, size/integral.height)
         

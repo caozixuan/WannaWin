@@ -56,7 +56,7 @@ enum ServerService {
     
     // 积分相关
     /// 积分兑换
-    case changePoints(merchants:[JSON])
+    case changePoints(merchants:[Dictionary<String,String>])
     /// 获取通用积分
     case getGeneralPoints()
     /// 获取可兑换积分
@@ -272,13 +272,14 @@ extension ServerService:TargetType {
             
         // 积分相关
         case .changePoints(let merchants):
-            var params:[String:String] = [:]
+            var params:[String:Any] = [:]
             params["userID"] = User.getUser().id
             let encoder = JSONEncoder()
             let encoded = try? encoder.encode(merchants)
             if encoded != nil {
-                if let json = String(data:encoded!,encoding:.utf8){
-                    params["merchants"] = json
+				if let json = String(data:encoded!,encoding:.utf8){
+                    params["merchants"] = merchants
+					print(params)
                 }
             }
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
