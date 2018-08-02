@@ -14,40 +14,37 @@ class QRScanViewController: UIViewController {
     @IBOutlet weak var qrCodeView: UIImageView!
     
     var timeStamp = ""
+	var timer:Timer?
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        timeStamp = String(Int(Date().timeIntervalSince1970))
-        let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id!))\",\"timeStamp\":\"\(timeStamp)\"}"
-        print(codeInfo)
-        barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
-        qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
-        let timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(refreshCode), userInfo: nil, repeats: true)
-        timer.fire()
-        
-        // Do any additional setup after loading the view.
-    }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		changeCode()
+		timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(refreshCode), userInfo: nil, repeats: true)
+		timer?.fire()
+	}
     @objc func refreshCode(){
         ServerConnector.pollizngQR(timestamp: timeStamp, callback: refreshCallback)
     }
     func refreshCallback(result:String, order:Order?){
         if result == "invalid" {
-            timeStamp = String(Int(Date().timeIntervalSince1970))
-            let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id!))\",\"timeStamp\":\"\(timeStamp)\"}"
-            barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
-            qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
+            changeCode()
         }
         else if result == "used" {
 			if order?.state == OrderState.SUCCESS{
+				timer?.invalidate()
 				let sb = UIStoryboard(name: "Exchange", bundle: nil)
 				let view = sb.instantiateViewController(withIdentifier: "FinishExchangeViewController") as! FinishExchangeViewController
 				view.order = order!
 				self.navigationController?.pushViewController(view, animated: true)
 			}
 			else{
+				self.timer?.fireDate = Date.distantFuture
 				let alert = UIAlertController(title:"支付", message:"支付失败！请重新支付", preferredStyle:.alert)
 				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+					self.changeCode()
+					self.timer?.fireDate = Date()
+					
 				})
 				alert.addAction(okAction)
 				self.present(alert, animated: true, completion: nil)
@@ -80,4 +77,10 @@ class QRScanViewController: UIViewController {
     }
     
 
+	func changeCode(){
+		timeStamp = String(Int(Date().timeIntervalSince1970))
+		let codeInfo = "{\"userID\":\"\(String(describing: User.getUser().id!))\",\"timeStamp\":\"\(timeStamp)\"}"
+		barCodeView.image=ScanCodeManager().createBarCode(url: codeInfo)
+		qrCodeView.image=ScanCodeManager().createQRCode(url: codeInfo)
+	}
 }
