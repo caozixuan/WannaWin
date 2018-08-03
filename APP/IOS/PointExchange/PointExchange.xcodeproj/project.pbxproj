@@ -67,7 +67,7 @@
 		B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */; };
 		B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */; };
 		B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */; };
-		B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */; };
+		B6A6EC5620F112200079FFA4 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */; };
 		B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */; };
 		B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */; };
 		B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */; };
@@ -148,7 +148,7 @@
 		B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		B6A6EC5220F0CAE90079FFA4 /* PointExchange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PointExchange.entitlements; sourceTree = "<group>"; };
 		B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
-		B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardTableViewController.swift; sourceTree = "<group>"; };
+		B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCodeManager.swift; sourceTree = "<group>"; };
 		B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnector.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */,
 				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
 				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
-				B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */,
+				B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */,
 				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
 				B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */,
 				B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */,
@@ -582,7 +582,7 @@
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
 				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,
 				B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */,
-				B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */,
+				B6A6EC5620F112200079FFA4 /* AddBankCardViewController.swift in Sources */,
 				B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */,
 				B66CFB2220F88AA3007165DF /* YDMenuDelegate.swift in Sources */,
 				B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */,

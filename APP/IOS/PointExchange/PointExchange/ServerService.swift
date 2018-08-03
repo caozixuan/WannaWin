@@ -30,9 +30,9 @@ enum ServerService {
     
     //花旗卡相关
     /// 绑定花旗银行卡
-    case bindCard(citiCardNum:String,phoneNum:String,ID:String,password:String)
+    case bindCitiCard()
     /// 解绑银行卡
-    case unbind(citiCardNum:String,phoneNum:String,ID:String,password:String)
+    case unbindCitiCard(citiCardNum:String,phoneNum:String,ID:String,password:String)
     
     // 商户相关
     /// 获取从start开始的n条商户信息
@@ -121,10 +121,11 @@ extension ServerService:TargetType {
             return "/merchant/\(merchantID)"
         case .getMerchantCount:
             return "/merchant/getNum"
-            
-        case .bindCard:
-            return "/citi/bindCard"
-        case .unbind:
+			
+		// 银行卡相关
+        case .bindCitiCard:
+            return "/citi/requestBind"
+        case .unbindCitiCard:
             return "/citi/unbind"
         
         // 会员卡
@@ -220,13 +221,11 @@ extension ServerService:TargetType {
             var params:[String:String] = [:]
             params["userID"] = userID
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-            
-        case .bindCard(let citiCardNum, let phoneNum, let ID, let password):
+			
+		// 银行卡相关
+        case .bindCitiCard():
             var params:[String:String] = [:]
-            params["citiCardNum"] = citiCardNum
-            params["phoneNum"] = phoneNum
-            params["ID"] = ID
-            params["password"] = password
+            params["userID"] = User.getUser().id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 商户

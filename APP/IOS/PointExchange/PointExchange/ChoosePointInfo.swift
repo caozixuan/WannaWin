@@ -7,6 +7,11 @@
 //
 
 import Foundation
+/// 积分兑换时选择的积分的信息
+/// - userID：不用更改
+/// - merchants:[ChooseMerchants] 选择的商户积分数组
+/// 	- merchantID: 商户id
+/// 	- selectedMSCardPoints: 选择的积分数
 struct ChoosePointInfo:Codable{
 	var userID = User.getUser().id
 	var merchants = [ChooseMerchants]()
