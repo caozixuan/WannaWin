@@ -38,7 +38,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		
 		// 加入“全选”按钮在导航栏右边
-		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: view, action: #selector(ExchangeViewController.selectAllCell))
+		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: self, action: #selector(ExchangeViewController.selectAllCell))
 		self.navigationItem.rightBarButtonItem = selectBtn
 		
 		// 设置初始总积分数
@@ -99,6 +99,21 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	//MARK: - Target Action
 	@objc func selectAllCell() {
 		//TODO: - 全选逻辑
+        for cell in tableView.visibleCells {
+            for subview in cell.contentView.subviews{
+                if subview .isKind(of: ExchangeItemCellView.self){
+                    let exchangeItemCellView = subview as! ExchangeItemCellView
+                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+                }
+            }
+        }
+        if self.navigationItem.rightBarButtonItem?.title == "全选" {
+            self.navigationItem.rightBarButtonItem?.title = "全不选"
+        }
+        else {
+            self.navigationItem.rightBarButtonItem?.title = "全选"
+        }
+        
 	}
 
 	// MARK: - ExchangeItemCell delegate
