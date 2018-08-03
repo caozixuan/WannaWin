@@ -369,7 +369,7 @@
         <!--完成兑换-->
         <scene sceneID="SlD-2e-e35">
             <objects>
-                <viewController storyboardIdentifier="finishExchange" title="完成兑换" id="2G0-RY-xv0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="finishExchange" title="完成兑换" id="2G0-RY-xv0" customClass="FinishExchangeToGeneralViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xRA-UA-o1y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

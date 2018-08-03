@@ -43,6 +43,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		// 设置初始总积分数
 		pointsSumLabel.text = String(format:"%.2f", pointsSum)
+        
+        // 设置键盘弹出收回通知
+        NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 		
     }
 
@@ -79,6 +83,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     }
 	
 	// MARK: - TextField delegate
+    /// 检测输入正确性
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool{
 		let number = Double(textField.text!)
 		var maxPoints:Double!
@@ -95,10 +100,26 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			return false
 		}
 	}
+    
+    /// 键盘出现视图向上移动
+    @objc func keyboardWillShow(notification:NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.tableView.contentInset.bottom = keyboardSize.size.height + 60
+        }
+    }
+    
+    /// 键盘收回视图向下移动
+    @objc func keyboardWillHide(notification:NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            self.tableView.contentInset.bottom = 0
+        }
+    }
+    
 	
 	//MARK: - Target Action
+    /// 全选积分项
 	@objc func selectAllCell() {
-		//TODO: - 全选逻辑
         for cell in tableView.visibleCells {
             for subview in cell.contentView.subviews{
                 if subview .isKind(of: ExchangeItemCellView.self){
