@@ -42,7 +42,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		self.navigationItem.rightBarButtonItem = selectBtn
 		
 		// 设置初始总积分数
-		pointsSumLabel.text = String(pointsSum)
+		pointsSumLabel.text = String(format:"%.2f", pointsSum)
 		
     }
 
@@ -67,10 +67,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 				exchangeItemCellView.editSourcePoints?.tag = indexPath.row
 				if let card = dataSource?[indexPath.row]{
 					exchangeItemCellView.storeName.text = card.merchant?.name
-					exchangeItemCellView.sourcePoints.text = String(card.points)
-					exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
-					exchangeItemCellView.editSourcePoints.text = String(card.points)
-					exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
+					exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+					exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+					exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
+					exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					exchangeItemCellView.proportion = card.proportion
 				}
 			}
@@ -91,7 +91,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		else {
 			textField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
-			textField.text = String(maxPoints)
+            textField.text = String(format:"%.2f", maxPoints)
 			return false
 		}
 	}
@@ -107,20 +107,20 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		switch type {
 		case .add:
 			pointsSum += Double(text)!
-			pointsSumLabel.text = String(pointsSum)
+			pointsSumLabel.text = String(format:"%.2f", pointsSum)
 			
 		default: //minus
 			pointsSum -= Double(text)!
-			pointsSumLabel.text = String(pointsSum)
+			pointsSumLabel.text = String(format:"%.2f", pointsSum)
 			let indexPath = IndexPath(row: row, section: 0)
 			let cell = self.tableView.cellForRow(at: indexPath)
 			for subview in (cell?.contentView.subviews)!{
 				if subview .isKind(of: ExchangeItemCellView.self){
 					let exchangeItemCellView = subview as! ExchangeItemCellView
 					if let card = dataSource?[row]{
-						exchangeItemCellView.sourcePoints.text = String(card.points)
-						exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
-						exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
+						exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+						exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+						exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					}
 				}
 			}

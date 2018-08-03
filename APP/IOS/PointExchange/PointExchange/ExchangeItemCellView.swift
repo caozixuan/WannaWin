@@ -123,7 +123,7 @@ class ExchangeItemCellView: UIView {
 			// TODO: - 积分换算
 			if sourcePoints?.text != nil {
 				if (sourcePoints?.text?.count)! > 0 {
-					targetPoints?.text = String(Double(sourcePoints.text!)! * proportion!)
+					targetPoints?.text = String(format:"%.2f", Double(sourcePoints.text!)! * proportion!)
 				}
 			}
 		}
