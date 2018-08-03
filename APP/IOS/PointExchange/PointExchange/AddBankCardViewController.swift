@@ -11,14 +11,11 @@ import WebKit
 
 class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,UIWebViewDelegate{
 
-	var webView:WKWebView?
 	
+	@IBOutlet weak var webView: WKWebView!
 	var backBtn: UIBarButtonItem!
 	var forwardBtn: UIBarButtonItem!
 	var refreshBtn: UIBarButtonItem!
-	
-	
-	
 	var url:String?
 	
 	
@@ -42,15 +39,9 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.refreshButtonState()
-		let webview = WKWebView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-64))
-		
 		let pageUrl = NSURL(string: (self.url?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
 		let request = NSURLRequest(url: pageUrl! as URL)
-		webview.load(request as URLRequest)
-		self.webView = webview
-		
-		self.view.addSubview(webview)
-		
+		self.webView.load(request as URLRequest)
 		self.webView?.uiDelegate = self
 		self.webView?.navigationDelegate = self
 	}
