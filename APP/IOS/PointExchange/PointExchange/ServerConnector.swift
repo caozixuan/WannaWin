@@ -386,20 +386,33 @@ class ServerConnector: NSObject {
     }
     // 积分相关
     /// 积分兑换
-    static func changePoints(merchants:[Dictionary<String,String>],callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>)->()){
-        provider.request(.changePoints(merchants: merchants)){ result in
-            
+	///
+	/// - parameter chooseInfo: 选择的商家对应的积分信息
+	/// - parameter callback: 回调函数
+	///	- parameter result: 是否兑换成功
+	///	- parameter failureMerchant: 若成功，则为nil，若存在失败的，则为一个Dictionary，key为失败的商家名，value为失败原因
+    static func changePoints(chooseInfo:ChoosePointInfo,callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>?)->()){
+        provider.request(.changePoints(chooseInfo: chooseInfo)){ result in
+		
             if case let .success(response) = result{
                 let dataJson = try? response.mapJSON()
                 var failureMerchants = Dictionary<String,String>()
                 if let json = dataJson {
                     let datas = JSON(json).array
-                    for data in datas! {
-                        let merchantID = data["merchantID"].string
-                        let reason = data["reason"].string
-                        failureMerchants[merchantID!] = reason
-                    }
-            }
+					if datas?.count != 0{
+						for data in datas! {
+							let merchantID = data["merchantID"].string
+							let reason = data["reason"].string
+							failureMerchants[merchantID!] = reason
+						}
+						callback(false,failureMerchants)
+					}
+					else{
+						callback(true,nil)
+					}
+					
+				}
+			}
             if case .failure(_) = result{
                 
             }
@@ -407,7 +420,7 @@ class ServerConnector: NSObject {
         }
     }
 
-}
+
 
     /// 获取通用积分
     static func getGeneralPoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){

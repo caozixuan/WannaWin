@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14ECA9B05A9DED1BC9FCBD4E /* Pods_PointExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */; };
+		3E23A75021140AA300D19749 /* ChoosePointInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */; };
 		3E4017F021005FA700591B77 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4017EF21005FA700591B77 /* LoginView.swift */; };
 		3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75920EFDFA000843193 /* Store.storyboard */; };
 		3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75B20EFDFE400843193 /* Exchange.storyboard */; };
@@ -82,6 +83,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePointInfo.swift; sourceTree = "<group>"; };
 		3E4017EF21005FA700591B77 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E46B75920EFDFA000843193 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		3E46B75B20EFDFE400843193 /* Exchange.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exchange.storyboard; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				B66CFB2820F8AE2C007165DF /* Order.swift */,
 				B66CFB4020FE2D45007165DF /* PointsHistory.swift */,
 				3EFEFA0D210B004600BC760E /* Item.swift */,
+				3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */,
 				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
+				3E23A75021140AA300D19749 /* ChoosePointInfo.swift in Sources */,
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */,

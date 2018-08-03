@@ -133,18 +133,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		// ...
 		if isSuccess {
 			//准备“兑换成功”数据
-//			let json1 = ["merchantID":"1","selectedMSCardPoints":"10"] as [String:String]
-			var json1:[String:String] = [:]
-			json1["merchantID"] = "1"
-			json1["selectedMSCardPoints"] = "10"
-//			print(json1)
-			let json2 = ["merchantID":"2","selectedMSCardPoints":"10"] as [String:String]
-			let jsons = [json1,json2]
-			ServerConnector.changePoints(merchants: jsons){ (result,card) in
-				if result {
-					print("yes")
-				}
-			}
+
+			
 		}
 		else {
 			//准备“兑换失败”数据
@@ -153,3 +143,5 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 }
+
+
