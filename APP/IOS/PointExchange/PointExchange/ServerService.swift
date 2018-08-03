@@ -30,9 +30,9 @@ enum ServerService {
     
     //花旗卡相关
     /// 绑定花旗银行卡
-    case bindCard(citiCardNum:String,phoneNum:String,ID:String,password:String)
+    case bindCitiCard()
     /// 解绑银行卡
-    case unbind(citiCardNum:String,phoneNum:String,ID:String,password:String)
+    case unbindCitiCard(citiCardNum:String,phoneNum:String,ID:String,password:String)
     
     // 商户相关
     /// 获取从start开始的n条商户信息
@@ -56,7 +56,7 @@ enum ServerService {
     
     // 积分相关
     /// 积分兑换
-    case changePoints(merchants:[Dictionary<String,String>])
+    case changePoints(chooseInfo:ChoosePointInfo)
     /// 获取通用积分
     case getGeneralPoints()
     /// 获取可兑换积分
@@ -121,10 +121,11 @@ extension ServerService:TargetType {
             return "/merchant/\(merchantID)"
         case .getMerchantCount:
             return "/merchant/getNum"
-            
-        case .bindCard:
-            return "/citi/bindCard"
-        case .unbind:
+			
+		// 银行卡相关
+        case .bindCitiCard:
+            return "/citi/requestBind"
+        case .unbindCitiCard:
             return "/citi/unbind"
         
         // 会员卡
@@ -220,13 +221,11 @@ extension ServerService:TargetType {
             var params:[String:String] = [:]
             params["userID"] = userID
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
-            
-        case .bindCard(let citiCardNum, let phoneNum, let ID, let password):
+			
+		// 银行卡相关
+        case .bindCitiCard():
             var params:[String:String] = [:]
-            params["citiCardNum"] = citiCardNum
-            params["phoneNum"] = phoneNum
-            params["ID"] = ID
-            params["password"] = password
+            params["userID"] = User.getUser().id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 商户
@@ -271,18 +270,13 @@ extension ServerService:TargetType {
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 积分相关
-        case .changePoints(let merchants):
-            var params:[String:Any] = [:]
-            params["userID"] = User.getUser().id
-            let encoder = JSONEncoder()
-            let encoded = try? encoder.encode(merchants)
-            if encoded != nil {
-				if let json = String(data:encoded!,encoding:.utf8){
-                    params["merchants"] = merchants
-					print(params)
-                }
-            }
-            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .changePoints(let chooseInfo):
+			let encoder = JSONEncoder()
+			let merchantJsons = try! encoder.encode(chooseInfo)
+			print(String(data:merchantJsons, encoding:.utf8)!)
+			return .requestData(merchantJsons)
+//			return .requestData(jsons)
+//            return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getGeneralPoints():
             var params:[String:String] = [:]
             params["userID"] = User.getUser().id

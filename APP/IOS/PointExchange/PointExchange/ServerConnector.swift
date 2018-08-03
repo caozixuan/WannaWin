@@ -40,7 +40,8 @@ class ServerConnector: NSObject {
     static func sendPassword(phoneNumber:String, vcode:String, password:String,callback:@escaping (_ result:Bool)->()){
         provider.request(.sendPassword(phoneNumber:phoneNumber, vcode:vcode, password: password)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 if data["status"].bool == true{
                     callback(true)
                 }else{
@@ -58,7 +59,8 @@ class ServerConnector: NSObject {
     static func login(phoneNum:String, password:String,callback:@escaping (_ result:Bool)->()){
         provider.request(.login(phoneNum:phoneNum, password:password)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let isLogin = data.count
                 if isLogin != 0 {
                     User.getUser().generalPoints = data["generalPoints"].double
@@ -86,7 +88,8 @@ class ServerConnector: NSObject {
             provider.request(.getPointsInfo(userID: id)){result in
                 if case let .success(response) = result {
                     if response.statusCode == 200 {
-                        let data = JSON(try? response.mapJSON())
+						let responseJSON = try? response.mapJSON()
+						let data = JSON(responseJSON!)
                         User.getUser().availablePoints = data["availablePoints"].double
                         User.getUser().generalPoints = data["generalPoints"].double
                         callback(true)
@@ -112,7 +115,8 @@ class ServerConnector: NSObject {
     static func changePassword(oldPassword:String, newPassword:String, callback:@escaping (_ result:Bool)->()){
         provider.request(.changePassword(old: oldPassword, new: newPassword)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let status = data["status"].bool
                 if status != false {
                     callback(true)
@@ -131,7 +135,8 @@ class ServerConnector: NSObject {
     static func resetPassword(phoneNum:String, newPassword:String,callback:@escaping (_ result:Bool)->()){
         provider.request(.resetPassword(phoneNum: phoneNum, newPassword: newPassword)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let status = data["status"].bool
                 if status != false {
                     callback(true)
@@ -150,7 +155,8 @@ class ServerConnector: NSObject {
     static func getResetVCode(phoneNum:String, vcode:String, callback:@escaping (_ result:Bool)->()){
         provider.request(.getResetVCode(phoneNum:phoneNum, vcode: vcode)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let status = data["status"].bool
                 if status != false {
                     callback(true)
@@ -167,29 +173,26 @@ class ServerConnector: NSObject {
     
     //花旗卡相关
     /// 绑定花旗银行卡
-    static func bindCard(citiCardNum:String,phoneNum:String,ID:String,password:String,callback:@escaping (_ result:Bool)->()){
-        provider.request(.bindCard(citiCardNum:citiCardNum, phoneNum:phoneNum, ID:ID, password:password)){ result in
+	static func bindCitiCard(callback:@escaping (_ result:Bool,_ url:String?)->()){
+        provider.request(.bindCitiCard()){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
-                let isBinding = data["isBinding"]
-                if isBinding != "false" {
-                    callback(true)
-                }
-                else{
-                    callback(false)
-                }
+				let responseString = try? response.mapString()
+				if let responseURL = responseString{
+					callback(true,responseURL)
+				}
             }
             if case .failure(_) = result{
-                callback(false)
+                callback(false,nil)
                 print("连接失败")
             }
         }
     }
     /// 解绑银行卡
     static func unbind(citiCardNum:String,phoneNum:String,ID:String,password:String,callback:@escaping (_ result:Bool)->()){
-        provider.request(.unbind(citiCardNum:citiCardNum, phoneNum:phoneNum, ID:ID, password:password)){ result in
+        provider.request(.unbindCitiCard(citiCardNum:citiCardNum, phoneNum:phoneNum, ID:ID, password:password)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let isUnBinding = data["unBinding"]
                 if isUnBinding != "false" {
                     callback(true)
@@ -315,7 +318,8 @@ class ServerConnector: NSObject {
     static func addCard(merchantID:String, cardNum:String, password:String, callback:@escaping (_ result:Bool)->()){
         provider.request(.addCard(merchantID: merchantID, cardNum: cardNum, password: password)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 if data["status"].bool == true{
                     callback(true)
                 }else{
@@ -332,7 +336,8 @@ class ServerConnector: NSObject {
     static func getCardCount(callback:@escaping (_ result:Bool, _ num:Int)->()){
         provider.request(.getCardCount()){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let num = data["num"].int
                 if let count = num {
                     callback(true,count)
@@ -353,14 +358,18 @@ class ServerConnector: NSObject {
         provider.request(.getCardDetail(merchantID: merchantID)){ result in
             let card = Card()
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
-                card.logoURL = data["cardLogoURL"].string
-                card.points = data["points"].double!
-                card.number = data["cardNum"].string
-                card.description = data["cardDescription"].string
-                card.type = data["type"].int
+				let responseJSON = try? response.mapJSON()
+				
+				let data = JSON(responseJSON!)
+				card.logoURL = data["cardLogoURL"].string
+				card.points = data["points"].double!
+				card.number = data["cardNum"].string
+				card.description = data["cardDescription"].string
+				card.type = data["type"].int
 				card.proportion = data["proportion"].double
-                callback(true,card)
+				callback(true,card)
+				
+				
             }
             if case .failure(_) = result{
                 callback(false,card)
@@ -373,7 +382,8 @@ class ServerConnector: NSObject {
     static func unbindCard(merchantID:String, cardNum:String,callback:@escaping (_ result:Bool)->()){
         provider.request(.unbindCard(merchantID:merchantID, cardNum: cardNum)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 if data["status"].bool == true{
                     callback(true)
                 }else{
@@ -386,20 +396,33 @@ class ServerConnector: NSObject {
     }
     // 积分相关
     /// 积分兑换
-    static func changePoints(merchants:[Dictionary<String,String>],callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>)->()){
-        provider.request(.changePoints(merchants: merchants)){ result in
-            
+	///
+	/// - parameter chooseInfo: 选择的商家对应的积分信息
+	/// - parameter callback: 回调函数
+	///	- parameter result: 是否兑换成功
+	///	- parameter failureMerchant: 若成功，则为nil，若存在失败的，则为一个Dictionary，key为失败的商家名，value为失败原因
+    static func changePoints(chooseInfo:ChoosePointInfo,callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>?)->()){
+        provider.request(.changePoints(chooseInfo: chooseInfo)){ result in
+		
             if case let .success(response) = result{
                 let dataJson = try? response.mapJSON()
                 var failureMerchants = Dictionary<String,String>()
                 if let json = dataJson {
                     let datas = JSON(json).array
-                    for data in datas! {
-                        let merchantID = data["merchantID"].string
-                        let reason = data["reason"].string
-                        failureMerchants[merchantID!] = reason
-                    }
-            }
+					if datas?.count != 0{
+						for data in datas! {
+							let merchantID = data["merchantID"].string
+							let reason = data["reason"].string
+							failureMerchants[merchantID!] = reason
+						}
+						callback(false,failureMerchants)
+					}
+					else{
+						callback(true,nil)
+					}
+					
+				}
+			}
             if case .failure(_) = result{
                 
             }
@@ -407,13 +430,14 @@ class ServerConnector: NSObject {
         }
     }
 
-}
+
 
     /// 获取通用积分
     static func getGeneralPoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){
         provider.request(.getGeneralPoints()){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let generalPoint = data["generalPoints"].double
                 if let point = generalPoint{
                     callback(true,point)
@@ -431,7 +455,8 @@ class ServerConnector: NSObject {
     static func getAvailablePoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){
         provider.request(.getAvailablePoints()){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let generalPoint = data["availablePoints"].double
                 if let point = generalPoint{
                     callback(true,point)
@@ -451,7 +476,8 @@ class ServerConnector: NSObject {
             var pointsHistories = [PointsHistory]()
             if case let .success(response) = result{
                 let decoder = JSONDecoder()
-                let datas = JSON(try? response.mapJSON()).array
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
                 for data in datas!{
                     do{
 //                        let historyData = try data["points_history_merchants"].rawData()
@@ -496,7 +522,8 @@ class ServerConnector: NSObject {
     static func pollizngQR(timestamp:String,callback:@escaping (_ result:String,_ order:Order?)->()){
         provider.request(.pollingQR(timestamp: timestamp)){ result in
             if case let .success(response) = result{
-                let data = JSON(try? response.mapJSON())
+				let responseJSON = try? response.mapJSON()
+				let data = JSON(responseJSON!)
                 let status = data["status"].string
                 if let r = status{
                     callback(r,nil)
@@ -520,7 +547,8 @@ class ServerConnector: NSObject {
             var orders = [Order]()
             if case let .success(response) = result{
                 let decoder = JSONDecoder()
-                let datas = JSON(try? response.mapJSON()).array
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
                 for data in datas!{
                     do{
                         let order = try decoder.decode(Order.self, from: data.rawData())
@@ -548,7 +576,8 @@ class ServerConnector: NSObject {
 			if case let .success(response) = result{
 				var items = [Item]()
 				let decoder = JSONDecoder()
-				let datas = JSON(try? response.mapJSON()).array
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
 				for data in datas!{
 					do{
 						let item = try decoder.decode(Item.self, from: data.rawData())
@@ -574,7 +603,8 @@ class ServerConnector: NSObject {
 			var items = [Item]()
 			if case let .success(response) = result{
 				let decoder = JSONDecoder()
-				let datas = JSON(try? response.mapJSON()).array
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
 				for data in datas!{
 					do{
 						let item = try decoder.decode(Item.self, from: data.rawData())
@@ -599,7 +629,8 @@ class ServerConnector: NSObject {
 			var items = [Item]()
 			if case let .success(response) = result{
 				let decoder = JSONDecoder()
-				let datas = JSON(try? response.mapJSON()).array
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
 				for data in datas!{
 					do{
 						let item = try decoder.decode(Item.self, from: data.rawData())
@@ -624,7 +655,8 @@ class ServerConnector: NSObject {
 			var items = [Item]()
 			if case let .success(response) = result{
 				let decoder = JSONDecoder()
-				let datas = JSON(try? response.mapJSON()).array
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
 				for data in datas!{
 					do{
 						let item = try decoder.decode(Item.self, from: data.rawData())

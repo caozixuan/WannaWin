@@ -1,0 +1,67 @@
+package citi.BC;
+
+import java.util.Date;
+
+public class Block {
+
+    // @Expose(serialize = false, deserialize = false)
+    final public transient Block previousBlock;
+
+    private String hash;
+    final public String previousHash;
+    final public BC_Data data;
+    final public Long timeStamp; //as number of milliseconds since 1/1/1970.
+    private Integer nonce;
+
+
+    public String getHash() {
+        return hash;
+    }
+
+    public Integer getNonce() {
+        return nonce;
+    }
+
+    //Ctor
+    public Block(Block previousBlock, String previousHash, BC_Data data) {
+        this.previousBlock = previousBlock;
+        this.previousHash = previousHash;
+        this.data = data;
+        this.timeStamp = new Date().getTime();
+        this.nonce = 0;
+        this.hash = calculateThisHash();
+    }
+
+    //get Init-Block
+    static Block getInitBlock() {
+        DealData data = new DealData(null, null, null, 0.0);
+        Block block = new Block(null, null, BC_Data.Data2BC_Data(data));
+        block.hash = block.calculateThisHash();
+        return block;
+    }
+
+    //calculateHash
+    static public String calculateHash(String previousHash, String data, Long timeStamp, Integer nonce) {
+        String calculatedhash = StringUtil.applySha256(
+                previousHash +
+                        Long.toString(timeStamp) +
+                        Integer.toString(nonce) +
+                        data
+        );
+        return calculatedhash;
+    }
+
+    public String calculateThisHash() {
+        return calculateHash(this.previousHash, this.data.toString(), this.timeStamp, this.getNonce());
+    }
+
+    public void mineBlock(int difficulty) {
+        String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0"
+        while (!hash.substring(0, difficulty).equals(target)) {
+            nonce++;
+            hash = calculateThisHash();
+        }
+        System.out.println("Block Mined!!! : " + hash);
+    }
+
+}
