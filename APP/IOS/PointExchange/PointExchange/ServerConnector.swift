@@ -386,7 +386,7 @@ class ServerConnector: NSObject {
     }
     // 积分相关
     /// 积分兑换
-    static func changePoints(merchants:[JSON],callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>)->()){
+    static func changePoints(merchants:[Dictionary<String,String>],callback:@escaping (_ result:Bool,_ failureMerchant:Dictionary<String,String>)->()){
         provider.request(.changePoints(merchants: merchants)){ result in
             
             if case let .success(response) = result{
@@ -492,7 +492,7 @@ class ServerConnector: NSObject {
     }
     
     // 支付相关
-    /// TODO: 二维码轮询
+    /// 二维码轮询
     static func pollizngQR(timestamp:String,callback:@escaping (_ result:String,_ order:Order?)->()){
         provider.request(.pollingQR(timestamp: timestamp)){ result in
             if case let .success(response) = result{
