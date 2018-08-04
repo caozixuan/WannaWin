@@ -2,7 +2,7 @@
 //  FinishExchangeToGeneralViewController.swift
 //  PointExchange
 //
-//  Created by 黄小英 on 2018/8/2.
+//  Created by yiner on 2018/8/2.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 

@@ -192,10 +192,11 @@ public class PayingActivity extends AppCompatActivity {
         titleBar.addAction(new TitleBar.TextAction("全选") {
             @Override
             public void performAction(View view) {
-                for(int i = 0;i<mAdapter.getSourceItems().size();i++){
-                    mAdapter.getSourceItems().get(i).setChoose(true);
-                }
+                //for(int i = 0;i<mAdapter.getSourceItems().size();i++){
+                //    mAdapter.getSourceItems().get(i).setChoose(true);
+                //}
 
+                mAdapter.notifyCheckBoxChange();
 
                 Choose_Points.setText(mAdapter.getTotalPoints());
 
@@ -348,32 +349,77 @@ public class PayingActivity extends AppCompatActivity {
 
     }
 
-
-    private void postStringRequest() {
-        String url="http://193.112.44.141:80/citi/merchant/getInfos";
-        RequestQueue queue = MyApplication.getHttpQueues();
-        //RequestQueue queue= Volley.newRequestQueue(this);
-        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                Log.e("success",s);
-                System.out.println(s);
+    public void exchangePostJSON() {
+        //定义一个JSON，用于向服务器提交数据
+        final JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
+        try {
+            for (int i = 0;i<mAdapter.getSourceItems().size();i++){
+                if (mAdapter.getSourceItems().get(i).getChoose()){
+                    JSONObject item = new JSONObject();
+                    item.put("merchantID",mAdapter.getSourceItems().get(i).getMerchantID());
+                    item.put("selectedMSCardPoints",mAdapter.getSourceItems().get(i).getExchangePoint());
+                    jsonArray.put(item);
+                }
             }
-        }, new Response.ErrorListener() {
+
+            jsonObj.put("userID", LogStateInfo.getInstance(PayingActivity.this).getUserID())
+                    .put("merchants", jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final String jsonString = jsonObj.toString();
+        System.out.println(jsonString);
+        String url="http://193.112.44.141:80/citi/points/changePoints";
+        RequestQueue queue = MyApplication.getHttpQueues();
+
+        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.POST, url, jsonObj,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("success",response.toString());
+                        System.out.println("jsonRequest"+response.toString());
+                        try {
+                            if(response.length()>0){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jObj = jsonArray.getJSONObject(i);
+
+                                    String merchantName = String.valueOf(jObj.getInt("merchantName"));
+                                    String merchantLogoURL = String.valueOf(jObj.getInt("merchantLogoURL"));
+                                    String reason = String.valueOf(jObj.getString("reason"));
+                                    names.add(merchantName);
+                                    logos.add(merchantLogoURL);
+                                    reasons.add(reason);
+
+                                }
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
+            public void onErrorResponse(VolleyError error) {
+                Log.d("#JsonObject...:Error#", error.toString());
 
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
-                map.put("start","0");
-                map.put("n", "1");
-                return map;
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+
+                headers.put("Content-Type", "application/json");
+
+                return headers;
             }
         };
-        queue.add(request);
+
+        queue.add(jsonRequest);
+
     }
 
     private void getMSCardInfoRequest() {
@@ -424,6 +470,35 @@ public class PayingActivity extends AppCompatActivity {
         };
         queue.add(request);
     }
+
+    private void postStringRequest() {
+        String url="http://193.112.44.141:80/citi/merchant/getInfos";
+        RequestQueue queue = MyApplication.getHttpQueues();
+        //RequestQueue queue= Volley.newRequestQueue(this);
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("success",s);
+                System.out.println(s);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("start","0");
+                map.put("n", "1");
+                return map;
+            }
+        };
+        queue.add(request);
+    }
+
+
 
     private void postRequest() {
         //RequestQueue queue = VolleySingleton.getVolleySingleton(this.getApplicationContext()).getRequestQueue();
@@ -482,78 +557,7 @@ public class PayingActivity extends AppCompatActivity {
         MyApplication.getHttpQueues().add(request);
     }
 
-    public void exchangePostJSON() {
-        //定义一个JSON，用于向服务器提交数据
-        final JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObj = new JSONObject();
-        try {
-            for (int i = 0;i<mAdapter.getSourceItems().size();i++){
-                if (mAdapter.getSourceItems().get(i).getChoose()){
-                    JSONObject item = new JSONObject();
-                    item.put("merchantID",mAdapter.getSourceItems().get(i).getMerchantID());
-                    item.put("selectedMSCardPoints",mAdapter.getSourceItems().get(i).getExchangePoint());
-                    jsonArray.put(item);
-                }
-            }
 
-            jsonObj.put("userID", LogStateInfo.getInstance(PayingActivity.this).getUserID())
-                    .put("merchants", jsonArray);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        final String jsonString = jsonObj.toString();
-        System.out.println(jsonString);
-        String url="http://193.112.44.141:80/citi/points/changePoints";
-        RequestQueue queue = MyApplication.getHttpQueues();
-
-        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.POST, url, jsonObj,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("success",response.toString());
-                        System.out.println("jsonRequest"+response.toString());
-                        try {
-                            if(response.length()>0){
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jObj = jsonArray.getJSONObject(i);
-
-                                    String merchantName = String.valueOf(jObj.getInt("merchantName"));
-                                    String merchantLogoURL = String.valueOf(jObj.getInt("merchantLogoURL"));
-                                    String reason = String.valueOf(jObj.getString("reason"));
-                                    names.add(merchantName);
-                                    logos.add(merchantLogoURL);
-                                    reasons.add(reason);
-
-                                }
-                            }
-
-                        }
-                         catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("#JsonObject...:Error#", error.toString());
-
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<String, String>();
-
-                headers.put("Content-Type", "application/json");
-
-                return headers;
-            }
-        };
-
-        queue.add(jsonRequest);
-
-    }
 
 
     //@Override
