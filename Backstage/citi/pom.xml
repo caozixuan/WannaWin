@@ -15,16 +15,32 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
 
     <!--版本信息 -->
     <spring.version>4.1.3.RELEASE</spring.version>
     <mybatis.version>3.4.5</mybatis.version>
     <mysql-driver.version>6.0.6</mysql-driver.version>
+
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>aliyun</groupId>
+      <artifactId>aliyun-core</artifactId>
+      <version>3.31</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aliyun-java-sdk-core-3.3.1.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>aliyun</groupId>
+      <artifactId>aliyun-dysmsapi</artifactId>
+      <version>3.31</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
+    </dependency>
     <!-- 花旗API-->
     <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
     <dependency>

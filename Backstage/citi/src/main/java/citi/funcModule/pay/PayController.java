@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @author zhong
  * @date 2018-7-11
  */
-@RequestMapping(value = {"/pay"},produces = {"text/html;charset=UTF-8"})
+@RequestMapping(value = {"/pay"},produces = {"text/json;charset=UTF-8"})
 @Controller
 public class PayController {
     @Autowired

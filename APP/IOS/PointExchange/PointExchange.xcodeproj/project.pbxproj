@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14ECA9B05A9DED1BC9FCBD4E /* Pods_PointExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */; };
+		3E23A75021140AA300D19749 /* ChoosePointInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */; };
 		3E4017F021005FA700591B77 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4017EF21005FA700591B77 /* LoginView.swift */; };
 		3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75920EFDFA000843193 /* Store.storyboard */; };
 		3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75B20EFDFE400843193 /* Exchange.storyboard */; };
@@ -42,6 +43,7 @@
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
 		3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */; };
 		3EFEFA0E210B004600BC760E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0D210B004600BC760E /* Item.swift */; };
+		847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -65,7 +67,7 @@
 		B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */; };
 		B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */; };
 		B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */; };
-		B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */; };
+		B6A6EC5620F112200079FFA4 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */; };
 		B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */; };
 		B6A6EC5A20F1E6270079FFA4 /* ScanCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */; };
 		B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */; };
@@ -81,6 +83,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePointInfo.swift; sourceTree = "<group>"; };
 		3E4017EF21005FA700591B77 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E46B75920EFDFA000843193 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		3E46B75B20EFDFE400843193 /* Exchange.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exchange.storyboard; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 		3EFEFA0D210B004600BC760E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
+		847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishExchangeToGeneralViewController.swift; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B66CFB1D20F88A18007165DF /* YDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenu.swift; path = YDMenu/YDMenu.swift; sourceTree = "<group>"; };
@@ -144,7 +148,7 @@
 		B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		B6A6EC5220F0CAE90079FFA4 /* PointExchange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PointExchange.entitlements; sourceTree = "<group>"; };
 		B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
-		B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardTableViewController.swift; sourceTree = "<group>"; };
+		B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5920F1E6270079FFA4 /* ScanCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCodeManager.swift; sourceTree = "<group>"; };
 		B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnector.swift; sourceTree = "<group>"; };
@@ -205,7 +209,7 @@
 				B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */,
 				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
 				B6A6EC5320F106060079FFA4 /* OrdersTableViewController.swift */,
-				B6A6EC5520F112200079FFA4 /* AddBankCardTableViewController.swift */,
+				B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */,
 				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
 				B66CFB3020F98584007165DF /* SingleSectionOrderViewController.swift */,
 				B66CFB3220F98598007165DF /* DoubleSectionOrderViewController.swift */,
@@ -236,6 +240,7 @@
 				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
 				3EBF049120F99854004D6D8E /* ExchangeHistoryTableViewController.swift */,
+				847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				B66CFB2820F8AE2C007165DF /* Order.swift */,
 				B66CFB4020FE2D45007165DF /* PointsHistory.swift */,
 				3EFEFA0D210B004600BC760E /* Item.swift */,
+				3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -564,17 +570,19 @@
 				B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */,
 				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
+				3E23A75021140AA300D19749 /* ChoosePointInfo.swift in Sources */,
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
 				3E4017F021005FA700591B77 /* LoginView.swift in Sources */,
 				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
+				847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */,
 				3E46B76920F06E0200843193 /* CardDetailTableViewController.swift in Sources */,
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
 				3E46B76D20F09E7900843193 /* ExchangeViewController.swift in Sources */,
 				B6A6EC4520F05F360079FFA4 /* UIViewExtension.swift in Sources */,
-				B6A6EC5620F112200079FFA4 /* AddBankCardTableViewController.swift in Sources */,
+				B6A6EC5620F112200079FFA4 /* AddBankCardViewController.swift in Sources */,
 				B696E7ED20F5A87900ABF0D2 /* StringExtension.swift in Sources */,
 				B66CFB2220F88AA3007165DF /* YDMenuDelegate.swift in Sources */,
 				B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */,
@@ -777,7 +785,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PointExchange/PointExchange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 695ANUHALN;
+				DEVELOPMENT_TEAM = W4GH5MNPHW;
 				HEADER_SEARCH_PATHS = /Pods;
 				INFOPLIST_FILE = PointExchange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -798,7 +806,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PointExchange/PointExchange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 695ANUHALN;
+				DEVELOPMENT_TEAM = W4GH5MNPHW;
 				HEADER_SEARCH_PATHS = /Pods;
 				INFOPLIST_FILE = PointExchange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
@@ -37,11 +38,15 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		
 		// 加入“全选”按钮在导航栏右边
-		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: view, action: #selector(ExchangeViewController.selectAllCell))
+		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: self, action: #selector(ExchangeViewController.selectAllCell))
 		self.navigationItem.rightBarButtonItem = selectBtn
 		
 		// 设置初始总积分数
-		pointsSumLabel.text = String(pointsSum)
+		pointsSumLabel.text = String(format:"%.2f", pointsSum)
+        
+        // 设置键盘弹出收回通知
+        NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 		
     }
 
@@ -66,10 +71,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 				exchangeItemCellView.editSourcePoints?.tag = indexPath.row
 				if let card = dataSource?[indexPath.row]{
 					exchangeItemCellView.storeName.text = card.merchant?.name
-					exchangeItemCellView.sourcePoints.text = String(card.points)
-					exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
-					exchangeItemCellView.editSourcePoints.text = String(card.points)
-					exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
+					exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+					exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+					exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
+					exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					exchangeItemCellView.proportion = card.proportion
 				}
 			}
@@ -78,6 +83,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     }
 	
 	// MARK: - TextField delegate
+    /// 检测输入正确性
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool{
 		let number = Double(textField.text!)
 		var maxPoints:Double!
@@ -90,14 +96,45 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		else {
 			textField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
-			textField.text = String(maxPoints)
+            textField.text = String(format:"%.2f", maxPoints)
 			return false
 		}
 	}
+    
+    /// 键盘出现视图向上移动
+    @objc func keyboardWillShow(notification:NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.tableView.contentInset.bottom = keyboardSize.size.height + 60
+        }
+    }
+    
+    /// 键盘收回视图向下移动
+    @objc func keyboardWillHide(notification:NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            self.tableView.contentInset.bottom = 0
+        }
+    }
+    
 	
 	//MARK: - Target Action
+    /// 全选积分项
 	@objc func selectAllCell() {
-		//TODO: - 全选逻辑
+        for cell in tableView.visibleCells {
+            for subview in cell.contentView.subviews{
+                if subview .isKind(of: ExchangeItemCellView.self){
+                    let exchangeItemCellView = subview as! ExchangeItemCellView
+                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+                }
+            }
+        }
+        if self.navigationItem.rightBarButtonItem?.title == "全选" {
+            self.navigationItem.rightBarButtonItem?.title = "全不选"
+        }
+        else {
+            self.navigationItem.rightBarButtonItem?.title = "全选"
+        }
+        
 	}
 
 	// MARK: - ExchangeItemCell delegate
@@ -106,20 +143,20 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		switch type {
 		case .add:
 			pointsSum += Double(text)!
-			pointsSumLabel.text = String(pointsSum)
+			pointsSumLabel.text = String(format:"%.2f", pointsSum)
 			
 		default: //minus
 			pointsSum -= Double(text)!
-			pointsSumLabel.text = String(pointsSum)
+			pointsSumLabel.text = String(format:"%.2f", pointsSum)
 			let indexPath = IndexPath(row: row, section: 0)
 			let cell = self.tableView.cellForRow(at: indexPath)
 			for subview in (cell?.contentView.subviews)!{
 				if subview .isKind(of: ExchangeItemCellView.self){
 					let exchangeItemCellView = subview as! ExchangeItemCellView
 					if let card = dataSource?[row]{
-						exchangeItemCellView.sourcePoints.text = String(card.points)
-						exchangeItemCellView.editSourcePoints.placeholder = String(card.points)
-						exchangeItemCellView.targetPoints.text = String(card.points * (card.proportion)!)
+						exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+						exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+						exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					}
 				}
 			}
@@ -132,6 +169,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		// ...
 		if isSuccess {
 			//准备“兑换成功”数据
+
+			
 		}
 		else {
 			//准备“兑换失败”数据
@@ -140,3 +179,5 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 }
+
+
