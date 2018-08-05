@@ -70,7 +70,7 @@ public class User {
     }
 
     public Double getGeneralPoints() {
-        return generalPoints;
+        return Double.parseDouble(String.format("%.2f", generalPoints));
     }
 
     public void setGeneralPoints(Double generalPoints) {
@@ -78,7 +78,7 @@ public class User {
     }
 
     public Double getAvailablePoints() {
-        return availablePoints;
+        return Double.parseDouble(String.format("%.2f", availablePoints));
     }
 
     public void setAvailablePoints(Double availablePoints) {
