@@ -47,6 +47,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         // 设置键盘弹出收回通知
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        self.tableView.contentInset.bottom = 60
 		
     }
 
@@ -61,7 +63,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell:UITableViewCell!
-		// TODO: - 测试使用，后面再修改
 		cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
 		for subview in cell.contentView.subviews{
 			if subview .isKind(of: ExchangeItemCellView.self){
@@ -77,6 +78,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 					exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					exchangeItemCellView.proportion = card.proportion
 				}
+                break
 			}
 		}
 		return cell
@@ -112,7 +114,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     /// 键盘收回视图向下移动
     @objc func keyboardWillHide(notification:NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            self.tableView.contentInset.bottom = 0
+            self.tableView.contentInset.bottom = 60
         }
     }
     
@@ -120,14 +122,33 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	//MARK: - Target Action
     /// 全选积分项
 	@objc func selectAllCell() {
-        for cell in tableView.visibleCells {
-            for subview in cell.contentView.subviews{
+        // 选中所有的单元格
+        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
+        var indexPath:IndexPath
+        var cell:UITableViewCell?
+        for row in 0..<cellNumber {
+            indexPath = IndexPath(row: row, section: 0)
+            cell = tableView.cellForRow(at: indexPath)
+            for subview in (cell?.contentView.subviews)!{
                 if subview .isKind(of: ExchangeItemCellView.self){
                     let exchangeItemCellView = subview as! ExchangeItemCellView
                     exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+                    break
                 }
             }
         }
+        
+        // 选中所有可见的单元格
+//        for cell in tableView.visibleCells {
+//            for subview in cell.contentView.subviews{
+//                if subview .isKind(of: ExchangeItemCellView.self){
+//                    let exchangeItemCellView = subview as! ExchangeItemCellView
+//                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+//                }
+//            }
+//        }
+        
+        // 改变按钮名称
         if self.navigationItem.rightBarButtonItem?.title == "全选" {
             self.navigationItem.rightBarButtonItem?.title = "全不选"
         }
@@ -158,26 +179,57 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 						exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
 						exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					}
+                    break
 				}
 			}
 		}
 	}
-
-	// TODO: - 进行网络请求
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let isSuccess = true
-		// ...
-		if isSuccess {
-			//准备“兑换成功”数据
-
-			
-		}
-		else {
-			//准备“兑换失败”数据
-		}
-		
-	}
 	
+    // MARK: - 兑换积分网络请求
+    @IBAction func clickExchangeBtn(_ sender: Any) {
+        var allUnselected = true
+        
+        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
+        var indexPath:IndexPath
+        var cell:UITableViewCell?
+        outer: for row in 0..<cellNumber {
+            indexPath = IndexPath(row: row, section: 0)
+            cell = tableView.cellForRow(at: indexPath)
+            inner: for subview in (cell?.contentView.subviews)!{
+                if subview .isKind(of: ExchangeItemCellView.self){
+                    let exchangeItemCellView = subview as! ExchangeItemCellView
+                    if exchangeItemCellView.checkbox.isSelected == true {
+                        allUnselected = false
+                        break outer
+                    }
+                }
+            }
+        }
+        
+        // 判断是否有选择积分项
+        if allUnselected == true {
+//            alert = UIAlertController(title:"提示", message:"会员卡解绑成功！", preferredStyle:.alert)
+//            okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+//                self.navigationController!.popViewController(animated: true)
+//            })
+            return // 如果没有选择任何积分项则不跳转
+        }
+        
+        let isSuccess = true
+        
+        
+        if isSuccess {
+            //准备“兑换成功”数据
+            
+            
+        }
+        else {
+            //准备“兑换失败”数据
+        }
+        
+    }
+    
+    
 }
 
 
