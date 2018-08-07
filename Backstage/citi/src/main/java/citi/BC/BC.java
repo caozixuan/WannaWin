@@ -12,6 +12,11 @@ public class BC {
     public static ArrayList<Block> BC = new ArrayList<>();
     private static ConcurrentLinkedQueue<DealData> clq = new ConcurrentLinkedQueue<>();
 
+
+    static final public String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTJu5H9n0ixlxSpxbBUL02ywuEhCXpDhKFlIYbIsDzRKHxMXT//FTeprfti8sN6vBI4TB0MAGklezTNnP1TRvtbSzqAVCewsuUNJZtnodem4fipN9Ko9vJDtM4vCLuFq5c3yWBIcSVZRyTJQjA8A5E3eFnOncFPEK9rIw6qvSPMQIDAQAB";
+    static final public String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJMm7kf2fSLGXFKnFsFQvTbLC4SEJekOEoWUhhsiwPNEofExdP/8VN6mt+2Lyw3q8EjhMHQwAaSV7NM2c/VNG+1tLOoBUJ7Cy5Q0lm2eh16bh+Kk30qj28kO0zi8Iu4WrlzfJYEhxJVlHJMlCMDwDkTd4Wc6dwU8Qr2sjDqq9I8xAgMBAAECgYBmFp07acNZC9rjMK61wSj0SZuc/P08GZo5+FetncfVPelH5vLv4YSTz4BNGi3uYu7+8NPn16JcJ/NceSurpCpZ02E1Mn0fp3CWz+SBQFiCfU1S97aKq1F2bPY/qDVruXCww3or6V46vvXdecj6DG+DcFiyqbNK9DzFpI9RZvSoUQJBAPByAwHsuZOjYvLvUokb4Ai948PSw+1T9q5fmFHGCg1EUfOBjKrG0GC2ZBl4aHwM9ZRaLOxAe7EzTfDHTdea9t0CQQCcq+ZIxSkczOMy3vtM8uWHAWuaX2BR2JHSOPcMeuyLkMdwQUX6wpTjEDt9jjfYR8f+Zng+crB8cIXqZTDOYjJlAkBwVEM1bftQjt8WMVo0tbIXQ2cZv+hKgpRW6FAHu+ZMRmOmyBoIWnNVC0B+abMeaQt9sBcWlBV1NkuuNd4W4M19AkBFDBFiktnqonWjDtir8gSsOjkFAPG/QHYLsyVV77reS4FJ/MptmGHrrFS7ofkEraX7fYeS5hLX1PN/+PbIjkhtAkEAlW/2V/daEzvAXpc7Vfs4/mP2OWOzuHDtXSr91QAG2G15ZB6F3849f0lp9/L2yqfUD0TSQXyqAVFP+4X6hjkbdw==";
+
+
     public static void setDifficulty(int _difficulty) {
         difficulty = _difficulty;
     }
@@ -74,6 +79,12 @@ public class BC {
                 System.out.println("Previous Hashes not equal");
                 return false;
             }
+            //compare signature
+            if (!RSA.verify(currentBlock.getEnStr(), publicKey, currentBlock.getSignature())) {
+                // 验证签名
+                System.out.println("Signature not verify");
+                return false;
+            }
         }
         return true;
     }
@@ -100,23 +111,23 @@ public class BC {
         System.out.println("\n\n");
 
         Block genesisBlock = Block.getInitBlock();
-        blockchain.add(genesisBlock);
         System.out.println("Trying to Mine block 1... ");
-        blockchain.get(0).mineBlock(difficulty);
+        genesisBlock.mineBlock(difficulty);
+        blockchain.add(genesisBlock);
 
 
         DealData data2 = new DealData(DealData.DealType.IN, "1", "1", 678.0);
         Block secondBlock = new Block(genesisBlock, genesisBlock.getHash(), BC_Data.Data2BC_Data(data2));
-        blockchain.add(secondBlock);
         System.out.println("Trying to Mine block 2... ");
-        blockchain.get(1).mineBlock(difficulty);
+        secondBlock.mineBlock(difficulty);
+        blockchain.add(secondBlock);
 
 
         DealData data3 = new DealData(DealData.DealType.IN, "1", "123", 23.3);
         Block thirdBlock = new Block(secondBlock, secondBlock.getHash(), BC_Data.Data2BC_Data(data3));
-        blockchain.add(thirdBlock);
         System.out.println("Trying to Mine block 3... ");
-        blockchain.get(2).mineBlock(difficulty);
+        thirdBlock.mineBlock(difficulty);
+        blockchain.add(thirdBlock);
 
 
         System.out.println("\nBlockchain is Valid: " + isChainValid());
