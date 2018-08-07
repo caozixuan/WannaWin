@@ -33,6 +33,7 @@ class UserViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
         
     }
     
@@ -168,8 +169,15 @@ class UserViewController: UITableViewController {
     /// 绑定花旗账户
     func bindAccount(){
         if let _ = User.getUser().username{
-            let view = storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController")
-            self.navigationController?.pushViewController(view, animated: true)
+			activityIndicator?.startAnimating()
+			ServerConnector.bindCitiCard { (result, url) in
+				if result {
+					let view = self.storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController") as! AddBankCardViewController
+					view.url = url
+					self.navigationController?.pushViewController(view, animated: true)
+				}
+			}
+			
         }else{
             let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
             self.navigationController?.pushViewController(view, animated: true)
@@ -198,7 +206,7 @@ class UserViewController: UITableViewController {
     /// 查看历史订单
     func checkHistory(){
         if let _ = User.getUser().username{
-            activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
+            activityIndicator?.startAnimating()
             let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
 			self.navigationController?.pushViewController(view, animated: true)
 			

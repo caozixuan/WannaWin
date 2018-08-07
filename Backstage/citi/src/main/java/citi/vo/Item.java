@@ -1,6 +1,7 @@
 package citi.vo;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 public class Item {
     private String ItemID;
@@ -19,7 +20,7 @@ public class Item {
         this.description = description;
         this.merchantID = merchantID;
         this.logoURL = logoURL;
-        this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
+        this.originalPrice =  Double.parseDouble(String.format("%.2f", originalPrice));
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
