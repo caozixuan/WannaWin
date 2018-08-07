@@ -2,7 +2,7 @@
 //  ChoosePointInfo.swift
 //  PointExchange
 //
-//  Created by yiner on 2018/8/3.
+//  Created by panyy on 2018/8/3.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 

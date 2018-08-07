@@ -65,9 +65,11 @@ class AddCardTableViewController: UITableViewController {
 				}
 				else {
 					alert = UIAlertController(title:"绑定失败", message:nil, preferredStyle:.alert)
-					let cancelAction = UIAlertAction(title:"取消", style:.cancel, handler:nil)
-					alert.addAction(cancelAction)
+					let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+					})
+					alert.addAction(okAction)
 				}
+				self.activityIndicator?.stopAnimating()
 				self.present(alert, animated: true, completion: nil)
 			}
 			

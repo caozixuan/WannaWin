@@ -615,15 +615,13 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         return result;
     }
 
-    //点击item选中CheckBox
-    public void setSelectItem(int position) {
-        //对当前状态取反
-        if (map.get(position)) {
-            map.put(position, false);
-        } else {
-            map.put(position, true);
+
+    public void notifyCheckBoxChange(){
+        for (ExchangeModel model:sourceItems){
+            model.setChoose(true);
         }
-        notifyItemChanged(position);
+        notifyDataSetChanged();
+
     }
 
     //返回集合给MainActivity
