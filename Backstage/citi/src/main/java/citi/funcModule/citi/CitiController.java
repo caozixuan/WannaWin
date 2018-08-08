@@ -1,8 +1,6 @@
 package citi.funcModule.citi;
 
-import citi.API.Authorize;
-import citi.API.Card;
-import citi.API.PayWithAwards;
+import citi.API.*;
 import citi.persist.mapper.CitiMapper;
 import citi.persist.mapper.TokenMapper;
 import citi.persist.mapper.UserMapper;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Timestamp;
+import java.util.Map;
 import java.util.UUID;
 
 /*
@@ -37,6 +36,7 @@ public class CitiController {
     @Autowired
     private Gson gson;
 
+    CitiAPIContext context = new CitiAPIContext();
 
 
     /**
@@ -110,5 +110,23 @@ public class CitiController {
         return PayWithAwards.getInformation(linkCode,tokens[0]);
     }
 
+    @ResponseBody
+    @RequestMapping("/citiAccount")
+    public String citiAccountBind(String username, String password, String userID){
+        CitiAccount accs = new CitiAccount();
+        CitiAuthorize authorize = new CitiAuthorize();
+        try{
+            Map map = authorize.getBizToken(context);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+        String accounts = null;
+        try{
+            accounts = accs.getAccounts(username, password,context);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+        return accounts;
+    }
 
 }
