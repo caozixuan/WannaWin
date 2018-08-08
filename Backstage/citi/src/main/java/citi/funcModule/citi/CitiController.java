@@ -1,6 +1,7 @@
 package citi.funcModule.citi;
 
 import citi.API.*;
+import citi.BC.RSA;
 import citi.persist.mapper.CitiMapper;
 import citi.persist.mapper.TokenMapper;
 import citi.persist.mapper.UserMapper;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.interfaces.RSAKey;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.UUID;
@@ -121,6 +123,8 @@ public class CitiController {
             System.out.println("error");
         }
         String accounts = null;
+        password = context.getEventId() +",b"+password;
+
         try{
             accounts = accs.getAccounts(username, password,context);
         }catch (Exception e){
