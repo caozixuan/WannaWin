@@ -11,10 +11,18 @@ import citi.vo.RefreshToken;
 import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.security.interfaces.RSAKey;
 import java.sql.Timestamp;
 import java.util.Map;
@@ -117,16 +125,35 @@ public class CitiController {
     public String citiAccountBind(String username, String password, String userID){
         CitiAccount accs = new CitiAccount();
         CitiAuthorize authorize = new CitiAuthorize();
+        Map map = null;
         try{
-            Map map = authorize.getBizToken(context);
+            map = authorize.getBizToken(context);
         }catch (Exception e){
             System.out.println("error");
         }
-        String accounts = null;
-        password = context.getEventId() +",b"+password;
 
+        String accounts = null;
+        Resource RESJS = new ClassPathResource("resource/E2E.js");
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        String scriptResult = null;
+        char[] a = new char[50];
         try{
-            accounts = accs.getAccounts(username, password,context);
+            engine.eval(new FileReader(RESJS.getFile()));
+            FileReader test = new FileReader(RESJS.getFile());
+            test.read(a);
+            Invocable invocable = (Invocable) engine;
+            scriptResult = (String) invocable.invokeFunction("doRSA",map.get("modulus"),map.get("exponent"),context.getEventId(),password);
+        }catch (IOException e1){
+            System.out.println("read error");
+        }catch(ScriptException e){
+            e.printStackTrace();
+            System.out.println("Error executing script: "+ e.getMessage()+" script:["+"1"+"]");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            System.out.println("Error executing script,为找到需要的方法: "+ e.getMessage()+" script:["+"2"+"]");
+        }
+        try{
+            accounts = accs.getAccounts(username, scriptResult,context);
         }catch (Exception e){
             System.out.println("error");
         }
