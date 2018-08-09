@@ -1,6 +1,5 @@
 //
 //  ModifyPasswordTableViewController.swift
-//  
 //
 //  Created by panyy on 2018/7/16.
 //
@@ -16,11 +15,6 @@ class ModifyPasswordTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {

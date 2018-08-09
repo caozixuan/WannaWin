@@ -297,6 +297,7 @@ class ServerConnector: NSObject {
                         merchant.name = data["merchantName"].string!
                         card.merchant = merchant
                         card.points = data["points"].double!
+						card.number = data["cardNum"].string
                         card.proportion = data["proportion"].double
                         card.logoURL = data["logoURL"].string
                         cards.append(card)

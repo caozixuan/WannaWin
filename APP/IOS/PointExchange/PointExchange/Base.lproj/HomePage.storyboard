@@ -300,19 +300,19 @@
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbC-0T-OQ7">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="54"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兑换花旗点:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptv-dl-DiO">
+                                                <rect key="frame" x="16" y="15" width="95" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hc0-0O-H4N">
-                                                <rect key="frame" x="119" y="0.5" width="100" height="53.5"/>
+                                                <rect key="frame" x="119" y="0.0" width="100" height="53.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="2F0-yo-QWN"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="38"/>
                                                 <color key="textColor" red="1" green="0.5490196078431373" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兑换花旗点:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptv-dl-DiO">
-                                                <rect key="frame" x="16" y="15" width="95" height="25.5"/>
-                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -560,10 +560,28 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Hp3-iz-5SH">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="85" id="FZx-ME-Y0L">
+                                        <rect key="frame" x="0.0" y="521" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FZx-ME-Y0L" id="NBD-Qg-3CF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhm-Ca-dHM">
+                                                    <rect key="frame" x="7" y="0.0" width="359" height="85"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="bXE-XH-Xxr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="unbind" rowHeight="59" id="uWX-xX-e0k">
-                                        <rect key="frame" x="0.0" y="521" width="375" height="59"/>
+                                        <rect key="frame" x="0.0" y="642" width="375" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uWX-xX-e0k" id="Wcz-BM-1i5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
@@ -588,6 +606,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="barCodeView" destination="xhm-Ca-dHM" id="R4a-sf-cKs"/>
                         <outlet property="cardImageView" destination="AJO-bp-IJq" id="DVh-co-uTE"/>
                         <outlet property="citiPointLabelView" destination="UaM-6P-ln7" id="rwD-3d-eNC"/>
                         <outlet property="numberLabel" destination="k8P-S3-aB8" id="pUv-Td-wER"/>
@@ -596,7 +615,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVu-Yc-VaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2908" y="-396"/>
+            <point key="canvasLocation" x="2908" y="-396.25187406296857"/>
         </scene>
         <!--Exchange History Table View Controller-->
         <scene sceneID="pss-0h-0BS">
