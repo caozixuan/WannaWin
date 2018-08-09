@@ -1,8 +1,7 @@
 package citi.funcModule.citi;
 
-import citi.API.Authorize;
-import citi.API.Card;
-import citi.API.PayWithAwards;
+import citi.API.*;
+import citi.BC.RSA;
 import citi.persist.mapper.CitiMapper;
 import citi.persist.mapper.TokenMapper;
 import citi.persist.mapper.UserMapper;
@@ -12,11 +11,21 @@ import citi.vo.RefreshToken;
 import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.security.interfaces.RSAKey;
 import java.sql.Timestamp;
+import java.util.Map;
 import java.util.UUID;
 
 /*
@@ -37,6 +46,7 @@ public class CitiController {
     @Autowired
     private Gson gson;
 
+    CitiAPIContext context = new CitiAPIContext();
 
 
     /**
@@ -110,5 +120,44 @@ public class CitiController {
         return PayWithAwards.getInformation(linkCode,tokens[0]);
     }
 
+    @ResponseBody
+    @RequestMapping("/citiAccount")
+    public String citiAccountBind(String username, String password, String userID){
+        CitiAccount accs = new CitiAccount();
+        CitiAuthorize authorize = new CitiAuthorize();
+        Map map = null;
+        try{
+            map = authorize.getBizToken(context);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+
+        String accounts = null;
+        Resource RESJS = new ClassPathResource("resource/E2E.js");
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        String scriptResult = null;
+        char[] a = new char[50];
+        try{
+            engine.eval(new FileReader(RESJS.getFile()));
+            FileReader test = new FileReader(RESJS.getFile());
+            test.read(a);
+            Invocable invocable = (Invocable) engine;
+            scriptResult = (String) invocable.invokeFunction("doRSA",map.get("modulus"),map.get("exponent"),context.getEventId(),password);
+        }catch (IOException e1){
+            System.out.println("read error");
+        }catch(ScriptException e){
+            e.printStackTrace();
+            System.out.println("Error executing script: "+ e.getMessage()+" script:["+"1"+"]");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            System.out.println("Error executing script,为找到需要的方法: "+ e.getMessage()+" script:["+"2"+"]");
+        }
+        try{
+            accounts = accs.getAccounts(username, scriptResult,context);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+        return accounts;
+    }
 
 }

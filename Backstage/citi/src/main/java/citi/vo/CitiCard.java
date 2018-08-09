@@ -1,5 +1,7 @@
 package citi.vo;
 
+import java.text.DecimalFormat;
+
 public class CitiCard {
     private String citiCardID;
     private String citiCardNum;
@@ -12,7 +14,8 @@ public class CitiCard {
         this.citiCardNum = citiCardNum;
         this.phoneNum = phoneNum;
         this.userID = userID;
-        this.miniExpense = miniExpense;
+        DecimalFormat df = new DecimalFormat("#.00");
+        this.miniExpense = Double.valueOf(df.format(miniExpense));
     }
 
     public String getCitiCardID() {
