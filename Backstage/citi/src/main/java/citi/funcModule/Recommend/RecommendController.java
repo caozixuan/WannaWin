@@ -1,13 +1,19 @@
 package citi.funcModule.Recommend;
 
 
+import citi.vo.Item;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +37,10 @@ public class RecommendController {
     @ResponseBody
     @RequestMapping("/initPref")
     public String initPref(ArrayList<String> prefList){
-        if(recommendService.initPref(prefList))
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String userID = (String)session.getAttribute("userID");
+        if(recommendService.initPref(userID,prefList))
             return "[{\"status\":\"true\"}]";
         else
             return "[{\"status\":\"false\"}]";
@@ -45,8 +54,11 @@ public class RecommendController {
      */
     @ResponseBody
     @RequestMapping("/addRecord")
-    public String addRecord(String itemID){
-        if(recommendService.addRecord(itemID))
+    public String addRecord(String itemID, Timestamp time){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String userID = (String)session.getAttribute("userID");
+        if(recommendService.addRecord(userID,itemID,time))
             return "[{\"status\":\"true\"}]";
         else
             return "[{\"status\":\"false\"}]";
@@ -60,11 +72,11 @@ public class RecommendController {
      */
     @ResponseBody
     @RequestMapping("/getRecommendedItems")
-    public ArrayList<Item> getRecommendedItems(){
-        if(recommendService.addRecord(itemID))
-            return "[{\"status\":\"true\"}]";
-        else
-            return "[{\"status\":\"false\"}]";
+    public String getRecommendedItems(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String userID = (String)session.getAttribute("userID");
+        return gson.toJson(recommendService.getRecommendedItems(userID));
     }
 
 
