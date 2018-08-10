@@ -206,7 +206,6 @@ class UserViewController: UITableViewController {
     /// 查看历史订单
     func checkHistory(){
         if let _ = User.getUser().username{
-            activityIndicator?.startAnimating()
             let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
 			self.navigationController?.pushViewController(view, animated: true)
 			

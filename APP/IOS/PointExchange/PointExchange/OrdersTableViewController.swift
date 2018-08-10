@@ -62,8 +62,6 @@ class OrdersTableViewController: UIViewController {
             }
         case "usedView":
             if let view = segue.destination as? DoubleSectionOrderViewController{
-                view.orders = self.usedOrders
-				view.items = self.usedItems
             }
         case "expireView":
             if let view = segue.destination as? SingleSectionOrderViewController{

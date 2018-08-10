@@ -14,8 +14,8 @@ import RxCocoa
 class DoubleSectionOrderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var orders:[Order]?
-	var items:[Item]?
+    var orders:[Order] = [Order]()
+	var items:[Item] = [Item]()
     
     // tableView相关
     var dataSource:RxTableViewSectionedReloadDataSource<SectionModel<String,Order>>?
@@ -44,8 +44,8 @@ class DoubleSectionOrderViewController: UIViewController {
         
         // 绑定数据源
 		let obs = Observable.just([
-				SectionModel(model:"使用优惠券",items:items!),
-				SectionModel(model:"使用积分",items:orders!)
+				SectionModel(model:"使用优惠券",items:items),
+				SectionModel(model:"使用积分",items:orders)
                 ])
         
     }

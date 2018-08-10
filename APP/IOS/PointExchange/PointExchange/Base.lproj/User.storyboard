@@ -986,6 +986,21 @@
             </objects>
             <point key="canvasLocation" x="1616.8" y="-1995.6521739130437"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="B2c-c6-qpI">
+            <objects>
+                <viewController id="J1I-3M-UwK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kcn-b6-uDK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yyL-mo-FSs"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YRc-vx-pCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2273" y="-2019"/>
+        </scene>
         <!--我的订单-->
         <scene sceneID="tBa-nQ-tky">
             <objects>
@@ -1258,7 +1273,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ye0-Hz-MaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2696.8000000000002" y="-2053.223388305847"/>
+            <point key="canvasLocation" x="3002" y="-2138"/>
         </scene>
         <!--关于-->
         <scene sceneID="Ac7-lZ-1Bg">
