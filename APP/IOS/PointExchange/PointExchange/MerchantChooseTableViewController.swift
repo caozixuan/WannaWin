@@ -24,13 +24,13 @@ class MerchantChooseTableViewController: UIViewController {
 	
 	var activityIndicator:UIActivityIndicatorView?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		self.tableView.rowHeight = 60
 		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
 		activityIndicator?.startAnimating()
 		requestMerchantsInfo()
-    }
+	}
 	
 	/// 请求数据
 	func requestMerchantsInfo(){
@@ -39,27 +39,7 @@ class MerchantChooseTableViewController: UIViewController {
 				ServerConnector.getMerchantsInfos(start: 0, n: count){(result,merchants) in
 					if result {
 						self.merchants = merchants
-						let observable = Observable.empty().asObservable()
-							.startWith(())
-							.flatMapLatest(self.getDatas)
-							.flatMap(self.filter)
-							.share(replay:1)
-						self.dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Merchant>>(configureCell: { (dataSource,view,indexPath,element) in
-							let cell = view.dequeueReusableCell(withIdentifier: "cell")!
-							(cell.viewWithTag(1) as? UILabel)?.text = element.name
-							(cell.viewWithTag(2) as? UIImageView)?.imageFromURL(element.logoURL!, placeholder: UIImage())
-							return cell
-						})
-						observable.bind(to: self.tableView.rx.items(dataSource: self.dataSource!)).disposed(by: self.disposeBag)
-						// 点击事件
-						self.tableView.rx.itemSelected.map{ indexPath in
-							return (indexPath,self.dataSource![indexPath])
-							}.subscribe(onNext: { indexPath, model in
-								let sb = UIStoryboard(name: "HomePage", bundle: nil)
-								let view = sb.instantiateViewController(withIdentifier: "AddCardTableView") as! AddCardTableViewController
-								view.merchant = self.merchants[indexPath.row]
-								self.navigationController?.pushViewController(view, animated: true)
-							}).disposed(by:self.disposeBag)
+						self.setTableCell()
 					}
 					self.activityIndicator?.stopAnimating()
 				}
@@ -67,6 +47,32 @@ class MerchantChooseTableViewController: UIViewController {
 		}
 	}
 
+	/// 设置单元格
+	func setTableCell(){
+		let observable = Observable.empty().asObservable()
+			.startWith(())
+			.flatMapLatest(self.getDatas)
+			.flatMap(self.filter)
+			.share(replay:1)
+		self.dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,Merchant>>(configureCell: { (dataSource,view,indexPath,element) in
+			let cell = view.dequeueReusableCell(withIdentifier: "cell")!
+			(cell.viewWithTag(1) as? UILabel)?.text = element.name
+			(cell.viewWithTag(2) as? UIImageView)?.imageFromURL(element.logoURL!, placeholder: UIImage())
+			cell.selectedBackgroundView = UIView()
+			cell.selectedBackgroundView?.backgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1.0)
+			return cell
+		})
+		observable.bind(to: self.tableView.rx.items(dataSource: self.dataSource!)).disposed(by: self.disposeBag)
+		// 点击事件
+		self.tableView.rx.itemSelected.map{ indexPath in
+			return (indexPath,self.dataSource![indexPath])
+			}.subscribe(onNext: { indexPath, model in
+				let sb = UIStoryboard(name: "HomePage", bundle: nil)
+				let view = sb.instantiateViewController(withIdentifier: "AddCardViewController") as! AddCardViewController
+				view.merchant = self.merchants[indexPath.row]
+				self.navigationController?.pushViewController(view, animated: true)
+			}).disposed(by:self.disposeBag)
+	}
 	
 	/// 获得商户信息后的回调函数
 	func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
@@ -143,7 +149,7 @@ class MerchantChooseTableViewController: UIViewController {
                 MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
                 
                 let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-                let view = storyboard.instantiateViewController(withIdentifier: "AddCardTableView") as? AddCardTableViewController
+                let view = storyboard.instantiateViewController(withIdentifier: "AddCardViewController") as? AddCardViewController
                 view?.merchant = MerchantList.get(merchantID: cardTypes[0].merchantID!)
                 self.navigationController?.pushViewController(view!, animated: true)
             }
