@@ -2,9 +2,12 @@ package citi.funcModule.Recommend;
 
 import Jama.Matrix;
 import citi.persist.mapper.ItemMapper;
+import citi.persist.mapper.MerchantMapper;
+import citi.persist.mapper.OrderMapper;
 import citi.persist.mapper.UserMapper;
 import citi.vo.Item;
 import citi.vo.Merchant;
+import citi.vo.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -17,6 +20,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class RecommendService {
@@ -25,6 +29,10 @@ public class RecommendService {
     private PrefMapper prefMapper;
     @Autowired
     private RecordMapper recordMapper;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private MerchantMapper merchantMapper;
     @Autowired
     private ItemMapper itemMapper;
 
@@ -79,21 +87,34 @@ public class RecommendService {
 
     /**
      * 返回用户的推荐商户列表
-     * @param merchantID
-     * @return ArrayList<Merchant>
-     */
-    public ArrayList<Merchant> getRecommendedMerchants(String merchantID){
-        return null;
-    }
-
-    /**
-     * 返回用户的商户喜好评分
      * @param userID
      * @return ArrayList<Merchant>
      */
-    public double getMerchantPoints(String userID){
-        double points = 10;
+    public ArrayList<Merchant> getRecommendedMerchants(String userID){
+        ArrayList<UserMerchantPoints> userMerchantPointsArrayList = getUserInterestToMerchants(userID);
+        ArrayList<Merchant> merchants = new ArrayList<Merchant>();
+        for(UserMerchantPoints userMerchantPoints:userMerchantPointsArrayList){
+            merchants.add(merchantMapper.selectByID(userMerchantPoints.merchantID));
+        }
+        return merchants;
+    }
+
+    /**
+     * 返回用户对商户喜好评分
+     * @param userID
+     * @return ArrayList<Merchant>
+     */
+    public double getMerchantPoints(String userID, String merchantID){
+        double points = 0;
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
+        // TODO: 这里缺用户浏览和用户积分消费的接口
+        List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
+        int counter = 0;
+        for(Order order:orderList){
+            if(order.getState()== Order.OrderState.SUCCESS)
+                counter++;
+        }
+        points = 5*counter;
         return points;
     }
 
@@ -140,16 +161,25 @@ public class RecommendService {
      * 获取用户商户评分数组
      */
     public ArrayList<MerchantPoints> getMerchantPointsArray(){
-        double[] points1 = {1,2,3};
-        double[] points2 = {2,3,4};
-        double[] points3 = {3,4,5};
-        MerchantPoints merchantPoints1 = new MerchantPoints("1",points1);
-        MerchantPoints merchantPoints2 = new MerchantPoints("2",points2);
-        MerchantPoints merchantPoints3 = new MerchantPoints("3",points3);
+        //double[] points1 = {1,2,3};
+        //double[] points2 = {2,3,4};
+        //double[] points3 = {3,4,5};
         ArrayList<MerchantPoints> results = new ArrayList<MerchantPoints>();
-        results.add(merchantPoints1);
-        results.add(merchantPoints2);
-        results.add(merchantPoints3);
+        // TODO:这里缺获取所用用户userID的方法
+        ArrayList<String> userIDs = new ArrayList<String>();
+        ArrayList<String> merchantIDs = new ArrayList<String>();
+        for(String merchantID:merchantIDs){
+            ArrayList<Double> points = new ArrayList<Double>();
+            for(String userID: userIDs){
+                points.add(getMerchantPoints(userID,merchantID));
+            }
+            double[] pointsArray = new double[points.size()];
+            for(int i=0;i<points.size();i++){
+                pointsArray[i]=points.get(i);
+            }
+            MerchantPoints merchantPoints = new MerchantPoints(merchantID,pointsArray);
+            results.add(merchantPoints);
+        }
         return results;
     }
     public static double cosineSimilarity(double[] A, double[] B) {
@@ -206,9 +236,9 @@ public class RecommendService {
      * 获得最终用户对商品的喜好评分，并从大到小排序
      */
 
-    public ArrayList<UserMerchantPoints> getUserInterestToMerchants(){
+    public ArrayList<UserMerchantPoints> getUserInterestToMerchants(String userID){
         ArrayList<MerchantSimilarity> similarities = getMerchantSimilarities();
-        ArrayList<UserMerchantPoints> userMerchantPointsArrayList = getUserPointsToMerchants("1");
+        ArrayList<UserMerchantPoints> userMerchantPointsArrayList = getUserPointsToMerchants(userID);
         ArrayList<UserMerchantPoints> results = new ArrayList<UserMerchantPoints>();
         for(UserMerchantPoints userMerchantPoints:userMerchantPointsArrayList){
             double points = 0;
