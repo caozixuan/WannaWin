@@ -15,6 +15,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -172,8 +176,20 @@ public class RecommendService {
             MerchantPoints merchantPoints = new MerchantPoints(merchantID,pointsArray);
             results.add(merchantPoints);
         }
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(
+                    new FileOutputStream("similarity.txt"));
+            os.writeObject(results);// 将List列表写进文件
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return results;
     }
+
+    
     public static double cosineSimilarity(double[] A, double[] B) {
         if (A.length != B.length) {
             return 2.0000;
