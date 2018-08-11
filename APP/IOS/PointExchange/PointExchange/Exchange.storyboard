@@ -6,6 +6,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -103,40 +107,48 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ux7-5b-8gI" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
                                 <rect key="frame" x="26" y="170" width="323" height="393"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="抵扣成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcq-Ry-cCG">
-                                        <rect key="frame" x="116" y="192" width="90" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-3000.00P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joA-W5-WnC">
+                                        <rect key="frame" x="86.5" y="80" width="150" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" name="main_orange"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥200.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-JO-0uK">
-                                        <rect key="frame" x="99" y="132" width="124" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥200.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-JO-0uK">
+                                        <rect key="frame" x="106.5" y="186" width="110" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                        <color key="textColor" red="0.60392156862745094" green="0.52549019607843139" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" name="main_lightGreen"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Grand Canal III" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WL-4r3">
-                                        <rect key="frame" x="-10" y="242" width="343" height="134"/>
+                                        <rect key="frame" x="10" y="274" width="303" height="111"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥220.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3R-iX-nn4">
-                                        <rect key="frame" x="103" y="160" width="115" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥220.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3R-iX-nn4">
+                                        <rect key="frame" x="129.5" y="227.5" width="64" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-3000.00P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joA-W5-WnC">
-                                        <rect key="frame" x="93" y="75" width="135" height="33"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抵扣成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcq-Ry-cCG">
+                                        <rect key="frame" x="126.5" y="125" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.16078431372549018" green="0.16078431372549018" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="-2"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Kcq-Ry-cCG" firstAttribute="top" secondItem="joA-W5-WnC" secondAttribute="bottom" constant="8" id="Lea-1r-VMR"/>
+                                    <constraint firstItem="dHe-JO-0uK" firstAttribute="top" secondItem="Kcq-Ry-cCG" secondAttribute="bottom" constant="40" id="NP3-ov-Izs"/>
+                                    <constraint firstItem="m3R-iX-nn4" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="OTt-Ey-6CE"/>
+                                    <constraint firstItem="joA-W5-WnC" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="PVD-7V-nyZ"/>
+                                    <constraint firstItem="Kcq-Ry-cCG" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="Ws5-Do-vep"/>
+                                    <constraint firstItem="m3R-iX-nn4" firstAttribute="top" secondItem="dHe-JO-0uK" secondAttribute="bottom" constant="8" id="g7J-jr-zkm"/>
+                                    <constraint firstItem="dHe-JO-0uK" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="iQe-Mw-2nX"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                         <color key="value" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -155,9 +167,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="starbucks" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-6h-nWJ">
-                                <rect key="frame" x="124" y="96" width="127" height="127"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-6h-nWJ">
+                                <rect key="frame" x="123" y="105" width="129" height="129"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="onQ-6h-nWJ" secondAttribute="height" multiplier="1:1" id="fYe-bA-80Y"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="20"/>
@@ -167,8 +181,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="joA-W5-WnC" firstAttribute="top" secondItem="onQ-6h-nWJ" secondAttribute="bottom" constant="16" id="0FO-T6-uW5"/>
                             <constraint firstItem="Ux7-5b-8gI" firstAttribute="leading" secondItem="Rcu-ps-zKw" secondAttribute="leading" constant="26" id="Dhp-bV-IVj"/>
+                            <constraint firstItem="onQ-6h-nWJ" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="HgB-Je-h8j"/>
                             <constraint firstItem="Rcu-ps-zKw" firstAttribute="bottom" secondItem="Ux7-5b-8gI" secondAttribute="bottom" constant="104" id="IJh-mm-mhn"/>
+                            <constraint firstItem="onQ-6h-nWJ" firstAttribute="width" secondItem="Ux7-5b-8gI" secondAttribute="width" multiplier="0.4" id="Xt5-FN-flz"/>
+                            <constraint firstItem="onQ-6h-nWJ" firstAttribute="centerY" secondItem="Ux7-5b-8gI" secondAttribute="top" id="dZ8-MY-Npk"/>
                             <constraint firstItem="Rcu-ps-zKw" firstAttribute="trailing" secondItem="Ux7-5b-8gI" secondAttribute="trailing" constant="26" id="j1Y-8d-ufm"/>
                             <constraint firstItem="Ux7-5b-8gI" firstAttribute="top" secondItem="Rcu-ps-zKw" secondAttribute="top" constant="106" id="mQH-ah-2Nq"/>
                         </constraints>
@@ -194,5 +212,11 @@
         <image name="erweima" width="23" height="23"/>
         <image name="pay" width="24" height="23"/>
         <image name="starbucks" width="1009" height="987"/>
+        <namedColor name="main_lightGreen">
+            <color red="0.60399997234344482" green="0.52499997615814209" blue="0.086000002920627594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="main_orange">
+            <color red="1" green="0.58399999141693115" blue="0.27500000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
