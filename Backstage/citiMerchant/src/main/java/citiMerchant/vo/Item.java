@@ -1,7 +1,9 @@
 package citiMerchant.vo;
 
+
 import java.sql.Timestamp;
 import java.util.UUID;
+
 
 public class Item {
     private String ItemID;
@@ -13,8 +15,15 @@ public class Item {
     private Integer points;
     private Timestamp overdueTime;
     private Long stock;
+    private String itemType;
 
-    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
+
+    public Type.ItemType getItemType() {
+        return Type.ItemType.getItemType(itemType);
+    }
+
+    //for DB
+    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, String itemType) {
         ItemID = itemID;
         this.name = name;
         this.description = description;
@@ -24,13 +33,17 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
+        this.itemType = itemType;
     }
+
 
     public Item() {
         this.ItemID = UUID.randomUUID().toString();
     }
 
-    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
+
+    //for programmer
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, Type.ItemType itemType) {
         this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
@@ -40,6 +53,7 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
+        this.itemType = Type.ItemType.getItemTypeString(itemType);
     }
 
     public String getItemID() {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		14ECA9B05A9DED1BC9FCBD4E /* Pods_PointExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */; };
 		3E23A75021140AA300D19749 /* ChoosePointInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */; };
+		3E23A754211E94A600D19749 /* DiscoverCouponView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E23A752211E94A600D19749 /* DiscoverCouponView.xib */; };
+		3E23A756211EC01600D19749 /* DiscoverCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E23A755211EC01600D19749 /* DiscoverCouponView.swift */; };
 		3E4017F021005FA700591B77 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4017EF21005FA700591B77 /* LoginView.swift */; };
 		3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75920EFDFA000843193 /* Store.storyboard */; };
 		3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75B20EFDFE400843193 /* Exchange.storyboard */; };
@@ -23,6 +25,8 @@
 		3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155B20EE0117000743C0 /* SettingViewController.swift */; };
 		3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C155F20EE0185000743C0 /* LoginViewController.swift */; };
 		3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C156120EE01AB000743C0 /* SignUpViewController.swift */; };
+		3E5FD378211ECCA600ECE558 /* DsMerchantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */; };
+		3E5FD379211ECCA600ECE558 /* DsMerchantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */; };
 		3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */; };
 		3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B720EDAEDE00915561 /* Assets.xcassets */; };
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
@@ -86,6 +90,8 @@
 
 /* Begin PBXFileReference section */
 		3E23A74F21140AA300D19749 /* ChoosePointInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePointInfo.swift; sourceTree = "<group>"; };
+		3E23A752211E94A600D19749 /* DiscoverCouponView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverCouponView.xib; sourceTree = "<group>"; };
+		3E23A755211EC01600D19749 /* DiscoverCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCouponView.swift; sourceTree = "<group>"; };
 		3E4017EF21005FA700591B77 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E46B75920EFDFA000843193 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		3E46B75B20EFDFE400843193 /* Exchange.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exchange.storyboard; sourceTree = "<group>"; };
@@ -101,6 +107,8 @@
 		3E4C155B20EE0117000743C0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3E4C155F20EE0185000743C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E4C156120EE01AB000743C0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DsMerchantTableViewCell.swift; sourceTree = "<group>"; };
+		3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DsMerchantTableViewCell.xib; sourceTree = "<group>"; };
 		3E8AB4AD20EDAEDC00915561 /* PointExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PointExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E8AB4B720EDAEDE00915561 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -304,6 +312,8 @@
 				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
+				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
+				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -413,6 +423,8 @@
 				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
 				3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */,
 				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
+				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
+				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -493,6 +505,8 @@
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
 				3EA3CD052102472000B0392E /* ExchangeItemCellView.xib in Resources */,
+				3E23A754211E94A600D19749 /* DiscoverCouponView.xib in Resources */,
+				3E5FD379211ECCA600ECE558 /* DsMerchantTableViewCell.xib in Resources */,
 				B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */,
 				B6C480662100C143002ED9C9 /* LoginView.xib in Resources */,
 				3E46B75E20EFE00400843193 /* Discover.storyboard in Resources */,
@@ -618,6 +632,7 @@
 				B6A6EC5420F106060079FFA4 /* OrdersTableViewController.swift in Sources */,
 				3EA3CD0721033D6A00B0392E /* HuaQiStoreWebViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
+				3E5FD378211ECCA600ECE558 /* DsMerchantTableViewCell.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
@@ -625,6 +640,7 @@
 				3EBF049220F99854004D6D8E /* ExchangeHistoryTableViewController.swift in Sources */,
 				B66CFB2920F8AE2C007165DF /* Order.swift in Sources */,
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
+				3E23A756211EC01600D19749 /* DiscoverCouponView.swift in Sources */,
 				3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				B66CFB4120FE2D45007165DF /* PointsHistory.swift in Sources */,
