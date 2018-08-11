@@ -47,6 +47,8 @@
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
 		3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */; };
 		3EFEFA0E210B004600BC760E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0D210B004600BC760E /* Item.swift */; };
+		844CF6E1211EC05600B232DF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CF6DF211EC05600B232DF /* GradientView.swift */; };
+		844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 844CF6E0211EC05600B232DF /* LICENSE.txt */; };
 		847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
@@ -130,6 +132,8 @@
 		3EFEFA0D210B004600BC760E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
+		844CF6DF211EC05600B232DF /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		844CF6E0211EC05600B232DF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishExchangeToGeneralViewController.swift; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -361,6 +365,8 @@
 		3EA0334920EDCDF700D05A03 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				844CF6DF211EC05600B232DF /* GradientView.swift */,
+				844CF6E0211EC05600B232DF /* LICENSE.txt */,
 				3EA0334A20EDCE3E00D05A03 /* UIColorExtension.swift */,
 				B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */,
 				3E46B77220F0BD5C00843193 /* UIViewControllerExtension.swift */,
@@ -494,6 +500,7 @@
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
 				B66CFB2420F88B60007165DF /* MenuData.plist in Resources */,
 				3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */,
+				844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */,
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
@@ -589,6 +596,7 @@
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */,
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
+				844CF6E1211EC05600B232DF /* GradientView.swift in Sources */,
 				3E4017F021005FA700591B77 /* LoginView.swift in Sources */,
 				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
 				847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */,

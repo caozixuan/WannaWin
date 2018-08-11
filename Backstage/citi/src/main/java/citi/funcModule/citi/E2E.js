@@ -1179,11 +1179,4 @@ function pubKeyCheck() {
             throw "-103"
         }
     }
-}
-function doRSA(modulus,exponent, eventId, password) {
-    var pub = new RSAKey();
-    pub.setPublic(modulus,exponent);
-    var unencrypted_data = eventId +",b"+password;
-    var encrypted_password = pub.encryptB(getByteArray(unencrypted_data)).toString(16);
-    return encrypted_password;
 };

@@ -843,7 +843,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="历史订单" translatesAutoresizingMaskIntoConstraints="NO" id="b45-0r-0Dq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="兑换记录" translatesAutoresizingMaskIntoConstraints="NO" id="b45-0r-0Dq">
                                                     <rect key="frame" x="16" y="17" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1811,6 +1811,7 @@
         <image name="MyUnselected" width="24" height="24"/>
         <image name="portrait_1userTabMe" width="128" height="128"/>
         <image name="下箭头" width="24" height="24"/>
+        <image name="兑换记录" width="48" height="48"/>
         <image name="关于我们" width="48" height="48"/>
         <image name="历史订单" width="49" height="48"/>
         <image name="反馈意见" width="48" height="48"/>
