@@ -14,9 +14,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomepageStackView" customModule="PointExchange" customModuleProvider="target">
             <connections>
                 <outlet property="availablePointsLabel" destination="sgc-Ux-trY" id="u22-4D-6Dg"/>
-                <outlet property="cardImage1" destination="4g5-FI-MWS" id="nhW-53-5U2"/>
-                <outlet property="cardImage2" destination="LAF-bV-xyb" id="GyJ-ix-zIc"/>
-                <outlet property="cardImage3" destination="4Db-OO-ZrJ" id="vwL-Tm-KoU"/>
+                <outlet property="cardImage1" destination="4Db-OO-ZrJ" id="VIj-En-1Wj"/>
+                <outlet property="cardImage2" destination="4g5-FI-MWS" id="j6P-if-hAc"/>
+                <outlet property="cardImage3" destination="LAF-bV-xyb" id="E3O-1x-wCr"/>
                 <outlet property="cardScrollView" destination="kjJ-VY-RPH" id="57S-w0-upJ"/>
                 <outlet property="currentCitiPointLabel" destination="kC7-0q-vqg" id="C2A-6p-udC"/>
                 <outlet property="exchangeBtn" destination="Bqt-0E-Vcu" id="cfd-zX-PSK"/>
@@ -125,7 +125,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
                             <rect key="frame" x="0.0" y="0.5" width="615" height="269.5"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="4g5-FI-MWS">
+                                <imageView clipsSubviews="YES" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="4g5-FI-MWS">
                                     <rect key="frame" x="0.0" y="0.5" width="200" height="269.5"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -133,7 +133,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
-                                <imageView clipsSubviews="YES" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="LAF-bV-xyb">
+                                <imageView clipsSubviews="YES" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="LAF-bV-xyb">
                                     <rect key="frame" x="415" y="0.5" width="200" height="269.5"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -141,7 +141,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
-                                <imageView clipsSubviews="YES" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="4Db-OO-ZrJ">
+                                <imageView clipsSubviews="YES" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="4Db-OO-ZrJ">
                                     <rect key="frame" x="208" y="0.5" width="200" height="269.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="vT3-k8-atZ"/>
