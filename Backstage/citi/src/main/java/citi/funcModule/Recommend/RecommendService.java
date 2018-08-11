@@ -109,12 +109,7 @@ public class RecommendService {
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
         // TODO: 这里缺用户浏览和用户积分消费的接口
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
-        int counter = 0;
-        for(Order order:orderList){
-            if(order.getState()== Order.OrderState.SUCCESS)
-                counter++;
-        }
-        points = 5*counter;
+        points = 5*orderList.size();
         return points;
     }
 
@@ -161,9 +156,6 @@ public class RecommendService {
      * 获取用户商户评分数组
      */
     public ArrayList<MerchantPoints> getMerchantPointsArray(){
-        //double[] points1 = {1,2,3};
-        //double[] points2 = {2,3,4};
-        //double[] points3 = {3,4,5};
         ArrayList<MerchantPoints> results = new ArrayList<MerchantPoints>();
         // TODO:这里缺获取所用用户userID的方法
         ArrayList<String> userIDs = new ArrayList<String>();
@@ -226,9 +218,12 @@ public class RecommendService {
      */
     public ArrayList<UserMerchantPoints> getUserPointsToMerchants(String userID){
         ArrayList<UserMerchantPoints> results = new ArrayList<UserMerchantPoints>();
-        results.add(new UserMerchantPoints("1",1));
-        results.add(new UserMerchantPoints("2",3));
-        results.add(new UserMerchantPoints("3",2));
+        // TODO:这里通过数据库获取所有商户ID
+        ArrayList<Merchant> merchants = new ArrayList<Merchant>();
+        for(Merchant merchant:merchants){
+            double points = getMerchantPoints(userID,merchant.getMerchantID());
+            results.add(new UserMerchantPoints(merchant.getMerchantID(),points));
+        }
         return results;
     }
 
