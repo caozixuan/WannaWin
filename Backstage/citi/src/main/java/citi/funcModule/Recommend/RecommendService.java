@@ -1,10 +1,7 @@
 package citi.funcModule.Recommend;
 
 import Jama.Matrix;
-import citi.persist.mapper.ItemMapper;
-import citi.persist.mapper.MerchantMapper;
-import citi.persist.mapper.OrderMapper;
-import citi.persist.mapper.UserMapper;
+import citi.persist.mapper.*;
 import citi.vo.Item;
 import citi.vo.Merchant;
 import citi.vo.Order;
@@ -13,12 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletSecurityElement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,6 +34,10 @@ public class RecommendService {
     private MerchantMapper merchantMapper;
     @Autowired
     private ItemMapper itemMapper;
+    @Autowired
+    private VisitRecordMapper visitRecordMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 初始化用户的偏好列表
@@ -83,11 +82,180 @@ public class RecommendService {
     /**
      * 返回用户的推荐商品列表
      * @param userID
+     * @param num
      * @return ArrayList<Item>
      */
-    public ArrayList<Item> getRecommendedItems(String userID){
-
+    public ArrayList<Item> getRecommendedItems(String userID,int num){
+        ArrayList<UserItemPoints> userItemPointsArrayList = getUserInterestToItems(userID);
+        ArrayList<Item> items = new ArrayList<Item>();
+        for(int i =0;i<num;i++){
+            items.add(itemMapper.getItemByItemID(userItemPointsArrayList.get(i).itemID));
+        }
+        return items;
     }
+    /**
+     * 返回用户对商品喜好评分
+     * @param userID
+     * @return ArrayList<Merchant>
+     */
+    public double getItemPoints(String userID, String itemID){
+        double points = 0;
+        // 目前制定的积分策略：购买一次得5分+浏览一次得1分+每符合一个喜好得5分
+        // TODO:这里需要数据库写两个vo类还有对应mapper里的方法
+        List<Order> orderList = orderMapper.getOrderByUserAndItemID(userID,"+010101010101");
+        List<UserPref> prefList = prefMapper.getPrefByUserID(userID);
+        List<Record> recordList = recordMapper.getRecordByUserID(userID);
+        Item item = itemMapper.getItemByItemID(itemID);
+        points += 5*orderList.size();
+        points += recordList.size();
+        for(int i=0;i<prefList.size();i++){
+            if(prefList.get(i).getPref().equals(item.getItemType())){
+                points+=5;
+            }
+        }
+        return points;
+    }
+
+    class ItemPoints{
+        String itemID;
+        double[] points;
+
+        public ItemPoints(String itemID, double[] points) {
+            this.itemID = itemID;
+            this.points = points;
+        }
+    }
+    class UserItemPoints implements Comparable<UserItemPoints>{
+        String itemID;
+        double points;
+
+        public UserItemPoints(String itemID, double points) {
+            this.itemID = itemID;
+            this.points = points;
+        }
+
+        @Override
+        public int compareTo(UserItemPoints o) {
+            if((this.points - o.points)>=0){
+                return 1;
+            }
+            else return -1;
+        }
+    }
+
+
+    /*
+    * 获取用户商品评分数组
+    */
+    public ArrayList<ItemPoints> getItemPointsArray(){
+        ArrayList<ItemPoints> results = new ArrayList<ItemPoints>();
+        // TODO:这里缺获取所用用户userID的方法
+        ArrayList<String> userIDs = new ArrayList<String>();
+        ArrayList<String> itemIDs = new ArrayList<String>();
+        for(String itemID:itemIDs){
+            ArrayList<Double> points = new ArrayList<Double>();
+            for(String userID: userIDs){
+                points.add(getMerchantPoints(userID,itemID));
+            }
+            double[] pointsArray = new double[points.size()];
+            for(int i=0;i<points.size();i++){
+                pointsArray[i]=points.get(i);
+            }
+            ItemPoints itemPoints = new ItemPoints(itemID,pointsArray);
+            results.add(itemPoints);
+        }
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(
+                    new FileOutputStream("ItemSimilarity.txt"));
+            os.writeObject(results);// 将List列表写进文件
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+    public ArrayList<ItemSimilarity> getItemSimilarities(){
+        ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            while (true) {
+                ItemSimilarity itemSimilarity = (ItemSimilarity) ois.readObject();
+                results.add(itemSimilarity);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return results;
+    }
+
+    public ArrayList<ItemSimilarity> updateItemSimilarities(){
+        ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
+        ArrayList<ItemPoints> itemPoints = getItemPointsArray();
+        for(int i=0;i<itemPoints.size()-1;i++){
+            for(int j=i;j<itemPoints.size();j++){
+                double similarity = cosineSimilarity(itemPoints.get(i).points,itemPoints.get(j).points);
+                String itemID1 = itemPoints.get(i).itemID;
+                String itemID2 = itemPoints.get(j).itemID;
+                results.add(new ItemSimilarity(itemID1,itemID2, similarity));
+            }
+        }
+        try {
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
+            for(ItemSimilarity result:results){
+                oos.writeObject(result);
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return results;
+    }
+    /*
+   * 返回用户对商品的评分
+   */
+    public ArrayList<UserItemPoints> getUserPointsToItems(String userID){
+        ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
+        ArrayList<String> itemIDs = new ArrayList<>();
+        //TODO:itemMapper中返回所有ItemID
+        itemIDs.addAll(itemMapper,getItemIDs());
+        ArrayList<Item> items = new ArrayList<Item>();
+        for(String id:itemIDs){
+            items.add(itemMapper.getItemByItemID(id));
+        }
+        for(Item item:items){
+            double points = getItemPoints(userID,item.getItemID());
+            results.add(new UserItemPoints(item.getItemID(),points));
+        }
+        return results;
+    }
+ /*
+     * 获得最终用户对商品的喜好评分，并从大到小排序
+     */
+
+    public ArrayList<UserItemPoints> getUserInterestToItems(String userID){
+        ArrayList<ItemSimilarity> similarities = getItemSimilarities();
+        ArrayList<UserItemPoints> userItemPointsArrayList = getUserPointsToItems(userID);
+        ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
+        for(UserItemPoints userItemPoints:userItemPointsArrayList){
+            double points = 0;
+            for(ItemSimilarity similarity:similarities){
+                if(similarity.itemID1.equals(userItemPoints.itemID)||similarity.itemID2.equals(userItemPoints.itemID)){
+                    points+=userItemPoints.points*similarity.similarity;
+                }
+            }
+            results.add(new UserItemPoints(userItemPoints.itemID,points));
+        }
+        Collections.sort(results);
+        return results;
+    }
+
 
     /**
      * 返回用户的推荐商户列表
@@ -112,8 +280,14 @@ public class RecommendService {
         double points = 0;
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
         // TODO: 这里缺用户浏览和用户积分消费的接口
+        // 这里缺获取全部的商品吗？
+        List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,1);
+        int visitTimes = 0;
+        for(Item item:items){
+            visitTimes+=visitRecordMapper.getVisitTimes(userID,item.getItemID());
+        }
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
-        points = 5*orderList.size();
+        points = 5*orderList.size()+visitTimes;
         return points;
     }
 
@@ -162,7 +336,7 @@ public class RecommendService {
     public ArrayList<MerchantPoints> getMerchantPointsArray(){
         ArrayList<MerchantPoints> results = new ArrayList<MerchantPoints>();
         // TODO:这里缺获取所用用户userID的方法
-        ArrayList<String> userIDs = new ArrayList<String>();
+        List<String> userIDs = userMapper.getAllUserID();
         ArrayList<String> merchantIDs = new ArrayList<String>();
         for(String merchantID:merchantIDs){
             ArrayList<Double> points = new ArrayList<Double>();
@@ -175,16 +349,6 @@ public class RecommendService {
             }
             MerchantPoints merchantPoints = new MerchantPoints(merchantID,pointsArray);
             results.add(merchantPoints);
-        }
-        try {
-            ObjectOutputStream os = new ObjectOutputStream(
-                    new FileOutputStream("similarity.txt"));
-            os.writeObject(results);// 将List列表写进文件
-            os.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return results;
     }
@@ -215,7 +379,24 @@ public class RecommendService {
         return Double.parseDouble(df.format(result));
     }
 
-    public ArrayList<MerchantSimilarity> getMerchantSimilarities(){
+    public ArrayList<MerchantSimilarity> getMerchantSimilarities() {
+        ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            while (true) {
+                    MerchantSimilarity merchantSimilarity = (MerchantSimilarity) ois.readObject();
+                    results.add(merchantSimilarity);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return results;
+    }
+    /*
+     * 更新商户相似度
+     */
+    public ArrayList<MerchantSimilarity> updateMerchantSimilarities(){
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ArrayList<MerchantPoints> merchantPoints = getMerchantPointsArray();
         for(int i=0;i<merchantPoints.size()-1;i++){
@@ -225,6 +406,19 @@ public class RecommendService {
                 String merchantID2 = merchantPoints.get(j).merchantID;
                 results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));
             }
+        }
+        try {
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
+            for(MerchantSimilarity result:results){
+                oos.writeObject(result);
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return results;
     }
