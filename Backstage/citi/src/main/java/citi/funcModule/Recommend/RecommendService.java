@@ -13,12 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletSecurityElement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -366,7 +364,24 @@ public class RecommendService {
         return Double.parseDouble(df.format(result));
     }
 
-    public ArrayList<MerchantSimilarity> getMerchantSimilarities(){
+    public ArrayList<MerchantSimilarity> getMerchantSimilarities() {
+        ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            while (true) {
+                    MerchantSimilarity merchantSimilarity = (MerchantSimilarity) ois.readObject();
+                    results.add(merchantSimilarity);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return results;
+    }
+    /*
+     * 更新商户相似度
+     */
+    public ArrayList<MerchantSimilarity> updateMerchantSimilarities(){
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ArrayList<MerchantPoints> merchantPoints = getMerchantPointsArray();
         for(int i=0;i<merchantPoints.size()-1;i++){
@@ -376,6 +391,19 @@ public class RecommendService {
                 String merchantID2 = merchantPoints.get(j).merchantID;
                 results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));
             }
+        }
+        try {
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
+            for(MerchantSimilarity result:results){
+                oos.writeObject(result);
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return results;
     }
