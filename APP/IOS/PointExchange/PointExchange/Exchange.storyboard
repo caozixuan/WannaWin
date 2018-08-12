@@ -121,10 +121,6 @@
                                         <color key="textColor" name="main_lightGreen"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Grand Canal III" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WL-4r3">
-                                        <rect key="frame" x="10" y="274" width="303" height="111"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥220.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3R-iX-nn4">
                                         <rect key="frame" x="129.5" y="227.5" width="64" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
@@ -138,14 +134,26 @@
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="-2"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Grand Canal III" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WL-4r3">
+                                        <rect key="frame" x="18" y="272" width="287" height="105"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="3Qq-WL-4r3" firstAttribute="leading" secondItem="Ux7-5b-8gI" secondAttribute="leading" constant="18" id="0qe-tP-5UL"/>
+                                    <constraint firstItem="3Qq-WL-4r3" firstAttribute="top" secondItem="m3R-iX-nn4" secondAttribute="bottom" constant="24" id="JBe-gu-I19"/>
                                     <constraint firstItem="Kcq-Ry-cCG" firstAttribute="top" secondItem="joA-W5-WnC" secondAttribute="bottom" constant="8" id="Lea-1r-VMR"/>
                                     <constraint firstItem="dHe-JO-0uK" firstAttribute="top" secondItem="Kcq-Ry-cCG" secondAttribute="bottom" constant="40" id="NP3-ov-Izs"/>
                                     <constraint firstItem="m3R-iX-nn4" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="OTt-Ey-6CE"/>
                                     <constraint firstItem="joA-W5-WnC" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="PVD-7V-nyZ"/>
                                     <constraint firstItem="Kcq-Ry-cCG" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="Ws5-Do-vep"/>
+                                    <constraint firstItem="3Qq-WL-4r3" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="apE-MP-o7W"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Qq-WL-4r3" secondAttribute="bottom" constant="16" id="fiU-YU-Lek"/>
                                     <constraint firstItem="m3R-iX-nn4" firstAttribute="top" secondItem="dHe-JO-0uK" secondAttribute="bottom" constant="8" id="g7J-jr-zkm"/>
                                     <constraint firstItem="dHe-JO-0uK" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="iQe-Mw-2nX"/>
                                 </constraints>
