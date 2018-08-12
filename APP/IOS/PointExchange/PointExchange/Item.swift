@@ -10,7 +10,6 @@ import Foundation
 
 class Item:Codable{
 	var ItemID:String?
-	var name:String?
 	var description:String?
 	var merchantID:String?
 	var logoURL:String?
