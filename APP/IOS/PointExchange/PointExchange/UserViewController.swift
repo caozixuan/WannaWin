@@ -139,10 +139,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     /// 查看历史订单
     func checkHistory(){
         if let _ = User.getUser().username{
-            let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersTableViewController") as! OrdersTableViewController
+            let view = self.storyBoard.instantiateViewController(withIdentifier:"OrdersViewController") as! OrdersViewController
 			self.navigationController?.pushViewController(view, animated: true)
-			
-            
             
         }else{
             let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")

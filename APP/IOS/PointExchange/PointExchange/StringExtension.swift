@@ -15,4 +15,16 @@ extension String{
         CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
         return String(mutableString)
     }
+	
+	func dateFormatChange()->String{
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "MMM d, YYYY hh:mm:ss tt"
+		print(self)
+		print("MMM d, YYYY hh:mm:ss tt")
+		let date = dateFormatter.date(from: self)
+		let newString = dateFormatter.string(from: date!)
+		return newString
+	}
 }
+
+

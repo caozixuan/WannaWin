@@ -1,10 +1,7 @@
 package citi.funcModule.Recommend;
 
 import Jama.Matrix;
-import citi.persist.mapper.ItemMapper;
-import citi.persist.mapper.MerchantMapper;
-import citi.persist.mapper.OrderMapper;
-import citi.persist.mapper.UserMapper;
+import citi.persist.mapper.*;
 import citi.vo.Item;
 import citi.vo.Merchant;
 import citi.vo.Order;
@@ -37,6 +34,10 @@ public class RecommendService {
     private MerchantMapper merchantMapper;
     @Autowired
     private ItemMapper itemMapper;
+    @Autowired
+    private VisitRecordMapper visitRecordMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 初始化用户的偏好列表
@@ -279,8 +280,14 @@ public class RecommendService {
         double points = 0;
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
         // TODO: 这里缺用户浏览和用户积分消费的接口
+        // 这里缺获取全部的商品吗？
+        List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,1);
+        int visitTimes = 0;
+        for(Item item:items){
+            visitTimes+=visitRecordMapper.getVisitTimes(userID,item.getItemID());
+        }
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
-        points = 5*orderList.size();
+        points = 5*orderList.size()+visitTimes;
         return points;
     }
 
@@ -329,7 +336,7 @@ public class RecommendService {
     public ArrayList<MerchantPoints> getMerchantPointsArray(){
         ArrayList<MerchantPoints> results = new ArrayList<MerchantPoints>();
         // TODO:这里缺获取所用用户userID的方法
-        ArrayList<String> userIDs = new ArrayList<String>();
+        List<String> userIDs = userMapper.getAllUserID();
         ArrayList<String> merchantIDs = new ArrayList<String>();
         for(String merchantID:merchantIDs){
             ArrayList<Double> points = new ArrayList<Double>();
@@ -342,16 +349,6 @@ public class RecommendService {
             }
             MerchantPoints merchantPoints = new MerchantPoints(merchantID,pointsArray);
             results.add(merchantPoints);
-        }
-        try {
-            ObjectOutputStream os = new ObjectOutputStream(
-                    new FileOutputStream("similarity.txt"));
-            os.writeObject(results);// 将List列表写进文件
-            os.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return results;
     }
