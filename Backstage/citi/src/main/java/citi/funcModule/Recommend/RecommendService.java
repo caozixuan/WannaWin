@@ -142,17 +142,7 @@ public class RecommendService {
         }
     }
 
-    class ItemSimilarity{
-        String itemID1;
-        String itemID2;
-        double similarity;
 
-        public ItemSimilarity(String itemID1, String itemID2, double similarity) {
-            this.itemID1 = itemID1;
-            this.itemID2 = itemID2;
-            this.similarity = similarity;
-        }
-    }
     /*
     * 获取用户商品评分数组
     */
@@ -187,6 +177,21 @@ public class RecommendService {
     }
     public ArrayList<ItemSimilarity> getItemSimilarities(){
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            while (true) {
+                ItemSimilarity itemSimilarity = (ItemSimilarity) ois.readObject();
+                results.add(itemSimilarity);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return results;
+    }
+
+    public ArrayList<ItemSimilarity> updateItemSimilarities(){
+        ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ArrayList<ItemPoints> itemPoints = getItemPointsArray();
         for(int i=0;i<itemPoints.size()-1;i++){
             for(int j=i;j<itemPoints.size();j++){
@@ -195,6 +200,19 @@ public class RecommendService {
                 String itemID2 = itemPoints.get(j).itemID;
                 results.add(new ItemSimilarity(itemID1,itemID2, similarity));
             }
+        }
+        try {
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
+            for(ItemSimilarity result:results){
+                oos.writeObject(result);
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return results;
     }
