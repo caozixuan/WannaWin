@@ -56,6 +56,11 @@ public class ItemController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping("/itemDetail")
+    public String getItemInfo(String itemID){
+        return gson.toJson(itemService.getItem(itemID));
+    }
 
 
 

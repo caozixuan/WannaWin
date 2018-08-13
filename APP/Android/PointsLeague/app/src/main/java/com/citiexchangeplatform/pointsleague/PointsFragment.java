@@ -26,6 +26,7 @@ import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.leochuan.CenterSnapHelper;
 import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
@@ -133,6 +134,7 @@ public class PointsFragment extends Fragment {
                     .Builder(getContext(),2)
                     .setOrientation(OrientationHelper. HORIZONTAL)
                     .build());
+            new CenterSnapHelper().attachToRecyclerView(recyclerView);
             recyclerView.setAdapter(cardPointsAdapter);
             recyclerView.setItemAnimator( new DefaultItemAnimator());
 

@@ -23,13 +23,13 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
 
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
-        public final TextView textViewDesc;
+        //public final TextView textViewDesc;
         public final ImageView imageViewLogo;
 
         public VH(View v) {
             super(v);
             textViewName = (TextView) v.findViewById(R.id.textView_merchant_name_item);
-            textViewDesc = (TextView) v.findViewById(R.id.textView_merchant_description_item);
+            //textViewDesc = (TextView) v.findViewById(R.id.textView_merchant_description_item);
             imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_item);
         }
     }
@@ -47,7 +47,7 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         holder.textViewName.setText(filteredItems.get(position).getName());
-        holder.textViewDesc.setText(filteredItems.get(position).getDescription());
+        //holder.textViewDesc.setText(filteredItems.get(position).getDescription());
         Glide.with(context)
                 .load(filteredItems.get(position).getLogoURL())
                 .placeholder(R.drawable.ic_points_black_24dp)
@@ -57,7 +57,6 @@ public class AddCardAdapter extends RecyclerView.Adapter<AddCardAdapter.VH> impl
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(v.getContext(), filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
                 Intent intentToBindCard = new Intent(context, BindCardActivity.class);
                 intentToBindCard.putExtra("merchantID",filteredItems.get(position).getMerchantID());
                 intentToBindCard.putExtra("logoURL",filteredItems.get(position).getLogoURL());

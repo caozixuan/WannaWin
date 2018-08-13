@@ -7,11 +7,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +20,11 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.citiexchangeplatform.pointsleague.adapter.DetailFindAdapter;
+import com.citiexchangeplatform.pointsleague.adapter.FindActivityAdapter;
+import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
+import com.citiexchangeplatform.pointsleague.models.DetailFindItemModel;
+import com.leochuan.CenterSnapHelper;
+import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -36,8 +41,11 @@ public class DetailFindActivity extends AppCompatActivity {
     ImageView imageViewLogo;
     TextView textViewName;
     TextView textViewDescription;
-    ListView listView;
+
+    RecyclerView recyclerView1;
+    RecyclerView recyclerView2;
     DetailFindAdapter detailFindAdapter;
+    FindActivityAdapter findActivityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +59,31 @@ public class DetailFindActivity extends AppCompatActivity {
         textViewName = (TextView) findViewById(R.id.textView_name_detail_find);
         textViewDescription = (TextView) findViewById(R.id.textView_description_detail_find);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_detail_find);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        finish();
-        //    }
-        //});
-
         toolBar();
 
-        listView = (ListView) findViewById(R.id.listView_detail_find);
-        listView.setEmptyView(findViewById(R.id.view_detail_find_empty));
+        recyclerView2 = (RecyclerView)findViewById(R.id.recyclerView_detail_find);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(DetailFindActivity.this);
+        recyclerView2.setLayoutManager(layoutManager2);
         detailFindAdapter = new DetailFindAdapter(DetailFindActivity.this);
-        listView.setAdapter(detailFindAdapter);
+        recyclerView2.setAdapter(detailFindAdapter);
+        recyclerView2.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView1 = (RecyclerView)findViewById(R.id.recyclerView_ad_detail_find);
+        recyclerView1.setLayoutManager(
+                new ScaleLayoutManager
+                        .Builder(DetailFindActivity.this,2)
+                        .setMinScale(1.0f)
+                        .setOrientation(OrientationHelper. HORIZONTAL)
+                        .build());
+        new CenterSnapHelper().attachToRecyclerView(recyclerView1);
+        findActivityAdapter = new FindActivityAdapter(DetailFindActivity.this);
+        recyclerView1.setAdapter(findActivityAdapter);
+        recyclerView1.setItemAnimator(new DefaultItemAnimator());
+
+        findActivityAdapter.addData("123123","!23","123","123","123");
+        findActivityAdapter.addData("123123","!23","123","123","123");
+        findActivityAdapter.addData("123123","!23","123","123","123");
+        recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
 
         getInfos();
 
@@ -76,34 +92,11 @@ public class DetailFindActivity extends AppCompatActivity {
     }
 
     public void toolBar(){
-        boolean isImmersive = false;
-        if (hasKitKat() && !hasLollipop()) {
-            isImmersive = true;
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        } else if (hasLollipop()) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            isImmersive = true;
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-
-        final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        TitleBar titleBar = (TitleBar) findViewById(R.id.toolbar_detail_find);
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("返回");
-        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftTextColor(0xFFFF9546);
+
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,21 +104,9 @@ public class DetailFindActivity extends AppCompatActivity {
             }
         });
 
-        titleBar.setTitle("发现页详情");
+        titleBar.setTitle("商户详情");
         titleBar.setTitleColor(Color.BLACK);
-
-        //沉浸式
-        titleBar.setImmersive(isImmersive);
     }
-
-    public static boolean hasKitKat() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-    }
-
-    public static boolean hasLollipop() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-    }
-
 
     private void getInfos() {
         XVolley.getInstance()
@@ -191,11 +172,9 @@ public class DetailFindActivity extends AppCompatActivity {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String itemID = jsonObject.getString("ItemID");
                                 String name = jsonObject.getString("name");
-                                String time = jsonObject.getString("overdueTime");
                                 String description = jsonObject.getString("description");
-                                String logoURL = jsonObject.getString("logoURL");
                                 int points = jsonObject.getInt("points");
-                                detailFindAdapter.addData(itemID, name, time, description, logoURL, points);
+                                detailFindAdapter.addData(new DetailFindItemModel(itemID, name, description, points));
                             }
 
                         } catch (JSONException e) {

@@ -24,10 +24,10 @@ import java.util.List;
 @Service
 public class RecommendService {
     //需要访问到用户的喜好、用户的访问记录、商品的基本信息
-    @Autowired
-    private PrefMapper prefMapper;
-    @Autowired
-    private RecordMapper recordMapper;
+    //@Autowired
+    //private PrefMapper prefMapper;
+    //@Autowired
+    //private RecordMapper recordMapper;
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
@@ -52,10 +52,10 @@ public class RecommendService {
              * 参数一：userID,参数二：一个偏好（字符串形式）
              * 返回受影响的行数
              */
-            if(prefMapper.addPref(userID,prefList.get(i))!=1){
-                flag = false;
-                break;
-            }
+            //if(prefMapper.addPref(userID,prefList.get(i))!=1){
+             //   flag = false;
+             //   break;
+            //}
         }
         return flag;
     }
@@ -73,8 +73,8 @@ public class RecommendService {
          * 参数一：userID,参数二：itemID,参数三：该浏览记录的时间戳
          * 返回受影响的行数
          */
-      if(recordMapper.addRecord(userID,itemID,time)!=1)
-          return false;
+      //if(recordMapper.addRecord(userID,itemID,time)!=1)
+        //  return false;
       return true;
     }
 
@@ -99,6 +99,9 @@ public class RecommendService {
      * @return ArrayList<Merchant>
      */
     public double getItemPoints(String userID, String itemID){
+        /*
+
+
         double points = 0;
         // 目前制定的积分策略：购买一次得5分+浏览一次得1分+每符合一个喜好得5分
         // TODO:这里需要数据库写两个vo类还有对应mapper里的方法
@@ -114,6 +117,8 @@ public class RecommendService {
             }
         }
         return points;
+        */
+        return 0;
     }
 
     class ItemPoints{
@@ -224,7 +229,8 @@ public class RecommendService {
         ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
         ArrayList<String> itemIDs = new ArrayList<>();
         //TODO:itemMapper中返回所有ItemID
-        itemIDs.addAll(itemMapper,getItemIDs());
+
+        //itemIDs.addAll(itemMapper,getItemIDs());
         ArrayList<Item> items = new ArrayList<Item>();
         for(String id:itemIDs){
             items.add(itemMapper.getItemByItemID(id));
