@@ -8,9 +8,12 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMapper {
 
+    final String getAllUserID = "SELECT userID FROM user";
     final String getInfoByPhoneNum = "SELECT * FROM user WHERE phoneNum = #{phoneNum}";
     final String getInfoByUserID = "SELECT * FROM user WHERE userID = #{userID}";
     final String loginVerify = "SELECT * FROM user WHERE phoneNum = #{phoneNum} AND password = #{password}";
@@ -24,6 +27,9 @@ public interface UserMapper {
     final String exchangeGeneralPoints = "UPDATE user SET generalPoints = generalPoints + #{points} WHERE userID = #{userID}";
     final String useGeneralPoints = "UPDATE user SET generalPoints = generalPoints - #{points} WHERE userID = #{userID}";
 
+
+    @Select(getAllUserID)
+    List<String> getAllUserID();
 
     @Select(getInfoByPhoneNum)
     User getInfoByPhone(String phoneNum);

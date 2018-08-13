@@ -21,8 +21,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.security.interfaces.RSAKey;
 import java.sql.Timestamp;
 import java.util.Map;
@@ -126,25 +125,39 @@ public class CitiController {
         CitiAccount accs = new CitiAccount();
         CitiAuthorize authorize = new CitiAuthorize();
         Map map = null;
+        String jsCode = null;
         try{
             map = authorize.getBizToken(context);
         }catch (Exception e){
             System.out.println("error");
         }
-
         String accounts = null;
-        Resource RESJS = new ClassPathResource("resource/E2E.js");
+        String encoding = "UTF-8";
+        File file = new File("./E2E.js");
+        Long filelength = file.length();
+        byte[] filecontent = new byte[filelength.intValue()];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(filecontent);
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            jsCode = new String(filecontent, encoding);
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("The OS does not support " + encoding);
+            e.printStackTrace();
+        }
+        //Resource RESJS = new ClassPathResource("E:\\WannaWin\\Backstage\\citi\\src\\E2E.js");
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
         String scriptResult = null;
-        char[] a = new char[50];
         try{
-            engine.eval(new FileReader(RESJS.getFile()));
-            FileReader test = new FileReader(RESJS.getFile());
-            test.read(a);
+            engine.eval(jsCode);
             Invocable invocable = (Invocable) engine;
             scriptResult = (String) invocable.invokeFunction("doRSA",map.get("modulus"),map.get("exponent"),context.getEventId(),password);
-        }catch (IOException e1){
-            System.out.println("read error");
         }catch(ScriptException e){
             e.printStackTrace();
             System.out.println("Error executing script: "+ e.getMessage()+" script:["+"1"+"]");
