@@ -7,13 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".AddCardActivity">
 
-    <android.support.v7.widget.Toolbar
+    <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/toolbar_add_card"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ToolbarTheme" />
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_search_bar"
+        android:orientation="horizontal">
+
+        <SearchView
+            android:id="@+id/search_add_card"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:queryHint="搜索"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
+        </SearchView>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_add_card"

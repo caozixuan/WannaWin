@@ -33,47 +33,16 @@ public class DetailFindPayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_find_pay);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_detail_find_pay);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        finish();
-        //    }
-        //});
-
         toolBar();
 
-        Intent intent = getIntent();
-        final String[] info = intent.getStringArrayExtra("itemInfo");
-
-        TextView textViewName = (TextView) findViewById(R.id.textView_name_detail_find_pay);
-        textViewName.setText(info[2]);
-        TextView textViewDescription = (TextView) findViewById(R.id.textView_description_detail_find_pay);
-        textViewDescription.setText("内容："+info[3]);
-        TextView textViewTime = (TextView) findViewById(R.id.textView_time_detail_find_pay);
-        textViewTime.setText("有效时间至："+info[4]);
-        TextView textViewPoints = (TextView) findViewById(R.id.textView_points_detail_find_pay);
-        textViewPoints.setText("消耗花旗点："+info[5]);
-        Button button = (Button) findViewById(R.id.button_detail_find_pay);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button buttonBuy = findViewById(R.id.button_buy_detail_find_pay);
+        buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailFindPayActivity.this);
-                alertDialog.setTitle("支付积分").setMessage("确定要支付" + info[5] + "积分兑换吗")
-                        .setPositiveButton("确定",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        tryPay(info[0]);
-                                    }
-                                })
-                        .setNegativeButton("取消", null)
-                        .show();
+                tryPay("");
             }
         });
+
     }
 
     public void toolBar(){
@@ -100,11 +69,11 @@ public class DetailFindPayActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
-        final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        TitleBar titleBar = (TitleBar) findViewById(R.id.toolbar_detail_find_pay);
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("返回");
-        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftTextColor(0xFFFF9546);
+
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +81,7 @@ public class DetailFindPayActivity extends AppCompatActivity {
             }
         });
 
-        titleBar.setTitle("");
+        titleBar.setTitle("详情");
         titleBar.setTitleColor(Color.BLACK);
 
         //沉浸式
@@ -151,8 +120,7 @@ public class DetailFindPayActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         if(paySuccess){
-                            Intent intentToPayFinish = new Intent(DetailFindPayActivity.this, DetailFindPayFinishActivity.class);
-                            startActivity(intentToPayFinish);
+                            //Intent intentTo
                             finish();
                         }else {
                             Toast.makeText(DetailFindPayActivity.this, "兑换失败", Toast.LENGTH_LONG).show();

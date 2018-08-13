@@ -3,6 +3,7 @@ package com.citiexchangeplatform.pointsleague;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -43,16 +44,20 @@ public class HistoryExchangeActivity extends AppCompatActivity {
         recyclerView.setAdapter(historyExchangeAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_history_exchange);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        TitleBar titleBar = (TitleBar) findViewById(R.id.toolbar_history_exchange);
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
+        titleBar.setLeftText("返回");
+        titleBar.setLeftTextColor(0xFFFF9546);
+
+        titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        titleBar.setTitle("兑换记录");
+        titleBar.setTitleColor(Color.BLACK);
 
         showHistoryExchange();
     }

@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:shadowColor="#50000000"
                     android:shadowRadius="20"
-                    android:text="当前花旗点:"
+                    android:text="当前通用点:"
                     android:textSize="14sp" />
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:shadowColor="#50000000"
                     android:shadowRadius="20"
-                    android:text="可兑花旗点:"
+                    android:text="可兑通用点:"
                     android:textSize="14sp" />
 
                 <TextView

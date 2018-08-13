@@ -8,45 +8,100 @@
     android:orientation="vertical">
 
     <com.citiexchangeplatform.pointsleague.TitleBar
-        android:id="@+id/title_bar"
+        android:id="@+id/toolbar_detail_find_pay_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="500dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="5dp"
+                app:cardPreventCornerOverlap="false">
+            </android.support.v7.widget.CardView>
+        </FrameLayout>
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            >
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView_logo_detail_find_pay_finish"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/nike_logo" />
 
             <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView_points_detail_find_pay_finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="-XX.XXP"
+                android:textColor="#FF9546"
+                android:textSize="32sp" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="兑换成功"
-                android:textSize="36sp"
-                />
+                android:textSize="18sp"/>
+
             <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView_price_detail_find_pay_finish"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="请到历史订单查看并使用"
-                android:layout_marginTop="50sp"
-                android:textSize="20sp"/>
-            <Button
-                android:id="@+id/button_detail_find_pay_finish"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
+                android:text="$XX.XX"
+                android:textSize="32sp"
+                android:textColor="#9A8616"/>
+
+            <TextView
+                android:id="@+id/textView_original_price_detail_find_pay_finish"
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorOrange"
-                android:layout_marginTop="50sp"
-                android:text="确定"
-                android:textColor="@color/colorWhite"/>
+                android:text="$XX.XX"
+                android:textSize="18sp"
+                android:textColor="#858585"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="280dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/loading_card"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    />
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
-    </LinearLayout>
+
+
+
+    </RelativeLayout>
 
 
 
