@@ -2,6 +2,8 @@ package com.citiexchangeplatform.pointsleague.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +29,7 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
         public final ImageView imageViewLogo;
         public final TextView textViewPoints;
         public final TextView textViewExchangePoints;
+        public final RelativeLayout cardView;
 
         public VH(View v) {
             super(v);
@@ -33,6 +37,7 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
             imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_all_card_item);
             textViewPoints = (TextView) v.findViewById(R.id.textView_all_points_all_card_item);
             textViewExchangePoints = (TextView) v.findViewById(R.id.textView_exchange_points_all_card_item);
+            cardView = (RelativeLayout) v.findViewById(R.id.relative_all_card_item);
         }
     }
 
@@ -54,11 +59,13 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
                 .error(R.drawable.ic_mall_black_24dp)
                 .into(holder.imageViewLogo);
         holder.textViewName.setText(filteredItems.get(position).getName());
-        holder.textViewPoints.setText("商户卡积分：" + filteredItems.get(position).getPoint());
-        holder.textViewExchangePoints.setText("可兑换通用积分" + String.format("%.1f",filteredItems.get(position).getExchangePoint()));
-        //image
+        holder.textViewPoints.setText("积分：" + filteredItems.get(position).getPoint());
+        holder.textViewExchangePoints.setText("可兑通用点" + String.format("%.1f",filteredItems.get(position).getExchangePoint()));
 
+        int colors[] = { 0xff6bacfa , 0xff4EC0A3 };
+        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
 
+        holder.cardView.setBackground(bg);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

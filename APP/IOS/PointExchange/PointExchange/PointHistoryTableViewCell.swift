@@ -11,7 +11,8 @@ import ExpyTableView
 
 class PointHistoryTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
     
-    @IBOutlet weak var arrow: UIImageView!
+	@IBOutlet weak var line: UIImageView!
+	@IBOutlet weak var oval: UIImageView!
     @IBOutlet weak var pointLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     func changeState(_ state: ExpyState, cellReuseStatus cellReuse: Bool) {
@@ -19,11 +20,9 @@ class PointHistoryTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
         case .willExpand:
             print("WILL EXPAND")
             hideSeparator()
-            arrowDown(animated: !cellReuse)
             
         case .willCollapse:
             print("WILL COLLAPSE")
-            arrowRight(animated: !cellReuse)
             
         case .didExpand:
             print("DID EXPAND")
@@ -33,21 +32,13 @@ class PointHistoryTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
             print("DID COLLAPSE")
         }
     }
-    private func arrowDown(animated: Bool) {
-        UIView.animate(withDuration: (animated ? 0.3 : 0)) {
-            self.arrow.transform = CGAffineTransform(rotationAngle: (CGFloat.pi / 2))
-        }
-    }
-    
-    private func arrowRight(animated: Bool) {
-        UIView.animate(withDuration: (animated ? 0.3 : 0)) {
-            self.arrow.transform = CGAffineTransform(rotationAngle: 0)
-        }
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+		self.oval.layer.zPosition = 2.0
+		self.line.layer.zPosition = 1.0
+		
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,8 +46,6 @@ class PointHistoryTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
 
         // Configure the view for the selected state
     }
-
-    
 }
 
 extension UITableViewCell {

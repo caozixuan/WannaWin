@@ -14,22 +14,44 @@
         android:layout_height="wrap_content">
 
         <com.citiexchangeplatform.pointsleague.TitleBar
-            android:id="@+id/title_bar"
+            android:id="@+id/toolbar_detail_find"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar_detail_find"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--android:minHeight="?attr/actionBarSize"-->
-            <!--android:theme="?attr/actionBarTheme" />-->
 
-        <FrameLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp">
+            android:layout_height="220dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <android.support.v7.widget.CardView
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="5dp"
+                    app:cardPreventCornerOverlap="false">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/textView_description_detail_find"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="90dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginEnd="30dp"
+                            android:maxLines="3"
+                            android:textColor="#CC858585"
+                            android:text="description"/>
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,8 +61,8 @@
 
                 <ImageView
                     android:id="@+id/imageView_logo_detail_find"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/nike_logo" />
 
@@ -48,40 +70,15 @@
                     android:id="@+id/textView_name_detail_find"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="name"
+                    android:text="NAME"
                     android:textSize="24sp" />
             </LinearLayout>
-        </FrameLayout>
 
-        <View
-            android:background="@color/colorUnable"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="商家简介"
-                android:textSize="24sp"/>
-            <TextView
-                android:id="@+id/textView_description_detail_find"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="description"/>
-        </LinearLayout>
 
-        <View
-            android:background="@color/colorUnable"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"/>
+        </RelativeLayout>
+
 
         <LinearLayout
             android:orientation="vertical"
@@ -95,78 +92,56 @@
                 android:textSize="24sp"
                 android:layout_marginBottom="5dp"/>
 
-            <ListView
-                android:id="@+id/listView_detail_find"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_detail_find"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:padding="10dp">
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
 
-            </ListView>
-
-            <FrameLayout
-                android:id="@+id/view_detail_find_empty"
+            <!--button for more-->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:padding="20dp">
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="商家似乎还没有活动哦"
-                    android:textSize="18sp"/>
-            </FrameLayout>
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="false">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#CC858585"
+                        android:text="查看更多"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
-
-        <View
-            android:background="@color/colorUnable"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"/>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="线下优惠"
                 android:textSize="24sp"
+                android:layout_margin="20dp"
                 android:layout_marginBottom="5dp"/>
 
-            <LinearLayout
-                android:background="@drawable/rectangle"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_margin="5dp">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="xxx"
-                        android:textSize="18sp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxxxxx"
-                        android:textSize="12sp"/>
-                </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_ad_detail_find"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginBottom="20dp">
+            </android.support.v7.widget.RecyclerView>
 
 
-            </LinearLayout>
 
 
         </LinearLayout>
