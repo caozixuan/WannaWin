@@ -65,7 +65,6 @@
         <activity android:name=".BindCardActivity" />
         <activity android:name=".DetailFindPayActivity" />
         <activity android:name=".PayCodeFinishActivity" />
-        <activity android:name=".DetailFindPayFinishActivity" />
         <activity android:name=".CouponsDetailsActivity" />
         <activity android:name=".BindAccountActivity"></activity>
     </application>
