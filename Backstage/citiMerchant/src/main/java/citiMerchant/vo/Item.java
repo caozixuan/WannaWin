@@ -1,30 +1,24 @@
 package citiMerchant.vo;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 import java.util.UUID;
 
-
 public class Item {
-    private String ItemID;
+    private String itemID;
     private String name;
     private String description;
     private String merchantID;
     private String logoURL;
     private Double originalPrice;
     private Integer points;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Timestamp overdueTime;
     private Long stock;
-    private String itemType;
 
-
-    public Type.ItemType getItemType() {
-        return Type.ItemType.getItemType(itemType);
-    }
-
-    //for DB
-    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, String itemType) {
-        ItemID = itemID;
+    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
+        this.itemID = itemID;
         this.name = name;
         this.description = description;
         this.merchantID = merchantID;
@@ -33,18 +27,14 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
-        this.itemType = itemType;
     }
-
 
     public Item() {
-        this.ItemID = UUID.randomUUID().toString();
+
     }
 
-
-    //for programmer
-    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, Type.ItemType itemType) {
-        this.ItemID = UUID.randomUUID().toString();
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
+        this.itemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.merchantID = merchantID;
@@ -53,11 +43,10 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
-        this.itemType = Type.ItemType.getItemTypeString(itemType);
     }
 
     public String getItemID() {
-        return ItemID;
+        return itemID;
     }
 
     public String getName() {
@@ -92,4 +81,39 @@ public class Item {
         return stock;
     }
 
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
+    }
+
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public void setOverdueTime(Timestamp overdueTime) {
+        this.overdueTime = overdueTime;
+    }
+
+    public void setStock(Long stock) {
+        this.stock = stock;
+    }
 }

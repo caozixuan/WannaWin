@@ -14,6 +14,7 @@ class CouponHistoryViewController: UIViewController {
 	@IBOutlet weak var usedContainer: UIView!
 	@IBOutlet weak var overdueContainer: UIView!
 	@IBOutlet weak var segmentControl: UISegmentedControl!
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 		segmentControl.tintColor = UIColor.clear

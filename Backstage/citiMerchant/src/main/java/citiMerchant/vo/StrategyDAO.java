@@ -1,5 +1,7 @@
 package citiMerchant.vo;
 
+import java.util.UUID;
+
 public class StrategyDAO {
     private String strategyID;
     private String merchantID;
@@ -8,7 +10,11 @@ public class StrategyDAO {
     private Double points;
 
     public StrategyDAO() {
+        this.strategyID= UUID.randomUUID().toString();
+    }
 
+    public StrategyDAO(String strategyID){
+        this.strategyID=strategyID;
     }
 
     public StrategyDAO(String strategyID, String merchantID, Double full, Double priceAfter, Double points) {
@@ -39,4 +45,23 @@ public class StrategyDAO {
         return points;
     }
 
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
+    }
+
+    public void setStrategyID(String strategyID) {
+        this.strategyID = strategyID;
+    }
+
+    public void setFull(Double full) {
+        this.full = full;
+    }
+
+    public void setPriceAfter(Double priceAfter) {
+        this.priceAfter = priceAfter;
+    }
+
+    public void setPoints(Double points) {
+        this.points = points;
+    }
 }

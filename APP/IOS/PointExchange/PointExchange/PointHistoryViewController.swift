@@ -11,11 +11,33 @@ import ExpyTableView
 
 class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     
-    var pointsHistoryArray:[PointsHistory]?
+    var pointsHistoryArray = [PointsHistory]()
     @IBOutlet weak var tableView: ExpyTableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
+		
+		self.tableView.register(UINib(nibName: "PointHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "pointCell")
+		self.tableView.register(UINib(nibName: "PointHistoryDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "detailCell")
+		self.tableView.rowHeight = 44
+		
+		let pointHistory = PointsHistory()
+		pointHistory.totalPoints = 100
+		var pointHistoryItem = PointsHistoryItem()
+		pointHistoryItem.merchantName = "Test"
+		pointHistoryItem.time = "Aug, 10, 2018"
+		pointHistoryItem.pointsCard = 20
+		pointHistoryItem.pointsCiti = 10
+		
+		pointHistory.historyMerchants = [pointHistoryItem]
+		pointsHistoryArray.append(pointHistory)
+		pointsHistoryArray.append(pointHistory)
+		self.tableView.dataSource = self
+//		ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
+//			if result {
+//
+//			}
+//
+//		}
         // Do any additional setup after loading the view.
     }
 
@@ -26,26 +48,51 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     
     // 可展开的cell
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PointHistoryTableViewCell.self)) as! PointHistoryTableViewCell
-        cell.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray![section].totalPoints!)
-        cell.dateLabel.text = pointsHistoryArray![section].historyMerchants![0].time!
-        return cell
+		
+		var cell = tableView.dequeueReusableCell(withIdentifier: String(describing: "pointCell")) as? PointHistoryTableViewCell
+		if cell == nil {
+			cell = UITableViewCell(style: .default, reuseIdentifier: "pointCell") as? PointHistoryTableViewCell
+		}
+		if section == 0 {
+			cell?.line.frame = CGRect(x: (cell?.oval.center.x)!-1, y: (cell?.oval.center.y)!, width: 2, height: 50)
+		}else{
+			cell?.line.frame = CGRect(x: (cell?.oval.center.x)!-1, y: -2, width: 2, height: 50)
+		}
+		switch section%5 {
+		case 0:
+			cell?.oval.image = UIImage(named: "Oval_blue")
+		case 1:
+			cell?.oval.image = UIImage(named: "Oval_green")
+		case 2:
+			cell?.oval.image = UIImage(named: "Oval_lightGreen")
+		case 3:
+			cell?.oval.image = UIImage(named: "Oval_purple")
+		default:
+			cell?.oval.image = UIImage(named: "Oval_red")
+		}
+		
+        cell?.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray[section].totalPoints!)
+        cell?.dateLabel.text = pointsHistoryArray[section].historyMerchants![0].time!
+        return cell!
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return pointsHistoryArray!.count
+        return pointsHistoryArray.count
     }
     
     // 点击展开后的单元格
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "detailCell")
+		var cell = self.tableView.dequeueReusableCell(withIdentifier: "detailCell") as? PointHistoryDetailTableViewCell
+		if cell == nil {
+			cell = UITableViewCell(style: .default, reuseIdentifier: "detailCell") as? PointHistoryDetailTableViewCell
+		}
         cell?.hideSeparator()
         // 商家名
-        (cell?.viewWithTag(1) as! UILabel).text = pointsHistoryArray![indexPath.section].historyMerchants![indexPath.row-1].merchantName
+        cell?.merchantName.text = pointsHistoryArray[indexPath.section].historyMerchants![indexPath.row-1].merchantName
         // 商家积分
-        (cell?.viewWithTag(2) as! UILabel).text = String(stringInterpolationSegment: pointsHistoryArray![indexPath.section].historyMerchants![indexPath.row-1].pointsCard!)
+        cell?.merchantPointLabel.text = "-" + String(stringInterpolationSegment: pointsHistoryArray[indexPath.section].historyMerchants![indexPath.row-1].pointsCard!)
         // 通用点
-        (cell?.viewWithTag(3) as! UILabel).text = String(stringInterpolationSegment: pointsHistoryArray![indexPath.section].historyMerchants![indexPath.row-1].pointsCiti!)
+        cell?.pointLabel.text = "+" + String(stringInterpolationSegment: pointsHistoryArray[indexPath.section].historyMerchants![indexPath.row-1].pointsCiti!)
         
         return cell!
     }
@@ -56,7 +103,7 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pointsHistoryArray![section].historyMerchants!.count+1
+        return pointsHistoryArray[section].historyMerchants!.count+1
     }
     
 

@@ -16,6 +16,9 @@
 		3E3327902120041900426518 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E33278E2120041900426518 /* HistoryTableViewCell.xib */; };
 		3E3327922120507B00426518 /* CouponHistoryContainerViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */; };
 		3E3327942120762D00426518 /* OfflineHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3327932120762D00426518 /* OfflineHistoryViewController.swift */; };
+		3E33279821215A8B00426518 /* PointHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E33279721215A8B00426518 /* PointHistoryTableViewCell.xib */; };
+		3E33279B2121723D00426518 /* PointHistoryDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */; };
+		3E33279C2121723D00426518 /* PointHistoryDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E33279A2121723D00426518 /* PointHistoryDetailTableViewCell.xib */; };
 		3E4017F021005FA700591B77 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4017EF21005FA700591B77 /* LoginView.swift */; };
 		3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75920EFDFA000843193 /* Store.storyboard */; };
 		3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75B20EFDFE400843193 /* Exchange.storyboard */; };
@@ -100,6 +103,9 @@
 		3E33278E2120041900426518 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponHistoryContainerViewContainer.swift; sourceTree = "<group>"; };
 		3E3327932120762D00426518 /* OfflineHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineHistoryViewController.swift; sourceTree = "<group>"; };
+		3E33279721215A8B00426518 /* PointHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryDetailTableViewCell.swift; sourceTree = "<group>"; };
+		3E33279A2121723D00426518 /* PointHistoryDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointHistoryDetailTableViewCell.xib; sourceTree = "<group>"; };
 		3E4017EF21005FA700591B77 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E46B75920EFDFA000843193 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		3E46B75B20EFDFE400843193 /* Exchange.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exchange.storyboard; sourceTree = "<group>"; };
@@ -322,6 +328,7 @@
 				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
 				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
 				3E33278D2120041900426518 /* HistoryTableViewCell.swift */,
+				3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -434,6 +441,8 @@
 				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
 				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
 				3E33278E2120041900426518 /* HistoryTableViewCell.xib */,
+				3E33279721215A8B00426518 /* PointHistoryTableViewCell.xib */,
+				3E33279A2121723D00426518 /* PointHistoryDetailTableViewCell.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -508,10 +517,12 @@
 				3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */,
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
 				3E3327902120041900426518 /* HistoryTableViewCell.xib in Resources */,
+				3E33279C2121723D00426518 /* PointHistoryDetailTableViewCell.xib in Resources */,
 				B66CFB2420F88B60007165DF /* MenuData.plist in Resources */,
 				3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */,
 				844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */,
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
+				3E33279821215A8B00426518 /* PointHistoryTableViewCell.xib in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
 				3EA3CD052102472000B0392E /* ExchangeItemCellView.xib in Resources */,
@@ -643,6 +654,7 @@
 				B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */,
 				3EA3CD0721033D6A00B0392E /* HuaQiStoreWebViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
+				3E33279B2121723D00426518 /* PointHistoryDetailTableViewCell.swift in Sources */,
 				3E5FD378211ECCA600ECE558 /* DsMerchantTableViewCell.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,

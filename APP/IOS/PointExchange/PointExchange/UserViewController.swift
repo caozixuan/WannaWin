@@ -120,15 +120,9 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     /// 查看积分兑换记录
     func checkPointRecord(){
         if let _ = User.getUser().username{
-            ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
-                if result {
-                    let view = self.storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController") as! PointHistoryViewController
-                    view.pointsHistoryArray = pointsHistory
-                    self.navigationController?.pushViewController(view, animated: true)
-                    
-                }
-                
-            }
+			let view = self.storyBoard.instantiateViewController(withIdentifier:"PointHistoryViewController") as! PointHistoryViewController
+			self.navigationController?.pushViewController(view, animated: true)
+            
             
         }else{
             let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")

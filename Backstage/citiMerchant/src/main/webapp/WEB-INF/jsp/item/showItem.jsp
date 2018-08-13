@@ -189,7 +189,6 @@ desired effect
         </thead>
         <tbody>
             <tr><td>
-
             <c:forEach items="${items}" var="item">
               <tr>
                 <td>
