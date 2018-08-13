@@ -26,10 +26,6 @@ class CouponHistoryContainViewContainer: UIViewController {
         super.viewDidLoad()
         tableView.rowHeight = 98
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 		self.tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "historyCell")
 		if tag == "unuse" {
 			ServerConnector.getUnusedCoupons(){(result, items) in
@@ -54,10 +50,8 @@ class CouponHistoryContainViewContainer: UIViewController {
 				}
 			}
 		}
-//		let obs = Observable<SectionModel<String,[Item]>>.empty().asObservable()
-		
-		
     }
+	
 	func getDatas()->Observable<[SectionModel<String,Item>]>{
 		let items = (0 ..< self.items.count).map {i in
 			self.items[i]

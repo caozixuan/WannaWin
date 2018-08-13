@@ -16,6 +16,7 @@ class OfflineHistoryViewController: UIViewController {
 	var orders = [Order]()
 	var disposeBag = DisposeBag()
 	@IBOutlet weak var tableView: UITableView!
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.rowHeight = 95

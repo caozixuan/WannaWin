@@ -10,20 +10,19 @@
     <context:annotation-config/>
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="citiMerchant.accounting"/>
-    <context:component-scan base-package="citiMerchant.history"/>
-    <!--<context:component-scan base-package="citiMerchant.interceptor"/>-->
-    <context:component-scan base-package="citiMerchant.item"/>
-    <context:component-scan base-package="citiMerchant.login"/>
-    <context:component-scan base-package="citiMerchant.strategy"/>
-    <context:component-scan base-package="citiMerchant.Merchant"/>
-    <context:component-scan base-package="citiMerchant.mapper"/>
-    <context:component-scan base-package="citiMerchant.showData"/>
-    <!--<context:component-scan base-package="citiMerchant.dao"/>-->
-    <context:component-scan base-package="citiMerchant.vo"/>
+    <context:component-scan base-package="citiMerchant.*"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mvc:default-servlet-handler/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <mvc:exclude-mapping path="/loginSubmit"/>
+            <mvc:exclude-mapping path="/statics/*"/>
+            <bean class="citiMerchant.interceptor.AuthInterceptorAdapter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!-- 绑定数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

@@ -16,6 +16,7 @@
 		3E3327902120041900426518 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E33278E2120041900426518 /* HistoryTableViewCell.xib */; };
 		3E3327922120507B00426518 /* CouponHistoryContainerViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */; };
 		3E3327942120762D00426518 /* OfflineHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3327932120762D00426518 /* OfflineHistoryViewController.swift */; };
+		3E332796212146CA00426518 /* CouponTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E332795212146CA00426518 /* CouponTableView.xib */; };
 		3E4017F021005FA700591B77 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4017EF21005FA700591B77 /* LoginView.swift */; };
 		3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75920EFDFA000843193 /* Store.storyboard */; };
 		3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E46B75B20EFDFE400843193 /* Exchange.storyboard */; };
@@ -100,6 +101,7 @@
 		3E33278E2120041900426518 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponHistoryContainerViewContainer.swift; sourceTree = "<group>"; };
 		3E3327932120762D00426518 /* OfflineHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineHistoryViewController.swift; sourceTree = "<group>"; };
+		3E332795212146CA00426518 /* CouponTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponTableView.xib; sourceTree = "<group>"; };
 		3E4017EF21005FA700591B77 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E46B75920EFDFA000843193 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		3E46B75B20EFDFE400843193 /* Exchange.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exchange.storyboard; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
 				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
 				3E33278E2120041900426518 /* HistoryTableViewCell.xib */,
+				3E332795212146CA00426518 /* CouponTableView.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */,
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
 				3E3327902120041900426518 /* HistoryTableViewCell.xib in Resources */,
+				3E332796212146CA00426518 /* CouponTableView.xib in Resources */,
 				B66CFB2420F88B60007165DF /* MenuData.plist in Resources */,
 				3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */,
 				844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */,

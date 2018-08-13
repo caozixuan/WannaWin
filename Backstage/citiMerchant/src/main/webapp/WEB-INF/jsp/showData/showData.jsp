@@ -212,8 +212,6 @@ desired effect
                     <div class="chart" id="line-chart1" style="height: 300px;"></div>
                 </div>
             </div>
-            <!-- /.box-body -->
-
 
             <div class="box box-info">
                 <div class="box-header with-border">
@@ -230,26 +228,6 @@ desired effect
                     <div class="chart" id="line-chart2" style="height: 300px;"></div>
                 </div>
             </div>
-            <!-- /.box-body -->
-
-
-            <%--<div class="box box-info">--%>
-            <%--<div class="box-header with-border">--%>
-            <%--<h3 class="box-title">优惠券积分兑换情况统计</h3>--%>
-            <%--<div class="box-tools pull-right">--%>
-            <%--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i--%>
-            <%--class="fa fa-minus"></i>--%>
-            <%--</button>--%>
-            <%--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>--%>
-            <%--</button>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="box-body chart-responsive">--%>
-            <%--<div class="chart" id="line-chart3" style="height: 300px;"></div>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-            <%--<!-- /.box-body -->--%>
-
 
             <div class="box box-danger">
                 <div class="box-header with-border">
@@ -267,11 +245,6 @@ desired effect
                     <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
                 </div>
             </div>
-            <!-- /.box-body -->
-
-            <!--------------------------
-              | Your Page Content Here |
-              -------------------------->
 
         </section>
         <!-- /.content -->
@@ -319,7 +292,6 @@ desired effect
     String total_order_points_json = (String) session.getAttribute("total_order_points_json");
     String total_points_exchange_json = (String) session.getAttribute("total_points_exchange_json");
     String total_merchant_coupon_record_json = (String) session.getAttribute("total_merchant_coupon_record_json");
-    //String merchant_coupon_record = (String) session.getAttribute("merchant_coupon_record_json");
 %>
 <script>
     var Points = $.parseJSON("<%=Point %>");
@@ -328,10 +300,7 @@ desired effect
     var Total_order_points_json = $.parseJSON("<%=total_order_points_json %>");
     var Total_points_exchange_json = $.parseJSON("<%=total_points_exchange_json %>");
     var Total_merchant_coupon_record_json = $.parseJSON("<%=total_merchant_coupon_record_json %>");
-    <%--//var Merchant_coupon_record = $.parseJSON("<%=merchant_coupon_record %>");--%>
 
-    // for (var i = 0; i < 12; ++i)
-    //     document.write(Merchant_coupon_record[i] + "  ");
 
     $(function () {
         "use strict";
@@ -361,7 +330,6 @@ desired effect
             hideHover: 'auto'
         });
 
-
         // LINE CHART2 会员卡积分兑换情况统计
         var line2 = new Morris.Line({
             element: 'line-chart2',
@@ -386,33 +354,6 @@ desired effect
             lineColors: ['#3c8dbc'],
             hideHover: 'auto'
         });
-
-
-        // // LINE CHART3 优惠券积分兑换情况统计
-        // var line3 = new Morris.Line({
-        //     element: 'line-chart3',
-        //     resize: true,
-        //     data: [
-        //         {timeStamp: timeStamps[0], item1: Points_EXCHANGES[0]},
-        //         {timeStamp: timeStamps[1], item1: Points_EXCHANGES[1]},
-        //         {timeStamp: timeStamps[2], item1: Points_EXCHANGES[2]},
-        //         {timeStamp: timeStamps[3], item1: Points_EXCHANGES[3]},
-        //         {timeStamp: timeStamps[4], item1: Points_EXCHANGES[4]},
-        //         {timeStamp: timeStamps[5], item1: Points_EXCHANGES[5]},
-        //         {timeStamp: timeStamps[6], item1: Points_EXCHANGES[6]},
-        //         {timeStamp: timeStamps[7], item1: Points_EXCHANGES[7]},
-        //         {timeStamp: timeStamps[8], item1: Points_EXCHANGES[8]},
-        //         {timeStamp: timeStamps[9], item1: Points_EXCHANGES[9]},
-        //         {timeStamp: timeStamps[10], item1: Points_EXCHANGES[10]},
-        //         {timeStamp: timeStamps[11], item1: Points_EXCHANGES[11]}
-        //     ],
-        //     xkey: 'timeStamp',
-        //     ykeys: ['item1'],
-        //     labels: ['优惠券积分兑换'],
-        //     lineColors: ['#3c8dbc'],
-        //     hideHover: 'auto'
-        // });
-
 
         //DONUT CHART
         var donut = new Morris.Donut({
