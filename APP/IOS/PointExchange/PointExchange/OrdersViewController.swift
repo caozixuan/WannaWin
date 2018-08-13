@@ -54,7 +54,7 @@ class OrdersViewController: UIViewController {
 			.selectionIndicatorColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0))
 			
 		]
-		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: 30),pageMenuOptions:params)
+		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-64),pageMenuOptions:params)
 		self.addChildViewController(pageMenu!)
 		self.view.addSubview((pageMenu?.view)!)
 		pageMenu!.didMove(toParentViewController: self)
