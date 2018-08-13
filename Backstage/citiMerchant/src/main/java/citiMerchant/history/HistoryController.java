@@ -29,18 +29,12 @@ public class HistoryController {
     private MerchantMapper merchantMapper;
 
     @RequestMapping("/history")
-    public ModelAndView getHistory(){
+    public ModelAndView getHistory(HttpSession session){
         ModelAndView mv = new ModelAndView();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session =request.getSession();
         String merchantID = (String)session.getAttribute("merchantID");
         List<Order> orders = historyService.getHistory(merchantID);
-        mv.addObject("merchant",merchantMapper.selectByID(merchantID));
-        if(orders==null)
-            mv.addObject("orders", new ArrayList<Order>());
-        else
-            mv.addObject("orders",orders);
-        mv.setViewName("history/history");
+        mv.addObject("orders",orders);
+        mv.setViewName("table/history");
         return mv;
     }
 

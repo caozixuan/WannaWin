@@ -33,5 +33,9 @@ public class LoginService {
         return merchantMapper.selectByID(merchantID);
     }
 
+    public Merchant login(String merchantID,String password){
+        return merchantMapper.loginMerchant(merchantID,password);
+    }
+
 
 }

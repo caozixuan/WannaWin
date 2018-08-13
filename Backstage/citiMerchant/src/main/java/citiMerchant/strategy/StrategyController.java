@@ -1,10 +1,12 @@
 package citiMerchant.strategy;
 
 import citiMerchant.mapper.MerchantMapper;
+import citiMerchant.uitl.JsonResult;
 import citiMerchant.vo.StrategyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,94 +31,54 @@ public class StrategyController {
     MerchantMapper merchantMapper;
 
     @RequestMapping("/strategy/getStrategyList")
-    public ModelAndView getStrategyList() {
+    public ModelAndView getStrategyList(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
         String merchantID = (String) session.getAttribute("merchantID");
-        List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
-        if (strategies == null)
-            mv.addObject("strategies", new ArrayList<StrategyDAO>());
-        else
-            mv.addObject("strategies", strategies);
-        mv.setViewName("strategy/strategyList");
+        mv.addObject("strategies", strategyService.getStrategyList(merchantID));
+        mv.setViewName("table/strategyTable");
         return mv;
     }
 
     @RequestMapping("/strategy/deleteStrategy")
-    public ModelAndView deleteStrategy(String strategyID) {
+    public ModelAndView deleteStrategy(String strategyID,HttpSession session) {
         ModelAndView mv = new ModelAndView();
         strategyService.deleteStrategy(strategyID);
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
         String merchantID = (String) session.getAttribute("merchantID");
         List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
-        if (strategies == null)
-            mv.addObject("strategies", new ArrayList<StrategyDAO>());
-        else
-            mv.addObject("strategies", strategies);
-        mv.setViewName("strategy/strategyList");
+        mv.addObject("strategies", strategies);
+        mv.setViewName("table/strategyTable");
         return mv;
     }
 
-    @RequestMapping("/strategy/editStrategyRequest")
+    @RequestMapping("/strategy/editStrategy")
     public ModelAndView editStrategyRequest(String strategyID) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String merchantID = (String) session.getAttribute("merchantID");
         ModelAndView mv = new ModelAndView();
         StrategyDAO strategyDAO = strategyService.editStrategyRequest(strategyID);
         mv.addObject("strategy", strategyDAO);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
-        mv.setViewName("strategy/editStrategy");
+        mv.setViewName("table/editStrategy");
         return mv;
     }
 
     @RequestMapping("/strategy/editStrategySubmit")
-    public ModelAndView editStrategySubmit(String strategyID, Double full, Double priceAfter, Double points) {
-        ModelAndView mv = new ModelAndView();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
+    @ResponseBody
+    public String editStrategySubmit(StrategyDAO strategyDAO,HttpSession session) {
         String merchantID = (String) session.getAttribute("merchantID");
-        StrategyDAO strategyDAO = new StrategyDAO(strategyID, merchantID, full, priceAfter, points);
-        strategyService.editStrategySubmit(strategyDAO);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
-        mv.addObject("strategies", strategyService.getStrategyList(strategyDAO.getMerchantID()));
-        mv.setViewName("strategy/strategyList");
-        return mv;
+        strategyDAO.setMerchantID(merchantID);
+        if (strategyDAO.getStrategyID().equals("")){
+            strategyDAO.setStrategyID(UUID.randomUUID().toString());
+            strategyService.addStrategy(strategyDAO);
+        }else {
+            strategyService.editStrategySubmit(strategyDAO);
+        }
+        return JsonResult.SUCCESS;
     }
 
-    @RequestMapping("/strategy/addStrategyRequest")
+    @RequestMapping("/strategy/addStrategy")
     public ModelAndView addStrategyRequest() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/strategy/addStrategy");
-        mv.addObject("strategyID", UUID.randomUUID().toString());
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String merchantID = (String) session.getAttribute("merchantID");
-        mv.addObject("merchantID", merchantID);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
+        mv.setViewName("/table/editStrategy");
+        mv.addObject("strategy",new StrategyDAO(""));
         return mv;
     }
-
-    @RequestMapping("/strategy/addStrategySubmit")
-    public ModelAndView addStrategySubmit(Double full, Double priceAfter, Double points) {
-        ModelAndView mv = new ModelAndView();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String merchantID = (String) session.getAttribute("merchantID");
-        mv.addObject("merchantID", merchantID);
-        StrategyDAO strategyDAO = new StrategyDAO(UUID.randomUUID().toString(), merchantID, full, priceAfter, points);
-        strategyService.addStrategy(strategyDAO);
-
-        List<StrategyDAO> strategies = strategyService.getStrategyList(merchantID);
-        mv.addObject("strategies", strategies);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
-        mv.setViewName("strategy/strategyList");
-        return mv;
-    }
-
 
 }
