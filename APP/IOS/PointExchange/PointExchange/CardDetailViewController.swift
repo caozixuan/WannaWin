@@ -8,20 +8,20 @@
 
 import UIKit
 
-class CardDetailTableViewController: UITableViewController {
+class CardDetailViewController: UIViewController,UITableViewDataSource {
 	
 	var merchantID:String?
 	var indicator:UIActivityIndicatorView?
 	var card:Card?
 	
-	@IBOutlet weak var barCodeView: UIImageView!
 	@IBOutlet weak var cardImageView: UIImageView!
-	@IBOutlet weak var pointLabel: UILabel!
-	@IBOutlet weak var numberLabel: UILabel!
-	@IBOutlet weak var citiPointLabelView: UILabel!
+	
+	@IBOutlet weak var tableView: UITableView!
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		
+		self.tableView.dataSource = self
+		self.tableView.layer.zPosition = 10
 		// 加入“历史积分兑换记录”按钮在导航栏右边
 		let historyBtn = UIBarButtonItem(title: "兑换记录", style: .plain, target: self, action: #selector(goExchangeHistoryVC))
 		self.navigationItem.rightBarButtonItem = historyBtn
@@ -30,26 +30,25 @@ class CardDetailTableViewController: UITableViewController {
 		ServerConnector.getCardDetail(merchantID: self.merchantID!){(result,card) in
 			if result {
 				self.card = card
-				self.cardImageView.imageFromURL(card.logoURL!, placeholder: UIImage())
-				self.pointLabel.text = String(stringInterpolationSegment: card.points)
-				self.citiPointLabelView.text = String(stringInterpolationSegment: card.points * card.proportion!)
-				self.numberLabel.text = card.number
+			self.cardImageView.imageFromURL(card.logoURL!, placeholder: UIImage())
+				self.tableView.reloadData()
 				// - TODO: 会员卡条形码
-				self.barCodeView.image = ScanCodeManager().createBarCode(url:"hello")
 			}
 			self.indicator?.stopAnimating()
 		}
     }
-
+	
     // MARK: - Navigations
 	@objc func goExchangeHistoryVC() {
 		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-		let view = storyBoard.instantiateViewController(withIdentifier: "ExchangeHistoryTableViewController")
+		let view = storyBoard.instantiateViewController(withIdentifier: "ExchangeHistoryViewController") as! ExchangeHistoryViewController
+		view.merchantID = self.merchantID
+		
 		self.navigationController!.pushViewController(view, animated: true)
 	}
 	
 	// MARK: - Unbind
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 2 && indexPath.row == 0 {
 			// TODO: - 网络请求
 			let alert = UIAlertController(title:"解绑会员卡", message:"您确定要解绑该会员卡吗？", preferredStyle:.alert)
@@ -82,4 +81,32 @@ class CardDetailTableViewController: UITableViewController {
 		}
 	}
 
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 4
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		var cell = UITableViewCell()
+		switch indexPath.row {
+		case 0:
+			cell = self.tableView.dequeueReusableCell(withIdentifier: "pointCell")!
+			if card != nil {
+				(cell.viewWithTag(1) as! UILabel).text = String(stringInterpolationSegment: (card?.points)!)
+			}
+		case 1:
+			cell = self.tableView.dequeueReusableCell(withIdentifier: "citiPointCell")!
+			if card != nil {
+				(cell.viewWithTag(1) as! UILabel).text = String(stringInterpolationSegment: (card?.points)!*(card?.proportion)!)
+			}
+			
+		case 2:
+			cell = self.tableView.dequeueReusableCell(withIdentifier: "cardNumCell")!
+			if card != nil {
+				(cell.viewWithTag(1) as! UILabel).text = card?.number
+			}
+		default:
+			cell = self.tableView.dequeueReusableCell(withIdentifier: "ruleCell")!
+		}
+		return cell
+	}
 }

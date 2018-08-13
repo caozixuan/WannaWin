@@ -11,6 +11,7 @@ import ExpyTableView
 
 class PointHistoryTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
     
+	@IBOutlet weak var citiPointLabel: UILabel!
 	@IBOutlet weak var line: UIImageView!
 	@IBOutlet weak var oval: UIImageView!
     @IBOutlet weak var pointLabel: UILabel!

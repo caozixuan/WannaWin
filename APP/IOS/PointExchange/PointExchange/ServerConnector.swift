@@ -533,23 +533,31 @@ class ServerConnector: NSObject {
     }
     
     /// 获取一个人某张卡的积分兑换记录
-    static func getPointsHistoryByMerchantID(merchantID:String, callback:@escaping (_ result:Bool,_ pointsHistory:PointsHistory)->()){
+    static func getPointsHistoryByMerchantID(merchantID:String, callback:@escaping (_ result:Bool,_ pointsHistory:[PointsHistoryItem]?)->()){
         provider.request(.getPointsHistoryByMerchantID(merchantID:merchantID)){ result in
-            var pointsHistory = PointsHistory()
+            
             if case let .success(response) = result{
 				if response.statusCode == 200 {
+					var pointsHistories = [PointsHistoryItem]()
 					let decoder = JSONDecoder()
-					do{
-						pointsHistory = try decoder.decode(PointsHistory.self, from: response.data)
-					}catch{
-						callback(false,pointsHistory)
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let pointsHistory = try decoder.decode(PointsHistoryItem.self, from: data.rawData())
+							pointsHistories.append(pointsHistory)
+						}catch{
+							callback(false,pointsHistories)
+							return
+						}
 					}
+					callback(true,pointsHistories)
 					
 				}
                 
             }
             if case .failure(_) = result {
-                callback(false,pointsHistory)
+                callback(false,nil)
             }
         }
     }
