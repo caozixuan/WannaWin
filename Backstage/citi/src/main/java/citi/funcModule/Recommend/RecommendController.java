@@ -76,7 +76,7 @@ public class RecommendController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         String userID = (String)session.getAttribute("userID");
-        return gson.toJson(recommendService.getRecommendedItems(userID));
+        return gson.toJson(recommendService.getRecommendedItems(userID,3));
     }
 
 
