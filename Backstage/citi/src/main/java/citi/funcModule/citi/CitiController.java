@@ -1,8 +1,7 @@
 package citi.funcModule.citi;
 
-import citi.API.Authorize;
-import citi.API.Card;
-import citi.API.PayWithAwards;
+import citi.API.*;
+import citi.BC.RSA;
 import citi.persist.mapper.CitiMapper;
 import citi.persist.mapper.TokenMapper;
 import citi.persist.mapper.UserMapper;
@@ -12,11 +11,20 @@ import citi.vo.RefreshToken;
 import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.*;
+import java.security.interfaces.RSAKey;
 import java.sql.Timestamp;
+import java.util.Map;
 import java.util.UUID;
 
 /*
@@ -37,6 +45,7 @@ public class CitiController {
     @Autowired
     private Gson gson;
 
+    CitiAPIContext context = new CitiAPIContext();
 
 
     /**
@@ -110,5 +119,58 @@ public class CitiController {
         return PayWithAwards.getInformation(linkCode,tokens[0]);
     }
 
+    @ResponseBody
+    @RequestMapping("/citiAccount")
+    public String citiAccountBind(String username, String password, String userID){
+        CitiAccount accs = new CitiAccount();
+        CitiAuthorize authorize = new CitiAuthorize();
+        Map map = null;
+        String jsCode = null;
+        try{
+            map = authorize.getBizToken(context);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+        String accounts = null;
+        String encoding = "UTF-8";
+        File file = new File("./E2E.js");
+        Long filelength = file.length();
+        byte[] filecontent = new byte[filelength.intValue()];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(filecontent);
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            jsCode = new String(filecontent, encoding);
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("The OS does not support " + encoding);
+            e.printStackTrace();
+        }
+        //Resource RESJS = new ClassPathResource("E:\\WannaWin\\Backstage\\citi\\src\\E2E.js");
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        String scriptResult = null;
+        try{
+            engine.eval(jsCode);
+            Invocable invocable = (Invocable) engine;
+            scriptResult = (String) invocable.invokeFunction("doRSA",map.get("modulus"),map.get("exponent"),context.getEventId(),password);
+        }catch(ScriptException e){
+            e.printStackTrace();
+            System.out.println("Error executing script: "+ e.getMessage()+" script:["+"1"+"]");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            System.out.println("Error executing script,为找到需要的方法: "+ e.getMessage()+" script:["+"2"+"]");
+        }
+        try{
+            accounts = accs.getAccounts(username, scriptResult,context);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+        return accounts;
+    }
 
 }

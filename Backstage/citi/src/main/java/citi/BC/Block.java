@@ -12,7 +12,16 @@ public class Block {
     final public BC_Data data;
     final public Long timeStamp; //as number of milliseconds since 1/1/1970.
     private Integer nonce;
+    private String enStr;
+    private String signature;
 
+    public String getEnStr() {
+        return enStr;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
 
     public String getHash() {
         return hash;
@@ -62,6 +71,14 @@ public class Block {
             hash = calculateThisHash();
         }
         System.out.println("Block Mined!!! : " + hash);
+
+        String str = data.merchantID +
+                Long.toString(timeStamp) +
+                Integer.toString(nonce);
+        enStr = RSA.encryptByPrivate(str, BC.privateKey);
+        // 产生签名
+        signature = RSA.sign(enStr, BC.privateKey);
+
     }
 
 }

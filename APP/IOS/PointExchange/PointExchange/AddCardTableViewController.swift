@@ -8,35 +8,31 @@
 
 import UIKit
 
-class AddCardTableViewController: UITableViewController {
+class AddCardViewController: UIViewController {
 
     var merchant:Merchant?
 	
 	var activityIndicator:UIActivityIndicatorView?
 
+	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var passwordField: UITextField!
+
+	@IBOutlet weak var logoView: UIImageView!
+	@IBOutlet weak var cardID: UITextField!
 	
-	@IBOutlet weak var cardId: UITextField!
-	
-	@IBOutlet weak var finishBtn: UITableViewCell!
-	
+	@IBOutlet weak var button: UIButton!
 	override func viewDidLoad() {
         super.viewDidLoad()
-		cardId.delegate = self
-		finishBtn.isUserInteractionEnabled = false
-		
+		cardID.delegate = self
+		logoView.imageFromURL((merchant?.logoURL)!, placeholder: UIImage())
+		nameLabel.text = merchant?.name
 		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
     }
 
 	// MARK: - TextField delegate
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-		let text2 = cardId.text
+		
 		// FIXME: - 后期需要修改条件
-		if text2?.count != 0 && isCardIdValid()
-		{
-			finishBtn.isUserInteractionEnabled = true
-			finishBtn.backgroundColor = UIColor.blue
-		}
 		return true
 	}
 	
@@ -50,28 +46,28 @@ class AddCardTableViewController: UITableViewController {
 		return true
 	}
 	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if indexPath.section == 1 && indexPath.row == 0 {
-			activityIndicator?.startAnimating()
-			ServerConnector.addCard(merchantID: (merchant?.id)!, cardNum: cardId.text!, password: passwordField.text!){ result in
-				let alert:UIAlertController!
-				if result {
-					alert = UIAlertController(title:"绑定成功", message:nil, preferredStyle:.alert)
-					let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
-						self.navigationController!.popViewController(animated: true)
-						self.navigationController?.popViewController(animated: true)
-					})
-					alert.addAction(okAction)
-				}
-				else {
-					alert = UIAlertController(title:"绑定失败", message:nil, preferredStyle:.alert)
-					let cancelAction = UIAlertAction(title:"取消", style:.cancel, handler:nil)
-					alert.addAction(cancelAction)
-				}
-				self.present(alert, animated: true, completion: nil)
+	@IBAction func clickButton(_ sender: Any) {
+		activityIndicator?.startAnimating()
+		ServerConnector.addCard(merchantID: (merchant?.id)!, cardNum: cardID.text!, password: passwordField.text!){ result in
+			let alert:UIAlertController!
+			if result {
+				alert = UIAlertController(title:"绑定成功", message:nil, preferredStyle:.alert)
+				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+					self.navigationController!.popViewController(animated: true)
+					self.navigationController?.popViewController(animated: true)
+				})
+				alert.addAction(okAction)
 			}
-			
+			else {
+				alert = UIAlertController(title:"绑定失败", message:nil, preferredStyle:.alert)
+				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+				})
+				alert.addAction(okAction)
+			}
+			self.activityIndicator?.stopAnimating()
+			self.present(alert, animated: true, completion: nil)
 		}
 	}
+	
 
 }
