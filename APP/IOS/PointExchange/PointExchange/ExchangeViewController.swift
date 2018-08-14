@@ -12,7 +12,8 @@ import SwiftyJSON
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
 	var dataSource:[Card]?
-	
+    var selectedList:[Bool]? //用于记住选中的项，防止cell重用导致的选中错乱
+    
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
 	var pointsSum:Double = 0.0
@@ -49,12 +50,14 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.tableView.contentInset.bottom = 60
+
 		
     }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if dataSource != nil {
+            selectedList = Array(repeating: false, count: (dataSource?.count)!)
 			return (dataSource?.count)!
 		}else {
 			return 0
@@ -66,11 +69,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "store to bank")
-        }
-        else {
-            while cell.contentView.subviews.last != nil {
-                cell.contentView.subviews.last?.removeFromSuperview()
-            }
         }
         
 		for subview in cell.contentView.subviews{
@@ -86,6 +84,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 					exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
 					exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					exchangeItemCellView.proportion = card.proportion
+                    exchangeItemCellView.checkbox.isSelected = (selectedList?[indexPath.row])!
 				}
                 break
 			}
@@ -193,6 +192,11 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			}
 		}
 	}
+    
+    /// 标记选中状态
+    func setSelected(tag: Int, isSelected: Bool) {
+        selectedList?[tag] = isSelected
+    }
 	
     // MARK: - 兑换积分网络请求
     @IBAction func clickExchangeBtn(_ sender: Any) {
