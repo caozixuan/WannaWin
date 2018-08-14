@@ -172,7 +172,7 @@ public class PayingActivity extends AppCompatActivity {
         titleBar.setSubTitleSize(actionTitleSize);
 
         //左侧
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("首页");
         titleBar.setLeftTextColor(Color.BLACK);
 

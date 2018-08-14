@@ -1,6 +1,6 @@
 package com.citiexchangeplatform.pointsleague.models;
 
-public class MyOrderItemModel {
+public class CouponItemModel {
     String merchantName;
     String description;
     String exchangeDate;
@@ -8,7 +8,7 @@ public class MyOrderItemModel {
     String logoURL;
     String itemID;
 
-    public MyOrderItemModel(String merchantName, String description, String exchangeDate, String validityDate, String logoURL, String itemID) {
+    public CouponItemModel(String merchantName, String description, String exchangeDate, String validityDate, String logoURL, String itemID) {
         this.merchantName = merchantName;
         this.description = description;
         this.exchangeDate = exchangeDate;

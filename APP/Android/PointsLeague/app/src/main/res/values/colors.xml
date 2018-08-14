@@ -7,7 +7,8 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorOrange">#FF8022</color>
-    <color name="colorLightOrange">#FFFF9546</color>
+    <color name="colorLightOrange">#FF9546</color>
     <color name="colorUnable">#c3c3c3</color>
     <color name="colorToolBar">#cfcccccc</color>
+    <color name="colorBackground">#f3f3f3</color>
 </resources>

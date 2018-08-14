@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public class OrderTabUnusedFragment extends Fragment {
     private RecyclerView unusedOrderRecyclerView;
-    private MyOrderAdapter orderAdapter;
+    private MyCouponAdapter orderAdapter;
 
 
     public OrderTabUnusedFragment() {
@@ -77,67 +77,16 @@ public class OrderTabUnusedFragment extends Fragment {
     }
 
     protected void setRecyclerView(){
-        orderAdapter = new MyOrderAdapter(getActivity());
+        orderAdapter = new MyCouponAdapter(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         unusedOrderRecyclerView.setLayoutManager(layoutManager);
-        orderAdapter = new MyOrderAdapter(getActivity());
+        orderAdapter = new MyCouponAdapter(getActivity());
         unusedOrderRecyclerView.setAdapter(orderAdapter);
     }
 
 
-    //private void getHistoryOrderByQRCode() {
-    //    String url="http://193.112.44.141:80/citi/order/getOrders";
-    //    RequestQueue queue = MyApplication.getHttpQueues();
-    //    //RequestQueue queue=Volley.newRequestQueue(this);
-    //    StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-    //        @Override
-    //        public void onResponse(String s) {
-    //
-    //            Log.e("success",s);
-    //            System.out.println(s);
-    //            try {
-    //                JSONArray jsonArray = new JSONArray(s);
-    //
-    //                for (int i = 0; i < jsonArray.length(); i++) {
-    //                    JSONObject jObj = jsonArray.getJSONObject(i);
-    //
-    //
-    //                    String pointsNeeded = "使用花旗点：" + jObj.getString("pointsNeeded");
-    //                    String merchantName = jObj.getString("merchantName");
-    //                    String time = jObj.getString("time");
-    //
-    //                    orderAdapter.addData(merchantName,pointsNeeded,time);
-    //
-    //                }
-    //
-    //
-    //            } catch (JSONException e) {
-    //                e.printStackTrace();
-    //            }
-    //
-    //        }
-    //    }, new Response.ErrorListener() {
-    //        @Override
-    //        public void onErrorResponse(VolleyError volleyError) {
-    //
-    //        }
-    //    }){
-    //        @Override
-    //        protected Map<String, String> getParams() throws AuthFailureError {
-    //            Map<String,String> map=new HashMap<>();
-    //
-    //            map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
-    //            map.put("intervalTime","1101010101");
-    //
-    //
-    //            return map;
-    //        }
-    //    };
-    //    queue.add(request);
-    //
-    //
-    //}
+
     private void getHistoryOrderByCoupon() {
         String url="http://193.112.44.141:80/citi/userCoupon/getUnusedCoupons";
         RequestQueue queue = MyApplication.getHttpQueues();
