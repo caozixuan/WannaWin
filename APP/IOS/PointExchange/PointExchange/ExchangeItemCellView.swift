@@ -15,6 +15,7 @@ enum changeType {
 
 protocol ExchangeItemCellDelegate {
 	func contentDidChanged(text: String, row: Int, type: changeType)
+    func setSelected(tag:Int, isSelected:Bool)
 }
 
 class ExchangeItemCellView: UIView {
@@ -83,6 +84,8 @@ class ExchangeItemCellView: UIView {
 	/// 点击选中按钮的触发动作
 	@objc func checkboxClick(button:UIButton){
 		button.isSelected = !button.isSelected
+        
+        self.delegate?.setSelected(tag: self.editSourcePoints.tag, isSelected: button.isSelected)
 		
 		if button.isSelected {
 			editSourcePoints?.isHidden = false
