@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,51 +24,79 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66E-9D-dem">
-                    <rect key="frame" x="0.0" y="0.0" width="608" height="150"/>
+                    <rect key="frame" x="0.0" y="0.0" width="608" height="155"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-9I-MRs">
-                            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nn-iq-PSa" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="205" y="0.0" width="200" height="150"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-9I-MRs">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="8ZQ-9I-MRs" secondAttribute="height" multiplier="4:3" id="hl5-1L-PVd"/>
+                                <constraint firstAttribute="bottom" secondItem="8ZQ-9I-MRs" secondAttribute="bottom" id="4t7-hM-7vI"/>
+                                <constraint firstItem="8ZQ-9I-MRs" firstAttribute="leading" secondItem="6nn-iq-PSa" secondAttribute="leading" id="Xce-qP-JE9"/>
+                                <constraint firstItem="8ZQ-9I-MRs" firstAttribute="top" secondItem="6nn-iq-PSa" secondAttribute="top" id="eJ7-yY-iOu"/>
+                                <constraint firstAttribute="trailing" secondItem="8ZQ-9I-MRs" secondAttribute="trailing" id="ui3-7C-jZt"/>
                             </constraints>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-ze-aJW">
-                            <rect key="frame" x="408" y="0.0" width="200" height="150"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXD-Fz-bBn" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="434" y="0.0" width="200" height="150"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-ze-aJW">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="Hk0-ze-aJW" secondAttribute="height" multiplier="4:3" id="LrY-7W-t08"/>
+                                <constraint firstAttribute="bottom" secondItem="Hk0-ze-aJW" secondAttribute="bottom" id="2BA-Gm-aXH"/>
+                                <constraint firstAttribute="trailing" secondItem="Hk0-ze-aJW" secondAttribute="trailing" id="6Gf-EG-fW1"/>
+                                <constraint firstItem="Hk0-ze-aJW" firstAttribute="top" secondItem="zXD-Fz-bBn" secondAttribute="top" id="Dkw-lN-td4"/>
+                                <constraint firstItem="Hk0-ze-aJW" firstAttribute="leading" secondItem="zXD-Fz-bBn" secondAttribute="leading" id="nAx-m9-Afs"/>
                             </constraints>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="DNG-9x-19I">
-                            <rect key="frame" x="204" y="0.0" width="200" height="150"/>
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJs-6T-qR9" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="7" y="0.0" width="200" height="150"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="DNG-9x-19I">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="DNG-9x-19I" secondAttribute="height" multiplier="4:3" id="L0S-lc-hnf"/>
+                                <constraint firstItem="DNG-9x-19I" firstAttribute="leading" secondItem="hJs-6T-qR9" secondAttribute="leading" id="92x-LN-j5m"/>
+                                <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="hJs-6T-qR9" secondAttribute="top" id="Y4e-5I-6Iz"/>
+                                <constraint firstAttribute="bottom" secondItem="DNG-9x-19I" secondAttribute="bottom" id="ciu-PV-Pav"/>
+                                <constraint firstAttribute="trailing" secondItem="DNG-9x-19I" secondAttribute="trailing" id="or3-BL-uCN"/>
                             </constraints>
-                        </imageView>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="centerX" secondItem="66E-9D-dem" secondAttribute="centerX" id="2Kj-VM-Px6"/>
-                        <constraint firstItem="8ZQ-9I-MRs" firstAttribute="width" secondItem="DNG-9x-19I" secondAttribute="width" id="2rx-sp-dpL"/>
                         <constraint firstAttribute="width" constant="608" id="34n-rA-hIJ"/>
-                        <constraint firstAttribute="bottom" secondItem="DNG-9x-19I" secondAttribute="bottom" id="GrC-qD-RfE"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="leading" secondItem="8ZQ-9I-MRs" secondAttribute="trailing" constant="4" id="JUf-ys-NIz"/>
-                        <constraint firstAttribute="trailing" secondItem="Hk0-ze-aJW" secondAttribute="trailing" priority="250" constant="20" symbolic="YES" id="NYQ-mP-8Nu"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="8ZQ-9I-MRs" secondAttribute="top" id="QaY-Hc-ANQ"/>
-                        <constraint firstItem="8ZQ-9I-MRs" firstAttribute="leading" secondItem="66E-9D-dem" secondAttribute="leading" id="TSe-UZ-Xbm"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="bottom" secondItem="Hk0-ze-aJW" secondAttribute="bottom" id="Xf6-Fr-Uf5"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="Hk0-ze-aJW" secondAttribute="top" id="aak-tx-e4r"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="bottom" secondItem="8ZQ-9I-MRs" secondAttribute="bottom" id="quE-1R-qCJ"/>
-                        <constraint firstItem="Hk0-ze-aJW" firstAttribute="width" secondItem="DNG-9x-19I" secondAttribute="width" id="vR1-kn-kLg"/>
-                        <constraint firstItem="Hk0-ze-aJW" firstAttribute="leading" secondItem="DNG-9x-19I" secondAttribute="trailing" constant="4" id="w7Z-vR-Iit"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="66E-9D-dem" secondAttribute="top" id="yJs-qq-asJ"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstItem="66E-9D-dem" firstAttribute="top" secondItem="f05-tq-BQD" secondAttribute="top" id="b6N-EP-dTw"/>
-                <constraint firstItem="66E-9D-dem" firstAttribute="centerY" secondItem="JFf-4c-K7x" secondAttribute="centerY" id="fCw-I7-1Xd"/>
-                <constraint firstAttribute="bottom" secondItem="66E-9D-dem" secondAttribute="bottom" id="jEG-Wf-h7m"/>
-                <constraint firstAttribute="trailing" secondItem="66E-9D-dem" secondAttribute="trailing" constant="20" symbolic="YES" id="keu-F2-vyz"/>
+                <constraint firstItem="66E-9D-dem" firstAttribute="centerY" secondItem="JFf-4c-K7x" secondAttribute="centerY" constant="2.5" id="fCw-I7-1Xd"/>
+                <constraint firstAttribute="bottom" secondItem="66E-9D-dem" secondAttribute="bottom" constant="-5" id="jEG-Wf-h7m"/>
+                <constraint firstAttribute="trailing" secondItem="66E-9D-dem" secondAttribute="trailing" constant="-222" id="keu-F2-vyz"/>
                 <constraint firstItem="66E-9D-dem" firstAttribute="leading" secondItem="JFf-4c-K7x" secondAttribute="leading" id="nv9-Sq-LFs"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

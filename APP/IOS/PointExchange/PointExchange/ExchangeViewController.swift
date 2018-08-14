@@ -202,31 +202,14 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func clickExchangeBtn(_ sender: Any) {
         var allUnselected = true
         
-        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
-        var indexPath:IndexPath
-        var cell:UITableViewCell?
-        
-        var chosenMerchantList = [ChooseMerchants]()
-        var chosenMerchant:ChooseMerchants
-        
-        for row in 0..<cellNumber {
-            indexPath = IndexPath(row: row, section: 0)
-            cell = tableView.cellForRow(at: indexPath)
-            for subview in (cell?.contentView.subviews)!{
-                if subview .isKind(of: ExchangeItemCellView.self){
-                    let exchangeItemCellView = subview as! ExchangeItemCellView
-                    if exchangeItemCellView.checkbox.isSelected == true {
-                        chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
-                        chosenMerchantList.append(chosenMerchant)
-                    }
+        // 判断是否有选择积分项
+        if let list = selectedList {
+            for item in list {
+                if item {
+                    allUnselected = false
+                    break
                 }
             }
-        }
-        
-        
-        // 判断是否有选择积分项
-        if chosenMerchantList.count != 0 {
-            allUnselected = false
         }
         
         if allUnselected == true { // 如果没有选择任何积分项则不跳转
@@ -236,6 +219,46 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
             self.present(alert, animated: true, completion: nil)
             return
         }
+        
+        // 获得选中积分项数据
+        //let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
+        var indexPath:IndexPath
+        var cell:UITableViewCell?
+        
+        var chosenMerchantList = [ChooseMerchants]()
+        var chosenMerchant:ChooseMerchants
+        
+//        for row in 0..<cellNumber {
+//            indexPath = IndexPath(row: row, section: 0)
+//            cell = tableView.cellForRow(at: indexPath)
+//            for subview in (cell?.contentView.subviews)!{
+//                if subview .isKind(of: ExchangeItemCellView.self){
+//                    let exchangeItemCellView = subview as! ExchangeItemCellView
+//                    if exchangeItemCellView.checkbox.isSelected == true {
+//                        chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+//                        chosenMerchantList.append(chosenMerchant)
+//                    }
+//                }
+//            }
+//        }
+        
+        if let list = selectedList {
+            for (row,item) in list.enumerated() {
+                if item {
+                    indexPath = IndexPath(row: row, section: 0)
+                    cell = tableView.cellForRow(at: indexPath)
+                    for subview in (cell?.contentView.subviews)!{
+                        if subview .isKind(of: ExchangeItemCellView.self){
+                            let exchangeItemCellView = subview as! ExchangeItemCellView
+                            chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+                            chosenMerchantList.append(chosenMerchant)
+                        }
+                    }
+                }
+            }
+        }
+        
+        
         
         // 进行网络请求和后续跳转的数据准备
         let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)

@@ -16,6 +16,7 @@ class DiscoverCouponView: UIScrollView {
 	@IBOutlet weak var image2: UIImageView!
 	
 	@IBOutlet weak var image3: UIImageView!
+	var images = [UIImageView]()
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		initViewFromNib()
@@ -32,5 +33,8 @@ class DiscoverCouponView: UIScrollView {
 		self.view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView as! UIScrollView
 		self.view.frame = bounds
 		self.addSubview(view)
+		self.images.append(self.image1)
+		self.images.append(self.image2)
+		self.images.append(self.image3)
 	}
 }
