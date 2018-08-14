@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class Type {
 
+
+    //The amount is less than 512, so it can be interpreted as 512 bits.
+    // 0 ~ 511 bit represents types.
+    //
     public enum ItemType {
         normal, catering, exercise, bank, costume, education, communication;
 
@@ -38,5 +42,34 @@ public class Type {
         }
 
     }
+
+
+    public class type {
+
+
+
+
+
+    }
+
+
+    /*
+     * Parameter: 128 bytes String : "(ffffffffffffffffff)(....)(abcd...)(0123...)"
+     * Return:
+     *          Long[8] = (0123...), (abcd...), ..., ffffffffffffffffff
+     **/
+    public static Long[] Str2Long(final String type) {
+        Long[] l = new Long[8];
+        try {
+            for (int i = 0; i < 8; i++) {
+                int k = 7 - i;
+                l[k] = Long.parseLong(type.substring(0 + 16 * k, 16 + 16 * k), 16);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
 
 }
