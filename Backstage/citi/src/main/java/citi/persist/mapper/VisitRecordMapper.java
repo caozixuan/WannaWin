@@ -14,7 +14,7 @@ import java.util.List;
 public interface VisitRecordMapper {
 
     final String getItemIDByUserID = "SELECT itemID FROM visitRecord WHERE userID = #{userID} AND time >= now() - #{intervalTime}";
-    final String getVisitTimes = "SELECT COUNT(*) FROM visitRecord WHERE userID = #{userID} AND itemID = #{itemID}";
+    //final String getVisitTimes = "SELECT COUNT(*) FROM visitRecord WHERE userID = #{userID} AND itemID = #{itemID}";
     final String insertVisitRecord = "INSERT INTO visitRecord (userID, itemID, time) VALUES (#{userID}, #{itemID}, #{time})";
     final String deleteByUserID = "DELETE FROM visitRecord WHERE userID = #{userID} AND time <= now() - #{intervalTime}";
 
@@ -22,8 +22,11 @@ public interface VisitRecordMapper {
     @Select(getItemIDByUserID)
     List<String> getItemIDByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
 
-    @Select(getVisitTimes)
-    Integer getVisitTimes(@Param("userID") String userID, @Param("itemID") String itemID);
+    /* [[Deprecated]]
+     *      the new method is "VisitRecordUtil.getVisitTimesBy_userID_AND_itemID()";
+     */
+    //@Select(getVisitTimes)
+    //Integer getVisitTimes(@Param("userID") String userID, @Param("itemID") String itemID);
 
     @Insert(insertVisitRecord)
     int insertVisitRecord(VisitRecord visitRecord);

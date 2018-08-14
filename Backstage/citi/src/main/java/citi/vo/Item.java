@@ -1,6 +1,7 @@
 package citi.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -17,8 +18,8 @@ public class Item {
     protected String itemType;
 
 
-    public Type.ItemType getItemType() {
-        return Type.ItemType.getItemType(itemType);
+    public List<Type.ItemType> getItemType() {
+        return Type.ItemType.DBStr2enum(itemType);
     }
 
     //for DB
@@ -42,7 +43,7 @@ public class Item {
 
 
     //for programmer
-    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, Type.ItemType itemType) {
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, List<Type.ItemType> itemTypes) {
         this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
@@ -52,7 +53,21 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
-        this.itemType = Type.ItemType.getItemTypeString(itemType);
+        this.itemType = Type.ItemType.enum2DBStr(itemTypes);
+    }
+
+    //for programmer
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, Type.TypeWrapper tw) {
+        this.ItemID = UUID.randomUUID().toString();
+        this.name = name;
+        this.description = description;
+        this.merchantID = merchantID;
+        this.logoURL = logoURL;
+        this.originalPrice = originalPrice;
+        this.points = points;
+        this.overdueTime = overdueTime;
+        this.stock = stock;
+        this.itemType = tw.toString();
     }
 
     public String getItemID() {
