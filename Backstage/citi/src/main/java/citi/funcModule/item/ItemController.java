@@ -2,6 +2,7 @@ package citi.funcModule.item;
 
 import citi.support.resultjson.ResultJson;
 import citi.vo.Item;
+import citi.vo.Merchant;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +60,7 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/itemDetail")
     public String getItemInfo(String itemID){
+        Item item = itemService.getItem(itemID);
         return gson.toJson(itemService.getItem(itemID));
     }
 
