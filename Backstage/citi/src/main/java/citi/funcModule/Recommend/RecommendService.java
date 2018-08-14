@@ -2,6 +2,7 @@ package citi.funcModule.Recommend;
 
 import Jama.Matrix;
 import citi.persist.mapper.*;
+import citi.persist.procedure.probean.ItemBean;
 import citi.vo.Item;
 import citi.vo.Merchant;
 import citi.vo.Order;
@@ -85,13 +86,15 @@ public class RecommendService {
      * @param num
      * @return ArrayList<Item>
      */
-    public ArrayList<Item> getRecommendedItems(String userID,int num){
+    public ArrayList<ItemBean> getRecommendedItems(String userID,int num){
         ArrayList<UserItemPoints> userItemPointsArrayList = getUserInterestToItems(userID);
-        ArrayList<Item> items = new ArrayList<Item>();
+        ArrayList<ItemBean> items = new ArrayList<ItemBean>();
         for(int i =0;i<num;i++){
             String itemID = userItemPointsArrayList.get(i).itemID;
             Item item = itemMapper.getItemByItemID(itemID);
-            items.add(item);
+            Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+            ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+            items.add(itemBean);
         }
         return items;
     }
