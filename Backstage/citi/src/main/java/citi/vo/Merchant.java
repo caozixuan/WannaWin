@@ -61,6 +61,40 @@ public class Merchant {
 
     }
 
+    public enum BusinessType {
+        normal, catering, exercise, bank, costume, education, communication;
+
+        static Map<String, BusinessType> enumMap1 = new HashMap<>();
+        static Map<BusinessType, String> enumMap2 = new HashMap<>();
+
+        static {
+            enumMap1.put("normal", normal);
+            enumMap1.put("catering", catering);
+            enumMap1.put("exercise", exercise);
+            enumMap1.put("bank", bank);
+            enumMap1.put("costume", costume);
+            enumMap1.put("education", education);
+            enumMap1.put("communication", communication);
+
+            enumMap2.put(normal, "normal");
+            enumMap2.put(catering, "catering");
+            enumMap2.put(exercise, "exercise");
+            enumMap2.put(bank, "bank");
+            enumMap2.put(costume, "costume");
+            enumMap2.put(education, "education");
+            enumMap2.put(communication, "communication");
+        }
+
+        public static BusinessType getBusinessType(String businessType) {
+            return enumMap1.get(businessType);
+        }
+
+        public static String getBusinessTypeString(BusinessType businessType) {
+            return enumMap2.get(businessType);
+        }
+
+    }
+
 
     //for DB
     public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, String cardType, String businessType) {
@@ -81,7 +115,7 @@ public class Merchant {
 
 
     //for programmer
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, CardType cardType) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, CardType cardType, BusinessType businessType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -94,7 +128,7 @@ public class Merchant {
         this.activityTheme = activityTheme;
         this.activityDescription = activityDescription;
         this.cardType = CardType.getCardTypeString(cardType);
-        this.businessType = Type.ItemType.getItemTypeString(Type.ItemType.normal);
+        this.businessType = BusinessType.getBusinessTypeString(businessType);
     }
 
     public CardType getCardType() {
@@ -184,8 +218,8 @@ public class Merchant {
         this.merchantLogoURL = logoURL;
     }
 
-    public Type.ItemType getBusinessType() {
-        return Type.ItemType.getItemType(businessType);
+    public BusinessType getBusinessType() {
+        return BusinessType.getBusinessType(businessType);
     }
 
     public void setCardType(CardType cardType) {
