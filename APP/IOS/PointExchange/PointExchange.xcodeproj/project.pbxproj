@@ -59,6 +59,7 @@
 		844CF6E1211EC05600B232DF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CF6DF211EC05600B232DF /* GradientView.swift */; };
 		844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 844CF6E0211EC05600B232DF /* LICENSE.txt */; };
 		847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */; };
+		84A968732121C5A000EF5BA8 /* ExchangedPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -150,6 +151,7 @@
 		844CF6DF211EC05600B232DF /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		844CF6E0211EC05600B232DF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishExchangeToGeneralViewController.swift; sourceTree = "<group>"; };
+		84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangedPointsCell.swift; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B66CFB1D20F88A18007165DF /* YDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenu.swift; path = YDMenu/YDMenu.swift; sourceTree = "<group>"; };
@@ -260,12 +262,12 @@
 				3E4C155320EDFF5A000743C0 /* MainViewController.swift */,
 				B6B866552101768700CE0339 /* HomepagePartViewController.swift */,
 				3E46B76C20F09E7900843193 /* ExchangeViewController.swift */,
+				847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */,
 				B696E7EA20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift */,
 				3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */,
 				3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */,
 				3E46B76820F06E0200843193 /* CardDetailTableViewController.swift */,
 				3EBF049120F99854004D6D8E /* ExchangeHistoryTableViewController.swift */,
-				847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -319,15 +321,16 @@
 		3E8AB4C720EDBAAF00915561 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
-				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
+				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
+				84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */,
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
 				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
 				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
 				3E33278D2120041900426518 /* HistoryTableViewCell.swift */,
+				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */,
 			);
 			name = View;
@@ -666,6 +669,7 @@
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				3E23A756211EC01600D19749 /* DiscoverCouponView.swift in Sources */,
 				3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */,
+				84A968732121C5A000EF5BA8 /* ExchangedPointsCell.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */,
 				B66CFB4120FE2D45007165DF /* PointsHistory.swift in Sources */,

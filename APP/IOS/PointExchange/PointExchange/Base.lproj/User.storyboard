@@ -816,14 +816,6 @@
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-cH-9Mm">
-                                <rect key="frame" x="43" y="524" width="300" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="退出登录" image="退出登录"/>
-                                <connections>
-                                    <action selector="logoutBtnClick:" destination="J1I-3M-UwK" eventType="touchUpInside" id="oE1-AJ-eCV"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIu-hc-UXH" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
                                 <rect key="frame" x="6" y="304" width="364" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -929,6 +921,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-cH-9Mm">
+                                <rect key="frame" x="32" y="523" width="310" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="退出登录" image="退出登录"/>
+                                <connections>
+                                    <action selector="logoutBtnClick:" destination="J1I-3M-UwK" eventType="touchUpInside" id="oE1-AJ-eCV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="yyL-mo-FSs"/>
@@ -947,7 +947,6 @@
         <!--历史订单-优惠券-->
         <scene sceneID="tBa-nQ-tky">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bUh-LV-xgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CouponHistoryViewController" title="历史订单-优惠券" id="sab-0W-tes" customClass="CouponHistoryViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Soy-JR-EXa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -998,13 +997,13 @@
                         <outlet property="usedContainer" destination="bVn-rc-bcL" id="g8M-6Q-r87"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bUh-LV-xgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4452" y="-2919.490254872564"/>
         </scene>
         <!--未使用列表-->
         <scene sceneID="aHK-TX-NGy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FvZ-9X-fqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="未使用列表" id="j14-DT-tT6" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ug5-td-KmJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -1033,6 +1032,7 @@
                         <outlet property="tableView" destination="YiZ-yL-bvg" id="tLC-KW-Ou1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FvZ-9X-fqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="-3813"/>
         </scene>
@@ -1536,7 +1536,6 @@
         <!--已使用列表-->
         <scene sceneID="IHP-7R-IsK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hs-oy-CUq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="已使用列表" id="S0T-R1-w9X" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="plK-2u-7WL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -1565,13 +1564,13 @@
                         <outlet property="tableView" destination="YoR-aQ-I6D" id="6cF-Pf-V5h"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hs-oy-CUq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="-2546"/>
         </scene>
         <!--已过期列表-->
         <scene sceneID="fJw-Cy-Lq4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Et2-kX-pCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="已过期列表" id="Lw7-ak-9Di" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guY-2l-ISC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -1600,6 +1599,7 @@
                         <outlet property="tableView" destination="2OZ-AL-Xe6" id="zgh-Zn-mBM"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Et2-kX-pCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="-3151"/>
         </scene>

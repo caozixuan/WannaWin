@@ -62,8 +62,17 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell:UITableViewCell!
+        var cell:UITableViewCell!
 		cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "store to bank")
+        }
+        else {
+            while cell.contentView.subviews.last != nil {
+                cell.contentView.subviews.last?.removeFromSuperview()
+            }
+        }
+        
 		for subview in cell.contentView.subviews{
 			if subview .isKind(of: ExchangeItemCellView.self){
 				let exchangeItemCellView = subview as! ExchangeItemCellView
@@ -192,39 +201,61 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
         var indexPath:IndexPath
         var cell:UITableViewCell?
-        outer: for row in 0..<cellNumber {
+        
+        var chosenMerchantList = [ChooseMerchants]()
+        var chosenMerchant:ChooseMerchants
+        
+        for row in 0..<cellNumber {
             indexPath = IndexPath(row: row, section: 0)
             cell = tableView.cellForRow(at: indexPath)
-            inner: for subview in (cell?.contentView.subviews)!{
+            for subview in (cell?.contentView.subviews)!{
                 if subview .isKind(of: ExchangeItemCellView.self){
                     let exchangeItemCellView = subview as! ExchangeItemCellView
                     if exchangeItemCellView.checkbox.isSelected == true {
-                        allUnselected = false
-                        break outer
+                        chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+                        chosenMerchantList.append(chosenMerchant)
                     }
                 }
             }
         }
         
+        
         // 判断是否有选择积分项
-        if allUnselected == true {
-//            alert = UIAlertController(title:"提示", message:"会员卡解绑成功！", preferredStyle:.alert)
-//            okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
-//                self.navigationController!.popViewController(animated: true)
-//            })
-            return // 如果没有选择任何积分项则不跳转
+        if chosenMerchantList.count != 0 {
+            allUnselected = false
         }
         
-        let isSuccess = true
-        
-        
-        if isSuccess {
-            //准备“兑换成功”数据
-            
-            
+        if allUnselected == true { // 如果没有选择任何积分项则不跳转
+            let alert = UIAlertController(title:"提示", message:"尚未选择任何积分项！", preferredStyle:.alert)
+            let okAction = UIAlertAction(title:"确定", style:.default, handler:nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            return
         }
-        else {
-            //准备“兑换失败”数据
+        
+        // 进行网络请求和后续跳转的数据准备
+        let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "FinishExchangeToGeneralViewController")
+        
+        let chosenInfo = ChoosePointInfo(userID: User.getUser().id, merchants: chosenMerchantList)
+        
+        ServerConnector.changePoints(chooseInfo: chosenInfo){ result, failureMerchant  in
+            if result { // 准备“兑换成功”数据
+                if view .isKind(of: FinishExchangeToGeneralViewController.self){
+                    let finishExchangeToGeneralVC = view as! FinishExchangeToGeneralViewController
+                    finishExchangeToGeneralVC.status = true
+                    finishExchangeToGeneralVC.successMerchants = chosenMerchantList
+                }
+            }
+            else { // 准备“兑换失败”数据
+                if view .isKind(of: FinishExchangeToGeneralViewController.self){
+                    let finishExchangeToGeneralVC = view as! FinishExchangeToGeneralViewController
+                    finishExchangeToGeneralVC.status = false
+                    finishExchangeToGeneralVC.failureMerchants = failureMerchant
+                }
+            }
+            
+            self.navigationController!.pushViewController(view, animated: true)
         }
         
     }
