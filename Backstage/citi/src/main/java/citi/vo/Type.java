@@ -106,14 +106,12 @@ public class Type {
 
         // List<enum> => DBStr
         public static String enum2DBStr(List<ItemType> itemTypes) {
-            StringBuilder sb = new StringBuilder(String.join("", Collections.nCopies(amount, "0")));
+            TypeWrapper tw = new TypeWrapper(String.join("", Collections.nCopies(number_of_bytes_in_str, "0")));
             if (null == itemTypes)
-                return sb.toString();
-            for (ItemType itemtype : itemTypes) {
-                int index = enum2bit(itemtype);
-                sb.replace(index, index + 1, "1");
-            }
-            return sb.toString();
+                return tw.toString();
+            for (ItemType itemtype : itemTypes)
+                tw.addType(enum2bit(itemtype));
+            return tw.toString();
         }
 
         //
