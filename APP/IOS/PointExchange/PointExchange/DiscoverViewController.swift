@@ -85,7 +85,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: - 点击发现页折扣活动后跳转
 		let sb = UIStoryboard(name: "Discover", bundle: nil)
-		let view = sb.instantiateViewController(withIdentifier: "MerchantDetailTableView") as! MerchantDetailTableViewController
+		let view = sb.instantiateViewController(withIdentifier: "MerchantDetailViewController") as! MerchantDetailViewController
 		view.merchant = merchantArray?[indexPath.row]
 		self.navigationController?.pushViewController(view, animated: true)
     }

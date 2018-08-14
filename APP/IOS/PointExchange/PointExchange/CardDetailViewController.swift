@@ -61,7 +61,6 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		self.navigationController!.pushViewController(view, animated: true)
 	}
 	
-
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 5
 	}
