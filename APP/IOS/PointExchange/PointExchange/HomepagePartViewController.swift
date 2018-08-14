@@ -106,11 +106,9 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 		
 		if User.getUser().username != nil {
 			storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-			
-			
-			let tag = tap.view?.tag
-			if (cards?.count)! >= tag! {
-				let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailTableViewController
+			let tag = tap.view?.tag // tag从1开始
+			if cards != nil && (cards?.count)! >= tag!{
+				let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailViewController
 				view.merchantID = cards?[tag!-1].merchant?.id
 				self.navigationController!.pushViewController(view, animated: true)
 				self.navigationController?.setNavigationBarHidden(false, animated: true)

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *协同过滤的推荐算法
  */
 
-@RequestMapping()
+@RequestMapping(value = {"/recommend"},produces = {"text/html;charset=UTF-8"})
 @Controller
 public class RecommendController {
     @Autowired
@@ -67,17 +67,22 @@ public class RecommendController {
 
 
     /**
-     * 获取用户的商品推荐列表(暂定只推荐5个)
+     * 获取用户的商品推荐列表(暂定只推荐2个)
      * @Return itemList
      */
     @ResponseBody
     @RequestMapping("/getRecommendedItems")
-    public String getRecommendedItems(){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String userID = (String)session.getAttribute("userID");
-        return gson.toJson(recommendService.getRecommendedItems(userID));
+    public String getRecommendedItems(String userID){
+        return gson.toJson(recommendService.getRecommendedItems(userID,3));
     }
+
+    @ResponseBody
+    @RequestMapping("/getRecommendedMerchants")
+    public String getRecommendedMerchants(String userID){
+        return gson.toJson(recommendService.getRecommendedMerchants(userID));
+    }
+
+
 
 
 //    /**

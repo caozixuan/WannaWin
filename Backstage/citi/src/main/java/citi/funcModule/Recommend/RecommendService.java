@@ -24,10 +24,10 @@ import java.util.List;
 @Service
 public class RecommendService {
     //需要访问到用户的喜好、用户的访问记录、商品的基本信息
-    @Autowired
-    private PrefMapper prefMapper;
-    @Autowired
-    private RecordMapper recordMapper;
+    //@Autowired
+    //private PrefMapper prefMapper;
+    //@Autowired
+    //private RecordMapper recordMapper;
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
@@ -52,10 +52,10 @@ public class RecommendService {
              * 参数一：userID,参数二：一个偏好（字符串形式）
              * 返回受影响的行数
              */
-            if(prefMapper.addPref(userID,prefList.get(i))!=1){
-                flag = false;
-                break;
-            }
+            //if(prefMapper.addPref(userID,prefList.get(i))!=1){
+             //   flag = false;
+             //   break;
+            //}
         }
         return flag;
     }
@@ -73,8 +73,8 @@ public class RecommendService {
          * 参数一：userID,参数二：itemID,参数三：该浏览记录的时间戳
          * 返回受影响的行数
          */
-      if(recordMapper.addRecord(userID,itemID,time)!=1)
-          return false;
+      //if(recordMapper.addRecord(userID,itemID,time)!=1)
+        //  return false;
       return true;
     }
 
@@ -89,7 +89,9 @@ public class RecommendService {
         ArrayList<UserItemPoints> userItemPointsArrayList = getUserInterestToItems(userID);
         ArrayList<Item> items = new ArrayList<Item>();
         for(int i =0;i<num;i++){
-            items.add(itemMapper.getItemByItemID(userItemPointsArrayList.get(i).itemID));
+            String itemID = userItemPointsArrayList.get(i).itemID;
+            Item item = itemMapper.getItemByItemID(itemID);
+            items.add(item);
         }
         return items;
     }
@@ -99,6 +101,9 @@ public class RecommendService {
      * @return ArrayList<Merchant>
      */
     public double getItemPoints(String userID, String itemID){
+        /*
+
+
         double points = 0;
         // 目前制定的积分策略：购买一次得5分+浏览一次得1分+每符合一个喜好得5分
         // TODO:这里需要数据库写两个vo类还有对应mapper里的方法
@@ -114,6 +119,8 @@ public class RecommendService {
             }
         }
         return points;
+        */
+        return 0;
     }
 
     class ItemPoints{
@@ -137,9 +144,9 @@ public class RecommendService {
         @Override
         public int compareTo(UserItemPoints o) {
             if((this.points - o.points)>=0){
-                return 1;
+                return -1;
             }
-            else return -1;
+            else return 1;
         }
     }
 
@@ -150,7 +157,7 @@ public class RecommendService {
     public ArrayList<ItemPoints> getItemPointsArray(){
         ArrayList<ItemPoints> results = new ArrayList<ItemPoints>();
         // TODO:这里缺获取所用用户userID的方法
-        ArrayList<String> userIDs = new ArrayList<String>();
+        List<String> userIDs = userMapper.getAllUserID();
         ArrayList<String> itemIDs = new ArrayList<String>();
         for(String itemID:itemIDs){
             ArrayList<Double> points = new ArrayList<Double>();
@@ -180,7 +187,7 @@ public class RecommendService {
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            ois = new ObjectInputStream(new FileInputStream("ItemSimilarity.txt"));
             while (true) {
                 ItemSimilarity itemSimilarity = (ItemSimilarity) ois.readObject();
                 results.add(itemSimilarity);
@@ -224,7 +231,8 @@ public class RecommendService {
         ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
         ArrayList<String> itemIDs = new ArrayList<>();
         //TODO:itemMapper中返回所有ItemID
-        itemIDs.addAll(itemMapper,getItemIDs());
+
+        //itemIDs.addAll(itemMapper,getItemIDs());
         ArrayList<Item> items = new ArrayList<Item>();
         for(String id:itemIDs){
             items.add(itemMapper.getItemByItemID(id));
@@ -240,8 +248,28 @@ public class RecommendService {
      */
 
     public ArrayList<UserItemPoints> getUserInterestToItems(String userID){
-        ArrayList<ItemSimilarity> similarities = getItemSimilarities();
-        ArrayList<UserItemPoints> userItemPointsArrayList = getUserPointsToItems(userID);
+        ItemSimilarity itemSimilarity1 = new ItemSimilarity("148055e4-af54-45e7-816e-5e6270b65bb5","148055e4-af54-45e7-816e-5e6270b65bb5",1);
+        ItemSimilarity itemSimilarity2 = new ItemSimilarity("148055e4-af54-45e7-816e-5e6270b65bb5","1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d",0.8);
+        ItemSimilarity itemSimilarity3 = new ItemSimilarity("148055e4-af54-45e7-816e-5e6270b65bb5","34bb3c20-43bb-4af2-814c-4a0c5d601af5",0.5);
+        ItemSimilarity itemSimilarity4 = new ItemSimilarity("1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d","34bb3c20-43bb-4af2-814c-4a0c5d601af5",0.2);
+        ItemSimilarity itemSimilarity5 = new ItemSimilarity("1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d","1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d",1);
+        ItemSimilarity itemSimilarity6 = new ItemSimilarity("34bb3c20-43bb-4af2-814c-4a0c5d601af5","34bb3c20-43bb-4af2-814c-4a0c5d601af5",1);
+        ArrayList<ItemSimilarity> similarities = new ArrayList<ItemSimilarity>();
+        similarities.add(itemSimilarity1);
+        similarities.add(itemSimilarity2);
+        similarities.add(itemSimilarity3);
+        similarities.add(itemSimilarity4);
+        similarities.add(itemSimilarity5);
+        similarities.add(itemSimilarity6);
+        //ArrayList<ItemSimilarity> similarities = getItemSimilarities();
+        UserItemPoints userItemPoints1 = new UserItemPoints("148055e4-af54-45e7-816e-5e6270b65bb5",10);
+        UserItemPoints userItemPoints2 = new UserItemPoints("1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d",5);
+        UserItemPoints userItemPoints3 = new UserItemPoints("34bb3c20-43bb-4af2-814c-4a0c5d601af5",2);
+        ArrayList<UserItemPoints> userItemPointsArrayList = new ArrayList<UserItemPoints>();
+        userItemPointsArrayList.add(userItemPoints1);
+        userItemPointsArrayList.add(userItemPoints2);
+        userItemPointsArrayList.add(userItemPoints3);
+        //ArrayList<UserItemPoints> userItemPointsArrayList = getUserPointsToItems(userID);
         ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
         for(UserItemPoints userItemPoints:userItemPointsArrayList){
             double points = 0;
@@ -313,9 +341,9 @@ public class RecommendService {
         @Override
         public int compareTo(UserMerchantPoints o) {
             if((this.points - o.points)>=0){
-                return 1;
+                return -1;
             }
-            else return -1;
+            else return 1;
         }
     }
 
@@ -457,6 +485,8 @@ public class RecommendService {
         Collections.sort(results);
         return results;
     }
+
+
 
 
 }
