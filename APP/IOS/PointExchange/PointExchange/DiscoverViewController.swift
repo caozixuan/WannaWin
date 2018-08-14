@@ -16,9 +16,8 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var couponView: DiscoverCouponView!
 	var rowCount = 4;
     var merchantArray:[Merchant]?
+	var items = [Item]()
     @IBOutlet weak var tableView: UITableView!
-    
-    var tableCellIdentifier:String = "local discount"
     
     var activityIndicator:UIActivityIndicatorView?
 	
@@ -44,6 +43,11 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 					}
 					self.activityIndicator?.stopAnimating()
 				}
+			}
+		}
+		ServerConnector.getRecommendedItems(){(result,items) in
+			if result{
+				
 			}
 		}
 		
