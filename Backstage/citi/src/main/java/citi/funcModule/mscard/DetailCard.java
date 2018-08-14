@@ -7,14 +7,18 @@ public class DetailCard implements  Comparable<DetailCard>{
     private String cardDescription;
     private int type=0;
     private double proportion;
+    private String merchantName;
+    private String merchantLogoURL;
 
-    public DetailCard(String cardLogoURL, int points, String cardNum, String cardDescription, int type, double proportion) {
+    public DetailCard(String cardLogoURL, int points, String cardNum, String cardDescription, int type, double proportion, String merchantName, String merchantLogoURL) {
         this.cardLogoURL = cardLogoURL;
         this.points = points;
         this.cardNum = cardNum;
         this.cardDescription = cardDescription;
         this.type = type;
         this.proportion = proportion;
+        this.merchantName = merchantName;
+        this.merchantLogoURL = merchantLogoURL;
     }
 
     public String getCardLogoURL() {

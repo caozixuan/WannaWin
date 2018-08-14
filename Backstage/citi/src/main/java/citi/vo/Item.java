@@ -5,16 +5,16 @@ import java.util.UUID;
 
 
 public class Item {
-    private String ItemID;
-    private String name;
-    private String description;
-    private String merchantID;
-    private String logoURL;
-    private Double originalPrice;
-    private Integer points;
-    private Timestamp overdueTime;
-    private Long stock;
-    private String itemType;
+    protected String ItemID;
+    protected String name;
+    protected String description;
+    protected String merchantID;
+    protected String logoURL;
+    protected Double originalPrice;
+    protected Integer points;
+    protected Timestamp overdueTime;
+    protected Long stock;
+    protected String itemType;
 
 
     public Type.ItemType getItemType() {

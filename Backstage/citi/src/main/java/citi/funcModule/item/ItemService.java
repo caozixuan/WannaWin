@@ -2,9 +2,12 @@ package citi.funcModule.item;
 
 import citi.persist.mapper.CouponMapper;
 import citi.persist.mapper.ItemMapper;
+import citi.persist.mapper.MerchantMapper;
 import citi.persist.mapper.UserMapper;
+import citi.persist.procedure.probean.ItemBean;
 import citi.support.status.Status;
 import citi.vo.Item;
+import citi.vo.Merchant;
 import citi.vo.UserCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,8 @@ public class ItemService {
     private CouponMapper couponMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private MerchantMapper merchantMapper;
 
     public List<Item> getItems(int start,int length){
         return itemMapper.getItem(start,length);
@@ -52,7 +57,10 @@ public class ItemService {
         return itemMapper.getItemByMerchantID(merchantID,start,length);
     }
 
-    public Item getItem(String itemID){
-        return itemMapper.getItemByItemID(itemID);
+    public ItemBean getItem(String itemID){
+        Item item = itemMapper.getItemByItemID(itemID);
+        Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+        ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+        return itemBean;
     }
 }
