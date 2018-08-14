@@ -59,7 +59,7 @@
         <activity android:name=".DetailFindActivity" />
         <activity android:name=".CardInfoActivity" />
         <activity android:name=".HistoryExchangeActivity" />
-        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".MyCouponsActivity" />
         <activity android:name=".PointsExchangeExpandListActivity" />
         <activity android:name=".PointsExchangeRecordActivity" />
         <activity android:name=".BindCardActivity" />
@@ -67,7 +67,9 @@
         <activity android:name=".PayCodeFinishActivity" />
         <activity android:name=".DetailFindPayFinishActivity" />
         <activity android:name=".CouponsDetailsActivity" />
-        <activity android:name=".BindAccountActivity"></activity>
+        <activity android:name=".BindAccountActivity" />
+        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".OrderDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -28,18 +28,18 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderTabUsedFragment extends Fragment {
+public class MyOrderFragment extends Fragment {
 
-    RecyclerView usedOrderRecyclerView;
-    private MyCouponAdapter orderAdapter;
+    RecyclerView orderRecyclerView;
+    private MyOrderAdapter orderAdapter;
 
 
-    public OrderTabUsedFragment() {
+    public MyOrderFragment() {
         // Required empty public constructor
     }
 
     public static Fragment newInstance() {
-        OrderTabUsedFragment fragment = new OrderTabUsedFragment();
+        MyOrderFragment fragment = new MyOrderFragment();
         return fragment;
     }
 
@@ -48,9 +48,9 @@ public class OrderTabUsedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_order_tab_used, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_order, container, false);
 
-        usedOrderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder);
+        orderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder_overdue);
 
         //设置RecyclerView管理器
         setRecyclerView();
@@ -59,9 +59,9 @@ public class OrderTabUsedFragment extends Fragment {
         initData();
 
         return view;
+
     }
 
-    /*订单：totalPoints,description,usePoints*/
     protected void initData()
     {
         //orderAdapter.addData("niki","5元代金券","2018-7-23");
@@ -70,7 +70,8 @@ public class OrderTabUsedFragment extends Fragment {
         //orderAdapter.addData("中国电信","5元代金券","2018-7-27");
         //orderAdapter.addData("niki","5元代金券","2018-7-25");
         //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
-        getHistoryOrderByCoupon();
+
+        getHistoryOrderByQRCode();
 
 
 
@@ -78,16 +79,17 @@ public class OrderTabUsedFragment extends Fragment {
     }
 
     protected void setRecyclerView(){
-        orderAdapter = new MyCouponAdapter(getActivity());
+
+        orderAdapter = new MyOrderAdapter(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        usedOrderRecyclerView.setLayoutManager(layoutManager);
-        orderAdapter = new MyCouponAdapter(getActivity());
-        usedOrderRecyclerView.setAdapter(orderAdapter);
+        orderRecyclerView.setLayoutManager(layoutManager);
+        orderRecyclerView.setAdapter(orderAdapter);
     }
 
-    private void getHistoryOrderByCoupon() {
-        String url="http://193.112.44.141:80/citi/userCoupon/getUsedCoupons";
+
+    private void getHistoryOrderByQRCode() {
+        String url="http://193.112.44.141:80/citi/order/getOrders";
         RequestQueue queue = MyApplication.getHttpQueues();
         //RequestQueue queue=Volley.newRequestQueue(this);
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -103,15 +105,15 @@ public class OrderTabUsedFragment extends Fragment {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
 
-                        String description = jObj.getString("description");
-                        String itemName = jObj.getString("itemName");
-                        String time = "兑换时间：" +jObj.getString("getTime");
-                        String validityTerm = "使用时间：" +jObj.getString("useTime");
-                        //String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
-                        String logoURL = jObj.getString("logoURL");
-                        String itemID = jObj.getString("ItemID");
+                        Double pointsNeeded = jObj.getDouble("pointsNeeded");
+                        Double originalPrice = jObj.getDouble("originalPrice");
+                        Double priceAfter = jObj.getDouble("priceAfter");
+                        String merchantName = jObj.getString("merchantName");
+                        //String logoURL = jObj.getString("logoURL");
+                        String logoURL = "http://www.byzhong.cn/image/merchant/8aima_logo.png";
+                        String time = jObj.getString("time");
 
-                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"used");
+                        orderAdapter.addData(merchantName,originalPrice,priceAfter,pointsNeeded,logoURL,time);
 
                     }
 
@@ -132,6 +134,7 @@ public class OrderTabUsedFragment extends Fragment {
                 Map<String,String> map=new HashMap<>();
 
                 map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+                map.put("intervalTime","1101010101");
 
 
                 return map;
@@ -140,6 +143,12 @@ public class OrderTabUsedFragment extends Fragment {
         queue.add(request);
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getHistoryOrderByQRCode();
     }
 
 }
