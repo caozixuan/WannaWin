@@ -51,4 +51,8 @@ public class ItemService {
     public List<Item> getMerchantItems(String merchantID,int start,int length){
         return itemMapper.getItemByMerchantID(merchantID,start,length);
     }
+
+    public Item getItem(String itemID){
+        return itemMapper.getItemByItemID(itemID);
+    }
 }

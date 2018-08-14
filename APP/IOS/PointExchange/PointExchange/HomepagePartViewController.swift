@@ -16,34 +16,29 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 	
     var cards:[Card]?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-    }
 	
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		activityIndicator?.startAnimating()
         if User.getUser().username != nil {
-            if homepageStackView == nil {
-                activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-                activityIndicator?.startAnimating()
-                homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-                homepageStackView?.delegate = self
-                view.addSubview(homepageStackView!)
-                loginView?.removeFromSuperview()
+			if homepageStackView == nil {
+				homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+				homepageStackView?.delegate = self
+				view.addSubview(homepageStackView!)
+				loginView?.removeFromSuperview()
 				loginView = nil
+				
 			}
         }
         else {
-            if loginView == nil {
-                loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-                loginView?.delegate = self
-                view.addSubview(loginView!)
-                homepageStackView?.removeFromSuperview()
+			if loginView == nil {
+				loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+				loginView?.delegate = self
+				view.addSubview(loginView!)
+				homepageStackView?.removeFromSuperview()
 				homepageStackView = nil
 			}
-            
         }
 		
     }
@@ -71,9 +66,14 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 ServerConnector.getMostPointCards(n: 3){(result,cards) in
                     if result {
                         self.cards = cards
-						if cards.count != 0{
+						
+						if cards.count >= 1 {
 							v.cardImage1.imageFromURL((self.cards?[0].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+						}
+						if cards.count >= 2 {
 							v.cardImage2.imageFromURL((self.cards?[1].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+						}
+						if cards.count >= 3 {
 							v.cardImage3.imageFromURL((self.cards?[2].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
 						}
                         ServerConnector.getGeneralPoints(){ (result, points) in
@@ -106,12 +106,18 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 		
 		if User.getUser().username != nil {
 			storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-			let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailTableViewController
-			
-			let tag = tap.view?.tag
-			view.merchantID = cards?[tag!-1].merchant?.id
-			self.navigationController!.pushViewController(view, animated: true)
-			self.navigationController?.setNavigationBarHidden(false, animated: true)
+			let tag = tap.view?.tag // tag从1开始
+			if cards != nil && (cards?.count)! >= tag!{
+				let view = storyBoard.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailViewController
+				view.merchantID = cards?[tag!-1].merchant?.id
+				self.navigationController!.pushViewController(view, animated: true)
+				self.navigationController?.setNavigationBarHidden(false, animated: true)
+				
+			}else {
+				let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController")
+				self.navigationController!.pushViewController(view, animated: true)
+				self.navigationController?.setNavigationBarHidden(false, animated: true)
+			}
 			
 		}
 		else {

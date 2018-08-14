@@ -212,25 +212,19 @@ public class TestService {
                 total_merchant_coupon_record += record.getTotalPoints();
 
 
-        //set attribute
-        String points_json = gson.toJson(points);
-        session.setAttribute("points_json", points_json);
+        session.setAttribute("points", points);
 
-        String timeStamp_json = gson.toJson(timestamp);
-        session.setAttribute("timeStamp_json", timeStamp_json);
+        session.setAttribute("timeStamp", timestamp);
 
-        String points_exchange_json = gson.toJson(points_exchange);
-        session.setAttribute("points_exchange_json", points_exchange_json);
+        session.setAttribute("points_exchange", points_exchange);
 
-        String total_order_points_json = gson.toJson(total_order_points);
-        session.setAttribute("total_order_points_json", total_order_points_json);
-        String total_points_exchange_json = gson.toJson(total_points_exchange);
-        session.setAttribute("total_points_exchange_json", total_points_exchange_json);
-        String total_merchant_coupon_record_json = gson.toJson(total_merchant_coupon_record);
-        session.setAttribute("total_merchant_coupon_record_json", total_merchant_coupon_record_json);
+        session.setAttribute("total_order_points", total_order_points);
 
-        //String merchant_coupon_record_json = gson.toJson(merchant_coupon_record);
-        //session.setAttribute("merchant_coupon_record_json", merchant_coupon_record_json);
+        session.setAttribute("total_points_exchange", total_points_exchange);
+
+        session.setAttribute("total_merchant_coupon_record", total_merchant_coupon_record);
+
+
 
     }//end method void prepare(HttpSession session);
 

@@ -109,4 +109,32 @@ public class Order {
     public Timestamp getTime() {
         return time;
     }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public void setPriceAfter(Double priceAfter) {
+        this.priceAfter = priceAfter;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
 }

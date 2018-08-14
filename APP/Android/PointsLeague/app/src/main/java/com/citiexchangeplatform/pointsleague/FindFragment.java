@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +23,10 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.citiexchangeplatform.pointsleague.adapter.AllCardAdapter;
+import com.citiexchangeplatform.pointsleague.adapter.FindActivityAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
+import com.leochuan.CenterSnapHelper;
+import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -35,8 +39,10 @@ import java.lang.reflect.Field;
 public class FindFragment extends Fragment{
 
     View view;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView1;
+    RecyclerView recyclerView2;
     FindAdapter findAdapter;
+    FindActivityAdapter findActivityAdapter;
 
     ProgressDialog dialog;
 
@@ -44,15 +50,37 @@ public class FindFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_find, null);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView_find);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView1 = (RecyclerView)view.findViewById(R.id.recyclerView_activity_find);
+        recyclerView1.setLayoutManager(
+                new ScaleLayoutManager
+                        .Builder(getContext(),2)
+                        .setMinScale(1.0f)
+                        .setOrientation(OrientationHelper. HORIZONTAL)
+                        .build());
+        new CenterSnapHelper().attachToRecyclerView(recyclerView1);
+        findActivityAdapter = new FindActivityAdapter(getContext());
+        recyclerView1.setAdapter(findActivityAdapter);
+        recyclerView1.setItemAnimator(new DefaultItemAnimator());
+
+        findActivityAdapter.addData("123123","!23","123","123","123");
+        findActivityAdapter.addData("123123","!23","123","123","123");
+        findActivityAdapter.addData("123123","!23","123","123","123");
+        recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
+
+        recyclerView2 = (RecyclerView)view.findViewById(R.id.recyclerView_find);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+        recyclerView2.setLayoutManager(layoutManager2);
         findAdapter = new FindAdapter(getContext());
-        recyclerView.setAdapter(findAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView2.setAdapter(findAdapter);
+        recyclerView2.setItemAnimator(new DefaultItemAnimator());
+
+        TitleBar titleBar = (TitleBar) view.findViewById(R.id.toolbar_find);
+        titleBar.setTitle("发现");
+        titleBar.setTitleColor(Color.BLACK);
+        //titleBar.setImmersive(true);
 
         android.widget.SearchView search = view.findViewById(R.id.searchView_find);
-
         search.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -66,13 +94,22 @@ public class FindFragment extends Fragment{
             }
         });
         search.setIconified(false);
-        search.setQueryHint("请输入商家名");
-        //设置搜索框展开时是否显示提交按钮，可不显示
+        search.setIconifiedByDefault(false);
         search.setSubmitButtonEnabled(false);
-        //让键盘的回车键设置成搜索
-        search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         search.clearFocus();
-
+        search.clearFocus();
+        try {        //--拿到字节码
+            Class<?> argClass = search.getClass();
+            //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+            Field ownField = argClass.getDeclaredField("mSearchPlate");
+            //--暴力反射,只有暴力反射才能拿到私有属性
+            ownField.setAccessible(true);
+            View mView = (View) ownField.get(search);
+            //--设置背景
+            mView.setBackgroundColor(Color.TRANSPARENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         getCount();
 

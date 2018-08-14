@@ -2,9 +2,11 @@ package citiMerchant.login;
 
 import citiMerchant.showData.Prepare_info;
 import citiMerchant.showData.Session_store;
+import citiMerchant.uitl.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,26 +27,20 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-
-    @RequestMapping("/login")
-    public ModelAndView login() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("login/login");
-        return mv;
-    }
-
     @RequestMapping("/loginSubmit")
-    public ModelAndView loginSubmit(String merchantID, String password) {
-        ModelAndView mv = new ModelAndView();
-        ArrayList<Integer> nums = loginService.getNums(merchantID, password);
+    @ResponseBody
+    public String loginSubmit(String merchantID, String password) {
+        /*ArrayList<Integer> nums = loginService.getNums(merchantID, password);
         if (nums == null) {
-            mv.setViewName("login/fail");
-            return mv;
-        } else {
-            mv.addObject("nums", nums);
+           return JsonResult.FAIL;
+        } else {*/
+/*            mv.addObject("nums", nums);
             mv.addObject("merchant", loginService.getMerchant(merchantID));
-            mv.setViewName("starter");
+            mv.setViewName("starter");*/
             //添加session
+        if (loginService.login(merchantID,password)==null){
+            return JsonResult.FAIL;
+        }else {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session = request.getSession();
             session.setAttribute("merchantID", merchantID);
@@ -56,28 +52,25 @@ public class LoginController {
             prepare.set(merchantID);
             new Thread(prepare).start();
 
-            return mv;
+            return JsonResult.SUCCESS;
         }
-
     }
 
     @RequestMapping("/logout")
-    public ModelAndView logout() {
-        ModelAndView mv = new ModelAndView();
+    public String logout() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         request.getSession().invalidate();
-        mv.setViewName("login/login");
-        return mv;
+        return "redirect:/login.html";
     }
 
-    @RequestMapping("/starter")
+/*    @RequestMapping("/starter")
     public ModelAndView starter() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         String merchantID = (String) session.getAttribute("merchantID");
         String password = (String) session.getAttribute("password");
         return loginSubmit(merchantID, password);
-    }
+    }*/
 
 
 }

@@ -27,24 +27,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		scrollView.contentOffset = CGPoint(x: 0, y: 20)
     }
 
-    /// 获得商户信息后的回调函数
-    func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
-        if result {
-            MerchantList.list = merchants
-            var merchantName = [String]()
-            for m in merchants{
-                merchantName.append(m.name)
-            }
-            let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-            let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
-            view.merchantNames = merchantName
-            self.navigationController!.pushViewController(view, animated: true)
-        }
-        else {
-            print("商户信息获取失败")
-        }
-        activityIndicator?.stopAnimating()
-    }
     
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取数据集合

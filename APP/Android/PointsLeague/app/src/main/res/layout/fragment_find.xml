@@ -6,111 +6,80 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/toolbar_find"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/layout_search_find"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ToolbarTheme" >
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_search_bar"
+        android:orientation="horizontal">
         <SearchView
             android:id="@+id/searchView_find"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:queryHint="搜索活动或商家"
+            android:background="@null"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
         </SearchView>
-    </android.support.v7.widget.Toolbar>
-
-
-    <!--筛选栏-->
-    <LinearLayout
-        android:id="@+id/select_bar_find"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <!--筛选地点-->
-        <LinearLayout
-            android:id="@+id/ll_place_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <!--android:textColor="@drawable/selector_text_stock"-->
-            <CheckBox
-                android:id="@+id/cb_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:button="@null"
-                android:drawableEnd="@drawable/ic_expand_more_black_24dp"
-                android:drawablePadding="10dp"
-                android:gravity="center"
-                android:text="地点"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <!--筛选类型-->
-        <LinearLayout
-            android:id="@+id/ll_type"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <CheckBox
-                android:id="@+id/cb_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:button="@null"
-                android:drawableEnd="@drawable/ic_expand_more_black_24dp"
-                android:drawablePadding="10dp"
-                android:gravity="center"
-                android:text="条件"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <!--筛选时间-->
-        <LinearLayout
-            android:id="@+id/ll_time"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <CheckBox
-                android:id="@+id/cb_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:button="@null"
-                android:drawableEnd="@drawable/ic_expand_more_black_24dp"
-                android:drawablePadding="10dp"
-                android:gravity="center"
-                android:text="时间"
-                android:textSize="15sp" />
-        </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/horizontal_spilt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#33000000" />
-    </FrameLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_find"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:id="@+id/text1_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="30dp"
+                android:textSize="24sp"
+                android:text="推荐优惠"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/text1_find"
+                android:id="@+id/recyclerView_activity_find"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_below="@+id/recyclerView_activity_find"
+                android:id="@+id/text2_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="30dp"
+                android:textSize="24sp"
+                android:text="推荐商家"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/text2_find"
+                android:id="@+id/recyclerView_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+    </ScrollView>
 
 
 </LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="alV-6b-1XA" customClass="PointHistoryTableViewCell" customModule="PointExchange" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="alV-6b-1XA" id="Pdz-R0-yaU">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="lmz-tr-vzD">
+                        <rect key="frame" x="30" y="-4" width="1" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="point" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4A-tb-m8b">
+                        <rect key="frame" x="277" y="11" width="82" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Oval_red" translatesAutoresizingMaskIntoConstraints="NO" id="EXL-L5-dKA">
+                        <rect key="frame" x="20" y="11" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21" id="1Om-lF-Vcw"/>
+                            <constraint firstAttribute="height" constant="21" id="awj-lR-Ctr"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQi-6T-Wtw">
+                        <rect key="frame" x="290" y="41" width="69" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxn-Ps-VL3">
+                        <rect key="frame" x="58" y="5" width="165" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="EXL-L5-dKA" secondAttribute="trailing" priority="250" constant="334" id="SfV-EG-FFV"/>
+                <constraint firstItem="EXL-L5-dKA" firstAttribute="top" secondItem="alV-6b-1XA" secondAttribute="top" constant="11" id="V8o-2i-mFr"/>
+                <constraint firstItem="EXL-L5-dKA" firstAttribute="leading" secondItem="alV-6b-1XA" secondAttribute="leading" constant="20" id="ZoX-OT-LHh"/>
+            </constraints>
+            <connections>
+                <outlet property="citiPointLabel" destination="wQi-6T-Wtw" id="9FI-J4-JKJ"/>
+                <outlet property="dateLabel" destination="uxn-Ps-VL3" id="AWj-pW-R5s"/>
+                <outlet property="line" destination="lmz-tr-vzD" id="PKE-Lk-TLv"/>
+                <outlet property="oval" destination="EXL-L5-dKA" id="TPg-cP-8MH"/>
+                <outlet property="pointLabel" destination="Y4A-tb-m8b" id="E45-dX-nC5"/>
+            </connections>
+            <point key="canvasLocation" x="125.5" y="144"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Oval_red" width="21" height="21"/>
+        <image name="line" width="1" height="44"/>
+    </resources>
+</document>

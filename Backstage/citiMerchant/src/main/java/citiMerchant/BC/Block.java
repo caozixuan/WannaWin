@@ -12,7 +12,16 @@ public class Block {
     final public BC_Data data;
     final public Long timeStamp; //as number of milliseconds since 1/1/1970.
     private Integer nonce;
+    private String enStr;
+    private String signature;
 
+    public String getEnStr() {
+        return enStr;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
 
     public String getHash() {
         return hash;
@@ -55,13 +64,5 @@ public class Block {
         return calculateHash(this.previousHash, this.data.toString(), this.timeStamp, this.getNonce());
     }
 
-    public void mineBlock(int difficulty) {
-        String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0"
-        while (!hash.substring(0, difficulty).equals(target)) {
-            nonce++;
-            hash = calculateThisHash();
-        }
-        System.out.println("Block Mined!!! : " + hash);
-    }
 
 }

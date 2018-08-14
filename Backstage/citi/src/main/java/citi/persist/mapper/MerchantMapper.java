@@ -17,6 +17,7 @@ import java.util.List;
 @Repository
 public interface MerchantMapper {
 
+    final String getAllMerchantID = "SELECT MerchantID FROM merchant";
     final String addMerchant = "INSERT INTO merchant(MerchantID, name, password, description, cardDescription, address, merchantLogoURL, cardLogoURL, proportion, activityTheme, activityDescription, cardType, businessType) " +
             "VALUES(#{merchantID}, #{name}, #{password}, #{description}, #{cardDescription}, #{address}, #{merchantLogoURL}, #{cardLogoURL}, #{proportion}, #{activityTheme}, #{activityDescription}, #{cardType}, #{businessType})";
     final String loginMerchant = "SELECT * FROM merchant WHERE MerchantID = #{merchantID} AND password = #{password}";
@@ -35,6 +36,9 @@ public interface MerchantMapper {
     final String changePassword = "UPDATE merchant SET password = #{password} WHERE MerchantID = #{merchantID}";
     final String getMerchantAmount = "SELECT COUNT(*) from merchant";
 
+
+    @Select(getAllMerchantID)
+    List<String> getAllMerchantID();
 
     @Insert(addMerchant)
     int addMerchant(Merchant merchantDAO);

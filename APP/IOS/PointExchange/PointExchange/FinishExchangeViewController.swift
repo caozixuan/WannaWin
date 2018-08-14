@@ -21,10 +21,10 @@ class FinishExchangeViewController: UIViewController{
 		let finishBtn = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(goBackToHomePage))
 		self.navigationItem.rightBarButtonItem = finishBtn
 		
-		logo.imageFromURL((order!.merchantLogoURL)!, placeholder: UIImage())
-		points.text = String(stringInterpolationSegment: order!.pointsNeeded!)
-		originalPrice.text = String(stringInterpolationSegment: order!.originalPrice!)
-		afterPrice.text = String(stringInterpolationSegment: order!.priceAfter!)
+//        logo.imageFromURL((order!.merchantLogoURL)!, placeholder: UIImage())
+//        points.text = String(stringInterpolationSegment: order!.pointsNeeded!)
+//        originalPrice.text = String(stringInterpolationSegment: order!.originalPrice!)
+//        afterPrice.text = String(stringInterpolationSegment: order!.priceAfter!)
 		
     }
 

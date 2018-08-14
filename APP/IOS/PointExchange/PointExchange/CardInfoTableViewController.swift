@@ -16,22 +16,21 @@ class CardInfoTableViewController: UITableViewController {
     
     var cardArray:[Card]?
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		// 加入“添加”按钮在导航栏右边
 		let addBtn = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.add , target: self, action: #selector(goAddVC))
 		self.navigationItem.rightBarButtonItem = addBtn
-        
-        ServerConnector.getCardCount(){ (result,num) in
-            if result{
-                ServerConnector.getMostPointCards(n: num, callback: self.getCardCallback)
-            }
-        }
-        
-        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-        activityIndicator?.startAnimating()
 		
-    }
+		ServerConnector.getCardCount(){ (result,num) in
+			if result{
+				ServerConnector.getMostPointCards(n: num, callback: self.getCardCallback)
+			}
+		}
+		
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		activityIndicator?.startAnimating()
+	}
 	
 	func getCardCallback(result:Bool,cards:[Card]){
         if result {
@@ -49,28 +48,13 @@ class CardInfoTableViewController: UITableViewController {
 		self.activityIndicator?.startAnimating()
 		
 		// 获得商家信息
-		ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
-		
+//		ServerConnector.getMerchantsInfos(start: 0, n: 10, callback: gotMerchantsCallback)
+		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
+		self.navigationController!.pushViewController(view, animated: true)
 	}
 	
-	/// 获得商户信息后的回调函数
-	func gotMerchantsCallback(result:Bool, merchants:[Merchant]){
-		if result {
-			MerchantList.list = merchants
-			var merchantName = [String]()
-			for m in merchants{
-				merchantName.append(m.name)
-			}
-			let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
-			let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
-			view.merchantNames = merchantName
-			self.navigationController!.pushViewController(view, animated: true)
-		}
-		else {
-			print("商户信息获取失败")
-		}
-		activityIndicator?.stopAnimating()
-	}
+	
 	
 	//MARK: - Table view data source
 	
@@ -98,7 +82,7 @@ class CardInfoTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let sb = UIStoryboard(name: "HomePage", bundle: nil)
-		let vc = sb.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailTableViewController
+		let vc = sb.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailViewController
 		vc.merchantID = cardArray?[indexPath.row].merchant?.id
 		
 		self.navigationController?.pushViewController(vc, animated: true)

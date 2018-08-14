@@ -61,7 +61,6 @@ public class Merchant {
 
     }
 
-
     public enum BusinessType {
         normal, catering, exercise, bank, costume, education, communication;
 
@@ -116,7 +115,7 @@ public class Merchant {
 
 
     //for programmer
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, CardType cardType) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, CardType cardType, BusinessType businessType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -129,7 +128,7 @@ public class Merchant {
         this.activityTheme = activityTheme;
         this.activityDescription = activityDescription;
         this.cardType = CardType.getCardTypeString(cardType);
-        this.businessType = BusinessType.getBusinessTypeString(BusinessType.normal);
+        this.businessType = BusinessType.getBusinessTypeString(businessType);
     }
 
     public CardType getCardType() {
@@ -225,10 +224,6 @@ public class Merchant {
 
     public void setCardType(CardType cardType) {
         this.cardType = CardType.getCardTypeString(cardType);
-    }
-
-    public void setBusinessType(BusinessType businessType) {
-        this.businessType = BusinessType.getBusinessTypeString(businessType);
     }
 
 }

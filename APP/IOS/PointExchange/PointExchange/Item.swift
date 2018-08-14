@@ -10,7 +10,6 @@ import Foundation
 
 class Item:Codable{
 	var ItemID:String?
-	var name:String?
 	var description:String?
 	var merchantID:String?
 	var logoURL:String?
@@ -18,7 +17,7 @@ class Item:Codable{
 	var points:Double?
 	var overdueTime:String?
 	var stock:Int?
-	var itemName:String?
+	var name:String?
 	var couponID:Int?
 	var state:String?
 	var getTime:String?
