@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ItemMapper {
 
+    final String getAllItemID = "SELECT itemID FROM item";
     final String getItemByItemID = "SELECT * FROM item WHERE ItemID = #{ItemID}";
     final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, logoURL, originalPrice, points, overdueTime, stock) " +
             "VALUES(#{ItemID}, #{name}, #{description}, #{merchantID}, #{logoURL}, #{originalPrice}, #{overdueTime} #{stock})";
@@ -20,6 +21,10 @@ public interface ItemMapper {
     final String updateItemLogoURLByID = "UPDATE item SET logoURL = #{logoURL} WHERE ItemID = #{ItemID}";
     final String updateItemStockByID = "UPDATE item SET stock = #{stock} WHERE ItemID = #{ItemID}";
     final String deleteItemByID = "DELETE FROM item WHERE ItemID = #{ItemID}";
+
+
+    @Select(getAllItemID)
+    List<String> getAllItemID();
 
     @Select(getItemByItemID)
     Item getItemByItemID(String ItemID);
