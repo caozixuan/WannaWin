@@ -8,19 +8,82 @@
 
 import UIKit
 
-class FinishExchangeToGeneralViewController: UIViewController {
+class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var statusLogo: UIImageView!
+    @IBOutlet weak var statusText: UILabel!
+    @IBOutlet weak var addedGeneralPoints: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var status: Bool = false
+    var generalPoints: Double?
+    var successMerchants: [ChooseMerchants]?
+    var successMerchantNames : [String]?
+    var failureMerchants: Dictionary<String,String>?
+    var failureName: [String]?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 设置导航栏按钮
         self.navigationItem.hidesBackButton = true
         let finishBtn = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(goBackToHomePage))
         self.navigationItem.rightBarButtonItem = finishBtn
+        
+        // 设置显示数据
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        if status {
+            statusText.text = "兑换成功"
+            statusLogo.image = UIImage(named: "success")
+            addedGeneralPoints.isHidden = false
+            addedGeneralPoints.text = "+" + String(format:"%.2f", generalPoints!) + "P"
+        }
+        else {
+            statusText.text = "兑换失败"
+            statusLogo.image = UIImage(named: "fail")
+            failureName = failureMerchants?.keys.sorted()
+            addedGeneralPoints.isHidden = true
+        }
+    
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Table view data source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if status {
+            return (successMerchants?.count)!
+        }
+        else {
+            return (failureMerchants?.count)!
+        }
+        
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell  = tableView.dequeueReusableCell(withIdentifier: "exchangedPoints", for: indexPath)
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "exchangedPoints")
+        }
+        if cell .isKind(of: ExchangedPointsCell.self){
+            let exchangedPointsCell = cell as! ExchangedPointsCell
+            if status {
+                exchangedPointsCell.merchantName.text = successMerchantNames?[indexPath.row]
+                let points = Double((successMerchants?[indexPath.row].selectedMSCardPoints)!)!
+                exchangedPointsCell.exchangedPoints.text = String(format:"%.2f", points)
+            }
+            else {
+                let merchant = failureName?[indexPath.row]
+                exchangedPointsCell.merchantName.text = merchant
+                exchangedPointsCell.exchangedPoints.text = failureMerchants?[merchant!]
+            }
+            
+        }
+        return cell
+    }
+    
+    
     
     // MARK: - Navigation
     @objc func goBackToHomePage(){

@@ -15,58 +15,123 @@
                 <outlet property="image1" destination="DNG-9x-19I" id="nkI-Gc-mO5"/>
                 <outlet property="image2" destination="8ZQ-9I-MRs" id="g25-uf-lRh"/>
                 <outlet property="image3" destination="Hk0-ze-aJW" id="bOE-Fv-128"/>
+                <outlet property="imageView1" destination="hJs-6T-qR9" id="rSy-Rd-MQa"/>
+                <outlet property="imageView2" destination="6nn-iq-PSa" id="wBG-by-8PC"/>
+                <outlet property="imageView3" destination="zXD-Fz-bBn" id="BzC-7O-ujc"/>
                 <outlet property="view" destination="JFf-4c-K7x" id="V7v-OH-R4X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="JFf-4c-K7x">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <rect key="frame" x="0.0" y="0.0" width="620" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66E-9D-dem">
-                    <rect key="frame" x="20" y="0.0" width="650" height="130"/>
+                    <rect key="frame" x="0.0" y="0.0" width="608" height="160"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-9I-MRs">
-                            <rect key="frame" x="0.0" y="0.0" width="226" height="130"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-ze-aJW">
-                            <rect key="frame" x="424" y="0.0" width="200" height="130"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="DNG-9x-19I">
-                            <rect key="frame" x="235" y="0.0" width="180" height="130"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nn-iq-PSa" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="212" y="0.0" width="200" height="138"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-9I-MRs">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="138"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXD-Fz-bBn" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="413" y="0.0" width="200" height="138"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-ze-aJW">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="138"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJs-6T-qR9" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="7" y="0.0" width="200" height="138"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="DNG-9x-19I">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="138"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="H4D-Ot-qCz"/>
-                                <constraint firstAttribute="width" constant="180" id="nln-rx-qxj"/>
+                                <constraint firstAttribute="width" constant="200" id="28D-Bf-QOP"/>
+                                <constraint firstAttribute="height" constant="138" id="Nbw-kw-F6J"/>
                             </constraints>
-                        </imageView>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="centerX" secondItem="66E-9D-dem" secondAttribute="centerX" id="2Kj-VM-Px6"/>
-                        <constraint firstAttribute="width" constant="650" id="34n-rA-hIJ"/>
-                        <constraint firstAttribute="bottom" secondItem="DNG-9x-19I" secondAttribute="bottom" id="GrC-qD-RfE"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="leading" secondItem="8ZQ-9I-MRs" secondAttribute="trailing" constant="9" id="JUf-ys-NIz"/>
-                        <constraint firstAttribute="trailing" secondItem="Hk0-ze-aJW" secondAttribute="trailing" priority="250" constant="20" symbolic="YES" id="NYQ-mP-8Nu"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="8ZQ-9I-MRs" secondAttribute="top" id="QaY-Hc-ANQ"/>
-                        <constraint firstItem="8ZQ-9I-MRs" firstAttribute="leading" secondItem="66E-9D-dem" secondAttribute="leading" id="TSe-UZ-Xbm"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="bottom" secondItem="Hk0-ze-aJW" secondAttribute="bottom" id="Xf6-Fr-Uf5"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="Hk0-ze-aJW" secondAttribute="top" id="aak-tx-e4r"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="bottom" secondItem="8ZQ-9I-MRs" secondAttribute="bottom" id="quE-1R-qCJ"/>
-                        <constraint firstItem="Hk0-ze-aJW" firstAttribute="leading" secondItem="DNG-9x-19I" secondAttribute="trailing" constant="9" id="w7Z-vR-Iit"/>
-                        <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="66E-9D-dem" secondAttribute="top" id="yJs-qq-asJ"/>
+                        <constraint firstItem="6nn-iq-PSa" firstAttribute="leading" secondItem="hJs-6T-qR9" secondAttribute="trailing" constant="5" id="8cT-gZ-bzH"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="leading" secondItem="66E-9D-dem" secondAttribute="leading" constant="7" id="W7v-tF-a3Q"/>
+                        <constraint firstAttribute="trailing" secondItem="zXD-Fz-bBn" secondAttribute="trailing" constant="-5" id="aRx-NH-WXW"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="bottom" secondItem="6nn-iq-PSa" secondAttribute="bottom" id="ags-T8-hB0"/>
+                        <constraint firstAttribute="bottom" secondItem="hJs-6T-qR9" secondAttribute="bottom" constant="22" id="bsC-Fd-hkd"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="top" secondItem="zXD-Fz-bBn" secondAttribute="top" id="cU2-o6-guk"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="top" secondItem="6nn-iq-PSa" secondAttribute="top" id="oYb-jQ-Ry0"/>
+                        <constraint firstItem="zXD-Fz-bBn" firstAttribute="leading" secondItem="66E-9D-dem" secondAttribute="leading" constant="413" id="q1v-Ip-xfh"/>
+                        <constraint firstItem="zXD-Fz-bBn" firstAttribute="leading" secondItem="6nn-iq-PSa" secondAttribute="trailing" constant="1" id="qaq-lG-95D"/>
+                        <constraint firstAttribute="trailing" secondItem="hJs-6T-qR9" secondAttribute="trailing" constant="401" id="rEj-HA-A5l"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="top" secondItem="66E-9D-dem" secondAttribute="top" id="rT1-Fa-z5l"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="bottom" secondItem="zXD-Fz-bBn" secondAttribute="bottom" id="zej-BP-Bud"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="66E-9D-dem" firstAttribute="top" secondItem="f05-tq-BQD" secondAttribute="top" id="b6N-EP-dTw"/>
-                <constraint firstItem="66E-9D-dem" firstAttribute="centerY" secondItem="JFf-4c-K7x" secondAttribute="centerY" id="fCw-I7-1Xd"/>
-                <constraint firstAttribute="bottom" secondItem="66E-9D-dem" secondAttribute="bottom" id="jEG-Wf-h7m"/>
-                <constraint firstAttribute="trailing" secondItem="66E-9D-dem" secondAttribute="trailing" constant="20" symbolic="YES" id="keu-F2-vyz"/>
-                <constraint firstItem="66E-9D-dem" firstAttribute="leading" secondItem="JFf-4c-K7x" secondAttribute="leading" constant="20" symbolic="YES" id="nv9-Sq-LFs"/>
+                <constraint firstItem="66E-9D-dem" firstAttribute="top" secondItem="f05-tq-BQD" secondAttribute="top" id="76W-0T-NQS"/>
+                <constraint firstAttribute="bottom" secondItem="66E-9D-dem" secondAttribute="bottom" constant="-10" id="ZSD-qX-R8R"/>
+                <constraint firstAttribute="trailing" secondItem="66E-9D-dem" secondAttribute="trailing" constant="12" id="lYk-CH-DFg"/>
+                <constraint firstItem="66E-9D-dem" firstAttribute="leading" secondItem="JFf-4c-K7x" secondAttribute="leading" id="ops-1n-78j"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="f05-tq-BQD"/>
-            <point key="canvasLocation" x="411.5" y="-505"/>
+            <point key="canvasLocation" x="530" y="-450"/>
         </scrollView>
     </objects>
     <resources>

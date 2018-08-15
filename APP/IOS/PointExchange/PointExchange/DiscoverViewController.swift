@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AFImageHelper
 
 class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchBar: UISearchBar!
@@ -16,9 +17,8 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var couponView: DiscoverCouponView!
 	var rowCount = 4;
     var merchantArray:[Merchant]?
+	var items = [Item]()
     @IBOutlet weak var tableView: UITableView!
-    
-    var tableCellIdentifier:String = "local discount"
     
     var activityIndicator:UIActivityIndicatorView?
 	
@@ -44,6 +44,24 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 					}
 					self.activityIndicator?.stopAnimating()
 				}
+			}
+		}
+		ServerConnector.getRecommendedItems(){(result,items) in
+			if result{
+				for i in 0...2{
+					_ = UIImage.image(fromURL: items[i].logoURL!, placeholder: UIImage(named: "正在加载")!,shouldCacheImage: true){(image:UIImage?) in
+						if image != nil{
+//							var newImage = image?.resize(toSize: CGSize(width: 160, height: 120))
+//							newImage = newImage?.roundCorners(cornerRadius: 60)
+							self.couponView.image1.image = image
+						}
+						
+					}
+				}
+				
+//				self.couponView.image1.imageFromURL(items[0].logoURL!, placeholder: UIImage(named: "正在加载")!)
+//				self.couponView.image2.imageFromURL(items[1].logoURL!, placeholder: UIImage(named: "正在加载")!)
+//				self.couponView.image3.imageFromURL(items[2].logoURL!, placeholder: UIImage(named: "正在加载")!)
 			}
 		}
 		

@@ -728,4 +728,31 @@ class ServerConnector: NSObject {
 		}
 	}
 
+	// 推荐
+	/// 获取推荐商品
+	static func getRecommendedItems(callback:@escaping(_ result:Bool, _ items:[Item])->()){
+		provider.request(.getRecommendedItems()){ result in
+			var items = [Item]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(Item.self, from: data.rawData())
+							items.append(item)
+						}catch{
+							callback(false,items)
+							return
+						}
+					}
+					callback(true,items)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,items)
+			}
+		}
+	}
 }
