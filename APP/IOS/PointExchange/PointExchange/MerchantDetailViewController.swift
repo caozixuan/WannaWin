@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SnapKit
 
 class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
 	var merchant:Merchant?
 	var items = [Item]()
 	var offlineActivities = [OfflineActivity]()
+	var isFold = true
 	@IBOutlet weak var merchantName: UILabel!
 	@IBOutlet weak var merchantLogo: UIImageView!
 	@IBOutlet weak var offlineScrollView: UIScrollView!
@@ -39,6 +41,8 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		ServerConnector.getMerchantItems(merchantID: (merchant?.id)!, start: 0, n: 2){ (result, items) in
 			if result {
 				self.items = items!
+				self.items.append(items![0])
+				self.items.append(items![1])
 				self.couponTableView.reloadData()
 			}
 			
@@ -79,10 +83,15 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-		if items.count < 2{
+		if isFold {
+			if items.count < 2{
+				return items.count
+			}else{
+				return 2
+			}
+		}
+		else{
 			return items.count
-		}else{
-			return 2
 		}
 		
     }
@@ -98,4 +107,10 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 
 	}
 	
+	@IBAction func ClickMoreBtn(_ sender: Any) {
+		self.couponTableView.reloadData()
+		self.couponTableView.snp.updateConstraints(){ make in
+			make.height.equalTo(70*items.count)
+		}
+	}
 }
