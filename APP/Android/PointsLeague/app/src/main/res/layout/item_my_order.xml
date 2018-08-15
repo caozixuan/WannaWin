@@ -90,7 +90,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
                         android:text="兑换时间"
+                        android:maxEms="8"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:textAlignment="center"
                         android:textSize="20sp"
                         android:textColor="@android:color/white" />
