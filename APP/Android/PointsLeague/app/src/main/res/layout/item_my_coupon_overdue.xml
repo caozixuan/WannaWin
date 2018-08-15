@@ -91,30 +91,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:background="#FFCDB03E">
-                    <TextView
-                        android:id="@+id/textView_coupon_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="使用日期"
-                        android:textAlignment="center"
-                        android:textColor="#FFE8E8E8"
-                        android:textSize="15sp"
-                        android:layout_marginBottom="10px"
-                        />
+                    android:background="#CE512E">
 
 
                     <TextView
-                        android:id="@+id/textView_order_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="10dp"
-                        android:text="兑换时间"
-                        android:maxEms="8"
-                        android:singleLine="true"
-                        android:ellipsize="end"
+                        android:text="已过期"
                         android:textAlignment="center"
                         android:textSize="20sp"
                         android:textColor="@android:color/white" />
