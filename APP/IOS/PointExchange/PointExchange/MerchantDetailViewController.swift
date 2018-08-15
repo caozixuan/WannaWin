@@ -34,6 +34,7 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		self.couponTableView.dataSource = self
 		
 		
+		
     }
 	
 	override func viewWillLayoutSubviews() {
@@ -105,6 +106,14 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 			cell?.pointLabel.text = String(stringInterpolationSegment: items[indexPath.row].points!)
 			return cell!
 
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+		vc.item = items[indexPath.row]
+		self.navigationController?.pushViewController(vc, animated: true)
+		
 	}
 	
 	@IBAction func ClickMoreBtn(_ sender: Any) {
