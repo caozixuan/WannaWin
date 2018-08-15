@@ -15,30 +15,80 @@
                 <outlet property="image1" destination="DNG-9x-19I" id="nkI-Gc-mO5"/>
                 <outlet property="image2" destination="8ZQ-9I-MRs" id="g25-uf-lRh"/>
                 <outlet property="image3" destination="Hk0-ze-aJW" id="bOE-Fv-128"/>
+                <outlet property="imageView1" destination="hJs-6T-qR9" id="rSy-Rd-MQa"/>
+                <outlet property="imageView2" destination="6nn-iq-PSa" id="wBG-by-8PC"/>
+                <outlet property="imageView3" destination="zXD-Fz-bBn" id="BzC-7O-ujc"/>
                 <outlet property="view" destination="JFf-4c-K7x" id="V7v-OH-R4X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="JFf-4c-K7x">
-            <rect key="frame" x="0.0" y="0.0" width="386" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="620" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66E-9D-dem">
-                    <rect key="frame" x="0.0" y="0.0" width="608" height="155"/>
+                    <rect key="frame" x="0.0" y="0.0" width="608" height="160"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nn-iq-PSa" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                            <rect key="frame" x="205" y="0.0" width="200" height="150"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nn-iq-PSa" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="212" y="0.0" width="200" height="138"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-9I-MRs">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-9I-MRs">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="138"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXD-Fz-bBn" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="413" y="0.0" width="200" height="138"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-ze-aJW">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="138"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJs-6T-qR9" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <rect key="frame" x="7" y="0.0" width="200" height="138"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="DNG-9x-19I">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="138"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="8ZQ-9I-MRs" secondAttribute="bottom" id="4t7-hM-7vI"/>
-                                <constraint firstItem="8ZQ-9I-MRs" firstAttribute="leading" secondItem="6nn-iq-PSa" secondAttribute="leading" id="Xce-qP-JE9"/>
-                                <constraint firstItem="8ZQ-9I-MRs" firstAttribute="top" secondItem="6nn-iq-PSa" secondAttribute="top" id="eJ7-yY-iOu"/>
-                                <constraint firstAttribute="trailing" secondItem="8ZQ-9I-MRs" secondAttribute="trailing" id="ui3-7C-jZt"/>
+                                <constraint firstAttribute="width" constant="200" id="28D-Bf-QOP"/>
+                                <constraint firstAttribute="height" constant="138" id="Nbw-kw-F6J"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
@@ -55,49 +105,29 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXD-Fz-bBn" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                            <rect key="frame" x="434" y="0.0" width="200" height="150"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-ze-aJW">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Hk0-ze-aJW" secondAttribute="bottom" id="2BA-Gm-aXH"/>
-                                <constraint firstAttribute="trailing" secondItem="Hk0-ze-aJW" secondAttribute="trailing" id="6Gf-EG-fW1"/>
-                                <constraint firstItem="Hk0-ze-aJW" firstAttribute="top" secondItem="zXD-Fz-bBn" secondAttribute="top" id="Dkw-lN-td4"/>
-                                <constraint firstItem="Hk0-ze-aJW" firstAttribute="leading" secondItem="zXD-Fz-bBn" secondAttribute="leading" id="nAx-m9-Afs"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJs-6T-qR9" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                            <rect key="frame" x="7" y="0.0" width="200" height="150"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="正在加载" translatesAutoresizingMaskIntoConstraints="NO" id="DNG-9x-19I">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="DNG-9x-19I" firstAttribute="leading" secondItem="hJs-6T-qR9" secondAttribute="leading" id="92x-LN-j5m"/>
-                                <constraint firstItem="DNG-9x-19I" firstAttribute="top" secondItem="hJs-6T-qR9" secondAttribute="top" id="Y4e-5I-6Iz"/>
-                                <constraint firstAttribute="bottom" secondItem="DNG-9x-19I" secondAttribute="bottom" id="ciu-PV-Pav"/>
-                                <constraint firstAttribute="trailing" secondItem="DNG-9x-19I" secondAttribute="trailing" id="or3-BL-uCN"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="608" id="34n-rA-hIJ"/>
+                        <constraint firstItem="6nn-iq-PSa" firstAttribute="leading" secondItem="hJs-6T-qR9" secondAttribute="trailing" constant="5" id="8cT-gZ-bzH"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="leading" secondItem="66E-9D-dem" secondAttribute="leading" constant="7" id="W7v-tF-a3Q"/>
+                        <constraint firstAttribute="trailing" secondItem="zXD-Fz-bBn" secondAttribute="trailing" constant="-5" id="aRx-NH-WXW"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="bottom" secondItem="6nn-iq-PSa" secondAttribute="bottom" id="ags-T8-hB0"/>
+                        <constraint firstAttribute="bottom" secondItem="hJs-6T-qR9" secondAttribute="bottom" constant="22" id="bsC-Fd-hkd"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="top" secondItem="zXD-Fz-bBn" secondAttribute="top" id="cU2-o6-guk"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="top" secondItem="6nn-iq-PSa" secondAttribute="top" id="oYb-jQ-Ry0"/>
+                        <constraint firstItem="zXD-Fz-bBn" firstAttribute="leading" secondItem="66E-9D-dem" secondAttribute="leading" constant="413" id="q1v-Ip-xfh"/>
+                        <constraint firstItem="zXD-Fz-bBn" firstAttribute="leading" secondItem="6nn-iq-PSa" secondAttribute="trailing" constant="1" id="qaq-lG-95D"/>
+                        <constraint firstAttribute="trailing" secondItem="hJs-6T-qR9" secondAttribute="trailing" constant="401" id="rEj-HA-A5l"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="top" secondItem="66E-9D-dem" secondAttribute="top" id="rT1-Fa-z5l"/>
+                        <constraint firstItem="hJs-6T-qR9" firstAttribute="bottom" secondItem="zXD-Fz-bBn" secondAttribute="bottom" id="zej-BP-Bud"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="66E-9D-dem" firstAttribute="top" secondItem="f05-tq-BQD" secondAttribute="top" id="b6N-EP-dTw"/>
-                <constraint firstItem="66E-9D-dem" firstAttribute="centerY" secondItem="JFf-4c-K7x" secondAttribute="centerY" constant="2.5" id="fCw-I7-1Xd"/>
-                <constraint firstAttribute="bottom" secondItem="66E-9D-dem" secondAttribute="bottom" constant="-5" id="jEG-Wf-h7m"/>
-                <constraint firstAttribute="trailing" secondItem="66E-9D-dem" secondAttribute="trailing" constant="-222" id="keu-F2-vyz"/>
-                <constraint firstItem="66E-9D-dem" firstAttribute="leading" secondItem="JFf-4c-K7x" secondAttribute="leading" id="nv9-Sq-LFs"/>
+                <constraint firstItem="66E-9D-dem" firstAttribute="top" secondItem="f05-tq-BQD" secondAttribute="top" id="76W-0T-NQS"/>
+                <constraint firstAttribute="bottom" secondItem="66E-9D-dem" secondAttribute="bottom" constant="-10" id="ZSD-qX-R8R"/>
+                <constraint firstAttribute="trailing" secondItem="66E-9D-dem" secondAttribute="trailing" constant="12" id="lYk-CH-DFg"/>
+                <constraint firstItem="66E-9D-dem" firstAttribute="leading" secondItem="JFf-4c-K7x" secondAttribute="leading" id="ops-1n-78j"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="f05-tq-BQD"/>

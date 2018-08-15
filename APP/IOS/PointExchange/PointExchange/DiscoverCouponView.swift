@@ -10,6 +10,9 @@ import UIKit
 
 class DiscoverCouponView: UIScrollView {
 
+	@IBOutlet weak var imageView1: GradientView!
+	@IBOutlet weak var imageView3: GradientView!
+	@IBOutlet weak var imageView2: GradientView!
 	@IBOutlet var view: UIScrollView!
 	@IBOutlet weak var image1: UIImageView!
 	
@@ -36,5 +39,12 @@ class DiscoverCouponView: UIScrollView {
 		self.images.append(self.image1)
 		self.images.append(self.image2)
 		self.images.append(self.image3)
+		image1.contentMode = .scaleAspectFit
+		image2.contentMode = .scaleAspectFit
+		image3.contentMode = .scaleAspectFit
+		imageView1.contentMode = .scaleAspectFit
+		imageView2.contentMode = .scaleAspectFit
+		imageView3.contentMode = .scaleAspectFit
+		
 	}
 }

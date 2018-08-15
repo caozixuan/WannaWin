@@ -51,9 +51,9 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 				for i in 0...2{
 					_ = UIImage.image(fromURL: items[i].logoURL!, placeholder: UIImage(named: "正在加载")!,shouldCacheImage: true){(image:UIImage?) in
 						if image != nil{
-							var newImage = image?.resize(toSize: CGSize(width: 160, height: 120))
-							newImage = newImage?.roundCorners(cornerRadius: 60)
-							self.couponView.image1.image = newImage
+//							var newImage = image?.resize(toSize: CGSize(width: 160, height: 120))
+//							newImage = newImage?.roundCorners(cornerRadius: 60)
+							self.couponView.image1.image = image
 						}
 						
 					}
