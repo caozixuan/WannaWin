@@ -15,10 +15,11 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
     @IBOutlet weak var addedGeneralPoints: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var status:Bool = false
-    var successMerchants:[ChooseMerchants]?
-    var failureMerchants:Dictionary<String,String>?
-    var failureName:[String]?
+    var status: Bool = false
+    var generalPoints: Double?
+    var successMerchants: [ChooseMerchants]?
+    var failureMerchants: Dictionary<String,String>?
+    var failureName: [String]?
     
     
     override func viewDidLoad() {
@@ -64,11 +65,13 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         if cell .isKind(of: ExchangedPointsCell.self){
             let exchangedPointsCell = cell as! ExchangedPointsCell
             if status {
+                addedGeneralPoints.isHidden = false
                 exchangedPointsCell.merchantName.text = successMerchants?[indexPath.row].merchantID
                 exchangedPointsCell.exchangedPoints.text = successMerchants?[indexPath.row].selectedMSCardPoints
             }
             else {
                 let merchant = failureName?[indexPath.row]
+                addedGeneralPoints.isHidden = true
                 exchangedPointsCell.merchantName.text = merchant
                 exchangedPointsCell.exchangedPoints.text = failureMerchants?[merchant!]
             }

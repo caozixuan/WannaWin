@@ -250,7 +250,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
                     for subview in (cell?.contentView.subviews)!{
                         if subview .isKind(of: ExchangeItemCellView.self){
                             let exchangeItemCellView = subview as! ExchangeItemCellView
-                            chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+                            chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
                             chosenMerchantList.append(chosenMerchant)
                         }
                     }
@@ -272,6 +272,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
                     let finishExchangeToGeneralVC = view as! FinishExchangeToGeneralViewController
                     finishExchangeToGeneralVC.status = true
                     finishExchangeToGeneralVC.successMerchants = chosenMerchantList
+                    finishExchangeToGeneralVC.generalPoints = pointsSum
                 }
             }
             else { // 准备“兑换失败”数据
