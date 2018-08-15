@@ -1,36 +1,30 @@
 package citi.persist.mapper;
 
 
-import citi.vo.VisitRecord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import citi.vo.UserPref;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface UserPrefMapper {
 
-    final String getItemIDByUserID = "SELECT itemID FROM visitRecord WHERE userID = #{userID} AND time >= now() - #{intervalTime}";
-    final String getVisitTimes = "SELECT COUNT(*) FROM visitRecord WHERE userID = #{userID} AND itemID = #{itemID}";
-    final String insertVisitRecord = "INSERT INTO visitRecord (userID, itemID, time) VALUES (#{userID}, #{itemID}, #{time})";
-    final String deleteByUserID = "DELETE FROM visitRecord WHERE userID = #{userID} AND time <= now() - #{intervalTime}";
+    final String getUserPref = "SELECT * FROM userPref WHERE userID = #{userID}";
+    final String addUserPref = "INSERT INTO userPref(userID, prefType) VALUES(#{userID}, #{prefType})";
+    final String updateUserPref = "UPDATE userPref SET prefType = #{prefType} WHERE userID = #{userID}";
+    final String deleteUserPref = "DELETE FROM userPref WHERE userID = #{userID}";
 
 
-    @Select(getItemIDByUserID)
-    List<String> getItemIDByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
+    @Select(getUserPref)
+    UserPref getUserPref(String userID);
 
-    @Select(getVisitTimes)
-    Integer getVisitTimes(@Param("userID") String userID, @Param("itemID") String itemID);
+    @Insert(addUserPref)
+    int addUserPref(UserPref userPref);
 
-    @Insert(insertVisitRecord)
-    int insertVisitRecord(VisitRecord visitRecord);
+    @Update(updateUserPref)
+    int updateUserPref(@Param("userID") String userID, @Param("prefType") String prefType);
 
-    //从数据库中删除用户很久以前的访问记录
-    @Delete(deleteByUserID)
-    int deleteByUserID(@Param("userID") String userID, @Param("intervalTime") String intervalTime);
+    @Delete(deleteUserPref)
+    int deleteUserPref(String userID);
 
 }
 

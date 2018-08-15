@@ -11,17 +11,18 @@ public interface ItemMapper {
 
     final String getAllItemID = "SELECT itemID FROM item";
     final String getItemByItemID = "SELECT * FROM item WHERE ItemID = #{ItemID}";
-    final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, logoURL, originalPrice, points, overdueTime, stock) " +
-            "VALUES(#{ItemID}, #{name}, #{description}, #{merchantID}, #{logoURL}, #{originalPrice}, #{overdueTime} #{stock})";
+    final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, logoURL, originalPrice, points, overdueTime, stock, itemType) " +
+            "VALUES(#{ItemID}, #{name}, #{description}, #{merchantID}, #{logoURL}, #{originalPrice}, #{overdueTime} #{stock}, #{itemType})";
     final String getItem = "SELECT * FROM item LIMIT #{start}, #{length}";
     final String getItemByMerchantID = "SELECT * FROM item WHERE MerchantID = #{merchantID} LIMIT #{start}, #{length}";
-    final String updateItemByID = "UPDATE item SET name = #{name}, description = #{description}, logoURL = #{logoURL}, originalPrice = #{originalPrice}, points = #{points}, overdueTime = #{overdueTime}, stock = #{stock} " +
+    final String updateItemByID = "UPDATE item SET name = #{name}, description = #{description}, logoURL = #{logoURL}, originalPrice = #{originalPrice}, points = #{points}, overdueTime = #{overdueTime}, stock = #{stock}, itemType = #{itemType} " +
             "WHERE ItemID = #{ItemID}";
     final String updateItemOverdueTimeByID = "UPDATE item SET overdueTime = #{overdueTime} WHERE ItemID = #{ItemID}";
     final String updateItemLogoURLByID = "UPDATE item SET logoURL = #{logoURL} WHERE ItemID = #{ItemID}";
     final String updateItemStockByID = "UPDATE item SET stock = #{stock} WHERE ItemID = #{ItemID}";
     final String deleteItemByID = "DELETE FROM item WHERE ItemID = #{ItemID}";
-
+    final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE MerchantID = #{merchantID}";
+    final String updateItemType = "UPDATE item SET itemType = #{itemType} WHERE ItemID = #{ItemID}";
 
     @Select(getAllItemID)
     List<String> getAllItemID();
@@ -53,9 +54,10 @@ public interface ItemMapper {
     @Delete(deleteItemByID)
     int deleteItemByID(String ItemID);
 
-    final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE MerchantID = #{merchantID}";
-
-    @Select(getItemByMerchantID)
+    @Select(getItemAmountByMerchantID)
     int getItemAmountByMerchantID(String merchantID);
+
+    @Update(updateItemType)
+    int updateItemType(@Param("itemType") String itemType, @Param("ItemID") String ItemID);
 
 }
