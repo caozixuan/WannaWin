@@ -18,6 +18,7 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
     var status: Bool = false
     var generalPoints: Double?
     var successMerchants: [ChooseMerchants]?
+    var successMerchantNames : [String]?
     var failureMerchants: Dictionary<String,String>?
     var failureName: [String]?
     
@@ -37,11 +38,14 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         if status {
             statusText.text = "兑换成功"
             statusLogo.image = UIImage(named: "success")
+            addedGeneralPoints.isHidden = false
+            addedGeneralPoints.text = "+" + String(format:"%.2f", generalPoints!) + "P"
         }
         else {
             statusText.text = "兑换失败"
             statusLogo.image = UIImage(named: "fail")
             failureName = failureMerchants?.keys.sorted()
+            addedGeneralPoints.isHidden = true
         }
     
     }
@@ -65,13 +69,12 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         if cell .isKind(of: ExchangedPointsCell.self){
             let exchangedPointsCell = cell as! ExchangedPointsCell
             if status {
-                addedGeneralPoints.isHidden = false
-                exchangedPointsCell.merchantName.text = successMerchants?[indexPath.row].merchantID
-                exchangedPointsCell.exchangedPoints.text = successMerchants?[indexPath.row].selectedMSCardPoints
+                exchangedPointsCell.merchantName.text = successMerchantNames?[indexPath.row]
+                let points = Double((successMerchants?[indexPath.row].selectedMSCardPoints)!)!
+                exchangedPointsCell.exchangedPoints.text = String(format:"%.2f", points)
             }
             else {
                 let merchant = failureName?[indexPath.row]
-                addedGeneralPoints.isHidden = true
                 exchangedPointsCell.merchantName.text = merchant
                 exchangedPointsCell.exchangedPoints.text = failureMerchants?[merchant!]
             }

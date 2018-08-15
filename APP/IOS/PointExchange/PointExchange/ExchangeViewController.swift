@@ -11,8 +11,9 @@ import SwiftyJSON
 
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
-	var dataSource:[Card]?
-    var selectedList:[Bool]? //用于记住选中的项，防止cell重用导致的选中错乱
+	var dataSource: [Card]?
+    var selectedList: [Bool]? //用于记住选中的项，防止cell重用导致的选中错乱
+    var selectedResult: [Int]?
     
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
@@ -227,6 +228,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         
         var chosenMerchantList = [ChooseMerchants]()
         var chosenMerchant:ChooseMerchants
+        var chosenMerchantNames = [String]()
         
 //        for row in 0..<cellNumber {
 //            indexPath = IndexPath(row: row, section: 0)
@@ -250,8 +252,16 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
                     for subview in (cell?.contentView.subviews)!{
                         if subview .isKind(of: ExchangeItemCellView.self){
                             let exchangeItemCellView = subview as! ExchangeItemCellView
-                            chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+                            
+                            //避免发送“0.00”导致后台出错
+                            if exchangeItemCellView.sourcePoints.text! == "0.00" {
+                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
+                            }
+                            else {
+                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+                            }
                             chosenMerchantList.append(chosenMerchant)
+                            chosenMerchantNames.append((dataSource?[row].merchant?.name)!)
                         }
                     }
                 }
@@ -272,7 +282,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
                     let finishExchangeToGeneralVC = view as! FinishExchangeToGeneralViewController
                     finishExchangeToGeneralVC.status = true
                     finishExchangeToGeneralVC.successMerchants = chosenMerchantList
-                    finishExchangeToGeneralVC.generalPoints = pointsSum
+                    finishExchangeToGeneralVC.successMerchantNames = chosenMerchantNames
+                    finishExchangeToGeneralVC.generalPoints = self.pointsSum
                 }
             }
             else { // 准备“兑换失败”数据
