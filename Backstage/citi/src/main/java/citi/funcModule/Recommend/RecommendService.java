@@ -38,6 +38,8 @@ public class RecommendService {
     @Autowired
     private VisitRecordMapper visitRecordMapper;
     @Autowired
+    private VisitRecordUtil visitRecordUtil;
+    @Autowired
     private UserMapper userMapper;
 
     /**
@@ -315,7 +317,7 @@ public class RecommendService {
         List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,1);
         int visitTimes = 0;
         for(Item item:items){
-            visitTimes+=visitRecordMapper.getVisitTimes(userID,item.getItemID());
+            visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
         }
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
         points = 5*orderList.size()+visitTimes;
@@ -459,9 +461,9 @@ public class RecommendService {
      */
     public ArrayList<UserMerchantPoints> getUserPointsToMerchants(String userID){
         ArrayList<UserMerchantPoints> results = new ArrayList<UserMerchantPoints>();
-        // TODO:这里通过数据库获取所有商户ID
-        ArrayList<Merchant> merchants = new ArrayList<Merchant>();
-        for(Merchant merchant:merchants){
+        List<String> merchantIDs = merchantMapper.getAllMerchantID();
+        for(String merchantID:merchantIDs){
+            Merchant merchant = merchantMapper.selectByID(merchantID);
             double points = getMerchantPoints(userID,merchant.getMerchantID());
             results.add(new UserMerchantPoints(merchant.getMerchantID(),points));
         }
