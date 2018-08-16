@@ -2,14 +2,18 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.citiexchangeplatform.pointsleague.models.CouponItemModel;
 
 import java.util.ArrayList;
@@ -42,16 +46,50 @@ public class MyCouponAdapter extends RecyclerView.Adapter<MyCouponAdapter.MyView
     @Override
     public MyCouponAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         /*列表布局*/
-        return new MyCouponAdapter.MyViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.item_my_coupon, parent, false));
+        MyCouponAdapter.MyViewHolder viewHolder = null;
+        switch (type){
+            case "overdue":
+                viewHolder = new MyCouponAdapter.MyViewHolder(LayoutInflater.from(
+                        context).inflate(R.layout.item_my_coupon_overdue, parent, false));
+                break;
+            default:
+                viewHolder = new MyCouponAdapter.MyViewHolder(LayoutInflater.from(
+                        context).inflate(R.layout.item_my_coupon, parent, false));
+                break;
+        }
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyCouponAdapter.MyViewHolder holder, int position) {
         //设置订单信息
-        holder.name.setText(items.get(position).getMerchantName());
+
+        switch (type){
+            case "overdue":
+                break;
+            case "unused":
+                holder.date.setText(items.get(position).getExchangeDate());
+                holder.title.setText("有效期至");
+                holder.background.setBackgroundColor(Color.parseColor("#FF75BD47"));
+                break;
+            default:
+                holder.date.setText(items.get(position).getExchangeDate());
+                holder.title.setText("使用日期");
+                holder.background.setBackgroundColor(Color.parseColor("#CDB03E"));
+                break;
+        }
+
         holder.description.setText(items.get(position).getDescription());
-        holder.date.setText(items.get(position).getExchangeDate());
+
+        Glide.with(context)
+                .load(items.get(position).getLogoURL())
+                .placeholder(R.drawable.ic_points_black_24dp)
+                .error(R.drawable.ic_mall_black_24dp)
+                .override(60,60)
+                .into(holder.logo);
+
+
 
         final String logoURL = items.get(position).getLogoURL();
         final String name = items.get(position).getMerchantName();
@@ -99,16 +137,24 @@ public class MyCouponAdapter extends RecyclerView.Adapter<MyCouponAdapter.MyView
         TextView description;
         //时间
         TextView date;
-        //商户名
-        TextView name;
+        //logo
+        ImageView logo;
+        //background
+        LinearLayout background;
+        //title
+        TextView title;
+
 
 
         public MyViewHolder(View view) {
             super(view);
 
             description = view.findViewById(R.id.textView_order_description);
-            name = view.findViewById(R.id.textView_order_name);
             date = view.findViewById(R.id.textView_order_date);
+            logo = view.findViewById(R.id.image_order_logo);
+
+            background = view.findViewById(R.id.block_background);
+            title = view.findViewById(R.id.textView_coupon_title);
 
 
         }

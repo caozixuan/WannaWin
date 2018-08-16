@@ -6,6 +6,7 @@ import citi.persist.procedure.probean.ItemBean;
 import citi.vo.Item;
 import citi.vo.Merchant;
 import citi.vo.Order;
+import citi.vo.UserCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -38,7 +39,11 @@ public class RecommendService {
     @Autowired
     private VisitRecordMapper visitRecordMapper;
     @Autowired
+    private VisitRecordUtil visitRecordUtil;
+    @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CouponMapper couponMapper;
 
     /**
      * 初始化用户的偏好列表
@@ -123,7 +128,18 @@ public class RecommendService {
         }
         return points;
         */
-        return 0;
+        double points = 0;
+        double buy_times = 0;
+        Item item = itemMapper.getItemByItemID(itemID);
+        int visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
+        List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
+        for(UserCoupon userCoupon:userCoupons){
+            if(userCoupon.getItemID().equals(itemID)){
+                buy_times+=1;
+            }
+        }
+        points = visitTimes + 5*buy_times;
+        return points;
     }
 
     class ItemPoints{
@@ -159,13 +175,12 @@ public class RecommendService {
     */
     public ArrayList<ItemPoints> getItemPointsArray(){
         ArrayList<ItemPoints> results = new ArrayList<ItemPoints>();
-        // TODO:这里缺获取所用用户userID的方法
         List<String> userIDs = userMapper.getAllUserID();
-        ArrayList<String> itemIDs = new ArrayList<String>();
+        List<String> itemIDs = itemMapper.getAllItemID();
         for(String itemID:itemIDs){
             ArrayList<Double> points = new ArrayList<Double>();
             for(String userID: userIDs){
-                points.add(getMerchantPoints(userID,itemID));
+                points.add(getItemPoints(userID,itemID));
             }
             double[] pointsArray = new double[points.size()];
             for(int i=0;i<points.size();i++){
@@ -173,16 +188,6 @@ public class RecommendService {
             }
             ItemPoints itemPoints = new ItemPoints(itemID,pointsArray);
             results.add(itemPoints);
-        }
-        try {
-            ObjectOutputStream os = new ObjectOutputStream(
-                    new FileOutputStream("ItemSimilarity.txt"));
-            os.writeObject(results);// 将List列表写进文件
-            os.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return results;
     }
@@ -201,41 +206,13 @@ public class RecommendService {
         return results;
     }
 
-    public ArrayList<ItemSimilarity> updateItemSimilarities(){
-        ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
-        ArrayList<ItemPoints> itemPoints = getItemPointsArray();
-        for(int i=0;i<itemPoints.size()-1;i++){
-            for(int j=i;j<itemPoints.size();j++){
-                double similarity = cosineSimilarity(itemPoints.get(i).points,itemPoints.get(j).points);
-                String itemID1 = itemPoints.get(i).itemID;
-                String itemID2 = itemPoints.get(j).itemID;
-                results.add(new ItemSimilarity(itemID1,itemID2, similarity));
-            }
-        }
-        try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
-            for(ItemSimilarity result:results){
-                oos.writeObject(result);
-            }
-            oos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return results;
-    }
+
     /*
    * 返回用户对商品的评分
    */
     public ArrayList<UserItemPoints> getUserPointsToItems(String userID){
         ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
-        ArrayList<String> itemIDs = new ArrayList<>();
-        //TODO:itemMapper中返回所有ItemID
-
-        //itemIDs.addAll(itemMapper,getItemIDs());
+        List<String> itemIDs = itemMapper.getAllItemID();
         ArrayList<Item> items = new ArrayList<Item>();
         for(String id:itemIDs){
             items.add(itemMapper.getItemByItemID(id));
@@ -310,15 +287,18 @@ public class RecommendService {
     public double getMerchantPoints(String userID, String merchantID){
         double points = 0;
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
-        // TODO: 这里缺用户浏览和用户积分消费的接口
-        // 这里缺获取全部的商品吗？
         List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,1);
         int visitTimes = 0;
         for(Item item:items){
-            visitTimes+=visitRecordMapper.getVisitTimes(userID,item.getItemID());
+            visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
         }
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
-        points = 5*orderList.size()+visitTimes;
+        double consume_points = 0;
+        for(Order order:orderList){
+            consume_points+=order.getPointsNeeded();
+        }
+        List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
+        points = consume_points/10 + userCoupons.size()*5 + visitTimes;
         return points;
     }
 
@@ -350,25 +330,13 @@ public class RecommendService {
         }
     }
 
-    class MerchantSimilarity{
-        String merchantID1;
-        String merchantID2;
-        double similarity;
-
-        public MerchantSimilarity(String merchantID1, String merchantID2, double similarity) {
-            this.merchantID1 = merchantID1;
-            this.merchantID2 = merchantID2;
-            this.similarity = similarity;
-        }
-    }
     /*
      * 获取用户商户评分数组
      */
     public ArrayList<MerchantPoints> getMerchantPointsArray(){
         ArrayList<MerchantPoints> results = new ArrayList<MerchantPoints>();
-        // TODO:这里缺获取所用用户userID的方法
         List<String> userIDs = userMapper.getAllUserID();
-        ArrayList<String> merchantIDs = new ArrayList<String>();
+        List<String> merchantIDs = merchantMapper.getAllMerchantID();
         for(String merchantID:merchantIDs){
             ArrayList<Double> points = new ArrayList<Double>();
             for(String userID: userIDs){
@@ -424,44 +392,16 @@ public class RecommendService {
         }
         return results;
     }
-    /*
-     * 更新商户相似度
-     */
-    public ArrayList<MerchantSimilarity> updateMerchantSimilarities(){
-        ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
-        ArrayList<MerchantPoints> merchantPoints = getMerchantPointsArray();
-        for(int i=0;i<merchantPoints.size()-1;i++){
-            for(int j=i;j<merchantPoints.size();j++){
-                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(i).points);
-                String merchantID1 = merchantPoints.get(i).merchantID;
-                String merchantID2 = merchantPoints.get(j).merchantID;
-                results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));
-            }
-        }
-        try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
-            for(MerchantSimilarity result:results){
-                oos.writeObject(result);
-            }
-            oos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return results;
-    }
+
 
     /*
      * 返回用户对商户的评分
      */
     public ArrayList<UserMerchantPoints> getUserPointsToMerchants(String userID){
         ArrayList<UserMerchantPoints> results = new ArrayList<UserMerchantPoints>();
-        // TODO:这里通过数据库获取所有商户ID
-        ArrayList<Merchant> merchants = new ArrayList<Merchant>();
-        for(Merchant merchant:merchants){
+        List<String> merchantIDs = merchantMapper.getAllMerchantID();
+        for(String merchantID:merchantIDs){
+            Merchant merchant = merchantMapper.selectByID(merchantID);
             double points = getMerchantPoints(userID,merchant.getMerchantID());
             results.add(new UserMerchantPoints(merchant.getMerchantID(),points));
         }

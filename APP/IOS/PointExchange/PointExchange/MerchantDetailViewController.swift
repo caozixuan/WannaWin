@@ -34,6 +34,7 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		self.couponTableView.dataSource = self
 		
 		
+		
     }
 	
 	override func viewWillLayoutSubviews() {
@@ -106,7 +107,15 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 			return cell!
 
 	}
-	
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Discover", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+        vc.item = items[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+
 	@IBAction func ClickMoreBtn(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         self.couponTableView.reloadData()
@@ -135,7 +144,6 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
                 self.view.layoutIfNeeded()
             }
         }
-		
-	}
+    }
     
 }
