@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1606,20 +1607,20 @@
         <!--未使用优惠券详情-->
         <scene sceneID="QOU-fv-o68">
             <objects>
-                <viewController storyboardIdentifier="UnuseCouponDetailViewController" title="未使用优惠券详情" id="0t1-6c-w0f" customClass="UnuseCouponDetailViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryCouponDetailViewController" title="未使用优惠券详情" id="0t1-6c-w0f" customClass="HistoryCouponDetailViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gsV-Md-pB9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhe-wo-XXY" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="28" y="178" width="319" height="380"/>
+                                <rect key="frame" x="28" y="178" width="319" height="469"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggd-fV-YUs">
                                         <rect key="frame" x="122" y="128" width="75" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="main_orange"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="----------------------------------------------------------------------" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wfk-Je-suk">
@@ -1629,6 +1630,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="未使用" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSK-yX-sOz">
+                                        <rect key="frame" x="116" y="225" width="86" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <color key="textColor" red="0.45882352941176469" green="0.74117647058823533" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-0A-5TY">
+                                        <rect key="frame" x="65" y="267" width="189" height="189"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -1679,14 +1691,16 @@
                         <viewLayoutGuide key="safeArea" id="JjM-8O-3tk"/>
                     </view>
                     <connections>
-                        <outlet property="descriptionText" destination="Wfk-Je-suk" id="WdE-hR-yv0"/>
-                        <outlet property="logoImage" destination="6RF-FA-t2O" id="zSn-Fa-tr0"/>
-                        <outlet property="pointLabel" destination="ggd-fV-YUs" id="0tJ-pi-JLh"/>
+                        <outlet property="descriptionText" destination="Wfk-Je-suk" id="q7a-Qz-8uf"/>
+                        <outlet property="logoImage" destination="6RF-FA-t2O" id="rK1-CC-OYS"/>
+                        <outlet property="pointLabel" destination="ggd-fV-YUs" id="x3F-rf-Reu"/>
+                        <outlet property="qrBarImage" destination="ZUP-0A-5TY" id="cJH-pG-9r4"/>
+                        <outlet property="tagLabel" destination="PSK-yX-sOz" id="tPi-P9-tmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Z3-wd-W9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6274" y="-2919"/>
+            <point key="canvasLocation" x="6272.8000000000002" y="-2919.490254872564"/>
         </scene>
     </scenes>
     <resources>
@@ -1698,5 +1712,8 @@
         <image name="设置" width="48" height="48"/>
         <image name="退出登录" width="310" height="46"/>
         <image name="通讯录" width="100" height="100"/>
+        <namedColor name="main_orange">
+            <color red="1" green="0.58399999141693115" blue="0.27500000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

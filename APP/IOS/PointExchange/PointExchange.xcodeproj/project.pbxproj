@@ -57,7 +57,7 @@
 		3ED5F6D62122985C00F46E7C /* MerchantCouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED5F6D42122985C00F46E7C /* MerchantCouponTableViewCell.xib */; };
 		3ED5F6D82122AFC200F46E7C /* OfflineActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6D72122AFC200F46E7C /* OfflineActivity.swift */; };
 		3ED5F6DA21240C6300F46E7C /* CouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6D921240C6300F46E7C /* CouponDetailViewController.swift */; };
-		3ED5F6DC2124242800F46E7C /* UnuseCouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DB2124242800F46E7C /* UnuseCouponDetailViewController.swift */; };
+		3ED5F6DC2124242800F46E7C /* HistoryCouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */; };
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
@@ -154,7 +154,7 @@
 		3ED5F6D42122985C00F46E7C /* MerchantCouponTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MerchantCouponTableViewCell.xib; sourceTree = "<group>"; };
 		3ED5F6D72122AFC200F46E7C /* OfflineActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineActivity.swift; sourceTree = "<group>"; };
 		3ED5F6D921240C6300F46E7C /* CouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDetailViewController.swift; sourceTree = "<group>"; };
-		3ED5F6DB2124242800F46E7C /* UnuseCouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnuseCouponDetailViewController.swift; sourceTree = "<group>"; };
+		3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCouponDetailViewController.swift; sourceTree = "<group>"; };
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 				3E3327872120019900426518 /* CouponHistoryViewController.swift */,
 				3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */,
 				3E3327932120762D00426518 /* OfflineHistoryViewController.swift */,
-				3ED5F6DB2124242800F46E7C /* UnuseCouponDetailViewController.swift */,
+				3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */,
 			);
 			name = UserTab;
 			sourceTree = "<group>";
@@ -649,7 +649,7 @@
 				3E3327882120019900426518 /* CouponHistoryViewController.swift in Sources */,
 				3E4017F021005FA700591B77 /* LoginView.swift in Sources */,
 				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
-				3ED5F6DC2124242800F46E7C /* UnuseCouponDetailViewController.swift in Sources */,
+				3ED5F6DC2124242800F46E7C /* HistoryCouponDetailViewController.swift in Sources */,
 				3ED5F6D52122985C00F46E7C /* MerchantCouponTableViewCell.swift in Sources */,
 				847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */,
 				3ED5F6D22122892900F46E7C /* OfflineCardView.swift in Sources */,

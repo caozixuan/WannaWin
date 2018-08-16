@@ -413,7 +413,6 @@
                         <viewLayoutGuide key="safeArea" id="Yu3-Vb-dbE"/>
                     </view>
                     <connections>
-                        <outlet property="clickExchange" destination="jam-9X-RAw" id="JB5-jo-nwx"/>
                         <outlet property="countSelectedText" destination="aPh-1L-Nbf" id="Ysr-y6-wkH"/>
                         <outlet property="descriptionText" destination="ihS-QG-n2H" id="auY-hb-gcE"/>
                         <outlet property="logoImage" destination="5dQ-jz-AyY" id="vdT-iM-0kg"/>

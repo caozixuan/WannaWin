@@ -11,7 +11,9 @@ import UIKit
 class CouponDetailViewController: UIViewController {
 
 	var item:Item?
-	var count = 0
+	var count = 1
+	
+	
 	@IBOutlet weak var validDate: UILabel!
 	@IBOutlet weak var countSelectedText: UITextField!
 	@IBOutlet weak var descriptionText: UITextView!
@@ -59,12 +61,19 @@ class CouponDetailViewController: UIViewController {
 				let alert = UIAlertController(title:"兑换", message:"兑换成功！", preferredStyle:.alert)
 				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
 					let sb = UIStoryboard(name: "User", bundle: nil)
+					let vc = sb.instantiateViewController(withIdentifier: "OrdersViewController") as! OrdersViewController
+					
+					self.navigationController?.pushViewController(vc, animated: true)
 				})
-				let cancelAction = UIAlertAction(title:"取消", style:.cancel, handler:nil)
 				alert.addAction(okAction)
-				alert.addAction(cancelAction)
 				self.present(alert, animated: true, completion: nil)
-
+			}
+			else{
+				let alert = UIAlertController(title:"兑换", message:"兑换失败！", preferredStyle:.alert)
+				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+				})
+				alert.addAction(okAction)
+				self.present(alert, animated: true, completion: nil)
 			}
 		}
 	}

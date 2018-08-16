@@ -460,8 +460,6 @@ class ServerConnector: NSObject {
         }
     }
 
-
-
     /// 获取通用积分
     static func getGeneralPoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){
         provider.request(.getGeneralPoints()){ result in
@@ -776,4 +774,55 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
+
+	// 线下活动
+	/// 获得活动
+	static func getActivity(activityID:String, callback:@escaping(_ result:Bool, _ activity:OfflineActivity?)->()){
+		provider.request(.getRecommendedItems()){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					var activity = OfflineActivity()
+					let decoder = JSONDecoder()
+					do{
+						activity = try decoder.decode(OfflineActivity.self, from: response.data)
+						callback(true,activity)
+					}catch{
+						callback(false,nil)
+					}
+					
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+	/// 获得商家所有活动
+	static func getMerchantActivities(merchantID:String,callback:@escaping(_ result:Bool, _ activities:[OfflineActivity]?)->()){
+		provider.request(.getMerchantActivities(merchantID: merchantID)){ result in
+			var activities = [OfflineActivity]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(OfflineActivity.self, from: data.rawData())
+							activities.append(item)
+						}catch{
+							callback(false,nil)
+							return
+						}
+					}
+					callback(true,activities)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+
+
 }

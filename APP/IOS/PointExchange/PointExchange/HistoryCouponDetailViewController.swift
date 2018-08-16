@@ -1,5 +1,5 @@
 //
-//  UnuseCouponDetailViewController.swift
+//  HistoryCouponDetailViewController.swift
 //  PointExchange
 //
 //  Created by yiner on 2018/8/15.
@@ -8,11 +8,27 @@
 
 import UIKit
 
-class UnuseCouponDetailViewController: UIViewController {
+class HistoryCouponDetailViewController: UIViewController {
 
-    override func viewDidLoad() {
+	var items:Item?
+	@IBOutlet weak var qrBarImage: UIImageView!
+	@IBOutlet weak var tagLabel: UILabel!
+	@IBOutlet weak var descriptionText: UITextView!
+	@IBOutlet weak var pointLabel: UILabel!
+	@IBOutlet weak var logoImage: UIImageView!
+	override func viewDidLoad() {
         super.viewDidLoad()
-
+		descriptionText.text = items?.description
+		pointLabel.text = String(stringInterpolationSegment: items?.points!)
+		logoImage.imageFromURL((items?.logoURL)!, placeholder: UIImage())
+		qrBarImage.image = ScanCodeManager().createQRCode(url:(items?.ItemID)!)
+		switch items?.state {
+		case "UNUSED":
+			tagLabel.text = "未使用"
+		default:
+			break
+			
+		}
         // Do any additional setup after loading the view.
     }
 
