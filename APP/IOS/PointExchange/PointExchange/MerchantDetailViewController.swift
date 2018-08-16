@@ -107,10 +107,35 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 
 	}
 	
-	@IBAction func ClickMoreBtn(_ sender: Any) {
-		self.couponTableView.reloadData()
-		self.couponTableView.snp.updateConstraints(){ make in
-			make.height.equalTo(70*items.count)
-		}
+	@IBAction func ClickMoreBtn(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.couponTableView.reloadData()
+        
+        if sender.isSelected { // tableview变长
+            
+            // 设置约束更改tableview高度
+            self.couponTableView.snp.remakeConstraints(){ make in
+                make.height.equalTo(70*self.items.count).priority(1000)
+            }
+            
+            // 使动画生效
+            UIView.animate(withDuration: 0.5){
+                self.view.layoutIfNeeded()
+            }
+        }
+        else { // tableview变短
+            
+            // 更改约束更改tableview高度
+            self.couponTableView.snp.remakeConstraints(){ make in
+                make.height.equalTo(136).priority(1000)
+            }
+            
+            // 使动画生效
+            UIView.animate(withDuration: 0.5){
+                self.view.layoutIfNeeded()
+            }
+        }
+		
 	}
+    
 }
