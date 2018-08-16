@@ -85,6 +85,7 @@ enum ServerService {
 	case getUnusedCoupons()
 	/// 获取已过期优惠券
 	case getOverduedCoupons()
+	case buyCoupons(itemID:String,count:Int)
 	
 	// 推荐
 	/// 获取推荐的三种商品
@@ -175,6 +176,8 @@ extension ServerService:TargetType {
 			return "/userCoupon/getUnusedCoupons"
 		case .getOverduedCoupons():
 			return "/userCoupon/getOverduedCoupons"
+		case .buyCoupons:
+			return "/item/buyMultiple"
 			
 		// 推荐
 		case .getRecommendedItems():
@@ -338,6 +341,13 @@ extension ServerService:TargetType {
 			var params:[String:String] = [:]
 			params["userID"] = User.getUser().id
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .buyCoupons(let itemID, let count):
+			var params:[String:String] = [:]
+			params["userID"] = User.getUser().id
+			params["itemsID"] = itemID
+			params["count"] = String(count)
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+			
 			
 		// 推荐
 		case .getRecommendedItems():

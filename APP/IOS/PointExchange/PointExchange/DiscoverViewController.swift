@@ -18,6 +18,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 	var rowCount = 4;
     var merchantArray:[Merchant]?
 	var items = [Item]()
+	
     @IBOutlet weak var tableView: UITableView!
     
     var activityIndicator:UIActivityIndicatorView?
@@ -48,27 +49,32 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		ServerConnector.getRecommendedItems(){(result,items) in
 			if result{
+				self.items = items
 				for i in 0...2{
+					self.couponView.images[i].tag = i
+					let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickImage(_:)))
+					self.couponView.images[i].addGestureRecognizer(tapGesture)
+					self.couponView.images[i].isUserInteractionEnabled = true
 					_ = UIImage.image(fromURL: items[i].logoURL!, placeholder: UIImage(named: "正在加载")!,shouldCacheImage: true){(image:UIImage?) in
 						if image != nil{
-							var newImage = image?.resize(toSize: CGSize(width: 160, height: 120))
-							newImage = newImage?.roundCorners(cornerRadius: 60)
-							self.couponView.image1.image = newImage
+							self.couponView.images[i].image = image
 						}
 						
 					}
-				}
-				
-//				self.couponView.image1.imageFromURL(items[0].logoURL!, placeholder: UIImage(named: "正在加载")!)
-//				self.couponView.image2.imageFromURL(items[1].logoURL!, placeholder: UIImage(named: "正在加载")!)
-//				self.couponView.image3.imageFromURL(items[2].logoURL!, placeholder: UIImage(named: "正在加载")!)
-			}
+				}			}
 		}
 		
 		self.tableView.register(UINib(nibName: "DsMerchantTableViewCell", bundle: nil), forCellReuseIdentifier: "merchantCell")
 		self.tableView.rowHeight = 95
 		
     }
+	
+	@objc func clickImage(_ sender:UITapGestureRecognizer){
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+		vc.item = self.items[(sender.view?.tag)!]
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
 
 	
     

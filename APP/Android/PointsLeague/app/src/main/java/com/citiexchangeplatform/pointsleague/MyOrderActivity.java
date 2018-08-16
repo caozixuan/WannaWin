@@ -79,6 +79,7 @@ public class MyOrderActivity extends AppCompatActivity {
         titleBar.setBackgroundColor(getResources().getColor(R.color.colorWhite));
         titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("返回");
+        titleBar.setLeftTextSize(18);
         titleBar.setLeftTextColor(getResources().getColor(R.color.colorLightOrange));
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
