@@ -68,16 +68,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dT-1d-VYg">
-                                <rect key="frame" x="139" y="550" width="96" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="W2c-uv-jC5" kind="show" id="huV-iP-InB"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.54901960780000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="Adq-i6-9Rg"/>
@@ -105,7 +95,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ux7-5b-8gI" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="26" y="170" width="323" height="393"/>
+                                <rect key="frame" x="26" y="126" width="323" height="437"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-3000.00P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joA-W5-WnC">
                                         <rect key="frame" x="86.5" y="80" width="150" height="37"/>
@@ -135,7 +125,7 @@
                                         <size key="shadowOffset" width="0.0" height="-2"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Grand Canal III" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WL-4r3">
-                                        <rect key="frame" x="18" y="272" width="287" height="105"/>
+                                        <rect key="frame" x="18" y="272" width="287" height="149"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="12"/>
@@ -176,7 +166,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-6h-nWJ">
-                                <rect key="frame" x="123" y="105" width="129" height="129"/>
+                                <rect key="frame" x="123" y="61" width="129" height="129"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="onQ-6h-nWJ" secondAttribute="height" multiplier="1:1" id="fYe-bA-80Y"/>
                                 </constraints>

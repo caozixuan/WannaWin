@@ -1,7 +1,5 @@
 package com.citiexchangeplatform.pointsleague;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +33,7 @@ import java.util.Map;
  */
 public class OrderTabOverdueFragment extends Fragment {
     RecyclerView overdueOrderRecyclerView;
-    private MyOrderAdapter orderAdapter;
+    private MyCouponAdapter orderAdapter;
 
 
 
@@ -86,11 +84,11 @@ public class OrderTabOverdueFragment extends Fragment {
 
     protected void setRecyclerView(){
 
-        orderAdapter = new MyOrderAdapter(getActivity());
+        orderAdapter = new MyCouponAdapter(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         overdueOrderRecyclerView.setLayoutManager(layoutManager);
-        orderAdapter = new MyOrderAdapter(getActivity());
+        orderAdapter = new MyCouponAdapter(getActivity());
         overdueOrderRecyclerView.setAdapter(orderAdapter);
     }
 
@@ -115,8 +113,8 @@ public class OrderTabOverdueFragment extends Fragment {
 
                         String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
-                        String time = "兑换日期："+jObj.getString("getTime");
-                        String validityTerm = "有效期："+jObj.getString("overdueTime");
+                        String time = jObj.getString("getTime");
+                        String validityTerm = jObj.getString("overdueTime");
                         //String validityTerm = jObj.getString("overdueTime");
                         //String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
                         String itemID = jObj.getString("ItemID");

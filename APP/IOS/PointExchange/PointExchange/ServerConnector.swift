@@ -728,4 +728,52 @@ class ServerConnector: NSObject {
 		}
 	}
 
+	static func buyCoupons(itemID:String,count:Int,callback:@escaping (_ result:Bool)->()){
+		provider.request(.buyCoupons(itemID: itemID, count: count)){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					let isUnBinding = data["status"].bool
+					if isUnBinding! {
+						callback(true)
+					}
+					else{
+						callback(false)
+					}
+				}
+			}
+			if case .failure(_) = result{
+				callback(false)
+				print("连接失败")
+			}
+		}
+	}
+	// 推荐
+	/// 获取推荐商品
+	static func getRecommendedItems(callback:@escaping(_ result:Bool, _ items:[Item])->()){
+		provider.request(.getRecommendedItems()){ result in
+			var items = [Item]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(Item.self, from: data.rawData())
+							items.append(item)
+						}catch{
+							callback(false,items)
+							return
+						}
+					}
+					callback(true,items)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,items)
+			}
+		}
+	}
 }

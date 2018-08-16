@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AFImageHelper
 
 class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchBar: UISearchBar!
@@ -16,9 +17,9 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var couponView: DiscoverCouponView!
 	var rowCount = 4;
     var merchantArray:[Merchant]?
+	var items = [Item]()
+	
     @IBOutlet weak var tableView: UITableView!
-    
-    var tableCellIdentifier:String = "local discount"
     
     var activityIndicator:UIActivityIndicatorView?
 	
@@ -46,11 +47,34 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 				}
 			}
 		}
+		ServerConnector.getRecommendedItems(){(result,items) in
+			if result{
+				self.items = items
+				for i in 0...2{
+					self.couponView.images[i].tag = i
+					let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickImage(_:)))
+					self.couponView.images[i].addGestureRecognizer(tapGesture)
+					self.couponView.images[i].isUserInteractionEnabled = true
+					_ = UIImage.image(fromURL: items[i].logoURL!, placeholder: UIImage(named: "正在加载")!,shouldCacheImage: true){(image:UIImage?) in
+						if image != nil{
+							self.couponView.images[i].image = image
+						}
+						
+					}
+				}			}
+		}
 		
 		self.tableView.register(UINib(nibName: "DsMerchantTableViewCell", bundle: nil), forCellReuseIdentifier: "merchantCell")
 		self.tableView.rowHeight = 95
 		
     }
+	
+	@objc func clickImage(_ sender:UITapGestureRecognizer){
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+		vc.item = self.items[(sender.view?.tag)!]
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
 
 	
     
@@ -85,7 +109,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: - 点击发现页折扣活动后跳转
 		let sb = UIStoryboard(name: "Discover", bundle: nil)
-		let view = sb.instantiateViewController(withIdentifier: "MerchantDetailTableView") as! MerchantDetailTableViewController
+		let view = sb.instantiateViewController(withIdentifier: "MerchantDetailViewController") as! MerchantDetailViewController
 		view.merchant = merchantArray?[indexPath.row]
 		self.navigationController?.pushViewController(view, animated: true)
     }
