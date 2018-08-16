@@ -206,32 +206,7 @@ public class RecommendService {
         return results;
     }
 
-    public ArrayList<ItemSimilarity> updateItemSimilarities(){
-        ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
-        ArrayList<ItemPoints> itemPoints = getItemPointsArray();
-        for(int i=0;i<itemPoints.size()-1;i++){
-            for(int j=i;j<itemPoints.size();j++){
-                double similarity = cosineSimilarity(itemPoints.get(i).points,itemPoints.get(j).points);
-                String itemID1 = itemPoints.get(i).itemID;
-                String itemID2 = itemPoints.get(j).itemID;
-                results.add(new ItemSimilarity(itemID1,itemID2, similarity));
-            }
-        }
-        try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
-            for(ItemSimilarity result:results){
-                oos.writeObject(result);
-            }
-            oos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return results;
-    }
+
     /*
    * 返回用户对商品的评分
    */
@@ -355,17 +330,6 @@ public class RecommendService {
         }
     }
 
-    class MerchantSimilarity{
-        String merchantID1;
-        String merchantID2;
-        double similarity;
-
-        public MerchantSimilarity(String merchantID1, String merchantID2, double similarity) {
-            this.merchantID1 = merchantID1;
-            this.merchantID2 = merchantID2;
-            this.similarity = similarity;
-        }
-    }
     /*
      * 获取用户商户评分数组
      */
@@ -428,35 +392,7 @@ public class RecommendService {
         }
         return results;
     }
-    /*
-     * 更新商户相似度
-     */
-    public ArrayList<MerchantSimilarity> updateMerchantSimilarities(){
-        ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
-        ArrayList<MerchantPoints> merchantPoints = getMerchantPointsArray();
-        for(int i=0;i<merchantPoints.size()-1;i++){
-            for(int j=i;j<merchantPoints.size();j++){
-                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(i).points);
-                String merchantID1 = merchantPoints.get(i).merchantID;
-                String merchantID2 = merchantPoints.get(j).merchantID;
-                results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));
-            }
-        }
-        try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
-            for(MerchantSimilarity result:results){
-                oos.writeObject(result);
-            }
-            oos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return results;
-    }
+
 
     /*
      * 返回用户对商户的评分

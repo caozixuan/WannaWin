@@ -13,8 +13,7 @@
 
     <!-- 启用注解 -->
     <context:annotation-config/>
-    <!-- 通知spring容器采用自动扫描机制查找注解的bean -->
-    <context:component-scan base-package="citi.funcModule.Recommend" />
+
     <!-- 定时器开关,配置定时任务的线程池 -->
     <task:annotation-driven scheduler="myTask" />
     <task:scheduler id="myTask" pool-size="5" />
