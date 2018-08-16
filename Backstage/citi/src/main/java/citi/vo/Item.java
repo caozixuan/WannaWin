@@ -18,7 +18,7 @@ public class Item {
     protected String itemType;
 
 
-    public List<Type.ItemType> getItemType() {
+    public List<Type.ItemType> getItemTypeList() {
         return Type.ItemType.DBStr2enum(itemType);
     }
 
@@ -104,6 +104,14 @@ public class Item {
 
     public Long getStock() {
         return stock;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public String getItemType(){
+        return this.itemType;
     }
 
 }

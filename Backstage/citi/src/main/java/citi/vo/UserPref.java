@@ -29,8 +29,12 @@ public class UserPref {
         return userID;
     }
 
-    public List<Type.ItemType> getPrefType() {
+    public List<Type.ItemType> getPrefTypeList() {
         return Type.ItemType.DBStr2enum(prefType);
+    }
+
+    public String getPrefType(){
+        return this.prefType;
     }
 
 
