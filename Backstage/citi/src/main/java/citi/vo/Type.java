@@ -122,7 +122,8 @@ public class Type {
 
     /*
      * TypeWrapper stores the typeStr
-     *      and provide : 1. conversion operations  (DBStr <=> TypeWrapper)
+     *      and provide : 1. conversion operations  (DBStr <=> TypeWrapper) // NB: DBStr is not from 0 ~ (#{amount} -1)
+     *                                                                      // The sequence is stored in Long[] types;
      *                    2. update operations
      *                    3. get feature Vector
      */
@@ -146,6 +147,27 @@ public class Type {
                 for (int j = 0; j < long_bit; ++j)
                     b[long_bit * i + j] = ((types[i] & (1L << j)) == (1L << j)) ? true : false;
             return b;
+        }
+
+
+        /*
+         * Param: Boolean[#{amount}]
+         *              update the type 0-1 sequence
+         */
+        public void setFeatureVec(Boolean[] b) {
+            assert (b.length != amount) : "Vec length unsatisfied!";
+            if (b.length != amount) {
+                System.err.println("Vec length unsatisfied!");
+                return;
+            }
+            for (int i = 0; i < length_of_longs; ++i) {
+                Long l = 0L;
+                for (int j = 0; j < long_bit; ++j) {
+                    if (b[long_bit * i + j])
+                        l += 1L << j;
+                }
+                types[i] = l;
+            }
         }
 
         /*

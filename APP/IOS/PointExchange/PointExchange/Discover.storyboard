@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -102,7 +103,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ML-4b-HN4">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tJ-lj-0vu" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="32" width="305" height="147"/>
@@ -154,16 +155,16 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分抵扣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkT-46-wKP">
-                                                <rect key="frame" x="16" y="191" width="90" height="26.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <rect key="frame" x="16" y="189" width="69.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="68" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="V0n-GS-sfU">
-                                                <rect key="frame" x="16" y="217.5" width="343" height="136"/>
+                                                <rect key="frame" x="16" y="209.5" width="343" height="136"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="136" id="nQc-vx-t8B"/>
+                                                    <constraint firstAttribute="height" priority="700" constant="136" id="nQc-vx-t8B"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="couponCell" id="lRZ-s6-rEk" customClass="MerchantCouponTableViewCell" customModule="PointExchange" customModuleProvider="target">
@@ -177,28 +178,35 @@
                                                 </prototypes>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jzy-cZ-2J8">
-                                                <rect key="frame" x="0.0" y="353.5" width="375" height="200.5"/>
+                                                <rect key="frame" x="0.0" y="345.5" width="375" height="200.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6K-Az-azI">
-                                                        <rect key="frame" x="156.5" y="0.0" width="62" height="30"/>
-                                                        <state key="normal" title="查看更多">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6K-Az-azI">
+                                                        <rect key="frame" x="68.5" y="0.0" width="239" height="35"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Q6K-Az-azI" secondAttribute="height" multiplier="363:53" id="X0P-fY-lh8"/>
+                                                            <constraint firstAttribute="height" constant="35" id="lXc-jU-WkY"/>
+                                                        </constraints>
+                                                        <size key="titleShadowOffset" width="0.0" height="1"/>
+                                                        <state key="normal" image="查看更多">
                                                             <color key="titleColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <state key="selected" image="收起更多"/>
+                                                        <state key="highlighted" image="收起更多"/>
                                                         <connections>
                                                             <action selector="ClickMoreBtn:" destination="Uey-dB-BA7" eventType="touchUpInside" id="gBV-3x-aDZ"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="线下优惠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Stb-Mu-ZdD">
-                                                        <rect key="frame" x="16" y="20" width="90" height="27"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <rect key="frame" x="16" y="30" width="69.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <scrollView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9E-oQ-rhX">
-                                                        <rect key="frame" x="0.0" y="46.5" width="375" height="153.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="375" height="152"/>
                                                         <subviews>
                                                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h2N-pB-QyF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="153.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="152"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="378" id="AiC-ak-zSm"/>
@@ -217,12 +225,12 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="W9E-oQ-rhX" firstAttribute="leading" secondItem="Jzy-cZ-2J8" secondAttribute="leading" id="9fn-PC-Kiw"/>
-                                                    <constraint firstItem="Stb-Mu-ZdD" firstAttribute="top" secondItem="Jzy-cZ-2J8" secondAttribute="top" constant="20" id="HHK-Di-wPc"/>
+                                                    <constraint firstItem="Stb-Mu-ZdD" firstAttribute="top" secondItem="Jzy-cZ-2J8" secondAttribute="top" constant="30" id="HHK-Di-wPc"/>
                                                     <constraint firstAttribute="trailing" secondItem="W9E-oQ-rhX" secondAttribute="trailing" id="W6L-e4-bj8"/>
                                                     <constraint firstItem="Q6K-Az-azI" firstAttribute="top" secondItem="Jzy-cZ-2J8" secondAttribute="top" id="Zhs-0V-eBB"/>
                                                     <constraint firstItem="W9E-oQ-rhX" firstAttribute="bottom" secondItem="Jzy-cZ-2J8" secondAttribute="bottom" id="cRm-Sc-jO2"/>
                                                     <constraint firstItem="Q6K-Az-azI" firstAttribute="centerX" secondItem="Jzy-cZ-2J8" secondAttribute="centerX" id="jsj-dq-0Vv"/>
-                                                    <constraint firstItem="W9E-oQ-rhX" firstAttribute="top" secondItem="Jzy-cZ-2J8" secondAttribute="top" constant="46.5" id="sAc-82-QAp"/>
+                                                    <constraint firstItem="W9E-oQ-rhX" firstAttribute="top" secondItem="Jzy-cZ-2J8" secondAttribute="top" constant="48" id="sAc-82-QAp"/>
                                                     <constraint firstAttribute="height" constant="200.5" id="z0A-uF-uDh"/>
                                                 </constraints>
                                             </view>
@@ -236,7 +244,7 @@
                                             <constraint firstItem="Jzy-cZ-2J8" firstAttribute="top" secondItem="V0n-GS-sfU" secondAttribute="bottom" id="AdZ-ze-5IZ"/>
                                             <constraint firstItem="Stb-Mu-ZdD" firstAttribute="leading" secondItem="FkT-46-wKP" secondAttribute="leading" id="LFC-DL-8yw"/>
                                             <constraint firstItem="Jzy-cZ-2J8" firstAttribute="leading" secondItem="8ML-4b-HN4" secondAttribute="leading" id="S3J-XB-kNz"/>
-                                            <constraint firstItem="FkT-46-wKP" firstAttribute="top" secondItem="7tJ-lj-0vu" secondAttribute="bottom" constant="12" id="bbc-nv-L2y"/>
+                                            <constraint firstItem="FkT-46-wKP" firstAttribute="top" secondItem="7tJ-lj-0vu" secondAttribute="bottom" constant="10" id="bbc-nv-L2y"/>
                                             <constraint firstItem="Jzy-cZ-2J8" firstAttribute="trailing" secondItem="8ML-4b-HN4" secondAttribute="trailing" id="mc1-tA-xGA"/>
                                             <constraint firstAttribute="bottom" secondItem="Jzy-cZ-2J8" secondAttribute="bottom" id="n2q-VR-j8Y"/>
                                             <constraint firstItem="7tJ-lj-0vu" firstAttribute="top" secondItem="8ML-4b-HN4" secondAttribute="top" constant="32" id="v7B-V5-Sht"/>
@@ -448,5 +456,7 @@
         <image name="SearchActive" width="25" height="25"/>
         <image name="SearchUnselected" width="25" height="25"/>
         <image name="exchangeButton" width="177" height="60"/>
+        <image name="收起更多" width="363" height="53"/>
+        <image name="查看更多" width="363" height="53"/>
     </resources>
 </document>
