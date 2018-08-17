@@ -28,7 +28,6 @@ public class RecommendController {
     @Autowired
     RecommendService recommendService;
 
-
     /**
      * 用户第一次登录后，初始化自己的偏好
      * @param prefList 偏好列表
