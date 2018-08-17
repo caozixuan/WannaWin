@@ -63,10 +63,7 @@ public class FindFragment extends Fragment{
         recyclerView1.setAdapter(findActivityAdapter);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
-        findActivityAdapter.addData("123123","!23","123","123","123");
-        findActivityAdapter.addData("123123","!23","123","123","123");
-        findActivityAdapter.addData("123123","!23","123","123","123");
-        recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
+        getRecommendedActivity();
 
         recyclerView2 = (RecyclerView)view.findViewById(R.id.recyclerView_find);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
@@ -119,6 +116,38 @@ public class FindFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    private void getRecommendedActivity(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/recommend/getRecommendedItems")
+                .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                findActivityAdapter.addData(jsonObject.getString("ItemID"),jsonObject.getString("name"),jsonObject.getString("logoURL"));
+                            }
+                            recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void getCount(){

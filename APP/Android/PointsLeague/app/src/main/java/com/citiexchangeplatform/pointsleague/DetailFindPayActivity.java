@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -27,6 +29,16 @@ import org.json.JSONObject;
 public class DetailFindPayActivity extends AppCompatActivity {
 
     ProgressDialog dialog;
+    String itemID;
+    double points;
+    ImageView imageViewLogo;
+    TextView textViewPoints;
+    TextView textViewDescription;
+    TextView textViewOverdue;
+    TextView textViewNumber;
+    TextView textViewTotal;
+    int number;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +47,49 @@ public class DetailFindPayActivity extends AppCompatActivity {
 
         toolBar();
 
+        imageViewLogo = (ImageView) findViewById(R.id.imageView_detail_find_pay);
+        textViewPoints = (TextView) findViewById(R.id.textView_points_detail_find_pay);
+        textViewDescription = (TextView) findViewById(R.id.textView_description_detail_find_pay);
+        textViewOverdue = (TextView) findViewById(R.id.textView_time_detail_find_pay);
+        textViewNumber = (TextView) findViewById(R.id.textView_number_detail_find_pay);
+        textViewTotal = (TextView) findViewById(R.id.textView_total_detail_find_pay);
+        number = 1;
+
+        Button buttonMinus = (Button) findViewById(R.id.button_minus_detail_find_pay);
+        Button buttonAdd = (Button) findViewById(R.id.button_add_detail_find_pay);
+
+        buttonMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(number == 1)
+                    return;
+                number--;
+                textViewNumber.setText(String.valueOf(number));
+                textViewTotal.setText(String.format("%.2fP", points * number));
+            }
+        });
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number++;
+                textViewNumber.setText(String.valueOf(number));
+                textViewTotal.setText(String.format("%.2fP", points * number));
+
+            }
+        });
+
+
+        Intent intent = getIntent();
+        itemID = intent.getStringExtra("itemID");
+
+        loadInfo(itemID);
+
         Button buttonBuy = findViewById(R.id.button_buy_detail_find_pay);
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tryPay("");
+                tryPay(itemID);
             }
         });
 
@@ -96,13 +146,65 @@ public class DetailFindPayActivity extends AppCompatActivity {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
+    private void loadInfo(String itemID){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/item/itemDetail")
+                .addParam("itemID", itemID)
+                .build()
+                .execute(DetailFindPayActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String name = jsonObject.getString("name");
+                            String description = jsonObject.getString("description");
+                            String logoURL = jsonObject.getString("logoURL");
+                            String overdueTime = jsonObject.getString("overdueTime");
+                            points = jsonObject.getDouble("points");
+
+                            Glide.with(DetailFindPayActivity.this)
+                                    .load(logoURL)
+                                    .centerCrop()
+                                    .error(R.drawable.loading_card)
+                                    .into(imageViewLogo);
+                            textViewPoints.setText(String.format("%.2fP",points));
+                            textViewTotal.setText(String.format("%.2fP", points));
+                            textViewDescription.setText(description);
+                            textViewOverdue.setText("有效期截至" + overdueTime);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(DetailFindPayActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onBefore() {
+                        super.onBefore();
+                        dialog = ProgressDialog.show(DetailFindPayActivity.this, "", "正在加载优惠信息...");
+                    }
+                });
+    }
 
     private void tryPay(String itemID){
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/item/buy")
+                .url("http://193.112.44.141:80/citi/item/buyMultiple")
                 .addParam("userID", LogStateInfo.getInstance(DetailFindPayActivity.this).getUserID())
                 .addParam("itemID", itemID)
+                .addParam("count",String.valueOf(number))
                 .build()
                 .execute(DetailFindPayActivity.this, new CallBack<String>() {
                     @Override
@@ -121,6 +223,7 @@ public class DetailFindPayActivity extends AppCompatActivity {
 
                         if(paySuccess){
                             //Intent intentTo
+                            Toast.makeText(DetailFindPayActivity.this, "兑换成功", Toast.LENGTH_SHORT).show();
                             finish();
                         }else {
                             Toast.makeText(DetailFindPayActivity.this, "兑换失败", Toast.LENGTH_LONG).show();
