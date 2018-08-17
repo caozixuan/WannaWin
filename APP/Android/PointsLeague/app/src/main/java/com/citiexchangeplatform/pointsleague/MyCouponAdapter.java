@@ -34,8 +34,8 @@ public class MyCouponAdapter extends RecyclerView.Adapter<MyCouponAdapter.MyView
         this.context = context;
     }
 
-    public void addData(String name, String description,String date,String validityTerm,String logoURL,String itemID,String type){
-        CouponItemModel itemModel = new CouponItemModel(name,description,date,validityTerm,logoURL,itemID);
+    public void addData(String name,String points, String description,String date,String validityTerm,String logoURL,String itemID,String type){
+        CouponItemModel itemModel = new CouponItemModel(name,points,description,date,validityTerm,logoURL,itemID);
         items.add(itemModel);
         this.type = type;
         notifyDataSetChanged();
@@ -93,6 +93,7 @@ public class MyCouponAdapter extends RecyclerView.Adapter<MyCouponAdapter.MyView
 
         final String logoURL = items.get(position).getLogoURL();
         final String name = items.get(position).getMerchantName();
+        final String points = items.get(position).getNeedPoints();
         final String exchangeDate = items.get(position).getExchangeDate();
         final String validityDate = items.get(position).getValidityDate();
         final String itemID = items.get(position).getItemID();
@@ -106,6 +107,7 @@ public class MyCouponAdapter extends RecyclerView.Adapter<MyCouponAdapter.MyView
                 Bundle bundle = new Bundle();
 
                 bundle.putString("logoURL",logoURL);
+                bundle.putString("points",points);
                 bundle.putString("name",name);
                 bundle.putString("exchangeDate",exchangeDate);
                 bundle.putString("validityDate",validityDate);

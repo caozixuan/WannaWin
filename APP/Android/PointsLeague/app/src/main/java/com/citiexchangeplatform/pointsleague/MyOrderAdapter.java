@@ -85,6 +85,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         //    private String date;
         final String logoURL = items.get(position).getLogoURL();
         final String name = items.get(position).getMerchantName();
+        final String time = items.get(position).getDate();
         final Double pointsNeeded = items.get(position).getPointsNeeded();
         final Double originalPrice = items.get(position).getOriginalPrice();
         final Double priceAfter = items.get(position).getPriceAfter();
@@ -99,6 +100,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
 
                 bundle.putString("logoURL",logoURL);
                 bundle.putString("name",name);
+                bundle.putString("time",time);
                 bundle.putDouble("pointsNeeded",pointsNeeded);
                 bundle.putDouble("originalPrice",originalPrice);
                 bundle.putDouble("priceAfter",priceAfter);

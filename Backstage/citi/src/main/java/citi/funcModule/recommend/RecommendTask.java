@@ -1,4 +1,4 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
+import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
 
 @Component
 public class RecommendTask {
     @Autowired
     private RecommendService recommendService;
-    
+
     /*
      * 更新商户相似度
      */
@@ -37,7 +37,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"MerchantSimilarity.txt"));
             for(MerchantSimilarity result:results){
                 oos.writeObject(result);
             }
@@ -64,7 +64,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"ItemSimilarity.txt"));
             for(ItemSimilarity result:results){
                 oos.writeObject(result);
             }

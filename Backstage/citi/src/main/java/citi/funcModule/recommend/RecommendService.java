@@ -1,6 +1,5 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
-import Jama.Matrix;
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
 import citi.vo.Item;
@@ -9,17 +8,11 @@ import citi.vo.Order;
 import citi.vo.UserCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletSecurityElement;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -196,7 +189,7 @@ public class RecommendService {
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream("ItemSimilarity.txt"));
+            ois = new ObjectInputStream(new FileInputStream(this.getClass().getResource(".")+"ItemSimilarity.txt"));
             while (true) {
                 ItemSimilarity itemSimilarity = (ItemSimilarity) ois.readObject();
                 results.add(itemSimilarity);
@@ -364,7 +357,7 @@ public class RecommendService {
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            ois = new ObjectInputStream(new FileInputStream(this.getClass().getResource(".")+"MerchantSimilarity.txt"));
             while (true) {
                     MerchantSimilarity merchantSimilarity = (MerchantSimilarity) ois.readObject();
                     results.add(merchantSimilarity);

@@ -23,6 +23,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private String logoURL;
     private String name;
+    private String time;
     private double usePoints;
     private double priceBefore;
     private double priceAfter;
@@ -31,6 +32,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     private TextView TUsePoints;
     private TextView TPriceBefore;
     private TextView TPriceAfter;
+    private TextView TOrderTime;
 
     private TextView TName;
 
@@ -78,10 +80,11 @@ public class OrderDetailActivity extends AppCompatActivity {
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("返回");
-        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftTextSize(18);
+        titleBar.setLeftTextColor(getResources().getColor(R.color.colorLightOrange));
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +92,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             }
         });
 
-        titleBar.setTitle("优惠券详情");
+        titleBar.setTitle("详情");
         titleBar.setTitleColor(Color.BLACK);
 
         //沉浸式
@@ -111,6 +114,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         TUsePoints = findViewById(R.id.textView_order_userPoints);
         TPriceBefore = findViewById(R.id.textView_order_price_before);
         TPriceAfter = findViewById(R.id.textView_order_price_after);
+        TOrderTime = findViewById(R.id.textView_order_time);
     }
 
 
@@ -131,6 +135,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         logoURL = (String)bundle.get("logoURL");
         name = (String)bundle.get("name");
+        time = (String)bundle.get("time");
         usePoints = (double) bundle.get("pointsNeeded");
         priceBefore = (double) bundle.get("originalPrice");
         priceAfter = (double) bundle.get("priceAfter");
@@ -148,6 +153,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 .into(logo);
 
         TName.setText(name);
+        TOrderTime.setText(time);
         TUsePoints.setText(String.valueOf(usePoints));
         TPriceBefore.setText(String.valueOf(priceBefore));
         TPriceAfter.setText(String.valueOf(priceAfter));
