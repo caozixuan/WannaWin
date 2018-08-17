@@ -1,6 +1,8 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
-public class ItemSimilarity{
+import java.io.Serializable;
+
+public class ItemSimilarity implements Serializable {
     String itemID1;
     String itemID2;
     double similarity;

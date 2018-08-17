@@ -8,7 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,7 +66,12 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/itemDetail")
     public String getItemInfo(String itemID){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String userID = (String)session.getAttribute("userID");
         Item item = itemService.getItem(itemID);
+        Timestamp nowTimestamp = new Timestamp(new Date().getTime());
+        itemService.addRecord(userID,itemID,nowTimestamp);
         return gson.toJson(itemService.getItem(itemID));
     }
 
