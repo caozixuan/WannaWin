@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -34,12 +35,11 @@ public class PaymentFinishActivity extends AppCompatActivity {
     private List<String> reasons;
     private List<String> names;
     private List<String> logos;
-    private List<String> data_posses_point;
-    private List<Integer> business_image;
+
     private PayingFinishAdapter mAdapter;
     private TextView Text_NeedPoints;
     private ImageView ImageView_Business;
-    private HashMap<Integer, Boolean> map = new HashMap<>();
+
     private String total;
     private  Boolean state = true;
 
@@ -61,6 +61,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
     //保存
     List<ImageView> imageList = new ArrayList<ImageView>();
     List<String> descList = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,8 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //保存
         List<ImageView> imageList = new ArrayList<ImageView>();
         List<String> descList = new ArrayList<String>();
+
+
 
         //通过findViewById拿到RecyclerView实例
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
@@ -113,6 +116,8 @@ public class PaymentFinishActivity extends AppCompatActivity {
         }
 
 
+
+
         //初始化数据
         initView();
         initAdData();
@@ -126,8 +131,8 @@ public class PaymentFinishActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
-
     }
+
 
     public void toolBar(){
         boolean isImmersive = false;
@@ -168,6 +173,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
         titleBar.setTitle("兑换成功");
         titleBar.setTitleColor(Color.BLACK);
+
 
         titleBar.setActionTextColor(Color.BLACK);
 

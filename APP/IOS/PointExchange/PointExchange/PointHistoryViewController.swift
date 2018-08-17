@@ -19,25 +19,16 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
 		self.tableView.register(UINib(nibName: "PointHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "pointCell")
 		self.tableView.register(UINib(nibName: "PointHistoryDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "detailCell")
 		self.tableView.rowHeight = 44
+
 		
-		let pointHistory = PointsHistory()
-		pointHistory.totalPoints = 100
-		var pointHistoryItem = PointsHistoryItem()
-		pointHistoryItem.merchantName = "Test"
-		pointHistoryItem.time = "Aug, 10, 2018"
-		pointHistoryItem.pointsCard = 20
-		pointHistoryItem.pointsCiti = 10
-		
-		pointHistory.historyMerchants = [pointHistoryItem]
-		pointsHistoryArray.append(pointHistory)
-		pointsHistoryArray.append(pointHistory)
 		self.tableView.dataSource = self
-//		ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
-//			if result {
-//
-//			}
-//
-//		}
+		ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
+			if result {
+				self.pointsHistoryArray = pointsHistory
+				self.tableView.reloadData()
+			}
+
+		}
         // Do any additional setup after loading the view.
     }
 

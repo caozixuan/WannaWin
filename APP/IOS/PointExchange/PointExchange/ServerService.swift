@@ -85,6 +85,17 @@ enum ServerService {
 	case getUnusedCoupons()
 	/// 获取已过期优惠券
 	case getOverduedCoupons()
+	case buyCoupons(itemID:String,count:Int)
+	
+	// 推荐
+	/// 获取推荐的三种商品
+	case getRecommendedItems()
+	
+	// 活动
+	/// 获取活动详情
+	case getActivity(activityID:String)
+	/// 获取商家活动
+	case getMerchantActivities(merchantID:String)
     
 }
 
@@ -171,6 +182,17 @@ extension ServerService:TargetType {
 			return "/userCoupon/getUnusedCoupons"
 		case .getOverduedCoupons():
 			return "/userCoupon/getOverduedCoupons"
+		case .buyCoupons:
+			return "/item/buyMultiple"
+			
+		// 推荐
+		case .getRecommendedItems():
+			return "/recommend/getRecommendedItems"
+		// 活动
+		case .getActivity:
+			return "/activity/getActivity"
+		case .getMerchantActivities:
+			return "/activity/getMerchantActivities"
         }
     }
     
@@ -330,7 +352,29 @@ extension ServerService:TargetType {
 			var params:[String:String] = [:]
 			params["userID"] = User.getUser().id
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
-        default:
+		case .buyCoupons(let itemID, let count):
+			var params:[String:String] = [:]
+			params["userID"] = User.getUser().id
+			params["itemsID"] = itemID
+			params["count"] = String(count)
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+			
+			
+		// 推荐
+		case .getRecommendedItems():
+			var params:[String:String] = [:]
+			params["userID"] = User.getUser().id
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		// 活动
+		case .getActivity(let activityID):
+			var params:[String:String] = [:]
+			params["activityID"] = activityID
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .getMerchantActivities(let merchantID):
+			var params:[String:String] = [:]
+			params["merchantID"] = merchantID
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		default:
             return .requestPlain
         }
     }

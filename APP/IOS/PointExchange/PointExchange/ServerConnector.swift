@@ -460,8 +460,6 @@ class ServerConnector: NSObject {
         }
     }
 
-
-
     /// 获取通用积分
     static func getGeneralPoints(callback:@escaping (_ result:Bool, _ generalPoint:Double)->()){
         provider.request(.getGeneralPoints()){ result in
@@ -533,23 +531,31 @@ class ServerConnector: NSObject {
     }
     
     /// 获取一个人某张卡的积分兑换记录
-    static func getPointsHistoryByMerchantID(merchantID:String, callback:@escaping (_ result:Bool,_ pointsHistory:PointsHistory)->()){
+    static func getPointsHistoryByMerchantID(merchantID:String, callback:@escaping (_ result:Bool,_ pointsHistory:[PointsHistoryItem]?)->()){
         provider.request(.getPointsHistoryByMerchantID(merchantID:merchantID)){ result in
-            var pointsHistory = PointsHistory()
+            
             if case let .success(response) = result{
 				if response.statusCode == 200 {
+					var pointsHistories = [PointsHistoryItem]()
 					let decoder = JSONDecoder()
-					do{
-						pointsHistory = try decoder.decode(PointsHistory.self, from: response.data)
-					}catch{
-						callback(false,pointsHistory)
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let pointsHistory = try decoder.decode(PointsHistoryItem.self, from: data.rawData())
+							pointsHistories.append(pointsHistory)
+						}catch{
+							callback(false,pointsHistories)
+							return
+						}
 					}
+					callback(true,pointsHistories)
 					
 				}
                 
             }
             if case .failure(_) = result {
-                callback(false,pointsHistory)
+                callback(false,nil)
             }
         }
     }
@@ -719,5 +725,104 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
+
+	static func buyCoupons(itemID:String,count:Int,callback:@escaping (_ result:Bool)->()){
+		provider.request(.buyCoupons(itemID: itemID, count: count)){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					let isUnBinding = data["status"].bool
+					if isUnBinding! {
+						callback(true)
+					}
+					else{
+						callback(false)
+					}
+				}
+			}
+			if case .failure(_) = result{
+				callback(false)
+				print("连接失败")
+			}
+		}
+	}
+	// 推荐
+	/// 获取推荐商品
+	static func getRecommendedItems(callback:@escaping(_ result:Bool, _ items:[Item])->()){
+		provider.request(.getRecommendedItems()){ result in
+			var items = [Item]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(Item.self, from: data.rawData())
+							items.append(item)
+						}catch{
+							callback(false,items)
+							return
+						}
+					}
+					callback(true,items)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,items)
+			}
+		}
+	}
+
+	// 线下活动
+	/// 获得活动
+	static func getActivity(activityID:String, callback:@escaping(_ result:Bool, _ activity:OfflineActivity?)->()){
+		provider.request(.getRecommendedItems()){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					var activity = OfflineActivity()
+					let decoder = JSONDecoder()
+					do{
+						activity = try decoder.decode(OfflineActivity.self, from: response.data)
+						callback(true,activity)
+					}catch{
+						callback(false,nil)
+					}
+					
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+	/// 获得商家所有活动
+	static func getMerchantActivities(merchantID:String,callback:@escaping(_ result:Bool, _ activities:[OfflineActivity]?)->()){
+		provider.request(.getMerchantActivities(merchantID: merchantID)){ result in
+			var activities = [OfflineActivity]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(OfflineActivity.self, from: data.rawData())
+							activities.append(item)
+						}catch{
+							callback(false,nil)
+							return
+						}
+					}
+					callback(true,activities)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+
 
 }

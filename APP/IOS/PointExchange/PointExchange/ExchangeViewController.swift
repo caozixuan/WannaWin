@@ -11,8 +11,10 @@ import SwiftyJSON
 
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
-	var dataSource:[Card]?
-	
+	var dataSource: [Card]?
+    var selectedList: [Bool]? //用于记住选中的项，防止cell重用导致的选中错乱
+    var selectedResult: [Int]?
+    
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
 	var pointsSum:Double = 0.0
@@ -49,12 +51,14 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.tableView.contentInset.bottom = 60
+
 		
     }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if dataSource != nil {
+            selectedList = Array(repeating: false, count: (dataSource?.count)!)
 			return (dataSource?.count)!
 		}else {
 			return 0
@@ -62,8 +66,12 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell:UITableViewCell!
+        var cell:UITableViewCell!
 		cell = tableView.dequeueReusableCell(withIdentifier: "store to bank", for: indexPath)
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "store to bank")
+        }
+        
 		for subview in cell.contentView.subviews{
 			if subview .isKind(of: ExchangeItemCellView.self){
 				let exchangeItemCellView = subview as! ExchangeItemCellView
@@ -77,6 +85,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 					exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
 					exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
 					exchangeItemCellView.proportion = card.proportion
+                    exchangeItemCellView.checkbox.isSelected = (selectedList?[indexPath.row])!
 				}
                 break
 			}
@@ -184,47 +193,108 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			}
 		}
 	}
+    
+    /// 标记选中状态
+    func setSelected(tag: Int, isSelected: Bool) {
+        selectedList?[tag] = isSelected
+    }
 	
     // MARK: - 兑换积分网络请求
     @IBAction func clickExchangeBtn(_ sender: Any) {
         var allUnselected = true
         
-        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
+        // 判断是否有选择积分项
+        if let list = selectedList {
+            for item in list {
+                if item {
+                    allUnselected = false
+                    break
+                }
+            }
+        }
+        
+        if allUnselected == true { // 如果没有选择任何积分项则不跳转
+            let alert = UIAlertController(title:"提示", message:"尚未选择任何积分项！", preferredStyle:.alert)
+            let okAction = UIAlertAction(title:"确定", style:.default, handler:nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        // 获得选中积分项数据
+        //let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
         var indexPath:IndexPath
         var cell:UITableViewCell?
-        outer: for row in 0..<cellNumber {
-            indexPath = IndexPath(row: row, section: 0)
-            cell = tableView.cellForRow(at: indexPath)
-            inner: for subview in (cell?.contentView.subviews)!{
-                if subview .isKind(of: ExchangeItemCellView.self){
-                    let exchangeItemCellView = subview as! ExchangeItemCellView
-                    if exchangeItemCellView.checkbox.isSelected == true {
-                        allUnselected = false
-                        break outer
+        
+        var chosenMerchantList = [ChooseMerchants]()
+        var chosenMerchant:ChooseMerchants
+        var chosenMerchantNames = [String]()
+        
+//        for row in 0..<cellNumber {
+//            indexPath = IndexPath(row: row, section: 0)
+//            cell = tableView.cellForRow(at: indexPath)
+//            for subview in (cell?.contentView.subviews)!{
+//                if subview .isKind(of: ExchangeItemCellView.self){
+//                    let exchangeItemCellView = subview as! ExchangeItemCellView
+//                    if exchangeItemCellView.checkbox.isSelected == true {
+//                        chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+//                        chosenMerchantList.append(chosenMerchant)
+//                    }
+//                }
+//            }
+//        }
+        
+        if let list = selectedList {
+            for (row,item) in list.enumerated() {
+                if item {
+                    indexPath = IndexPath(row: row, section: 0)
+                    cell = tableView.cellForRow(at: indexPath)
+                    for subview in (cell?.contentView.subviews)!{
+                        if subview .isKind(of: ExchangeItemCellView.self){
+                            let exchangeItemCellView = subview as! ExchangeItemCellView
+                            
+                            //避免发送“0.00”导致后台出错
+                            if exchangeItemCellView.sourcePoints.text! == "0.00" {
+                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
+                            }
+                            else {
+                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+                            }
+                            chosenMerchantList.append(chosenMerchant)
+                            chosenMerchantNames.append((dataSource?[row].merchant?.name)!)
+                        }
                     }
                 }
             }
         }
         
-        // 判断是否有选择积分项
-        if allUnselected == true {
-//            alert = UIAlertController(title:"提示", message:"会员卡解绑成功！", preferredStyle:.alert)
-//            okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
-//                self.navigationController!.popViewController(animated: true)
-//            })
-            return // 如果没有选择任何积分项则不跳转
-        }
-        
-        let isSuccess = true
         
         
-        if isSuccess {
-            //准备“兑换成功”数据
+        // 进行网络请求和后续跳转的数据准备
+        let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "FinishExchangeToGeneralViewController")
+        
+        let chosenInfo = ChoosePointInfo(userID: User.getUser().id, merchants: chosenMerchantList)
+        
+        ServerConnector.changePoints(chooseInfo: chosenInfo){ result, failureMerchant  in
+            if result { // 准备“兑换成功”数据
+                if view .isKind(of: FinishExchangeToGeneralViewController.self){
+                    let finishExchangeToGeneralVC = view as! FinishExchangeToGeneralViewController
+                    finishExchangeToGeneralVC.status = true
+                    finishExchangeToGeneralVC.successMerchants = chosenMerchantList
+                    finishExchangeToGeneralVC.successMerchantNames = chosenMerchantNames
+                    finishExchangeToGeneralVC.generalPoints = self.pointsSum
+                }
+            }
+            else { // 准备“兑换失败”数据
+                if view .isKind(of: FinishExchangeToGeneralViewController.self){
+                    let finishExchangeToGeneralVC = view as! FinishExchangeToGeneralViewController
+                    finishExchangeToGeneralVC.status = false
+                    finishExchangeToGeneralVC.failureMerchants = failureMerchant
+                }
+            }
             
-            
-        }
-        else {
-            //准备“兑换失败”数据
+            self.navigationController!.pushViewController(view, animated: true)
         }
         
     }

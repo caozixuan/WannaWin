@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -816,14 +817,6 @@
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-cH-9Mm">
-                                <rect key="frame" x="43" y="524" width="300" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="退出登录" image="退出登录"/>
-                                <connections>
-                                    <action selector="logoutBtnClick:" destination="J1I-3M-UwK" eventType="touchUpInside" id="oE1-AJ-eCV"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIu-hc-UXH" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
                                 <rect key="frame" x="6" y="304" width="364" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -929,6 +922,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-cH-9Mm">
+                                <rect key="frame" x="32" y="523" width="310" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="退出登录" image="退出登录"/>
+                                <connections>
+                                    <action selector="logoutBtnClick:" destination="J1I-3M-UwK" eventType="touchUpInside" id="oE1-AJ-eCV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="yyL-mo-FSs"/>
@@ -947,7 +948,6 @@
         <!--历史订单-优惠券-->
         <scene sceneID="tBa-nQ-tky">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bUh-LV-xgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CouponHistoryViewController" title="历史订单-优惠券" id="sab-0W-tes" customClass="CouponHistoryViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Soy-JR-EXa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -998,13 +998,13 @@
                         <outlet property="usedContainer" destination="bVn-rc-bcL" id="g8M-6Q-r87"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bUh-LV-xgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4452" y="-2919.490254872564"/>
         </scene>
         <!--未使用列表-->
         <scene sceneID="aHK-TX-NGy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FvZ-9X-fqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="未使用列表" id="j14-DT-tT6" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ug5-td-KmJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -1033,6 +1033,7 @@
                         <outlet property="tableView" destination="YiZ-yL-bvg" id="tLC-KW-Ou1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FvZ-9X-fqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="-3813"/>
         </scene>
@@ -1536,7 +1537,6 @@
         <!--已使用列表-->
         <scene sceneID="IHP-7R-IsK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hs-oy-CUq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="已使用列表" id="S0T-R1-w9X" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="plK-2u-7WL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -1565,13 +1565,13 @@
                         <outlet property="tableView" destination="YoR-aQ-I6D" id="6cF-Pf-V5h"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hs-oy-CUq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="-2546"/>
         </scene>
         <!--已过期列表-->
         <scene sceneID="fJw-Cy-Lq4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Et2-kX-pCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="已过期列表" id="Lw7-ak-9Di" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guY-2l-ISC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -1600,8 +1600,107 @@
                         <outlet property="tableView" destination="2OZ-AL-Xe6" id="zgh-Zn-mBM"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Et2-kX-pCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="-3151"/>
+        </scene>
+        <!--未使用优惠券详情-->
+        <scene sceneID="QOU-fv-o68">
+            <objects>
+                <viewController storyboardIdentifier="HistoryCouponDetailViewController" title="未使用优惠券详情" id="0t1-6c-w0f" customClass="HistoryCouponDetailViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gsV-Md-pB9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhe-wo-XXY" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="28" y="178" width="319" height="469"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggd-fV-YUs">
+                                        <rect key="frame" x="122" y="128" width="75" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" name="main_orange"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="----------------------------------------------------------------------" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wfk-Je-suk">
+                                        <rect key="frame" x="39" y="165" width="240" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="未使用" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSK-yX-sOz">
+                                        <rect key="frame" x="116" y="225" width="86" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <color key="textColor" red="0.45882352941176469" green="0.74117647058823533" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-0A-5TY">
+                                        <rect key="frame" x="65" y="267" width="189" height="189"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="0.31035851879999998" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="endPointX">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zJx-12-Ce6" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="51" y="92" width="273" height="179"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6RF-FA-t2O">
+                                        <rect key="frame" x="0.0" y="0.0" width="273" height="179"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="0.20004708900000001" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JjM-8O-3tk"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionText" destination="Wfk-Je-suk" id="q7a-Qz-8uf"/>
+                        <outlet property="logoImage" destination="6RF-FA-t2O" id="rK1-CC-OYS"/>
+                        <outlet property="pointLabel" destination="ggd-fV-YUs" id="x3F-rf-Reu"/>
+                        <outlet property="qrBarImage" destination="ZUP-0A-5TY" id="cJH-pG-9r4"/>
+                        <outlet property="tagLabel" destination="PSK-yX-sOz" id="tPi-P9-tmF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Z3-wd-W9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6272.8000000000002" y="-2919.490254872564"/>
         </scene>
     </scenes>
     <resources>
@@ -1613,5 +1712,8 @@
         <image name="设置" width="48" height="48"/>
         <image name="退出登录" width="310" height="46"/>
         <image name="通讯录" width="100" height="100"/>
+        <namedColor name="main_orange">
+            <color red="1" green="0.58399999141693115" blue="0.27500000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

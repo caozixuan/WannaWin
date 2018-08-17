@@ -31,7 +31,7 @@ import java.util.Map;
 public class OrderTabUsedFragment extends Fragment {
 
     RecyclerView usedOrderRecyclerView;
-    private MyOrderAdapter orderAdapter;
+    private MyCouponAdapter orderAdapter;
 
 
     public OrderTabUsedFragment() {
@@ -78,11 +78,11 @@ public class OrderTabUsedFragment extends Fragment {
     }
 
     protected void setRecyclerView(){
-        orderAdapter = new MyOrderAdapter(getActivity());
+        orderAdapter = new MyCouponAdapter(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         usedOrderRecyclerView.setLayoutManager(layoutManager);
-        orderAdapter = new MyOrderAdapter(getActivity());
+        orderAdapter = new MyCouponAdapter(getActivity());
         usedOrderRecyclerView.setAdapter(orderAdapter);
     }
 
@@ -105,8 +105,8 @@ public class OrderTabUsedFragment extends Fragment {
 
                         String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
-                        String time = "兑换时间：" +jObj.getString("getTime");
-                        String validityTerm = "使用时间：" +jObj.getString("useTime");
+                        String time = jObj.getString("getTime");
+                        String validityTerm = jObj.getString("useTime");
                         //String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
                         String logoURL = jObj.getString("logoURL");
                         String itemID = jObj.getString("ItemID");

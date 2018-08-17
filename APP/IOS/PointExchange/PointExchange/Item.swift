@@ -17,7 +17,7 @@ class Item:Codable{
 	var points:Double?
 	var overdueTime:String?
 	var stock:Int?
-	var itemName:String?
+	var name:String?
 	var couponID:Int?
 	var state:String?
 	var getTime:String?
