@@ -1,6 +1,7 @@
 package citi.funcModule.Recommend;
 
 
+import citi.support.resultjson.SerializeGson;
 import citi.vo.Item;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ public class RecommendController {
     @ResponseBody
     @RequestMapping("/getRecommendedMerchants")
     public String getRecommendedMerchants(String userID){
-        return gson.toJson(recommendService.getRecommendedMerchants(userID));
+        return SerializeGson.GSON.toJson(recommendService.getRecommendedMerchants(userID));
     }
 
 
