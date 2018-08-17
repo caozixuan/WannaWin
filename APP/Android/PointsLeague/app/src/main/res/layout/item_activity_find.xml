@@ -23,7 +23,8 @@
             <RelativeLayout
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="50dp"
+                android:background="#90bdbdbd">
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_centerHorizontal="true"

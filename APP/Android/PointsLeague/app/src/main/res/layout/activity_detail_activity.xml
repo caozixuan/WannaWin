@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".DetailActivityActivity">
+
+
+    <com.citiexchangeplatform.pointsleague.TitleBar
+        android:id="@+id/toolbar_detail_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="140dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="false">
+                <LinearLayout
+                    android:layout_marginTop="80dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/textView_name_detail_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NAME"
+                        android:textStyle="bold"
+                        android:textSize="28sp"/>
+                    <TextView
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/textView_description_detail_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="描述描述描述描述描述描述描述描述描述描述"
+                        android:maxLines="8"
+                        android:textColor="#858585"
+                        android:textSize="18sp"
+                        />
+
+
+
+                    <TextView
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/textView_time_detail_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="活动有效期 xxxx.xx.xx - xxxx.xx.xx"
+                        android:maxLines="2"
+                        android:textColor="#858585"
+                        android:textSize="16sp"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_centerHorizontal="true"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+                <ImageView
+                    android:id="@+id/imageView_detail_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/loading_card"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    />
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

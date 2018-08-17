@@ -68,7 +68,6 @@ public class CardPointsAdapter extends RecyclerView.Adapter {
             Glide.with(context)
                     .load(items.get(position).getCardLogoURL())
                     .centerCrop()
-                    .placeholder(R.drawable.loading_card)
                     .error(R.drawable.loading_card)
                     .into(((CardPointsAdapter.VH)holder).imageView);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
