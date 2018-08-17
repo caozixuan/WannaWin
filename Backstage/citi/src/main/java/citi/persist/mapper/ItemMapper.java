@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ItemMapper {
 
+    final String getAllItem = "SELECT * FROM item";
     final String getAllItemID = "SELECT itemID FROM item";
     final String getItemByItemID = "SELECT * FROM item WHERE ItemID = #{ItemID}";
     final String addItem = "INSERT INTO item(ItemID, name, description, MerchantID, logoURL, originalPrice, points, overdueTime, stock, itemType) " +
@@ -23,6 +24,10 @@ public interface ItemMapper {
     final String deleteItemByID = "DELETE FROM item WHERE ItemID = #{ItemID}";
     final String getItemAmountByMerchantID = "SELECT COUNT(*) FROM item WHERE MerchantID = #{merchantID}";
     final String updateItemType = "UPDATE item SET itemType = #{itemType} WHERE ItemID = #{ItemID}";
+
+
+    @Select(getAllItem)
+    List<Item> getAllItem();
 
     @Select(getAllItemID)
     List<String> getAllItemID();
