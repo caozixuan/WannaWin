@@ -13,7 +13,6 @@
 
     <!-- 启用注解 -->
     <context:annotation-config/>
-
     <!-- 定时器开关,配置定时任务的线程池 -->
     <task:annotation-driven scheduler="myTask" />
     <task:scheduler id="myTask" pool-size="5" />
