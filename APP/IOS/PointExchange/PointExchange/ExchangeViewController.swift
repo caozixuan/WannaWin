@@ -92,6 +92,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 	
 	// MARK: - TextField delegate
     /// 检测输入正确性
@@ -137,6 +141,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         var cell:UITableViewCell?
         for row in 0..<cellNumber {
             indexPath = IndexPath(row: row, section: 0)
+            self.tableView(self.tableView, didSelectRowAt: indexPath)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             cell = tableView.cellForRow(at: indexPath)
             for subview in (cell?.contentView.subviews)!{
                 if subview .isKind(of: ExchangeItemCellView.self){
