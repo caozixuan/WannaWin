@@ -102,6 +102,13 @@ class CouponHistoryContainViewContainer: UIViewController {
 			return cell!
 		})
 		observable.bind(to: self.tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+		self.tableView.rx.modelSelected(Item.self)
+			.subscribe(onNext:{ value in
+				let sb = UIStoryboard(name: "User", bundle: nil)
+				let vc = sb.instantiateViewController(withIdentifier: "HistoryCouponDetailViewController") as! HistoryCouponDetailViewController
+				vc.items = value
+				self.navigationController?.pushViewController(vc, animated: true)
+			}).disposed(by:disposeBag)
 	}
 
     override func didReceiveMemoryWarning() {

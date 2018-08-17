@@ -55,6 +55,7 @@ public class DetailFindAdapter extends RecyclerView.Adapter<DetailFindAdapter.VH
             @Override
             public void onClick(View v) {
                 Intent intentToDetailFindPay = new Intent(context, DetailFindPayActivity.class);
+                intentToDetailFindPay.putExtra("itemID", items.get(position).getItemID());
                 context.startActivity(intentToDetailFindPay);
             }
         });

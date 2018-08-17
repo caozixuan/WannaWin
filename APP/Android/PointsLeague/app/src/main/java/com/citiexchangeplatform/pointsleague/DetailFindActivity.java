@@ -7,11 +7,13 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,10 +21,12 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.adapter.DetailActivityAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.DetailFindAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindActivityAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
 import com.citiexchangeplatform.pointsleague.models.DetailFindItemModel;
+import com.citiexchangeplatform.pointsleague.models.FindActivityItemModel;
 import com.leochuan.CenterSnapHelper;
 import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
@@ -31,6 +35,9 @@ import com.study.xuan.xvolleyutil.callback.CallBack;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailFindActivity extends AppCompatActivity {
 
@@ -41,11 +48,15 @@ public class DetailFindActivity extends AppCompatActivity {
     ImageView imageViewLogo;
     TextView textViewName;
     TextView textViewDescription;
+    CardView cardViewMore;
+    Button buttonMore;
+
+    List<DetailFindItemModel> items;
 
     RecyclerView recyclerView1;
     RecyclerView recyclerView2;
     DetailFindAdapter detailFindAdapter;
-    FindActivityAdapter findActivityAdapter;
+    DetailActivityAdapter detailActivityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,20 @@ public class DetailFindActivity extends AppCompatActivity {
         imageViewLogo = (ImageView) findViewById(R.id.imageView_logo_detail_find);
         textViewName = (TextView) findViewById(R.id.textView_name_detail_find);
         textViewDescription = (TextView) findViewById(R.id.textView_description_detail_find);
+
+        cardViewMore = findViewById(R.id.cardView_button_detail_find);
+        buttonMore = findViewById(R.id.button_more_detail_find);
+        items = new ArrayList<DetailFindItemModel>();
+
+        buttonMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewMore.setVisibility(View.GONE);
+                for(int i = 2; i < items.size(); i++){
+                    detailFindAdapter.addData(items.get(i));
+                }
+            }
+        });
 
         toolBar();
 
@@ -76,19 +101,15 @@ public class DetailFindActivity extends AppCompatActivity {
                         .setOrientation(OrientationHelper. HORIZONTAL)
                         .build());
         new CenterSnapHelper().attachToRecyclerView(recyclerView1);
-        findActivityAdapter = new FindActivityAdapter(DetailFindActivity.this);
-        recyclerView1.setAdapter(findActivityAdapter);
+        detailActivityAdapter = new DetailActivityAdapter(DetailFindActivity.this);
+        recyclerView1.setAdapter(detailActivityAdapter);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
-
-        findActivityAdapter.addData("123123","!23","123","123","123");
-        findActivityAdapter.addData("123123","!23","123","123","123");
-        findActivityAdapter.addData("123123","!23","123","123","123");
-        recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
 
         getInfos();
 
         loadListItems();
 
+        loadActivities();
     }
 
     public void toolBar(){
@@ -174,7 +195,25 @@ public class DetailFindActivity extends AppCompatActivity {
                                 String name = jsonObject.getString("name");
                                 String description = jsonObject.getString("description");
                                 int points = jsonObject.getInt("points");
-                                detailFindAdapter.addData(new DetailFindItemModel(itemID, name, description, points));
+                                items.add(new DetailFindItemModel(itemID, name, description, points));
+                            }
+
+                            switch (items.size()){
+                                case 0:
+                                    CardView cardViewEmpty = findViewById(R.id.cardView_empty_detail_find);
+                                    cardViewEmpty.setVisibility(View.VISIBLE);
+                                    break;
+                                case 1:
+                                    detailFindAdapter.addData(items.get(0));
+                                    break;
+                                case 2:
+                                    detailFindAdapter.addData(items.get(0));
+                                    detailFindAdapter.addData(items.get(1));
+                                    break;
+                                default:
+                                    cardViewMore.setVisibility(View.VISIBLE);
+                                    detailFindAdapter.addData(items.get(0));
+                                    detailFindAdapter.addData(items.get(1));
                             }
 
                         } catch (JSONException e) {
@@ -189,4 +228,39 @@ public class DetailFindActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void loadActivities(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/activity/getMerchantActivities")
+                .addParam("merchantID", merchantID)
+                .build()
+                .execute(DetailFindActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String activityID = jsonObject.getString("activityID");
+                                String name = jsonObject.getString("name");
+                                String description = jsonObject.getString("description");
+                                detailActivityAdapter.addData(activityID, name, description);
+                            }
+                            recyclerView1.scrollToPosition(detailActivityAdapter.getItemCount()/2);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(DetailFindActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
 }

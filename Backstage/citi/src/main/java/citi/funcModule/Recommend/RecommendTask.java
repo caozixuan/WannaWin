@@ -16,17 +16,16 @@ import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 public class RecommendTask {
     @Autowired
     private RecommendService recommendService;
-    //@Scheduled(cron="0/30 * * * * ? ") //间隔5秒执行
-    public void test(){
-        System.out.println("定时任务开始啦，哈哈哈");
-        System.out.println("<<<---------结束执行HR数据同步任务--------->>>");
-    }
-
+    
     /*
      * 更新商户相似度
      */
     //@Scheduled(cron="0 0 24 * * ?")
-    public ArrayList<MerchantSimilarity> updateMerchantSimilarities(){
+    //@Scheduled(cron="0/30 * * * * ? ")
+
+
+    @Scheduled(cron="0 0 2 * * ?")
+    public void updateMerchantSimilarities(){
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ArrayList<RecommendService.MerchantPoints> merchantPoints = recommendService.getMerchantPointsArray();
         for(int i=0;i<merchantPoints.size()-1;i++){
@@ -50,11 +49,10 @@ public class RecommendTask {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return results;
     }
 
-    //@Scheduled(cron="0 0 23 * * ?")
-    public ArrayList<ItemSimilarity> updateItemSimilarities(){
+    @Scheduled(cron="0 0 1 * * ?")
+    public void updateItemSimilarities(){
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ArrayList<RecommendService.ItemPoints> itemPoints = recommendService.getItemPointsArray();
         for(int i=0;i<itemPoints.size()-1;i++){
@@ -78,6 +76,6 @@ public class RecommendTask {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return results;
     }
+
 }

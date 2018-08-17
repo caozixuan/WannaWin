@@ -48,12 +48,14 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 			}
 			
 		}
-		// 设置线下活动scrollview
-		let offlineActivity = OfflineActivity()
-		offlineActivities.append(offlineActivity)
-		offlineActivities.append(offlineActivity)
-		offlineActivities.append(offlineActivity)
-		self.setOfflineScrollView()
+		ServerConnector.getMerchantActivities(merchantID: (merchant?.id)!){(result,activities) in
+			if result {
+				self.offlineActivities = activities!
+				self.setOfflineScrollView()
+			}
+			
+		}
+		
 	}
 	
 	
@@ -65,12 +67,15 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 			self.offlineView.frame = CGRect(x: offlineView.frame.origin.x, y: offlineView.frame.origin.y, width: width, height: offlineView.frame.height)
 			self.offlineScrollView.contentSize = CGSize(width: width, height: self.offlineView.frame.height)
 		}
-		for i in 0...offlineActivities.count{
-			let x = i*196
-			let y = self.offlineView.center.y - 65
-			
-			let view = OfflineCardView(frame: CGRect(x: x, y: Int(y), width: 180, height: 130))
-			self.offlineView.addSubview(view)
+		if offlineActivities.count > 0{
+			for i in 0...offlineActivities.count-1{
+				let x = i*196
+				let y = self.offlineView.center.y - 65
+				
+				let view = OfflineCardView(frame: CGRect(x: x, y: Int(y), width: 180, height: 130))
+				view.image.imageFromURL(offlineActivities[i].imageURL!, placeholder: UIImage())
+				self.offlineView.addSubview(view)
+			}
 		}
 	}
 
@@ -118,10 +123,10 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 
 	@IBAction func ClickMoreBtn(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.couponTableView.reloadData()
+		
         
         if sender.isSelected { // tableview变长
-            
+            isFold = false
             // 设置约束更改tableview高度
             self.couponTableView.snp.remakeConstraints(){ make in
                 make.height.equalTo(70*self.items.count).priority(1000)
@@ -133,7 +138,7 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
             }
         }
         else { // tableview变短
-            
+            isFold = true
             // 更改约束更改tableview高度
             self.couponTableView.snp.remakeConstraints(){ make in
                 make.height.equalTo(136).priority(1000)
@@ -144,6 +149,7 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
                 self.view.layoutIfNeeded()
             }
         }
+		self.couponTableView.reloadData()
     }
     
 }

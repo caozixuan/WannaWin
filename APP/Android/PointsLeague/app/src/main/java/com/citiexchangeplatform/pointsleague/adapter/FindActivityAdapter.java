@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.citiexchangeplatform.pointsleague.DetailFindActivity;
+import com.citiexchangeplatform.pointsleague.DetailFindPayActivity;
 import com.citiexchangeplatform.pointsleague.R;
+import com.citiexchangeplatform.pointsleague.models.FindActivityItemModel;
 import com.citiexchangeplatform.pointsleague.models.FindItemModel;
 
 import java.util.ArrayList;
@@ -34,31 +36,30 @@ public class FindActivityAdapter extends RecyclerView.Adapter<FindActivityAdapte
     }
 
     private Context context;
-    private List<FindItemModel> sourceItems;
-    private List<FindItemModel> filteredItems;
+    private List<FindActivityItemModel> sourceItems;
+    private List<FindActivityItemModel> filteredItems;
 
     public FindActivityAdapter(Context context) {
-        sourceItems = new ArrayList<FindItemModel>();
+        sourceItems = new ArrayList<FindActivityItemModel>();
         filteredItems = sourceItems;
         this.context = context;
     }
 
     @Override
     public void onBindViewHolder(FindActivityAdapter.VH holder, final int position) {
-//        Glide.with(context)
-//                .load(filteredItems.get(position).getLogoURL())
-//                .placeholder(R.drawable.ic_points_black_24dp)
-//                .error(R.drawable.ic_points_black_24dp)
-//                .into(holder.imageViewLogo);
+        Glide.with(context)
+                .load(filteredItems.get(position).getLogoURL())
+                .centerCrop()
+                .error(R.drawable.loading_card)
+                .into(holder.imageViewLogo);
         holder.textView.setText(filteredItems.get(position).getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, filteredItems.get(position).getName(), Toast.LENGTH_SHORT).show();
-//                Intent intentToDetailFind = new Intent(context, DetailFindActivity.class);
-//                intentToDetailFind.putExtra("merchantID",filteredItems.get(position).getMerchantID());
-//                context.startActivity(intentToDetailFind);
+                Intent intentToDetailFindPay = new Intent(context, DetailFindPayActivity.class);
+                intentToDetailFindPay.putExtra("itemID",filteredItems.get(position).getItemID());
+                context.startActivity(intentToDetailFindPay);
             }
         });
     }
@@ -75,8 +76,8 @@ public class FindActivityAdapter extends RecyclerView.Adapter<FindActivityAdapte
     }
 
 
-    public void addData(String name, String merchantID, String logoURL, String type, String description) {
-        FindItemModel newItem = new FindItemModel(name, merchantID,logoURL, type, description);
+    public void addData(String itemID, String name, String logoURL) {
+        FindActivityItemModel newItem = new FindActivityItemModel(itemID, name, logoURL);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }
@@ -90,8 +91,8 @@ public class FindActivityAdapter extends RecyclerView.Adapter<FindActivityAdapte
                 if(partName.isEmpty()){
                     filteredItems = sourceItems;
                 }else {
-                    List<FindItemModel> newFilterCards = new ArrayList<FindItemModel>();
-                    for (FindItemModel item:sourceItems) {
+                    List<FindActivityItemModel> newFilterCards = new ArrayList<FindActivityItemModel>();
+                    for (FindActivityItemModel item:sourceItems) {
                         System.out.println(item.getName().toLowerCase() + "    " + partName.toLowerCase());
                         if(item.getName().toLowerCase().contains(partName.toLowerCase()))
                             newFilterCards.add(item);
@@ -106,7 +107,7 @@ public class FindActivityAdapter extends RecyclerView.Adapter<FindActivityAdapte
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredItems = (ArrayList<FindItemModel>) results.values;
+                filteredItems = (ArrayList<FindActivityItemModel>) results.values;
                 notifyDataSetChanged();
             }
         };
