@@ -110,9 +110,9 @@ public class OrderTabOverdueFragment extends Fragment {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
 
-
-                        String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
+                        String description = jObj.getString("description");
+                        String points = jObj.getString("points");
                         String time = jObj.getString("getTime");
                         String validityTerm = jObj.getString("overdueTime");
                         //String validityTerm = jObj.getString("overdueTime");
@@ -120,7 +120,7 @@ public class OrderTabOverdueFragment extends Fragment {
                         String itemID = jObj.getString("ItemID");
                         String logoURL = jObj.getString("logoURL");
 
-                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"overdue");
+                        orderAdapter.addData(itemName,points,description,time,validityTerm,logoURL,itemID,"overdue");
 
 
                     }

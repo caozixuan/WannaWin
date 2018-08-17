@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            >
+
 
             <!-- 启动项 -->
             <intent-filter>
@@ -37,7 +39,8 @@
         <activity
             android:name=".PayingActivity"
             android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity

@@ -58,6 +58,12 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 					_ = UIImage.image(fromURL: items[i].logoURL!, placeholder: UIImage(named: "正在加载")!,shouldCacheImage: true){(image:UIImage?) in
 						if image != nil{
 							self.couponView.images[i].image = image
+							let couponNameLabel = UILabel()
+							couponNameLabel.text = items[i].name
+							couponNameLabel.font = UIFont.systemFont(ofSize: 12)
+							couponNameLabel.textColor = UIColor.white
+							couponNameLabel.frame = CGRect(x: 10, y: 100, width: 150, height: 28)
+							self.couponView.imageViews[i].addSubview(couponNameLabel)
 						}
 						
 					}

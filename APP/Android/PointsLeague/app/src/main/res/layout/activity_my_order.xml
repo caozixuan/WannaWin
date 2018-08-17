@@ -24,6 +24,7 @@
         app:tabIndicatorHeight="3dp"
         app:tabTextAppearance="@style/TabStyle"
         />
+    <!--阴影-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="@color/colorBackground"
         android:layout_width="match_parent"
