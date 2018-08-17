@@ -131,15 +131,19 @@ public class RecommendService {
         double points = 0;
         double buy_times = 0;
         Item item = itemMapper.getItemByItemID(itemID);
-        //int visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
+        Integer visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
         List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
         for(UserCoupon userCoupon:userCoupons){
             if(userCoupon.getItemID().equals(itemID)){
                 buy_times+=1;
             }
         }
-        //points = visitTimes + 5*buy_times;
-        points = 5*buy_times;
+        if(visitTimes!=null){
+            points = visitTimes + 5*buy_times;
+        }
+        else{
+            points = 5*buy_times;
+        }
         return points;
     }
 

@@ -30,7 +30,7 @@ public class RecommendTask {
         ArrayList<RecommendService.MerchantPoints> merchantPoints = recommendService.getMerchantPointsArray();
         for(int i=0;i<merchantPoints.size()-1;i++){
             for(int j=i;j<merchantPoints.size();j++){
-                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(i).points);
+                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(j).points);
                 String merchantID1 = merchantPoints.get(i).merchantID;
                 String merchantID2 = merchantPoints.get(j).merchantID;
                 results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));

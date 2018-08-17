@@ -14,8 +14,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 
 /**
  *协同过滤的推荐算法
@@ -81,8 +87,6 @@ public class RecommendController {
     public String getRecommendedMerchants(String userID){
         return SerializeGson.GSON.toJson(recommendService.getRecommendedMerchants(userID));
     }
-
-
 
 
 //    /**
