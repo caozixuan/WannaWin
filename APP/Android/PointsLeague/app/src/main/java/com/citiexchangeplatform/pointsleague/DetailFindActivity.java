@@ -21,10 +21,12 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.citiexchangeplatform.pointsleague.adapter.DetailActivityAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.DetailFindAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindActivityAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
 import com.citiexchangeplatform.pointsleague.models.DetailFindItemModel;
+import com.citiexchangeplatform.pointsleague.models.FindActivityItemModel;
 import com.leochuan.CenterSnapHelper;
 import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
@@ -54,7 +56,7 @@ public class DetailFindActivity extends AppCompatActivity {
     RecyclerView recyclerView1;
     RecyclerView recyclerView2;
     DetailFindAdapter detailFindAdapter;
-    FindActivityAdapter findActivityAdapter;  //change
+    DetailActivityAdapter detailActivityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,19 +101,15 @@ public class DetailFindActivity extends AppCompatActivity {
                         .setOrientation(OrientationHelper. HORIZONTAL)
                         .build());
         new CenterSnapHelper().attachToRecyclerView(recyclerView1);
-        findActivityAdapter = new FindActivityAdapter(DetailFindActivity.this);
-        recyclerView1.setAdapter(findActivityAdapter);
+        detailActivityAdapter = new DetailActivityAdapter(DetailFindActivity.this);
+        recyclerView1.setAdapter(detailActivityAdapter);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
-
-        findActivityAdapter.addData("123123","!23","123");
-        findActivityAdapter.addData("123123","!23","123");
-        findActivityAdapter.addData("123123","!23","123");
-        recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
 
         getInfos();
 
         loadListItems();
 
+        loadActivities();
     }
 
     public void toolBar(){
@@ -230,4 +228,39 @@ public class DetailFindActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void loadActivities(){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/activity/getMerchantActivities")
+                .addParam("merchantID", merchantID)
+                .build()
+                .execute(DetailFindActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String activityID = jsonObject.getString("activityID");
+                                String name = jsonObject.getString("name");
+                                String description = jsonObject.getString("description");
+                                detailActivityAdapter.addData(activityID, name, description);
+                            }
+                            recyclerView1.scrollToPosition(detailActivityAdapter.getItemCount()/2);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(DetailFindActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
 }

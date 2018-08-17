@@ -166,6 +166,7 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.RecyclerView
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/recyclerView_ad_detail_find"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
