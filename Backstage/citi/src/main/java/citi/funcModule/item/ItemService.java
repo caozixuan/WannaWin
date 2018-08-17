@@ -12,6 +12,7 @@ import citi.vo.UserCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -62,5 +63,16 @@ public class ItemService {
         Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
         ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
         return itemBean;
+    }
+
+    public boolean addRecord(String userID, String itemID, Timestamp time){
+        /**
+         * 接口一：RecordMapper-----addRecord()
+         * 参数一：userID,参数二：itemID,参数三：该浏览记录的时间戳
+         * 返回受影响的行数
+         */
+        //if(recordMapper.addRecord(userID,itemID,time)!=1)
+        //  return false;
+        return true;
     }
 }

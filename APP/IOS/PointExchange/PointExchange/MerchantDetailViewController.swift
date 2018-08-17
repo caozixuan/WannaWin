@@ -74,9 +74,21 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 				
 				let view = OfflineCardView(frame: CGRect(x: x, y: Int(y), width: 180, height: 130))
 				view.image.imageFromURL(offlineActivities[i].imageURL!, placeholder: UIImage())
+				let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickActivity(_:)))
+				view.addGestureRecognizer(tapGesture)
+				view.isUserInteractionEnabled = true
+				view.tag = i
 				self.offlineView.addSubview(view)
+				
 			}
 		}
+	}
+	
+	@objc func clickActivity(_ sender:UITapGestureRecognizer){
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "ActivityDetailViewController") as! ActivityDetailViewController
+		vc.activity = offlineActivities[(sender.view?.tag)!]
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 
     override func didReceiveMemoryWarning() {

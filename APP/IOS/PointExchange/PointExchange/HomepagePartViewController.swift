@@ -68,13 +68,17 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                         self.cards = cards
 						
 						if cards.count >= 1 {
-							v.cardImage1.imageFromURL((self.cards?[0].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+							v.cardImage1.kf.indicatorType = .activity
+							v.cardImage1.kf.setImage(with: URL(string:(self.cards?[0].logoURL)!),placeholder:UIImage(named: "Mask"))
 						}
 						if cards.count >= 2 {
-							v.cardImage2.imageFromURL((self.cards?[1].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+							v.cardImage2.kf.indicatorType = .activity
+							v.cardImage2.kf.setImage(with: URL(string:(self.cards?[1].logoURL)!),placeholder:UIImage(named: "Mask"))
+							
 						}
 						if cards.count >= 3 {
-							v.cardImage3.imageFromURL((self.cards?[2].logoURL)!, placeholder: UIImage(named: "Mask")!,fadeIn: true, shouldCacheImage: true)
+							v.cardImage3.kf.indicatorType = .activity
+							v.cardImage3.kf.setImage(with: URL(string:(self.cards?[2].logoURL)!),placeholder:UIImage(named: "Mask"))
 						}
                         ServerConnector.getGeneralPoints(){ (result, points) in
                             if result {

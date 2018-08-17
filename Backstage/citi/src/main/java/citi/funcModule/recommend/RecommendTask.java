@@ -37,7 +37,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"MerchantSimilarity.txt"));
             for(MerchantSimilarity result:results){
                 oos.writeObject(result);
             }
@@ -64,7 +64,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"ItemSimilarity.txt"));
             for(ItemSimilarity result:results){
                 oos.writeObject(result);
             }

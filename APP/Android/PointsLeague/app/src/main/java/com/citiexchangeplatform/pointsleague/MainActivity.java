@@ -1,5 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -7,12 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.citiexchangeplatform.pointsleague.base.CompatStatusBarActivity;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends CompatStatusBarActivity implements BottomNavigationBar.OnTabSelectedListener {
 
     private BottomNavigationBar bottomNavigationBar;
     int lastSelectedPosition = 0;
@@ -82,18 +86,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         FragmentTransaction transaction = fm.beginTransaction();
         switch (position) {
             case 0:
+                setStatusBarPlaceVisible(false);
+                setViewColorStatusBar(false,Color.WHITE);
                 if (pointsFragment == null) {
                     pointsFragment = new PointsFragment();
                 }
                 transaction.replace(R.id.tb, pointsFragment);
                 break;
             case 1:
+                setStatusBarPlaceVisible(true);
+                setViewColorStatusBar(true,Color.WHITE);
                 if (findFragment == null) {
                     findFragment = new FindFragment();
                 }
                 transaction.replace(R.id.tb, findFragment);
                 break;
             case 2:
+                setStatusBarPlaceVisible(false);
+                setViewColorStatusBar(false,Color.WHITE);
                 if(!LogStateInfo.getInstance(MainActivity.this).isLogin()){
                     Toast.makeText(MainActivity.this, "请登录后使用二维码", Toast.LENGTH_LONG).show();
                     return;
@@ -102,12 +112,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 startActivity(intentToPayCode);
                 break;
             case 3:
+                setStatusBarPlaceVisible(true);
+                setViewColorStatusBar(true,Color.WHITE);
                 if (mallFragment == null) {
                     mallFragment = new MallFragment();
                 }
                 transaction.replace(R.id.tb, mallFragment);
                 break;
             case 4:
+                setStatusBarPlaceVisible(false);
+                setViewColorStatusBar(false, Color.WHITE);
                 if (accountFragment == null) {
                     accountFragment = new AccountFragment();
                 }
@@ -142,5 +156,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         }
         return false;
     }
+
+
+
+
 
 }
