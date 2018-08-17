@@ -58,6 +58,7 @@
 		3ED5F6D82122AFC200F46E7C /* OfflineActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6D72122AFC200F46E7C /* OfflineActivity.swift */; };
 		3ED5F6DA21240C6300F46E7C /* CouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6D921240C6300F46E7C /* CouponDetailViewController.swift */; };
 		3ED5F6DC2124242800F46E7C /* HistoryCouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */; };
+		3ED5F6DE2126975200F46E7C /* HistoryOfflineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */; };
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
@@ -155,6 +156,7 @@
 		3ED5F6D72122AFC200F46E7C /* OfflineActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineActivity.swift; sourceTree = "<group>"; };
 		3ED5F6D921240C6300F46E7C /* CouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDetailViewController.swift; sourceTree = "<group>"; };
 		3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCouponDetailViewController.swift; sourceTree = "<group>"; };
+		3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOfflineDetailViewController.swift; sourceTree = "<group>"; };
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */,
 				3E3327932120762D00426518 /* OfflineHistoryViewController.swift */,
 				3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */,
+				3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */,
 			);
 			name = UserTab;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 			files = (
 				3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */,
 				B61D90AF20F43A9400A66662 /* Component.swift in Sources */,
+				3ED5F6DE2126975200F46E7C /* HistoryOfflineDetailViewController.swift in Sources */,
 				3EBB5D1320EE27E200B559BA /* ImageScrollerViewController.swift in Sources */,
 				B6A6EC4720F0A8220079FFA4 /* FeedbackViewController.swift in Sources */,
 				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,

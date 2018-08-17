@@ -21,7 +21,7 @@ class OfflineHistoryViewController: UIViewController {
         super.viewDidLoad()
 		self.tableView.rowHeight = 95
 		self.tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "orderCell")
-		ServerConnector.getOrders(intervalTime: "11111111"){ (result, orders) in
+		ServerConnector.getOrders(intervalTime: "101010101"){ (result, orders) in
 			if result {
 				self.orders = orders
 				self.setDataSource()
@@ -55,6 +55,14 @@ class OfflineHistoryViewController: UIViewController {
 			return cell!
 		})
 		observable.bind(to:self.tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+		
+		self.tableView.rx.modelSelected(Order.self)
+			.subscribe(onNext:{ value in
+				let sb = UIStoryboard(name: "User", bundle: nil)
+				let vc = sb.instantiateViewController(withIdentifier: "HistoryOfflineDetailViewController") as! HistoryOfflineDetailViewController
+				vc.order = value
+				self.navigationController?.pushViewController(vc, animated: true)
+			}).disposed(by: disposeBag)
 	}
 
     override func didReceiveMemoryWarning() {
