@@ -2,19 +2,45 @@ package com.citiexchangeplatform.pointsleague.models;
 
 public class CouponItemModel {
     String merchantName;
+    String needPoints;
     String description;
     String exchangeDate;
     String validityDate;
     String logoURL;
     String itemID;
 
-    public CouponItemModel(String merchantName, String description, String exchangeDate, String validityDate, String logoURL, String itemID) {
+    public CouponItemModel(String merchantName, String needPoints, String description, String exchangeDate, String validityDate, String logoURL, String itemID) {
         this.merchantName = merchantName;
+        this.needPoints = needPoints;
         this.description = description;
         this.exchangeDate = exchangeDate;
         this.validityDate = validityDate;
         this.logoURL = logoURL;
         this.itemID = itemID;
+    }
+
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
+    }
+
+    public String getNeedPoints() {
+        return needPoints;
+    }
+
+    public void setNeedPoints(String needPoints) {
+        this.needPoints = needPoints;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getExchangeDate() {
@@ -48,22 +74,4 @@ public class CouponItemModel {
     public void setItemID(String itemID) {
         this.itemID = itemID;
     }
-
-
-    public String getMerchantName() {
-        return merchantName;
-    }
-
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }
