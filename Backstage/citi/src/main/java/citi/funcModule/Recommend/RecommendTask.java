@@ -16,13 +16,7 @@ import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 public class RecommendTask {
     @Autowired
     private RecommendService recommendService;
-
-    @Scheduled(cron="0/5 * * * * ? ") //间隔5秒执行
-    public void test(){
-        System.out.println("定时任务开始啦，哈哈哈");
-        System.out.println("<<<---------结束执行HR数据同步任务--------->>>");
-    }
-
+    
     /*
      * 更新商户相似度
      */
