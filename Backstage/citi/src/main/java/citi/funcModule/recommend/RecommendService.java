@@ -1,5 +1,6 @@
 package citi.funcModule.Recommend;
 
+import citi.funcModule.recommend.ItemSimilarity;
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
 import citi.vo.*;
