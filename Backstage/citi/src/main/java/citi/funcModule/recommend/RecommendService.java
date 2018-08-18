@@ -2,10 +2,7 @@ package citi.funcModule.Recommend;
 
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
-import citi.vo.Item;
-import citi.vo.Merchant;
-import citi.vo.Order;
-import citi.vo.UserCoupon;
+import citi.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +34,8 @@ public class RecommendService {
     private UserMapper userMapper;
     @Autowired
     private CouponMapper couponMapper;
+    @Autowired
+    private  UserPrefMapper userPrefMapper;
 
     /**
      * 初始化用户的偏好列表
@@ -51,10 +50,10 @@ public class RecommendService {
              * 参数一：userID,参数二：一个偏好（字符串形式）
              * 返回受影响的行数
              */
-            //if(prefMapper.addPref(userID,prefList.get(i))!=1){
-             //   flag = false;
-             //   break;
-            //}
+            if(userPrefMapper.addUserPref(new UserPref(userID,prefList.get(i)))!=1){
+                flag=false;
+                break;
+            }
         }
         return flag;
     }

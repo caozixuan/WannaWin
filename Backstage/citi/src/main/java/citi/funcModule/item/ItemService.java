@@ -1,14 +1,12 @@
 package citi.funcModule.item;
 
-import citi.persist.mapper.CouponMapper;
-import citi.persist.mapper.ItemMapper;
-import citi.persist.mapper.MerchantMapper;
-import citi.persist.mapper.UserMapper;
+import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
 import citi.support.status.Status;
 import citi.vo.Item;
 import citi.vo.Merchant;
 import citi.vo.UserCoupon;
+import citi.vo.VisitRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +27,8 @@ public class ItemService {
     private UserMapper userMapper;
     @Autowired
     private MerchantMapper merchantMapper;
-
+    @Autowired
+    private VisitRecordMapper visitRecordMapper;
     public List<Item> getItems(int start,int length){
         return itemMapper.getItem(start,length);
     }
@@ -71,8 +70,8 @@ public class ItemService {
          * 参数一：userID,参数二：itemID,参数三：该浏览记录的时间戳
          * 返回受影响的行数
          */
-        //if(recordMapper.addRecord(userID,itemID,time)!=1)
-        //  return false;
+        if(visitRecordMapper.insertVisitRecord(new VisitRecord(userID,itemID,time))!=1)
+          return false;
         return true;
     }
 }

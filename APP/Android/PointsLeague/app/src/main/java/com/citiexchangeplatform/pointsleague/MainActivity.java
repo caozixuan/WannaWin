@@ -87,7 +87,7 @@ public class MainActivity extends CompatStatusBarActivity implements BottomNavig
         switch (position) {
             case 0:
                 setStatusBarPlaceVisible(false);
-                setViewColorStatusBar(false,Color.WHITE);
+                //setViewColorStatusBar(false,Color.WHITE);
                 if (pointsFragment == null) {
                     pointsFragment = new PointsFragment();
                 }
@@ -103,7 +103,7 @@ public class MainActivity extends CompatStatusBarActivity implements BottomNavig
                 break;
             case 2:
                 setStatusBarPlaceVisible(false);
-                setViewColorStatusBar(false,Color.WHITE);
+                //setViewColorStatusBar(false,Color.WHITE);
                 if(!LogStateInfo.getInstance(MainActivity.this).isLogin()){
                     Toast.makeText(MainActivity.this, "请登录后使用二维码", Toast.LENGTH_LONG).show();
                     return;
@@ -121,7 +121,7 @@ public class MainActivity extends CompatStatusBarActivity implements BottomNavig
                 break;
             case 4:
                 setStatusBarPlaceVisible(false);
-                setViewColorStatusBar(false, Color.WHITE);
+                //setViewColorStatusBar(false, Color.WHITE);
                 if (accountFragment == null) {
                     accountFragment = new AccountFragment();
                 }

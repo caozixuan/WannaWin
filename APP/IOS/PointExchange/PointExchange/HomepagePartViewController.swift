@@ -38,7 +38,9 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 				view.addSubview(loginView!)
 				homepageStackView?.removeFromSuperview()
 				homepageStackView = nil
+				
 			}
+			activityIndicator?.stopAnimating()
         }
 		
     }
