@@ -9,46 +9,48 @@
 import UIKit
 
 class UserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+	@IBOutlet weak var logoutBtn: UIButton!
+	@IBOutlet weak var locationLabel: UILabel!
+	@IBOutlet weak var loginBtn: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var quit: UIButton!
 	@IBOutlet weak var tableView: UITableView!
     // 等待动画
     var activityIndicator:UIActivityIndicatorView?
-    //登录后头部
-    var boundingCitiCardHeadLabel:UILabel = UILabel()
-    var usernameLabel:UILabel = UILabel()
-    
-    //未登录时登录按钮
-    var loginButton:UIButton = UIButton()
     
     let storyBoard = UIStoryboard(name: "User", bundle: nil)
     
-    @IBOutlet weak var userTableCell: UITableViewCell?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.rowHeight = 60
-		if User.getUser().username != nil {
-			self.nameLabel.text = User.getUser().username
-		}
-		else{
-			self.nameLabel.text = "未登录"
-		}
+		
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		refreshView()
         
     }
-    
-    @objc func gotoLogin(){
-        let storyBoard = UIStoryboard(name:"User", bundle:nil)
-        let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
-        self.navigationController!.pushViewController(view, animated: true)
-    }
+	
+	func refreshView(){
+		if User.getUser().username != nil {
+			self.nameLabel.text = User.getUser().username
+			self.loginBtn.isHidden = true
+			self.locationLabel.isHidden = false
+			self.logoutBtn.isHidden = false
+		}
+		else{
+			self.nameLabel.text = "未登录"
+			self.loginBtn.isHidden = false
+			self.locationLabel.isHidden = true
+			self.logoutBtn.isHidden = true
+			
+		}
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,12 +65,15 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		switch indexPath.row {
 		case 0:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "orderCell")
+			cell?.selectionStyle = .none
 			return cell!
 		case 1:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "recordCell")
+			cell?.selectionStyle = .none
 			return cell!
 		case 2:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "settingCell")
+			cell?.selectionStyle = .none
 			return cell!
 		default:
 			return UITableViewCell()
@@ -83,6 +88,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             // 查看积分兑换记录
             case 1:
                 checkPointRecord()
+			// 通用设置
+			case 2:
+				let view = storyBoard.instantiateViewController(withIdentifier: "SettingViewController")
+				self.navigationController?.pushViewController(view, animated: true)
             default:
                 break;
             }
@@ -145,11 +154,19 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let alert = UIAlertController(title:"退出登录", message:"是否确认退出登录？", preferredStyle:.alert)
 		let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
 			self.logout()
+			self.refreshView()
 		})
 		let cancelAction=UIAlertAction(title:"取消", style:.cancel, handler:nil)
 		
 		alert.addAction(cancelAction)
 		alert.addAction(okAction)
 		self.present(alert, animated:true, completion:nil)
+		
+	}
+	
+	@IBAction func clickLogin(_ sender: Any) {
+		let storyBoard = UIStoryboard(name:"User", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+		self.navigationController!.pushViewController(view, animated: true)
 	}
 }

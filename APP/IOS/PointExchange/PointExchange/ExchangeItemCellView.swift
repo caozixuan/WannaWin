@@ -15,7 +15,8 @@ enum changeType {
 
 protocol ExchangeItemCellDelegate {
 	func contentDidChanged(text: String, row: Int, type: changeType)
-    func setSelected(tag:Int, isSelected:Bool)
+    func setSelected(tag: Int, isSelected: Bool)
+    func setData(_ tag: Int, _ sourcePoints: String, _ editSourcePoints:String, _ targetPoints: String)
 }
 
 class ExchangeItemCellView: UIView {
@@ -135,6 +136,10 @@ class ExchangeItemCellView: UIView {
 		if let text = targetPoints?.text {
 			self.delegate?.contentDidChanged(text: text, row: editSourcePoints.tag, type: .add)
 		}
+        
+        //让代理记录数据
+        self.delegate?.setData(self.editSourcePoints.tag, (sourcePoints?.text)!, (editSourcePoints?.text)!, (targetPoints?.text)!)
+        
 	}
 	
 	/// 让viewController成为textField的delegate来控制键盘收回
