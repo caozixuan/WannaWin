@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ public class AccountFragment extends Fragment {
     Button buttonLogin;
     TextView accountTextView;
     TextView citiAccountTextView;
+    ImageView portrait;
 
     ListView listViewMenu;
     //ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("积分兑换记录","查看历史订单","绑定花旗账户","通用","反馈","关于"));
@@ -46,6 +48,15 @@ public class AccountFragment extends Fragment {
         accountInfoLayout = (RelativeLayout)view.findViewById(R.id.linearlayout_account_info_account);
         accountTextView = view.findViewById(R.id.textview_account);
         citiAccountTextView = view.findViewById(R.id.textview_account_position);
+        portrait = view.findViewById(R.id.img_portrait);
+
+        portrait.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentToUserSetting = new Intent(getContext(), UserSettingActivity.class);
+                startActivity(intentToUserSetting);
+            }
+        });
 
         //状态栏文字图标暗色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
