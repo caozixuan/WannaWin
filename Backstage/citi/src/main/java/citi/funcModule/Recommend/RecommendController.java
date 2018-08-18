@@ -78,12 +78,18 @@ public class RecommendController {
     @ResponseBody
     @RequestMapping("/getRecommendedItems")
     public String getRecommendedItems(String userID){
+        if(userID==null){
+            userID = "06bef837-9ad4-4e8e-9d3d-f20275d6fcb5";
+        }
         return gson.toJson(recommendService.getRecommendedItems(userID,3));
     }
 
     @ResponseBody
     @RequestMapping("/getRecommendedMerchants")
     public String getRecommendedMerchants(String userID){
+        if(userID==null){
+            userID = "06bef837-9ad4-4e8e-9d3d-f20275d6fcb5";
+        }
         return SerializeGson.GSON.toJson(recommendService.getRecommendedMerchants(userID));
     }
 
