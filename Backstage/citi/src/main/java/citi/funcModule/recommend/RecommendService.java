@@ -1,4 +1,4 @@
-package citi.funcModule.recommend;
+package citi.funcModule.Recommend;
 
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
@@ -124,15 +124,19 @@ public class RecommendService {
         double points = 0;
         double buy_times = 0;
         Item item = itemMapper.getItemByItemID(itemID);
-        //int visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
+        Integer visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
         List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
         for(UserCoupon userCoupon:userCoupons){
             if(userCoupon.getItemID().equals(itemID)){
                 buy_times+=1;
             }
         }
-        //points = visitTimes + 5*buy_times;
-        points = 5*buy_times;
+        if(visitTimes!=null){
+            points = visitTimes + 5*buy_times;
+        }
+        else{
+            points = 5*buy_times;
+        }
         return points;
     }
 
@@ -263,18 +267,47 @@ public class RecommendService {
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
 
         List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,itemMapper.getItemAmountByMerchantID(merchantID));
-        int visitTimes = 0;
+        Integer visitTimes = 0;
         for(Item item:items){
+            if(VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID())!=null){
+                visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
+            }
             //visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
         }
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
+        ArrayList<Order> filterOrders = filterOrder(orderList,merchantID);
         double consume_points = 0;
-        for(Order order:orderList){
+        for(Order order:filterOrders){
             consume_points+=order.getPointsNeeded();
         }
-        List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
-        points = consume_points/10 + userCoupons.size()*5 + visitTimes;
+        List<UserCoupon> userCoupons1 = couponMapper.getCouponsByUserID(userID);
+        List<UserCoupon> userCoupons2 = couponMapper.get_USED_Coupon(userID);
+        List<UserCoupon> userCoupons3 = couponMapper.get_OVERDUED_Coupon(userID);
+        ArrayList<UserCoupon> filterUserCoupons1 = filterUserCoupon(userCoupons1,merchantID);
+        ArrayList<UserCoupon> filterUserCoupons2 = filterUserCoupon(userCoupons2,merchantID);
+        ArrayList<UserCoupon> filterUserCoupons3 = filterUserCoupon(userCoupons3,merchantID);
+        points = consume_points/10 + filterUserCoupons1.size()*5+ filterUserCoupons2.size()*5+ filterUserCoupons3.size()*5 + visitTimes;
         return points;
+    }
+
+    public ArrayList<Order> filterOrder(List<Order> orderList, String merchantID){
+        ArrayList<Order> results = new  ArrayList<Order>();
+        for(Order order:orderList){
+            if(order.getMerchantId().equals(merchantID)){
+                results.add(order);
+            }
+        }
+        return results;
+    }
+    public ArrayList<UserCoupon> filterUserCoupon(List<UserCoupon> userCoupons, String merchantID){
+        ArrayList<UserCoupon> results = new  ArrayList<UserCoupon>();
+        for(UserCoupon userCoupon:userCoupons){
+            Item item = itemMapper.getItemByItemID(userCoupon.getItemID());
+            if(item.getMerchantID().equals(merchantID)){
+                results.add(userCoupon);
+            }
+        }
+        return results;
     }
 
     class MerchantPoints{

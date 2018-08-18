@@ -1,4 +1,4 @@
-package citi.funcModule.recommend;
+package citi.funcModule.Recommend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
+import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 
 @Component
 public class RecommendTask {
@@ -30,7 +30,7 @@ public class RecommendTask {
         ArrayList<RecommendService.MerchantPoints> merchantPoints = recommendService.getMerchantPointsArray();
         for(int i=0;i<merchantPoints.size()-1;i++){
             for(int j=i;j<merchantPoints.size();j++){
-                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(i).points);
+                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(j).points);
                 String merchantID1 = merchantPoints.get(i).merchantID;
                 String merchantID2 = merchantPoints.get(j).merchantID;
                 results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));
