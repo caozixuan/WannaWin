@@ -32,6 +32,7 @@ public class Type {
         static Map<ItemType, String> m1 = new HashMap<>();      //  enum  =>  str
         static Map<String, Integer> m2 = new HashMap<>();       //  str   =>  bit
         static Map<Integer, ItemType> m3 = new HashMap<>();     //  bit   =>  enum
+        static Integer bit = 0;
 
         static {
 
@@ -46,7 +47,7 @@ public class Type {
 
 
             //  str   =>  bit
-            Integer bit = 0;
+            bit = 0;
             m2.put("normal", bit++);
             m2.put("catering", bit++);
             m2.put("exercise", bit++);
@@ -67,6 +68,10 @@ public class Type {
             m3.put(bit++, communication);
 
 
+        }
+
+        public static Integer getAmount() {
+            return bit;
         }
 
         // str => bit => enum
@@ -104,7 +109,7 @@ public class Type {
             return l;
         }
 
-        // List<enum> => DBStr
+        // List<enum> => DBStr  // null -> "000..000"
         public static String enum2DBStr(List<ItemType> itemTypes) {
             TypeWrapper tw = new TypeWrapper(String.join("", Collections.nCopies(number_of_bytes_in_str, "0")));
             if (null == itemTypes)
@@ -113,9 +118,6 @@ public class Type {
                 tw.addType(enum2bit(itemtype));
             return tw.toString();
         }
-
-        //
-
 
     }
 
