@@ -115,4 +115,9 @@ public class CardPointsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public void clearAll(){
+        items.clear();
+        notifyDataSetChanged();
+    }
+
 }
