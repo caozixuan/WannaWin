@@ -894,10 +894,10 @@
                                     <action selector="logoutBtnClick:" destination="J1I-3M-UwK" eventType="touchUpInside" id="oE1-AJ-eCV"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4q-qD-Yum">
-                                <rect key="frame" x="110" y="266" width="155" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4q-qD-Yum">
+                                <rect key="frame" x="98" y="226" width="191" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="Button登录"/>
                                 <connections>
                                     <action selector="clickLogin:" destination="J1I-3M-UwK" eventType="touchUpInside" id="bDR-aM-K4c"/>
                                 </connections>
@@ -1826,6 +1826,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Button登录" width="191" height="46"/>
         <image name="MyActive" width="24" height="24"/>
         <image name="MyUnselected" width="24" height="24"/>
         <image name="portrait_1userTabMe" width="128" height="128"/>

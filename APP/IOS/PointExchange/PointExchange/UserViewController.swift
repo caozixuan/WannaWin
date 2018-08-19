@@ -42,12 +42,14 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 			self.loginBtn.isHidden = true
 			self.locationLabel.isHidden = false
 			self.logoutBtn.isHidden = false
+			self.nameLabel.isHidden = false
 		}
 		else{
 			self.nameLabel.text = "未登录"
 			self.loginBtn.isHidden = false
 			self.locationLabel.isHidden = true
 			self.logoutBtn.isHidden = true
+			self.nameLabel.isHidden = true
 			
 		}
 	}
