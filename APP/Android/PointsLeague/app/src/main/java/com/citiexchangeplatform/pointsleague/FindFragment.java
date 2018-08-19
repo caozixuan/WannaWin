@@ -84,7 +84,12 @@ public class FindFragment extends Fragment {
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView_find);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         recyclerView2.setLayoutManager(layoutManager2);
         findAdapter = new FindAdapter(getContext());
         recyclerView2.setAdapter(findAdapter);
