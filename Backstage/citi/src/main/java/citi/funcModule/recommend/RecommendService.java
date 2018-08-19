@@ -1,25 +1,16 @@
 package citi.funcModule.Recommend;
 
-import Jama.Matrix;
+import citi.funcModule.recommend.ItemSimilarity;
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
-import citi.vo.Item;
-import citi.vo.Merchant;
-import citi.vo.Order;
-import citi.vo.UserCoupon;
+import citi.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletSecurityElement;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,6 +35,8 @@ public class RecommendService {
     private UserMapper userMapper;
     @Autowired
     private CouponMapper couponMapper;
+    @Autowired
+    private  UserPrefMapper userPrefMapper;
 
     /**
      * 初始化用户的偏好列表
@@ -58,10 +51,10 @@ public class RecommendService {
              * 参数一：userID,参数二：一个偏好（字符串形式）
              * 返回受影响的行数
              */
-            //if(prefMapper.addPref(userID,prefList.get(i))!=1){
-             //   flag = false;
-             //   break;
-            //}
+            if(userPrefMapper.addUserPref(new UserPref(userID,prefList.get(i)))!=1){
+                flag=false;
+                break;
+            }
         }
         return flag;
     }
@@ -131,14 +124,19 @@ public class RecommendService {
         double points = 0;
         double buy_times = 0;
         Item item = itemMapper.getItemByItemID(itemID);
-        int visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
+        Integer visitTimes = VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,itemID);
         List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
         for(UserCoupon userCoupon:userCoupons){
             if(userCoupon.getItemID().equals(itemID)){
                 buy_times+=1;
             }
         }
-        points = visitTimes + 5*buy_times;
+        if(visitTimes!=null){
+            points = visitTimes + 5*buy_times;
+        }
+        else{
+            points = 5*buy_times;
+        }
         return points;
     }
 
@@ -195,7 +193,7 @@ public class RecommendService {
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream("ItemSimilarity.txt"));
+            ois = new ObjectInputStream(new FileInputStream(this.getClass().getResource(".")+"ItemSimilarity.txt"));
             while (true) {
                 ItemSimilarity itemSimilarity = (ItemSimilarity) ois.readObject();
                 results.add(itemSimilarity);
@@ -228,28 +226,8 @@ public class RecommendService {
      */
 
     public ArrayList<UserItemPoints> getUserInterestToItems(String userID){
-        ItemSimilarity itemSimilarity1 = new ItemSimilarity("148055e4-af54-45e7-816e-5e6270b65bb5","148055e4-af54-45e7-816e-5e6270b65bb5",1);
-        ItemSimilarity itemSimilarity2 = new ItemSimilarity("148055e4-af54-45e7-816e-5e6270b65bb5","1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d",0.8);
-        ItemSimilarity itemSimilarity3 = new ItemSimilarity("148055e4-af54-45e7-816e-5e6270b65bb5","34bb3c20-43bb-4af2-814c-4a0c5d601af5",0.5);
-        ItemSimilarity itemSimilarity4 = new ItemSimilarity("1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d","34bb3c20-43bb-4af2-814c-4a0c5d601af5",0.2);
-        ItemSimilarity itemSimilarity5 = new ItemSimilarity("1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d","1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d",1);
-        ItemSimilarity itemSimilarity6 = new ItemSimilarity("34bb3c20-43bb-4af2-814c-4a0c5d601af5","34bb3c20-43bb-4af2-814c-4a0c5d601af5",1);
-        ArrayList<ItemSimilarity> similarities = new ArrayList<ItemSimilarity>();
-        similarities.add(itemSimilarity1);
-        similarities.add(itemSimilarity2);
-        similarities.add(itemSimilarity3);
-        similarities.add(itemSimilarity4);
-        similarities.add(itemSimilarity5);
-        similarities.add(itemSimilarity6);
-        //ArrayList<ItemSimilarity> similarities = getItemSimilarities();
-        UserItemPoints userItemPoints1 = new UserItemPoints("148055e4-af54-45e7-816e-5e6270b65bb5",10);
-        UserItemPoints userItemPoints2 = new UserItemPoints("1e739ddb-eabb-4ef1-bb2f-6f6df8d73e0d",5);
-        UserItemPoints userItemPoints3 = new UserItemPoints("34bb3c20-43bb-4af2-814c-4a0c5d601af5",2);
-        ArrayList<UserItemPoints> userItemPointsArrayList = new ArrayList<UserItemPoints>();
-        userItemPointsArrayList.add(userItemPoints1);
-        userItemPointsArrayList.add(userItemPoints2);
-        userItemPointsArrayList.add(userItemPoints3);
-        //ArrayList<UserItemPoints> userItemPointsArrayList = getUserPointsToItems(userID);
+        ArrayList<ItemSimilarity> similarities = getItemSimilarities();
+        ArrayList<UserItemPoints> userItemPointsArrayList = getUserPointsToItems(userID);
         ArrayList<UserItemPoints> results = new ArrayList<UserItemPoints>();
         for(UserItemPoints userItemPoints:userItemPointsArrayList){
             double points = 0;
@@ -287,19 +265,49 @@ public class RecommendService {
     public double getMerchantPoints(String userID, String merchantID){
         double points = 0;
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
-        List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,1);
-        int visitTimes = 0;
+
+        List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,itemMapper.getItemAmountByMerchantID(merchantID));
+        Integer visitTimes = 0;
         for(Item item:items){
-            visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
+            if(VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID())!=null){
+                visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
+            }
+            //visitTimes+=VisitRecordUtil.getVisitTimesBy_userID_AND_itemID(userID,item.getItemID());
         }
         List<Order> orderList = orderMapper.getOrderByUserID(userID,"+010101010101");
+        ArrayList<Order> filterOrders = filterOrder(orderList,merchantID);
         double consume_points = 0;
-        for(Order order:orderList){
+        for(Order order:filterOrders){
             consume_points+=order.getPointsNeeded();
         }
-        List<UserCoupon> userCoupons = couponMapper.getCouponsByUserID(userID);
-        points = consume_points/10 + userCoupons.size()*5 + visitTimes;
+        List<UserCoupon> userCoupons1 = couponMapper.getCouponsByUserID(userID);
+        List<UserCoupon> userCoupons2 = couponMapper.get_USED_Coupon(userID);
+        List<UserCoupon> userCoupons3 = couponMapper.get_OVERDUED_Coupon(userID);
+        ArrayList<UserCoupon> filterUserCoupons1 = filterUserCoupon(userCoupons1,merchantID);
+        ArrayList<UserCoupon> filterUserCoupons2 = filterUserCoupon(userCoupons2,merchantID);
+        ArrayList<UserCoupon> filterUserCoupons3 = filterUserCoupon(userCoupons3,merchantID);
+        points = consume_points/10 + filterUserCoupons1.size()*5+ filterUserCoupons2.size()*5+ filterUserCoupons3.size()*5 + visitTimes;
         return points;
+    }
+
+    public ArrayList<Order> filterOrder(List<Order> orderList, String merchantID){
+        ArrayList<Order> results = new  ArrayList<Order>();
+        for(Order order:orderList){
+            if(order.getMerchantId().equals(merchantID)){
+                results.add(order);
+            }
+        }
+        return results;
+    }
+    public ArrayList<UserCoupon> filterUserCoupon(List<UserCoupon> userCoupons, String merchantID){
+        ArrayList<UserCoupon> results = new  ArrayList<UserCoupon>();
+        for(UserCoupon userCoupon:userCoupons){
+            Item item = itemMapper.getItemByItemID(userCoupon.getItemID());
+            if(item.getMerchantID().equals(merchantID)){
+                results.add(userCoupon);
+            }
+        }
+        return results;
     }
 
     class MerchantPoints{
@@ -382,7 +390,7 @@ public class RecommendService {
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream("MerchantSimilarity.txt"));
+            ois = new ObjectInputStream(new FileInputStream(this.getClass().getResource(".")+"MerchantSimilarity.txt"));
             while (true) {
                     MerchantSimilarity merchantSimilarity = (MerchantSimilarity) ois.readObject();
                     results.add(merchantSimilarity);

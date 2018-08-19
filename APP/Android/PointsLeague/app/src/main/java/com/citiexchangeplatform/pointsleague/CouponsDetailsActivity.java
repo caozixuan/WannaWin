@@ -18,39 +18,47 @@ import java.util.List;
 public class CouponsDetailsActivity extends AppCompatActivity {
 
     private String logoURL;
-    private String name;
+    //private String name;
+    //兑换日期
     private String exchangeDate;
+    //使用日期、有效期限
     private String validityDate;
     private String itemID;
     private String description;
     private String type;
+    private String points;
 
     //控件
     private TextView TValidityDate;
     private TextView TExchangeDate;
     private TextView TDescription;
-    private TextView TName;
-    private TextView hint;
+    private TextView TNeedPoints;
+    private TextView TDateType;
+    private TextView TStatus;
+    //private TextView TName;
+    //private TextView hint;
     private ImageView logo;
     private ImageView qrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coupons_details);
-        toolBar();
+
 
         Bundle bundle = getIntent().getExtras();
         type = (String)bundle.get("logoURL");
 
         getData();
         if(type.equals("unused")){
+            setContentView(R.layout.activity_coupons_details);
             initViewUnused();
         }
 
         else {
+            setContentView(R.layout.activity_coupons_details_invalid);
             initViewElse();
         }
+        toolBar();
 
 
         init();
@@ -83,10 +91,10 @@ public class CouponsDetailsActivity extends AppCompatActivity {
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("返回");
-        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftTextSize(18);
+        titleBar.setLeftTextColor(getResources().getColor(R.color.colorLightOrange));
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,8 +118,9 @@ public class CouponsDetailsActivity extends AppCompatActivity {
     }
 
     public void initViewUnused(){
+        TNeedPoints = findViewById(R.id.textView_coupon_details_points);
         logo = findViewById(R.id.imageView_coupons_details);
-        TName = findViewById(R.id.textView_coupon_business_name);
+        //TName = findViewById(R.id.textView_coupon_business_name);
         TDescription = findViewById(R.id.textView_coupon_description);
         TValidityDate = findViewById(R.id.textView_validity_term);
         TExchangeDate = findViewById(R.id.textView_coupon_exchange_date);
@@ -124,13 +133,16 @@ public class CouponsDetailsActivity extends AppCompatActivity {
     }
 
     public void initViewElse(){
+        TNeedPoints = findViewById(R.id.textView_coupon_details_points);
         logo = findViewById(R.id.imageView_coupons_details);
-        TName = findViewById(R.id.textView_coupon_business_name);
+        //TName = findViewById(R.id.textView_coupon_business_name);
         TDescription = findViewById(R.id.textView_coupon_description);
         TValidityDate = findViewById(R.id.textView_validity_term);
-        TExchangeDate = findViewById(R.id.textView_coupon_exchange_date);
-        hint = findViewById(R.id.textView_hint);
-        hint.setText("");
+        TDateType = findViewById(R.id.textview_date_type);
+        TStatus = findViewById(R.id.textView_status);
+        //TExchangeDate = findViewById(R.id.textView_coupon_exchange_date);
+        //hint = findViewById(R.id.textView_hint);
+        //hint.setText("");
 
     }
 
@@ -141,7 +153,8 @@ public class CouponsDetailsActivity extends AppCompatActivity {
         //map = serializableHashMap.getMap();
 
         logoURL = (String)bundle.get("logoURL");
-        name = (String)bundle.get("name");
+        points = (String)bundle.get("points");
+        //name = (String)bundle.get("name");
         exchangeDate = (String)bundle.get("exchangeDate");
         validityDate = (String)bundle.get("validityDate");
         itemID = (String)bundle.get("itemID");
@@ -158,10 +171,27 @@ public class CouponsDetailsActivity extends AppCompatActivity {
                 .error(R.drawable.ic_mall_black_24dp)
                 .override(60,60)
                 .into(logo);
+        TNeedPoints.setText(points);
         TDescription.setText(description);
-        TExchangeDate.setText(exchangeDate);
+
         TValidityDate.setText(validityDate);
-        TName.setText(name);
+        switch (type){
+            case "unused":
+                TExchangeDate.setText(exchangeDate);
+                break;
+            case "used":
+                TDateType.setText("使用日期：");
+                TStatus.setTextColor(Color.parseColor("#CDB03E"));
+                break;
+            case "overdue":
+                TDateType.setText("有效期至：");
+                TStatus.setText("已过期");
+                TStatus.setTextColor(Color.parseColor("#CE512E"));;
+                break;
+        }
+
+
+        //TName.setText(name);
 
     }
 

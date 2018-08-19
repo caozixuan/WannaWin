@@ -2,6 +2,7 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,12 +27,17 @@ public class AccountFragment extends Fragment {
     boolean isLogin;
 
     View view;
-    LinearLayout accountInfoLayout;
+    RelativeLayout accountInfoLayout;
     Button buttonLogout;
+    Button buttonLogin;
+    TextView accountTextView;
+    TextView citiAccountTextView;
+    ImageView portrait;
 
     ListView listViewMenu;
-    ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("积分兑换记录","查看历史订单","绑定花旗账户","通用","反馈","关于"));
-    ArrayList<Integer> menuIcon = new ArrayList<Integer>(Arrays.asList(R.drawable.ic_mall_black_24dp,R.drawable.ic_mall_black_24dp, R.drawable.ic_account_black_24dp, R.drawable.ic_settings_black_24dp, R.drawable.ic_search_black_24dp, R.drawable.ic_points_black_24dp));
+    //ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("积分兑换记录","查看历史订单","绑定花旗账户","通用","反馈","关于"));
+    ArrayList<String> menuItem = new ArrayList<String>(Arrays.asList("积分兑换记录","我的订单","设置"));
+    ArrayList<Integer> menuIcon = new ArrayList<Integer>(Arrays.asList(R.drawable.icon_exchange,R.drawable.icon_my_order_history, R.drawable.icon_setting));
 
 
     @Nullable
@@ -37,9 +45,34 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_account, null);
-        accountInfoLayout = (LinearLayout)view.findViewById(R.id.linearlayout_account_info_account);
+        accountInfoLayout = (RelativeLayout)view.findViewById(R.id.linearlayout_account_info_account);
+        accountTextView = view.findViewById(R.id.textview_account);
+        citiAccountTextView = view.findViewById(R.id.textview_account_position);
+        portrait = view.findViewById(R.id.img_portrait);
+
+        portrait.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentToUserSetting = new Intent(getContext(), UserSettingActivity.class);
+                startActivity(intentToUserSetting);
+            }
+        });
+
+        //状态栏文字图标暗色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
+            getActivity().getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+        buttonLogin = (Button)view.findViewById(R.id.button_login);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         buttonLogout = (Button)view.findViewById(R.id.button_logout_account);
+
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,42 +149,47 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadAccountInfo(){
-        accountInfoLayout.removeAllViewsInLayout();
+        //accountInfoLayout.removeAllViewsInLayout();
 
         isLogin = LogStateInfo.getInstance(getContext()).isLogin();
 
         if(isLogin){
+            buttonLogin.setVisibility(View.INVISIBLE);
             buttonLogout.setVisibility(View.VISIBLE);
+            accountTextView.setVisibility(View.VISIBLE);
+            citiAccountTextView.setVisibility(View.VISIBLE);
+
+            //TextView accountTextView = view.findViewById(R.id.textview_account);
+            accountTextView.setText(LogStateInfo.getInstance(getContext()).getAccount());
 
 
-            TextView accountTextView = new TextView(getActivity());
-            accountTextView.setText("账户：" + LogStateInfo.getInstance(getContext()).getAccount());
-            accountTextView.setTextSize(24);
+            //TextView citiAccountTextView = view.findViewById(R.id.textview_account_position);
+            //citiAccountTextView.setText("尚未绑定花旗账户");
 
-            TextView citiAccountTextView = new TextView(getActivity());
-            citiAccountTextView.setText("尚未绑定花旗账户");
-            citiAccountTextView.setTextSize(16);
 
-            accountInfoLayout.addView(accountTextView);
-            accountInfoLayout.addView(citiAccountTextView);
+            //accountInfoLayout.addView(accountTextView);
+            //accountInfoLayout.addView(citiAccountTextView);
         }else {
             buttonLogout.setVisibility(View.INVISIBLE);
-
-            Button button = new Button(getActivity());
-            button.setText("登录");
-            button.setTextColor(getResources().getColor(R.color.colorWhite));
-            button.setTextSize(18);
-            button.setBackgroundColor(getResources().getColor(R.color.colorLightOrange));
-            button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
-                }
-            });
-            accountInfoLayout.addView(button);
+            accountTextView.setVisibility(View.INVISIBLE);
+            citiAccountTextView.setVisibility(View.INVISIBLE);
+            buttonLogin.setVisibility(View.VISIBLE);
+            //Button button = new Button(getActivity());
+            //button.setText("登录");
+            //button.setTextColor(getResources().getColor(R.color.colorWhite));
+            //button.setTextSize(18);
+            //button.setBackgroundColor(getResources().getColor(R.color.colorLightOrange));
+            //button.setBackground(getResources().getDrawable(R.drawable.pic_logout));
+            //button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            //        LinearLayout.LayoutParams.WRAP_CONTENT));
+            //button.setOnClickListener(new View.OnClickListener() {
+            //    @Override
+            //    public void onClick(View v) {
+            //        Intent intent = new Intent(getActivity(), LoginActivity.class);
+            //        startActivity(intent);
+            //    }
+            //});
+            //accountInfoLayout.addView(button);
         }
     }
 }

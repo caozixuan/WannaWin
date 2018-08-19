@@ -19,12 +19,20 @@ class HistoryCouponDetailViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		descriptionText.text = items?.description
-		pointLabel.text = String(stringInterpolationSegment: items?.points!)
+		pointLabel.text = String(stringInterpolationSegment: items!.points!)
 		logoImage.imageFromURL((items?.logoURL)!, placeholder: UIImage())
-		qrBarImage.image = ScanCodeManager().createQRCode(url:(items?.ItemID)!)
+		
 		switch items?.state {
 		case "UNUSED":
 			tagLabel.text = "未使用"
+			tagLabel.textColor = UIColor(red: 117/255, green: 189/255, blue: 71/255, alpha: 1.0)
+			qrBarImage.image = ScanCodeManager().createQRCode(url:(items?.ItemID)!)
+		case "USED":
+			tagLabel.text = "已使用"
+			tagLabel.textColor = UIColor(red: 205/255, green: 176/255, blue: 62/255, alpha: 1.0)
+		case "OVERDUED":
+			tagLabel.text = "已过期"
+			tagLabel.textColor = UIColor(red: 206/255, green: 81/255, blue: 46/255, alpha: 1.0)
 		default:
 			break
 			

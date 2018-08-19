@@ -69,7 +69,8 @@
         <activity android:name=".CouponsDetailsActivity" />
         <activity android:name=".BindAccountActivity" />
         <activity android:name=".MyOrderActivity" />
-        <activity android:name=".OrderDetailActivity"></activity>
+        <activity android:name=".OrderDetailActivity" />
+        <activity android:name=".UserSettingActivity"></activity>
     </application>
 
 </manifest>

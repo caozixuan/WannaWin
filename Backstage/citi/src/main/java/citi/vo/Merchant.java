@@ -62,7 +62,8 @@ public class Merchant {
     }
 
     public enum BusinessType {
-        normal, catering, exercise, bank, costume, education, communication;
+        normal, catering, exercise, bank, costume, education, communication,
+        operator, aviation, hotel, supermarket, movie;
 
         static Map<String, BusinessType> enumMap1 = new HashMap<>();
         static Map<BusinessType, String> enumMap2 = new HashMap<>();
@@ -75,6 +76,12 @@ public class Merchant {
             enumMap1.put("costume", costume);
             enumMap1.put("education", education);
             enumMap1.put("communication", communication);
+            enumMap1.put("operator", operator);
+            enumMap1.put("aviation", aviation);
+            enumMap1.put("hotel", hotel);
+            enumMap1.put("supermarket", supermarket);
+            enumMap1.put("movie", movie);
+
 
             enumMap2.put(normal, "normal");
             enumMap2.put(catering, "catering");
@@ -83,6 +90,11 @@ public class Merchant {
             enumMap2.put(costume, "costume");
             enumMap2.put(education, "education");
             enumMap2.put(communication, "communication");
+            enumMap2.put(operator, "operator");
+            enumMap2.put(aviation, "aviation");
+            enumMap2.put(hotel, "hotel");
+            enumMap2.put(supermarket, "supermarket");
+            enumMap2.put(movie, "movie");
         }
 
         public static BusinessType getBusinessType(String businessType) {
@@ -131,9 +143,6 @@ public class Merchant {
         this.businessType = BusinessType.getBusinessTypeString(businessType);
     }
 
-    public CardType getCardType() {
-        return CardType.getCardType(cardType);
-    }
 
     public String getActivityTheme() {
         return activityTheme;
@@ -220,6 +229,14 @@ public class Merchant {
 
     public BusinessType getBusinessType() {
         return BusinessType.getBusinessType(businessType);
+    }
+
+    public void setBusinessType(BusinessType businessType) {
+        this.businessType = BusinessType.getBusinessTypeString(businessType);
+    }
+
+    public CardType getCardType() {
+        return CardType.getCardType(cardType);
     }
 
     public void setCardType(CardType cardType) {

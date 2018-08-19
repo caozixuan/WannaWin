@@ -13,75 +13,246 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <!--阴影-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- 你的View放在这里 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shadow" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="154dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView_order_logo"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="fitCenter"
-            />
 
-        <TextView
-            android:id="@+id/textView_order_business_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="星巴克"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_finish_business" />
+            >
+            <android.support.v7.widget.CardView
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="false">
+                <LinearLayout
+                    android:layout_marginTop="80dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_gravity="center"
+                        android:text="抵扣通用点"
+                        android:textColor="#858585"
+                        android:textSize="16sp"
+                        />
 
-    </LinearLayout>
+                    <!--花费通用点-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorLightOrange"
+                            android:text="- "
+                            android:textStyle="bold"
+                            android:textSize="28sp"/>
+                        <TextView
+                            android:id="@+id/textView_order_userPoints"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorLightOrange"
+                            android:text="XX.XX"
+                            android:textStyle="bold"
+                            android:textSize="28sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorLightOrange"
+                            android:text="P"
+                            android:textStyle="bold"
+                            android:textSize="28sp"/>
+                    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:orientation="vertical">
+                    <!--商家名称-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="商家名称"
+                            android:textColor="#858585"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textView_order_business_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="星巴克"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:textColor="#CC2B2B2B"
+                            />
+                    </LinearLayout>
+                    <!--商品原价-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="商品原价"
+                            android:textColor="#858585"
+                            android:textSize="16sp"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_weight="2">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="￥"
+                                android:textAlignment="textEnd"
+                                android:textSize="16sp"
+                                android:textColor="#CC2B2B2B"/>
+                            <TextView
+                                android:id="@+id/textView_order_price_before"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="XX.XX"
+                                android:textAlignment="textEnd"
+                                android:textSize="16sp"
+                                android:textColor="#CC2B2B2B"
+                                />
+                        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView_order_userPoints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    </LinearLayout>
+                    <!--抵后价格-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="抵扣后价"
+                            android:textColor="#858585"
+                            android:textSize="16sp"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_weight="2">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="￥"
+                                android:textAlignment="textEnd"
+                                android:textSize="16sp"
+                                android:textColor="#CC2B2B2B"/>
+                            <TextView
+                                android:id="@+id/textView_order_price_after"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="XX.XX"
+                                android:textAlignment="textEnd"
+                                android:textSize="16sp"
+                                android:textColor="#CC2B2B2B"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <!--消费时间-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="消费时间"
+                            android:textColor="#858585"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textView_order_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="2018-08-03 09:10:00"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:textColor="#CC2B2B2B"
+                            />
+                    </LinearLayout>
+
+
+
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/textView_order_price_before"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/textView_order_price_after"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            />
-    </LinearLayout>
+            android:layout_alignParentTop="true">
+
+                <ImageView
+                    android:id="@+id/imageView_order_logo"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/loading_card" />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
 
 </LinearLayout>

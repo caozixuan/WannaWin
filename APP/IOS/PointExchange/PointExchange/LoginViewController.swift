@@ -9,19 +9,14 @@
 import UIKit
 import Alamofire
 
-class LoginViewController: UITableViewController{
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var loginButton: UITableViewCell!
-    
-    
-    var activityIndicator:UIActivityIndicatorView?
+class LoginViewController: UIViewController,LoginViewDelegate{
+	@IBOutlet weak var loginView: LoginView!
+	var activityIndicator:UIActivityIndicatorView?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        passwordField.delegate=self
-        usernameField.delegate=self
+		loginView.delegate = self
     }
     
 
@@ -29,20 +24,17 @@ class LoginViewController: UITableViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // 点击事件
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0{
-            ServerConnector.login(phoneNum: usernameField.text!, password: passwordField.text!, callback: login)
-            // 加载动画
-            self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.tableView)
-            self.activityIndicator?.startAnimating()
-            
-        }
-    }
+	
+	func login() {
+		ServerConnector.login(phoneNum: loginView.usernameField.text!, password: loginView.passwordField.text!, callback: afterLogin)
+		// 加载动画
+		self.activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		self.activityIndicator?.startAnimating()
+	}
+	
     
     // 登录完成后的操作
-    func login(result:Bool){
+    func afterLogin(result:Bool){
         if result == true {
             self.saveUserInfo()
             
@@ -77,24 +69,6 @@ class LoginViewController: UITableViewController{
         User.saveToKeychain()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
-        cell.selectionStyle = .none
-        return cell
-        
-    }
-    
-    // 每次输入完后判断输入是否合法
-    @IBAction func isInputValid(_ sender: Any) {
-        if usernameField.text != "" && passwordField.text != "" {
-            loginButton.contentView.backgroundColor = UIColor.blue
-            loginButton.isUserInteractionEnabled = true
-        }
-        else{
-            loginButton.contentView.backgroundColor = UIColor.lightGray
-            loginButton.isUserInteractionEnabled = false
-        }
-    }
-    
+	
     
 }

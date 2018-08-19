@@ -14,36 +14,30 @@ import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 
 @Component
 public class RecommendTask {
-    //@Autowired
-    //private RecommendService recommendService;
-
-    @Scheduled(cron="0/5 * * * * ? ") //间隔5秒执行
-    public void test(){
-        System.out.println("定时任务开始啦，哈哈哈");
-        System.out.println("<<<---------结束执行HR数据同步任务--------->>>");
-    }
+    @Autowired
+    private RecommendService recommendService;
 
     /*
      * 更新商户相似度
      */
     //@Scheduled(cron="0 0 24 * * ?")
     //@Scheduled(cron="0/30 * * * * ? ")
-    /*
 
 
+    @Scheduled(cron="0 0 2 * * ?")
     public void updateMerchantSimilarities(){
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ArrayList<RecommendService.MerchantPoints> merchantPoints = recommendService.getMerchantPointsArray();
         for(int i=0;i<merchantPoints.size()-1;i++){
             for(int j=i;j<merchantPoints.size();j++){
-                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(i).points);
+                double similarity = cosineSimilarity(merchantPoints.get(i).points,merchantPoints.get(j).points);
                 String merchantID1 = merchantPoints.get(i).merchantID;
                 String merchantID2 = merchantPoints.get(j).merchantID;
                 results.add(new MerchantSimilarity(merchantID1,merchantID2, similarity));
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("MerchantSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"MerchantSimilarity.txt"));
             for(MerchantSimilarity result:results){
                 oos.writeObject(result);
             }
@@ -57,7 +51,7 @@ public class RecommendTask {
         }
     }
 
-    //@Scheduled(cron="0 0 23 * * ?")
+    @Scheduled(cron="0 0 1 * * ?")
     public void updateItemSimilarities(){
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ArrayList<RecommendService.ItemPoints> itemPoints = recommendService.getItemPointsArray();
@@ -70,7 +64,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("ItemSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"ItemSimilarity.txt"));
             for(ItemSimilarity result:results){
                 oos.writeObject(result);
             }
@@ -83,5 +77,5 @@ public class RecommendTask {
             e.printStackTrace();
         }
     }
-     */
+
 }

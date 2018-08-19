@@ -39,7 +39,7 @@ class OrdersViewController: UIViewController {
 		couponController.title = "优惠券"
 		let offlineController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "OfflineHistoryViewController")
 //		let offlineController = OfflineHistoryViewController(nibName: "OfflineHistoryViewController", bundle: nil)
-		offlineController.title = "线下活动"
+		offlineController.title = "线下支付"
 		controllerArray.append(couponController)
 		controllerArray.append(offlineController)
 		

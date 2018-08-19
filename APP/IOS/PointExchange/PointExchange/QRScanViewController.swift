@@ -23,6 +23,9 @@ class QRScanViewController: UIViewController {
 		timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(refreshCode), userInfo: nil, repeats: true)
 		timer?.fire()
 	}
+	override func viewWillDisappear(_ animated: Bool) {
+		timer?.invalidate()
+	}
     @objc func refreshCode(){
         ServerConnector.pollizngQR(timestamp: timeStamp, callback: refreshCallback)
     }

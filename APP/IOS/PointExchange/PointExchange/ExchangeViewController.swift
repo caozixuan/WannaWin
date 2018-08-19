@@ -9,11 +9,20 @@
 import UIKit
 import SwiftyJSON
 
+struct CellData {
+    var sourcePoints: String
+    var editSourcePoints: String
+    var targetPoints: String
+    var isSelected: Bool
+}
+
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
 	var dataSource: [Card]?
-    var selectedList: [Bool]? //用于记住选中的项，防止cell重用导致的选中错乱
-    var selectedResult: [Int]?
+    var selectedList: [Bool]? // 用于记住选中的项，防止cell重用导致的选中错乱
+    var cellDataList = [CellData]() // 用于存下所有数据
+    var firstTime: [Bool]?
+    var allCell = [ExchangeItemCellView]()
     
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
@@ -51,7 +60,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.tableView.contentInset.bottom = 60
-
 		
     }
 
@@ -59,6 +67,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if dataSource != nil {
             selectedList = Array(repeating: false, count: (dataSource?.count)!)
+            firstTime = Array(repeating: true, count: (dataSource?.count)!)
 			return (dataSource?.count)!
 		}else {
 			return 0
@@ -79,13 +88,34 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 				exchangeItemCellView.delegate = self
 				exchangeItemCellView.editSourcePoints?.tag = indexPath.row
 				if let card = dataSource?[indexPath.row]{
-					exchangeItemCellView.storeName.text = card.merchant?.name
-					exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
-					exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
-					exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
-					exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
-					exchangeItemCellView.proportion = card.proportion
-                    exchangeItemCellView.checkbox.isSelected = (selectedList?[indexPath.row])!
+                    
+                    // 不变的量
+                    exchangeItemCellView.storeName.text = card.merchant?.name
+                    exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+                    exchangeItemCellView.proportion = card.proportion
+                    
+                    if (firstTime?[indexPath.row])! { // 初始化数据
+                        
+                        exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+                        exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
+                        exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
+                        exchangeItemCellView.checkbox.isSelected = false
+                        
+                        // 保存数据到数组中
+                        let cellData = CellData(sourcePoints: String(format:"%.2f", card.points), editSourcePoints: String(format:"%.2f", card.points), targetPoints: String(format:"%.2f", card.points * (card.proportion)!), isSelected: false)
+                        cellDataList.append(cellData)
+                        firstTime?[indexPath.row] = false
+                        
+                        // 获得所有cell，用于全选逻辑
+                        allCell.append(exchangeItemCellView)
+                    }
+                    else { // 后续更新数据
+                        exchangeItemCellView.sourcePoints.text = cellDataList[indexPath.row].sourcePoints
+                        exchangeItemCellView.editSourcePoints.text = cellDataList[indexPath.row].editSourcePoints
+                        exchangeItemCellView.targetPoints.text = cellDataList[indexPath.row].targetPoints
+                        exchangeItemCellView.checkbox.isSelected = cellDataList[indexPath.row].isSelected
+                        allCell[indexPath.row] = exchangeItemCellView
+                    }
 				}
                 break
 			}
@@ -126,26 +156,35 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.contentInset.bottom = 60
         }
     }
-    
 	
 	//MARK: - Target Action
     /// 全选积分项
 	@objc func selectAllCell() {
         // 选中所有的单元格
-        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
-        var indexPath:IndexPath
-        var cell:UITableViewCell?
-        for row in 0..<cellNumber {
-            indexPath = IndexPath(row: row, section: 0)
-            cell = tableView.cellForRow(at: indexPath)
-            for subview in (cell?.contentView.subviews)!{
-                if subview .isKind(of: ExchangeItemCellView.self){
-                    let exchangeItemCellView = subview as! ExchangeItemCellView
-                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
-                    break
-                }
-            }
-        }
+//        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
+//        var indexPath:IndexPath
+//        var cell:UITableViewCell?
+//        for row in 0..<cellNumber {
+//            indexPath = IndexPath(row: row, section: 0)
+//
+//            cell = tableView.cellForRow(at: indexPath)
+//
+//            if cell != nil {
+//                //定于到该行cell（此方法可以用于解决cell被遮挡的问题）
+//                self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
+//                cell = tableView.cellForRow(at: indexPath)
+//            }
+//
+//            for subview in (cell?.contentView.subviews)!{
+//                if subview .isKind(of: ExchangeItemCellView.self){
+//                    let exchangeItemCellView = subview as! ExchangeItemCellView
+//                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+//                    break
+//                }
+//            }
+//        }
+        
+        
         
         // 选中所有可见的单元格
 //        for cell in tableView.visibleCells {
@@ -160,9 +199,21 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         // 改变按钮名称
         if self.navigationItem.rightBarButtonItem?.title == "全选" {
             self.navigationItem.rightBarButtonItem?.title = "全不选"
+            for cell in allCell {
+                if cell.checkbox.isSelected == false {
+                    cell.perform(#selector(cell.checkboxClick), with: cell.checkbox)
+                }
+
+            }
         }
         else {
             self.navigationItem.rightBarButtonItem?.title = "全选"
+            for cell in allCell {
+                if cell.checkbox.isSelected == true {
+                    cell.perform(#selector(cell.checkboxClick), with: cell.checkbox)
+                }
+
+            }
         }
         
 	}
@@ -177,26 +228,48 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 			
 		default: //minus
 			pointsSum -= Double(text)!
-			pointsSumLabel.text = String(format:"%.2f", pointsSum)
-			let indexPath = IndexPath(row: row, section: 0)
-			let cell = self.tableView.cellForRow(at: indexPath)
-			for subview in (cell?.contentView.subviews)!{
-				if subview .isKind(of: ExchangeItemCellView.self){
-					let exchangeItemCellView = subview as! ExchangeItemCellView
-					if let card = dataSource?[row]{
-						exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
-						exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
-						exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
-					}
-                    break
-				}
-			}
+            if String(format:"%.2f", pointsSum) == "-0.00" { //排除误差
+                pointsSumLabel.text = "0.00"
+            }
+            else {
+                pointsSumLabel.text = String(format:"%.2f", pointsSum)
+            }
+			
+            
+            if let card = dataSource?[row]{
+                 allCell[row].sourcePoints.text = String(format:"%.2f", card.points)
+                 allCell[row].editSourcePoints.placeholder = String(format:"%.2f", card.points)
+                 allCell[row].targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
+            }
+            
+//            let indexPath = IndexPath(row: row, section: 0)
+//            let cell = self.tableView.cellForRow(at: indexPath)
+//            for subview in (cell?.contentView.subviews)!{
+//                if subview .isKind(of: ExchangeItemCellView.self){
+//                    let exchangeItemCellView = subview as! ExchangeItemCellView
+//                    if let card = dataSource?[row]{
+//                        exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+//                        exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+//                        exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
+//                    }
+//                    break
+//                }
+//            }
+            
 		}
 	}
     
     /// 标记选中状态
     func setSelected(tag: Int, isSelected: Bool) {
-        selectedList?[tag] = isSelected
+        //selectedList?[tag] = isSelected
+        cellDataList[tag].isSelected = isSelected
+        
+    }
+    
+    func setData(_ tag: Int, _ sourcePoints: String, _ editSourcePoints:String, _ targetPoints: String) {
+        cellDataList[tag].sourcePoints = sourcePoints
+        cellDataList[tag].editSourcePoints = editSourcePoints
+        cellDataList[tag].targetPoints = targetPoints
     }
 	
     // MARK: - 兑换积分网络请求
@@ -204,12 +277,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         var allUnselected = true
         
         // 判断是否有选择积分项
-        if let list = selectedList {
-            for item in list {
-                if item {
-                    allUnselected = false
-                    break
-                }
+        for item in cellDataList {
+            if item.isSelected {
+                allUnselected = false
+                break
             }
         }
         
@@ -223,8 +294,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         
         // 获得选中积分项数据
         //let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
-        var indexPath:IndexPath
-        var cell:UITableViewCell?
+        //var indexPath:IndexPath
+        //var cell:UITableViewCell?
         
         var chosenMerchantList = [ChooseMerchants]()
         var chosenMerchant:ChooseMerchants
@@ -244,30 +315,51 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 //            }
 //        }
         
-        if let list = selectedList {
-            for (row,item) in list.enumerated() {
-                if item {
-                    indexPath = IndexPath(row: row, section: 0)
-                    cell = tableView.cellForRow(at: indexPath)
-                    for subview in (cell?.contentView.subviews)!{
-                        if subview .isKind(of: ExchangeItemCellView.self){
-                            let exchangeItemCellView = subview as! ExchangeItemCellView
-                            
-                            //避免发送“0.00”导致后台出错
-                            if exchangeItemCellView.sourcePoints.text! == "0.00" {
-                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
-                            }
-                            else {
-                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
-                            }
-                            chosenMerchantList.append(chosenMerchant)
-                            chosenMerchantNames.append((dataSource?[row].merchant?.name)!)
-                        }
-                    }
-                }
-            }
-        }
+//        if let list = selectedList {
+//            for (row,item) in list.enumerated() {
+//                if item {
+//                    indexPath = IndexPath(row: row, section: 0)
+//                    cell = tableView.cellForRow(at: indexPath)
+//
+//                    if cell == nil {
+//                        //定于到该行cell（此方法可以用于解决cell被遮挡的问题）
+//                        self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
+//                        cell = tableView.cellForRow(at: indexPath)
+//                    }
+//
+//                    for subview in (cell?.contentView.subviews)!{
+//                        if subview .isKind(of: ExchangeItemCellView.self){
+//                            let exchangeItemCellView = subview as! ExchangeItemCellView
+//
+//                            //避免发送“0.00”导致后台出错
+//                            if exchangeItemCellView.sourcePoints.text! == "0.00" {
+//                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
+//                            }
+//                            else {
+//                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
+//                            }
+//                            chosenMerchantList.append(chosenMerchant)
+//                            chosenMerchantNames.append((dataSource?[row].merchant?.name)!)
+//                        }
+//                    }
+//                }
+//            }
+//        }
         
+        for (row,cell) in cellDataList.enumerated() {
+            if cell.isSelected {
+                //避免发送“0.00”导致后台出错
+                if cell.sourcePoints == "0.00" {
+                    chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
+                }
+                else {
+                    chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: cell.sourcePoints)
+                }
+                chosenMerchantList.append(chosenMerchant)
+                chosenMerchantNames.append((dataSource?[row].merchant?.name)!)
+            }
+            
+        }
         
         
         // 进行网络请求和后续跳转的数据准备

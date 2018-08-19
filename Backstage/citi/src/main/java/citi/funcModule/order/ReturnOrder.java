@@ -7,8 +7,10 @@ import java.sql.Timestamp;
 
 public class ReturnOrder extends Order {
     private String merchantName;
-    public ReturnOrder(String orderId, double originalPrice, double priceAfter, double pointsNeeded, String userId, String state, String merchantId, Timestamp time, MerchantMapper merchantMapper) {
-        super(orderId, originalPrice, priceAfter, pointsNeeded, userId, state, merchantId, time);
-        this.merchantName = merchantMapper.selectByID(merchantId).getName();
+    private String merchantLogoURL;
+    public ReturnOrder(Order order, String merchantName, String merchantLogoURL) {
+        super(order.getOrderId(), order.getOriginalPrice(), order.getPriceAfter(), order.getPointsNeeded(), order.getUserId(), order.getState().toString(), order.getMerchantId(), order.getTime());
+        this.merchantName = merchantName;
+        this.merchantLogoURL = merchantLogoURL;
     }
 }

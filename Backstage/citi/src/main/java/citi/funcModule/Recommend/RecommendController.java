@@ -1,11 +1,12 @@
 package citi.funcModule.Recommend;
 
 
+import citi.support.resultjson.SerializeGson;
 import citi.vo.Item;
+
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -13,8 +14,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
 
 /**
  *协同过滤的推荐算法
@@ -27,7 +33,6 @@ public class RecommendController {
     Gson gson;
     @Autowired
     RecommendService recommendService;
-
 
     /**
      * 用户第一次登录后，初始化自己的偏好
@@ -73,16 +78,20 @@ public class RecommendController {
     @ResponseBody
     @RequestMapping("/getRecommendedItems")
     public String getRecommendedItems(String userID){
+        if(userID==null){
+            userID = "06bef837-9ad4-4e8e-9d3d-f20275d6fcb5";
+        }
         return gson.toJson(recommendService.getRecommendedItems(userID,3));
     }
 
     @ResponseBody
     @RequestMapping("/getRecommendedMerchants")
     public String getRecommendedMerchants(String userID){
-        return gson.toJson(recommendService.getRecommendedMerchants(userID));
+        if(userID==null){
+            userID = "06bef837-9ad4-4e8e-9d3d-f20275d6fcb5";
+        }
+        return SerializeGson.GSON.toJson(recommendService.getRecommendedMerchants(userID));
     }
-
-
 
 
 //    /**

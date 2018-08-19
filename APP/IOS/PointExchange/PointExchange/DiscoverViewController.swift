@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import AFImageHelper
+import Kingfisher
 
 class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchBar: UISearchBar!
@@ -55,13 +55,19 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 					let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickImage(_:)))
 					self.couponView.images[i].addGestureRecognizer(tapGesture)
 					self.couponView.images[i].isUserInteractionEnabled = true
-					_ = UIImage.image(fromURL: items[i].logoURL!, placeholder: UIImage(named: "正在加载")!,shouldCacheImage: true){(image:UIImage?) in
-						if image != nil{
-							self.couponView.images[i].image = image
-						}
-						
+					let imageURL = URL(string: (items[i].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+					self.couponView.images[i].kf.indicatorType = .activity
+					self.couponView.images[i].kf.setImage(with: imageURL){(image, error, cacheType, imageUrl) in
+						self.couponView.images[i].viewWithTag(1)?.isHidden = false
 					}
-				}			}
+					let couponNameLabel = UILabel()
+					couponNameLabel.text = items[i].name
+					couponNameLabel.font = UIFont.systemFont(ofSize: 12)
+					couponNameLabel.textColor = UIColor.white
+					couponNameLabel.frame = CGRect(x: 10, y: 100, width: 150, height: 28)
+					self.couponView.imageViews[i].addSubview(couponNameLabel)
+				}
+			}
 		}
 		
 		self.tableView.register(UINib(nibName: "DsMerchantTableViewCell", bundle: nil), forCellReuseIdentifier: "merchantCell")

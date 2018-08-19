@@ -14,7 +14,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
-    var activityIndicator:UIActivityIndicatorView?
 	
 	//图片轮播组件
 	var imageScroller : ImageScrollerViewController!

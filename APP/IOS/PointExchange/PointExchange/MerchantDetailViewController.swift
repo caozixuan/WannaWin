@@ -67,14 +67,28 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 			self.offlineView.frame = CGRect(x: offlineView.frame.origin.x, y: offlineView.frame.origin.y, width: width, height: offlineView.frame.height)
 			self.offlineScrollView.contentSize = CGSize(width: width, height: self.offlineView.frame.height)
 		}
-		for i in 0...offlineActivities.count-1{
-			let x = i*196
-			let y = self.offlineView.center.y - 65
-			
-			let view = OfflineCardView(frame: CGRect(x: x, y: Int(y), width: 180, height: 130))
-			view.image.imageFromURL(offlineActivities[i].imageURL!, placeholder: UIImage())
-			self.offlineView.addSubview(view)
+		if offlineActivities.count > 0{
+			for i in 0...offlineActivities.count-1{
+				let x = i*196
+				let y = self.offlineView.center.y - 65
+				
+				let view = OfflineCardView(frame: CGRect(x: x, y: Int(y), width: 180, height: 130))
+				view.image.imageFromURL(offlineActivities[i].imageURL!, placeholder: UIImage())
+				let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickActivity(_:)))
+				view.addGestureRecognizer(tapGesture)
+				view.isUserInteractionEnabled = true
+				view.tag = i
+				self.offlineView.addSubview(view)
+				
+			}
 		}
+	}
+	
+	@objc func clickActivity(_ sender:UITapGestureRecognizer){
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "ActivityDetailViewController") as! ActivityDetailViewController
+		vc.activity = offlineActivities[(sender.view?.tag)!]
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 
     override func didReceiveMemoryWarning() {

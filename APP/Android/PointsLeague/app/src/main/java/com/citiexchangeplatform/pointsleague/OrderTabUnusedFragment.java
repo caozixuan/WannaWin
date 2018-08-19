@@ -103,15 +103,16 @@ public class OrderTabUnusedFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
-                        String description = jObj.getString("description");
                         String itemName = jObj.getString("itemName");
+                        String description = jObj.getString("description");
+                        String points = jObj.getString("points");
                         String time = jObj.getString("getTime");
                         String validityTerm = jObj.getString("overdueTime");
                         //String logoURL  = "http://www.never-give-it-up.top/wp-content/uploads/2018/07/zhouheiya_logo.png";
                         String logoURL = jObj.getString("logoURL");
                         String itemID = jObj.getString("ItemID");
 
-                        orderAdapter.addData(itemName,description,time,validityTerm,logoURL,itemID,"unused");
+                        orderAdapter.addData(itemName,points,description,time,validityTerm,logoURL,itemID,"unused");
 
                     }
 
