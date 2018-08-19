@@ -1,11 +1,11 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 import java.io.Serializable;
 
 public class ItemSimilarity implements Serializable {
-    String itemID1;
-    String itemID2;
-    double similarity;
+    public String itemID1;
+    public String itemID2;
+    public double similarity;
 
     public ItemSimilarity(String itemID1, String itemID2, double similarity) {
         this.itemID1 = itemID1;
