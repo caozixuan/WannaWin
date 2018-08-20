@@ -108,21 +108,10 @@ public class AccountFragment extends Fragment {
                         startActivity(intentToOrder);
                         break;
                     case 2:
-                        Intent intentToBind = new Intent(getContext(), BindAccountActivity.class);
-                        startActivity(intentToBind);
-                        break;
-                    case 3:
-                        Intent intentToGeneral = new Intent(getContext(), GeneralSettingActivity.class);
+                        Intent intentToGeneral = new Intent(getContext(), SettingActivity.class);
                         startActivity(intentToGeneral);
                         break;
-                    case 4:
-                        Intent intentToFeedback = new Intent(getContext(), FeedbackActivity.class);
-                        startActivity(intentToFeedback);
-                        break;
-                    case 5:
-                        Intent intentToAbout = new Intent(getContext(), AboutUsActivity.class);
-                        startActivity(intentToAbout);
-                        break;
+
                 }
             }
         });

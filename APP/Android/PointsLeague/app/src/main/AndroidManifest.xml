@@ -70,7 +70,8 @@
         <activity android:name=".BindAccountActivity" />
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".OrderDetailActivity" />
-        <activity android:name=".UserSettingActivity"></activity>
+        <activity android:name=".UserSettingActivity" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>
