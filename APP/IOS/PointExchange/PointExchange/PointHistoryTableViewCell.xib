@@ -18,11 +18,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="lmz-tr-vzD">
-                        <rect key="frame" x="30" y="-4" width="1" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="lmz-tr-vzD">
+                        <rect key="frame" x="30" y="0.0" width="2" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="2" id="NcC-81-R5X"/>
+                            <constraint firstAttribute="height" constant="70" id="VFe-G9-rzq"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="point" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4A-tb-m8b">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="point" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4A-tb-m8b">
                         <rect key="frame" x="274.5" y="7" width="52.5" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <nil key="textColor"/>
@@ -43,8 +46,8 @@
                         <color key="textColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxn-Ps-VL3">
-                        <rect key="frame" x="58" y="8.5" width="42.5" height="26.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxn-Ps-VL3">
+                        <rect key="frame" x="58" y="8" width="200.5" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -52,9 +55,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Y4A-tb-m8b" firstAttribute="centerY" secondItem="EXL-L5-dKA" secondAttribute="centerY" id="0qY-HZ-wyE"/>
+                    <constraint firstItem="lmz-tr-vzD" firstAttribute="top" secondItem="Pdz-R0-yaU" secondAttribute="top" id="5Ea-7B-Zbq"/>
+                    <constraint firstItem="Y4A-tb-m8b" firstAttribute="leading" secondItem="uxn-Ps-VL3" secondAttribute="trailing" constant="16" id="CBq-kE-IUr"/>
                     <constraint firstItem="uxn-Ps-VL3" firstAttribute="centerY" secondItem="EXL-L5-dKA" secondAttribute="centerY" id="EUp-3l-ge2"/>
                     <constraint firstAttribute="trailing" secondItem="Y4A-tb-m8b" secondAttribute="trailing" constant="16" id="T2h-Up-dUR"/>
                     <constraint firstItem="uxn-Ps-VL3" firstAttribute="leading" secondItem="EXL-L5-dKA" secondAttribute="trailing" constant="17" id="hm2-a9-DZ5"/>
+                    <constraint firstItem="lmz-tr-vzD" firstAttribute="leading" secondItem="Pdz-R0-yaU" secondAttribute="leading" constant="30" id="tfI-9v-4n8"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>

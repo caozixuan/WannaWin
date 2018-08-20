@@ -352,6 +352,7 @@
 			children = (
 				84A96885212AE30D00EF5BA8 /* HomePageTab */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
+				3ED5F6E1212A895D00F46E7C /* SignUpView.swift */,
 				3ED5F6D32122985C00F46E7C /* MerchantCouponTableViewCell.swift */,
 				84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */,
 				84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */,
@@ -362,7 +363,6 @@
 				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
 				3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */,
 				3ED5F6D12122892900F46E7C /* OfflineCardView.swift */,
-				3ED5F6E1212A895D00F46E7C /* SignUpView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
