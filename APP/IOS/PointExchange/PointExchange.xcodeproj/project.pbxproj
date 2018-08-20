@@ -69,6 +69,7 @@
 		844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 844CF6E0211EC05600B232DF /* LICENSE.txt */; };
 		847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */; };
 		84A968732121C5A000EF5BA8 /* ExchangedPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */; };
+		84A968762129551F00EF5BA8 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A968752129551F00EF5BA8 /* SignUpView.xib */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -170,6 +171,7 @@
 		844CF6E0211EC05600B232DF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishExchangeToGeneralViewController.swift; sourceTree = "<group>"; };
 		84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangedPointsCell.swift; sourceTree = "<group>"; };
+		84A968752129551F00EF5BA8 /* SignUpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B66CFB1D20F88A18007165DF /* YDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenu.swift; path = YDMenu/YDMenu.swift; sourceTree = "<group>"; };
@@ -243,14 +245,12 @@
 		3E46B77820F254C900843193 /* UserTab */ = {
 			isa = PBXGroup;
 			children = (
+				84A968742128548E00EF5BA8 /* General Setting */,
+				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
 				3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */,
 				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
 				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
-				3E4C155B20EE0117000743C0 /* SettingViewController.swift */,
-				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
 				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
-				B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */,
-				B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */,
 				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
 				B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */,
 				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
@@ -449,6 +449,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		84A968742128548E00EF5BA8 /* General Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155B20EE0117000743C0 /* SettingViewController.swift */,
+				B6A6EC4620F0A8220079FFA4 /* FeedbackViewController.swift */,
+				B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */,
+			);
+			name = "General Setting";
+			sourceTree = "<group>";
+		};
 		B66CFB1C20F889FF007165DF /* YDMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C480652100C143002ED9C9 /* LoginView.xib */,
+				84A968752129551F00EF5BA8 /* SignUpView.xib */,
 				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
 				3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */,
 				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
@@ -558,6 +569,7 @@
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
 				3EA3CD052102472000B0392E /* ExchangeItemCellView.xib in Resources */,
 				3E23A754211E94A600D19749 /* DiscoverCouponView.xib in Resources */,
+				84A968762129551F00EF5BA8 /* SignUpView.xib in Resources */,
 				3ED5F6D02122888400F46E7C /* OfflineCardView.xib in Resources */,
 				3E5FD379211ECCA600ECE558 /* DsMerchantTableViewCell.xib in Resources */,
 				B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */,

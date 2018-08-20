@@ -40,7 +40,7 @@ import java.util.List;
 
 public class PointsFragment extends Fragment {
 
-    boolean isLogin;
+    boolean wasLogin;
 
     View view;
     LinearLayout accountInfoLayout;
@@ -58,6 +58,7 @@ public class PointsFragment extends Fragment {
         accountInfoLayout = (LinearLayout) view.findViewById(R.id.linearlayout_account_info_points);
 
         initImageSlider();
+
         //loadAccountInfo();
         //状态栏文字图标暗色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
@@ -66,15 +67,7 @@ public class PointsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
-
-    /**
-     * 初始化推广轮播内容
-     */
     private void initImageSlider() {
 
         SliderLayout sliderLayout = (SliderLayout) view.findViewById(R.id.slider_main);
@@ -85,7 +78,6 @@ public class PointsFragment extends Fragment {
         imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic1.jpg");
         imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic2.jpg");
         imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic3.jpg");
-
 
         for (int i = 0; i < imageUrls.size(); i++) {
             DefaultSliderView sv = new DefaultSliderView(getActivity());
@@ -107,11 +99,8 @@ public class PointsFragment extends Fragment {
     }
 
 
-    private void loadAccountInfo() {
-        accountInfoLayout.removeAllViewsInLayout();
-        isLogin = LogStateInfo.getInstance(getContext()).isLogin();
-
-        if (isLogin) {
+    private void loadMainContent() {
+        if (LogStateInfo.getInstance(getContext()).isLogin()) {
             content = LayoutInflater.from(getContext()).inflate(R.layout.content_cards_points, null);
             accountInfoLayout.addView(content);
             Button buttonAllCard = (Button) content.findViewById(R.id.button_all_card_main);
@@ -131,7 +120,6 @@ public class PointsFragment extends Fragment {
                 }
             });
 
-            cardPointsAdapter = new CardPointsAdapter(getContext());
             recyclerView = (RecyclerView) content.findViewById(R.id.recyclerView_cards_points);
             recyclerView.setLayoutManager(
                     new ScaleLayoutManager
@@ -139,6 +127,7 @@ public class PointsFragment extends Fragment {
                     .setOrientation(OrientationHelper. HORIZONTAL)
                     .build());
             new CenterSnapHelper().attachToRecyclerView(recyclerView);
+            cardPointsAdapter = new CardPointsAdapter(getContext());
             recyclerView.setAdapter(cardPointsAdapter);
             recyclerView.setItemAnimator( new DefaultItemAnimator());
 
@@ -180,12 +169,22 @@ public class PointsFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        loadMainContent();
+        wasLogin = LogStateInfo.getInstance(getContext()).isLogin();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        System.out.println("12345");
-        loadAccountInfo();
+        if(wasLogin != LogStateInfo.getInstance(getContext()).isLogin()){
+            accountInfoLayout.removeAllViewsInLayout();
+            loadMainContent();
+        }
 
-        if (isLogin) {
+        if (LogStateInfo.getInstance(getContext()).isLogin()) {
+            cardPointsAdapter.clearAll();
             showCardInfo();
             showPoints(content);
         }

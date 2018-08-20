@@ -86,6 +86,16 @@ public class DetailFindActivity extends AppCompatActivity {
 
         toolBar();
 
+        initRecyclerView();
+
+        getMerchantInfo();
+
+        getListItems();
+
+        getActivities();
+    }
+
+    private void initRecyclerView(){
         recyclerView2 = (RecyclerView)findViewById(R.id.recyclerView_detail_find);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(DetailFindActivity.this);
         recyclerView2.setLayoutManager(layoutManager2);
@@ -104,15 +114,9 @@ public class DetailFindActivity extends AppCompatActivity {
         detailActivityAdapter = new DetailActivityAdapter(DetailFindActivity.this);
         recyclerView1.setAdapter(detailActivityAdapter);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
-
-        getInfos();
-
-        loadListItems();
-
-        loadActivities();
     }
 
-    public void toolBar(){
+    private void toolBar(){
         TitleBar titleBar = (TitleBar) findViewById(R.id.toolbar_detail_find);
         titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("返回");
@@ -129,7 +133,7 @@ public class DetailFindActivity extends AppCompatActivity {
         titleBar.setTitleColor(Color.BLACK);
     }
 
-    private void getInfos() {
+    private void getMerchantInfo() {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/merchant/getSingleInfo")
@@ -175,7 +179,7 @@ public class DetailFindActivity extends AppCompatActivity {
                 });
     }
 
-    private void loadListItems(){
+    private void getListItems(){
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/item/getMerchantItems")
@@ -229,7 +233,7 @@ public class DetailFindActivity extends AppCompatActivity {
                 });
     }
 
-    private void loadActivities(){
+    private void getActivities(){
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/activity/getMerchantActivities")
