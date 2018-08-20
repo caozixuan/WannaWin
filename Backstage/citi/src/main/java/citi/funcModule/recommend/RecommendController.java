@@ -1,4 +1,4 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 
 import citi.support.resultjson.SerializeGson;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
  *协同过滤的推荐算法
  */
 
-@RequestMapping(value = {"/recommend"},produces = {"text/html;charset=UTF-8"})
+@RequestMapping(value = {"/recommend"},produces = {"text/json;charset=UTF-8"})
 @Controller
 public class RecommendController {
     @Autowired

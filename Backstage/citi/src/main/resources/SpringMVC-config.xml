@@ -18,8 +18,6 @@
     <task:scheduler id="myTask" pool-size="5" />
     <!-- 自动注解 @Controller类，使得能够分发以及获得json转换等一系列支持-->
     <mvc:annotation-driven />
-    <!-- 资源文件配置，静态访问，不被DispatcherServlet所分发 -->
-    <mvc:resources mapping="/citi/img/**" location="/img/"/>
     <!-- 扫描的包路径，所有需要自动装配的包都需要扫描 -->
     <context:component-scan base-package="citi.*"/>
     <!-- 引入资源文件，在引入的地方可以使用占位符使用value值 -->
