@@ -13,6 +13,7 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 
 	
 	@IBOutlet weak var webView: WKWebView!
+    var closeBtn: UIBarButtonItem!
 	var backBtn: UIBarButtonItem!
 	var forwardBtn: UIBarButtonItem!
 	var refreshBtn: UIBarButtonItem!
@@ -21,19 +22,22 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		backBtn = UIBarButtonItem(title: "后退", style: .plain, target: self, action: #selector(HuaQiStoreWebViewController.onButtonsClicked(_:)))
+        
+		backBtn = UIBarButtonItem(title: "后退", style: .plain, target: self, action: #selector(AddBankCardViewController.onButtonsClicked(_:)))
 		backBtn.tag = 1
 		
-		forwardBtn = UIBarButtonItem(title: "前进", style: .plain, target: self, action: #selector(HuaQiStoreWebViewController.onButtonsClicked(_:)))
+		forwardBtn = UIBarButtonItem(title: "前进", style: .plain, target: self, action: #selector(AddBankCardViewController.onButtonsClicked(_:)))
 		forwardBtn.tag = 2
 		
-		refreshBtn = UIBarButtonItem(title: "刷新", style: .plain, target: self, action: #selector(HuaQiStoreWebViewController.onButtonsClicked(_:)))
+		refreshBtn = UIBarButtonItem(title: "刷新", style: .plain, target: self, action: #selector(AddBankCardViewController.onButtonsClicked(_:)))
 		refreshBtn.tag = 3
 		
-		self.navigationItem.leftBarButtonItems = [backBtn,forwardBtn]
+        closeBtn = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(AddBankCardViewController.onButtonsClicked(_:)))
+        closeBtn.tag = 4
+        
+		self.navigationItem.leftBarButtonItems = [closeBtn,backBtn,forwardBtn]
 		self.navigationItem.rightBarButtonItem = refreshBtn
-		
-		
+
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +49,6 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 		self.webView?.uiDelegate = self
 		self.webView?.navigationDelegate = self
 	}
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 	func refreshButtonState() {
 		if (self.webView?.canGoBack)! {
@@ -64,6 +64,21 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 		else {
 			self.forwardBtn.isEnabled = false
 		}
-		
 	}
+    
+    @objc func onButtonsClicked(_ sender:UIBarButtonItem) {
+        switch (sender.tag) {
+        case 1:
+            self.webView.goBack()
+            self.refreshButtonState()
+        case 2:
+            self.webView.goForward()
+            self.refreshButtonState()
+        case 4:
+            self.navigationController?.popViewController(animated: true)
+        default:
+            self.webView.reload()
+        }
+    }
+
 }

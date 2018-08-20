@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--用户设置-->
+        <scene sceneID="CRR-EZ-Mtq">
+            <objects>
+                <viewController storyboardIdentifier="UserSettingViewController" title="用户设置" id="tjj-zw-oBZ" customClass="UserSettingViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wr9-hS-PfB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91s-vI-8e6">
+                                <rect key="frame" x="0.0" y="64" width="375" height="159"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portrait_1userTabMe" translatesAutoresizingMaskIntoConstraints="NO" id="fVT-Fl-YSw">
+                                        <rect key="frame" x="123" y="15" width="128" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fVT-Fl-YSw" secondAttribute="height" multiplier="1:1" id="P7s-jN-zeW"/>
+                                            <constraint firstAttribute="width" constant="128" id="yK9-HN-ugx"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="fVT-Fl-YSw" firstAttribute="centerX" secondItem="91s-vI-8e6" secondAttribute="centerX" id="RQ4-XT-TK0"/>
+                                    <constraint firstAttribute="height" constant="159" id="d3I-UY-3u9"/>
+                                    <constraint firstItem="fVT-Fl-YSw" firstAttribute="centerY" secondItem="91s-vI-8e6" secondAttribute="centerY" id="weX-vR-uHp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71g-NN-gal" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="8" y="287" width="359" height="128"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a8z-4N-F9x">
+                                        <rect key="frame" x="4" y="4" width="351" height="120"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="0oA-pi-aNG"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bindCell" rowHeight="60" id="wUQ-Sv-0JQ">
+                                                <rect key="frame" x="0.0" y="28" width="351" height="60"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wUQ-Sv-0JQ" id="fxy-m6-svs">
+                                                    <rect key="frame" x="0.0" y="0.0" width="318" height="59.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="绑定花旗账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sD9-T0-GP9">
+                                                            <rect key="frame" x="52" y="16" width="104" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="账户" translatesAutoresizingMaskIntoConstraints="NO" id="Y90-C9-GIb">
+                                                            <rect key="frame" x="15" y="11" width="29" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="modifyPasswordCell" rowHeight="60" id="TJs-7W-Wu8">
+                                                <rect key="frame" x="0.0" y="88" width="351" height="60"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TJs-7W-Wu8" id="yl2-zw-pUM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="318" height="59.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="修改密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3u-h4-Q8V">
+                                                            <rect key="frame" x="52" y="16" width="70" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="修改密码" translatesAutoresizingMaskIntoConstraints="NO" id="Ppa-fY-H6x">
+                                                            <rect key="frame" x="15" y="11" width="29" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <sections/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="a8z-4N-F9x" secondAttribute="bottom" constant="4" id="0tb-FB-c7T"/>
+                                    <constraint firstAttribute="trailing" secondItem="a8z-4N-F9x" secondAttribute="trailing" constant="4" id="Jdx-9X-Rt3"/>
+                                    <constraint firstItem="a8z-4N-F9x" firstAttribute="top" secondItem="71g-NN-gal" secondAttribute="top" constant="4" id="unR-qx-wpq"/>
+                                    <constraint firstItem="a8z-4N-F9x" firstAttribute="leading" secondItem="71g-NN-gal" secondAttribute="leading" constant="4" id="vZB-9s-6jD"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="0.17999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="45T-gX-E8I" firstAttribute="trailing" secondItem="71g-NN-gal" secondAttribute="trailing" constant="8" id="8I2-fO-YzO"/>
+                            <constraint firstItem="91s-vI-8e6" firstAttribute="top" secondItem="45T-gX-E8I" secondAttribute="top" id="IeI-C9-Wlp"/>
+                            <constraint firstItem="71g-NN-gal" firstAttribute="leading" secondItem="45T-gX-E8I" secondAttribute="leading" constant="8" id="K2Z-8l-tIc"/>
+                            <constraint firstItem="91s-vI-8e6" firstAttribute="leading" secondItem="45T-gX-E8I" secondAttribute="leading" id="dy2-qi-6iZ"/>
+                            <constraint firstItem="71g-NN-gal" firstAttribute="top" secondItem="91s-vI-8e6" secondAttribute="bottom" constant="64" id="pt7-Ji-XD1"/>
+                            <constraint firstItem="91s-vI-8e6" firstAttribute="trailing" secondItem="45T-gX-E8I" secondAttribute="trailing" id="uG2-5W-4Ul"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="45T-gX-E8I"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="用户设置" id="sCm-fa-Iy0"/>
+                    <connections>
+                        <outlet property="portraitImage" destination="fVT-Fl-YSw" id="HiK-Kf-7xv"/>
+                        <outlet property="tableView" destination="a8z-4N-F9x" id="WMe-QY-Vv1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="glb-oy-lO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3414" y="-2429"/>
+        </scene>
+        <!--修改密码-->
+        <scene sceneID="N2r-cO-LGH">
+            <objects>
+                <viewController storyboardIdentifier="ModifyPasswordViewController" title="修改密码" id="dtu-nO-Us5" customClass="ModifyPasswordViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tlb-o9-con">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DnA-8N-vAd" customClass="ModifyPasswordView" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="89" width="375" height="558"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="tEl-G7-D8v"/>
+                    </view>
+                    <connections>
+                        <outlet property="modifyPasswordView" destination="DnA-8N-vAd" id="CUj-dB-3ma"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAf-zt-fxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3414" y="-1648"/>
+        </scene>
+        <!--用户设置相关-->
+        <scene sceneID="zIn-1J-uc3">
+            <objects>
+                <navigationController title="用户设置相关" id="qdK-uO-Zkd" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kq2-9P-xrd">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tjj-zw-oBZ" kind="relationship" relationship="rootViewController" id="KTt-wy-EgQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3a-d2-MNF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2290" y="-2429"/>
+        </scene>
+        <!--绑定花旗账户-->
+        <scene sceneID="gm1-M7-2qr">
+            <objects>
+                <viewController storyboardIdentifier="AddBankCardViewController" title="绑定花旗账户" id="3Io-ht-QRm" customClass="AddBankCardViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yqy-ZQ-gV3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfZ-ZH-idC">
+                                <rect key="frame" x="0.0" y="54" width="375" height="613"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ec4-TV-s26"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="vfZ-ZH-idC" id="kXR-xk-RyN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xcZ-K7-um7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4484" y="-2429"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="portrait_1userTabMe" width="128" height="128"/>
+        <image name="修改密码" width="64" height="64"/>
+        <image name="账户" width="54" height="48"/>
+    </resources>
+</document>

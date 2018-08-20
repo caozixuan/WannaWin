@@ -26,7 +26,7 @@
                             <constraint firstAttribute="width" constant="2" id="mQl-5h-TS9"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7M7-hl-fWh">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7M7-hl-fWh">
                         <rect key="frame" x="64" y="12" width="40" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,7 +57,7 @@
                 </constraints>
             </tableViewCellContentView>
             <constraints>
-                <constraint firstItem="swy-jJ-WHQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="29.5" id="86R-aM-sZO"/>
+                <constraint firstItem="swy-jJ-WHQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="86R-aM-sZO"/>
                 <constraint firstItem="njF-e1-oar" firstAttribute="trailing" secondItem="swy-jJ-WHQ" secondAttribute="trailing" priority="250" constant="287.5" id="Q7v-ty-eLn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

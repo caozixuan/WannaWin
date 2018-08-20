@@ -88,6 +88,8 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 			cell = self.tableView.dequeueReusableCell(withIdentifier: "ruleCell")!
 		default:
 			cell = self.tableView.dequeueReusableCell(withIdentifier: "unbindCell")!
+            // 去除最后一行的分割线
+            cell.separatorInset = UIEdgeInsetsMake(0,0, 0, cell.bounds.size.width)
 		}
 		cell.selectionStyle = UITableViewCellSelectionStyle.none
 		return cell
