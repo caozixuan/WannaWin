@@ -165,16 +165,17 @@ public class PayingActivity extends AppCompatActivity {
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setDividerColor(Color.parseColor("#d3d3d3"));
+        titleBar.setBackgroundColor(Color.WHITE);
         //设置字体大小
-        titleBar.setHeight(toolBarHeight*2);
-        titleBar.setTitleSize(titleSize);
-        titleBar.setLeftTextSize(actionTitleSize);
-        titleBar.setSubTitleSize(actionTitleSize);
+        //titleBar.setHeight(toolBarHeight*2);
+        //titleBar.setTitleSize(titleSize);
+        //titleBar.setLeftTextSize(actionTitleSize);
+        //titleBar.setSubTitleSize(actionTitleSize);
 
         //左侧
         titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
         titleBar.setLeftText("首页");
-        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftTextColor(getResources().getColor(R.color.colorLightOrange));
 
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +205,7 @@ public class PayingActivity extends AppCompatActivity {
         });
 
         //沉浸式
-        titleBar.setImmersive(true);
+        //titleBar.setImmersive(true);
     }
 
     public static boolean hasKitKat() {

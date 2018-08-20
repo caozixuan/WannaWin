@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 import com.android.volley.AuthFailureError;
@@ -43,6 +45,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
     List<RecordParent> recordList;
     ExpandableAdapter adapter;
     VExpandableAdapter expandableAdapter;
+    ToggleButton toggleButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,31 +57,34 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
 
         vertical(recyclerView);
 
+
         getPointsExchangeRecordRequest();
 
-        findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+
+        toggleButton = (ToggleButton)findViewById(R.id.togglebutton);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
-            public void onClick(View v) {
-
-                expandableAdapter.getRecordList().clear();
-                getPointsExchangeRecordRequest();
-
-                expandableAdapter.notifyDataSetChanged();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                if(isChecked){
+                    expandableAdapter.expandAllGroup();
+                }else{
+                    expandableAdapter.collapseAllGroup();
+                }
             }
         });
 
-        findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandableAdapter.collapseAllGroup();
-            }
-        });
-        findViewById(R.id.open).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandableAdapter.expandAllGroup();
-            }
-        });
+        //refresh
+        //findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //
+        //        expandableAdapter.getRecordList().clear();
+        //        getPointsExchangeRecordRequest();
+        //
+        //        expandableAdapter.notifyDataSetChanged();
+        //    }
+        //});
+
 
 
         //调用方法,传入一个接口回调
@@ -102,6 +108,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         expandableAdapter = new VExpandableAdapter(PointsExchangeExpandListActivity.this);
         recyclerView.setAdapter(expandableAdapter);
+        expandableAdapter.collapseAllGroup();
 
 
     }
@@ -131,10 +138,11 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
+        //titleBar.setDividerColor(Color.GRAY);
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
+        titleBar.setBackgroundColor(Color.WHITE);
         titleBar.setLeftText("返回");
-        titleBar.setLeftTextColor(Color.BLACK);
+        titleBar.setLeftTextColor(getResources().getColor(R.color.colorLightOrange));
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,7 +203,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
                             RecordChild recordChild = new RecordChild();
                             String businessName = child.getString("merchantName");
                             int usePoints = child.getInt("points_card");
-                            double exchangePoints = child.getInt("points_citi");
+                            double exchangePoints = child.getDouble("points_citi");
 
                             //保留两位小数
                             NumberFormat nf = NumberFormat.getNumberInstance();
@@ -206,8 +214,8 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
                             String result = nf.format(exchangePoints);
 
                             recordChild.name = businessName;
-                            recordChild.usePoints = "使用积分: " + String.valueOf(usePoints);
-                            recordChild.exchangePoints = "兑换积分: " + result;
+                            recordChild.usePoints = String.valueOf(usePoints);
+                            recordChild.exchangePoints = result;
                             date = String.valueOf(child.getString("time"));
                             recordChildList.add(recordChild);
 
@@ -221,7 +229,7 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
                         // 如果不需要四舍五入，可以使用RoundingMode.DOWN
                         nf.setRoundingMode(RoundingMode.UP);
                         String result = nf.format(total);
-                        recordParent.totalExchangePoint = "总兑换积分" + result;
+                        recordParent.totalExchangePoint = result;
                         recordParent.date = date;
                         recordParent.childs = recordChildList;
                         expandableAdapter.addData(recordParent);

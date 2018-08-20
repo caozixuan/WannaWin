@@ -23,8 +23,16 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		
 		//隐藏导航栏，设置滑动偏移量来隐藏刷新的白边
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
+		// 下拉加载
 		scrollView.contentOffset = CGPoint(x: 0, y: 20)
+		scrollView.es.addPullToRefresh{ [unowned self] in
+			
+			self.scrollView.es.stopPullToRefresh(ignoreDate: true)
+			self.scrollView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+		}
     }
+	
+	
 
     
 	// MARK: - 图片轮播组件协议
