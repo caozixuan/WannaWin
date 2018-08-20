@@ -11,6 +11,9 @@ import UIKit
 class SettingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
 	@IBOutlet weak var tableView: UITableView!
+    
+    let storyBoard = UIStoryboard(name:"GeneralSetting", bundle:nil)
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
 		tableView.delegate = self
@@ -72,14 +75,12 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
 	}
     
 	func feedback(){
-        let storyBoard = UIStoryboard(name:"User", bundle:nil)
         let view = storyBoard.instantiateViewController(withIdentifier: "FeedbackViewController")
         view.navigationItem.title = "反馈"
         self.navigationController!.pushViewController(view, animated: true)
 	}
     
 	func about(){
-        let storyBoard = UIStoryboard(name:"User", bundle:nil)
         let view = storyBoard.instantiateViewController(withIdentifier: "AboutViewController")
         view.navigationItem.title = "关于"
         self.navigationController!.pushViewController(view, animated: true)
