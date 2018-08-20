@@ -49,7 +49,7 @@ class ExchangeHistoryViewController: UIViewController {
 			cell?.isUserInteractionEnabled = false
 			cell?.dateLabel.text = element.time
 			cell?.pointLabel.text = "-" + String(stringInterpolationSegment: element.pointsCard!)
-			cell?.citiPointLabel.text = "+" + String(stringInterpolationSegment: element.pointsCiti!)
+			cell?.citiPointLabel.text = "+" + String(stringInterpolationSegment: element.pointsCiti!) + "P"
 			return cell!
 		})
 		observable.bind(to: self.tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)

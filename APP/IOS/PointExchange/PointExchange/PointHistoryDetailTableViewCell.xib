@@ -57,7 +57,7 @@
                 </constraints>
             </tableViewCellContentView>
             <constraints>
-                <constraint firstItem="swy-jJ-WHQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="29.5" id="86R-aM-sZO"/>
+                <constraint firstItem="swy-jJ-WHQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="86R-aM-sZO"/>
                 <constraint firstItem="njF-e1-oar" firstAttribute="trailing" secondItem="swy-jJ-WHQ" secondAttribute="trailing" priority="250" constant="287.5" id="Q7v-ty-eLn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
