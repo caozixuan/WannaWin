@@ -89,6 +89,7 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
     @Override
     public void onBindGroupViewHolder(final GroupVH holder, final int position) {
         Log.d(TAG, "onBindGroupViewHolder: " + position + " " + holder);
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,15 +104,29 @@ public class VExpandableAdapter extends ExpandableAdapter<GroupVH, ChildVH> {
             }
         };
 
-
-
         GroupVH vh = ((GroupVH) holder);
+        //if(position == 0){
+        //    vh.timeLine.setVisibility(View.INVISIBLE);
+        //}
         //vh.date.setText(String.valueOf(getChildCount(position)));
         vh.id.setText(String.valueOf(position));
         vh.totalPoints.setText(recordList.get(position).totalExchangePoint);
         vh.date.setText(recordList.get(position).date);
-        vh.refresh.setOnClickListener(listener);
+        //vh.refresh.setOnClickListener(listener);
         //vh.refresh.setText(isExpanded(position) ? "Close" : "Open");
+
+        switch (position%3)
+        {
+            case 0:
+                vh.imageView.setImageResource(R.drawable.ic_dot_red_24dp);
+                break;
+            case 1:
+                vh.imageView.setImageResource(R.drawable.ic_dot_blue_24dp);
+                break;
+            case 2:
+                vh.imageView.setImageResource(R.drawable.ic_dot_green_24dp);
+                break;
+        }
 
 
 

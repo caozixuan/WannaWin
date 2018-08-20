@@ -87,6 +87,11 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.VH> implements
         notifyDataSetChanged();
     }
 
+    public void clearAll(){
+        sourceItems.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public Filter getFilter() {
         return new Filter() {

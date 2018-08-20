@@ -28,6 +28,7 @@ import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
 import com.leochuan.CenterSnapHelper;
 import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
+import com.study.xuan.xvolleyutil.build.PostFormBuilder;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 
-public class FindFragment extends Fragment{
+public class FindFragment extends Fragment {
 
     View view;
     RecyclerView recyclerView1;
@@ -51,32 +52,57 @@ public class FindFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_find, null);
 
-        recyclerView1 = (RecyclerView)view.findViewById(R.id.recyclerView_activity_find);
+        initRecyclerView();
+
+        initToolbar();
+
+        initSearchView();
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        findActivityAdapter.clearAll();
+        findAdapter.clearAll();
+        getRecommendedMerchants();
+        getRecommendedActivity();
+    }
+
+    private void initRecyclerView(){
+        recyclerView1 = (RecyclerView) view.findViewById(R.id.recyclerView_activity_find);
         recyclerView1.setLayoutManager(
                 new ScaleLayoutManager
-                        .Builder(getContext(),2)
+                        .Builder(getContext(), 2)
                         .setMinScale(1.0f)
-                        .setOrientation(OrientationHelper. HORIZONTAL)
+                        .setOrientation(OrientationHelper.HORIZONTAL)
                         .build());
         new CenterSnapHelper().attachToRecyclerView(recyclerView1);
         findActivityAdapter = new FindActivityAdapter(getContext());
         recyclerView1.setAdapter(findActivityAdapter);
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
-        getRecommendedActivity();
-
-        recyclerView2 = (RecyclerView)view.findViewById(R.id.recyclerView_find);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView_find);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         recyclerView2.setLayoutManager(layoutManager2);
         findAdapter = new FindAdapter(getContext());
         recyclerView2.setAdapter(findAdapter);
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
+    }
 
+    private void initToolbar(){
         TitleBar titleBar = (TitleBar) view.findViewById(R.id.toolbar_find);
         titleBar.setTitle("发现");
         titleBar.setTitleColor(Color.BLACK);
-        //titleBar.setImmersive(true);
+    }
 
+    private void initSearchView(){
         android.widget.SearchView search = view.findViewById(R.id.searchView_find);
         search.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -107,50 +133,106 @@ public class FindFragment extends Fragment{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        getCount();
-
-        return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void getRecommendedActivity() {
+        PostFormBuilder url =
+                XVolley.getInstance()
+                        .doPost()
+                        .url("http://193.112.44.141:80/citi/recommend/getRecommendedItems");
+
+        if (LogStateInfo.getInstance(getContext()).isLogin()) {
+            url = url.addParam("userID", LogStateInfo.getInstance(getContext()).getUserID());
+        }
+
+        url.build().execute(getContext(), new CallBack<String>() {
+            @Override
+            public void onSuccess(Context context, String response) {
+                System.out.println(response);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        findActivityAdapter.addData(jsonObject.getString("ItemID"), jsonObject.getString("name"), jsonObject.getString("logoURL"));
+                    }
+                    recyclerView1.scrollToPosition(findActivityAdapter.getItemCount() / 2);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                super.onError(error);
+                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
+    private void getRecommendedMerchants() {
+        PostFormBuilder url =
+                XVolley.getInstance()
+                        .doPost()
+                        .url("http://193.112.44.141:80/citi/recommend/getRecommendedMerchants");
 
-    private void getRecommendedActivity(){
-        XVolley.getInstance()
-                .doPost()
-                .url("http://193.112.44.141:80/citi/recommend/getRecommendedItems")
-                .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
-                .build()
-                .execute(getContext(), new CallBack<String>() {
-                    @Override
-                    public void onSuccess(Context context, String response) {
-                        System.out.println(response);
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for(int i = 0; i < jsonArray.length(); i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                findActivityAdapter.addData(jsonObject.getString("ItemID"),jsonObject.getString("name"),jsonObject.getString("logoURL"));
-                            }
-                            recyclerView1.scrollToPosition(findActivityAdapter.getItemCount()/2);
+        if (LogStateInfo.getInstance(getContext()).isLogin()) {
+            url = url.addParam("userID", LogStateInfo.getInstance(getContext()).getUserID());
+        }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+        url.build().execute(getContext(), new CallBack<String>() {
+            @Override
+            public void onSuccess(Context context, String response) {
+                System.out.println(response);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String merchantID = jsonObject.getString("merchantID");
+                        String name = jsonObject.getString("name");
+                        String description = jsonObject.getString("description");
+                        String businessType;
+                        switch (jsonObject.getString("businessType")) {
+                            case "catering":
+                                businessType = "餐饮";
+                                break;
+                            case "exercise":
+                                businessType = "运动";
+                                break;
+                            case "bank":
+                                businessType = "银行";
+                                break;
+                            case "costume":
+                                businessType = "服饰";
+                                break;
+                            case "education":
+                                businessType = "教育";
+                                break;
+                            case "communication":
+                                businessType = "通讯";
+                                break;
+                            default:
+                                businessType = "一般";
                         }
+                        String merchantLogoURL = jsonObject.getString("merchantLogoURL");
+                        findAdapter.addData(name, merchantID, merchantLogoURL, businessType, description);
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(VolleyError error) {
-                        super.onError(error);
-                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-                    }
-                });
+            @Override
+            public void onError(VolleyError error) {
+                super.onError(error);
+                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
-    private void getCount(){
+    private void getCount() {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/merchant/getNum")
@@ -203,7 +285,7 @@ public class FindFragment extends Fragment{
                                 String name = jsonObject.getString("name");
                                 String description = jsonObject.getString("description");
                                 String businessType;
-                                switch (jsonObject.getString("businessType")){
+                                switch (jsonObject.getString("businessType")) {
                                     case "catering":
                                         businessType = "餐饮";
                                         break;

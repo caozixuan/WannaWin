@@ -3,6 +3,7 @@ package com.citiexchangeplatform.pointsleague.vh;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.citiexchangeplatform.pointsleague.R;
@@ -19,7 +20,10 @@ public class GroupVH extends RecyclerView.ViewHolder implements RecyclerView.OnC
     public TextView id;
     public TextView totalPoints;
     public TextView date;
-    public Button refresh;
+    public ImageView imageView;
+    public View timeLine;
+    public View timeLineEnd;
+    //public Button refresh;
     private VExpandableAdapter.MyItemClickListener mListener;
 
     public GroupVH(View itemView,VExpandableAdapter.MyItemClickListener myItemClickListener) {
@@ -32,7 +36,11 @@ public class GroupVH extends RecyclerView.ViewHolder implements RecyclerView.OnC
         id = itemView.findViewById(R.id.textView_id);
         totalPoints = itemView.findViewById(R.id.textView_total_exchange_points);
         date = itemView.findViewById(R.id.textView_exchange_date);
-        refresh = itemView.findViewById(R.id.refresh);
+        imageView = itemView.findViewById(R.id.imageView_history_exchange_item);
+        timeLine = itemView.findViewById(R.id.timeline);
+        timeLineEnd = itemView.findViewById(R.id.timeline_end);
+
+        //refresh = itemView.findViewById(R.id.refresh);
     }
 
     @Override

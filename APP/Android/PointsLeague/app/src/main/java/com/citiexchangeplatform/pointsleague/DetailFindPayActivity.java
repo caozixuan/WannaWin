@@ -47,6 +47,9 @@ public class DetailFindPayActivity extends AppCompatActivity {
 
         toolBar();
 
+        Intent intent = getIntent();
+        itemID = intent.getStringExtra("itemID");
+
         imageViewLogo = (ImageView) findViewById(R.id.imageView_detail_find_pay);
         textViewPoints = (TextView) findViewById(R.id.textView_points_detail_find_pay);
         textViewDescription = (TextView) findViewById(R.id.textView_description_detail_find_pay);
@@ -79,12 +82,6 @@ public class DetailFindPayActivity extends AppCompatActivity {
             }
         });
 
-
-        Intent intent = getIntent();
-        itemID = intent.getStringExtra("itemID");
-
-        loadInfo(itemID);
-
         Button buttonBuy = findViewById(R.id.button_buy_detail_find_pay);
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +89,9 @@ public class DetailFindPayActivity extends AppCompatActivity {
                 tryPay(itemID);
             }
         });
+
+
+        getInfo(itemID);
 
     }
 
@@ -146,7 +146,7 @@ public class DetailFindPayActivity extends AppCompatActivity {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
-    private void loadInfo(String itemID){
+    private void getInfo(String itemID){
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/item/itemDetail")
@@ -199,6 +199,10 @@ public class DetailFindPayActivity extends AppCompatActivity {
     }
 
     private void tryPay(String itemID){
+        if( ! LogStateInfo.getInstance(DetailFindPayActivity.this).isLogin()){
+            Toast.makeText(DetailFindPayActivity.this, "请登录后兑换", Toast.LENGTH_LONG).show();
+            return;
+        }
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/item/buyMultiple")
