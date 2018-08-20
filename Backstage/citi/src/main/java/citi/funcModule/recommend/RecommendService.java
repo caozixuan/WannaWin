@@ -193,7 +193,7 @@ public class RecommendService {
         ArrayList<ItemSimilarity> results = new ArrayList<ItemSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream(this.getClass().getClassLoader().getResource(".")+"ItemSimilarity.txt"));
+            ois = new ObjectInputStream(this.getClass().getClassLoader().getResourceAsStream("ItemSimilarity.txt"));
             while (true) {
                 ItemSimilarity itemSimilarity = (ItemSimilarity) ois.readObject();
                 results.add(itemSimilarity);
@@ -390,7 +390,7 @@ public class RecommendService {
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream(this.getClass().getClassLoader().getResource(".")+"MerchantSimilarity.txt"));
+            ois = new ObjectInputStream(this.getClass().getClassLoader().getResourceAsStream("MerchantSimilarity.txt"));
             while (true) {
                     MerchantSimilarity merchantSimilarity = (MerchantSimilarity) ois.readObject();
                     results.add(merchantSimilarity);
