@@ -26,7 +26,7 @@ public class PayCodeFinishActivity extends AppCompatActivity {
     private TextView usePoints;
     private TextView originalPrice;
     private TextView currentPrice;
-    private TextView name;
+    //private TextView name;
 
     private ImageView logo;
 
@@ -116,12 +116,12 @@ public class PayCodeFinishActivity extends AppCompatActivity {
         //当前价格
         currentPrice = (TextView)findViewById(R.id.textView_current_price);
         //商家名称
-        name = (TextView)findViewById(R.id.textView_merchant_name_paying_finish);
+        //name = (TextView)findViewById(R.id.textView_merchant_name_paying_finish);
 
-        name.setText(merchantName);
-        usePoints.setText("-"+usePoint+"通用积分");
-        originalPrice.setText("原价 ￥"+originalPrices);
-        currentPrice.setText("抵后 ￥"+currentPrices);
+        //name.setText(merchantName);
+        usePoints.setText(String.valueOf(usePoint));
+        originalPrice.setText(String.valueOf(originalPrices));
+        currentPrice.setText(String.valueOf(currentPrices));
 
         Glide.with(PayCodeFinishActivity.this)
                 .load(logoURL)
@@ -244,7 +244,7 @@ public class PayCodeFinishActivity extends AppCompatActivity {
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
+
         titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
         titleBar.setLeftText("返回");
         titleBar.setLeftTextColor(Color.BLACK);

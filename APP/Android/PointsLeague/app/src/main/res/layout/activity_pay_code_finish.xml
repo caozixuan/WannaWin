@@ -4,148 +4,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".PaymentFinishActivity">
+    android:orientation="vertical">
 
     <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="154dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView_scan_finish_business"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/rv_finish_points"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.257"
-            app:srcCompat="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/textView_merchant_name_paying_finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="商家名"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_finish_points"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView_points_usedTotal"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:text="支付成功"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_finish_business" />
-
-        <TextView
-            android:id="@+id/textView_points_usedTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="使用通用积分数"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_finish_points"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_original_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="原价"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textView_current_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="现价"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <!--阴影-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorBackground"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_ad"
+        android:layout_height="wrap_content">
+        <!-- 你的View放在这里 -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_height="5dp"
+            android:background="@drawable/shadow" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="5dp"
+                app:cardPreventCornerOverlap="false">
+            </android.support.v7.widget.CardView>
+        </FrameLayout>
 
         <LinearLayout
-            android:id="@+id/id_dots_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#84171717"
+            android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="4dp"
-            android:visibility="visible">
+            android:layout_marginTop="35dp">
 
-            <TextView
-                android:id="@+id/id_image_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/imageView_scan_finish_business"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:text="这个是描述"
-                android:textColor="#ffffff" />
+                android:src="@drawable/nike_logo" />
 
             <LinearLayout
-                android:id="@+id/id_dots"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/dotsgroupbg"
-                android:orientation="horizontal"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp" />
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="#FF9546"
+                    android:textSize="32sp" />
+                <TextView
+                    android:id="@+id/textView_points_usedTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XX.XX"
+                    android:textColor="#FF9546"
+                    android:textSize="32sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P"
+                    android:textColor="#FF9546"
+                    android:textSize="32sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="抵扣成功"
+                android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:textSize="32sp"
+                android:textColor="#9A8616"/>
+
+            <TextView
+                android:id="@+id/textView_current_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XX.XX"
+                android:textSize="32sp"
+                android:textColor="#9A8616"/>
         </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textSize="18sp"
+                    android:textColor="#858585"/>
+
+                <TextView
+                    android:id="@+id/textView_original_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XX.XX"
+                    android:textSize="18sp"
+                    android:textColor="#858585"/>
+            </LinearLayout>
+
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="280dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+                <!--<ImageView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:src="@drawable/loading_card"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:adjustViewBounds="true"-->
+                    <!--/>-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_ad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/loading_card"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/id_dots_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:background="#00000000"
+                        android:orientation="vertical"
+                        android:padding="4dp"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/id_image_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="这个是描述"
+                            android:textColor="#ffffff" />
+
+                        <LinearLayout
+                            android:id="@+id/id_dots"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/dotsgroupbg"
+                            android:orientation="horizontal"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>
