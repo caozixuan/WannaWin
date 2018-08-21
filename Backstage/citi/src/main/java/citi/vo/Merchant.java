@@ -25,10 +25,6 @@ public class Merchant {
     @Expose
     private Double proportion;
     @Expose
-    private String activityTheme;
-    @Expose
-    private String activityDescription;
-    @Expose
     private String cardType;
     @Expose
     private String businessType;
@@ -109,7 +105,7 @@ public class Merchant {
 
 
     //for DB
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, String cardType, String businessType) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String cardType, String businessType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -119,15 +115,13 @@ public class Merchant {
         this.merchantLogoURL = merchantLogoURL;
         this.cardLogoURL = cardLogoURL;
         this.proportion = proportion;
-        this.activityTheme = activityTheme;
-        this.activityDescription = activityDescription;
         this.cardType = cardType;
         this.businessType = businessType;
     }
 
 
     //for programmer
-    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, String activityTheme, String activityDescription, CardType cardType, BusinessType businessType) {
+    public Merchant(String merchantID, String name, String password, String description, String cardDescription, String address, String merchantLogoURL, String cardLogoURL, Double proportion, CardType cardType, BusinessType businessType) {
         this.merchantID = merchantID;
         this.name = name;
         this.password = password;
@@ -137,28 +131,10 @@ public class Merchant {
         this.merchantLogoURL = merchantLogoURL;
         this.cardLogoURL = cardLogoURL;
         this.proportion = proportion;
-        this.activityTheme = activityTheme;
-        this.activityDescription = activityDescription;
         this.cardType = CardType.getCardTypeString(cardType);
         this.businessType = BusinessType.getBusinessTypeString(businessType);
     }
 
-
-    public String getActivityTheme() {
-        return activityTheme;
-    }
-
-    public void setActivityTheme(String activityTheme) {
-        this.activityTheme = activityTheme;
-    }
-
-    public String getActivityDescription() {
-        return activityDescription;
-    }
-
-    public void setActivityDescription(String activityDescription) {
-        this.activityDescription = activityDescription;
-    }
 
     public Merchant() {
     }

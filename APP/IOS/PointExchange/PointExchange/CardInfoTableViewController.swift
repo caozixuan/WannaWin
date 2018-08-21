@@ -52,6 +52,7 @@ class CardInfoTableViewController: UITableViewController {
 		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "MerchantChooseTableViewController") as! MerchantChooseTableViewController
 		self.navigationController!.pushViewController(view, animated: true)
+        self.activityIndicator?.stopAnimating()
 	}
 	
 	

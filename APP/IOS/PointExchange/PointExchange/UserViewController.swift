@@ -9,7 +9,10 @@
 import UIKit
 
 class UserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-	@IBOutlet weak var logoutBtn: UIButton!
+    
+    @IBOutlet weak var portrait: UIImageView!
+    @IBOutlet weak var portraitBg: UIView!
+    @IBOutlet weak var logoutBtn: UIButton!
 	@IBOutlet weak var locationLabel: UILabel!
 	@IBOutlet weak var loginBtn: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
@@ -26,8 +29,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.rowHeight = 60
-		
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +44,12 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 			self.locationLabel.isHidden = false
 			self.logoutBtn.isHidden = false
 			self.nameLabel.isHidden = false
+            
+            self.portrait.isUserInteractionEnabled = true
+            let tap1 = UITapGestureRecognizer(target: self, action: #selector(goToUserSetting(_:)))
+            let tap2 = UITapGestureRecognizer(target: self, action: #selector(goToUserSetting(_:)))
+            self.portrait.addGestureRecognizer(tap1)
+            self.portraitBg.addGestureRecognizer(tap2)
 		}
 		else{
 			self.nameLabel.text = "未登录"
@@ -53,12 +60,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 			
 		}
 	}
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    //MARK: - Table view data source
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 3
 	}
@@ -92,6 +95,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
                 checkPointRecord()
 			// 通用设置
 			case 2:
+                let storyBoard = UIStoryboard(name:"GeneralSetting", bundle:nil)
 				let view = storyBoard.instantiateViewController(withIdentifier: "SettingViewController")
 				self.navigationController?.pushViewController(view, animated: true)
             default:
@@ -109,25 +113,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
 
-    
-    /// 绑定花旗账户
-    func bindAccount(){
-        if let _ = User.getUser().username{
-			activityIndicator?.startAnimating()
-			ServerConnector.bindCitiCard { (result, url) in
-				if result {
-					let view = self.storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController") as! AddBankCardViewController
-					view.url = url
-					self.navigationController?.pushViewController(view, animated: true)
-				}
-			}
-			
-        }else{
-            let view = storyBoard.instantiateViewController(withIdentifier:"LoginViewController")
-            self.navigationController?.pushViewController(view, animated: true)
-        }
-    }
-    
     /// 查看积分兑换记录
     func checkPointRecord(){
         if let _ = User.getUser().username{
@@ -152,6 +137,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationController?.pushViewController(view, animated: true)
         }
     }
+    
 	@IBAction func logoutBtnClick(_ sender: Any) {
 		let alert = UIAlertController(title:"退出登录", message:"是否确认退出登录？", preferredStyle:.alert)
 		let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
@@ -171,4 +157,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 		self.navigationController!.pushViewController(view, animated: true)
 	}
+    
+    @objc func goToUserSetting(_ tap:UITapGestureRecognizer){
+        let storyBoard = UIStoryboard(name:"UserSetting", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "UserSettingViewController")
+        self.navigationController!.pushViewController(view, animated: true)
+    }
+    
 }

@@ -4,9 +4,6 @@ import java.util.Date;
 
 public class Block {
 
-    // @Expose(serialize = false, deserialize = false)
-    final public transient Block previousBlock;
-
     private String hash;
     final public String previousHash;
     final public BC_Data data;
@@ -33,7 +30,6 @@ public class Block {
 
     //Ctor
     public Block(Block previousBlock, String previousHash, BC_Data data) {
-        this.previousBlock = previousBlock;
         this.previousHash = previousHash;
         this.data = data;
         this.timeStamp = new Date().getTime();

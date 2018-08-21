@@ -62,7 +62,7 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
 			cell?.oval.image = UIImage(named: "Oval_red")
 		}
 		
-        cell?.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray[section].totalPoints!)
+        cell?.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray[section].totalPoints!) + "P"
         cell?.dateLabel.text = pointsHistoryArray[section].historyMerchants![0].time!
         return cell!
     }
@@ -83,7 +83,7 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
         // 商家积分
         cell?.merchantPointLabel.text = "-" + String(stringInterpolationSegment: pointsHistoryArray[indexPath.section].historyMerchants![indexPath.row-1].pointsCard!)
         // 通用点
-        cell?.pointLabel.text = "+" + String(stringInterpolationSegment: pointsHistoryArray[indexPath.section].historyMerchants![indexPath.row-1].pointsCiti!)
+        cell?.pointLabel.text = "+" + String(stringInterpolationSegment: pointsHistoryArray[indexPath.section].historyMerchants![indexPath.row-1].pointsCiti!) + "P"
         
         return cell!
     }

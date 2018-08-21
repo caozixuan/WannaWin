@@ -15,7 +15,7 @@ import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 @Component
 public class RecommendTask {
     @Autowired
-    private RecommendService recommendService;
+    private citi.funcModule.Recommend.RecommendService recommendService;
 
     /*
      * 更新商户相似度
@@ -37,7 +37,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"MerchantSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getClassLoader().getResource(".")+"MerchantSimilarity.txt"));
             for(MerchantSimilarity result:results){
                 oos.writeObject(result);
             }
@@ -64,7 +64,7 @@ public class RecommendTask {
             }
         }
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getResource(".")+"ItemSimilarity.txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(this.getClass().getClassLoader().getResource(".")+"ItemSimilarity.txt"));
             for(ItemSimilarity result:results){
                 oos.writeObject(result);
             }

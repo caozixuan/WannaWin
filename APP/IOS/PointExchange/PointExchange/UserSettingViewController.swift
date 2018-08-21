@@ -9,26 +9,39 @@
 import UIKit
 import AFImageHelper
 
-class UserSettingViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UserSettingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var picker:UIImagePickerController?
-
+    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var portraitImage: UIImageView!
+    
+    // 等待动画
+    var activityIndicator:UIActivityIndicatorView?
+    
+    let storyBoard = UIStoryboard(name: "UserSetting", bundle: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        // 隐藏tableView最后一个cell的分割线
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.1))
+        tableView.tableFooterView = view
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+        
         self.tableView.reloadData()
+        
+        portraitImage.isUserInteractionEnabled = true
         let imageClickGuesture = UITapGestureRecognizer(target: self, action: #selector(UserSettingViewController.changePortrait))
         portraitImage.addGestureRecognizer(imageClickGuesture)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @objc func changePortrait(){
@@ -59,45 +72,51 @@ class UserSettingViewController: UITableViewController, UIImagePickerControllerD
     }
 
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.destination.isKind(of: EditTableViewController.self){
-            let view = segue.destination as! EditTableViewController
-            switch segue.identifier {
-            case "edit username":
-                view.textPlaceholder = User.getUser().username
-                view.title = "设置用户名"
-                view.changedType = "username"
-            case "edit nickname":
-                view.textPlaceholder = User.getUser().nickname
-                view.title = "设置昵称"
-                view.changedType = "nickname"
-            default:
-                break;
-            }
-        }
-        
+    // MARK: - Table view data source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(self.tableView, cellForRowAt: indexPath)
-        portraitImage.image=User.getUser().getPortraitImage().roundCornersToCircle()
-        if indexPath.section == 1 {
-            switch indexPath.row{
-            case 0:
-                cell.detailTextLabel?.text = User.getUser().nickname
-            case 1:
-                cell.detailTextLabel?.text = User.getUser().username!
-            default:
-                break;
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "bindCell")
+            cell?.selectionStyle = .none
+            return cell!
+        case 1:
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "modifyPasswordCell")
+            cell?.selectionStyle = .none
+            return cell!
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
+        switch indexPath.row{
+        // 绑定花旗账户
+        case 0:
+            bindAccount()
+        // 修改密码
+        case 1:
+            let view = storyBoard.instantiateViewController(withIdentifier: "ModifyPasswordViewController") as! ModifyPasswordViewController
+            self.navigationController?.pushViewController(view, animated: true)
+        default:
+            break;
+        }
+    }
+    
+    /// 绑定花旗账户
+    func bindAccount(){
+        activityIndicator?.startAnimating()
+        ServerConnector.bindCitiCard { (result, url) in
+            if result {
+                let view = self.storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController") as! AddBankCardViewController
+                view.url = url
+                self.navigationController?.pushViewController(view, animated: true)
+                self.activityIndicator?.stopAnimating()
             }
         }
-        return cell
-        
     }
     
     

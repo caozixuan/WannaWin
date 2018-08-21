@@ -60,6 +60,7 @@
 		3ED5F6DC2124242800F46E7C /* HistoryCouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */; };
 		3ED5F6DE2126975200F46E7C /* HistoryOfflineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */; };
 		3ED5F6E02126B1A900F46E7C /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */; };
+		3ED5F6E2212A895D00F46E7C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6E1212A895D00F46E7C /* SignUpView.swift */; };
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
@@ -70,6 +71,13 @@
 		847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */; };
 		84A968732121C5A000EF5BA8 /* ExchangedPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */; };
 		84A968762129551F00EF5BA8 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A968752129551F00EF5BA8 /* SignUpView.xib */; };
+		84A96879212ACBB100EF5BA8 /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A96878212ACBB000EF5BA8 /* ModifyPasswordViewController.swift */; };
+		84A9687B212ACCDC00EF5BA8 /* ModifyPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A9687A212ACCDC00EF5BA8 /* ModifyPasswordView.xib */; };
+		84A9687D212AD24700EF5BA8 /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */; };
+		84A9687F212ADA1500EF5BA8 /* UserSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A9687E212ADA1500EF5BA8 /* UserSetting.storyboard */; };
+		84A96884212AE25500EF5BA8 /* GeneralSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A96883212AE25500EF5BA8 /* GeneralSetting.storyboard */; };
+		84A96889212BC8F400EF5BA8 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A96888212BC8F400EF5BA8 /* PageViewController.swift */; };
+		84A9688B212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9688A212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -160,6 +168,7 @@
 		3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCouponDetailViewController.swift; sourceTree = "<group>"; };
 		3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOfflineDetailViewController.swift; sourceTree = "<group>"; };
 		3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
+		3ED5F6E1212A895D00F46E7C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,6 +181,13 @@
 		847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishExchangeToGeneralViewController.swift; sourceTree = "<group>"; };
 		84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangedPointsCell.swift; sourceTree = "<group>"; };
 		84A968752129551F00EF5BA8 /* SignUpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
+		84A96878212ACBB000EF5BA8 /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
+		84A9687A212ACCDC00EF5BA8 /* ModifyPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModifyPasswordView.xib; sourceTree = "<group>"; };
+		84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordView.swift; sourceTree = "<group>"; };
+		84A9687E212ADA1500EF5BA8 /* UserSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserSetting.storyboard; sourceTree = "<group>"; };
+		84A96883212AE25500EF5BA8 /* GeneralSetting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralSetting.storyboard; sourceTree = "<group>"; };
+		84A96888212BC8F400EF5BA8 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		84A9688A212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeResultTableViewController.swift; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B66CFB1D20F88A18007165DF /* YDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenu.swift; path = YDMenu/YDMenu.swift; sourceTree = "<group>"; };
@@ -232,7 +248,7 @@
 		3E46B76520EFE1F200843193 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				3E46B76220EFE0B400843193 /* User.storyboard */,
+				84A96881212ADDE300EF5BA8 /* UserTab */,
 				3E46B75F20EFE05500843193 /* HomePage.storyboard */,
 				3E46B75D20EFE00400843193 /* Discover.storyboard */,
 				3E46B75B20EFDFE400843193 /* Exchange.storyboard */,
@@ -246,13 +262,10 @@
 			isa = PBXGroup;
 			children = (
 				84A968742128548E00EF5BA8 /* General Setting */,
-				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
-				3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */,
-				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
+				84A96877212AAEDA00EF5BA8 /* User Setting */,
 				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
+				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
 				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
-				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
-				B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */,
 				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
 				B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */,
 				B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */,
@@ -288,6 +301,8 @@
 				3E46B76820F06E0200843193 /* CardDetailViewController.swift */,
 				3EBF049120F99854004D6D8E /* ExchangeHistoryViewController.swift */,
 				847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */,
+				84A96888212BC8F400EF5BA8 /* PageViewController.swift */,
+				84A9688A212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -341,11 +356,11 @@
 		3E8AB4C720EDBAAF00915561 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3ED5F6D32122985C00F46E7C /* MerchantCouponTableViewCell.swift */,
-				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
+				84A96885212AE30D00EF5BA8 /* HomePageTab */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
-				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
-				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
+				3ED5F6E1212A895D00F46E7C /* SignUpView.swift */,
+				3ED5F6D32122985C00F46E7C /* MerchantCouponTableViewCell.swift */,
+				84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */,
 				84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */,
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
 				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
@@ -459,6 +474,38 @@
 			name = "General Setting";
 			sourceTree = "<group>";
 		};
+		84A96877212AAEDA00EF5BA8 /* User Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
+				84A96878212ACBB000EF5BA8 /* ModifyPasswordViewController.swift */,
+				B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */,
+				3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */,
+				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
+			);
+			name = "User Setting";
+			sourceTree = "<group>";
+		};
+		84A96881212ADDE300EF5BA8 /* UserTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E46B76220EFE0B400843193 /* User.storyboard */,
+				84A96883212AE25500EF5BA8 /* GeneralSetting.storyboard */,
+				84A9687E212ADA1500EF5BA8 /* UserSetting.storyboard */,
+			);
+			name = UserTab;
+			sourceTree = "<group>";
+		};
+		84A96885212AE30D00EF5BA8 /* HomePageTab */ = {
+			isa = PBXGroup;
+			children = (
+				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
+				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
+				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
+			);
+			name = HomePageTab;
+			sourceTree = "<group>";
+		};
 		B66CFB1C20F889FF007165DF /* YDMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +521,7 @@
 			children = (
 				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				84A968752129551F00EF5BA8 /* SignUpView.xib */,
+				84A9687A212ACCDC00EF5BA8 /* ModifyPasswordView.xib */,
 				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
 				3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */,
 				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
@@ -563,12 +611,15 @@
 				B66CFB2420F88B60007165DF /* MenuData.plist in Resources */,
 				3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */,
 				844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */,
+				84A9687F212ADA1500EF5BA8 /* UserSetting.storyboard in Resources */,
 				3E46B76120EFE05500843193 /* HomePage.storyboard in Resources */,
 				3E33279821215A8B00426518 /* PointHistoryTableViewCell.xib in Resources */,
 				3E46B76420EFE0B400843193 /* User.storyboard in Resources */,
 				3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */,
 				3EA3CD052102472000B0392E /* ExchangeItemCellView.xib in Resources */,
 				3E23A754211E94A600D19749 /* DiscoverCouponView.xib in Resources */,
+				84A9687B212ACCDC00EF5BA8 /* ModifyPasswordView.xib in Resources */,
+				84A96884212AE25500EF5BA8 /* GeneralSetting.storyboard in Resources */,
 				84A968762129551F00EF5BA8 /* SignUpView.xib in Resources */,
 				3ED5F6D02122888400F46E7C /* OfflineCardView.xib in Resources */,
 				3E5FD379211ECCA600ECE558 /* DsMerchantTableViewCell.xib in Resources */,
@@ -597,6 +648,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -616,6 +668,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -668,6 +721,7 @@
 				3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */,
 				844CF6E1211EC05600B232DF /* GradientView.swift in Sources */,
 				3E3327882120019900426518 /* CouponHistoryViewController.swift in Sources */,
+				3ED5F6E2212A895D00F46E7C /* SignUpView.swift in Sources */,
 				3E4017F021005FA700591B77 /* LoginView.swift in Sources */,
 				B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */,
 				3ED5F6DC2124242800F46E7C /* HistoryCouponDetailViewController.swift in Sources */,
@@ -696,18 +750,22 @@
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
 				3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */,
 				B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */,
+				84A9688B212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */,
+				84A9687D212AD24700EF5BA8 /* ModifyPasswordView.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
 				3E33278F2120041900426518 /* HistoryTableViewCell.swift in Sources */,
 				B6B866562101768700CE0339 /* HomepagePartViewController.swift in Sources */,
 				3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */,
+				84A96879212ACBB100EF5BA8 /* ModifyPasswordViewController.swift in Sources */,
 				B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */,
 				3EA3CD0721033D6A00B0392E /* HuaQiStoreWebViewController.swift in Sources */,
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
 				3E33279B2121723D00426518 /* PointHistoryDetailTableViewCell.swift in Sources */,
 				3E5FD378211ECCA600ECE558 /* DsMerchantTableViewCell.swift in Sources */,
+				84A96889212BC8F400EF5BA8 /* PageViewController.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,

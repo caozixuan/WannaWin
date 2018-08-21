@@ -1,57 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
-    android:background="#fff"
-    android:gravity="center_vertical"
+    android:layout_height="25dp"
     android:orientation="horizontal"
-    android:padding="20dp">
+    android:background="@color/colorWhite">
+    <TextView
+        android:id="@+id/textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+        <View
+            android:id="@+id/timeline"
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:background="@color/colorUnable"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
+        android:layout_weight="3"
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/textView_points_record_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000"
-                tools:text="商家名" />
+                android:layout_gravity="center"
+                android:text="商家名"
+                android:textColor="#A7A7A7"
+                android:textSize="16sp"/>
 
 
             <TextView
                 android:id="@+id/textView_use_card_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:textColor="#000"
-                tools:text="使用积分" />
+                android:text="使用积分"
+                android:textColor="#A7A7A7"
+                android:textSize="16sp"/>
 
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingEnd="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textColor="#A7A7A7"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/textView_exchange_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:textColor="#000"
-                tools:text="本次兑换积分" />
+                android:layout_gravity="center_vertical|end"
+                android:text="兑换积分"
+                android:textColor="#A7A7A7"
+                android:textSize="16sp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="P"
+                android:textColor="#A7A7A7"
+                android:textSize="16sp"/>
         </LinearLayout>
 
 
     </FrameLayout>
 
-
 </LinearLayout>
+

@@ -2,52 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground"
     android:orientation="vertical">
 
     <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/title_bar"
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <!--阴影-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- 你的View放在这里 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shadow" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:paddingEnd="25dp">
 
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/close"
+        <ToggleButton
+            android:id="@+id/togglebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="收起"
-            android:textAllCaps="false" />
+            android:background="#00000000"
+            android:textColor="#3B95DF"
+            android:textOn="收起全部"
+            android:textOff="展开全部"/>
 
-        <Button
-            android:id="@+id/open"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="展开全部"
-            android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/refresh"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:textAllCaps="false"
-            android:background="@drawable/ic_refresh_black_24dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/refresh"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:background="@drawable/ic_refresh_black_24dp"/>-->
 
     </LinearLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
 
-    </android.support.v7.widget.RecyclerView>
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v7.widget.CardView>
+
+
+
 </LinearLayout>
