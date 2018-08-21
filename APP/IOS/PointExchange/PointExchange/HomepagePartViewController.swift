@@ -190,5 +190,12 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
         self.navigationController?.pushViewController(view, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
+	
+	func gotoSignUp() {
+		let sb = UIStoryboard(name: "User", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "SignUpViewController")
+		
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
 
 }

@@ -57,8 +57,13 @@ class LoginView: UIView{
     @IBAction func login(_ sender: Any) {
         delegate?.login()
     }
+	
+	@IBAction func gotoSignUp(_ sender: Any) {
+		delegate?.gotoSignUp()
+	}
 }
 
 protocol LoginViewDelegate {
     func login()
+	func gotoSignUp()
 }

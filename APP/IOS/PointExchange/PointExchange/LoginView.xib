@@ -15,7 +15,6 @@
             <connections>
                 <outlet property="loginButton" destination="z41-fb-VoN" id="WQu-To-DfA"/>
                 <outlet property="passwordField" destination="MhJ-Tb-797" id="tyj-xD-DNg"/>
-                <outlet property="signUpButton" destination="ypy-a2-him" id="2GW-2u-UUd"/>
                 <outlet property="usernameField" destination="7gb-LH-OGi" id="d6i-uD-nZt"/>
                 <outlet property="view" destination="ue7-un-13m" id="Hhb-Ik-ATD"/>
             </connections>
@@ -29,13 +28,13 @@
                     <rect key="frame" x="70" y="30" width="235" height="372"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1K5-7c-5MQ">
-                            <rect key="frame" x="97.5" y="0.0" width="40" height="76.5"/>
+                            <rect key="frame" x="97.5" y="0.0" width="40" height="74.5"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                             <color key="textColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入账号(电话号码)" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="7gb-LH-OGi" userLabel="账户">
-                            <rect key="frame" x="7" y="84.5" width="221" height="40"/>
+                            <rect key="frame" x="7" y="82.5" width="221" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Gpm-ot-tMF"/>
                             </constraints>
@@ -47,7 +46,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="MhJ-Tb-797" userLabel="密码">
-                            <rect key="frame" x="7" y="132.5" width="221" height="40"/>
+                            <rect key="frame" x="7" y="130.5" width="221" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="LZ4-Ff-BDy"/>
                             </constraints>
@@ -59,29 +58,33 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z41-fb-VoN">
-                            <rect key="frame" x="7" y="180.5" width="221" height="126"/>
+                            <rect key="frame" x="7" y="178.5" width="221" height="122"/>
                             <state key="normal" image="login"/>
                             <connections>
                                 <action selector="login:" destination="-1" eventType="touchUpInside" id="3gv-vo-PZ4"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4vG-6O-7mK">
-                            <rect key="frame" x="15" y="314.5" width="205" height="57.5"/>
+                            <rect key="frame" x="15" y="308.5" width="205" height="63.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd6-FV-dt6">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="57.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="63.5"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypy-a2-him">
-                                    <rect key="frame" x="88.5" y="0.0" width="28" height="57.5"/>
-                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
-                                    <color key="textColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCu-LT-ReR">
+                                    <rect key="frame" x="87.5" y="0.0" width="30" height="63.5"/>
+                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                    <state key="normal" title="注册">
+                                        <color key="titleColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="gotoSignUp:" destination="-1" eventType="touchUpInside" id="oBL-KG-htE"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJw-nL-n3E">
-                                    <rect key="frame" x="145" y="0.0" width="60" height="57.5"/>
+                                    <rect key="frame" x="145" y="0.0" width="60" height="63.5"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>

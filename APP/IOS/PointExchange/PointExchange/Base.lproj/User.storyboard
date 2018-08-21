@@ -504,7 +504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWU-lu-gGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3399.1999999999998" y="-2894.3028485757122"/>
+            <point key="canvasLocation" x="2631" y="-3603"/>
         </scene>
         <!--Modify Password Table View Controller-->
         <scene sceneID="GMm-g1-bQ8">
@@ -1047,6 +1047,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="at6-EM-VEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2721" y="-1996"/>
+        </scene>
+        <!--注册-->
+        <scene sceneID="hw3-8i-YxV">
+            <objects>
+                <viewController storyboardIdentifier="SignUpViewController" title="注册" id="EsM-Ep-Yj5" customClass="SignUpViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4NE-tt-P5I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1yX-iB-XNn" customClass="SignUpView" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Lgw-j4-V5f"/>
+                    </view>
+                    <connections>
+                        <outlet property="signUpView" destination="1yX-iB-XNn" id="LTn-sk-HSX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PuI-j5-PJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3364" y="-2846"/>
         </scene>
         <!--注册-->
         <scene sceneID="nh4-o1-2hl">
