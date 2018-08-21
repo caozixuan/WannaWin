@@ -62,8 +62,15 @@ class SignUpView: UIView {
 	}
 	
 	@IBAction func clickNextBtn(_ sender: Any) {
-		view1.removeFromSuperview()
-		self.addSubview(view2)
+		ServerConnector.checkVCode(phoneNum: phoneNumField.text!, vcode: vcodeField.text!){result in
+			if result{
+				self.view1.removeFromSuperview()
+				self.addSubview(self.view2)
+			}else{
+
+			}
+		}
+		
 	}
 	@IBAction func clickGetVCode(_ sender: Any) {
 		ServerConnector.getVCode(phoneNumber: phoneNumField.text!)
