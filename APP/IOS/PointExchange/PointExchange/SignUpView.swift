@@ -9,7 +9,10 @@
 import UIKit
 
 class SignUpView: UIView {
+	var delegate:SignUpViewDelegate?
 	
+	@IBOutlet var errorLabel2: UILabel!
+	@IBOutlet var errorLabel: UILabel!
 	@IBOutlet weak var nextBtn: UIButton!
 	@IBOutlet weak var signUpBtn: UIButton!
 	@IBOutlet weak var vcodeBtn: UIButton!
@@ -55,7 +58,7 @@ class SignUpView: UIView {
 	}
 
 	@IBAction func clickSignUp(_ sender: Any) {
-		
+		delegate?.signUp()
 	}
 	
 	@IBAction func clickNextBtn(_ sender: Any) {
@@ -65,7 +68,7 @@ class SignUpView: UIView {
 	@IBAction func clickGetVCode(_ sender: Any) {
 		ServerConnector.getVCode(phoneNumber: phoneNumField.text!)
 		self.vcodeBtn.isEnabled = false
-		let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SignUpViewController.refreshVCodeTime), userInfo: sender, repeats: true)
+		let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.refreshVCodeTime), userInfo: sender, repeats: true)
 		timer.fire()
 	}
 	
@@ -77,10 +80,12 @@ class SignUpView: UIView {
 	func checkPhoneNumberInput()->Bool{
 		if phoneNumField.text?.count != 11 {
 			phoneNumField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+			self.errorLabel.isHidden = false
+			self.errorLabel.text = "您输入的手机号不正确（至少11位）"
 			return false
 		}
 		else{
-			
+			self.errorLabel.isHidden = true
 			return true
 		}
 	}
@@ -104,9 +109,11 @@ class SignUpView: UIView {
 	func checkPasswordIdentifyInput()->Bool{
 		if passwordAgainField.text != passwordField.text {
 			passwordAgainField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+			errorLabel2.isHidden = false
+			errorLabel2.text = "两次输入的密码不一致"
 			return false
 		}else{
-			
+			errorLabel2.isHidden = true
 			return true
 		}
 	}
@@ -130,13 +137,17 @@ class SignUpView: UIView {
 			break;
 		}
 		
-		if phoneNumberValid && passwordAgainValid && passwordAgainValid && phoneNumField.text != "" && vcodeField.text != "" && passwordField.text != "" && passwordAgainField.text != ""{
-			signUpBtn.isUserInteractionEnabled=true
-			signUpBtn.backgroundColor=UIColor.blue
+		if passwordValid && passwordAgainValid && passwordField.text != "" && passwordAgainField.text != ""{
+			signUpBtn.isEnabled = true
 		}
 		else{
-			signUpBtn.isUserInteractionEnabled=false
-			signUpBtn.backgroundColor=UIColor.gray
+			signUpBtn.isEnabled = false
+		}
+		if phoneNumberValid && vcodeValid && phoneNumField.text != "" && vcodeField.text != ""{
+			nextBtn.isEnabled = true
+		}
+		else{
+			nextBtn.isEnabled = false
 		}
 	}
 	
@@ -155,4 +166,8 @@ class SignUpView: UIView {
 		second -= 1
 	}
 
+}
+
+protocol SignUpViewDelegate{
+	func signUp()
 }

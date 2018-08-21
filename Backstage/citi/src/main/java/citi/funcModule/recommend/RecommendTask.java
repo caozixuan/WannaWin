@@ -15,7 +15,7 @@ import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
 @Component
 public class RecommendTask {
     @Autowired
-    private citi.funcModule.recommend.RecommendService recommendService;
+    private RecommendService recommendService;
 
     /*
      * 更新商户相似度

@@ -32,6 +32,12 @@ class LoginViewController: UIViewController,LoginViewDelegate{
 		self.activityIndicator?.startAnimating()
 	}
 	
+	func gotoSignUp() {
+		let sb = UIStoryboard(name: "User", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "SignUpViewController")
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
     
     // 登录完成后的操作
     func afterLogin(result:Bool){

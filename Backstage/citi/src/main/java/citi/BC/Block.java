@@ -1,10 +1,14 @@
 package citi.BC;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 
 public class Block {
 
-    // @Expose(serialize = false, deserialize = false)
+    static private final String magic_hash = "No previous Block";
+
+    @Expose(serialize = false, deserialize = false)
     final public transient Block previousBlock;
 
     private String hash;
@@ -44,7 +48,7 @@ public class Block {
     //get Init-Block
     static Block getInitBlock() {
         DealData data = new DealData(null, null, null, 0.0);
-        Block block = new Block(null, null, BC_Data.Data2BC_Data(data));
+        Block block = new Block(null, magic_hash, BC_Data.Data2BC_Data(data));
         block.hash = block.calculateThisHash();
         return block;
     }

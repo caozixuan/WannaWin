@@ -49,19 +49,20 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">商品优惠</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:getItems();">商品清单</a></dd>
-                        <dd><a href="javascript:addItems();">添加商品</a></dd>
+                        <dd><a href="javascript:load('item/getItem');">商品清单</a></dd>
+                        <dd><a href="javascript:load('item/addItem');">添加商品</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;">减免策略</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:getStrategys();">策略清单</a></dd>
-                        <dd><a href="javascript:addStrategy();">添加策略</a></dd>
+                        <dd><a href="javascript:load('strategy/getStrategyList');">策略清单</a></dd>
+                        <dd><a href="javascript:load('strategy/addStrategy');">添加策略</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:history();">历史订单</a></li>
-                <li class="layui-nav-item"><a href="javascript:showData();">统计信息</a></li>
-                <li class="layui-nav-item"><a href="javascript:merchant()">商户信息</a></li>
+                <li class="layui-nav-item"><a href="javascript:merchant()">活动信息</a></li>
+                <li class="layui-nav-item"><a href="javascript:load('history');">历史订单</a></li>
+                <li class="layui-nav-item"><a href="javascript:load('showData');">统计信息</a></li>
+                <li class="layui-nav-item"><a href="javascript:load('merchant/editMerchant')">商户信息</a></li>
             </ul>
         </div>
     </div>
@@ -80,7 +81,7 @@
 </div>
 <script src="${pageContext.request.contextPath}/statics/layui/layui.all.js"></script>
 <script src="${pageContext.request.contextPath}/statics/js/jquery/jquery-3.3.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/statics/js/index.js?v=3.0"></script>
+<script src="${pageContext.request.contextPath}/statics/js/util.js?v=3.0"></script>
 <script src="${pageContext.request.contextPath}/statics/js/jquery/jquery.form.js"></script>
 </body>
 </html>
