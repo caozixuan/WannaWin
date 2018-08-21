@@ -25,3 +25,6 @@ function merchant() {
 function showData() {
     $("#content-body").load("showData");
 }
+function f() {
+    
+}

@@ -31,7 +31,7 @@ public interface MerchantMapper {
     final String updateCardType = "UPDATE merchat SET cardType = #{cardType} WHERE MerchantID = #{merchantID}";
     final String updateBusinessType = "UPDATE merchat SET businessType = #{businessType} WHERE MerchantID = #{merchantID}";
     final String getSome = "SELECT * FROM merchant ORDER BY name LIMIT #{start}, #{length}";
-    final String getById = "SELECT * FROM merchant WHERE MerchantID = #{Mercantid}";
+    final String getById = "SELECT * FROM merchant WHERE MerchantID = #{merchantID}";
     final String changePassword = "UPDATE merchant SET password = #{password} WHERE MerchantID = #{merchantID}";
     final String getMerchantAmount = "SELECT COUNT(*) from merchant";
 
@@ -77,7 +77,7 @@ public interface MerchantMapper {
     List<Merchant> select(@Param("start") int start, @Param("length") int length);
 
     @Select(getById)
-    Merchant selectByID(String MerchantID);
+    Merchant selectByID(String merchantID);
 
     @Update(changePassword)
     int changePassword(@Param("merchantID") String merchantID, @Param("password") String password);
