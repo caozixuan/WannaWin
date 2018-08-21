@@ -61,7 +61,7 @@ public class MerchantController {
         merchantMapper.updateMerchantLogo(url2,merchantID);
         merchantMapper.updateMerchantCardLogo(url3, merchantID);
         mv.addObject("merchant",merchantMapper.selectByID(merchantID));
-        mv.setViewName("redirect:/starter");
+        mv.setViewName("redirect:index");
         return mv;
     }
 
