@@ -2,6 +2,7 @@ package citiMerchant.BC;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -107,15 +108,16 @@ public class BC {
         }
     }
 
-    //TODO: json 解析
+    //return Dealdata or null
     //格式： type, userID, points_citi  eg. IN,1,678.0
     static public DealData read(Block block, String merchantID, String private_K) {
-        if()
+        if (merchantID != block.data.merchantID) return null;
         String message = RSA.decryptByPrivate(block.data.encrypted_data, private_K);
-        String type;
-        String userID;
-        Double points_citi;
-        return null;
+        StringTokenizer st = new StringTokenizer(message, ",");
+        String type = st.nextToken();
+        String userID = st.nextToken();
+        Double points_citi = Double.parseDouble(st.nextToken());
+        return new DealData(DealData.DealType.getType(type), merchantID, userID, points_citi);
     }
 
 }
