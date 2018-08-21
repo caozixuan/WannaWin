@@ -107,6 +107,16 @@ public class BC {
         }
     }
 
+    //TODO: json 解析
+    //格式： type, userID, points_citi  eg. IN,1,678.0
+    static public DealData read(Block block, String merchantID, String private_K) {
+        if()
+        String message = RSA.decryptByPrivate(block.data.encrypted_data, private_K);
+        String type;
+        String userID;
+        Double points_citi;
+        return null;
+    }
 
 }
 
