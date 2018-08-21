@@ -1051,7 +1051,7 @@
         <!--注册-->
         <scene sceneID="hw3-8i-YxV">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" title="注册" id="EsM-Ep-Yj5" customClass="SignUpViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" title="注册" hidesBottomBarWhenPushed="YES" id="EsM-Ep-Yj5" customClass="SignUpViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4NE-tt-P5I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
