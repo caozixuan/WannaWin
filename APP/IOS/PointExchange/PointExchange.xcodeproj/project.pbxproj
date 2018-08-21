@@ -251,8 +251,8 @@
 				84A96881212ADDE300EF5BA8 /* UserTab */,
 				3E46B75F20EFE05500843193 /* HomePage.storyboard */,
 				3E46B75D20EFE00400843193 /* Discover.storyboard */,
-				3E46B75B20EFDFE400843193 /* Exchange.storyboard */,
 				3E46B75920EFDFA000843193 /* Store.storyboard */,
+				3E46B75B20EFDFE400843193 /* Exchange.storyboard */,
 				3E8AB4C320EDAFB300915561 /* Main.storyboard */,
 			);
 			name = storyboard;

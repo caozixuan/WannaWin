@@ -1,6 +1,5 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
-import citi.funcModule.Recommend.ItemSimilarity;
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
 import citi.vo.*;
@@ -391,6 +390,7 @@ public class RecommendService {
         ObjectInputStream ois = null;
         try {
             ois = new ObjectInputStream(this.getClass().getClassLoader().getResourceAsStream("MerchantSimilarity.txt"));
+            System.out.println(this.getClass().getClassLoader().getResource(".").toString());
             while (true) {
                     MerchantSimilarity merchantSimilarity = (MerchantSimilarity) ois.readObject();
                     results.add(merchantSimilarity);

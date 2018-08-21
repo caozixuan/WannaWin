@@ -106,13 +106,13 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
                     pageViewController.totalNum = (failureMerchants?.count)!
                 }
                 
-                // 为tableView设置代理
-                for controller in pageViewController.pageControllers {
-                    if controller .isKind(of: ExchangeResultTableViewController.self){
-                        let c = controller as! ExchangeResultTableViewController
-                        c.tableView.dataSource = self
-                    }
-                }
+//                // 为tableView设置代理
+//                for controller in pageViewController.pageControllers {
+//                    if controller .isKind(of: ExchangeResultTableViewController.self){
+//                        let c = controller as! ExchangeResultTableViewController
+//                        c.tableView.dataSource = self
+//                    }
+//                }
             }
         }
         

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#44ccf4fc"
-    android:layout_height="wrap_content" >
+    android:layout_height="40dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dash_line"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,40 +20,49 @@
         android:gravity="center">
 
 
-        <ImageView
-            android:id="@+id/image_finish_business"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/textview_business_name"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#8C8C8C"
+            android:text="东方航空" />
 
 
-        <TextView
-            android:id="@+id/textview_business_used_finish"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="1" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|end"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="- "
+                android:textColor="#9A8616"/>
+            <TextView
+                android:id="@+id/textview_business_used_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XX.XX"
+                android:textColor="#9A8616"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textview_points_exchanged"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="1" />
+
+        <!--兑换成的通用积分数-->
+        <!--<TextView-->
+            <!--android:id="@+id/textview_points_exchanged"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_weight="3"-->
+            <!--android:gravity="center"-->
+            <!--android:text="1" />-->
 
 
 
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

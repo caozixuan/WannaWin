@@ -553,7 +553,7 @@
         <!--记录-->
         <scene sceneID="STa-a7-hvN">
             <objects>
-                <tableViewController title="记录" id="L8A-BA-rCV" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExchangeResultTableViewController" title="记录" id="L8A-BA-rCV" customClass="ExchangeResultTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iho-vM-QhQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
