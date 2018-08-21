@@ -67,7 +67,7 @@
                             <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="18" bottom="8" trailing="16"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <action selector="checkInputValid:" destination="-1" eventType="editingDidEnd" id="UZt-1Z-oTF"/>
                             </connections>
