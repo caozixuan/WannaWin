@@ -8,10 +8,11 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Encrypt {
 
-    static Map<String, String> pub_Ks = new HashMap<>();
+    static ConcurrentHashMap<String, String> pub_Ks = new ConcurrentHashMap<>();
 
     static void register_merchant(String merchantID, String pub_K) {
         pub_Ks.put(merchantID, pub_K);
