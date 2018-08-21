@@ -17,9 +17,6 @@ class SignUpViewController: UIViewController,SignUpViewDelegate {
 		signUpView.delegate = self
         // Do any additional setup after loading the view.
     }
-	override func viewWillAppear(_ animated: Bool) {
-		self.navigationController?.setToolbarHidden(false, animated: true)
-	}
 
     
     // 向服务器进行注册操作

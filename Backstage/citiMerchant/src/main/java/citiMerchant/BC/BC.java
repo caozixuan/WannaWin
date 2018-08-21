@@ -25,11 +25,17 @@ public class BC {
 
     static final public String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTJu5H9n0ixlxSpxbBUL02ywuEhCXpDhKFlIYbIsDzRKHxMXT//FTeprfti8sN6vBI4TB0MAGklezTNnP1TRvtbSzqAVCewsuUNJZtnodem4fipN9Ko9vJDtM4vCLuFq5c3yWBIcSVZRyTJQjA8A5E3eFnOncFPEK9rIw6qvSPMQIDAQAB";
 
+    static final private String pub_K;
+    static final private String priv_K;
+
+    static {
+        Map<String, Object> merchant_K1 = Encrypt.init();
+        pub_K = RSA.getPublicKey(merchant_K1);
+        priv_K = RSA.getPrivateKey(merchant_K1);
+    }
 
     static public merchantInfo register_merchant(String merchantID) {
-        Map<String, Object> merchant_K1 = Encrypt.init();
-        Encrypt.register_merchant("1", RSA.getPublicKey(merchant_K1));
-        return new merchantInfo(merchantID, RSA.getPublicKey(merchant_K1));
+        return new merchantInfo(merchantID, pub_K);
     }
 
     static public Boolean isChainValid() {

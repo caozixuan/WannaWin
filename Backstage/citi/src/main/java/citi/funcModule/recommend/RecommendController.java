@@ -1,4 +1,4 @@
-package citi.funcModule.recommend;
+package citi.funcModule.Recommend;
 
 
 import citi.support.resultjson.SerializeGson;

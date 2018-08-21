@@ -13,7 +13,7 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
     @IBOutlet weak var statusLogo: UIImageView!
     @IBOutlet weak var statusText: UILabel!
     @IBOutlet weak var addedGeneralPoints: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    //@IBOutlet weak var tableView: UITableView!
     
     var status: Bool = false
     var generalPoints: Double?
@@ -21,6 +21,8 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
     var successMerchantNames : [String]?
     var failureMerchants: Dictionary<String,String>?
     var failureName: [String]?
+    
+    var pageViewController : PageViewController!
     
     
     override func viewDidLoad() {
@@ -32,8 +34,8 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         self.navigationItem.rightBarButtonItem = finishBtn
         
         // 设置显示数据
-        tableView.delegate = self
-        tableView.dataSource = self
+        //tableView.delegate = self
+        //tableView.dataSource = self
         
         if status {
             statusText.text = "兑换成功"
@@ -90,6 +92,30 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         let rootVC = self.navigationController
         self.navigationController?.popToRootViewController(animated: false)
         rootVC?.tabBarController?.selectedIndex = 0
+    }
+    
+    // 为嵌入PageVC做准备
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show page VC" {
+            if segue.destination .isKind(of: PageViewController.self){
+                pageViewController = segue.destination as! PageViewController
+                if status {
+                    pageViewController.totalNum = (successMerchants?.count)!
+                }
+                else {
+                    pageViewController.totalNum = (failureMerchants?.count)!
+                }
+                
+                // 为tableView设置代理
+                for controller in pageViewController.pageControllers {
+                    if controller .isKind(of: ExchangeResultTableViewController.self){
+                        let c = controller as! ExchangeResultTableViewController
+                        c.tableView.dataSource = self
+                    }
+                }
+            }
+        }
+        
     }
 
 }
