@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,6 +43,10 @@ import java.util.List;
 public class PointsFragment extends Fragment {
 
     boolean wasLogin;
+    String newAccount;
+
+    int remainSecond;
+    final int WAITING_TIME_FOR_EACH_MSG = 30;
 
     View view;
     LinearLayout accountInfoLayout;
@@ -59,7 +65,6 @@ public class PointsFragment extends Fragment {
 
         initImageSlider();
 
-        //loadAccountInfo();
         //状态栏文字图标暗色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
             getActivity().getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -132,41 +137,121 @@ public class PointsFragment extends Fragment {
             recyclerView.setItemAnimator( new DefaultItemAnimator());
 
         } else {
-
-            content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_button_points, null);
-            accountInfoLayout.addView(content);
-
-            final EditText editTextAccount = (EditText) content.findViewById(R.id.editText_account_card_points);
-            final EditText editTextPassword = (EditText) content.findViewById(R.id.editText_password_card_points);
-
-            Button buttonLogin = (Button) content.findViewById(R.id.button_login_card_points);
-            buttonLogin.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (editTextAccount.getText().length() == 0) {
-                        Toast.makeText(getContext(), "请输入账号", Toast.LENGTH_SHORT).show();
-                    } else if (editTextPassword.getText().length() == 0) {
-                        Toast.makeText(getContext(), "请输入密码", Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        String strAccount = editTextAccount.getText().toString();
-                        String strPassword = editTextPassword.getText().toString();
-
-                        tryLogin(strAccount, strPassword);
-                    }
-                }
-            });
-
-            TextView buttonRegister = (TextView) content.findViewById(R.id.textView_register_card_points);
-            buttonRegister.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intentToRegister = new Intent(getContext(), RegisterActivity.class);
-                    startActivity(intentToRegister);
-                }
-            });
+            loadLoginContent();
         }
     }
+
+    private void loadLoginContent(){
+        content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_points, null);
+        accountInfoLayout.addView(content);
+
+        final EditText editTextAccount = (EditText) content.findViewById(R.id.editText_account_card_points);
+        final EditText editTextPassword = (EditText) content.findViewById(R.id.editText_password_card_points);
+
+        Button buttonLogin = (Button) content.findViewById(R.id.button_login_card_points);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextAccount.getText().length() == 0) {
+                    Toast.makeText(getContext(), "请输入账号", Toast.LENGTH_SHORT).show();
+                } else if (editTextPassword.getText().length() == 0) {
+                    Toast.makeText(getContext(), "请输入密码", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    String strAccount = editTextAccount.getText().toString();
+                    String strPassword = editTextPassword.getText().toString();
+
+                    tryLogin(strAccount, strPassword);
+                }
+            }
+        });
+
+        TextView buttonRegister = (TextView) content.findViewById(R.id.textView_register_card_points);
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountInfoLayout.removeAllViewsInLayout();
+                loadRegisterContent1();
+            }
+        });
+    }
+
+    private void loadRegisterContent1(){
+        content = LayoutInflater.from(getContext()).inflate(R.layout.content_register1_points, null);
+        accountInfoLayout.addView(content);
+
+        final EditText editTextPhone = (EditText) content.findViewById(R.id.editText_phone_card_points);
+        final EditText editTextMsg = (EditText) content.findViewById(R.id.editText_msg_card_points);
+
+        final Button buttonMsg = (Button) content.findViewById(R.id.button_msg_card_points);
+        buttonMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getMsgVerification(editTextPhone.getText().toString(), buttonMsg);
+            }
+        });
+
+        Button buttonNext = (Button) content.findViewById(R.id.button_next_card_points);
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextPhone.getText().length() == 0) {
+                    Toast.makeText(getContext(), "请输入手机号码", Toast.LENGTH_SHORT).show();
+                } else if (editTextMsg.getText().length() == 0) {
+                    Toast.makeText(getContext(), "请输入短信验证码", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    newAccount = editTextPhone.getText().toString();
+                    String strMsg = editTextMsg.getText().toString();
+
+                    checkMsgVerification(newAccount, strMsg);
+                }
+            }
+        });
+
+        Button buttonLogin = (Button) content.findViewById(R.id.button_back_login_card_points);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountInfoLayout.removeAllViewsInLayout();
+                loadLoginContent();
+            }
+        });
+    }
+
+    private void loadRegisterContent2(){
+        content = LayoutInflater.from(getContext()).inflate(R.layout.content_register2_points, null);
+        accountInfoLayout.addView(content);
+
+        final EditText editTextPassword1 = (EditText) content.findViewById(R.id.editText_password1_card_points);
+        final EditText editTextPassword2 = (EditText) content.findViewById(R.id.editText_password2_card_points);
+
+
+
+        Button buttonRegister = (Button) content.findViewById(R.id.button_register_card_points);
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextPassword1.getText().length() == 0 || editTextPassword2.getText().length() == 0) {
+                    Toast.makeText(getContext(), "请输入密码", Toast.LENGTH_SHORT).show();
+                } else if ( ! editTextPassword1.getText().toString().equals(editTextPassword2.getText().toString())) {
+                    Toast.makeText(getContext(), "两次密码输入不一致", Toast.LENGTH_SHORT).show();
+                } else {
+                    tryRegister(newAccount, editTextPassword1.getText().toString());
+                }
+            }
+        });
+
+        Button buttonLogin = (Button) content.findViewById(R.id.button_back_login_card_points);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountInfoLayout.removeAllViewsInLayout();
+                loadLoginContent();
+            }
+        });
+    }
+
 
     @Override
     public void onStart() {
@@ -190,7 +275,6 @@ public class PointsFragment extends Fragment {
         }
 
     }
-
 
     private void showCardInfo() {
         XVolley.getInstance()
@@ -382,6 +466,108 @@ public class PointsFragment extends Fragment {
                     public void onBefore() {
                         super.onBefore();
                         dialog = ProgressDialog.show(getContext(), "", "登录中...");
+                    }
+                });
+    }
+
+    private void getMsgVerification(String phone, final Button buttonMsg) {
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/account/getVCode")
+                .addParam("phoneNum", phone)
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+
+                        boolean getMSg = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            getMSg = jsonObject.getBoolean("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (getMSg) {
+                            Toast.makeText(getActivity(), "验证码已发送", Toast.LENGTH_SHORT).show();
+
+                            remainSecond = WAITING_TIME_FOR_EACH_MSG;
+                            Message messageChangeSecond = new Message();
+                            messageChangeSecond.what = 0;
+                            new Handler() {
+                                @Override
+                                public void handleMessage(Message message) {
+                                    switch (message.what) {
+                                        case 0:
+                                            if (remainSecond == WAITING_TIME_FOR_EACH_MSG) {
+                                                buttonMsg.setEnabled(false);
+                                            }
+                                            remainSecond--;
+                                            buttonMsg.setText(remainSecond + "秒后重试");
+                                            if (remainSecond != 0) {
+                                                Message message1 = new Message();
+                                                message1.what = 0;
+                                                this.sendMessageDelayed(message1, 1000);
+                                            } else {
+                                                buttonMsg.setText("获取验证码");
+                                                buttonMsg.setEnabled(true);
+                                            }
+                                    }
+                                }
+                            }.sendMessage(messageChangeSecond);
+                        }else {
+                            Toast.makeText(getContext(), "获取验证码失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void checkMsgVerification(String strPhone, String strMsg){
+        accountInfoLayout.removeAllViewsInLayout();
+        loadRegisterContent2();
+    }
+
+    private void tryRegister(final String strAccount, final String strPassword){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/account/sendVCode")
+                .addParam("phoneNum", strAccount)
+                .addParam("password", strPassword)
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean registerSuccess = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            registerSuccess = jsonObject.getBoolean("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (registerSuccess) {
+                            Toast.makeText(getContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                            tryLogin(strAccount, strPassword);
+                        }else {
+                            Toast.makeText(getContext(), "注册失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
                     }
                 });
     }
