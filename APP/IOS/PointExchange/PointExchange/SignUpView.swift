@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpView: UIView {
-	
+	var delegate:SignUpViewDelegate?
 	@IBOutlet weak var nextBtn: UIButton!
 	@IBOutlet weak var signUpBtn: UIButton!
 	@IBOutlet weak var vcodeBtn: UIButton!
@@ -55,7 +55,7 @@ class SignUpView: UIView {
 	}
 
 	@IBAction func clickSignUp(_ sender: Any) {
-		
+		delegate?.signUp()
 	}
 	
 	@IBAction func clickNextBtn(_ sender: Any) {
@@ -65,7 +65,7 @@ class SignUpView: UIView {
 	@IBAction func clickGetVCode(_ sender: Any) {
 		ServerConnector.getVCode(phoneNumber: phoneNumField.text!)
 		self.vcodeBtn.isEnabled = false
-		let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SignUpViewController.refreshVCodeTime), userInfo: sender, repeats: true)
+		let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.refreshVCodeTime), userInfo: sender, repeats: true)
 		timer.fire()
 	}
 	
@@ -155,4 +155,8 @@ class SignUpView: UIView {
 		second -= 1
 	}
 
+}
+
+protocol SignUpViewDelegate{
+	func signUp()
 }
