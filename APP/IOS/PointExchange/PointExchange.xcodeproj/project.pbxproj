@@ -76,6 +76,8 @@
 		84A9687D212AD24700EF5BA8 /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */; };
 		84A9687F212ADA1500EF5BA8 /* UserSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A9687E212ADA1500EF5BA8 /* UserSetting.storyboard */; };
 		84A96884212AE25500EF5BA8 /* GeneralSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A96883212AE25500EF5BA8 /* GeneralSetting.storyboard */; };
+		84A96889212BC8F400EF5BA8 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A96888212BC8F400EF5BA8 /* PageViewController.swift */; };
+		84A9688B212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9688A212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift */; };
 		B61D90AF20F43A9400A66662 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D90AE20F43A9400A66662 /* Component.swift */; };
 		B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1D20F88A18007165DF /* YDMenu.swift */; };
 		B66CFB2020F88A1C007165DF /* YDMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CFB1F20F88A1C007165DF /* YDMenuDataSource.swift */; };
@@ -184,6 +186,8 @@
 		84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordView.swift; sourceTree = "<group>"; };
 		84A9687E212ADA1500EF5BA8 /* UserSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserSetting.storyboard; sourceTree = "<group>"; };
 		84A96883212AE25500EF5BA8 /* GeneralSetting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralSetting.storyboard; sourceTree = "<group>"; };
+		84A96888212BC8F400EF5BA8 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		84A9688A212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeResultTableViewController.swift; sourceTree = "<group>"; };
 		AB643E9ED0FC3CD6539BD0EE /* Pods-PointExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		B61D90AE20F43A9400A66662 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B66CFB1D20F88A18007165DF /* YDMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YDMenu.swift; path = YDMenu/YDMenu.swift; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				3E46B76820F06E0200843193 /* CardDetailViewController.swift */,
 				3EBF049120F99854004D6D8E /* ExchangeHistoryViewController.swift */,
 				847D60BD2112D59300612174 /* FinishExchangeToGeneralViewController.swift */,
+				84A96888212BC8F400EF5BA8 /* PageViewController.swift */,
+				84A9688A212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift */,
 			);
 			name = HomePageTab;
 			sourceTree = "<group>";
@@ -642,6 +648,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -661,6 +668,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -742,6 +750,7 @@
 				B66CFB1E20F88A18007165DF /* YDMenu.swift in Sources */,
 				3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */,
 				B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */,
+				84A9688B212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
 				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */,
@@ -756,6 +765,7 @@
 				3E4C155820EE0087000743C0 /* QRScanViewController.swift in Sources */,
 				3E33279B2121723D00426518 /* PointHistoryDetailTableViewCell.swift in Sources */,
 				3E5FD378211ECCA600ECE558 /* DsMerchantTableViewCell.swift in Sources */,
+				84A96889212BC8F400EF5BA8 /* PageViewController.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
