@@ -50,10 +50,11 @@ class SignUpView: UIView {
 	private func initViewFromNib(){
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: "SignUpView", bundle: bundle)
-		self.view1 = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+		let views = nib.instantiate(withOwner: self, options: nil)
+		self.view1 = views[0] as! UIView
 		self.view1.frame = bounds
 		self.addSubview(view1)
-		self.view2 = nib.instantiate(withOwner: self, options: nil)[1] as! UIView
+		self.view2 = views[1] as! UIView
 		self.view2.frame = bounds
 	}
 
