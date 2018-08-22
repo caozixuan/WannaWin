@@ -41,7 +41,10 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		ServerConnector.getCardDetail(merchantID: self.merchantID!){(result,card) in
 			if result {
 				self.card = card
-			self.cardImageView.imageFromURL(card.logoURL!, placeholder: UIImage())
+//			self.cardImageView.imageFromURL(card.logoURL!, placeholder: UIImage())
+				let imageURL = URL(string: (card.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+				self.cardImageView.kf.indicatorType = .activity
+				self.cardImageView.kf.setImage(with: imageURL)
 				self.tableView.reloadData()
 				// - TODO: 会员卡条形码
 			}

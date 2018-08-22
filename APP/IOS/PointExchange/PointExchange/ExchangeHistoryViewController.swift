@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxDataSources
+import Kingfisher
 
 class ExchangeHistoryViewController: UIViewController {
 
@@ -47,7 +48,11 @@ class ExchangeHistoryViewController: UIViewController {
 				cell = UITableViewCell(style: .default, reuseIdentifier: "pointCell") as? PointHistoryTableViewCell
 			}
 			cell?.isUserInteractionEnabled = false
-			cell?.dateLabel.text = element.time
+			let formatter = DateFormatter()
+			formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
+			let date = formatter.date(from: element.time!)
+			formatter.dateFormat = "MMM dd, yyyy"
+			cell?.dateLabel.text = formatter.string(from: date!)
 			cell?.pointLabel.text = "-" + String(stringInterpolationSegment: element.pointsCard!)
 			cell?.citiPointLabel.text = "+" + String(stringInterpolationSegment: element.pointsCiti!) + "P"
 			return cell!

@@ -19,7 +19,6 @@ struct CellData {
 class ExchangeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExchangeItemCellDelegate {
 	
 	var dataSource: [Card]?
-    var selectedList: [Bool]? // 用于记住选中的项，防止cell重用导致的选中错乱
     var cellDataList = [CellData]() // 用于存下所有数据
     var firstTime: [Bool]?
     var allCell = [ExchangeItemCellView]()
@@ -59,14 +58,13 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        // 表底部留出空间来调整键盘弹出的偏移
         self.tableView.contentInset.bottom = 60
-		
     }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if dataSource != nil {
-            selectedList = Array(repeating: false, count: (dataSource?.count)!)
             firstTime = Array(repeating: true, count: (dataSource?.count)!)
 			return (dataSource?.count)!
 		}else {
@@ -80,6 +78,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "store to bank")
         }
+        
+        cell.editingAccessoryType = .none
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = UIColor(red: 0, green: 255, blue: 255, alpha: 0.0)
         
 		for subview in cell.contentView.subviews{
 			if subview .isKind(of: ExchangeItemCellView.self){
@@ -161,58 +163,56 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     /// 全选积分项
 	@objc func selectAllCell() {
         // 选中所有的单元格
-//        let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
-//        var indexPath:IndexPath
-//        var cell:UITableViewCell?
-//        for row in 0..<cellNumber {
-//            indexPath = IndexPath(row: row, section: 0)
-//
-//            cell = tableView.cellForRow(at: indexPath)
-//
-//            if cell != nil {
-//                //定于到该行cell（此方法可以用于解决cell被遮挡的问题）
-//                self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
-//                cell = tableView.cellForRow(at: indexPath)
-//            }
-//
-//            for subview in (cell?.contentView.subviews)!{
-//                if subview .isKind(of: ExchangeItemCellView.self){
-//                    let exchangeItemCellView = subview as! ExchangeItemCellView
-//                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
-//                    break
-//                }
-//            }
-//        }
-        
-        
-        
-        // 选中所有可见的单元格
-//        for cell in tableView.visibleCells {
-//            for subview in cell.contentView.subviews{
-//                if subview .isKind(of: ExchangeItemCellView.self){
-//                    let exchangeItemCellView = subview as! ExchangeItemCellView
-//                    exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
-//                }
-//            }
-//        }
-        
+        var indexPath:IndexPath
+        var cell:UITableViewCell?
+
         // 改变按钮名称
         if self.navigationItem.rightBarButtonItem?.title == "全选" {
             self.navigationItem.rightBarButtonItem?.title = "全不选"
-            for cell in allCell {
-                if cell.checkbox.isSelected == false {
-                    cell.perform(#selector(cell.checkboxClick), with: cell.checkbox)
+            for (row,cellData) in cellDataList.enumerated() {
+                if !cellData.isSelected {
+                    indexPath = IndexPath(row: row, section: 0)
+                    
+                    cell = tableView.cellForRow(at: indexPath)
+                    
+                    if cell == nil {
+                        //定于到该行cell（此方法可以用于解决cell被遮挡的问题）
+                        self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
+                        cell = tableView.cellForRow(at: indexPath)
+                    }
+                    
+                    for subview in (cell?.contentView.subviews)!{
+                        if subview .isKind(of: ExchangeItemCellView.self){
+                            let exchangeItemCellView = subview as! ExchangeItemCellView
+                            exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+                            break
+                        }
+                    }
                 }
-
             }
         }
         else {
             self.navigationItem.rightBarButtonItem?.title = "全选"
-            for cell in allCell {
-                if cell.checkbox.isSelected == true {
-                    cell.perform(#selector(cell.checkboxClick), with: cell.checkbox)
+            for (row,cellData) in cellDataList.enumerated() {
+                if cellData.isSelected {
+                    indexPath = IndexPath(row: row, section: 0)
+                    
+                    cell = tableView.cellForRow(at: indexPath)
+                    
+                    if cell == nil {
+                        //定于到该行cell（此方法可以用于解决cell被遮挡的问题）
+                        self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
+                        cell = tableView.cellForRow(at: indexPath)
+                    }
+                    
+                    for subview in (cell?.contentView.subviews)!{
+                        if subview .isKind(of: ExchangeItemCellView.self){
+                            let exchangeItemCellView = subview as! ExchangeItemCellView
+                            exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+                            break
+                        }
+                    }
                 }
-
             }
         }
         
@@ -266,11 +266,13 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    /// 记录数据
     func setData(_ tag: Int, _ sourcePoints: String, _ editSourcePoints:String, _ targetPoints: String) {
         cellDataList[tag].sourcePoints = sourcePoints
         cellDataList[tag].editSourcePoints = editSourcePoints
         cellDataList[tag].targetPoints = targetPoints
     }
+    
 	
     // MARK: - 兑换积分网络请求
     @IBAction func clickExchangeBtn(_ sender: Any) {
@@ -293,63 +295,14 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         // 获得选中积分项数据
-        //let cellNumber = self.tableView(self.tableView, numberOfRowsInSection: 0)
-        //var indexPath:IndexPath
-        //var cell:UITableViewCell?
-        
         var chosenMerchantList = [ChooseMerchants]()
         var chosenMerchant:ChooseMerchants
         var chosenMerchantNames = [String]()
         
-//        for row in 0..<cellNumber {
-//            indexPath = IndexPath(row: row, section: 0)
-//            cell = tableView.cellForRow(at: indexPath)
-//            for subview in (cell?.contentView.subviews)!{
-//                if subview .isKind(of: ExchangeItemCellView.self){
-//                    let exchangeItemCellView = subview as! ExchangeItemCellView
-//                    if exchangeItemCellView.checkbox.isSelected == true {
-//                        chosenMerchant = ChooseMerchants(merchantID: exchangeItemCellView.storeName.text!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
-//                        chosenMerchantList.append(chosenMerchant)
-//                    }
-//                }
-//            }
-//        }
-        
-//        if let list = selectedList {
-//            for (row,item) in list.enumerated() {
-//                if item {
-//                    indexPath = IndexPath(row: row, section: 0)
-//                    cell = tableView.cellForRow(at: indexPath)
-//
-//                    if cell == nil {
-//                        //定于到该行cell（此方法可以用于解决cell被遮挡的问题）
-//                        self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
-//                        cell = tableView.cellForRow(at: indexPath)
-//                    }
-//
-//                    for subview in (cell?.contentView.subviews)!{
-//                        if subview .isKind(of: ExchangeItemCellView.self){
-//                            let exchangeItemCellView = subview as! ExchangeItemCellView
-//
-//                            //避免发送“0.00”导致后台出错
-//                            if exchangeItemCellView.sourcePoints.text! == "0.00" {
-//                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
-//                            }
-//                            else {
-//                                chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: exchangeItemCellView.sourcePoints.text!)
-//                            }
-//                            chosenMerchantList.append(chosenMerchant)
-//                            chosenMerchantNames.append((dataSource?[row].merchant?.name)!)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        
         for (row,cell) in cellDataList.enumerated() {
             if cell.isSelected {
                 //避免发送“0.00”导致后台出错
-                if cell.sourcePoints == "0.00" {
+                if cell.sourcePoints == "0.00" || String(format:"%.2f", cell.sourcePoints) == "0.00"  {
                     chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
                 }
                 else {

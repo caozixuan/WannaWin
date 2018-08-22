@@ -30,7 +30,7 @@ class ResetPasswordTableViewController: UITableViewController {
     
     
     @IBAction func clickGetVCode(_ sender: Any) {
-        ServerConnector.getResetVCode(phoneNum: phoneNumField.text!, vcode: vcodeField.text!, callback: getVCodeCallbak)
+        ServerConnector.checkVCode(phoneNum: phoneNumField.text!, vcode: vcodeField.text!, callback: getVCodeCallbak)
     }
     func getVCodeCallbak(result:Bool){
         if !result {

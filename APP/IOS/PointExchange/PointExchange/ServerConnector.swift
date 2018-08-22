@@ -160,8 +160,8 @@ class ServerConnector: NSObject {
     }
     
     /// 获取重置密码的验证码
-    static func getResetVCode(phoneNum:String, vcode:String, callback:@escaping (_ result:Bool)->()){
-        provider.request(.getResetVCode(phoneNum:phoneNum, vcode: vcode)){ result in
+    static func checkVCode(phoneNum:String, vcode:String, callback:@escaping (_ result:Bool)->()){
+        provider.request(.checkVCode(phoneNum:phoneNum, vcode: vcode)){ result in
             if case let .success(response) = result{
 				if response.statusCode == 200 {
 					let responseJSON = try? response.mapJSON()

@@ -63,7 +63,11 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
 		}
 		
         cell?.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray[section].totalPoints!) + "P"
-        cell?.dateLabel.text = pointsHistoryArray[section].historyMerchants![0].time!
+		let formatter = DateFormatter()
+		formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
+		let date = formatter.date(from: pointsHistoryArray[section].historyMerchants![0].time!)
+		formatter.dateFormat = "MMM dd, yyyy"
+        cell?.dateLabel.text = formatter.string(from: date!)
         return cell!
     }
     
