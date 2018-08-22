@@ -20,47 +20,43 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.citiexchangeplatform.pointsleague.adapter.PaymentFinishViewPagerAdapter;
+import com.citiexchangeplatform.pointsleague.models.ExchangeResultModel;
+
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class PaymentFinishActivity extends AppCompatActivity {
 
     private View view;
-    private RecyclerView mRecyclerView;
-    private List<String> points_used;
+    //private RecyclerView mRecyclerView;
+    private ViewPager mViewPager;
+    private PaymentFinishViewPagerAdapter vpAdapter;
+
+    private List<ExchangeResultModel> resultList;
+
+    /*private List<String> points_used;
     private List<String> points_exchanged;
     private List<String> reasons;
     private List<String> names;
-    private List<String> logos;
+    private List<String> logos;*/
 
-    private PayingFinishAdapter mAdapter;
+    //private PayingFinishAdapter mAdapter;
     private TextView Text_NeedPoints;
-    private ImageView ImageView_Business;
+    private ImageView Image_status;
+    private CircleIndicator indicator;
+
+    //private LinearLayout llIndicator;
+    //private ImageView ImageView_Business;
 
     private String total;
     private  Boolean state = true;
 
-    //控件的声明
-    private ViewPager viewPager;
-    private TextView imageDesc;
-    private LinearLayout dotsGroup;
-    //数据声明
-    //图片资源的ID
-    private int[] imageIds;
-    //用来保存上个视图的位置
-    private int lastPoint;
-
-    //为了不让Fragment每次在调用oncreteView都创建视图，造成视图的重复，定义一个布尔类型来确定是不是第一次调用
-    private boolean isFirstCreateView = true;
-    //图片标题集合
-    private String[] imageDescriptions;
-
-    //保存
-    List<ImageView> imageList = new ArrayList<ImageView>();
-    List<String> descList = new ArrayList<String>();
 
 
     @Override
@@ -79,10 +75,14 @@ public class PaymentFinishActivity extends AppCompatActivity {
 
 
         //通过findViewById拿到RecyclerView实例
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
+        //mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
+        mViewPager = findViewById(R.id.vp_finish_points);
         Text_NeedPoints = (TextView)findViewById(R.id.textView_points_usedTotal);
+        Image_status = findViewById(R.id.imageView_order_status);
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+        //llIndicator = findViewById(R.id.id_dots);
 
-        ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
+        //ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -90,24 +90,40 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //map = serializableHashMap.getMap();
 
         state = (Boolean) bundle.get("state");
-        logos = (List) bundle.get("logo_urls");
-        names = (List) bundle.get("business_names");
+        resultList = bundle.getParcelableArrayList("resultList");
+        //resultList =  (List<ExchangeResultModel>) getIntent().getSerializableExtra("resultList");
+        //logos = (List) bundle.get("logo_urls");
+        //names = (List) bundle.get("business_names");
         if(state){
-            points_used = (List) bundle.get("points_used");
-            points_exchanged = (List) bundle.get("points_exchanged");
+            //points_used = (List) bundle.get("points_used");
+            //points_exchanged = (List) bundle.get("points_exchanged");
             total = (String) bundle.get("total");
 
             Text_NeedPoints.setText(total);
         }
         else {
-            reasons = (List) bundle.get("reasons");
+            //reasons = (List) bundle.get("reasons");
+            Image_status.setImageResource(R.drawable.fail);
         }
 
-        //设置RecyclerView管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
+        //设置ViewPager管理器
+        vpAdapter = new PaymentFinishViewPagerAdapter(this,indicator);
+        vpAdapter.addData(resultList);
 
-        mRecyclerView.setAdapter(mAdapter);
+
+        mViewPager.setAdapter(vpAdapter);
+        indicator.setViewPager(mViewPager);
+
+
+
+
+        //设置RecyclerView管理器
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
+
+        //mRecyclerView.setAdapter(mAdapter);
+        //设置viewPager
+
 
 
     }

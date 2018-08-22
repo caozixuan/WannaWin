@@ -82,7 +82,7 @@
                             android:textSize="30sp"/>
                     </LinearLayout>
 
-                <LinearLayout
+                    <LinearLayout
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -108,24 +108,45 @@
                         />
 
                 </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="150dp"
                         android:orientation="vertical"
                         android:layout_marginStart="60dp"
                         android:layout_marginEnd="60dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="40dp">
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rv_finish_points"
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/vp_finish_points"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="match_parent">
 
-                            />
+                        </android.support.v4.view.ViewPager>
+
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/rv_finish_points"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+
+                            <!--/>-->
 
                     </LinearLayout>
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:ci_drawable="@drawable/dot_unselect"
+                        app:ci_drawable_unselected="@drawable/dot_select"/>
+
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/id_dots"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingBottom="4dp"-->
+                        <!--android:paddingTop="4dp" >-->
+                    <!--</LinearLayout>-->
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -140,7 +161,7 @@
             android:layout_alignParentTop="true">
 
             <ImageView
-                android:id="@+id/imageView_order_logo"
+                android:id="@+id/imageView_order_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
