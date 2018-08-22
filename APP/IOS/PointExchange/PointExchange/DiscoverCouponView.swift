@@ -9,7 +9,7 @@
 import UIKit
 
 class DiscoverCouponView: UIScrollView {
-
+	var viewDelegate:DiscoverCouponViewDelegate?
 	@IBOutlet weak var imageView1: GradientView!
 	@IBOutlet weak var imageView3: GradientView!
 	@IBOutlet weak var imageView2: GradientView!
@@ -53,5 +53,14 @@ class DiscoverCouponView: UIScrollView {
 		imageView2.contentMode = .scaleAspectFit
 		imageView3.contentMode = .scaleAspectFit
 		
+		// 添加点击
+		viewDelegate?.addTapImageAction()
+		
 	}
+	
+	
+}
+
+protocol DiscoverCouponViewDelegate {
+	func addTapImageAction()
 }

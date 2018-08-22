@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CouponDetailViewController: UIViewController {
 
@@ -22,7 +23,9 @@ class CouponDetailViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.logoImage.contentMode = .scaleAspectFit
-		self.logoImage.imageFromURL((item?.logoURL)!, placeholder: UIImage())
+		let imageURL = URL(string: (item?.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+		self.logoImage.kf.indicatorType = .activity
+		self.logoImage.kf.setImage(with: imageURL)
 		self.descriptionText.text = item?.description
 		self.pointLabel.text = String(stringInterpolationSegment: item!.points!)+"P"
 		

@@ -61,19 +61,19 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
             holder.pointsUsed.setText(points_used.get(position));
             //设置列表中积分信息
 
-            holder.pointsExchange.setText(points_exchanged.get(position));
+            //holder.pointsExchange.setText(points_exchanged.get(position));
         }
         else {
             holder.falseReason.setText(reasons.get(position));
         }
 
         //设置商家图片
-        Glide.with(context)
-                .load(logos.get(position))
-                .placeholder(R.drawable.ic_points_black_24dp)
-                .error(R.drawable.ic_mall_black_24dp)
-                .override(60,60)
-                .into(holder.logo);
+        //Glide.with(context)
+        //        .load(logos.get(position))
+        //        .placeholder(R.drawable.ic_points_black_24dp)
+        //        .error(R.drawable.ic_mall_black_24dp)
+        //        .override(60,60)
+        //        .into(holder.logo);
         //holder.logo.setImageResource(img_list.get(position));
         //设置商户名
         holder.name.setText(names.get(position));
@@ -95,8 +95,8 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
         View view;
         TextView pointsUsed;
         TextView falseReason;
-        ImageView logo;
-        TextView pointsExchange;
+        //ImageView logo;
+        //TextView pointsExchange;
         TextView name;
 
 
@@ -106,12 +106,12 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
             super(view);
             if(state){
                 pointsUsed = view.findViewById(R.id.textview_business_used_finish);
-                pointsExchange = view.findViewById(R.id.textview_points_exchanged);
+                //pointsExchange = view.findViewById(R.id.textview_points_exchanged);
             }
             else {
                 falseReason = view.findViewById(R.id.textview_false_reason);
             }
-            logo = view.findViewById(R.id.image_finish_business);
+            //logo = view.findViewById(R.id.image_finish_business);
             name = view.findViewById(R.id.textview_business_name);
 
 

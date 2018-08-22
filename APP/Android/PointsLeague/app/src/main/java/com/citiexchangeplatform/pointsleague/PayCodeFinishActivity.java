@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -118,9 +119,16 @@ public class PayCodeFinishActivity extends AppCompatActivity {
         //商家名称
         //name = (TextView)findViewById(R.id.textView_merchant_name_paying_finish);
 
+
         //name.setText(merchantName);
         usePoints.setText(String.valueOf(usePoint));
         originalPrice.setText(String.valueOf(originalPrices));
+
+        TextView tag = findViewById(R.id.textView_original_price_tag);
+        //中划线
+        tag.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        originalPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+
         currentPrice.setText(String.valueOf(currentPrices));
 
         Glide.with(PayCodeFinishActivity.this)
@@ -245,15 +253,19 @@ public class PayCodeFinishActivity extends AppCompatActivity {
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
 
-        titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
-        titleBar.setLeftText("返回");
-        titleBar.setLeftTextColor(Color.BLACK);
-        titleBar.setLeftClickListener(new View.OnClickListener() {
+
+
+        titleBar.setActionTextColor(getResources().getColor(R.color.colorLightOrange));
+        //右侧
+        titleBar.addAction(new TitleBar.TextAction("完成") {
             @Override
-            public void onClick(View v) {
+            public void performAction(View view) {
                 finish();
+
             }
         });
+
+
 
         titleBar.setTitle("支付结果");
         titleBar.setTitleColor(Color.BLACK);
