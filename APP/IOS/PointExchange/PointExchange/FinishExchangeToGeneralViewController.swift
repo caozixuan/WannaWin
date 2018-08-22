@@ -8,12 +8,14 @@
 
 import UIKit
 
-class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Connector {
 
     @IBOutlet weak var statusLogo: UIImageView!
     @IBOutlet weak var statusText: UILabel!
     @IBOutlet weak var addedGeneralPoints: UILabel!
-    //@IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    var pageViewController : PageViewController!
     
     var status: Bool = false
     var generalPoints: Double?
@@ -21,8 +23,6 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
     var successMerchantNames : [String]?
     var failureMerchants: Dictionary<String,String>?
     var failureName: [String]?
-    
-    var pageViewController : PageViewController!
     
     
     override func viewDidLoad() {
@@ -54,29 +54,51 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
     
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if status {
-            return (successMerchants?.count)!
-        }
-        else {
-            return (failureMerchants?.count)!
+        var count: Int! = 0
+        
+        if (tableView.delegate? .isKind(of: ExchangeResultTableViewController.self))!{
+            let viewController = tableView.delegate as! ExchangeResultTableViewController
+            count = viewController.index! * 3
         }
         
+        if status {
+            if count > (successMerchants?.count)!{
+                let num = (successMerchants?.count)! - (count - 3)
+                return num
+            }
+            return 3
+        }
+        else {
+            if count > (failureMerchants?.count)!{
+                let num = (failureMerchants?.count)! - (count - 3)
+                return num
+            }
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell  = tableView.dequeueReusableCell(withIdentifier: "exchangedPoints", for: indexPath)
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "exchangedPoints")
+        let cell  = tableView.dequeueReusableCell(withIdentifier: "exchangedPoints", for: indexPath)
+        
+        var page: Int! = 0
+        var index: Int! = 0
+        
+        if (tableView.delegate? .isKind(of: ExchangeResultTableViewController.self))!{
+            let viewController = tableView.delegate as! ExchangeResultTableViewController
+            page = viewController.index!
+            index = (page-1) * 3 + indexPath.row
         }
+        
+        
         if cell .isKind(of: ExchangedPointsCell.self){
             let exchangedPointsCell = cell as! ExchangedPointsCell
             if status {
-                exchangedPointsCell.merchantName.text = successMerchantNames?[indexPath.row]
-                let points = Double((successMerchants?[indexPath.row].selectedMSCardPoints)!)!
+                exchangedPointsCell.merchantName.text = successMerchantNames?[index]
+                let points = Double((successMerchants?[index].selectedMSCardPoints)!)!
                 exchangedPointsCell.exchangedPoints.text = String(format:"%.2f", points)
             }
             else {
-                let merchant = failureName?[indexPath.row]
+                let merchant = failureName?[index]
                 exchangedPointsCell.merchantName.text = merchant
                 exchangedPointsCell.exchangedPoints.text = failureMerchants?[merchant!]
             }
@@ -99,6 +121,7 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         if segue.identifier == "show page VC" {
             if segue.destination .isKind(of: PageViewController.self){
                 pageViewController = segue.destination as! PageViewController
+                pageViewController.connector = self
                 if status {
                     pageViewController.totalNum = (successMerchants?.count)!
                 }
@@ -106,16 +129,17 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
                     pageViewController.totalNum = (failureMerchants?.count)!
                 }
                 
-//                // 为tableView设置代理
-//                for controller in pageViewController.pageControllers {
-//                    if controller .isKind(of: ExchangeResultTableViewController.self){
-//                        let c = controller as! ExchangeResultTableViewController
-//                        c.tableView.dataSource = self
-//                    }
-//                }
+                pageViewController.pageNum = (pageViewController.totalNum % 3 == 0) ?(pageViewController.totalNum/3) : (pageViewController.totalNum/3 + 1)
+                
+                // set up page control
+                self.pageControl.numberOfPages = pageViewController.pageNum
+                self.pageControl.currentPage = 0
             }
         }
-        
+    }
+    
+    func setPageIndex(index: Int){
+        self.pageControl.currentPage = index
     }
 
 }

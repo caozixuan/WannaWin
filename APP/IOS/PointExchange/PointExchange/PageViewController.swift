@@ -9,29 +9,34 @@
 import UIKit
 import Pageboy
 
+protocol Connector {
+    func setPageIndex(index: Int)
+}
+
 class PageViewController: PageboyViewController, PageboyViewControllerDataSource {
-    
-    @IBOutlet weak var pageControl: UIPageControl!
+   
     var totalNum: Int!
+    var pageNum: Int!
     
     var pageControllers = [UIViewController]()
+    
+    var connector: Connector?
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self
         
         // set up pageControllers
         let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
         //var viewControllers = [UIViewController]()
-        for i in 0 ..< totalNum {
+        for i in 0 ..< pageNum {
             let viewController = storyboard.instantiateViewController(withIdentifier: "ExchangeResultTableViewController") as! ExchangeResultTableViewController
             viewController.index = i + 1
+            viewController.tableView.dataSource = self.connector as? UITableViewDataSource
             pageControllers.append(viewController)
         }
         
-        // set up page control
-        pageControl.numberOfPages = pageControllers.count
-        pageControl.currentPage = 0
+        self.dataSource = self
+
     }
 
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
@@ -50,7 +55,7 @@ class PageViewController: PageboyViewController, PageboyViewControllerDataSource
                                didScrollToPageAt index: Int,
                                direction: PageboyViewController.NavigationDirection,
                                animated: Bool) {
-        pageControl.currentPage = index
+        self.connector?.setPageIndex(index: index)
     }
 
 }

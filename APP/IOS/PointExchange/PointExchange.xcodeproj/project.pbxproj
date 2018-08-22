@@ -361,7 +361,6 @@
 				3ED5F6E1212A895D00F46E7C /* SignUpView.swift */,
 				3ED5F6D32122985C00F46E7C /* MerchantCouponTableViewCell.swift */,
 				84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */,
-				84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */,
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
 				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
 				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
@@ -501,6 +500,7 @@
 			children = (
 				3EBF049720FDAD13004D6D8E /* MaskView.swift */,
 				B6C480692100F1A3002ED9C9 /* HomepageStackView.swift */,
+				84A968722121C5A000EF5BA8 /* ExchangedPointsCell.swift */,
 				3EA3CD002100ED8B00B0392E /* ExchangeItemCellView.swift */,
 			);
 			name = HomePageTab;
