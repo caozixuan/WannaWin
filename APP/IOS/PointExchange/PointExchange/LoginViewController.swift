@@ -48,7 +48,10 @@ class LoginViewController: UIViewController,LoginViewDelegate{
             
             let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popViewController(animated: true)
+				let sb = UIStoryboard(name: "User", bundle: nil)
+				let vc = sb.instantiateViewController(withIdentifier: "TendencySurveyViewController")
+				self.navigationController?.pushViewController(vc, animated: true)
             })
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
@@ -68,6 +71,7 @@ class LoginViewController: UIViewController,LoginViewDelegate{
             self.present(alert, animated: true, completion: nil)
         }
         self.activityIndicator?.stopAnimating()
+		
     }
     
     // 设置当前用户的用户名和密码，并存储到keychain

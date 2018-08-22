@@ -383,12 +383,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-Wi-31h" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="51" y="92" width="273" height="179"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jam-9X-RAw">
+                                <rect key="frame" x="118" y="535" width="138" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="exchangeButton"/>
+                                <connections>
+                                    <action selector="clickExchange:" destination="tvj-xr-jyE" eventType="touchUpInside" id="fsj-JB-YoT"/>
+                                </connections>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-Wi-31h" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="58" y="100" width="258" height="169"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5dQ-jz-AyY">
-                                        <rect key="frame" x="0.0" y="0.0" width="273" height="179"/>
+                                        <rect key="frame" x="-20" y="-22" width="299" height="212"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -408,14 +416,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jam-9X-RAw">
-                                <rect key="frame" x="118" y="535" width="138" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="exchangeButton"/>
-                                <connections>
-                                    <action selector="clickExchange:" destination="tvj-xr-jyE" eventType="touchUpInside" id="fsj-JB-YoT"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Yu3-Vb-dbE"/>

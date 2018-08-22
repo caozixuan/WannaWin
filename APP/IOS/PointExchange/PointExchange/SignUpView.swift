@@ -50,10 +50,11 @@ class SignUpView: UIView {
 	private func initViewFromNib(){
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: "SignUpView", bundle: bundle)
-		self.view1 = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+		let views = nib.instantiate(withOwner: self, options: nil)
+		self.view1 = views[0] as! UIView
 		self.view1.frame = bounds
 		self.addSubview(view1)
-		self.view2 = nib.instantiate(withOwner: self, options: nil)[1] as! UIView
+		self.view2 = views[1] as! UIView
 		self.view2.frame = bounds
 	}
 
@@ -62,8 +63,16 @@ class SignUpView: UIView {
 	}
 	
 	@IBAction func clickNextBtn(_ sender: Any) {
-		view1.removeFromSuperview()
-		self.addSubview(view2)
+		ServerConnector.checkVCode(phoneNum: phoneNumField.text!, vcode: vcodeField.text!){result in
+			if result{
+				self.view1.removeFromSuperview()
+				self.addSubview(self.view2)
+			}else{
+
+			}
+		}
+		
+		
 	}
 	@IBAction func clickGetVCode(_ sender: Any) {
 		ServerConnector.getVCode(phoneNumber: phoneNumField.text!)

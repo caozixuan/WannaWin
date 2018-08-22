@@ -456,6 +456,304 @@
             </objects>
             <point key="canvasLocation" x="1708" y="-2815"/>
         </scene>
+        <!--积分消费倾向-->
+        <scene sceneID="hq2-Sw-SQD">
+            <objects>
+                <viewController storyboardIdentifier="TendencySurveyViewController" title="积分消费倾向" id="XGf-BK-mI9" customClass="TendencySurveyViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mkY-Qa-VOq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请选择您经常消费的商户类型：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYf-eR-yx3">
+                                <rect key="frame" x="74" y="88" width="238" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
+                                <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="0.89000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZg-6w-2i6">
+                                <rect key="frame" x="149" y="146" width="88" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="航空出行" backgroundImage="whiteCircle">
+                                    <color key="titleColor" red="0.16078431372549018" green="0.51372549019607838" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="航空出行" backgroundImage="blueCircle">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseType:" destination="XGf-BK-mI9" eventType="touchUpInside" id="2wm-0E-gQR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-QP-hBe">
+                                <rect key="frame" x="42" y="311" width="88" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="电影" backgroundImage="whiteCircle">
+                                    <color key="titleColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="电影" backgroundImage="blueCircle">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseType:" destination="XGf-BK-mI9" eventType="touchUpInside" id="y7y-e7-CTt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Cg-kj-teR">
+                                <rect key="frame" x="149" y="381" width="88" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="whiteCircle">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="超市">
+                                            <attributes>
+                                                <color key="NSColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">&amp;
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" metaFont="system" size="14"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="便利店">
+                                            <attributes>
+                                                <color key="NSColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <state key="selected" backgroundImage="blueCircle">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="超市">
+                                            <attributes>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">&amp;
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="便利店">
+                                            <attributes>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="chooseType:" destination="XGf-BK-mI9" eventType="touchUpInside" id="BBb-vJ-F41"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpT-Gh-uDb">
+                                <rect key="frame" x="245" y="311" width="88" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="通讯" backgroundImage="whiteCircle">
+                                    <color key="titleColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="通讯" backgroundImage="blueCircle">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseType:" destination="XGf-BK-mI9" eventType="touchUpInside" id="XOQ-M4-k1I"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93t-fd-zGA">
+                                <rect key="frame" x="42" y="200" width="88" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="酒店" backgroundImage="whiteCircle">
+                                    <color key="titleColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="酒店" backgroundImage="blueCircle">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseType:" destination="XGf-BK-mI9" eventType="touchUpInside" id="Aud-a8-LJ3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jax-6r-pl0">
+                                <rect key="frame" x="245" y="200" width="88" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="餐饮" backgroundImage="whiteCircle">
+                                    <color key="titleColor" red="0.16078431369999999" green="0.51372549020000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="餐饮" backgroundImage="blueCircle">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseType:" destination="XGf-BK-mI9" eventType="touchUpInside" id="4Cy-OV-gSc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODy-U1-uxP">
+                                <rect key="frame" x="77" y="502" width="232" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="完成" backgroundImage="button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickFinish:" destination="XGf-BK-mI9" eventType="touchUpInside" id="gAn-k3-0lm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJe-Yc-Bwm">
+                                <rect key="frame" x="164" y="550" width="58" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="跳过此步">
+                                    <color key="titleColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="0.87208369006849318" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickSkip:" destination="XGf-BK-mI9" eventType="touchUpInside" id="Nii-cd-VdE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gh9-Je-XGA"/>
+                    </view>
+                    <connections>
+                        <outlet property="airlineBtn" destination="VZg-6w-2i6" id="Lrw-VB-Pae"/>
+                        <outlet property="communicationBtn" destination="dpT-Gh-uDb" id="13Q-zh-C75"/>
+                        <outlet property="foodBtn" destination="jax-6r-pl0" id="X1n-bb-YRK"/>
+                        <outlet property="hotelBtn" destination="93t-fd-zGA" id="TD8-Uj-KEZ"/>
+                        <outlet property="marketBtn" destination="5Cg-kj-teR" id="jkH-kM-FMj"/>
+                        <outlet property="movieBtn" destination="qEC-QP-hBe" id="gz6-Er-o4M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hXA-d6-Xe5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2529" y="-2804"/>
+        </scene>
         <!--历史订单-线下支付-->
         <scene sceneID="OOQ-0O-eOc">
             <objects>
@@ -1646,7 +1944,10 @@
         <image name="Button登录" width="191" height="46"/>
         <image name="MyActive" width="24" height="24"/>
         <image name="MyUnselected" width="24" height="24"/>
+        <image name="blueCircle" width="88" height="88"/>
+        <image name="button" width="663" height="138"/>
         <image name="portrait_1userTabMe" width="128" height="128"/>
+        <image name="whiteCircle" width="86" height="86"/>
         <image name="兑换记录" width="48" height="48"/>
         <image name="历史订单" width="49" height="48"/>
         <image name="设置" width="48" height="48"/>
