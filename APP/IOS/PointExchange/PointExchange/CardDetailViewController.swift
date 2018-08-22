@@ -41,19 +41,34 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		ServerConnector.getCardDetail(merchantID: self.merchantID!){(result,card) in
 			if result {
 				self.card = card
-//			self.cardImageView.imageFromURL(card.logoURL!, placeholder: UIImage())
 				let imageURL = URL(string: (card.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
 				self.cardImageView.kf.indicatorType = .activity
 				self.cardImageView.kf.setImage(with: imageURL)
 				self.tableView.reloadData()
-				// - TODO: 会员卡条形码
 			}
 			self.indicator?.stopAnimating()
 		}
 		self.tableView.layer.zPosition = 10.0
 		self.barButton.layer.zPosition = 10.0
 		self.cardInfoBackgroundImage.layer.zPosition = 10.0
+		
+		// 添加滑动手势
+		let gestureDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownResponse))
+		gestureDown.direction = .down
+		self.backgroundView.addGestureRecognizer(gestureDown)
+		let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpResponse))
+		gestureUp.direction = .up
+		self.backgroundView.addGestureRecognizer(gestureUp)
+		
     }
+	
+	@objc func swipeDownResponse(){
+		backgroundViewSwipe()
+	}
+	
+	@objc func swipeUpResponse(){
+		backgroundViewSwipe()
+	}
 	
     // MARK: - Navigations
 	@objc func goExchangeHistoryVC() {
@@ -98,6 +113,10 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		return cell
 	}
 	@IBAction func clickBarBtn(_ sender: Any) {
+		backgroundViewSwipe()
+		
+	}
+	func backgroundViewSwipe(){
 		if isFold{
 			self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_unfold")
 			isFold = false
@@ -111,7 +130,6 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 				self.backgroundView.frame = CGRect(x: self.backgroundView.frame.origin.x, y: self.backgroundView.frame.origin.y-169, width: self.backgroundView.frame.width, height: self.backgroundView.frame.height)
 			}
 		}
-		
 	}
 	@IBAction func clickUnbind(_ sender: Any) {
 		let alert = UIAlertController(title:"解绑会员卡", message:"您确定要解绑该会员卡吗？", preferredStyle:.alert)
