@@ -1,6 +1,7 @@
 package citiMerchant.BC;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
@@ -126,6 +127,17 @@ public class BC {
         return new DealData(DealData.DealType.getType(type), merchantID, userID, points_citi);
     }
 
+
+    //number of milliseconds since 1/1/1970.
+    static public List<DealInfo> readAllAfterTime(String merchantID, Long timestamp, String private_K) {
+        List<DealInfo> l = new ArrayList<>();
+        for (Block b : blockchain)
+            if (b.data.merchantID == merchantID && b.timeStamp > timestamp)
+                l.add(new DealInfo(read(b, merchantID, private_K), b.timeStamp));
+        return l;
+    }
+
+
 }
 
 class merchantInfo {
@@ -135,5 +147,15 @@ class merchantInfo {
     public merchantInfo(String merchantID, String pub_K) {
         this.merchantID = merchantID;
         this.pub_K = pub_K;
+    }
+}
+
+class DealInfo {
+    public final DealData dealData;
+    public final Long timestamp;
+
+    public DealInfo(DealData dealData, Long timestamp) {
+        this.dealData = dealData;
+        this.timestamp = timestamp;
     }
 }

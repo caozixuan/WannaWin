@@ -379,7 +379,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPb-WV-E5p" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="26" y="160" width="323" height="419"/>
+                                <rect key="frame" x="26" y="130" width="323" height="465"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+720.00P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Jj-rc-5To">
                                         <rect key="frame" x="94.5" y="89" width="134" height="37"/>
@@ -403,14 +403,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDT-17-IDG">
-                                        <rect key="frame" x="50" y="175" width="223" height="150"/>
+                                        <rect key="frame" x="50" y="208.5" width="223" height="132"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="ekJ-Gt-4fm"/>
+                                            <constraint firstAttribute="height" constant="132" id="ekJ-Gt-4fm"/>
                                         </constraints>
                                         <connections>
                                             <segue destination="zKN-cb-81j" kind="embed" identifier="show page VC" id="8J1-xU-Pm0"/>
                                         </connections>
                                     </containerView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="7X7-SW-qsZ">
+                                        <rect key="frame" x="142" y="341" width="39" height="55"/>
+                                        <color key="pageIndicatorTintColor" red="0.54901960780000003" green="0.54901960780000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="currentPageIndicatorTintColor" name="main_orange"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -418,9 +423,12 @@
                                     <constraint firstAttribute="trailing" secondItem="RDT-17-IDG" secondAttribute="trailing" constant="50" id="7TM-BH-QZk"/>
                                     <constraint firstItem="RDT-17-IDG" firstAttribute="top" secondItem="MkK-qs-bPt" secondAttribute="bottom" constant="4" id="ID6-Y6-2ix"/>
                                     <constraint firstItem="Xcp-C5-cY4" firstAttribute="centerX" secondItem="xPb-WV-E5p" secondAttribute="centerX" id="J2x-9N-TQu"/>
+                                    <constraint firstAttribute="bottom" secondItem="7X7-SW-qsZ" secondAttribute="bottom" constant="69" id="Np5-iH-k9b"/>
                                     <constraint firstItem="RDT-17-IDG" firstAttribute="leading" secondItem="xPb-WV-E5p" secondAttribute="leading" constant="50" id="OzA-4v-LON"/>
                                     <constraint firstItem="MkK-qs-bPt" firstAttribute="centerX" secondItem="xPb-WV-E5p" secondAttribute="centerX" id="ZPf-NA-McV"/>
                                     <constraint firstItem="MkK-qs-bPt" firstAttribute="top" secondItem="Xcp-C5-cY4" secondAttribute="bottom" constant="32" id="hJc-Hr-ubE"/>
+                                    <constraint firstItem="7X7-SW-qsZ" firstAttribute="centerX" secondItem="xPb-WV-E5p" secondAttribute="centerX" id="nse-mT-Q2b"/>
+                                    <constraint firstItem="7X7-SW-qsZ" firstAttribute="top" secondItem="RDT-17-IDG" secondAttribute="bottom" id="rmV-26-zY0"/>
                                     <constraint firstItem="4Jj-rc-5To" firstAttribute="centerX" secondItem="xPb-WV-E5p" secondAttribute="centerX" id="wTN-5z-9MN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -442,7 +450,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="EAv-NR-hLZ">
-                                <rect key="frame" x="123" y="96" width="129" height="129"/>
+                                <rect key="frame" x="123" y="66" width="129" height="129"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EAv-NR-hLZ" secondAttribute="height" multiplier="1:1" id="Wyw-QY-Kxo"/>
                                 </constraints>
@@ -457,8 +465,8 @@
                         <constraints>
                             <constraint firstItem="EAv-NR-hLZ" firstAttribute="width" secondItem="xPb-WV-E5p" secondAttribute="width" multiplier="0.4" id="3TZ-LE-2nD"/>
                             <constraint firstItem="uN4-JC-6qi" firstAttribute="trailing" secondItem="xPb-WV-E5p" secondAttribute="trailing" constant="26" id="3d5-id-Y4L"/>
-                            <constraint firstItem="uN4-JC-6qi" firstAttribute="bottom" secondItem="xPb-WV-E5p" secondAttribute="bottom" constant="88" id="OJ1-58-tad"/>
-                            <constraint firstItem="xPb-WV-E5p" firstAttribute="top" secondItem="uN4-JC-6qi" secondAttribute="top" constant="140" id="Vhh-Av-p6e"/>
+                            <constraint firstItem="uN4-JC-6qi" firstAttribute="bottom" secondItem="xPb-WV-E5p" secondAttribute="bottom" constant="72" id="OJ1-58-tad"/>
+                            <constraint firstItem="xPb-WV-E5p" firstAttribute="top" secondItem="uN4-JC-6qi" secondAttribute="top" constant="110" id="Vhh-Av-p6e"/>
                             <constraint firstItem="4Jj-rc-5To" firstAttribute="top" secondItem="EAv-NR-hLZ" secondAttribute="bottom" constant="24" id="aY3-Ug-hgW"/>
                             <constraint firstItem="EAv-NR-hLZ" firstAttribute="centerX" secondItem="xPb-WV-E5p" secondAttribute="centerX" id="eRc-U6-bff"/>
                             <constraint firstItem="EAv-NR-hLZ" firstAttribute="centerY" secondItem="xPb-WV-E5p" secondAttribute="top" id="j8D-dw-sHT"/>
@@ -471,6 +479,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="addedGeneralPoints" destination="4Jj-rc-5To" id="PFV-WV-fjj"/>
+                        <outlet property="pageControl" destination="7X7-SW-qsZ" id="9zF-vO-efb"/>
                         <outlet property="statusLogo" destination="EAv-NR-hLZ" id="nYW-cJ-QG0"/>
                         <outlet property="statusText" destination="Xcp-C5-cY4" id="XpT-Ic-r5C"/>
                     </connections>
@@ -554,16 +563,16 @@
         <scene sceneID="STa-a7-hvN">
             <objects>
                 <tableViewController storyboardIdentifier="ExchangeResultTableViewController" title="记录" id="L8A-BA-rCV" customClass="ExchangeResultTableViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iho-vM-QhQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iho-vM-QhQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exchangedPoints" rowHeight="35" id="S9a-7v-Ywx" customClass="ExchangedPointsCell" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="35"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exchangedPoints" rowHeight="44" id="S9a-7v-Ywx" customClass="ExchangedPointsCell" customModule="PointExchange" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S9a-7v-Ywx" id="KcL-we-2Gw">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="34.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星巴克" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59M-w4-vM6">
@@ -993,21 +1002,10 @@
             <objects>
                 <viewController id="zKN-cb-81j" customClass="PageViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rLT-CC-mUz">
-                        <rect key="frame" x="0.0" y="0.0" width="223" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="223" height="132"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0Qo-3y-7mv">
-                                <rect key="frame" x="92" y="113" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="pageIndicatorTintColor" red="0.54901960780000003" green="0.54901960780000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" name="main_orange"/>
-                            </pageControl>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <connections>
-                        <outlet property="pageControl" destination="0Qo-3y-7mv" id="764-1a-8wK"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epn-9L-ZSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1032,10 +1030,10 @@
             <color red="0.60399997230000002" green="0.52499997620000005" blue="0.086000002919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="main_orange">
-            <color red="1" green="0.58399999141693115" blue="0.27500000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58399999140000003" blue="0.27500000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="main_orange">
-            <color red="1" green="0.58399999140000003" blue="0.27500000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58399999141693115" blue="0.27500000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
