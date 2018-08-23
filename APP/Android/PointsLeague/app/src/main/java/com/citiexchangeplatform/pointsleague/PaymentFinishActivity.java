@@ -20,47 +20,43 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.citiexchangeplatform.pointsleague.adapter.PaymentFinishViewPagerAdapter;
+import com.citiexchangeplatform.pointsleague.models.ExchangeResultModel;
+
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class PaymentFinishActivity extends AppCompatActivity {
 
     private View view;
-    private RecyclerView mRecyclerView;
-    private List<String> points_used;
+    //private RecyclerView mRecyclerView;
+    private ViewPager mViewPager;
+    private PaymentFinishViewPagerAdapter vpAdapter;
+
+    private List<ExchangeResultModel> resultList;
+
+    /*private List<String> points_used;
     private List<String> points_exchanged;
     private List<String> reasons;
     private List<String> names;
-    private List<String> logos;
+    private List<String> logos;*/
 
-    private PayingFinishAdapter mAdapter;
+    //private PayingFinishAdapter mAdapter;
     private TextView Text_NeedPoints;
-    private ImageView ImageView_Business;
+    private ImageView Image_status;
+    private CircleIndicator indicator;
+
+    //private LinearLayout llIndicator;
+    //private ImageView ImageView_Business;
 
     private String total;
     private  Boolean state = true;
 
-    //控件的声明
-    private ViewPager viewPager;
-    private TextView imageDesc;
-    private LinearLayout dotsGroup;
-    //数据声明
-    //图片资源的ID
-    private int[] imageIds;
-    //用来保存上个视图的位置
-    private int lastPoint;
-
-    //为了不让Fragment每次在调用oncreteView都创建视图，造成视图的重复，定义一个布尔类型来确定是不是第一次调用
-    private boolean isFirstCreateView = true;
-    //图片标题集合
-    private String[] imageDescriptions;
-
-    //保存
-    List<ImageView> imageList = new ArrayList<ImageView>();
-    List<String> descList = new ArrayList<String>();
 
 
     @Override
@@ -76,25 +72,17 @@ public class PaymentFinishActivity extends AppCompatActivity {
         toolBar();
 
 
-        //广告栏
-        imageIds = new int[]{R.drawable.ad1, R.drawable.ad2, R.drawable.ad3};
-
-        imageDescriptions = new String[]{
-                "banner1",
-                "banner2",
-                "banner3"
-        };
-        //保存
-        List<ImageView> imageList = new ArrayList<ImageView>();
-        List<String> descList = new ArrayList<String>();
-
 
 
         //通过findViewById拿到RecyclerView实例
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
+        //mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
+        mViewPager = findViewById(R.id.vp_finish_points);
         Text_NeedPoints = (TextView)findViewById(R.id.textView_points_usedTotal);
+        Image_status = findViewById(R.id.imageView_order_status);
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+        //llIndicator = findViewById(R.id.id_dots);
 
-        ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
+        //ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -102,33 +90,40 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //map = serializableHashMap.getMap();
 
         state = (Boolean) bundle.get("state");
-        logos = (List) bundle.get("logo_urls");
-        names = (List) bundle.get("business_names");
+        resultList = bundle.getParcelableArrayList("resultList");
+        //resultList =  (List<ExchangeResultModel>) getIntent().getSerializableExtra("resultList");
+        //logos = (List) bundle.get("logo_urls");
+        //names = (List) bundle.get("business_names");
         if(state){
-            points_used = (List) bundle.get("points_used");
-            points_exchanged = (List) bundle.get("points_exchanged");
+            //points_used = (List) bundle.get("points_used");
+            //points_exchanged = (List) bundle.get("points_exchanged");
             total = (String) bundle.get("total");
 
             Text_NeedPoints.setText(total);
         }
         else {
-            reasons = (List) bundle.get("reasons");
+            //reasons = (List) bundle.get("reasons");
+            Image_status.setImageResource(R.drawable.fail);
         }
 
+        //设置ViewPager管理器
+        vpAdapter = new PaymentFinishViewPagerAdapter(this,indicator);
+        vpAdapter.addData(resultList);
 
 
+        mViewPager.setAdapter(vpAdapter);
+        indicator.setViewPager(mViewPager);
 
-        //初始化数据
-        initView();
-        initAdData();
-        initEvent();
+
 
 
         //设置RecyclerView管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
 
-        mRecyclerView.setAdapter(mAdapter);
+        //mRecyclerView.setAdapter(mAdapter);
+        //设置viewPager
+
 
 
     }
@@ -159,7 +154,7 @@ public class PaymentFinishActivity extends AppCompatActivity {
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
+        //titleBar.setDividerColor(Color.GRAY);
         //左侧
         //titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
         //titleBar.setLeftText("返回");
@@ -171,12 +166,13 @@ public class PaymentFinishActivity extends AppCompatActivity {
         //    }
         //});
 
-        titleBar.setTitle("兑换成功");
+        titleBar.setTitle("兑换结果");
         titleBar.setTitleColor(Color.BLACK);
 
 
         titleBar.setActionTextColor(Color.BLACK);
 
+        titleBar.setActionTextColor(getResources().getColor(R.color.colorLightOrange));
         //右侧
         titleBar.addAction(new TitleBar.TextAction("完成") {
             @Override
@@ -197,95 +193,6 @@ public class PaymentFinishActivity extends AppCompatActivity {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
-
-    private void initView() {
-        viewPager = (ViewPager) findViewById(R.id.vp_ad);
-        imageDesc = (TextView) findViewById(R.id.id_image_desc);
-        dotsGroup = (LinearLayout) findViewById(R.id.id_dots);
-        imageDesc.setText(imageDescriptions[0]);
-    }
-
-    private void initAdData() {
-        if (isFirstCreateView) {
-            for (int i = 0; i < imageIds.length; i++) {
-                //初始化图片资源
-                ImageView imageView = new ImageView(this);
-                imageView.setBackgroundResource(imageIds[i]);
-                imageList.add(imageView);
-                //初始化点
-                ImageView point = new ImageView(this);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                if (i == 0) {
-                    isFirstCreateView = false;
-                    point.setEnabled(true);
-                    layoutParams.rightMargin = 30;
-                    layoutParams.leftMargin = 30;
-                    point.setLayoutParams(layoutParams);
-                } else {
-                    layoutParams.rightMargin = 30;
-                    point.setLayoutParams(layoutParams);
-                    point.setEnabled(false);
-                }
-                point.setBackgroundResource(R.drawable.point_bg);
-                dotsGroup.addView(point);
-            }
-        }
-    }
-
-    private void initEvent() {
-        viewPager.setAdapter(new AdAdapter(descList,imageList));
-        //减去后面的数是为了保证一开始的界面是我们的第一张图片
-        viewPager.setCurrentItem(Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2 % imageList.size()));
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            /**
-             * 页面正在滑动的时候，回调
-             */
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            /**
-             * 页面切换后调用
-             * position  新的页面位置
-             */
-            public void onPageSelected(int position) {
-                position = position % imageList.size();
-                imageDesc.setText(imageDescriptions[position]);
-                dotsGroup.getChildAt(lastPoint).setEnabled(false);
-                dotsGroup.getChildAt(position).setEnabled(true);
-                lastPoint = position;
-            }
-
-            @Override
-            /**
-             * 当页面状态发生变化的时候，回调
-             */
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        isRunning = true;
-        handler.sendEmptyMessageDelayed(0, 2000);
-    }
-
-    /**
-     * 判断是否自动滚动
-     */
-    private boolean isRunning = false;
-
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-
-            //让viewPager 滑动到下一页
-            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-            if (isRunning) {
-                handler.sendEmptyMessageDelayed(0, 2000);
-            }
-        }
-    };
 
 
 }

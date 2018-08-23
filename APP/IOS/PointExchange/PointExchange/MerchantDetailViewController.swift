@@ -42,8 +42,6 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		ServerConnector.getMerchantItems(merchantID: (merchant?.id)!, start: 0, n: 2){ (result, items) in
 			if result {
 				self.items = items!
-				self.items.append(items![0])
-				self.items.append(items![1])
 				self.couponTableView.reloadData()
 			}
 			

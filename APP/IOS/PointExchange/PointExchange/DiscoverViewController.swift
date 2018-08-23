@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,DiscoverCouponViewDelegate{
     @IBOutlet weak var searchBar: UISearchBar!
     
 	@IBOutlet weak var couponView: DiscoverCouponView!
@@ -29,7 +29,8 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.delegate=self
         self.tableView.dataSource=self
-        
+        self.couponView.viewDelegate = self
+		
         self.tableView.rowHeight = 68
 		
         // Do any additional setup after loading the view.
@@ -119,6 +120,22 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		view.merchant = merchantArray?[indexPath.row]
 		self.navigationController?.pushViewController(view, animated: true)
     }
+	
+	func addTapImageAction() {
+		for i in 0 ... 2{
+			couponView.images[i].tag = i
+			let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapImageAction(_:)))
+			couponView.images[i].addGestureRecognizer(gesture)
+			
+		}
+	}
 
+	@objc func tapImageAction(_ sender:UITapGestureRecognizer){
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+		vc.item = items[(sender.view?.tag)!]
+		self.navigationController?.pushViewController(vc, animated: true)
+		
+	}
     
 }

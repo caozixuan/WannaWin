@@ -29,18 +29,20 @@ class SignUpViewController: UIViewController,SignUpViewDelegate {
         if result == true{
             let alert = UIAlertController(title:"注册", message:"注册成功！", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-                self.navigationController!.popViewController(animated: true)
-                self.navigationController!.popViewController(animated: true)
+				ServerConnector.login(phoneNum: self.signUpView.phoneNumField.text!, password: self.signUpView.passwordField.text!){result in
+					if result {
+						User.getUser().username = self.signUpView.phoneNumField.text
+						User.getUser().password = self.signUpView.passwordField.text
+						User.saveToKeychain()
+						let sb = UIStoryboard(name: "User", bundle: nil)
+						let vc = sb.instantiateViewController(withIdentifier: "TendencySurveyViewController")
+						self.navigationController?.pushViewController(vc, animated: true)
+					}
+				}
             })
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
-			ServerConnector.login(phoneNum: signUpView.phoneNumField.text!, password: signUpView.passwordField.text!){result in
-                if result {
-                    User.getUser().username = self.signUpView.phoneNumField.text
-                    User.getUser().password = self.signUpView.passwordField.text
-                    User.saveToKeychain()
-                }
-            }
+			
         }else{
             let alert = UIAlertController(title:"注册失败", message:"请检查信息是否填写正确", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in

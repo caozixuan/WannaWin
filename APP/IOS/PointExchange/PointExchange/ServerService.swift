@@ -23,8 +23,8 @@ enum ServerService {
     
     /// 修改密码
     case changePassword(old:String,new:String)
-    /// 重置密码验证码
-    case checkResetVCode(phoneNum:String, vcode:String)
+    /// 验证验证码
+    case checkVCode(phoneNum:String, vcode:String)
     /// 重置密码
     case resetPassword(phoneNum:String, newPassword:String)
     
@@ -117,7 +117,7 @@ extension ServerService:TargetType {
             return "/account/login"
         case .changePassword:
             return "/account/changePassword"
-        case .checkResetVCode:
+        case .checkVCode:
             return "/account/vfcode"
         case .resetPassword:
             return "/account/resetPassword"
@@ -227,7 +227,7 @@ extension ServerService:TargetType {
             params["newPassword"] = new
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
-        case .checkResetVCode(let phoneNum, let vcode):
+        case .checkVCode(let phoneNum, let vcode):
             var params:[String:String] = [:]
             params["phoneNum"] = phoneNum
             params["vcode"] = vcode

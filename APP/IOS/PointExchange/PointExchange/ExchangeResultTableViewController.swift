@@ -11,5 +11,10 @@ import UIKit
 class ExchangeResultTableViewController: UITableViewController {
 
     var index: Int?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.isScrollEnabled = false
+    }
 
 }
