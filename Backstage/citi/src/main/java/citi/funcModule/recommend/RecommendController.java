@@ -71,9 +71,9 @@ public class RecommendController {
             //prefList.add('1');
         }
         if(recommendService.initPref(userID,prefList))
-            return "[{\"status\":\"true\"}]";
+            return ResultJson.SUCCESS;
         else
-            return "[{\"status\":\"false\"}]";
+            return ResultJson.FAILURE;
     }
 
 
