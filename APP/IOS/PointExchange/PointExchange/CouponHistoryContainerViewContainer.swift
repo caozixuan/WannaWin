@@ -72,7 +72,8 @@ class CouponHistoryContainViewContainer: UIViewController {
 				let formatter = DateFormatter()
 				formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
 				self.tableView.isHidden = false
-				cell?.logoImage.imageFromURL(element.logoURL!, placeholder: UIImage())
+				let imageURL = URL(string: (element.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+				cell?.logoImage.kf.setImage(with: imageURL)
 				cell?.pointLabel.text = String(stringInterpolationSegment:element.points!)
 				cell?.descriptionField.text = element.description!
 				switch self.tag{
