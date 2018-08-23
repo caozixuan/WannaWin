@@ -6,14 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.citiexchangeplatform.pointsleague.models.ExchangeResultModel;
 
-import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.util.List;
 
 public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapter.MyViewHolder> {
@@ -24,14 +20,14 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
     private List<String> names;
     private List<String> logos;
     private List<String> reasons;*/
-    //private  Boolean state;
+    private  Boolean state;
     private Context context;
 
     //构造方法
 
-    public PayingFinishAdapter(Context context) {
-
+    public PayingFinishAdapter(Context context, Boolean state) {
         this.context = context;
+        this.state = state;
     }
 
     /*public PayingFinishAdapter(Boolean state,List<String> bNames,List<String> logoURLs,List<String> used,List<String> exchanged, List<String> reasons, Context context) {
@@ -54,30 +50,23 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
     @Override
     public PayingFinishAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         /*列表布局*/
-        if(true){
-            return new MyViewHolder(LayoutInflater.from(
-                    context).inflate(R.layout.item_paying_finish, parent, false));
-        }
-        else {
-            return new MyViewHolder(LayoutInflater.from(
-                    context).inflate(R.layout.item_paying_finish_false, parent, false));
-        }
-
+        return new MyViewHolder(LayoutInflater.from(
+                context).inflate(R.layout.item_paying_finish, parent, false));
     }
 
 
     /*为列表内容配置数据*/
     @Override
     public void onBindViewHolder(@NonNull final PayingFinishAdapter.MyViewHolder holder, final int position) {
-        if(true){
+        if(state){
             //使用的积分
-            holder.pointsUsed.setText(exchangeResultModels.get(position).getUsePoints());
+            holder.Details.setText(exchangeResultModels.get(position).getUsePoints());
             //设置列表中积分信息
 
             //holder.pointsExchange.setText(points_exchanged.get(position));
         }
         else {
-            holder.falseReason.setText(exchangeResultModels.get(position).getReason());
+            holder.Details.setText(exchangeResultModels.get(position).getReason());
         }
 
         //设置商家图片
@@ -106,8 +95,8 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
      */
     class MyViewHolder extends RecyclerView.ViewHolder {
         View view;
-        TextView pointsUsed;
-        TextView falseReason;
+        TextView Details;
+        //TextView falseReason;
         //ImageView logo;
         //TextView pointsExchange;
         TextView name;
@@ -117,13 +106,7 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
 
         public MyViewHolder(View view) {
             super(view);
-            if(true){
-                pointsUsed = view.findViewById(R.id.textview_business_used_finish);
-                //pointsExchange = view.findViewById(R.id.textview_points_exchanged);
-            }
-            else {
-                falseReason = view.findViewById(R.id.textview_false_reason);
-            }
+            Details = view.findViewById(R.id.textview_business_used_finish);
             //logo = view.findViewById(R.id.image_finish_business);
             name = view.findViewById(R.id.textview_business_name);
 

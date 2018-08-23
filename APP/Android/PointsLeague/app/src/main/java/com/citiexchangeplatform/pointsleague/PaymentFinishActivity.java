@@ -62,34 +62,47 @@ public class PaymentFinishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_finish);
+
+
+        Bundle bundle = getIntent().getExtras();
+        state = (Boolean) bundle.get("state");
+        System.out.println(state);
+        if(state)
+            setContentView(R.layout.activity_payment_finish);
+        else
+            setContentView(R.layout.activity_payment_finish_false);
 
         //设置toolbar
-        //Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying_finish);
-        //setSupportActionBar(mToolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolBar();
 
 
 
+        initView();
+        initData();
+        setView();
 
+
+
+    }
+
+    public void initView(){
         //通过findViewById拿到RecyclerView实例
         //mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
-        mViewPager = findViewById(R.id.vp_finish_points);
-        Text_NeedPoints = (TextView)findViewById(R.id.textView_points_usedTotal);
-        Image_status = findViewById(R.id.imageView_order_status);
-        indicator = (CircleIndicator) findViewById(R.id.indicator);
         //llIndicator = findViewById(R.id.id_dots);
-
         //ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
+        mViewPager = findViewById(R.id.vp_finish_points);
+        if(state){
+            Text_NeedPoints = (TextView)findViewById(R.id.textView_points_usedTotal);
+        }
 
 
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+    }
+
+    public void initData(){
         Bundle bundle = getIntent().getExtras();
-        //SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map");
-        //map = serializableHashMap.getMap();
-
-        state = (Boolean) bundle.get("state");
+        assert bundle != null;
         resultList = bundle.getParcelableArrayList("resultList");
         //resultList =  (List<ExchangeResultModel>) getIntent().getSerializableExtra("resultList");
         //logos = (List) bundle.get("logo_urls");
@@ -99,32 +112,22 @@ public class PaymentFinishActivity extends AppCompatActivity {
             //points_exchanged = (List) bundle.get("points_exchanged");
             total = (String) bundle.get("total");
 
-            Text_NeedPoints.setText(total);
         }
-        else {
-            //reasons = (List) bundle.get("reasons");
-            Image_status.setImageResource(R.drawable.fail);
+
+    }
+
+    public void setView(){
+        if(state){
+            Text_NeedPoints.setText(total);
         }
 
         //设置ViewPager管理器
-        vpAdapter = new PaymentFinishViewPagerAdapter(this,indicator);
+        vpAdapter = new PaymentFinishViewPagerAdapter(this,state);
         vpAdapter.addData(resultList);
 
 
         mViewPager.setAdapter(vpAdapter);
         indicator.setViewPager(mViewPager);
-
-
-
-
-        //设置RecyclerView管理器
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
-
-        //mRecyclerView.setAdapter(mAdapter);
-        //设置viewPager
-
-
 
     }
 
