@@ -62,6 +62,7 @@
 		3ED5F6E02126B1A900F46E7C /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */; };
 		3ED5F6E2212A895D00F46E7C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6E1212A895D00F46E7C /* SignUpView.swift */; };
 		3ED5F6E4212D444500F46E7C /* TendencySurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6E3212D444500F46E7C /* TendencySurveyViewController.swift */; };
+		3EE77DAC212E919300ADDD82 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DAB212E919300ADDD82 /* SearchResultViewController.swift */; };
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
@@ -171,6 +172,7 @@
 		3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		3ED5F6E1212A895D00F46E7C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3ED5F6E3212D444500F46E7C /* TendencySurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TendencySurveyViewController.swift; sourceTree = "<group>"; };
+		3EE77DAB212E919300ADDD82 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */,
 				3ED5F6D921240C6300F46E7C /* CouponDetailViewController.swift */,
 				3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */,
+				3EE77DAB212E919300ADDD82 /* SearchResultViewController.swift */,
 			);
 			name = DiscoverTab;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 				84A96889212BC8F400EF5BA8 /* PageViewController.swift in Sources */,
 				B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */,
 				C1ED982320EE1E3900A2F0C5 /* Card.swift in Sources */,
+				3EE77DAC212E919300ADDD82 /* SearchResultViewController.swift in Sources */,
 				3E4C155C20EE0117000743C0 /* SettingViewController.swift in Sources */,
 				3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */,
 				3EBF049220F99854004D6D8E /* ExchangeHistoryViewController.swift in Sources */,
