@@ -1,4 +1,4 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
+import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
 
 @Component
 public class RecommendTask {

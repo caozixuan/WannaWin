@@ -1,4 +1,4 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
