@@ -33,8 +33,6 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		self.couponTableView.delegate = self
 		self.couponTableView.dataSource = self
 		
-		
-		
     }
 	
 	override func viewWillLayoutSubviews() {
@@ -42,6 +40,10 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		ServerConnector.getMerchantItems(merchantID: (merchant?.id)!, start: 0, n: 2){ (result, items) in
 			if result {
 				self.items = items!
+                // 当优惠信息少于三个时，移除“查看更多”按钮
+                if self.items.count < 3 && self.moreButton != nil {
+                    self.moreButton.removeFromSuperview()
+                }
 				self.couponTableView.reloadData()
 			}
 			
