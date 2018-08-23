@@ -1,4 +1,4 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 
 import citi.support.resultjson.ResultJson;
@@ -23,7 +23,7 @@ import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
+import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
 
 
 /**
@@ -36,7 +36,7 @@ public class RecommendController {
     @Autowired
     Gson gson;
     @Autowired
-    RecommendService recommendService;
+    citi.funcModule.recommend.RecommendService recommendService;
 
 
     @ResponseBody
