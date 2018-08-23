@@ -226,8 +226,9 @@ public class DetailFindPayActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         if(paySuccess){
-                            //Intent intentTo
+                            Intent intentToCouponUnused = new Intent(DetailFindPayActivity.this,MyOrderActivity.class);
                             Toast.makeText(DetailFindPayActivity.this, "兑换成功", Toast.LENGTH_SHORT).show();
+                            startActivity(intentToCouponUnused);
                             finish();
                         }else {
                             Toast.makeText(DetailFindPayActivity.this, "兑换失败", Toast.LENGTH_LONG).show();
