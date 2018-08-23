@@ -1,9 +1,11 @@
-package citi.funcModule.Recommend;
+package citi.funcModule.recommend;
 
 
+import citi.support.resultjson.ResultJson;
 import citi.support.resultjson.SerializeGson;
 import citi.vo.Item;
 
+import citi.vo.Type;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,7 @@ import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
+import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
 
 
 /**
@@ -34,23 +36,44 @@ public class RecommendController {
     @Autowired
     Gson gson;
     @Autowired
-    RecommendService recommendService;
+    citi.funcModule.recommend.RecommendService recommendService;
 
-    /**
-     * 用户第一次登录后，初始化自己的偏好
-     * @param prefList 偏好列表
-     * @Return status [{"status":"true/false"}]
-     */
+
+    @ResponseBody
+    @RequestMapping("isInvestigated")
+    public String isInvestigated(String userID){
+        if(recommendService.isInvestigated(userID)){
+            return ResultJson.SUCCESS;
+        }
+        return ResultJson.FAILURE;
+    }
+
     @ResponseBody
     @RequestMapping("/initPref")
-    public String initPref(ArrayList<String> prefList){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String userID = (String)session.getAttribute("userID");
+    public String initPref(boolean type1,boolean type2,boolean type3,boolean type4,boolean type5,boolean type6,String userID){
+        ArrayList<Type.ItemType> prefList = new ArrayList<Type.ItemType>();
+        if(type1){
+            prefList.add(Type.ItemType.normal);
+        }
+        if(type2){
+            prefList.add(Type.ItemType.catering);
+        }
+        if(type3){
+            prefList.add(Type.ItemType.communication);
+        }
+        if(type4){
+            prefList.add(Type.ItemType.costume);
+        }
+        if(type5){
+            //prefList.add('1');
+        }
+        if(type6){
+            //prefList.add('1');
+        }
         if(recommendService.initPref(userID,prefList))
-            return "[{\"status\":\"true\"}]";
+            return ResultJson.SUCCESS;
         else
-            return "[{\"status\":\"false\"}]";
+            return ResultJson.FAILURE;
     }
 
 
