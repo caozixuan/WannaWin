@@ -71,7 +71,8 @@
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".OrderDetailActivity" />
         <activity android:name=".UserSettingActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".QuestionnaireActivity"></activity>
     </application>
 
 </manifest>

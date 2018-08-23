@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionnaireActivity">
+    <com.citiexchangeplatform.pointsleague.TitleBar
+        android:id="@+id/toolbar_questionnaire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请您选择，\n以下哪些商户类型是您经常消费的："
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+        <ToggleButton
+            android:layout_centerHorizontal="true"
+            android:id="@+id/togglebutton_1"
+            android:background="@drawable/toggle_bg_questionnaire"
+            android:textColor="@drawable/toggle_text_questionnaire"
+            android:textOn="航空出行"
+            android:textOff="航空出行"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ToggleButton
+            android:id="@+id/togglebutton_2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/toggle_bg_questionnaire"
+            android:textColor="@drawable/toggle_text_questionnaire"
+            android:textOn="餐饮"
+            android:textOff="餐饮"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ToggleButton
+            android:id="@+id/togglebutton_3"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/toggle_bg_questionnaire"
+            android:textColor="@drawable/toggle_text_questionnaire"
+            android:textOn="通讯"
+            android:textOff="通讯"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ToggleButton
+            android:id="@+id/togglebutton_4"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/toggle_bg_questionnaire"
+            android:textColor="@drawable/toggle_text_questionnaire"
+            android:textOn="超市/\n便利店"
+            android:textOff="超市/\n便利店"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ToggleButton
+            android:id="@+id/togglebutton_5"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/toggle_bg_questionnaire"
+            android:textColor="@drawable/toggle_text_questionnaire"
+            android:textOn="电影"
+            android:textOff="电影"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ToggleButton
+            android:id="@+id/togglebutton_6"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/toggle_bg_questionnaire"
+            android:textColor="@drawable/toggle_text_questionnaire"
+            android:textOn="酒店"
+            android:textOff="酒店"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/button_finish_questionnaire"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/orange_button"
+        android:text="完 成"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:layout_width="250dp"
+        android:layout_height="50dp" />
+
+    <Button
+        android:id="@+id/button_ignore_questionnaire"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳过此步"
+        android:textSize="16sp"
+        android:background="@null"/>
+</LinearLayout>

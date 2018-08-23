@@ -450,6 +450,8 @@ public class PointsFragment extends Fragment {
                             LogStateInfo.getInstance(getContext()).login();
                             Toast.makeText(getContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             onResume();
+                            Intent intentToQuestionnaire = new Intent(getContext(), QuestionnaireActivity.class);
+                            startActivity(intentToQuestionnaire);
                         } else {
                             Toast.makeText(getContext(), "账号或密码错误", Toast.LENGTH_SHORT).show();
                         }
