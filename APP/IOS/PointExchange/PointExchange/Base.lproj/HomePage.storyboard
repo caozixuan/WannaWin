@@ -39,7 +39,7 @@
         <!--首页-积分-->
         <scene sceneID="qm3-im-Sgx">
             <objects>
-                <viewController title="首页-积分" id="9q5-mV-epd" customClass="MainViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="首页-积分" id="9q5-mV-epd" customClass="MainViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cjw-1E-asS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -935,6 +935,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="uz5-zK-dKS"/>
+                        <viewLayoutGuide key="safeArea" id="ota-sA-mh7"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epn-9L-ZSa" userLabel="First Responder" sceneMemberID="firstResponder"/>

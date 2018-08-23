@@ -46,9 +46,9 @@ class OfflineHistoryViewController: UIViewController {
 			if cell == nil {
 				cell = UITableViewCell(style: .default, reuseIdentifier: "orderCell") as? HistoryTableViewCell
 			}
-			//			cell?.logoImage.imageFromURL(self.orders[row].merchantLogoURL!, placeholder: UIImage())
-			// TODO: 商家logo
-			cell?.logoImage.image = UIImage(named: "starbucks")
+			let imageURL = URL(string: (self.orders[indexPath.row].merchantLogoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+			cell?.logoImage.kf.indicatorType = .activity
+			cell?.logoImage.kf.setImage(with: imageURL)
 			cell?.pointLabel.text = String(stringInterpolationSegment: element.pointsNeeded!)
 			cell?.dateTitleLabel.text = "消费日期"
 			cell?.dateLabel.text = element.time

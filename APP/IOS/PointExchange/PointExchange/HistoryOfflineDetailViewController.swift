@@ -21,7 +21,9 @@ class HistoryOfflineDetailViewController: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-//		self.imageView.imageFromURL((order?.merchantLogoURL)!, placeholder: UIImage())
+		let imageURL = URL(string: (order?.merchantLogoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+		self.imageView.kf.indicatorType = .activity
+		self.imageView.kf.setImage(with: imageURL)
 		self.useDateLabel.text = order?.time
 		self.pointLabel.text = String(stringInterpolationSegment: order!.pointsNeeded!)
 		self.AfterPointLabel.text = String(stringInterpolationSegment: order!.priceAfter!)
