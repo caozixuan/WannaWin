@@ -1,4 +1,4 @@
-package citi.funcModule.recommend;
+package citi.funcModule.Recommend;
 
 
 import citi.support.resultjson.ResultJson;
@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 
 
 /**

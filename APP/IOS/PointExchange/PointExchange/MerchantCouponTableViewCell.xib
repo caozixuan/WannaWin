@@ -29,10 +29,10 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" editable="NO" text="------------------------------------------------------------" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="n9D-2V-Xpg">
-                        <rect key="frame" x="16" y="11" width="149" height="44"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="------------------------------------------------------------" translatesAutoresizingMaskIntoConstraints="NO" id="n9D-2V-Xpg">
+                        <rect key="frame" x="16" y="8" width="149" height="44"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.32929209347232558" green="0.33255241122947732" blue="0.33255241122947732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>

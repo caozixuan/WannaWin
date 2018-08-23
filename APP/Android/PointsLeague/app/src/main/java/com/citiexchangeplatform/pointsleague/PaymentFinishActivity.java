@@ -20,95 +20,114 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.citiexchangeplatform.pointsleague.adapter.PaymentFinishViewPagerAdapter;
+import com.citiexchangeplatform.pointsleague.models.ExchangeResultModel;
+
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class PaymentFinishActivity extends AppCompatActivity {
 
     private View view;
-    private RecyclerView mRecyclerView;
-    private List<String> points_used;
+    //private RecyclerView mRecyclerView;
+    private ViewPager mViewPager;
+    private PaymentFinishViewPagerAdapter vpAdapter;
+
+    private List<ExchangeResultModel> resultList;
+
+    /*private List<String> points_used;
     private List<String> points_exchanged;
     private List<String> reasons;
     private List<String> names;
-    private List<String> logos;
+    private List<String> logos;*/
 
-    private PayingFinishAdapter mAdapter;
+    //private PayingFinishAdapter mAdapter;
     private TextView Text_NeedPoints;
-    private ImageView ImageView_Business;
+    private ImageView Image_status;
+    private CircleIndicator indicator;
+
+    //private LinearLayout llIndicator;
+    //private ImageView ImageView_Business;
 
     private String total;
     private  Boolean state = true;
 
-    //控件的声明
-    private ViewPager viewPager;
-    private TextView imageDesc;
-    private LinearLayout dotsGroup;
-    //数据声明
-    //图片资源的ID
-    private int[] imageIds;
-    //用来保存上个视图的位置
-    private int lastPoint;
-
-    //为了不让Fragment每次在调用oncreteView都创建视图，造成视图的重复，定义一个布尔类型来确定是不是第一次调用
-    private boolean isFirstCreateView = true;
-    //图片标题集合
-    private String[] imageDescriptions;
-
-    //保存
-    List<ImageView> imageList = new ArrayList<ImageView>();
-    List<String> descList = new ArrayList<String>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_finish);
+
+
+        Bundle bundle = getIntent().getExtras();
+        state = (Boolean) bundle.get("state");
+        System.out.println(state);
+        if(state)
+            setContentView(R.layout.activity_payment_finish);
+        else
+            setContentView(R.layout.activity_payment_finish_false);
 
         //设置toolbar
-        //Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_paying_finish);
-        //setSupportActionBar(mToolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolBar();
 
 
 
+        initView();
+        initData();
+        setView();
 
+
+
+    }
+
+    public void initView(){
         //通过findViewById拿到RecyclerView实例
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
-        Text_NeedPoints = (TextView)findViewById(R.id.textView_points_usedTotal);
-
-        ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
-
-
-        Bundle bundle = getIntent().getExtras();
-        //SerializableHashMap serializableHashMap = (SerializableHashMap) bundle.get("checkbox_map");
-        //map = serializableHashMap.getMap();
-
-        state = (Boolean) bundle.get("state");
-        logos = (List) bundle.get("logo_urls");
-        names = (List) bundle.get("business_names");
+        //mRecyclerView = (RecyclerView) findViewById(R.id.rv_finish_points);
+        //llIndicator = findViewById(R.id.id_dots);
+        //ImageView_Business = (ImageView)findViewById(R.id.imageView_finish_business);
+        mViewPager = findViewById(R.id.vp_finish_points);
         if(state){
-            points_used = (List) bundle.get("points_used");
-            points_exchanged = (List) bundle.get("points_exchanged");
+            Text_NeedPoints = (TextView)findViewById(R.id.textView_points_usedTotal);
+        }
+
+
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+    }
+
+    public void initData(){
+        Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
+        resultList = bundle.getParcelableArrayList("resultList");
+        //resultList =  (List<ExchangeResultModel>) getIntent().getSerializableExtra("resultList");
+        //logos = (List) bundle.get("logo_urls");
+        //names = (List) bundle.get("business_names");
+        if(state){
+            //points_used = (List) bundle.get("points_used");
+            //points_exchanged = (List) bundle.get("points_exchanged");
             total = (String) bundle.get("total");
 
+        }
+
+    }
+
+    public void setView(){
+        if(state){
             Text_NeedPoints.setText(total);
         }
-        else {
-            reasons = (List) bundle.get("reasons");
-        }
 
-        //设置RecyclerView管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new PayingFinishAdapter(state,names,logos,points_used,points_exchanged,reasons,getApplicationContext());
+        //设置ViewPager管理器
+        vpAdapter = new PaymentFinishViewPagerAdapter(this,state);
+        vpAdapter.addData(resultList);
 
-        mRecyclerView.setAdapter(mAdapter);
 
+        mViewPager.setAdapter(vpAdapter);
+        indicator.setViewPager(mViewPager);
 
     }
 

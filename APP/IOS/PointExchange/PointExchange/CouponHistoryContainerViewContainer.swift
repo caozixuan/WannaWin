@@ -69,8 +69,11 @@ class CouponHistoryContainViewContainer: UIViewController {
 				cell = UITableViewCell(style: .default, reuseIdentifier: "historyCell") as? HistoryTableViewCell
 			}
 			if self.items.count != 0 {
+				let formatter = DateFormatter()
+				formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
 				self.tableView.isHidden = false
-				cell?.logoImage.imageFromURL(element.logoURL!, placeholder: UIImage())
+				let imageURL = URL(string: (element.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+				cell?.logoImage.kf.setImage(with: imageURL)
 				cell?.pointLabel.text = String(stringInterpolationSegment:element.points!)
 				cell?.descriptionField.text = element.description!
 				switch self.tag{
@@ -78,14 +81,18 @@ class CouponHistoryContainViewContainer: UIViewController {
 					cell?.backgroundImage.image = UIImage(named: "willUse")
 					cell?.dateLabel.isHidden = false
 					cell?.dateTitleLabel.isHidden = false
-					cell?.dateLabel.text = element.overdueTime
+					let date = formatter.date(from: element.overdueTime!)
+					formatter.dateFormat = "yyyy/MM/dd"
+					cell?.dateLabel.text = formatter.string(from: date!)
 					cell?.dateTitleLabel.text = "有效期至"
 					cell?.invalidLabel.isHidden = true
 				case "used":
 					cell?.backgroundImage.image = UIImage(named: "used")
 					cell?.dateLabel.isHidden = false
 					cell?.dateTitleLabel.isHidden = false
-					cell?.dateLabel.text = element.useTime
+					let date = formatter.date(from: element.useTime!)
+					formatter.dateFormat = "yyyy/MM/dd"
+					cell?.dateLabel.text = formatter.string(from: date!)
 					cell?.dateTitleLabel.text = "使用日期"
 					cell?.invalidLabel.isHidden = true
 				case "overdue":

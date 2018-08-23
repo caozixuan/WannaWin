@@ -18,8 +18,15 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 	var forwardBtn: UIBarButtonItem!
 	var refreshBtn: UIBarButtonItem!
 	var url:String?
+    var activityIndicator:UIActivityIndicatorView? // 用于初次加载网页的时候显示
 	
-	
+    lazy private var progressView: UIProgressView = {
+        self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
+        self.progressView.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
+        self.progressView.trackTintColor = UIColor.white
+        return self.progressView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,18 +44,60 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
         
 		self.navigationItem.leftBarButtonItems = [closeBtn,backBtn,forwardBtn]
 		self.navigationItem.rightBarButtonItem = refreshBtn
+        
+        // 初次加载网页的时候显示
+        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+        activityIndicator?.startAnimating()
 
     }
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		self.refreshButtonState()
-		let pageUrl = NSURL(string: (self.url?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
-		let request = NSURLRequest(url: pageUrl! as URL)
-		self.webView.load(request as URLRequest)
-		self.webView?.uiDelegate = self
-		self.webView?.navigationDelegate = self
+        
+        // 添加进度条
+        self.refreshButtonState()
+        let pageUrl = NSURL(string: (self.url?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+        let request = NSURLRequest(url: pageUrl! as URL)
+        self.webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        self.webView.load(request as URLRequest)
+        self.webView?.uiDelegate = self
+        self.webView?.navigationDelegate = self
+        
+        self.setProgressView()
+
 	}
+    
+    func setProgressView(){
+        self.view.addSubview(progressView)
+        
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress"{
+            progressView.alpha = 1.0
+            progressView.setProgress(Float((self.webView.estimatedProgress) ), animated: true)
+            if (self.webView?.estimatedProgress ?? 0.0)  >= 1.0 {
+                UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+                    self.progressView.alpha = 0
+                }, completion: { (finish) in
+                    self.progressView.setProgress(0.0, animated: false)
+                })
+            }
+        }
+    }
+    deinit {
+        self.webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+        self.webView?.uiDelegate = nil
+        self.webView?.navigationDelegate = nil
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if (activityIndicator?.isAnimating)! {
+            activityIndicator?.stopAnimating()
+        }
+        
+        self.refreshButtonState()
+    }
 
 	func refreshButtonState() {
 		if (self.webView?.canGoBack)! {

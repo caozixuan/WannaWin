@@ -72,6 +72,7 @@ class SignUpView: UIView {
 			}
 		}
 		
+		
 	}
 	@IBAction func clickGetVCode(_ sender: Any) {
 		ServerConnector.getVCode(phoneNumber: phoneNumField.text!)

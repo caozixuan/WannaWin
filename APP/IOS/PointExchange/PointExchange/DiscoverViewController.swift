@@ -22,7 +22,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     var activityIndicator:UIActivityIndicatorView?
-	
+	var searchController:UISearchController?
 
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
@@ -33,6 +33,13 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		
         self.tableView.rowHeight = 68
 		
+		// searchController
+		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController")
+		self.searchController = UISearchController(searchResultsController: searchResultVC)
+		searchBar = self.searchController?.searchBar
+		searchController?.view.backgroundColor = UIColor.white
+		searchController?.dimsBackgroundDuringPresentation = true
+		searchController?.hidesNavigationBarDuringPresentation = false
         // Do any additional setup after loading the view.
         
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)

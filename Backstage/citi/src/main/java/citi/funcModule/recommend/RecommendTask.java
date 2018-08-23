@@ -1,4 +1,4 @@
-package citi.funcModule.recommend;
+package citi.funcModule.Recommend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import static citi.funcModule.recommend.RecommendService.cosineSimilarity;
+import static citi.funcModule.Recommend.RecommendService.cosineSimilarity;
 
 @Component
 public class RecommendTask {
@@ -24,7 +24,8 @@ public class RecommendTask {
     //@Scheduled(cron="0/30 * * * * ? ")
 
 
-    @Scheduled(cron="0 0 2 * * ?")
+    //@Scheduled(cron="0 0 2 * * ?")
+    @Scheduled(cron="0/30 * * * * ? ")
     public void updateMerchantSimilarities(){
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ArrayList<RecommendService.MerchantPoints> merchantPoints = recommendService.getMerchantPointsArray();

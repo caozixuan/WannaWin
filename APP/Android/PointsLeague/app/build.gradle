@@ -46,4 +46,5 @@ dependencies {
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
     implementation 'rouchuan.viewpagerlayoutmanager:viewpagerlayoutmanager:2.0.19'
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
+    implementation 'me.relex:circleindicator:1.2.2@aar'
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,16 +32,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.citiexchangeplatform.pointsleague.models.ExchangeModel;
+import com.citiexchangeplatform.pointsleague.models.ExchangeResultModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -301,22 +306,26 @@ public class PayingActivity extends AppCompatActivity {
     /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
         exchangePostJSON();
+        List<ExchangeResultModel> list = new ArrayList<>();
+        Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
+        Bundle bundle = new Bundle();
         if(state){
-            Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
 
             //map = mAdapter.getMap();
             for (int i = 0;i<mAdapter.getSourceItems().size();i++){
                 if (mAdapter.getSourceItems().get(i).getChoose()){
                     //map.keySet()返回的是所有key的值
-                    used.add(mAdapter.getSourceItems().get(i).getExchangePoint());
-                    logos.add(mAdapter.getSourceItems().get(i).getLogo());
-                    names.add(mAdapter.getSourceItems().get(i).getName());
-                    exchanged.add(mAdapter.getSourceItems().get(i).getTargetPoint());
-
+                    String usePoints = mAdapter.getSourceItems().get(i).getExchangePoint();
+                    String merchantName = mAdapter.getSourceItems().get(i).getName();
+                    ExchangeResultModel model = new ExchangeResultModel(null,merchantName,usePoints);
+                    list.add(model);
                 }
             }
 
-            Bundle bundle = new Bundle();
+            bundle.putString("total",mAdapter.getTotalPoints());
+            bundle.putParcelableArrayList("resultList", (ArrayList<? extends Parcelable>) list);
+            //intent.putExtra("resultList", (Serializable) list);
+            /*Bundle bundle = new Bundle();
 
             bundle.putStringArrayList("points_used",used);
             bundle.putBoolean("state",state);
@@ -325,14 +334,23 @@ public class PayingActivity extends AppCompatActivity {
             bundle.putStringArrayList("business_names",names);
             bundle.putString("total",mAdapter.getTotalPoints());
             //bundle.putSerializable("checkbox_map", myMap);
-            intent.putExtras(bundle);
+            intent.putExtras(bundle);*/
             //
-            startActivity(intent);
-            finish();
         }
         else {
+            if (names!=null&&reasons!=null){
 
-            Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
+                for (int i = 0;i<names.size();i++){
+                    ExchangeResultModel model = new ExchangeResultModel(reasons.get(i),names.get(i),null);
+                    list.add(model);
+
+                }
+            }
+
+            bundle.putParcelableArrayList("resultList", (ArrayList<? extends Parcelable>) list);
+            //intent.putExtra("resultList", (Serializable) list);
+
+            /*Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
             Bundle bundle = new Bundle();
 
             bundle.putStringArrayList("reasons",reasons);
@@ -341,9 +359,16 @@ public class PayingActivity extends AppCompatActivity {
 
             intent.putExtras(bundle);
             //
-            startActivity(intent);
+            startActivity(intent);*/
 
         }
+
+
+        bundle.putBoolean("state",state);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
 
 
 
@@ -381,32 +406,32 @@ public class PayingActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         Log.e("success",response.toString());
                         System.out.println("jsonRequest"+response.toString());
-                        try {
-                            if(response.length()>0){
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jObj = jsonArray.getJSONObject(i);
 
-                                    String merchantName = String.valueOf(jObj.getInt("merchantName"));
-                                    String merchantLogoURL = String.valueOf(jObj.getInt("merchantLogoURL"));
-                                    String reason = String.valueOf(jObj.getString("reason"));
-                                    names.add(merchantName);
-                                    logos.add(merchantLogoURL);
-                                    reasons.add(reason);
-
-                                }
-                            }
-
-                        }
-                        catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
                     }
 
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("#JsonObject...:Error#", error.toString());
+                state = false;
 
+                try {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jObj = jsonArray.getJSONObject(i);
+
+                        String merchantName = String.valueOf(jObj.getInt("merchantName"));
+                        //String merchantLogoURL = String.valueOf(jObj.getInt("merchantLogoURL"));
+                        String reason = String.valueOf(jObj.getString("reason"));
+                        names.add(merchantName);
+                        //logos.add(merchantLogoURL);
+                        reasons.add(reason);
+
+                    }
+
+                }
+                catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
             }
         }){
             @Override
@@ -448,7 +473,8 @@ public class PayingActivity extends AppCompatActivity {
                         nf.setRoundingMode(RoundingMode.UP);
                         String result = nf.format(availablePoints);
 
-                        mAdapter.addData(generalPoints,result,jObj.getString("merchantID"),jObj.getString("proportion"),jObj.getString("merchantName"),jObj.getString("merchantLogoURL"));
+                        if(jObj.getInt("points") > 0)
+                            mAdapter.addData(generalPoints,result,jObj.getString("merchantID"),jObj.getString("proportion"),jObj.getString("merchantName"),jObj.getString("merchantLogoURL"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

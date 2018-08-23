@@ -16,6 +16,7 @@ class HuaQiStoreWebViewController: UIViewController,WKNavigationDelegate,WKUIDel
 	var backBtn: UIBarButtonItem!
 	var forwardBtn: UIBarButtonItem!
 	var refreshBtn: UIBarButtonItem!
+    var activityIndicator:UIActivityIndicatorView? // 用于初次加载网页的时候显示
 	
 	lazy private var progressView: UIProgressView = {
 		self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
@@ -48,12 +49,18 @@ class HuaQiStoreWebViewController: UIViewController,WKNavigationDelegate,WKUIDel
 		self.webView.navigationDelegate = self
 		self.webView.uiDelegate = self
 		self.setProgressView()
+        
+        // 初次加载网页的时候显示
+        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+        activityIndicator?.startAnimating()
+        
 	}
 	
 	func setProgressView(){
 		self.view.addSubview(progressView)
 		
 	}
+    
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 		if keyPath == "estimatedProgress"{
 			progressView.alpha = 1.0
@@ -68,7 +75,7 @@ class HuaQiStoreWebViewController: UIViewController,WKNavigationDelegate,WKUIDel
 		}
 	}
 	deinit {
-		self.webView?.removeObserver(self, forKeyPath: "progress")
+		self.webView?.removeObserver(self, forKeyPath: "estimatedProgress")
 		self.webView?.uiDelegate = nil
 		self.webView?.navigationDelegate = nil
 	}
@@ -79,7 +86,11 @@ class HuaQiStoreWebViewController: UIViewController,WKNavigationDelegate,WKUIDel
 	}
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		self.refreshButtonState()
+        if (activityIndicator?.isAnimating)! {
+            activityIndicator?.stopAnimating()
+        }
+        
+        self.refreshButtonState()
 	}
 
 	
