@@ -36,7 +36,10 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		// searchController
 		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController")
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
-		
+		searchBar = self.searchController?.searchBar
+		searchController?.view.backgroundColor = UIColor.white
+		searchController?.dimsBackgroundDuringPresentation = true
+		searchController?.hidesNavigationBarDuringPresentation = false
         // Do any additional setup after loading the view.
         
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)

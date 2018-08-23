@@ -23,22 +23,11 @@ class OrdersViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-//		couponContainer.isHidden = false
-//		activityContainer.isHidden = true
-		// segment设置
-//		self.segmentControl.frame = CGRect(x: 0, y: 64, width: 375, height: 50)
-//		self.segmentControl.tintColor = UIColor.clear
-//		let unselectedSegmentStyle = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 18),NSAttributedStringKey.foregroundColor:UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)] as [AnyHashable : Any]
-//		segmentControl.setTitleTextAttributes(unselectedSegmentStyle as [AnyHashable : Any], for: UIControlState.normal)
-//		let selectedSegmentStyle = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 18),NSAttributedStringKey.foregroundColor:UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)] as [AnyHashable : Any]
-//		segmentControl.setTitleTextAttributes(selectedSegmentStyle as [AnyHashable : Any], for: UIControlState.selected)
 		
 		var controllerArray:[UIViewController] = []
 		let couponController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "CouponHistoryViewController")
-//		let couponController = CouponHistoryViewController(nibName: "CouponHistoryViewController", bundle: nil)
 		couponController.title = "优惠券"
 		let offlineController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "OfflineHistoryViewController")
-//		let offlineController = OfflineHistoryViewController(nibName: "OfflineHistoryViewController", bundle: nil)
 		offlineController.title = "线下支付"
 		controllerArray.append(couponController)
 		controllerArray.append(offlineController)
