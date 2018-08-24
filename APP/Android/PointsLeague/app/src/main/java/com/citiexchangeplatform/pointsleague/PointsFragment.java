@@ -450,8 +450,7 @@ public class PointsFragment extends Fragment {
                             LogStateInfo.getInstance(getContext()).login();
                             Toast.makeText(getContext(), "登录成功", Toast.LENGTH_SHORT).show();
                             onResume();
-                            Intent intentToQuestionnaire = new Intent(getContext(), QuestionnaireActivity.class);
-                            startActivity(intentToQuestionnaire);
+                            getQuestionnaireInfo();
                         } else {
                             Toast.makeText(getContext(), "账号或密码错误", Toast.LENGTH_SHORT).show();
                         }
@@ -468,6 +467,40 @@ public class PointsFragment extends Fragment {
                     public void onBefore() {
                         super.onBefore();
                         dialog = ProgressDialog.show(getContext(), "", "登录中...");
+                    }
+                });
+    }
+
+    private void getQuestionnaireInfo() {
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/recommend/isInvestigated")
+                .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+
+                        boolean haveDone = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            haveDone = jsonObject.getBoolean("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(!haveDone){
+                            Intent intentToQuestionnaire = new Intent(getContext(), QuestionnaireActivity.class);
+                            startActivity(intentToQuestionnaire);
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
                     }
                 });
     }
