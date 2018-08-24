@@ -66,10 +66,7 @@
                                                 </constraints>
                                             </view>
                                             <containerView opaque="NO" contentMode="scaleToFill" restorationIdentifier="mainViewContainer" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGN-Ab-H4O">
-                                                <rect key="frame" x="0.0" y="170" width="375" height="460"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="460" id="BJm-bH-Tgf"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="170" width="375" height="468"/>
                                                 <connections>
                                                     <segue destination="cme-Fl-azE" kind="embed" identifier="container" id="ifq-wG-s1m"/>
                                                 </connections>
@@ -78,6 +75,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="ve6-PH-yOv" firstAttribute="top" secondItem="oSD-fv-QKp" secondAttribute="top" constant="140" id="BTV-zM-WaI"/>
+                                            <constraint firstAttribute="bottom" secondItem="vGN-Ab-H4O" secondAttribute="bottom" id="ONC-gN-te6"/>
                                             <constraint firstAttribute="trailing" secondItem="oSD-fv-QKp" secondAttribute="trailing" id="Tcj-ZQ-wK2"/>
                                             <constraint firstAttribute="trailing" secondItem="vGN-Ab-H4O" secondAttribute="trailing" id="aLB-wD-90J"/>
                                             <constraint firstItem="ve6-PH-yOv" firstAttribute="leading" secondItem="Z78-a1-SRI" secondAttribute="leading" id="baO-dd-mxa"/>
@@ -93,7 +91,6 @@
                                     <constraint firstItem="Z78-a1-SRI" firstAttribute="centerX" secondItem="IHr-Bj-siO" secondAttribute="centerX" id="8lk-QD-BaP"/>
                                     <constraint firstItem="Z78-a1-SRI" firstAttribute="leading" secondItem="IHr-Bj-siO" secondAttribute="leading" id="Om1-cB-wVB"/>
                                     <constraint firstAttribute="bottom" secondItem="Z78-a1-SRI" secondAttribute="bottom" constant="-20" id="Rov-cf-iik"/>
-                                    <constraint firstItem="Z78-a1-SRI" firstAttribute="top" secondItem="IHr-Bj-siO" secondAttribute="top" id="SRI-QJ-dnE"/>
                                     <constraint firstItem="Z78-a1-SRI" firstAttribute="top" secondItem="IHr-Bj-siO" secondAttribute="top" id="kqi-tR-ms9"/>
                                     <constraint firstAttribute="trailing" secondItem="Z78-a1-SRI" secondAttribute="trailing" id="xyE-cL-VJ9"/>
                                 </constraints>

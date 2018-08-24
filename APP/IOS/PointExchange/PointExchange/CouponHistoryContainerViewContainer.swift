@@ -24,8 +24,9 @@ class CouponHistoryContainViewContainer: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 98
-        // Do any additional setup after loading the view.
+        
+        tableView.rowHeight = self.view.frame.width * 0.32 // 按比例缩放
+        
 		self.tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "historyCell")
 		if tag == "unuse" {
 			ServerConnector.getUnusedCoupons(){(result, items) in

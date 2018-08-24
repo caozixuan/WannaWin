@@ -18,10 +18,6 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-        
-        // 隐藏tableView最后一个cell的分割线
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.1))
-        tableView.tableFooterView = view
     }
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,6 +30,8 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
 			return cell!
 		case 2:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "aboutCell")
+            // 去除最后一行的分割线
+            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width)
 			return cell!
 		default:
 			return UITableViewCell()

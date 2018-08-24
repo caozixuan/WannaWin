@@ -24,15 +24,18 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" id="UEa-Bk-Odu">
+        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" id="UEa-Bk-Odu">
             <rect key="frame" x="0.0" y="0.0" width="375" height="453.5"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNj-zL-lGc" userLabel="ButtonView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-0E-Vcu">
-                            <rect key="frame" x="131" y="1" width="112" height="46"/>
+                            <rect key="frame" x="131" y="-2.5" width="112" height="46.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="lZ6-oL-bPJ"/>
+                            </constraints>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             <state key="normal" image="兑换">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,21 +51,21 @@
                     <constraints>
                         <constraint firstItem="Bqt-0E-Vcu" firstAttribute="centerY" secondItem="tNj-zL-lGc" secondAttribute="centerY" id="MZm-0g-vw8"/>
                         <constraint firstItem="Bqt-0E-Vcu" firstAttribute="centerX" secondItem="tNj-zL-lGc" secondAttribute="centerX" id="TZ9-44-Iih"/>
-                        <constraint firstAttribute="height" constant="48" id="xYB-tK-5YX"/>
+                        <constraint firstAttribute="height" constant="42" id="xYB-tK-5YX"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tw-SN-gIL" userLabel="LabelView">
-                    <rect key="frame" x="0.0" y="48" width="375" height="86"/>
+                    <rect key="frame" x="0.0" y="42" width="375" height="82"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="花旗点信息" translatesAutoresizingMaskIntoConstraints="NO" id="CNn-p2-klz">
-                            <rect key="frame" x="82" y="5.5" width="210" height="76"/>
+                            <rect key="frame" x="82" y="3" width="210" height="76"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="210" id="RXY-Ds-Bb8"/>
                                 <constraint firstAttribute="height" constant="76" id="dQf-Gb-XRL"/>
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MKt-Ei-VJq">
-                            <rect key="frame" x="135" y="18.5" width="104" height="51"/>
+                            <rect key="frame" x="135" y="15.5" width="104" height="51"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="muH-P5-7FY">
                                     <rect key="frame" x="0.0" y="0.0" width="104" height="25.5"/>
@@ -114,19 +117,21 @@
                         <constraint firstItem="CNn-p2-klz" firstAttribute="centerX" secondItem="3tw-SN-gIL" secondAttribute="centerX" id="Dfv-Wb-lNu"/>
                         <constraint firstItem="MKt-Ei-VJq" firstAttribute="centerX" secondItem="CNn-p2-klz" secondAttribute="centerX" id="DtX-6S-Izp"/>
                         <constraint firstItem="CNn-p2-klz" firstAttribute="centerY" secondItem="3tw-SN-gIL" secondAttribute="centerY" id="V8m-Qf-d9g"/>
-                        <constraint firstAttribute="height" constant="86" id="VF3-1d-c8l"/>
-                        <constraint firstAttribute="height" secondItem="CNn-p2-klz" secondAttribute="height" constant="10" id="VeP-oU-azv"/>
+                        <constraint firstAttribute="height" secondItem="CNn-p2-klz" secondAttribute="height" constant="6" id="VeP-oU-azv"/>
                         <constraint firstItem="MKt-Ei-VJq" firstAttribute="centerY" secondItem="CNn-p2-klz" secondAttribute="centerY" id="h9X-Vr-ZDV"/>
                     </constraints>
                 </view>
                 <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjJ-VY-RPH">
-                    <rect key="frame" x="0.0" y="134" width="375" height="269.5"/>
+                    <rect key="frame" x="0.0" y="124" width="375" height="281"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
-                            <rect key="frame" x="0.0" y="0.5" width="615" height="269.5"/>
+                            <rect key="frame" x="0.0" y="0.5" width="615" height="281"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="4g5-FI-MWS">
-                                    <rect key="frame" x="0.0" y="0.5" width="200" height="269.5"/>
+                                    <rect key="frame" x="0.0" y="0.5" width="200" height="280"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="280" id="nvS-B3-JSs"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="14"/>
@@ -134,7 +139,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <imageView clipsSubviews="YES" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="LAF-bV-xyb">
-                                    <rect key="frame" x="415" y="0.5" width="200" height="269.5"/>
+                                    <rect key="frame" x="415" y="0.5" width="200" height="281"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="14"/>
@@ -142,7 +147,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <imageView clipsSubviews="YES" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="4Db-OO-ZrJ">
-                                    <rect key="frame" x="208" y="0.5" width="200" height="269.5"/>
+                                    <rect key="frame" x="208" y="0.5" width="200" height="280"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="vT3-k8-atZ"/>
                                     </constraints>
@@ -181,10 +186,10 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bu7-kK-vQe" userLabel="ButtonView">
-                    <rect key="frame" x="0.0" y="403.5" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="405" width="375" height="48.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-hb-6z0">
-                            <rect key="frame" x="136" y="0.0" width="102" height="38"/>
+                            <rect key="frame" x="136" y="4" width="102" height="38"/>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             <state key="normal" image="查看">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -202,8 +207,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="q4M-hb-6z0" firstAttribute="centerX" secondItem="bu7-kK-vQe" secondAttribute="centerX" id="anh-Tr-hhQ"/>
-                        <constraint firstAttribute="height" constant="50" id="ixw-sX-OTn"/>
-                        <constraint firstItem="q4M-hb-6z0" firstAttribute="top" secondItem="bu7-kK-vQe" secondAttribute="top" id="u8K-wm-t1u"/>
+                        <constraint firstItem="q4M-hb-6z0" firstAttribute="top" secondItem="bu7-kK-vQe" secondAttribute="top" constant="4" id="gfO-px-ETi"/>
                     </constraints>
                     <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                 </view>
