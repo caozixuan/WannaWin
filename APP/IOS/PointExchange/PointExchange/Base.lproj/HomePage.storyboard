@@ -876,7 +876,7 @@
                 <viewController id="cme-Fl-azE" customClass="HomepagePartViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-H9-XcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402" y="-99"/>
+            <point key="canvasLocation" x="982" y="-335"/>
         </scene>
         <!--积分兑换记录-->
         <scene sceneID="P08-lp-iXv">
@@ -935,7 +935,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="uz5-zK-dKS"/>
-                        <viewLayoutGuide key="safeArea" id="ota-sA-mh7"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epn-9L-ZSa" userLabel="First Responder" sceneMemberID="firstResponder"/>

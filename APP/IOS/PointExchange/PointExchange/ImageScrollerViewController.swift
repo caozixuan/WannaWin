@@ -50,32 +50,33 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	
 	//自动滚动计时器
 	var autoScrollTimer:Timer?
-	
-	override func viewWillAppear(_ animated: Bool) {
-		//获取并设置scrollerView尺寸
-		self.view.setNeedsLayout()
-		self.view.layoutIfNeeded()
-		self.scrollerViewWidth = self.view.bounds.size.width
-		self.scrollerViewHeight = self.view.bounds.size.height
-		
-		
-		//获取数据
-		self.dataSource =  self.delegate.scrollerDataSource()
-		//设置scrollerView
-		self.configureScrollerView()
-		//设置加载指示图片
-		self.configurePlaceholder()
-		//设置imageView
-		self.configureImageView()
-		//设置页控制器
-		self.configurePageController()
-		//设置自动滚动计时器
-		self.configureAutoScrollTimer()
-		
-		self.view.backgroundColor = UIColor.black
-		
-		
-	}
+    
+    //viewDidLoad：view加载完毕
+    //viewWillAppear：控制器的view将要显示
+    //viewWillLayoutSubviews：控制器的view将要布局子控件
+    //viewDidLayoutSubviews：控制器的view布局子控件完成
+    //这期间系统可能会多次调用viewWillLayoutSubviews 、 viewDidLayoutSubviews 俩个方法
+    //viewDidAppear:控制器的view完全显示 (约束布局都已完成)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.scrollerViewWidth = self.view.bounds.size.width
+        self.scrollerViewHeight = self.view.bounds.size.height
+
+        //获取数据
+        self.dataSource =  self.delegate.scrollerDataSource()
+        //设置scrollerView
+        self.configureScrollerView()
+        //设置加载指示图片
+        self.configurePlaceholder()
+        //设置imageView
+        self.configureImageView()
+        //设置页控制器
+        self.configurePageController()
+        //设置自动滚动计时器
+        self.configureAutoScrollTimer()
+        
+        self.view.backgroundColor = UIColor.black
+    }
 	
 	//设置scrollerView
 	func configureScrollerView(){

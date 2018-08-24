@@ -19,6 +19,8 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 	
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.updateConstraintsIfNeeded()
+        self.view.updateConstraints()
 		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
 		activityIndicator?.startAnimating()
         if User.getUser().username != nil {
@@ -44,8 +46,16 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
         }
 		
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(view.frame.width)
+        print(view.frame.height)
+    }
 	
     override func viewWillLayoutSubviews() {
+        print(view.frame.width)
+        print(view.frame.height)
         
         for subview in view.subviews{
             if subview .isKind(of: HomepageStackView.self){
