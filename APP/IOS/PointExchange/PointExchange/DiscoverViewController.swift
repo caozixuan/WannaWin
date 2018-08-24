@@ -11,8 +11,8 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,DiscoverCouponViewDelegate{
-    @IBOutlet weak var searchBar: UISearchBar!
+class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,DiscoverCouponViewDelegate,UISearchBarDelegate{
+    @IBOutlet weak var searchBarView: UIView!
     
 	@IBOutlet weak var couponView: DiscoverCouponView!
 	var rowCount = 4;
@@ -34,14 +34,17 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.rowHeight = 68
 		
 		// searchController
-		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController")
+		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
-		searchBar = self.searchController?.searchBar
-		searchController?.view.backgroundColor = UIColor.white
-		searchController?.dimsBackgroundDuringPresentation = true
-		searchController?.hidesNavigationBarDuringPresentation = false
         // Do any additional setup after loading the view.
-        
+		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: 375, height: 56)
+		searchController?.searchBar.searchBarStyle = .minimal
+		searchController?.searchBar.delegate = self
+		searchController?.searchResultsUpdater = searchResultVC
+		searchController?.definesPresentationContext = true
+		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
+		self.searchBarView.addSubview((searchController?.searchBar)!)
+		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         activityIndicator?.startAnimating()
 		ServerConnector.getMerchantCount(){(result,count) in

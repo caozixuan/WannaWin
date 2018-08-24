@@ -9,7 +9,11 @@
 import UIKit
 import PageMenu
 
-class SearchResultViewController: UIViewController {
+class SearchResultViewController: UIViewController,UISearchResultsUpdating {
+	func updateSearchResults(for searchController: UISearchController) {
+		
+	}
+	
 
 	var pageMenu:CAPSPageMenu?
     override func viewDidLoad() {
@@ -22,10 +26,10 @@ class SearchResultViewController: UIViewController {
 		let merchantController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultMerchantViewController")
 		merchantController.title = "商家"
 		let offlineController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultOfflineViewController")
-		offlineController.title = "商家"
+		offlineController.title = "线下活动"
 		controllerArray.append(allController)
-		controllerArray.append(couponController)
 		controllerArray.append(merchantController)
+		controllerArray.append(couponController)
 		controllerArray.append(offlineController)
 		
 		let params:[CAPSPageMenuOption] = [

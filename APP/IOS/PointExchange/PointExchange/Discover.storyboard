@@ -52,29 +52,30 @@
                                 <color key="textColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="2ur-SE-JYh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZ7-om-Vi8">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="trailing" secondItem="aDG-2P-Ln0" secondAttribute="trailing" id="0Ya-Aj-A2p"/>
                             <constraint firstItem="MxV-jO-O3v" firstAttribute="top" secondItem="J2Z-2C-4fB" secondAttribute="bottom" id="3UP-Fy-7fW"/>
-                            <constraint firstItem="2ur-SE-JYh" firstAttribute="leading" secondItem="1vg-n1-HwL" secondAttribute="leading" id="47G-Zc-bKD"/>
                             <constraint firstItem="pjn-np-K5R" firstAttribute="leading" secondItem="J2Z-2C-4fB" secondAttribute="leading" id="4aD-i4-zB8"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="leading" secondItem="aDG-2P-Ln0" secondAttribute="leading" id="A2u-40-7yy"/>
                             <constraint firstItem="J2Z-2C-4fB" firstAttribute="top" secondItem="hls-mE-JXI" secondAttribute="bottom" constant="4" id="AFF-V8-fzO"/>
                             <constraint firstItem="pjn-np-K5R" firstAttribute="leading" secondItem="aDG-2P-Ln0" secondAttribute="leadingMargin" id="AyP-Mo-qWK"/>
+                            <constraint firstItem="zZ7-om-Vi8" firstAttribute="bottom" secondItem="pjn-np-K5R" secondAttribute="top" constant="1" id="CWo-rg-ffl"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="top" secondItem="pjn-np-K5R" secondAttribute="bottom" constant="4" id="F5J-a5-o1u"/>
+                            <constraint firstItem="zZ7-om-Vi8" firstAttribute="top" secondItem="1vg-n1-HwL" secondAttribute="top" id="KE5-cf-ipn"/>
+                            <constraint firstItem="zZ7-om-Vi8" firstAttribute="leading" secondItem="1vg-n1-HwL" secondAttribute="leading" id="KXc-AV-8Y6"/>
+                            <constraint firstItem="pjn-np-K5R" firstAttribute="top" secondItem="1vg-n1-HwL" secondAttribute="top" constant="55" id="Kmf-fM-sAJ"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="leading" secondItem="MxV-jO-O3v" secondAttribute="leading" id="Ofy-Aq-4xX"/>
-                            <constraint firstItem="2ur-SE-JYh" firstAttribute="bottom" secondItem="pjn-np-K5R" secondAttribute="top" constant="1" id="UL4-8x-COT"/>
-                            <constraint firstItem="2ur-SE-JYh" firstAttribute="trailing" secondItem="1vg-n1-HwL" secondAttribute="trailing" id="b02-VP-Z7V"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="leading" secondItem="1vg-n1-HwL" secondAttribute="leading" id="c8p-Lx-2cp"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="trailing" secondItem="MxV-jO-O3v" secondAttribute="trailing" id="fLi-g5-135"/>
                             <constraint firstAttribute="bottom" secondItem="MxV-jO-O3v" secondAttribute="bottom" constant="20" symbolic="YES" id="hRc-Xu-cJa"/>
-                            <constraint firstItem="2ur-SE-JYh" firstAttribute="top" secondItem="1vg-n1-HwL" secondAttribute="top" id="k57-5N-PQD"/>
                             <constraint firstItem="1vg-n1-HwL" firstAttribute="trailing" secondItem="hls-mE-JXI" secondAttribute="trailing" id="kMW-7N-jhn"/>
+                            <constraint firstItem="zZ7-om-Vi8" firstAttribute="trailing" secondItem="1vg-n1-HwL" secondAttribute="trailing" id="m3W-i2-CfM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1vg-n1-HwL"/>
                     </view>
@@ -82,7 +83,7 @@
                     <navigationItem key="navigationItem" title="发现" id="clD-fC-Sfo"/>
                     <connections>
                         <outlet property="couponView" destination="hls-mE-JXI" id="xue-MA-1cf"/>
-                        <outlet property="searchBar" destination="2ur-SE-JYh" id="9UR-va-SK9"/>
+                        <outlet property="searchBarView" destination="zZ7-om-Vi8" id="CAu-yf-D8Z"/>
                         <outlet property="searchDisplayController" destination="3O2-sI-y3R" id="uLi-HM-gDs"/>
                         <outlet property="tableView" destination="MxV-jO-O3v" id="xME-i0-TsQ"/>
                     </connections>
