@@ -150,6 +150,7 @@ public class DetailFindPayActivity extends AppCompatActivity {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/item/itemDetail")
+                .addParam("userID", LogStateInfo.getInstance(DetailFindPayActivity.this).getUserID())
                 .addParam("itemID", itemID)
                 .build()
                 .execute(DetailFindPayActivity.this, new CallBack<String>() {
