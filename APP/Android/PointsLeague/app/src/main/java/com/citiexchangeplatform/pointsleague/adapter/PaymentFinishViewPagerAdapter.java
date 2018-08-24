@@ -21,25 +21,24 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class PaymentFinishViewPagerAdapter extends PagerAdapter {
     Context context;
+    private Boolean state;
     private List<ExchangeResultModel> exchangeResultModels;
 
 
     //水平分页的指示器
-    private List<View> indicators = new ArrayList<>();
+    //private List<View> indicators = new ArrayList<>();
 
     //水平分页的容器
-    private LinearLayout llIndicators;
-
-    private CircleIndicator indicator;
+    //private LinearLayout llIndicators;
 
     //public List<View> getIndicators() {
     //    return indicators;
     //}
 
 
-    public PaymentFinishViewPagerAdapter(Context context, CircleIndicator indicator) {
+    public PaymentFinishViewPagerAdapter(Context context, Boolean state) {
         this.context = context;
-        this.indicator = indicator;
+        this.state = state;
     }
 
     public void addData(List<ExchangeResultModel> exchangeResultModels){
@@ -63,7 +62,7 @@ public class PaymentFinishViewPagerAdapter extends PagerAdapter {
 
         List<ExchangeResultModel> list = new ArrayList<ExchangeResultModel>();
 
-        PayingFinishAdapter mAdapter = new PayingFinishAdapter(context);
+        PayingFinishAdapter mAdapter = new PayingFinishAdapter(context,state);
 
         //每页最多显示3个，小于数据集总数，且小于下一页开始的位置索引
         for (int i = position * 3; i < (position + 1) * 3 && i < exchangeResultModels.size(); i++) {

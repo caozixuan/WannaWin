@@ -24,7 +24,8 @@ public class RecommendTask {
     //@Scheduled(cron="0/30 * * * * ? ")
 
 
-    @Scheduled(cron="0 0 2 * * ?")
+    //@Scheduled(cron="0 0 2 * * ?")
+    @Scheduled(cron="0/30 * * * * ? ")
     public void updateMerchantSimilarities(){
         ArrayList<MerchantSimilarity> results = new ArrayList<MerchantSimilarity>();
         ArrayList<RecommendService.MerchantPoints> merchantPoints = recommendService.getMerchantPointsArray();

@@ -473,7 +473,7 @@ public class PayingActivity extends AppCompatActivity {
                         nf.setRoundingMode(RoundingMode.UP);
                         String result = nf.format(availablePoints);
 
-                        if(jObj.getInt("points") == 0)
+                        if(jObj.getInt("points") > 0)
                             mAdapter.addData(generalPoints,result,jObj.getString("merchantID"),jObj.getString("proportion"),jObj.getString("merchantName"),jObj.getString("merchantLogoURL"));
                     }
                 } catch (JSONException e) {

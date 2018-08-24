@@ -42,20 +42,23 @@ public class RecommendService {
      * @param prefList
      * @return true/false
      */
-    public boolean initPref(String userID,ArrayList<String> prefList){
-        boolean flag = true;
-        for(int i=0;i<prefList.size();i++){
-            /**
-             * 接口一：PrefMapper-----addPref()
-             * 参数一：userID,参数二：一个偏好（字符串形式）
-             * 返回受影响的行数
-             */
-            if(userPrefMapper.addUserPref(new UserPref(userID,prefList.get(i)))!=1){
-                flag=false;
-                break;
-            }
+    public boolean initPref(String userID,ArrayList<Type.ItemType> prefList){
+        if(userPrefMapper.addUserPref(new UserPref(userID,prefList))!=1){
+            return false;
         }
-        return flag;
+        return true;
+    }
+
+    public boolean isInvestigated(String userID){
+        UserPref userPref = userPrefMapper.getUserPref(userID);
+        if(userPref!=null){
+            List<Type.ItemType> itemTypes = userPref.getPrefTypeList();
+            for(Type.ItemType itemType:itemTypes){
+                System.out.println(itemType);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

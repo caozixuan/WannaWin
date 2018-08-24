@@ -16,10 +16,15 @@ class TendencySurveyViewController: UIViewController {
 	@IBOutlet var communicationBtn: UIButton!
 	@IBOutlet var foodBtn: UIButton!
 	@IBOutlet var airlineBtn: UIButton!
+	var typeBtns = [UIButton]()
 	override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		typeBtns.append(hotelBtn)
+		typeBtns.append(movieBtn)
+		typeBtns.append(marketBtn)
+		typeBtns.append(communicationBtn)
+		typeBtns.append(foodBtn)
+		typeBtns.append(airlineBtn)
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,10 +44,21 @@ class TendencySurveyViewController: UIViewController {
     */
 
 	@IBAction func clickFinish(_ sender: Any) {
+		var chooseResult = [String]()
+		for i in 0...typeBtns.count-1{
+			if typeBtns[i].isSelected{
+				chooseResult.append((typeBtns[i].titleLabel?.text)!.replacingOccurrences(of: "\n", with: ""))
+				
+			}
+		}
+		print(chooseResult)
 	}
 	
 	
 	@IBAction func clickSkip(_ sender: Any) {
+		let storyBoard = UIStoryboard(name:"HomePage", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
+		self.navigationController!.pushViewController(view, animated: true)
 	}
 	
 	@IBAction func chooseType(_ sender: Any) {
