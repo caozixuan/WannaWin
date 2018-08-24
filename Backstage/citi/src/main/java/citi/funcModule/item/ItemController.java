@@ -65,13 +65,11 @@ public class ItemController {
 
     @ResponseBody
     @RequestMapping("/itemDetail")
-    public String getItemInfo(String itemID){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String userID = (String)session.getAttribute("userID");
-        Item item = itemService.getItem(itemID);
-        Timestamp nowTimestamp = new Timestamp(new Date().getTime());
-        itemService.addRecord(userID,itemID,nowTimestamp);
+    public String getItemInfo(String itemID, String userID){
+        if(userID!=null){
+            Timestamp nowTimestamp = new Timestamp(new Date().getTime());
+            itemService.addRecord(userID,itemID,nowTimestamp);
+        }
         return gson.toJson(itemService.getItem(itemID));
     }
 
