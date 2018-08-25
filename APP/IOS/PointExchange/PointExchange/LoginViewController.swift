@@ -48,10 +48,8 @@ class LoginViewController: UIViewController,LoginViewDelegate{
             
             let alert = UIAlertController(title:"登录", message:"登录成功！", preferredStyle:.alert)
             let okAction=UIAlertAction(title:"确定", style:.default, handler:{ action in
-//                self.navigationController?.popViewController(animated: true)
-				let sb = UIStoryboard(name: "User", bundle: nil)
-				let vc = sb.instantiateViewController(withIdentifier: "TendencySurveyViewController")
-				self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.popViewController(animated: true)
+				
             })
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)

@@ -70,15 +70,14 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		switch indexPath.row {
 		case 0:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "orderCell")
-			cell?.selectionStyle = .none
 			return cell!
 		case 1:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "recordCell")
-			cell?.selectionStyle = .none
 			return cell!
 		case 2:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "settingCell")
-			cell?.selectionStyle = .none
+            // 去除最后一行的分割线
+            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width)
 			return cell!
 		default:
 			return UITableViewCell()

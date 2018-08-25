@@ -2,7 +2,7 @@
 //  ModifyPasswordView.swift
 //  PointExchange
 //
-//  Created by 黄小英 on 2018/8/20.
+//  Created by yiner on 2018/8/20.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 
@@ -39,7 +39,6 @@ class ModifyPasswordView: UIView {
         self.view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         self.view.frame = bounds
         self.addSubview(view)
-        
         button.isEnabled = false
     }
     

@@ -2,7 +2,7 @@
 //  ModifyPasswordViewController.swift
 //  PointExchange
 //
-//  Created by 黄小英 on 2018/8/20.
+//  Created by yiner on 2018/8/20.
 //  Copyright © 2018年 WannaWin. All rights reserved.
 //
 
@@ -16,6 +16,12 @@ class ModifyPasswordViewController: UIViewController, ModifyPasswordViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         modifyPasswordView.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 调整位置以适配
+        modifyPasswordView.view.frame = modifyPasswordView.bounds
     }
 
     func modify() {

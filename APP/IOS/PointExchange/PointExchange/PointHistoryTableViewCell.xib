@@ -39,9 +39,8 @@
                             <constraint firstAttribute="height" constant="21" id="awj-lR-Ctr"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQi-6T-Wtw">
-                        <rect key="frame" x="290" y="41" width="69" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQi-6T-Wtw">
+                        <rect key="frame" x="291.5" y="41" width="39.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -55,9 +54,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Y4A-tb-m8b" firstAttribute="centerY" secondItem="EXL-L5-dKA" secondAttribute="centerY" id="0qY-HZ-wyE"/>
+                    <constraint firstItem="wQi-6T-Wtw" firstAttribute="trailing" secondItem="Y4A-tb-m8b" secondAttribute="trailing" constant="4" id="2Cj-kO-zvf"/>
                     <constraint firstItem="lmz-tr-vzD" firstAttribute="top" secondItem="Pdz-R0-yaU" secondAttribute="top" id="5Ea-7B-Zbq"/>
                     <constraint firstItem="Y4A-tb-m8b" firstAttribute="leading" secondItem="uxn-Ps-VL3" secondAttribute="trailing" constant="16" id="CBq-kE-IUr"/>
                     <constraint firstItem="uxn-Ps-VL3" firstAttribute="centerY" secondItem="EXL-L5-dKA" secondAttribute="centerY" id="EUp-3l-ge2"/>
+                    <constraint firstItem="wQi-6T-Wtw" firstAttribute="top" secondItem="Y4A-tb-m8b" secondAttribute="bottom" constant="5" id="OAm-K3-aKm"/>
                     <constraint firstAttribute="trailing" secondItem="Y4A-tb-m8b" secondAttribute="trailing" constant="16" id="T2h-Up-dUR"/>
                     <constraint firstItem="uxn-Ps-VL3" firstAttribute="leading" secondItem="EXL-L5-dKA" secondAttribute="trailing" constant="17" id="hm2-a9-DZ5"/>
                     <constraint firstItem="lmz-tr-vzD" firstAttribute="leading" secondItem="Pdz-R0-yaU" secondAttribute="leading" constant="30" id="tfI-9v-4n8"/>
@@ -75,7 +76,7 @@
                 <outlet property="oval" destination="EXL-L5-dKA" id="TPg-cP-8MH"/>
                 <outlet property="pointLabel" destination="Y4A-tb-m8b" id="E45-dX-nC5"/>
             </connections>
-            <point key="canvasLocation" x="125.5" y="144"/>
+            <point key="canvasLocation" x="80" y="158"/>
         </tableViewCell>
     </objects>
     <resources>

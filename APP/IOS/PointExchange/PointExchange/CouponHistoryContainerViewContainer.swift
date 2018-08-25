@@ -24,8 +24,9 @@ class CouponHistoryContainViewContainer: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 98
-        // Do any additional setup after loading the view.
+        
+        tableView.rowHeight = self.view.frame.width * 0.32 // 按比例缩放
+        
 		self.tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "historyCell")
 		if tag == "unuse" {
 			ServerConnector.getUnusedCoupons(){(result, items) in
@@ -72,7 +73,8 @@ class CouponHistoryContainViewContainer: UIViewController {
 				let formatter = DateFormatter()
 				formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
 				self.tableView.isHidden = false
-				cell?.logoImage.imageFromURL(element.logoURL!, placeholder: UIImage())
+				let imageURL = URL(string: (element.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+				cell?.logoImage.kf.setImage(with: imageURL)
 				cell?.pointLabel.text = String(stringInterpolationSegment:element.points!)
 				cell?.descriptionField.text = element.description!
 				switch self.tag{

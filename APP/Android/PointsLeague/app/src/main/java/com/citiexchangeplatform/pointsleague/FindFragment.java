@@ -171,11 +171,11 @@ public class FindFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-            }
+//            @Override
+//            public void onError(VolleyError error) {
+//                super.onError(error);
+//                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+//            }
         });
 
     }
@@ -304,104 +304,13 @@ public class FindFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-            }
+//            @Override
+//            public void onError(VolleyError error) {
+//                super.onError(error);
+//                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+//            }
         });
 
-    }
-
-    private void getCount() {
-        XVolley.getInstance()
-                .doPost()
-                .url("http://193.112.44.141:80/citi/merchant/getNum")
-                .build()
-                .execute(getContext(), new CallBack<String>() {
-                    @Override
-                    public void onSuccess(Context context, String response) {
-                        System.out.println(response);
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            getInfos(jsonObject.getInt("num"));
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        dialog.dismiss();
-                    }
-
-                    @Override
-                    public void onError(VolleyError error) {
-                        super.onError(error);
-                        dialog.dismiss();
-                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onBefore() {
-                        super.onBefore();
-                        dialog = ProgressDialog.show(getContext(), "", "正在获取商家信息...");
-                    }
-                });
-    }
-
-    private void getInfos(int n) {
-        XVolley.getInstance()
-                .doPost()
-                .url("http://193.112.44.141:80/citi/merchant/getInfos")
-                .addParam("start", "0")
-                .addParam("n", "20")
-                .build()
-                .execute(getContext(), new CallBack<String>() {
-                    @Override
-                    public void onSuccess(Context context, String response) {
-                        System.out.println(response);
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String merchantID = jsonObject.getString("merchantID");
-                                String name = jsonObject.getString("name");
-                                String description = jsonObject.getString("description");
-                                String businessType;
-                                switch (jsonObject.getString("businessType")) {
-                                    case "catering":
-                                        businessType = "餐饮";
-                                        break;
-                                    case "exercise":
-                                        businessType = "运动";
-                                        break;
-                                    case "bank":
-                                        businessType = "银行";
-                                        break;
-                                    case "costume":
-                                        businessType = "服饰";
-                                        break;
-                                    case "education":
-                                        businessType = "教育";
-                                        break;
-                                    case "communication":
-                                        businessType = "通讯";
-                                        break;
-                                    default:
-                                        businessType = "一般";
-                                }
-                                String merchantLogoURL = jsonObject.getString("merchantLogoURL");
-                                findAdapter.addData(name, merchantID, merchantLogoURL, businessType, description);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(VolleyError error) {
-                        super.onError(error);
-                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-                    }
-                });
     }
 
 }

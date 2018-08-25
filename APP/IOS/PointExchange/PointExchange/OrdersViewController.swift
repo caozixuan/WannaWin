@@ -21,24 +21,13 @@ class OrdersViewController: UIViewController {
 	
 	var pageMenu : CAPSPageMenu?
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-//		couponContainer.isHidden = false
-//		activityContainer.isHidden = true
-		// segment设置
-//		self.segmentControl.frame = CGRect(x: 0, y: 64, width: 375, height: 50)
-//		self.segmentControl.tintColor = UIColor.clear
-//		let unselectedSegmentStyle = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 18),NSAttributedStringKey.foregroundColor:UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)] as [AnyHashable : Any]
-//		segmentControl.setTitleTextAttributes(unselectedSegmentStyle as [AnyHashable : Any], for: UIControlState.normal)
-//		let selectedSegmentStyle = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 18),NSAttributedStringKey.foregroundColor:UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)] as [AnyHashable : Any]
-//		segmentControl.setTitleTextAttributes(selectedSegmentStyle as [AnyHashable : Any], for: UIControlState.selected)
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 		
 		var controllerArray:[UIViewController] = []
 		let couponController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "CouponHistoryViewController")
-//		let couponController = CouponHistoryViewController(nibName: "CouponHistoryViewController", bundle: nil)
 		couponController.title = "优惠券"
 		let offlineController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "OfflineHistoryViewController")
-//		let offlineController = OfflineHistoryViewController(nibName: "OfflineHistoryViewController", bundle: nil)
 		offlineController.title = "线下支付"
 		controllerArray.append(couponController)
 		controllerArray.append(offlineController)
@@ -52,20 +41,19 @@ class OrdersViewController: UIViewController {
 			.unselectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
 			.selectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
 			.selectionIndicatorColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0))
-			
 		]
-		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-64),pageMenuOptions:params)
+        
+        // 获得导航栏及状态栏的高度，避免控件被遮住
+        let frameY = self.view.safeAreaLayoutGuide.layoutFrame.minY
+        
+		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: frameY, width: self.view.frame.width, height: self.view.frame.height-frameY),pageMenuOptions:params)
 		self.addChildViewController(pageMenu!)
 		self.view.addSubview((pageMenu?.view)!)
 		pageMenu!.didMove(toParentViewController: self)
 		
 		
 	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
+
 	
 	@IBAction func segmentChange(_ sender: Any) {
 			switch segmentControl.selectedSegmentIndex {
@@ -80,7 +68,4 @@ class OrdersViewController: UIViewController {
 			}
 	}
 	
-
-	
-
 }

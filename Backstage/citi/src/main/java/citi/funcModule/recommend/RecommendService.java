@@ -42,20 +42,23 @@ public class RecommendService {
      * @param prefList
      * @return true/false
      */
-    public boolean initPref(String userID,ArrayList<String> prefList){
-        boolean flag = true;
-        for(int i=0;i<prefList.size();i++){
-            /**
-             * 接口一：PrefMapper-----addPref()
-             * 参数一：userID,参数二：一个偏好（字符串形式）
-             * 返回受影响的行数
-             */
-            if(userPrefMapper.addUserPref(new UserPref(userID,prefList.get(i)))!=1){
-                flag=false;
-                break;
-            }
+    public boolean initPref(String userID,ArrayList<Type.ItemType> prefList){
+        if(userPrefMapper.addUserPref(new UserPref(userID,prefList))!=1){
+            return false;
         }
-        return flag;
+        return true;
+    }
+
+    public boolean isInvestigated(String userID){
+        UserPref userPref = userPrefMapper.getUserPref(userID);
+        if(userPref!=null){
+            List<Type.ItemType> itemTypes = userPref.getPrefTypeList();
+            for(Type.ItemType itemType:itemTypes){
+                System.out.println(itemType);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -262,9 +265,19 @@ public class RecommendService {
      * @return ArrayList<Merchant>
      */
     public double getMerchantPoints(String userID, String merchantID){
-        double points = 0;
+        Merchant merchant = merchantMapper.selectByID(merchantID);
         // 目前制定的积分策略：购买一件物品得5分+对应的浏览得1分+消费点数除以10
-
+        double points = 0;
+        double prefPoints = 0;
+        UserPref userPref = userPrefMapper.getUserPref(userID);
+        if(userPref!=null){
+            List<Type.ItemType> itemTypes = userPref.getPrefTypeList();
+            for(Type.ItemType itemType:itemTypes){
+                if(itemType.toString().equals(merchant.getBusinessType().toString())){
+                    prefPoints+=20;
+                }
+            }
+        }
         List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,itemMapper.getItemAmountByMerchantID(merchantID));
         Integer visitTimes = 0;
         for(Item item:items){
@@ -285,7 +298,7 @@ public class RecommendService {
         ArrayList<UserCoupon> filterUserCoupons1 = filterUserCoupon(userCoupons1,merchantID);
         ArrayList<UserCoupon> filterUserCoupons2 = filterUserCoupon(userCoupons2,merchantID);
         ArrayList<UserCoupon> filterUserCoupons3 = filterUserCoupon(userCoupons3,merchantID);
-        points = consume_points/10 + filterUserCoupons1.size()*5+ filterUserCoupons2.size()*5+ filterUserCoupons3.size()*5 + visitTimes;
+        points = consume_points/10 + filterUserCoupons1.size()*5+ filterUserCoupons2.size()*5+ filterUserCoupons3.size()*5 + visitTimes+prefPoints;
         return points;
     }
 
@@ -407,9 +420,8 @@ public class RecommendService {
      */
     public ArrayList<UserMerchantPoints> getUserPointsToMerchants(String userID){
         ArrayList<UserMerchantPoints> results = new ArrayList<UserMerchantPoints>();
-        List<String> merchantIDs = merchantMapper.getAllMerchantID();
-        for(String merchantID:merchantIDs){
-            Merchant merchant = merchantMapper.selectByID(merchantID);
+        List<Merchant> merchants = merchantMapper.getAllMerchant();
+        for(Merchant merchant:merchants){
             double points = getMerchantPoints(userID,merchant.getMerchantID());
             results.add(new UserMerchantPoints(merchant.getMerchantID(),points));
         }
