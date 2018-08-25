@@ -86,7 +86,7 @@ public class ItemController {
         }catch (Exception e){
             return "[]";
         }
-        ArrayList<ItemBean> itemBeans = itemService.search(searchString);
+        ArrayList<ItemBean> itemBeans = itemService.search(keyword);
         ArrayList<ItemBean> results = new ArrayList<ItemBean>();
         for(int i=Integer.valueOf(start);i<Integer.valueOf(end);i++){
             results.add(itemBeans.get(i));
@@ -103,7 +103,7 @@ public class ItemController {
         }catch (Exception e){
             return "{\"num\":"+0+"}";
         }
-        return "{\"num\":"+itemService.searchCount(searchString)+"}";
+        return "{\"num\":"+itemService.searchCount(keyword)+"}";
     }
 
 
