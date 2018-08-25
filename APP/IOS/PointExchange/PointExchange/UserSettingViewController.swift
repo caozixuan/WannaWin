@@ -25,10 +25,6 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        // 隐藏tableView最后一个cell的分割线
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.1))
-        tableView.tableFooterView = view
     }
     
     
@@ -86,6 +82,8 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
         case 1:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "modifyPasswordCell")
             cell?.selectionStyle = .none
+            // 去除最后一行的分割线
+            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width)
             return cell!
         default:
             return UITableViewCell()
