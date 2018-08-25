@@ -80,12 +80,6 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/search")
     public String search(String keyword, String start, String end){
-        String searchString = null;
-        try{
-            searchString = new String(keyword.getBytes("iso-8859-1"),"UTF-8");
-        }catch (Exception e){
-            return "[]";
-        }
         ArrayList<ItemBean> itemBeans = itemService.search(keyword);
         ArrayList<ItemBean> results = new ArrayList<ItemBean>();
         for(int i=Integer.valueOf(start);i<Integer.valueOf(end);i++){
@@ -97,12 +91,6 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/searchNum")
     public String searchNum(String keyword){
-        String searchString = null;
-        try{
-            searchString = new String(keyword.getBytes("iso-8859-1"),"UTF-8");
-        }catch (Exception e){
-            return "{\"num\":"+0+"}";
-        }
         return "{\"num\":"+itemService.searchCount(keyword)+"}";
     }
 

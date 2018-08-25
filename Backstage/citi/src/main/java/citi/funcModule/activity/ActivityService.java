@@ -34,4 +34,45 @@ public class ActivityService {
         ActivityBean activityBean = new ActivityBean(activity,merchant.getName(),merchant.getMerchantLogoURL());
         return activityBean;
     }
+
+    public ArrayList<ActivityBean> search(String searchString){
+        List<Activity> activities = activityMapper.getAllActivity();
+        ArrayList<ActivityBean> results = new ArrayList<ActivityBean>();
+        for(Activity activity:activities){
+            if(activity.getName().contains(searchString)){
+                Merchant merchant = merchantMapper.selectByID(activity.getMerchantID());
+                ActivityBean activityBean = new ActivityBean(activity,merchant.getName(),merchant.getMerchantLogoURL());
+                results.add(activityBean);
+            }
+        }
+        if(results.size()==0){
+            for(Activity activity:activities){
+                if(activity.getDescription().contains(searchString)){
+                    Merchant merchant = merchantMapper.selectByID(activity.getMerchantID());
+                    ActivityBean activityBean = new ActivityBean(activity,merchant.getName(),merchant.getMerchantLogoURL());
+                    results.add(activityBean);
+                }
+            }
+        }
+        return results;
+    }
+
+    public int searchNum(String searchString){
+        int counter = 0;
+        List<Activity> activities = activityMapper.getAllActivity();
+        ArrayList<ActivityBean> results = new ArrayList<ActivityBean>();
+        for(Activity activity:activities){
+            if(activity.getName().contains(searchString)){
+                counter++;
+            }
+        }
+        if(counter==0){
+            for(Activity activity:activities){
+                if(activity.getDescription().contains(searchString)){
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
 }
