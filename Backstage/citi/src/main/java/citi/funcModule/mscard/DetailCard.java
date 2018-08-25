@@ -1,20 +1,24 @@
 package citi.funcModule.mscard;
 
+import com.google.gson.Gson;
+
 public class DetailCard implements  Comparable<DetailCard>{
     private String cardLogoURL;
     private int points;
     private String cardNum;
     private String cardDescription;
+    private int cardStyle;
     private int type=0;
     private double proportion;
     private String merchantName;
     private String merchantLogoURL;
 
-    public DetailCard(String cardLogoURL, int points, String cardNum, String cardDescription, int type, double proportion, String merchantName, String merchantLogoURL) {
+    public DetailCard(String cardLogoURL, int points, String cardNum, String cardDescription, int cardStyle, int type, double proportion, String merchantName, String merchantLogoURL) {
         this.cardLogoURL = cardLogoURL;
         this.points = points;
         this.cardNum = cardNum;
         this.cardDescription = cardDescription;
+        this.cardStyle = cardStyle;
         this.type = type;
         this.proportion = proportion;
         this.merchantName = merchantName;
@@ -31,10 +35,6 @@ public class DetailCard implements  Comparable<DetailCard>{
 
     public String getCardNum() {
         return cardNum;
-    }
-
-    public String getCardDescription() {
-        return cardDescription;
     }
 
     public int getType() {

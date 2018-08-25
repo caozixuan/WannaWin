@@ -115,7 +115,7 @@ public class MSCardService {
         for(int i=0;i<cards.size();i++){
             MSCard card = cards.get(i);
             Merchant merchant = merchantMapper.selectByID(card.getMerchantId());
-            BriefCard briefCard = new BriefCard(card.getMerchantId(),merchant.getMerchantLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion(),merchant.getCardLogoURL());
+            BriefCard briefCard = new BriefCard(card.getMerchantId(),merchant.getMerchantLogoURL(),card.getMerchantName(),card.getPoints(),card.getProportion(),merchant.getCardLogoURL(),merchant.getStyle());
             briefCards.add(briefCard);
         }
         return briefCards;
@@ -134,7 +134,7 @@ public class MSCardService {
             cardNum="default";
         if(description==null)
             description="default";
-        return new DetailCard(logoURL,points,cardNum,description,0, merchant.getProportion(),merchant.getName(),merchant.getMerchantLogoURL());
+        return new DetailCard(logoURL,points,cardNum,description,merchant.getStyle(),0, merchant.getProportion(),merchant.getName(),merchant.getMerchantLogoURL());
     }
 
     public boolean unbindcard(String userID, String merchantID, String cardNum){
