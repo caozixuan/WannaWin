@@ -665,7 +665,32 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-	
+	/// 搜索优惠券
+	static func searchItem(start:Int,end:Int,keyword:String,callback:@escaping(_ result:Bool,_ items:[Item]?)->()){
+		provider.request(.searchItem(start: start, end: end, keyword: keyword)){ result in
+			
+			if case let .success(response) = result{
+				var items = [Item]()
+				let decoder = JSONDecoder()
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
+				for data in datas!{
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						items.append(item)
+					}catch{
+						callback(false,nil)
+						return
+					}
+				}
+				callback(true,items)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
 	// 优惠券
 	/// 获取已使用优惠券
 	static func getUsedCoupons(callback:@escaping (_ result:Bool, _ items:[Item])->()){
@@ -884,6 +909,31 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-
+	/// 搜索活动
+	static func searchActivity(start:Int,end:Int,keyword:String,callback:@escaping(_ result:Bool,_ activities:[OfflineActivity]?)->()){
+		provider.request(.searchActivity(start: start, end: end, keyword: keyword)){ result in
+			var activities = [OfflineActivity]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(OfflineActivity.self, from: data.rawData())
+							activities.append(item)
+						}catch{
+							callback(false,nil)
+							return
+						}
+					}
+					callback(true,activities)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
 
 }

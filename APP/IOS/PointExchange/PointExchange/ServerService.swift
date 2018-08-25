@@ -79,6 +79,8 @@ enum ServerService {
 	case getMerchantItems(merchntID:String, start:Int, n:Int)
 	/// 获取单个优惠券详情
 	case getSingleItemDetail(itemID:String)
+	/// 搜索商品
+	case searchItem(start:Int,end:Int,keyword:String)
 	
 	// 优惠券
 	/// 获取已使用优惠劵
@@ -102,6 +104,8 @@ enum ServerService {
 	case getActivity(activityID:String)
 	/// 获取商家活动
 	case getMerchantActivities(merchantID:String)
+	/// 搜索活动
+	case searchActivity(start:Int,end:Int,keyword:String)
     
 }
 
@@ -182,6 +186,8 @@ extension ServerService:TargetType {
 			return "/item/getMerchantItems"
 		case .getSingleItemDetail:
 			return "/item/itemDetail"
+		case .searchItem:
+			return "/item/search"
 			
 		// 优惠券
 		case .getUsedCoupons():
@@ -205,6 +211,8 @@ extension ServerService:TargetType {
 			return "/activity/getActivity"
 		case .getMerchantActivities:
 			return "/activity/getMerchantActivities"
+		case .searchActivity:
+			return "/activity/search"
         }
     }
     
@@ -355,6 +363,12 @@ extension ServerService:TargetType {
 				params["userID"] = userID
 			}
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .searchItem(let start, let end, let keyword):
+			var params:[String:Any] = [:]
+			params["start"] = start
+			params["end"] = end
+			params["keyword"] = keyword
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
 			
 		// 优惠券
 		case .getUsedCoupons():
@@ -401,6 +415,12 @@ extension ServerService:TargetType {
 		case .getMerchantActivities(let merchantID):
 			var params:[String:String] = [:]
 			params["merchantID"] = merchantID
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .searchActivity(let start, let end, let keyword):
+			var params:[String:Any] = [:]
+			params["start"] = start
+			params["end"] = end
+			params["keyword"] = keyword
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
 		default:
             return .requestPlain
