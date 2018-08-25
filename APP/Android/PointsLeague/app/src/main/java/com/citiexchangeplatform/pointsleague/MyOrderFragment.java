@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,6 +34,7 @@ public class MyOrderFragment extends Fragment {
 
     RecyclerView orderRecyclerView;
     private MyOrderAdapter orderAdapter;
+    ProgressDialog dialog;
 
 
     public MyOrderFragment() {
@@ -71,6 +74,7 @@ public class MyOrderFragment extends Fragment {
         //orderAdapter.addData("niki","5元代金券","2018-7-25");
         //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
 
+        dialog = ProgressDialog.show(getContext(), "", "正在加载订单信息...");
         getHistoryOrderByQRCode();
 
 
@@ -122,11 +126,13 @@ public class MyOrderFragment extends Fragment {
                     e.printStackTrace();
                 }
 
+                dialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
+                dialog.dismiss();
             }
         }){
             @Override

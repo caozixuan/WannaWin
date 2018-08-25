@@ -1,5 +1,6 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -19,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,14 +55,15 @@ public class PayingActivity extends AppCompatActivity {
 
     private RecyclerView msCardRecyclerView;
     private PayingAdapter mAdapter;
+    ProgressDialog dialog;
 
     TextView Choose_Points;
     Boolean state = true;
 
     //存放抵扣结果
     ArrayList<String> used = new ArrayList<>();
-    ArrayList<String> exchanged = new ArrayList<>();
-    ArrayList<String> logos = new ArrayList<>();
+    //ArrayList<String> exchanged = new ArrayList<>();
+    //ArrayList<String> logos = new ArrayList<>();
     ArrayList<String> names = new ArrayList<>();
     ArrayList<String> reasons = new ArrayList<>();
 
@@ -231,6 +234,7 @@ public class PayingActivity extends AppCompatActivity {
     /*获得各项积分卡数据：logo merchantName posses_points rate generalPoints*/
     protected void initData()
     {
+        dialog = ProgressDialog.show(PayingActivity.this, "", "正在加载积分信息...");
         getMSCardInfoRequest();
         //mAdapter.addData("1000", "100","0.1","qwe","中国移动","http://www.never-give-it-up.top/wp-content/uploads/2018/07/apple_logo.png");
         //mAdapter.addData("2000","20","0.01","qwe","中国联通","http://www.never-give-it-up.top/wp-content/uploads/2018/07/yidong_logo.png");
@@ -449,6 +453,7 @@ public class PayingActivity extends AppCompatActivity {
     }
 
     private void getMSCardInfoRequest() {
+
         String url="http://193.112.44.141:80/citi/mscard/infos";
         RequestQueue queue = MyApplication.getHttpQueues();
         //RequestQueue queue=Volley.newRequestQueue(this);
@@ -479,11 +484,14 @@ public class PayingActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                dialog.dismiss();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                dialog.dismiss();
+                Toast.makeText(PayingActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
 
             }
         }){
