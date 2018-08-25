@@ -44,14 +44,20 @@ class TendencySurveyViewController: UIViewController {
     */
 
 	@IBAction func clickFinish(_ sender: Any) {
-		var chooseResult = [String]()
+		var chooseResult = [Bool]()
 		for i in 0...typeBtns.count-1{
 			if typeBtns[i].isSelected{
-				chooseResult.append((typeBtns[i].titleLabel?.text)!.replacingOccurrences(of: "\n", with: ""))
+				chooseResult.append(true)
 				
+			}else{
+				chooseResult.append(false)
 			}
 		}
-		print(chooseResult)
+		ServerConnector.investigate(types: chooseResult){ result in
+			if result{
+				self.navigationController?.popViewController(animated: true)
+			}
+		}
 	}
 	
 	

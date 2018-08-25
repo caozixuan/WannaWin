@@ -774,7 +774,45 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-
+	/// 是否进行过问卷调查
+	static func isInvestigated(callback:@escaping(_ result:Bool)->()){
+		provider.request(.isInvestigated()){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					if data["status"].bool == true{
+						callback(true)
+					}else{
+						callback(false)
+					}
+				}
+			}
+			if case .failure(_) = result {
+				callback(false)
+			}
+		}
+	}
+	/// 问卷调查
+	static func investigate(types:[Bool],callback:@escaping(_ result:Bool)->()){
+		provider.request(.investigate(types: types)){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					if data["status"].bool == true{
+						callback(true)
+					}else{
+						callback(false)
+					}
+				}
+			}
+			if case .failure(_) = result {
+				callback(false)
+			}
+		}
+	}
+	
 	// 线下活动
 	/// 获得活动
 	static func getActivity(activityID:String, callback:@escaping(_ result:Bool, _ activity:OfflineActivity?)->()){
