@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,14 +19,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.build.PostFormBuilder;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailFindPayActivity extends AppCompatActivity {
 
@@ -147,7 +160,69 @@ public class DetailFindPayActivity extends AppCompatActivity {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
-    private void getInfo(String itemID) {
+
+    private void getInfo(final String itemID){
+        String url="http://193.112.44.141:80/citi/item/itemDetail";
+        dialog = ProgressDialog.show(DetailFindPayActivity.this, "", "正在加载优惠信息...");
+        RequestQueue queue = MyApplication.getHttpQueues();
+
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("success",s);
+                System.out.println(s);
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    String name = jsonObject.getString("name");
+                    String description = jsonObject.getString("description");
+                    String logoURL = jsonObject.getString("logoURL");
+                    String overdueTime = jsonObject.getString("overdueTime");
+                    points = jsonObject.getDouble("points");
+
+                    Glide.with(DetailFindPayActivity.this)
+                            .load(logoURL)
+                            .centerCrop()
+                            .error(R.drawable.loading_card)
+                            .into(imageViewLogo);
+                    textViewPoints.setText(String.format("%.2fP", points));
+                    textViewTotal.setText(String.format("%.2fP", points));
+                    textViewDescription.setText(description);
+                    textViewOverdue.setText("有效期截至" + overdueTime);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                dialog.dismiss();
+                Toast.makeText(DetailFindPayActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("itemID",itemID);
+                if (LogStateInfo.getInstance(DetailFindPayActivity.this).isLogin()) {
+                    map.put("userID", LogStateInfo.getInstance(DetailFindPayActivity.this).getUserID());
+                }
+                return map;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(request);
+    }
+
+    private void getInfo2(String itemID){
+    	
         PostFormBuilder url =
                 XVolley.getInstance()
                         .doPost()

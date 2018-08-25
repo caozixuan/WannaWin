@@ -1,5 +1,6 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,6 +36,7 @@ import java.util.Map;
 public class OrderTabOverdueFragment extends Fragment {
     RecyclerView overdueOrderRecyclerView;
     private MyCouponAdapter orderAdapter;
+    ProgressDialog dialog;
 
 
 
@@ -75,6 +78,7 @@ public class OrderTabOverdueFragment extends Fragment {
         //orderAdapter.addData("niki","5元代金券","2018-7-25");
         //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
 
+        dialog = ProgressDialog.show(getContext(), "", "正在加载优惠券信息...");
         getHistoryOrderByCoupon();
 
 
@@ -97,7 +101,7 @@ public class OrderTabOverdueFragment extends Fragment {
         String url="http://193.112.44.141:80/citi/userCoupon/getOverduedCoupons";
         RequestQueue queue = MyApplication.getHttpQueues();
         //RequestQueue queue=Volley.newRequestQueue(this);
-        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        final StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
 
@@ -130,10 +134,12 @@ public class OrderTabOverdueFragment extends Fragment {
                     e.printStackTrace();
                 }
 
+                dialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                dialog.dismiss();
 
             }
         }){
@@ -146,6 +152,10 @@ public class OrderTabOverdueFragment extends Fragment {
                 return map;
             }
         };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
 
 
