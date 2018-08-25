@@ -11,6 +11,7 @@ import Kingfisher
 
 class CouponDetailViewController: UIViewController {
 
+	var itemID:String?
 	var item:Item?
 	var count = 1
 	
@@ -22,12 +23,18 @@ class CouponDetailViewController: UIViewController {
 	@IBOutlet weak var logoImage: UIImageView!
 	override func viewDidLoad() {
         super.viewDidLoad()
+		ServerConnector.getSingleItemDetail(itemID: itemID!){(result,item) in
+			if result{
+				self.item = item
+				let imageURL = URL(string: (self.item?.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+				self.logoImage.kf.indicatorType = .activity
+				self.logoImage.kf.setImage(with: imageURL)
+				self.descriptionText.text = self.item?.description
+				self.pointLabel.text = String(stringInterpolationSegment: self.item!.points!)+"P"
+			}
+		}
 		self.logoImage.contentMode = .scaleAspectFit
-		let imageURL = URL(string: (item?.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
-		self.logoImage.kf.indicatorType = .activity
-		self.logoImage.kf.setImage(with: imageURL)
-		self.descriptionText.text = item?.description
-		self.pointLabel.text = String(stringInterpolationSegment: item!.points!)+"P"
+		
 		
         // Do any additional setup after loading the view.
     }

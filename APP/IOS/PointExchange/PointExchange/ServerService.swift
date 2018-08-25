@@ -77,6 +77,8 @@ enum ServerService {
     // 发现页item
     /// 获取指定商家从start的n个item
 	case getMerchantItems(merchntID:String, start:Int, n:Int)
+	/// 获取单个优惠券详情
+	case getSingleItemDetail(itemID:String)
 	
 	// 优惠券
 	/// 获取已使用优惠劵
@@ -178,6 +180,8 @@ extension ServerService:TargetType {
 		// 发现页
 		case .getMerchantItems:
 			return "/item/getMerchantItems"
+		case .getSingleItemDetail:
+			return "/item/itemDetail"
 			
 		// 优惠券
 		case .getUsedCoupons():
@@ -305,8 +309,6 @@ extension ServerService:TargetType {
 			let merchantJsons = try! encoder.encode(chooseInfo)
 			print(String(data:merchantJsons, encoding:.utf8)!)
 			return .requestData(merchantJsons)
-//			return .requestData(jsons)
-//            return .requestParameters(parameters: params, encoding: URLEncoding.default)
         case .getGeneralPoints():
             var params:[String:String] = [:]
             params["userID"] = User.getUser().id
@@ -345,6 +347,13 @@ extension ServerService:TargetType {
 			params["merchantID"] = merchantID
 			params["start"] = String(start)
 			params["n"] = String(n)
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+		case .getSingleItemDetail(let itemID):
+			var params:[String:String] = [:]
+			params["itemID"] = itemID
+			if let userID = User.getUser().id{
+				params["userID"] = userID
+			}
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
 			
 		// 优惠券

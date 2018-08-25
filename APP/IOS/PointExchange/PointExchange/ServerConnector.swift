@@ -642,7 +642,30 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-
+	/// 获得单个商品详情
+	static func getSingleItemDetail(itemID:String, callback:@escaping(_ result:Bool, _ item:Item?)->()){
+		provider.request(.getSingleItemDetail(itemID: itemID)){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						callback(true,item)
+					}catch{
+						callback(false,nil)
+						return
+					}
+					
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+	
 	// 优惠券
 	/// 获取已使用优惠券
 	static func getUsedCoupons(callback:@escaping (_ result:Bool, _ items:[Item])->()){
