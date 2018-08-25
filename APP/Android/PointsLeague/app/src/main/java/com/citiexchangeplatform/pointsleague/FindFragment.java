@@ -162,11 +162,11 @@ public class FindFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-            }
+//            @Override
+//            public void onError(VolleyError error) {
+//                super.onError(error);
+//                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+//            }
         });
 
     }
@@ -223,11 +223,11 @@ public class FindFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-            }
+//            @Override
+//            public void onError(VolleyError error) {
+//                super.onError(error);
+//                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+//            }
         });
 
     }
