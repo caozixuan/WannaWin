@@ -89,8 +89,8 @@ public class ItemController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/searchNum", method= RequestMethod.POST)
-    public String searchNum(@RequestParam String keyword){
+    @RequestMapping("/searchNum")
+    public String searchNum(String keyword){
         String searchString = null;
         try{
             searchString = new String(keyword.getBytes("iso-8859-1"),"UTF-8");
