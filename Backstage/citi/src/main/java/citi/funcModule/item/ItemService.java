@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,4 +75,46 @@ public class ItemService {
           return false;
         return true;
     }
+
+    public ArrayList<ItemBean> search(String searchString){
+        List<Item> items = itemMapper.getAllItem();
+        ArrayList<ItemBean> results = new ArrayList<ItemBean>();
+        for(Item item:items){
+            if(item.getName().contains(searchString)){
+                Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+                ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+                results.add(itemBean);
+            }
+        }
+        if(results.size()==0){
+            for(Item item:items){
+                if(item.getDescription().contains(searchString)){
+                    Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+                    ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+                    results.add(itemBean);
+                }
+            }
+        }
+        return results;
+    }
+
+    public int searchCount(String searchString){
+        List<Item> items = itemMapper.getAllItem();
+        int counter=0;
+        for(Item item:items){
+            if(item.getName().contains(searchString)){
+                counter++;
+            }
+        }
+        if(counter==0){
+            for(Item item:items){
+                if(item.getDescription().contains(searchString)){
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
+
+
 }

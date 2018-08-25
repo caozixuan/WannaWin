@@ -19,30 +19,60 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 	
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-		activityIndicator?.startAnimating()
+//        self.view.updateConstraintsIfNeeded()
+//        self.view.updateConstraints()
+//        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+//        activityIndicator?.startAnimating()
+//        if User.getUser().username != nil {
+//            if homepageStackView == nil {
+//                homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+//                homepageStackView?.delegate = self
+//                view.addSubview(homepageStackView!)
+//                loginView?.removeFromSuperview()
+//                loginView = nil
+//
+//            }
+//        }
+//        else {
+//            if loginView == nil {
+//                loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+//                loginView?.delegate = self
+//                view.addSubview(loginView!)
+//                homepageStackView?.removeFromSuperview()
+//                homepageStackView = nil
+//
+//            }
+//            activityIndicator?.stopAnimating()
+//        }
+		
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+        activityIndicator?.startAnimating()
         if User.getUser().username != nil {
-			if homepageStackView == nil {
-				homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-				homepageStackView?.delegate = self
-				view.addSubview(homepageStackView!)
-				loginView?.removeFromSuperview()
-				loginView = nil
-				
-			}
+            if homepageStackView == nil {
+                homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+                homepageStackView?.delegate = self
+                view.addSubview(homepageStackView!)
+                loginView?.removeFromSuperview()
+                loginView = nil
+                
+            }
         }
         else {
-			if loginView == nil {
-				loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-				loginView?.delegate = self
-				view.addSubview(loginView!)
-				homepageStackView?.removeFromSuperview()
-				homepageStackView = nil
-				
-			}
-			activityIndicator?.stopAnimating()
+            if loginView == nil {
+                loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+                loginView?.delegate = self
+                view.addSubview(loginView!)
+                homepageStackView?.removeFromSuperview()
+                homepageStackView = nil
+                
+            }
+            activityIndicator?.stopAnimating()
         }
-		
     }
 	
     override func viewWillLayoutSubviews() {
@@ -53,6 +83,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 				
 				// 设置会员卡偏移量---显示中间卡
 				let xOffset = v.cardScrollView.contentSize.width/2 - UIScreen.main.bounds.size.width/2
+                //let xOffset = (v.cardImage1.bounds.width*3 + 15)/2 - UIScreen.main.bounds.size.width/2
 				v.cardScrollView.contentOffset = CGPoint(x: xOffset, y: 0)
                 
                 // 添加会员卡点击手势事件

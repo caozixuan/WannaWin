@@ -49,7 +49,6 @@
 		3EBB5D1620EE668700B559BA /* CardInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */; };
 		3EBB5D1820EE7C6200B559BA /* AddCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */; };
 		3EBF049220F99854004D6D8E /* ExchangeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049120F99854004D6D8E /* ExchangeHistoryViewController.swift */; };
-		3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */; };
 		3EBF049820FDAD13004D6D8E /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF049720FDAD13004D6D8E /* MaskView.swift */; };
 		3ED5F6D02122888400F46E7C /* OfflineCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED5F6CF2122888400F46E7C /* OfflineCardView.xib */; };
 		3ED5F6D22122892900F46E7C /* OfflineCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6D12122892900F46E7C /* OfflineCardView.swift */; };
@@ -102,7 +101,6 @@
 		B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */; };
 		B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */; };
 		B6A6EC4D20F0AE490079FFA4 /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */; };
-		B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */; };
 		B6A6EC5120F0C9260079FFA4 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */; };
 		B6A6EC5620F112200079FFA4 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */; };
 		B6A6EC5820F1C34F0079FFA4 /* OrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */; };
@@ -163,7 +161,6 @@
 		3EBB5D1520EE668700B559BA /* CardInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoTableViewController.swift; sourceTree = "<group>"; };
 		3EBB5D1720EE7C6200B559BA /* AddCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardTableViewController.swift; sourceTree = "<group>"; };
 		3EBF049120F99854004D6D8E /* ExchangeHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeHistoryViewController.swift; sourceTree = "<group>"; };
-		3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordTableViewController.swift; sourceTree = "<group>"; };
 		3EBF049720FDAD13004D6D8E /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		3ED5F6CF2122888400F46E7C /* OfflineCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OfflineCardView.xib; sourceTree = "<group>"; };
 		3ED5F6D12122892900F46E7C /* OfflineCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineCardView.swift; sourceTree = "<group>"; };
@@ -219,7 +216,6 @@
 		B6A6EC4820F0A8380079FFA4 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingViewController.swift; sourceTree = "<group>"; };
-		B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		B6A6EC5020F0C9260079FFA4 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		B6A6EC5220F0CAE90079FFA4 /* PointExchange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PointExchange.entitlements; sourceTree = "<group>"; };
 		B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
@@ -275,19 +271,10 @@
 			children = (
 				84A968742128548E00EF5BA8 /* General Setting */,
 				84A96877212AAEDA00EF5BA8 /* User Setting */,
+				842237BE21302EC500CDC7DF /* My order */,
+				842237BF21302EED00CDC7DF /* point exchange record */,
+				842237C021302F2800CDC7DF /* login/signup/reset */,
 				B6A6EC4A20F0AE160079FFA4 /* UserViewController.swift */,
-				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
-				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
-				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
-				B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */,
-				B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */,
-				B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */,
-				3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */,
-				3E3327872120019900426518 /* CouponHistoryViewController.swift */,
-				3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */,
-				3E3327932120762D00426518 /* OfflineHistoryViewController.swift */,
-				3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */,
-				3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */,
 				3ED5F6E3212D444500F46E7C /* TendencySurveyViewController.swift */,
 			);
 			name = UserTab;
@@ -369,18 +356,12 @@
 		3E8AB4C720EDBAAF00915561 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				84A96885212AE30D00EF5BA8 /* HomePageTab */,
 				3E4017EF21005FA700591B77 /* LoginView.swift */,
 				3ED5F6E1212A895D00F46E7C /* SignUpView.swift */,
-				3ED5F6D32122985C00F46E7C /* MerchantCouponTableViewCell.swift */,
 				84A9687C212AD24700EF5BA8 /* ModifyPasswordView.swift */,
-				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
-				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
-				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
-				3E33278D2120041900426518 /* HistoryTableViewCell.swift */,
-				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
-				3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */,
-				3ED5F6D12122892900F46E7C /* OfflineCardView.swift */,
+				84A96885212AE30D00EF5BA8 /* HomePageTab */,
+				842237C42130348200CDC7DF /* DiscoverTab */,
+				842237C52130349000CDC7DF /* UserTab */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -481,6 +462,92 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		842237BE21302EC500CDC7DF /* My order */ = {
+			isa = PBXGroup;
+			children = (
+				3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */,
+				3E3327872120019900426518 /* CouponHistoryViewController.swift */,
+				3E3327912120507B00426518 /* CouponHistoryContainerViewContainer.swift */,
+				3E3327932120762D00426518 /* OfflineHistoryViewController.swift */,
+				3ED5F6DB2124242800F46E7C /* HistoryCouponDetailViewController.swift */,
+				3ED5F6DD2126975200F46E7C /* HistoryOfflineDetailViewController.swift */,
+				B6A6EC5720F1C34F0079FFA4 /* OrderDetailTableViewController.swift */,
+			);
+			name = "My order";
+			sourceTree = "<group>";
+		};
+		842237BF21302EED00CDC7DF /* point exchange record */ = {
+			isa = PBXGroup;
+			children = (
+				B66CFB3420F9CD65007165DF /* PointHistoryViewController.swift */,
+			);
+			name = "point exchange record";
+			sourceTree = "<group>";
+		};
+		842237C021302F2800CDC7DF /* login/signup/reset */ = {
+			isa = PBXGroup;
+			children = (
+				3E4C155F20EE0185000743C0 /* LoginViewController.swift */,
+				3E4C156120EE01AB000743C0 /* SignUpViewController.swift */,
+				B66CFB3C20FC6004007165DF /* ResetPasswordTableViewController.swift */,
+				B66CFB3E20FC62CC007165DF /* ResetPasswordFinishTableViewController.swift */,
+			);
+			name = login/signup/reset;
+			sourceTree = "<group>";
+		};
+		842237C12130343500CDC7DF /* HomePageTab */ = {
+			isa = PBXGroup;
+			children = (
+				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
+				3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */,
+			);
+			name = HomePageTab;
+			sourceTree = "<group>";
+		};
+		842237C22130344D00CDC7DF /* DiscoverTab */ = {
+			isa = PBXGroup;
+			children = (
+				3ED5F6D42122985C00F46E7C /* MerchantCouponTableViewCell.xib */,
+				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
+				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
+				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
+			);
+			name = DiscoverTab;
+			sourceTree = "<group>";
+		};
+		842237C32130346700CDC7DF /* UserTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E33278E2120041900426518 /* HistoryTableViewCell.xib */,
+				3E33279721215A8B00426518 /* PointHistoryTableViewCell.xib */,
+				3E33279A2121723D00426518 /* PointHistoryDetailTableViewCell.xib */,
+				3ED5F6CF2122888400F46E7C /* OfflineCardView.xib */,
+			);
+			name = UserTab;
+			sourceTree = "<group>";
+		};
+		842237C42130348200CDC7DF /* DiscoverTab */ = {
+			isa = PBXGroup;
+			children = (
+				3ED5F6D32122985C00F46E7C /* MerchantCouponTableViewCell.swift */,
+				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
+				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
+				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
+			);
+			name = DiscoverTab;
+			sourceTree = "<group>";
+		};
+		842237C52130349000CDC7DF /* UserTab */ = {
+			isa = PBXGroup;
+			children = (
+				3E33278D2120041900426518 /* HistoryTableViewCell.swift */,
+				B66CFB3620F9D6B2007165DF /* PointHistoryTableViewCell.swift */,
+				3E3327992121723D00426518 /* PointHistoryDetailTableViewCell.swift */,
+				3ED5F6D12122892900F46E7C /* OfflineCardView.swift */,
+			);
+			name = UserTab;
+			sourceTree = "<group>";
+		};
 		84A968742128548E00EF5BA8 /* General Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,8 +564,6 @@
 				B6A6EC4C20F0AE490079FFA4 /* UserSettingViewController.swift */,
 				84A96878212ACBB000EF5BA8 /* ModifyPasswordViewController.swift */,
 				B6A6EC5520F112200079FFA4 /* AddBankCardViewController.swift */,
-				3EBF049520FD89AB004D6D8E /* ModifyPasswordTableViewController.swift */,
-				B6A6EC4E20F0B4400079FFA4 /* EditTableViewController.swift */,
 			);
 			name = "User Setting";
 			sourceTree = "<group>";
@@ -540,16 +605,9 @@
 				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				84A968752129551F00EF5BA8 /* SignUpView.xib */,
 				84A9687A212ACCDC00EF5BA8 /* ModifyPasswordView.xib */,
-				B6C480672100F189002ED9C9 /* HomepageStackView.xib */,
-				3EA3CD042102472000B0392E /* ExchangeItemCellView.xib */,
-				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
-				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
-				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
-				3E33278E2120041900426518 /* HistoryTableViewCell.xib */,
-				3E33279721215A8B00426518 /* PointHistoryTableViewCell.xib */,
-				3E33279A2121723D00426518 /* PointHistoryDetailTableViewCell.xib */,
-				3ED5F6CF2122888400F46E7C /* OfflineCardView.xib */,
-				3ED5F6D42122985C00F46E7C /* MerchantCouponTableViewCell.xib */,
+				842237C12130343500CDC7DF /* HomePageTab */,
+				842237C22130344D00CDC7DF /* DiscoverTab */,
+				842237C32130346700CDC7DF /* UserTab */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -774,7 +832,6 @@
 				B66CFB3D20FC6004007165DF /* ResetPasswordTableViewController.swift in Sources */,
 				84A9688B212BCD9D00EF5BA8 /* ExchangeResultTableViewController.swift in Sources */,
 				3EA0334B20EDCE3E00D05A03 /* UIColorExtension.swift in Sources */,
-				B6A6EC4F20F0B4400079FFA4 /* EditTableViewController.swift in Sources */,
 				3EBA7A9420F8D4E600D31D47 /* FinishExchangeViewController.swift in Sources */,
 				84A9687D212AD24700EF5BA8 /* ModifyPasswordView.swift in Sources */,
 				B6A6EC4920F0A8380079FFA4 /* AboutViewController.swift in Sources */,
@@ -799,7 +856,6 @@
 				3E3327942120762D00426518 /* OfflineHistoryViewController.swift in Sources */,
 				B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */,
 				3E23A756211EC01600D19749 /* DiscoverCouponView.swift in Sources */,
-				3EBF049620FD89AB004D6D8E /* ModifyPasswordTableViewController.swift in Sources */,
 				84A968732121C5A000EF5BA8 /* ExchangedPointsCell.swift in Sources */,
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */,
