@@ -65,11 +65,32 @@ public class CardPointsAdapter extends RecyclerView.Adapter {
             ((CardPointsAdapter.VH)holder).textViewName.setText(items.get(position).getName());
             ((CardPointsAdapter.VH)holder).textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
             ((CardPointsAdapter.VH)holder).textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()*items.get(position).getProportion()));
-            Glide.with(context)
-                    .load(items.get(position).getCardLogoURL())
-                    .centerCrop()
-                    .error(R.drawable.loading_card)
-                    .into(((CardPointsAdapter.VH)holder).imageView);
+
+//            Glide.with(context)
+//                    .load(items.get(position).getCardLogoURL())
+//                    .centerCrop()
+//                    .error(R.drawable.loading_card)
+//                    .into(((CardPointsAdapter.VH)holder).imageView);
+
+            switch (items.get(position).getCardStyle()){
+                case 0:
+                    ((CardPointsAdapter.VH)holder).imageView.setImageResource(R.drawable.bg1_1);
+                    break;
+                case 1:
+                    ((CardPointsAdapter.VH)holder).imageView.setImageResource(R.drawable.bg1_2);
+                    break;
+                case 2:
+                    ((CardPointsAdapter.VH)holder).imageView.setImageResource(R.drawable.bg1_3);
+                    break;
+                case 3:
+                    ((CardPointsAdapter.VH)holder).imageView.setImageResource(R.drawable.bg1_4);
+                    break;
+                case 4:
+                    ((CardPointsAdapter.VH)holder).imageView.setImageResource(R.drawable.bg1_5);
+                    break;
+            }
+            ((CardPointsAdapter.VH)holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
