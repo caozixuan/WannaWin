@@ -642,7 +642,55 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-
+	/// 获得单个商品详情
+	static func getSingleItemDetail(itemID:String, callback:@escaping(_ result:Bool, _ item:Item?)->()){
+		provider.request(.getSingleItemDetail(itemID: itemID)){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						callback(true,item)
+					}catch{
+						callback(false,nil)
+						return
+					}
+					
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+	/// 搜索优惠券
+	static func searchItem(start:Int,end:Int,keyword:String,callback:@escaping(_ result:Bool,_ items:[Item]?)->()){
+		provider.request(.searchItem(start: start, end: end, keyword: keyword)){ result in
+			
+			if case let .success(response) = result{
+				var items = [Item]()
+				let decoder = JSONDecoder()
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
+				for data in datas!{
+					do{
+						let item = try decoder.decode(Item.self, from: data.rawData())
+						items.append(item)
+					}catch{
+						callback(false,nil)
+						return
+					}
+				}
+				callback(true,items)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
 	// 优惠券
 	/// 获取已使用优惠券
 	static func getUsedCoupons(callback:@escaping (_ result:Bool, _ items:[Item])->()){
@@ -774,7 +822,45 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-
+	/// 是否进行过问卷调查
+	static func isInvestigated(callback:@escaping(_ result:Bool)->()){
+		provider.request(.isInvestigated()){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					if data["status"].bool == true{
+						callback(true)
+					}else{
+						callback(false)
+					}
+				}
+			}
+			if case .failure(_) = result {
+				callback(false)
+			}
+		}
+	}
+	/// 问卷调查
+	static func investigate(types:[Bool],callback:@escaping(_ result:Bool)->()){
+		provider.request(.investigate(types: types)){ result in
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let responseJSON = try? response.mapJSON()
+					let data = JSON(responseJSON!)
+					if data["status"].bool == true{
+						callback(true)
+					}else{
+						callback(false)
+					}
+				}
+			}
+			if case .failure(_) = result {
+				callback(false)
+			}
+		}
+	}
+	
 	// 线下活动
 	/// 获得活动
 	static func getActivity(activityID:String, callback:@escaping(_ result:Bool, _ activity:OfflineActivity?)->()){
@@ -823,6 +909,31 @@ class ServerConnector: NSObject {
 			}
 		}
 	}
-
+	/// 搜索活动
+	static func searchActivity(start:Int,end:Int,keyword:String,callback:@escaping(_ result:Bool,_ activities:[OfflineActivity]?)->()){
+		provider.request(.searchActivity(start: start, end: end, keyword: keyword)){ result in
+			var activities = [OfflineActivity]()
+			if case let .success(response) = result{
+				if response.statusCode == 200 {
+					let decoder = JSONDecoder()
+					let responseJSON = try? response.mapJSON()
+					let datas = JSON(responseJSON!).array
+					for data in datas!{
+						do{
+							let item = try decoder.decode(OfflineActivity.self, from: data.rawData())
+							activities.append(item)
+						}catch{
+							callback(false,nil)
+							return
+						}
+					}
+					callback(true,activities)
+				}
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
 
 }

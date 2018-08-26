@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,DiscoverCouponViewDelegate,UISearchBarDelegate{
+class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate{
     @IBOutlet weak var searchBarView: UIView!
     
 	@IBOutlet weak var couponView: DiscoverCouponView!
@@ -29,7 +29,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.delegate=self
         self.tableView.dataSource=self
-        self.couponView.viewDelegate = self
+//        self.couponView.viewDelegate = self
 		
         self.tableView.rowHeight = 68
 		
@@ -89,7 +89,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 	@objc func clickImage(_ sender:UITapGestureRecognizer){
 		let sb = UIStoryboard(name: "Discover", bundle: nil)
 		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
-		vc.item = self.items[(sender.view?.tag)!]
+		vc.itemID = self.items[(sender.view?.tag)!].ItemID
 		self.navigationController?.pushViewController(vc, animated: true)
 	}
 
@@ -124,28 +124,27 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: - 点击发现页折扣活动后跳转
 		let sb = UIStoryboard(name: "Discover", bundle: nil)
 		let view = sb.instantiateViewController(withIdentifier: "MerchantDetailViewController") as! MerchantDetailViewController
 		view.merchant = merchantArray?[indexPath.row]
 		self.navigationController?.pushViewController(view, animated: true)
     }
 	
-	func addTapImageAction() {
-		for i in 0 ... 2{
-			couponView.images[i].tag = i
-			let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapImageAction(_:)))
-			couponView.images[i].addGestureRecognizer(gesture)
-			
-		}
-	}
-
-	@objc func tapImageAction(_ sender:UITapGestureRecognizer){
-		let sb = UIStoryboard(name: "Discover", bundle: nil)
-		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
-		vc.item = items[(sender.view?.tag)!]
-		self.navigationController?.pushViewController(vc, animated: true)
-		
-	}
-    
+//	func addTapImageAction() {
+//		for i in 0 ... 2{
+//			couponView.images[i].tag = i
+//			let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapImageAction(_:)))
+//			couponView.images[i].addGestureRecognizer(gesture)
+//
+//		}
+//	}
+//
+//	@objc func tapImageAction(_ sender:UITapGestureRecognizer){
+//		let sb = UIStoryboard(name: "Discover", bundle: nil)
+//		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+//		vc.itemID = items[(sender.view?.tag)!].ItemID
+//		self.navigationController?.pushViewController(vc, animated: true)
+//
+//	}
+	
 }

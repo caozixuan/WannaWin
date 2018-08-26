@@ -1,5 +1,7 @@
 package citi.vo;
 
+import citi.funcModule.mscard.CardDescriptionBean;
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 
 import java.util.HashMap;
@@ -140,7 +142,17 @@ public class Merchant {
     }
 
     public String getCardDescription() {
-        return cardDescription;
+        Gson gson = new Gson();
+        CardDescriptionBean jsonObject = gson.fromJson(cardDescription, CardDescriptionBean.class);//把JSON字符串转为对象
+        String description = jsonObject.getCardDescription();
+        return description;
+    }
+
+    public int getStyle(){
+        Gson gson = new Gson();
+        CardDescriptionBean jsonObject = gson.fromJson(cardDescription, CardDescriptionBean.class);//把JSON字符串转为对象
+        String style = jsonObject.getCardStyle();
+        return Integer.valueOf(style);
     }
 
     public void setCardDescription(String cardDescription) {

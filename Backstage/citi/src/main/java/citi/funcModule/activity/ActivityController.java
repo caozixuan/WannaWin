@@ -27,4 +27,17 @@ public class ActivityController {
     public String getActivity(String activityID){
         return gson.toJson(activityService.getActiity(activityID));
     }
+
+    @ResponseBody
+    @RequestMapping("/search")
+    public String search(String keyword){
+        return gson.toJson(activityService.search(keyword));
+    }
+
+    @ResponseBody
+    @RequestMapping("/searchNum")
+    public String searchNum(String keyword){
+        int num = activityService.searchNum(keyword);
+        return "{\"num\":"+num+"}";
+    }
 }

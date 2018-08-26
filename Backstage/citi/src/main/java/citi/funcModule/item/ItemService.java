@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,5 +74,59 @@ public class ItemService {
         if(visitRecordMapper.insertVisitRecord(new VisitRecord(userID,itemID,time))!=1)
           return false;
         return true;
+    }
+
+    public ArrayList<ItemBean> search(String[] keywords){
+        List<Item> items = itemMapper.getAllItem();
+        ArrayList<ItemBean> results = new ArrayList<ItemBean>();
+        for(Item item:items){
+            for(String keyword:keywords){
+                if(item.getName().contains(keyword)){
+                    Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+                    ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+                    results.add(itemBean);
+                    break;
+                }
+            }
+        }
+        if(results.size()==0){
+            for(Item item:items){
+                for(String keyword:keywords){
+                    if(item.getDescription().contains(keyword)){
+                        Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+                        ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+                        results.add(itemBean);
+                        break;
+                    }
+                }
+            }
+        }
+        return results;
+    }
+
+    public int searchCount(String[] keywords){
+        List<Item> items = itemMapper.getAllItem();
+        int counter=0;
+        for(Item item:items){
+            for(String keyword:keywords){
+                if(item.getName().contains(keyword)){
+                    counter++;
+                    break;
+                }
+            }
+
+        }
+        if(counter==0){
+            for(Item item:items){
+                for(String keyword:keywords){
+                    if(item.getDescription().contains(keyword)){
+                        counter++;
+                        break;
+                    }
+                }
+
+            }
+        }
+        return counter;
     }
 }

@@ -13,12 +13,15 @@ import java.util.List;
 @Repository
 public interface ActivityMapper {
 
+    final String getAllActivity = "SELECT * FROM activity";
     final String getActivityByActivityID = "SELECT * FROM activity WHERE activityID = #{activityID}";
     final String getActivitiesByMerchantID = "SELECT * FROM activity WHERE merchantID = #{merchantID}";
     final String updateActivity = "UPDATE activity SET name=#{name}, description=#{description}, startDate=#{startDate}, endDate=#{endDate}, imageURL=#{imageURL} WHERE activityID=#{activityID}";
     final String insertActivity = "INSERT INTO activity (activityID, merchantID, name, description, startDate, endDate, imageURL) VALUES (#{activityID}, #{merchantID}, #{name}, #{description}, #{startDate}, #{endDate}, #{imageURL})";
     final String deleteByActivityID = "DELETE FROM activity WHERE activityID = #{activityID}";
 
+    @Select(getAllActivity)
+    List<Activity> getAllActivity();
 
     @Select(getActivityByActivityID)
     Activity getActivityByActivityID(String activityID);

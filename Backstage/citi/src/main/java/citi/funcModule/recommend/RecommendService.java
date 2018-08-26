@@ -270,10 +270,12 @@ public class RecommendService {
         double points = 0;
         double prefPoints = 0;
         UserPref userPref = userPrefMapper.getUserPref(userID);
-        List<Type.ItemType> itemTypes = userPref.getPrefTypeList();
-        for(Type.ItemType itemType:itemTypes){
-            if(itemType.toString().equals(merchant.getBusinessType().toString())){
-                prefPoints+=20;
+        if(userPref!=null){
+            List<Type.ItemType> itemTypes = userPref.getPrefTypeList();
+            for(Type.ItemType itemType:itemTypes){
+                if(itemType.toString().equals(merchant.getBusinessType().toString())){
+                    prefPoints+=20;
+                }
             }
         }
         List<Item> items = itemMapper.getItemByMerchantID(merchantID,0,itemMapper.getItemAmountByMerchantID(merchantID));
@@ -418,9 +420,8 @@ public class RecommendService {
      */
     public ArrayList<UserMerchantPoints> getUserPointsToMerchants(String userID){
         ArrayList<UserMerchantPoints> results = new ArrayList<UserMerchantPoints>();
-        List<String> merchantIDs = merchantMapper.getAllMerchantID();
-        for(String merchantID:merchantIDs){
-            Merchant merchant = merchantMapper.selectByID(merchantID);
+        List<Merchant> merchants = merchantMapper.getAllMerchant();
+        for(Merchant merchant:merchants){
             double points = getMerchantPoints(userID,merchant.getMerchantID());
             results.add(new UserMerchantPoints(merchant.getMerchantID(),points));
         }

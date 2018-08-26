@@ -1,6 +1,7 @@
 package com.citiexchangeplatform.pointsleague;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ public class OrderTabUsedFragment extends Fragment {
 
     RecyclerView usedOrderRecyclerView;
     private MyCouponAdapter orderAdapter;
+    ProgressDialog dialog;
 
 
     public OrderTabUsedFragment() {
@@ -70,6 +72,7 @@ public class OrderTabUsedFragment extends Fragment {
         //orderAdapter.addData("中国电信","5元代金券","2018-7-27");
         //orderAdapter.addData("niki","5元代金券","2018-7-25");
         //orderAdapter.addData("中国联通","5元代金券","2018-7-27");
+        dialog = ProgressDialog.show(getContext(), "", "正在加载优惠券信息...");
         getHistoryOrderByCoupon();
 
 
@@ -120,12 +123,14 @@ public class OrderTabUsedFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                dialog.dismiss();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
+                dialog.dismiss();
             }
         }){
             @Override

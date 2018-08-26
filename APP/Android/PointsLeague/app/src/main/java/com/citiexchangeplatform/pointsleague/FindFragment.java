@@ -13,6 +13,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.citiexchangeplatform.pointsleague.adapter.AllCardAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindActivityAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
@@ -36,6 +43,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FindFragment extends Fragment {
 
@@ -162,16 +171,88 @@ public class FindFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-            }
+//            @Override
+//            public void onError(VolleyError error) {
+//                super.onError(error);
+//                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+//            }
         });
 
     }
 
-    private void getRecommendedMerchants() {
+    private void getRecommendedMerchants(){
+        String url="http://193.112.44.141:80/citi/recommend/getRecommendedMerchants";
+        dialog = ProgressDialog.show(getContext(), "", "正在获取商家信息...");
+        RequestQueue queue = MyApplication.getHttpQueues();
+        final StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+
+                Log.e("success",s);
+                System.out.println(s);
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String merchantID = jsonObject.getString("merchantID");
+                        String name = jsonObject.getString("name");
+                        String description = jsonObject.getString("description");
+                        String businessType;
+                        switch (jsonObject.getString("businessType")) {
+                            case "catering":
+                                businessType = "餐饮";
+                                break;
+                            case "exercise":
+                                businessType = "运动";
+                                break;
+                            case "bank":
+                                businessType = "银行";
+                                break;
+                            case "costume":
+                                businessType = "服饰";
+                                break;
+                            case "education":
+                                businessType = "教育";
+                                break;
+                            case "communication":
+                                businessType = "通讯";
+                                break;
+                            default:
+                                businessType = "一般";
+                        }
+                        String merchantLogoURL = jsonObject.getString("merchantLogoURL");
+                        findAdapter.addData(name, merchantID, merchantLogoURL, businessType, description);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                dialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                dialog.dismiss();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+
+                map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+
+                return map;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(request);
+    }
+
+    private void getRecommendedMerchants2() {
         PostFormBuilder url =
                 XVolley.getInstance()
                         .doPost()
@@ -223,11 +304,11 @@ public class FindFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
-            }
+//            @Override
+//            public void onError(VolleyError error) {
+//                super.onError(error);
+//                Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+//            }
         });
 
     }

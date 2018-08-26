@@ -7,14 +7,16 @@ public class BriefCard implements  Comparable<BriefCard>{
     private int points;
     private double proportion;
     private String logoURL;
+    private int cardStyle;
 
-    public BriefCard(String merchantID, String merchantLogoURL, String merchantName, int points, double proportion, String logoURL) {
+    public BriefCard(String merchantID, String merchantLogoURL, String merchantName, int points, double proportion, String logoURL, int cardStyle) {
         this.merchantID = merchantID;
         this.merchantLogoURL = merchantLogoURL;
         this.merchantName = merchantName;
         this.points = points;
         this.proportion = proportion;
         this.logoURL = logoURL;
+        this.cardStyle = cardStyle;
     }
 
     public String getMerchantID() {
