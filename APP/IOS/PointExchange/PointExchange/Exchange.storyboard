@@ -18,7 +18,7 @@
         <scene sceneID="klH-VJ-woC">
             <objects>
                 <navigationController title="支付积分" id="5zr-dd-bEb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="支付积分" image="erweima" landscapeImage="pay" selectedImage="erweima" id="tAR-Li-zdY">
+                    <tabBarItem key="tabBarItem" title="支付积分" image="erweima" selectedImage="erweima" id="tAR-Li-zdY">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aUh-bE-FZ8">
@@ -229,7 +229,6 @@
     <resources>
         <image name="Grand Canal III" width="682" height="483"/>
         <image name="erweima" width="23" height="23"/>
-        <image name="pay" width="24" height="23"/>
         <image name="starbucks" width="1009" height="987"/>
         <namedColor name="main_lightGreen">
             <color red="0.60399997234344482" green="0.52499997615814209" blue="0.086000002920627594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -396,7 +396,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUJ-yl-YI3" userLabel="body" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="24.5" y="187.5" width="326.5" height="346.5"/>
+                                <rect key="frame" x="24.5" y="187.5" width="326.5" height="329.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uly-gW-OCz">
                                         <rect key="frame" x="126" y="108.5" width="74.5" height="29"/>
@@ -498,7 +498,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jam-9X-RAw">
-                                <rect key="frame" x="99" y="503.5" width="177" height="60"/>
+                                <rect key="frame" x="114" y="491.5" width="147.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jam-9X-RAw" secondAttribute="height" multiplier="59:20" id="Tkl-vd-JZx"/>
+                                    <constraint firstAttribute="height" constant="50" id="z83-e7-mkj"/>
+                                </constraints>
                                 <state key="normal" backgroundImage="exchangeButton"/>
                                 <connections>
                                     <action selector="clickExchange:" destination="tvj-xr-jyE" eventType="touchUpInside" id="fsj-JB-YoT"/>
@@ -544,7 +548,7 @@
                             <constraint firstItem="M4h-Wi-31h" firstAttribute="width" secondItem="XT0-Qc-MzZ" secondAttribute="width" multiplier="0.6" id="LEV-UN-tx1"/>
                             <constraint firstItem="Uly-gW-OCz" firstAttribute="top" secondItem="M4h-Wi-31h" secondAttribute="bottom" constant="24" id="O44-Y9-Fjd"/>
                             <constraint firstItem="kUJ-yl-YI3" firstAttribute="centerX" secondItem="Nrr-tF-CSy" secondAttribute="centerX" id="SOe-Dt-5SA"/>
-                            <constraint firstItem="jam-9X-RAw" firstAttribute="top" secondItem="uSw-E5-dQA" secondAttribute="bottom" constant="48" id="Sop-bv-jFe"/>
+                            <constraint firstItem="jam-9X-RAw" firstAttribute="top" secondItem="uSw-E5-dQA" secondAttribute="bottom" constant="36" id="Sop-bv-jFe"/>
                             <constraint firstItem="kUJ-yl-YI3" firstAttribute="width" secondItem="XT0-Qc-MzZ" secondAttribute="width" multiplier="0.87" id="TFr-4P-acP"/>
                             <constraint firstItem="M4h-Wi-31h" firstAttribute="centerX" secondItem="kUJ-yl-YI3" secondAttribute="centerX" id="e59-4C-IRX"/>
                             <constraint firstItem="jam-9X-RAw" firstAttribute="centerY" secondItem="kUJ-yl-YI3" secondAttribute="bottom" id="hKv-kV-kKh"/>
