@@ -27,8 +27,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var pointsSumLabel: UILabel!
 	var pointsSum:Double = 0.0
 	
-	override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		if User.getUser().card == nil {
@@ -79,13 +79,15 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
             cell = UITableViewCell(style: .default, reuseIdentifier: "store to bank")
         }
         
-        cell.editingAccessoryType = .none
-        cell.selectedBackgroundView = UIView()
-        cell.selectedBackgroundView?.backgroundColor = UIColor(red: 0, green: 255, blue: 255, alpha: 0.0)
-        
 		for subview in cell.contentView.subviews{
 			if subview .isKind(of: ExchangeItemCellView.self){
 				let exchangeItemCellView = subview as! ExchangeItemCellView
+                
+                cell.frame.size.width = self.tableView.bounds.width
+                cell.contentView.frame = cell.bounds
+                exchangeItemCellView.frame.size.width = cell.bounds.width
+                exchangeItemCellView.view.frame = exchangeItemCellView.bounds
+                
 				exchangeItemCellView.perform(#selector(ExchangeItemCellView.setTextFieldDelegateWith), with: self)
 				exchangeItemCellView.delegate = self
 				exchangeItemCellView.editSourcePoints?.tag = indexPath.row
