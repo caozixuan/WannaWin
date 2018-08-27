@@ -12,9 +12,9 @@ class HomepageStackView: UIStackView{
     @IBOutlet var view: UIStackView!
     
     @IBOutlet weak var cardScrollView: UIScrollView!
-    @IBOutlet weak var cardImage1: UIImageView!
-    @IBOutlet weak var cardImage3: UIImageView!
-    @IBOutlet weak var cardImage2: UIImageView!
+    @IBOutlet weak var cardImage1: UIView!
+    @IBOutlet weak var cardImage3: UIView!
+    @IBOutlet weak var cardImage2: UIView!
 	
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var currentCitiPointLabel: UILabel!

@@ -15,37 +15,6 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
     var activityIndicator:UIActivityIndicatorView?
 	
     var cards:[Card]?
-
-	
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.view.updateConstraintsIfNeeded()
-//        self.view.updateConstraints()
-//        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-//        activityIndicator?.startAnimating()
-//        if User.getUser().username != nil {
-//            if homepageStackView == nil {
-//                homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//                homepageStackView?.delegate = self
-//                view.addSubview(homepageStackView!)
-//                loginView?.removeFromSuperview()
-//                loginView = nil
-//
-//            }
-//        }
-//        else {
-//            if loginView == nil {
-//                loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//                loginView?.delegate = self
-//                view.addSubview(loginView!)
-//                homepageStackView?.removeFromSuperview()
-//                homepageStackView = nil
-//
-//            }
-//            activityIndicator?.stopAnimating()
-//        }
-		
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -74,7 +43,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
             activityIndicator?.stopAnimating()
         }
     }
-	
+    
     override func viewWillLayoutSubviews() {
         
         for subview in view.subviews{
@@ -82,9 +51,12 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 let v = subview as! HomepageStackView
 				
 				// 设置会员卡偏移量---显示中间卡
-				let xOffset = v.cardScrollView.contentSize.width/2 - UIScreen.main.bounds.size.width/2
-                //let xOffset = (v.cardImage1.bounds.width*3 + 15)/2 - UIScreen.main.bounds.size.width/2
-				v.cardScrollView.contentOffset = CGPoint(x: xOffset, y: 0)
+                let xOffset = v.cardImage2.frame.midX
+				
+                // contentOffset will not change before the main runloop ends without queueing it
+                DispatchQueue.main.async {
+                    v.cardScrollView.contentOffset = CGPoint(x: xOffset, y: 0)
+                }
                 
                 // 添加会员卡点击手势事件
                 let cardTap1 = UITapGestureRecognizer(target: self, action: #selector(goToCardDetail(_:)))
@@ -101,17 +73,23 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                         self.cards = cards
 						
 						if cards.count >= 1 {
-							v.cardImage1.kf.indicatorType = .activity
-							v.cardImage1.kf.setImage(with: URL(string:(self.cards?[0].logoURL)!),placeholder:UIImage(named: "Mask"))
+                            if let image = v.cardImage1.subviews[0] as? UIImageView {
+                                image.kf.indicatorType = .activity
+                                image.kf.setImage(with: URL(string:(self.cards?[0].logoURL)!),placeholder:UIImage(named: "Mask"))
+                            }
 						}
 						if cards.count >= 2 {
-							v.cardImage2.kf.indicatorType = .activity
-							v.cardImage2.kf.setImage(with: URL(string:(self.cards?[1].logoURL)!),placeholder:UIImage(named: "Mask"))
+                            if let image = v.cardImage1.subviews[0] as? UIImageView {
+                                image.kf.indicatorType = .activity
+                                image.kf.setImage(with: URL(string:(self.cards?[1].logoURL)!),placeholder:UIImage(named: "Mask"))
+                            }
 							
 						}
 						if cards.count >= 3 {
-							v.cardImage3.kf.indicatorType = .activity
-							v.cardImage3.kf.setImage(with: URL(string:(self.cards?[2].logoURL)!),placeholder:UIImage(named: "Mask"))
+                            if let image = v.cardImage1.subviews[0] as? UIImageView {
+                                image.kf.indicatorType = .activity
+                                image.kf.setImage(with: URL(string:(self.cards?[2].logoURL)!),placeholder:UIImage(named: "Mask"))
+                            }
 						}
                         ServerConnector.getGeneralPoints(){ (result, points) in
                             if result {
