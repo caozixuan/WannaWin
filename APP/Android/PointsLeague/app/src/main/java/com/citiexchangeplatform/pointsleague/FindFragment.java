@@ -2,6 +2,7 @@ package com.citiexchangeplatform.pointsleague;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -113,6 +114,15 @@ public class FindFragment extends Fragment {
 
     private void initSearchView(){
         android.widget.SearchView search = view.findViewById(R.id.searchView_find);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToSearch = new Intent(getContext(),SearchActivity.class);
+                startActivity(intentToSearch);
+
+            }
+        });
         search.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

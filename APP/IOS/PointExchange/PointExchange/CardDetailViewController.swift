@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CardDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 	
@@ -26,7 +27,9 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 	
 	@IBOutlet weak var tableView: UITableView!
 	
-	override func viewDidLoad() {
+    @IBOutlet weak var bgConstraint: NSLayoutConstraint!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.dataSource = self
 		self.tableView.delegate = self
@@ -120,15 +123,41 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		if isFold{
 			self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_unfold")
 			isFold = false
-			UIView.animate(withDuration: 0.5){
-				self.backgroundView.frame = CGRect(x: self.backgroundView.frame.origin.x, y: self.backgroundView.frame.origin.y+169, width: self.backgroundView.frame.width, height: self.backgroundView.frame.height)
-			}
+            
+            // 移除原有约束
+            if bgConstraint != nil {
+                self.view.removeConstraint(bgConstraint)
+            }
+            
+            // 设置约束更改backgroundView位置
+            self.backgroundView.snp.remakeConstraints(){ make in
+                make.top.equalTo(self.cardImageView.snp.bottom).offset(169)
+            }
+            
+            // 使动画生效
+            UIView.animate(withDuration: 0.5){
+                self.view.layoutIfNeeded()
+            }
+            
 		}else{
 			self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_fold")
 			isFold = true
-			UIView.animate(withDuration: 0.5){
-				self.backgroundView.frame = CGRect(x: self.backgroundView.frame.origin.x, y: self.backgroundView.frame.origin.y-169, width: self.backgroundView.frame.width, height: self.backgroundView.frame.height)
-			}
+            
+            // 移除原有约束
+            if bgConstraint != nil {
+                self.view.removeConstraint(bgConstraint)
+            }
+        
+            // 设置约束更改backgroundView位置
+            self.backgroundView.snp.remakeConstraints(){ make in
+                make.top.equalTo(self.cardImageView.snp.bottom).offset(-23.5)
+            }
+            
+            // 使动画生效
+            UIView.animate(withDuration: 0.5){
+                self.view.layoutIfNeeded()
+            }
+            
 		}
 	}
 	@IBAction func clickUnbind(_ sender: Any) {

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate{
+class DiscoverViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchBarView: UIView!
     
 	@IBOutlet weak var couponView: DiscoverCouponView!
@@ -35,15 +35,18 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		// searchController
 		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+		
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
         // Do any additional setup after loading the view.
 		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: 375, height: 56)
 		searchController?.searchBar.searchBarStyle = .minimal
-		searchController?.searchBar.delegate = self
+		searchController?.searchBar.delegate = searchResultVC
 		searchController?.searchResultsUpdater = searchResultVC
 		searchController?.definesPresentationContext = true
 		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
+		searchController?.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 		self.searchBarView.addSubview((searchController?.searchBar)!)
+		searchResultVC.searchBar = searchController?.searchBar
 		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         activityIndicator?.startAnimating()
@@ -147,4 +150,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 //
 //	}
 	
+}
+extension DiscoverViewController:UISearchBarDelegate{
 }
