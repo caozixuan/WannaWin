@@ -12,13 +12,14 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 
 	@IBOutlet var tableView: UITableView!
 	var merchants = [Merchant]()
+	var searchResults = [Merchant]()
 	var start = 0
 	var end = 9
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-		
+		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
         // Do any additional setup after loading the view.
     }
 
@@ -28,7 +29,16 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
     }
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell()
+		var cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as? SearchTableViewCell
+		if cell == nil {
+			cell = UITableViewCell(style:.default, reuseIdentifier:"searchCell") as? SearchTableViewCell
+		}
+		let imageURL = URL(string: (searchResults[indexPath.row].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+		cell?.logoImageView.kf.indicatorType = .activity
+		cell?.logoImageView.kf.setImage(with: imageURL)
+		cell?.title.text = searchResults[indexPath.row].name
+		cell?.descriptionLabel.text = searchResults[indexPath.row].description
+		return cell!
 	}
 	
 	func search(keyword:String){
@@ -38,6 +48,7 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 					if result{
 						self.merchants = merchants
 						self.searchMerchant(keyword: keyword)
+						self.tableView.reloadData()
 					}
 					
 				}
@@ -45,7 +56,7 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 		}
 	}
 	private func searchMerchant(keyword:String){
-		var searchResults = [Merchant]()
+		searchResults.removeAll()
 		for merchant in self.merchants{
 			if merchant.name.lowercased().contains(keyword.lowercased()){
 				searchResults.append(merchant)
@@ -64,7 +75,7 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 		return 1
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return merchants.count
+		return searchResults.count
 	}
 
 }

@@ -11,7 +11,7 @@ import PageMenu
 
 class SearchResultViewController: UIViewController {
 	
-	
+	var currentPage = 0
 	var searchBar:UISearchBar?
 	var pageMenu:CAPSPageMenu?
 	var couponController:SearchResultCouponViewController?
@@ -42,26 +42,22 @@ class SearchResultViewController: UIViewController {
 			
 		]
 		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-64),pageMenuOptions:params)
+		pageMenu?.delegate = self
 		self.addChildViewController(pageMenu!)
 		self.view.addSubview((pageMenu?.view)!)
 		pageMenu!.didMove(toParentViewController: self)
+		
+		
     }
+	
+	
+	
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	
 
 }
 extension SearchResultViewController:UISearchBarDelegate,UISearchResultsUpdating{
@@ -84,24 +80,29 @@ extension SearchResultViewController:UISearchBarDelegate,UISearchResultsUpdating
 		}
 	}
 }
+
 extension SearchResultViewController:CAPSPageMenuDelegate{
 	func didMoveToPage(_ controller: UIViewController, index: Int) {
-		switch index {
-		case 0:
-			if let keyword = searchBar?.text{
-				merchantController?.search(keyword: keyword)
+		if index != currentPage{
+			currentPage = index
+			switch index {
+			case 0:
+				if let keyword = searchBar?.text{
+					merchantController?.search(keyword: keyword)
+				}
+			case 1:
+				if let keyword = searchBar?.text{
+					couponController?.search(keyword: keyword)
+				}
+				
+			case 2:
+				if let keyword = searchBar?.text{
+					offlineController?.search(keyword: keyword)
+				}
+			default:
+				break
 			}
-		case 1:
-			if let keyword = searchBar?.text{
-				couponController?.search(keyword: keyword)
-			}
-			
-		case 2:
-			if let keyword = searchBar?.text{
-				offlineController?.search(keyword: keyword)
-			}
-		default:
-			break
 		}
 	}
+	
 }

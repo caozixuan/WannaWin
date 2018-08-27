@@ -35,6 +35,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		// searchController
 		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+		
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
         // Do any additional setup after loading the view.
 		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: 375, height: 56)
@@ -45,6 +46,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
 		searchController?.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 		self.searchBarView.addSubview((searchController?.searchBar)!)
+		searchResultVC.searchBar = searchController?.searchBar
 		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         activityIndicator?.startAnimating()

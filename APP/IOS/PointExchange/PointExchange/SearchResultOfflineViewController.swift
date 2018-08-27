@@ -18,6 +18,7 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
+		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
         // Do any additional setup after loading the view.
     }
 
@@ -36,7 +37,16 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell()
+		var cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as? SearchTableViewCell
+		if cell == nil {
+			cell = UITableViewCell(style:.default, reuseIdentifier:"searchCell") as? SearchTableViewCell
+		}
+		let imageURL = URL(string: (activity[indexPath.row].imageURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+		cell?.logoImageView.kf.indicatorType = .activity
+		cell?.logoImageView.kf.setImage(with: imageURL)
+		cell?.title.text = activity[indexPath.row].name
+		cell?.descriptionLabel.text = activity[indexPath.row].description
+		return cell!
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {

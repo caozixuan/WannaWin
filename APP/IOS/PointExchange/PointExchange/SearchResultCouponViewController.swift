@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchResultCouponViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
@@ -18,6 +19,7 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
+		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
         // Do any additional setup after loading the view.
     }
 
@@ -43,6 +45,15 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell()
+		var cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as? SearchTableViewCell
+		if cell == nil {
+			cell = UITableViewCell(style:.default, reuseIdentifier:"searchCell") as? SearchTableViewCell
+		}
+		let imageURL = URL(string: (items[indexPath.row].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+		cell?.logoImageView.kf.indicatorType = .activity
+		cell?.logoImageView.kf.setImage(with: imageURL)
+		cell?.title.text = items[indexPath.row].name
+		cell?.descriptionLabel.text = items[indexPath.row].description
+		return cell!
 	}
 }

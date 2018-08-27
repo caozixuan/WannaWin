@@ -65,6 +65,8 @@
 		3EE77DB0212EAA9700ADDD82 /* SearchResultCouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DAF212EAA9700ADDD82 /* SearchResultCouponViewController.swift */; };
 		3EE77DB2212EAAB000ADDD82 /* SearchResultMerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DB1212EAAB000ADDD82 /* SearchResultMerchantViewController.swift */; };
 		3EE77DB4212EABC500ADDD82 /* SearchResultOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DB3212EABC500ADDD82 /* SearchResultOfflineViewController.swift */; };
+		3EE77DB72133B9AC00ADDD82 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DB52133B9AC00ADDD82 /* SearchTableViewCell.swift */; };
+		3EE77DB82133B9AC00ADDD82 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE77DB62133B9AC00ADDD82 /* SearchTableViewCell.xib */; };
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
@@ -176,6 +178,8 @@
 		3EE77DAF212EAA9700ADDD82 /* SearchResultCouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCouponViewController.swift; sourceTree = "<group>"; };
 		3EE77DB1212EAAB000ADDD82 /* SearchResultMerchantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultMerchantViewController.swift; sourceTree = "<group>"; };
 		3EE77DB3212EABC500ADDD82 /* SearchResultOfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultOfflineViewController.swift; sourceTree = "<group>"; };
+		3EE77DB52133B9AC00ADDD82 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		3EE77DB62133B9AC00ADDD82 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
@@ -508,6 +512,7 @@
 				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
 				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
 				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
+				3EE77DB62133B9AC00ADDD82 /* SearchTableViewCell.xib */,
 			);
 			name = DiscoverTab;
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 				3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */,
 				3E23A755211EC01600D19749 /* DiscoverCouponView.swift */,
 				3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */,
+				3EE77DB52133B9AC00ADDD82 /* SearchTableViewCell.swift */,
 			);
 			name = DiscoverTab;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */,
 				B6C480662100C143002ED9C9 /* LoginView.xib in Resources */,
 				3E46B75E20EFE00400843193 /* Discover.storyboard in Resources */,
+				3EE77DB82133B9AC00ADDD82 /* SearchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +808,7 @@
 				3ED5F6D52122985C00F46E7C /* MerchantCouponTableViewCell.swift in Sources */,
 				847D60BE2112D59300612174 /* FinishExchangeToGeneralViewController.swift in Sources */,
 				3ED5F6D22122892900F46E7C /* OfflineCardView.swift in Sources */,
+				3EE77DB72133B9AC00ADDD82 /* SearchTableViewCell.swift in Sources */,
 				3EE77DB4212EABC500ADDD82 /* SearchResultOfflineViewController.swift in Sources */,
 				3E46B76920F06E0200843193 /* CardDetailViewController.swift in Sources */,
 				3E4C155620EDFF87000743C0 /* DiscoverViewController.swift in Sources */,
