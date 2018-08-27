@@ -72,9 +72,11 @@ class CardInfoTableViewController: UITableViewController {
 	 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell  = tableView.dequeueReusableCell(withIdentifier: "card", for: indexPath)
         if cardArray != nil {
-            (cell.viewWithTag(1) as! UIImageView).imageFromURL(cardArray![indexPath.row].logoURL!, placeholder: UIImage())
+			(cell.viewWithTag(1) as! UIImageView).imageFromURL((cardArray![indexPath.row].merchant?.logoURL)!, placeholder: UIImage())
             (cell.viewWithTag(2) as! UILabel).text = String(stringInterpolationSegment: cardArray![indexPath.row].points)
             (cell.viewWithTag(3) as! UILabel).text = String(stringInterpolationSegment: cardArray![indexPath.row].points*cardArray![indexPath.row].proportion!)
+			(cell.viewWithTag(4) as! UILabel).text = cardArray![indexPath.row].merchant?.name
+			(cell.viewWithTag(5) as! UIImageView).image = UIImage(named: "bg2_\(cardArray![indexPath.row].cardStyle!)")
             
         }
 		return cell
