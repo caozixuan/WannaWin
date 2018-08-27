@@ -9,7 +9,8 @@
     <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/toolbar_find"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"/>
 
     <LinearLayout
         android:id="@+id/layout_search_find"

@@ -27,28 +27,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
+    <!--搜索栏-->
     <LinearLayout
         android:id="@+id/search_bar_exchange"
         android:layout_width="match_parent"
-        android:layout_height="108px"
-        android:layout_marginHorizontal="24px"
-        android:layout_marginTop="15px"
-        android:layout_marginBottom="15px"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/bg_search_bar"
         android:layout_below="@+id/title_bar"
         android:orientation="horizontal">
-        <!--<FrameLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginLeft="30px"-->
-            <!--&gt;-->
-            <!--<ImageView-->
-                <!--android:layout_width="42px"-->
-                <!--android:layout_height="42px"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:background="@drawable/search"/>-->
 
-        <!--</FrameLayout>-->
         <SearchView
             android:id="@+id/editText_search_paying"
             android:layout_width="match_parent"
@@ -57,25 +48,11 @@
             android:queryHint="Search"
             android:background="@null"
             android:focusable="false"
-            android:focusableInTouchMode="false">
+            android:focusableInTouchMode="false"/>
 
-
-        </SearchView>
-
-
-        <!--<EditText-->
-
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="21px"-->
-            <!--android:textSize="51px"-->
-            <!--android:hint="Search"-->
-            <!--android:textColorHint="#8E8E93"-->
-            <!--android:background="@null"-->
-
-             <!--/>-->
     </LinearLayout>
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="72px"
