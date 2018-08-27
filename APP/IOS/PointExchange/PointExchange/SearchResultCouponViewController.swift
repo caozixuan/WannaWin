@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import Kingfisher
 
-class SearchResultCouponViewController: UIViewController {
+class SearchResultCouponViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
-    override func viewDidLoad() {
+	@IBOutlet var tableView: UITableView!
+	var items = [Item]()
+	var start = 0
+	var end = 9
+	override func viewDidLoad() {
         super.viewDidLoad()
-
+		self.tableView.delegate = self
+		self.tableView.dataSource = self
+		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
         // Do any additional setup after loading the view.
     }
 
@@ -20,16 +27,33 @@ class SearchResultCouponViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
+	func search(keyword:String){
+		ServerConnector.searchItem(start: start, end: end, keyword: keyword){(result,items) in
+			if result {
+				self.items = items!
+				self.tableView.reloadData()
+			}
+		}
+	}
+	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return items.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		var cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as? SearchTableViewCell
+		if cell == nil {
+			cell = UITableViewCell(style:.default, reuseIdentifier:"searchCell") as? SearchTableViewCell
+		}
+		let imageURL = URL(string: (items[indexPath.row].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+		cell?.logoImageView.kf.indicatorType = .activity
+		cell?.logoImageView.kf.setImage(with: imageURL)
+		cell?.title.text = items[indexPath.row].name
+		cell?.descriptionLabel.text = items[indexPath.row].description
+		return cell!
+	}
 }

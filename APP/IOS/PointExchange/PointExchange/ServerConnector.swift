@@ -321,6 +321,7 @@ class ServerConnector: NSObject {
 							card.number = data["cardNum"].string
 							card.proportion = data["proportion"].double
 							card.logoURL = data["logoURL"].string
+							card.cardStyle = data["cardStyle"].int
 							cards.append(card)
 						}
 						callback(true,cards)
@@ -395,6 +396,10 @@ class ServerConnector: NSObject {
 					card.description = data["cardDescription"].string
 					card.type = data["type"].int
 					card.proportion = data["proportion"].double
+					card.merchant = Merchant()
+					card.merchant?.name = data["merchantName"].string!
+					card.merchant?.logoURL = data["merchantLogoURL"].string
+					card.cardStyle = data["cardStyle"].int
 					callback(true,card)
 				}
 				

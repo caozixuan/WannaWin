@@ -15,6 +15,7 @@ class Card: Codable {
     var logoURL:String?
     var description:String?
     var type:Int?
+	var cardStyle:Int?
 	
 	//test
 	convenience init(merchant:Merchant,points:Double,proportion:Double){

@@ -99,6 +99,13 @@ public class PayingActivity extends AppCompatActivity {
 
         toolBar();
 
+        setSearchView();
+
+
+    }
+
+    public void setSearchView(){
+
         SearchView search = this.findViewById(R.id.editText_search_paying);
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -113,36 +120,34 @@ public class PayingActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         search.setIconified(false);
-        search.setQueryHint("Search");
         //搜索图标是否显示在搜索框内
         search.setIconifiedByDefault(false);
 
         //设置搜索框展开时是否显示提交按钮，可不显示
         search.setSubmitButtonEnabled(false);
+        search.clearFocus();
+        search.clearFocus();
 
         //让键盘的回车键设置成搜索
-        search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-        search.clearFocus();
+        //search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+
         //隐藏下划线
-        if (search != null) {
-            try {        //--拿到字节码
-                Class<?> argClass = search.getClass();
-                //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
-                Field ownField = argClass.getDeclaredField("mSearchPlate");
-                //--暴力反射,只有暴力反射才能拿到私有属性
-                ownField.setAccessible(true);
-                View mView = (View) ownField.get(search);
-                //--设置背景
-                mView.setBackgroundColor(Color.TRANSPARENT);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {        //--拿到字节码
+            Class<?> argClass = search.getClass();
+            //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+            Field ownField = argClass.getDeclaredField("mSearchPlate");
+            //--暴力反射,只有暴力反射才能拿到私有属性
+            ownField.setAccessible(true);
+            View mView = (View) ownField.get(search);
+            //--设置背景
+            mView.setBackgroundColor(Color.TRANSPARENT);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-
     }
-
     public void toolBar(){
         boolean isImmersive = false;
         //if (hasKitKat() && !hasLollipop()) {

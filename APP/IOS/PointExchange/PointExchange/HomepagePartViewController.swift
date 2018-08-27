@@ -73,23 +73,36 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                         self.cards = cards
 						
 						if cards.count >= 1 {
+                            // 我写的
                             if let image = v.cardImage1.subviews[0] as? UIImageView {
                                 image.kf.indicatorType = .activity
                                 image.kf.setImage(with: URL(string:(self.cards?[0].logoURL)!),placeholder:UIImage(named: "Mask"))
+                                
+                                // 你写的
+                                print("bg1_\(String(describing: self.cards![0].cardStyle!))")
+                                image.image = UIImage(named: "bg1_\(String(describing: self.cards![0].cardStyle!))")
                             }
+                            
+                            
 						}
 						if cards.count >= 2 {
                             if let image = v.cardImage1.subviews[0] as? UIImageView {
                                 image.kf.indicatorType = .activity
                                 image.kf.setImage(with: URL(string:(self.cards?[1].logoURL)!),placeholder:UIImage(named: "Mask"))
+                                
+                                image.image = UIImage(named: "bg1_\(String(describing: self.cards![0].cardStyle!))")
                             }
+
 							
 						}
 						if cards.count >= 3 {
                             if let image = v.cardImage1.subviews[0] as? UIImageView {
                                 image.kf.indicatorType = .activity
                                 image.kf.setImage(with: URL(string:(self.cards?[2].logoURL)!),placeholder:UIImage(named: "Mask"))
+                                
+                                image.image = UIImage(named: "bg1_\(String(describing: self.cards![0].cardStyle!))")
                             }
+
 						}
                         ServerConnector.getGeneralPoints(){ (result, points) in
                             if result {

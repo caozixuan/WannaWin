@@ -298,7 +298,8 @@ public class PointsFragment extends Fragment {
                                 int points = jsonObject.getInt("points");
                                 double proportion = jsonObject.getDouble("proportion");
                                 int cardStyle = jsonObject.getInt("cardStyle");
-                                CardPointsModel item = new CardPointsModel(merchantName, merchantID, points, proportion, cardStyle);
+                                String logoURL = jsonObject.getString("merchantLogoURL");
+                                CardPointsModel item = new CardPointsModel(merchantName, merchantID, points, proportion, cardStyle, logoURL);
                                 items.add(item);
                             }
 
