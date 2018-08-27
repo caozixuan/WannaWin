@@ -18,7 +18,7 @@
         <scene sceneID="klH-VJ-woC">
             <objects>
                 <navigationController title="支付积分" id="5zr-dd-bEb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="支付积分" image="erweima" landscapeImage="pay" selectedImage="erweima" id="tAR-Li-zdY">
+                    <tabBarItem key="tabBarItem" title="支付积分" image="erweima" selectedImage="erweima" id="tAR-Li-zdY">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aUh-bE-FZ8">
@@ -48,20 +48,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Mm-Db-OLc">
-                                <rect key="frame" x="9" y="136" width="357" height="394"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Mm-Db-OLc">
+                                <rect key="frame" x="11.5" y="122" width="352.5" height="422"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f2o-51-d9W">
-                                        <rect key="frame" x="6" y="17" width="343" height="89"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f2o-51-d9W">
+                                        <rect key="frame" x="9" y="16" width="334" height="87"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="f2o-51-d9W" secondAttribute="height" multiplier="341:89" id="48f-DE-E8S"/>
+                                        </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tUN-4h-nxX">
-                                        <rect key="frame" x="57" y="114" width="240" height="240"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tUN-4h-nxX">
+                                        <rect key="frame" x="52.5" y="119" width="247" height="247.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="tUN-4h-nxX" secondAttribute="height" multiplier="1:1" id="VdQ-x8-r8l"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="tUN-4h-nxX" firstAttribute="centerX" secondItem="2Mm-Db-OLc" secondAttribute="centerX" id="Gz1-a7-6C9"/>
+                                    <constraint firstItem="tUN-4h-nxX" firstAttribute="width" secondItem="2Mm-Db-OLc" secondAttribute="width" multiplier="0.7" id="PAW-8d-nOE"/>
+                                    <constraint firstItem="f2o-51-d9W" firstAttribute="top" secondItem="2Mm-Db-OLc" secondAttribute="top" constant="16" id="TE0-Tm-3el"/>
+                                    <constraint firstItem="f2o-51-d9W" firstAttribute="width" secondItem="2Mm-Db-OLc" secondAttribute="width" multiplier="0.95" id="V26-Hk-F0a"/>
+                                    <constraint firstItem="tUN-4h-nxX" firstAttribute="top" secondItem="f2o-51-d9W" secondAttribute="bottom" constant="16" id="pGx-RI-WSJ"/>
+                                    <constraint firstItem="tUN-4h-nxX" firstAttribute="centerX" secondItem="2Mm-Db-OLc" secondAttribute="centerX" id="vRz-jz-uZv"/>
+                                    <constraint firstItem="f2o-51-d9W" firstAttribute="centerX" secondItem="2Mm-Db-OLc" secondAttribute="centerX" id="yFF-Ao-4r2"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="14"/>
@@ -70,6 +82,12 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.54901960780000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="2Mm-Db-OLc" firstAttribute="width" secondItem="Adq-i6-9Rg" secondAttribute="width" multiplier="0.94" id="4qB-gY-4YB"/>
+                            <constraint firstItem="2Mm-Db-OLc" firstAttribute="centerX" secondItem="ufU-aA-vnl" secondAttribute="centerX" id="IRR-gA-E2T"/>
+                            <constraint firstItem="2Mm-Db-OLc" firstAttribute="height" secondItem="Adq-i6-9Rg" secondAttribute="height" multiplier="0.7" id="KjO-fk-BRD"/>
+                            <constraint firstItem="2Mm-Db-OLc" firstAttribute="centerY" secondItem="Adq-i6-9Rg" secondAttribute="centerY" multiplier="0.8" constant="40.599999999999966" id="nSf-g3-MKT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Adq-i6-9Rg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="二维码" id="GCT-9F-p7J"/>
@@ -84,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDK-OO-Akm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.5999999999999" y="313.49325337331339"/>
+            <point key="canvasLocation" x="1897" y="313"/>
         </scene>
         <!--完成抵扣-->
         <scene sceneID="YCc-lO-hJo">
@@ -95,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ux7-5b-8gI" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="26" y="126" width="323" height="437"/>
+                                <rect key="frame" x="26" y="126" width="323" height="438"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-3000.00P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joA-W5-WnC">
                                         <rect key="frame" x="86.5" y="80" width="150" height="37"/>
@@ -125,7 +143,10 @@
                                         <size key="shadowOffset" width="0.0" height="-2"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Grand Canal III" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WL-4r3">
-                                        <rect key="frame" x="18" y="272" width="287" height="149"/>
+                                        <rect key="frame" x="18" y="272" width="287" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="iRY-4U-8lg"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="12"/>
@@ -182,7 +203,7 @@
                             <constraint firstItem="joA-W5-WnC" firstAttribute="top" secondItem="onQ-6h-nWJ" secondAttribute="bottom" constant="16" id="0FO-T6-uW5"/>
                             <constraint firstItem="Ux7-5b-8gI" firstAttribute="leading" secondItem="Rcu-ps-zKw" secondAttribute="leading" constant="26" id="Dhp-bV-IVj"/>
                             <constraint firstItem="onQ-6h-nWJ" firstAttribute="centerX" secondItem="Ux7-5b-8gI" secondAttribute="centerX" id="HgB-Je-h8j"/>
-                            <constraint firstItem="Rcu-ps-zKw" firstAttribute="bottom" secondItem="Ux7-5b-8gI" secondAttribute="bottom" constant="104" id="IJh-mm-mhn"/>
+                            <constraint firstItem="Rcu-ps-zKw" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ux7-5b-8gI" secondAttribute="bottom" constant="24" id="IJh-mm-mhn"/>
                             <constraint firstItem="onQ-6h-nWJ" firstAttribute="width" secondItem="Ux7-5b-8gI" secondAttribute="width" multiplier="0.4" id="Xt5-FN-flz"/>
                             <constraint firstItem="onQ-6h-nWJ" firstAttribute="centerY" secondItem="Ux7-5b-8gI" secondAttribute="top" id="dZ8-MY-Npk"/>
                             <constraint firstItem="Rcu-ps-zKw" firstAttribute="trailing" secondItem="Ux7-5b-8gI" secondAttribute="trailing" constant="26" id="j1Y-8d-ufm"/>
@@ -202,13 +223,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13i-ye-HkG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2840.8000000000002" y="312.59370314842579"/>
+            <point key="canvasLocation" x="2847" y="314"/>
         </scene>
     </scenes>
     <resources>
         <image name="Grand Canal III" width="682" height="483"/>
         <image name="erweima" width="23" height="23"/>
-        <image name="pay" width="24" height="23"/>
         <image name="starbucks" width="1009" height="987"/>
         <namedColor name="main_lightGreen">
             <color red="0.60399997234344482" green="0.52499997615814209" blue="0.086000002920627594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

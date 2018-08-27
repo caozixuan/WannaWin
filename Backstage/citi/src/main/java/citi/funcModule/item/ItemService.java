@@ -76,45 +76,57 @@ public class ItemService {
         return true;
     }
 
-    public ArrayList<ItemBean> search(String searchString){
+    public ArrayList<ItemBean> search(String[] keywords){
         List<Item> items = itemMapper.getAllItem();
         ArrayList<ItemBean> results = new ArrayList<ItemBean>();
         for(Item item:items){
-            if(item.getName().contains(searchString)){
-                Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
-                ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
-                results.add(itemBean);
+            for(String keyword:keywords){
+                if(item.getName().contains(keyword)){
+                    Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+                    ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+                    results.add(itemBean);
+                    break;
+                }
             }
         }
         if(results.size()==0){
             for(Item item:items){
-                if(item.getDescription().contains(searchString)){
-                    Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
-                    ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
-                    results.add(itemBean);
+                for(String keyword:keywords){
+                    if(item.getDescription().contains(keyword)){
+                        Merchant merchant = merchantMapper.selectByID(item.getMerchantID());
+                        ItemBean itemBean = new ItemBean(item,merchant.getName(),merchant.getMerchantLogoURL());
+                        results.add(itemBean);
+                        break;
+                    }
                 }
             }
         }
         return results;
     }
 
-    public int searchCount(String searchString){
+    public int searchCount(String[] keywords){
         List<Item> items = itemMapper.getAllItem();
         int counter=0;
         for(Item item:items){
-            if(item.getName().contains(searchString)){
-                counter++;
+            for(String keyword:keywords){
+                if(item.getName().contains(keyword)){
+                    counter++;
+                    break;
+                }
             }
+
         }
         if(counter==0){
             for(Item item:items){
-                if(item.getDescription().contains(searchString)){
-                    counter++;
+                for(String keyword:keywords){
+                    if(item.getDescription().contains(keyword)){
+                        counter++;
+                        break;
+                    }
                 }
+
             }
         }
         return counter;
     }
-
-
 }
