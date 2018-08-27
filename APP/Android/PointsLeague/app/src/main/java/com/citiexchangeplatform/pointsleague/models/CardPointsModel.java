@@ -5,14 +5,14 @@ public class CardPointsModel {
     private String merchantID;
     private int points;
     private double proportion;
-    private String cardLogoURL;
+    private int cardStyle;
 
-    public CardPointsModel(String name, String merchantID, int points, double proportion, String cardLogoURL) {
+    public CardPointsModel(String name, String merchantID, int points, double proportion, int cardStyle) {
         this.name = name;
         this.merchantID = merchantID;
         this.points = points;
         this.proportion = proportion;
-        this.cardLogoURL = cardLogoURL;
+        this.cardStyle = cardStyle;
     }
 
     public String getName() {
@@ -31,7 +31,7 @@ public class CardPointsModel {
         return proportion;
     }
 
-    public String getCardLogoURL() {
-        return cardLogoURL;
+    public int getCardStyle() {
+        return cardStyle;
     }
 }

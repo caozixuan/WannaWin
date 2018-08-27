@@ -60,12 +60,27 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
                 .into(holder.imageViewLogo);
         holder.textViewName.setText(filteredItems.get(position).getName());
         holder.textViewPoints.setText("积分：" + filteredItems.get(position).getPoint());
-        holder.textViewExchangePoints.setText("可兑通用点" + String.format("%.1f",filteredItems.get(position).getExchangePoint()));
+        holder.textViewExchangePoints.setText("可兑通用点" + String.format("%.1f",filteredItems.get(position).getPoint()*filteredItems.get(position).getProportion()));
 
-        int colors[] = { 0xff6bacfa , 0xff4EC0A3 };
-        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+        switch (filteredItems.get(position).getCardStyle()){
+            case 0:
+                holder.cardView.setBackgroundResource(R.drawable.bg2_1);
+                break;
+            case 1:
+                holder.cardView.setBackgroundResource(R.drawable.bg2_2);
+                break;
+            case 2:
+                holder.cardView.setBackgroundResource(R.drawable.bg2_3);
+                break;
+            case 3:
+                holder.cardView.setBackgroundResource(R.drawable.bg2_4);
+                break;
+            case 4:
+                holder.cardView.setBackgroundResource(R.drawable.bg2_5);
+                break;
+        }
 
-        holder.cardView.setBackground(bg);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +105,8 @@ public class AllCardAdapter extends RecyclerView.Adapter<AllCardAdapter.VH> impl
     }
 
 
-    public void addData(String merchantID, String name, String logoURL, int point, double proportion) {
-        AllCardItemModel newItem = new AllCardItemModel(merchantID, name, logoURL, point, proportion);
+    public void addData(String merchantID, String name, String logoURL, int point, double proportion, int cardStyle) {
+        AllCardItemModel newItem = new AllCardItemModel(merchantID, name, logoURL, point, proportion, cardStyle);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }

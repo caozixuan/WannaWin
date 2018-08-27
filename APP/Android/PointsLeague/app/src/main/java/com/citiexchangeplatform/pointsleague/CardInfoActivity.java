@@ -62,12 +62,6 @@ public class CardInfoActivity extends AppCompatActivity {
 
         toolBar();
 
-        int colors[] = { 0xff6bacfa , 0xff4EC0A3 };
-        GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
-        RelativeLayout relativeLayout = findViewById(R.id.relative_card_info);
-        relativeLayout.setBackground(bg);
-
-
         Button buttonUnbind = (Button) findViewById(R.id.button_unbind_card_info);
         buttonUnbind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,12 +164,34 @@ public class CardInfoActivity extends AppCompatActivity {
                             int point = jsonObject.getInt("points");
                             int type = jsonObject.getInt("type");
                             double proportion = jsonObject.getDouble("proportion");
+                            int cardStyle = jsonObject.getInt("cardStyle");
+
+                            RelativeLayout relativeLayout = findViewById(R.id.relative_card_info);
+                            relativeLayout.setBackgroundResource(R.drawable.bg3_1);
+                            switch (cardStyle){
+                                case 0:
+                                    relativeLayout.setBackgroundResource(R.drawable.bg3_1);
+                                    break;
+                                case 1:
+                                    relativeLayout.setBackgroundResource(R.drawable.bg3_2);
+                                    break;
+                                case 2:
+                                    relativeLayout.setBackgroundResource(R.drawable.bg3_3);
+                                    break;
+                                case 3:
+                                    relativeLayout.setBackgroundResource(R.drawable.bg3_4);
+                                    break;
+                                case 4:
+                                    relativeLayout.setBackgroundResource(R.drawable.bg3_5);
+                                    break;
+                            }
 
 
                             Glide.with(CardInfoActivity.this)
                                     .load(cardImageURL)
                                     .error(R.drawable.nike_logo)
                                     .into(imageViewCard);
+
                             textViewName.setText(cardName);
                             textViewPoint.setText(String.valueOf(point));
                             textViewExchangePoint.setText(String.format("%.1f",point/proportion));

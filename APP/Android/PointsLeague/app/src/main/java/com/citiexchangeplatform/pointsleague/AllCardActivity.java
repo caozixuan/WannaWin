@@ -137,7 +137,8 @@ public class AllCardActivity extends AppCompatActivity {
                                 int point = jobj.getInt("points");
                                 double proportion = jobj.getDouble("proportion");
                                 String merchantID = jobj.getString("merchantID");
-                                allCardAdapter.addData(merchantID, name, merchantLogoURL, point, proportion);
+                                int cardStyle = jobj.getInt("cardStyle");
+                                allCardAdapter.addData(merchantID, name, merchantLogoURL, point, proportion, cardStyle);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

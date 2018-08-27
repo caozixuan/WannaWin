@@ -80,9 +80,17 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/search")
     public String search(String keyword, String start, String end){
-        ArrayList<ItemBean> itemBeans = itemService.search(keyword);
+        if(Integer.valueOf(start)>=Integer.valueOf(end))
+            return "[]";
+        String [] keywords = keyword.split("\\s+");
+        ArrayList<ItemBean> itemBeans = itemService.search(keywords);
         ArrayList<ItemBean> results = new ArrayList<ItemBean>();
-        for(int i=Integer.valueOf(start);i<Integer.valueOf(end);i++){
+        int returnNum = 0;
+        if(Integer.valueOf(end)<itemBeans.size())
+            returnNum = Integer.valueOf(end);
+        else
+            returnNum = itemBeans.size();
+        for(int i=Integer.valueOf(start);i<returnNum;i++){
             results.add(itemBeans.get(i));
         }
         return gson.toJson(results);
@@ -91,7 +99,8 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/searchNum")
     public String searchNum(String keyword){
-        return "{\"num\":"+itemService.searchCount(keyword)+"}";
+        String [] keywords = keyword.split("\\s+");
+        return "{\"num\":"+itemService.searchCount(keywords)+"}";
     }
 
 
