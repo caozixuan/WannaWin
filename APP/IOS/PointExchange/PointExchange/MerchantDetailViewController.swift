@@ -128,7 +128,7 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Discover", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
-        vc.item = items[indexPath.row]
+        vc.itemID = items[indexPath.row].ItemID
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
