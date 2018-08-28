@@ -5,6 +5,7 @@ import citi.vo.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,5 +41,55 @@ public class MerchantSerivce {
 
     public int getNum(){
         return merchantMapper.getMerchantAmount();
+    }
+
+    public ArrayList<Merchant> search(String[] keywords){
+        List<Merchant> merchants = merchantMapper.getAllMerchant();
+        ArrayList<Merchant> results = new ArrayList<Merchant>();
+        for(Merchant merchant:merchants){
+            for(String keyword:keywords){
+                if(merchant.getName().contains(keyword)){
+                    results.add(merchant);
+                    break;
+                }
+            }
+        }
+        if(results.size()==0){
+            for(Merchant merchant:merchants){
+                for(String keyword:keywords){
+                    if(merchant.getDescription().contains(keyword)){
+                        results.add(merchant);
+                        break;
+                    }
+                }
+            }
+        }
+        return results;
+    }
+
+    public int searchCount(String[] keywords){
+        List<Merchant> merchants = merchantMapper.getAllMerchant();
+        int counter=0;
+        for(Merchant merchant:merchants){
+            for(String keyword:keywords){
+                if(merchant.getName().contains(keyword)){
+                    counter++;
+                    break;
+                }
+            }
+
+        }
+        if(counter==0){
+            for(Merchant merchant:merchants){
+                for(String keyword:keywords){
+                    if(merchant.getDescription().contains(keyword)){
+                        counter++;
+                        break;
+                    }
+                }
+
+            }
+        }
+        return counter;
     }
 }

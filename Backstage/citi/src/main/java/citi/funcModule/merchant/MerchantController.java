@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,6 +68,32 @@ public class MerchantController {
     public String getNum(){
         int num = merchantSerivce.getNum();
         return "{\"num\": "+num+"}";
+    }
+
+    @ResponseBody
+    @RequestMapping("/search")
+    public String search(String keyword, String start, String end){
+        if(Integer.valueOf(start)>=Integer.valueOf(end))
+            return "[]";
+        String [] keywords = keyword.split("\\s+");
+        ArrayList<Merchant> merchants = merchantSerivce.search(keywords);
+        ArrayList<Merchant> results = new ArrayList<Merchant>();
+        int returnNum = 0;
+        if(Integer.valueOf(end)<merchants.size())
+            returnNum = Integer.valueOf(end);
+        else
+            returnNum = merchants.size();
+        for(int i=Integer.valueOf(start);i<returnNum;i++){
+            results.add(merchants.get(i));
+        }
+        return gson.toJson(results);
+    }
+
+    @ResponseBody
+    @RequestMapping("/searchNum")
+    public String searchNum(String keyword){
+        String [] keywords = keyword.split("\\s+");
+        return "{\"num\":"+merchantSerivce.searchCount(keywords)+"}";
     }
 
 
