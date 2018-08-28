@@ -30,6 +30,16 @@ class CouponDetailViewController: UIViewController {
 				self.logoImage.kf.indicatorType = .activity
 				self.logoImage.kf.setImage(with: imageURL)
 				self.descriptionText.text = self.item?.description
+				// TODO: 日期
+				let formatter = DateFormatter()
+				formatter.dateFormat = "yyyy MMM"
+				let overdueTime = "2018 Jan"
+				print(self.item!.overdueTime!)
+				let d = formatter.date(from: overdueTime)
+
+				formatter.dateFormat = "yyyy-MM-dd"
+				let dateString = formatter.string(from: d!)
+				self.validDate.text = dateString
 				self.pointLabel.text = String(stringInterpolationSegment: self.item!.points!)+"P"
 			}
 		}
