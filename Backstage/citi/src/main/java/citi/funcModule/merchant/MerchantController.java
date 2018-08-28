@@ -16,7 +16,7 @@ import java.util.List;
  *bug修复：刘钟博
  */
 @Controller
-@RequestMapping(value = {"/merchant"},produces = {"text/html;charset=UTF-8"})
+@RequestMapping(value = {"/merchant"},produces = {"text/json;charset=UTF-8"})
 public class MerchantController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class MerchantController {
      * @return [{"merchantID":"1","name":"1","description":"520d9479","address":"7ea18369","logoURL":"http://xx.png"}]
      */
     @ResponseBody
-    @RequestMapping(value = {"/getInfos"},produces = {"text/html;charset=UTF-8"})
+    @RequestMapping(value = {"/getInfos"},produces = {"text/json;charset=UTF-8"})
     public String getMerchantInfos(int start,int n){
         List<Merchant> merchants= merchantSerivce.getMerchants(start,n);
         if(merchants==null)
