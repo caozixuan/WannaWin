@@ -34,14 +34,15 @@ class SearchResultViewController: UIViewController {
 			.useMenuLikeSegmentedControl(true),
 			.addBottomMenuHairline (true),
 			.scrollMenuBackgroundColor (UIColor.white),
-			.menuHeight(40),
+			.menuHeight(35),
 			.menuItemFont(UIFont.systemFont(ofSize:18)),
 			.unselectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
 			.selectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
-			.selectionIndicatorColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0))
+			.selectionIndicatorColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
+			.enableHorizontalBounce (false)
 			
 		]
-		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-64),pageMenuOptions:params)
+		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-120),pageMenuOptions:params)
 		pageMenu?.delegate = self
 		self.addChildViewController(pageMenu!)
 		self.view.addSubview((pageMenu?.view)!)
