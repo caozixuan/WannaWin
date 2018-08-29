@@ -82,4 +82,11 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 		cell?.descriptionLabel.text = items[indexPath.row].description
 		return cell!
 	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+		view.itemID = items[indexPath.row].ItemID
+		self.navigationController!.pushViewController(view, animated: true)
+	}
 }
