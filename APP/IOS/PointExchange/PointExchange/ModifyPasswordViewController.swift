@@ -13,13 +13,9 @@ class ModifyPasswordViewController: UIViewController, ModifyPasswordViewDelegate
     @IBOutlet weak var modifyPasswordView: ModifyPasswordView!
     var activityIndicator:UIActivityIndicatorView?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        modifyPasswordView.delegate = self
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        modifyPasswordView.delegate = self
         // 调整位置以适配
         modifyPasswordView.view.frame = modifyPasswordView.bounds
     }

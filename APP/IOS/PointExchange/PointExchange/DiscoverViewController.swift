@@ -37,8 +37,9 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
 		
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
-        // Do any additional setup after loading the view.
-		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: 375, height: 56)
+
+        let screenWidth = UIScreen.main.bounds.width
+		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 56)
 		searchController?.searchBar.searchBarStyle = .minimal
 		searchController?.searchBar.delegate = searchResultVC
 		searchController?.searchResultsUpdater = searchResultVC

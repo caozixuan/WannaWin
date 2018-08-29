@@ -19,12 +19,11 @@ class LoginViewController: UIViewController,LoginViewDelegate{
 		loginView.delegate = self
     }
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        //调整以适配屏幕
+        self.loginView.view.frame = self.loginView.bounds
     }
-	
+
 	func login() {
 		ServerConnector.login(phoneNum: loginView.usernameField.text!, password: loginView.passwordField.text!, callback: afterLogin)
 		// 加载动画
