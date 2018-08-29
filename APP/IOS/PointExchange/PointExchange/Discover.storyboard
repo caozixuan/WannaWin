@@ -162,6 +162,22 @@
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="1019.640179910045"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZV4-PR-zou">
+            <objects>
+                <navigationController id="eSX-fx-Mwb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wNL-UG-8ng">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ngh-xX-q3j" kind="relationship" relationship="rootViewController" id="ytY-V5-c6M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hme-8H-ilt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="324"/>
+        </scene>
         <!--搜索结果-->
         <scene sceneID="yTX-Wa-JNH">
             <objects>
@@ -172,6 +188,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="oGb-ag-TV4"/>
                     </view>
+                    <navigationItem key="navigationItem" id="yuq-GX-JYz"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KO0-vD-CeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
