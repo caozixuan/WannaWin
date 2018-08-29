@@ -13,6 +13,7 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 	@IBOutlet var tableView: UITableView!
 	var merchants = [Merchant]()
 	var searchResults = [Merchant]()
+	var keyword = ""
 	var start = 0
 	var end = 9
 	override func viewDidLoad() {
@@ -20,7 +21,20 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
-        // Do any additional setup after loading the view.
+		
+		self.tableView.es.addPullToRefresh { [weak self] in
+			self?.search(keyword: (self?.keyword)!)
+			self?.tableView.es.stopPullToRefresh()
+			self?.start = 0
+			self?.end = 6
+		}
+		
+		self.tableView.es.addInfiniteScrolling {
+			self.start = self.start + 6
+			self.end = self.end + 6
+			self.search(keyword: self.keyword)
+			
+		}
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,34 +56,26 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 	}
 	
 	func search(keyword:String){
-		ServerConnector.getMerchantCount(){(result,count) in
-			if result{
-				ServerConnector.getMerchantsInfos(start: 0, n: count){(result,merchants) in
-					if result{
-						self.merchants = merchants
-						self.searchMerchant(keyword: keyword)
-						self.tableView.reloadData()
-					}
-					
+		self.keyword = keyword
+		ServerConnector.searchMerchant(start: self.start, end: self.end, keyword: keyword){(result, merchants) in
+			if result {
+				if self.searchResults.count == 0{
+					self.searchResults = merchants!
+				}else{
+					self.searchResults += merchants!
 				}
+				if (merchants?.count)! < 6{
+					self.tableView.es.noticeNoMoreData()
+				}else{
+					self.tableView.es.stopLoadingMore()
+				}
+				
+				self.tableView.reloadData()
+				
 			}
 		}
 	}
-	private func searchMerchant(keyword:String){
-		searchResults.removeAll()
-		for merchant in self.merchants{
-			if merchant.name.lowercased().contains(keyword.lowercased()){
-				searchResults.append(merchant)
-			}
-		}
-		for merchant in self.merchants{
-			if (merchant.description?.contains(keyword))!{
-				searchResults.append(merchant)
-			}
-		}
-
-		
-	}
+	
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1

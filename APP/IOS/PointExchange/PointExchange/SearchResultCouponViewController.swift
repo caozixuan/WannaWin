@@ -33,6 +33,7 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 			self.start = self.start + 6
 			self.end = self.end + 6
 			self.search(keyword: self.keyword)
+			
 		}
         // Do any additional setup after loading the view.
     }
@@ -50,6 +51,11 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 					self.items = items!
 				}else{
 					self.items += items!
+				}
+				if (items?.count)! < 6{
+					self.tableView.es.noticeNoMoreData()
+				}else{
+					self.tableView.es.stopLoadingMore()
 				}
 				
 				self.tableView.reloadData()

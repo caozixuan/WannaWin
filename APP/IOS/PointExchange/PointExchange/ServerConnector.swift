@@ -298,7 +298,35 @@ class ServerConnector: NSObject {
             }
         }
     }
-    
+	
+	/// 搜索商户
+	static func searchMerchant(start:Int,end:Int,keyword:String,callback:@escaping(_ result:Bool, _ merchants:[Merchant]?)->()){
+		provider.request(.searchMerchant(start: start, end: end, keyword: keyword)){ result in
+			
+			if case let .success(response) = result{
+				var merchants = [Merchant]()
+				let decoder = JSONDecoder()
+				let responseJSON = try? response.mapJSON()
+				let datas = JSON(responseJSON!).array
+				for data in datas!{
+					do{
+						let merchant = try decoder.decode(Merchant.self, from: data.rawData())
+						merchants.append(merchant)
+					}catch{
+						callback(false,nil)
+						return
+					}
+				}
+				callback(true,merchants)
+				
+			}
+			if case .failure(_) = result {
+				callback(false,nil)
+			}
+		}
+	}
+	
+	
     // 会员卡相关
     /// 获取指定用户积分最多的n张卡
     static func getMostPointCards(n:Int, callback:@escaping (_ result:Bool, _ cards:[Card])->()){
