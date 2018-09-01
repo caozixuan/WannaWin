@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -113,45 +114,56 @@ public class FindFragment extends Fragment {
     }
 
     private void initSearchView(){
-        android.widget.SearchView search = view.findViewById(R.id.searchView_find);
+        //android.widget.SearchView search = view.findViewById(R.id.searchView_find);
+        //
+        //search.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        Intent intentToSearch = new Intent(getContext(),SearchActivity.class);
+        //        startActivity(intentToSearch);
+        //
+        //    }
+        //});
 
-        search.setOnClickListener(new View.OnClickListener() {
+        LinearLayout layout = view.findViewById(R.id.layout_search_find);
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentToSearch = new Intent(getContext(),SearchActivity.class);
                 startActivity(intentToSearch);
-
             }
         });
-        search.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                findAdapter.getFilter().filter(newText);
-                return true;
-            }
-        });
-        search.setIconified(false);
-        search.setIconifiedByDefault(false);
-        search.setSubmitButtonEnabled(false);
-        search.clearFocus();
-        search.clearFocus();
-        try {        //--拿到字节码
-            Class<?> argClass = search.getClass();
-            //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
-            Field ownField = argClass.getDeclaredField("mSearchPlate");
-            //--暴力反射,只有暴力反射才能拿到私有属性
-            ownField.setAccessible(true);
-            View mView = (View) ownField.get(search);
-            //--设置背景
-            mView.setBackgroundColor(Color.TRANSPARENT);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //search.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+        //    @Override
+        //    public boolean onQueryTextSubmit(String query) {
+        //        return false;
+        //    }
+        //
+        //    @Override
+        //    public boolean onQueryTextChange(String newText) {
+        //        findAdapter.getFilter().filter(newText);
+        //        return true;
+        //    }
+        //});
+
+        //search.setIconified(false);
+        //search.setIconifiedByDefault(false);
+        //search.setSubmitButtonEnabled(false);
+        //search.clearFocus();
+        //search.clearFocus();
+        //try {        //--拿到字节码
+        //    Class<?> argClass = search.getClass();
+        //    //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+        //    Field ownField = argClass.getDeclaredField("mSearchPlate");
+        //    //--暴力反射,只有暴力反射才能拿到私有属性
+        //    ownField.setAccessible(true);
+        //    View mView = (View) ownField.get(search);
+        //    //--设置背景
+        //    mView.setBackgroundColor(Color.TRANSPARENT);
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //}
     }
 
     private void getRecommendedActivity() {
