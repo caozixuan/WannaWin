@@ -8,18 +8,33 @@
 
 import UIKit
 import Kingfisher
+import ESPullToRefresh
 
 class SearchResultCouponViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
 	@IBOutlet var tableView: UITableView!
 	var items = [Item]()
 	var start = 0
-	var end = 9
+	var end = 6
+	var keyword = ""
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
+		self.tableView.es.addPullToRefresh { [weak self] in
+			self?.search(keyword: (self?.keyword)!)
+			self?.tableView.es.stopPullToRefresh()
+			self?.start = 0
+			self?.end = 6
+		}
+		
+		self.tableView.es.addInfiniteScrolling {
+			self.start = self.start + 6
+			self.end = self.end + 6
+			self.search(keyword: self.keyword)
+			
+		}
         // Do any additional setup after loading the view.
     }
 
@@ -29,9 +44,20 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
     }
 	
 	func search(keyword:String){
+		self.keyword = keyword
 		ServerConnector.searchItem(start: start, end: end, keyword: keyword){(result,items) in
 			if result {
-				self.items = items!
+				if self.items.count == 0 {
+					self.items = items!
+				}else{
+					self.items += items!
+				}
+				if (items?.count)! < 6{
+					self.tableView.es.noticeNoMoreData()
+				}else{
+					self.tableView.es.stopLoadingMore()
+				}
+				
 				self.tableView.reloadData()
 			}
 		}
@@ -55,5 +81,12 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 		cell?.title.text = items[indexPath.row].name
 		cell?.descriptionLabel.text = items[indexPath.row].description
 		return cell!
+	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
+		let view = storyBoard.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+		view.itemID = items[indexPath.row].ItemID
+		self.navigationController!.pushViewController(view, animated: true)
 	}
 }

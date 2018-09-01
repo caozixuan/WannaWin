@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by zhong on 2018/7/17 18:50
  */
-@RequestMapping(value = {"/item"},produces = {"text/html;charset=UTF-8"})
+@RequestMapping(value = {"/item"},produces = {"text/json;charset=UTF-8"})
 @Controller
 public class ItemController {
 

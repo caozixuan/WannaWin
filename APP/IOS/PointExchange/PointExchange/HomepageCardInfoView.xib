@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomepageCardInfoView" customModule="PointExchange" customModuleProvider="target">
+            <connections>
+                <outlet property="generalPointLabel" destination="0Wm-kZ-oHo" id="OmR-AD-zBl"/>
+                <outlet property="merchantLogoImageView" destination="O3s-mJ-1zr" id="4dE-wK-zMb"/>
+                <outlet property="merchantNameLabel" destination="FDA-Jr-Tjd" id="mdx-ht-3sr"/>
+                <outlet property="view" destination="0Kq-io-E2y" id="tMB-Qd-10y"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="0Kq-io-E2y">
+            <rect key="frame" x="0.0" y="0.0" width="201" height="280"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteCircle-1" translatesAutoresizingMaskIntoConstraints="NO" id="sEK-Pb-IoX">
+                    <rect key="frame" x="10" y="12" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="3N1-EK-9JG"/>
+                        <constraint firstAttribute="width" secondItem="sEK-Pb-IoX" secondAttribute="height" multiplier="1:1" id="ZvU-WT-bEW"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-mJ-1zr">
+                    <rect key="frame" x="10" y="12" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="O3s-mJ-1zr" secondAttribute="height" multiplier="1:1" id="GDC-3o-ztK"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDA-Jr-Tjd">
+                    <rect key="frame" x="78" y="18" width="31" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-Y5-eUg">
+                    <rect key="frame" x="78" y="46.5" width="40" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask-1" translatesAutoresizingMaskIntoConstraints="NO" id="KuR-Y6-hed">
+                    <rect key="frame" x="-7" y="237" width="216" height="55"/>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5y-qB-YRp">
+                    <rect key="frame" x="58.5" y="256" width="86" height="17"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可兑通用点：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vuo-Sf-JSt">
+                            <rect key="frame" x="0.0" y="0.0" width="86" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" fixedFrame="YES" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Wm-kZ-oHo">
+                    <rect key="frame" x="137" y="256" width="57" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" name="main_orange"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="sEK-Pb-IoX" firstAttribute="width" secondItem="ypL-VG-VCw" secondAttribute="width" multiplier="0.3" id="53I-Vl-25W"/>
+                <constraint firstItem="sEK-Pb-IoX" firstAttribute="centerX" secondItem="0Kq-io-E2y" secondAttribute="centerX" multiplier="0.4" id="5UR-vB-ldh"/>
+                <constraint firstAttribute="trailing" secondItem="KuR-Y6-hed" secondAttribute="trailing" constant="-8" id="F5a-x3-gYG"/>
+                <constraint firstItem="H5y-qB-YRp" firstAttribute="centerX" secondItem="KuR-Y6-hed" secondAttribute="centerX" id="F9b-U5-KYJ"/>
+                <constraint firstItem="FDA-Jr-Tjd" firstAttribute="leading" secondItem="sEK-Pb-IoX" secondAttribute="trailing" constant="8" id="JMf-YT-1Ex"/>
+                <constraint firstItem="O3s-mJ-1zr" firstAttribute="centerX" secondItem="sEK-Pb-IoX" secondAttribute="centerX" id="SLM-ix-MRT"/>
+                <constraint firstItem="dDs-Y5-eUg" firstAttribute="leading" secondItem="FDA-Jr-Tjd" secondAttribute="leading" id="UwJ-MF-7zT"/>
+                <constraint firstItem="FDA-Jr-Tjd" firstAttribute="top" secondItem="O3s-mJ-1zr" secondAttribute="top" constant="6" id="Vtj-K6-Efy"/>
+                <constraint firstItem="O3s-mJ-1zr" firstAttribute="centerY" secondItem="sEK-Pb-IoX" secondAttribute="centerY" id="Yyl-TI-i41"/>
+                <constraint firstAttribute="bottom" secondItem="KuR-Y6-hed" secondAttribute="bottom" constant="-12" id="f6W-xS-HCP"/>
+                <constraint firstItem="KuR-Y6-hed" firstAttribute="leading" secondItem="0Kq-io-E2y" secondAttribute="leading" constant="-7" id="hhz-R9-wxV"/>
+                <constraint firstItem="dDs-Y5-eUg" firstAttribute="top" secondItem="FDA-Jr-Tjd" secondAttribute="bottom" constant="8" id="mTy-Ec-bBa"/>
+                <constraint firstItem="sEK-Pb-IoX" firstAttribute="centerY" secondItem="0Kq-io-E2y" secondAttribute="centerY" multiplier="0.3" id="odS-QV-lsB"/>
+                <constraint firstItem="O3s-mJ-1zr" firstAttribute="width" secondItem="sEK-Pb-IoX" secondAttribute="width" id="ps8-L6-Ql1"/>
+                <constraint firstItem="H5y-qB-YRp" firstAttribute="centerY" secondItem="KuR-Y6-hed" secondAttribute="centerY" id="qaQ-vV-18C"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="ypL-VG-VCw"/>
+            <point key="canvasLocation" x="-372.5" y="683"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Mask-1" width="331" height="55"/>
+        <image name="whiteCircle-1" width="50" height="50"/>
+        <namedColor name="main_orange">
+            <color red="1" green="0.58399999140000003" blue="0.27500000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
