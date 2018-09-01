@@ -205,6 +205,7 @@ public class FindFragment extends Fragment {
     private void getRecommendedMerchants(){
         String url="http://193.112.44.141:80/citi/recommend/getRecommendedMerchants";
         dialog = ProgressDialog.show(getContext(), "", "正在获取商家信息...");
+        System.out.println("获取推荐商家");
         RequestQueue queue = MyApplication.getHttpQueues();
         final StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -254,6 +255,7 @@ public class FindFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                System.out.println("获取推荐商家失败");
                 dialog.dismiss();
 
             }
@@ -262,13 +264,16 @@ public class FindFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
 
-                map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+                if (LogStateInfo.getInstance(getContext()).isLogin()) {
+                    map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+                }
+
 
                 return map;
             }
         };
         request.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
+                6000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
