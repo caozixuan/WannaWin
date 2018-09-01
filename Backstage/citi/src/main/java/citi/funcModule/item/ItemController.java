@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by zhong on 2018/7/17 18:50
  */
-@RequestMapping(value = {"/item"},produces = {"text/html;charset=UTF-8"})
+@RequestMapping(value = {"/item"},produces = {"text/json;charset=UTF-8"})
 @Controller
 public class ItemController {
 
@@ -80,10 +80,17 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/search")
     public String search(String keyword, String start, String end){
+        if(Integer.valueOf(start)>=Integer.valueOf(end)||keyword==null)
+            return "[]";
         String [] keywords = keyword.split("\\s+");
         ArrayList<ItemBean> itemBeans = itemService.search(keywords);
         ArrayList<ItemBean> results = new ArrayList<ItemBean>();
-        for(int i=Integer.valueOf(start);i<Integer.valueOf(end);i++){
+        int returnNum = 0;
+        if(Integer.valueOf(end)<itemBeans.size())
+            returnNum = Integer.valueOf(end);
+        else
+            returnNum = itemBeans.size();
+        for(int i=Integer.valueOf(start);i<returnNum;i++){
             results.add(itemBeans.get(i));
         }
         return gson.toJson(results);

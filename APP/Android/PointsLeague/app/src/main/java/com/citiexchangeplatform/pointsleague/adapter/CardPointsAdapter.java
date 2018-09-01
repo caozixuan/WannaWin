@@ -21,16 +21,18 @@ import java.util.List;
 public class CardPointsAdapter extends RecyclerView.Adapter {
     public static class VH extends RecyclerView.ViewHolder{
         public final TextView textViewName;
-        public final TextView textViewPoints;
+        //public final TextView textViewPoints;
         public final TextView textViewExchangePoints;
         public final ImageView imageView;
+        public final ImageView imageViewLogo;
 
         public VH(View v) {
             super(v);
             textViewName = (TextView) v.findViewById(R.id.textView_name_card_point_item);
-            textViewPoints = (TextView) v.findViewById(R.id.textView_points_card_point_item);
+            //textViewPoints = (TextView) v.findViewById(R.id.textView_points_card_point_item);
             textViewExchangePoints = (TextView) v.findViewById(R.id.textView_exchange_points_card_point_item);
             imageView = (ImageView) v.findViewById(R.id.imageView_card_point_item);
+            imageViewLogo = (ImageView) v.findViewById(R.id.imageView_logo_card_points_item);
         }
     }
 
@@ -63,14 +65,13 @@ public class CardPointsAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof CardPointsAdapter.VH){
             ((CardPointsAdapter.VH)holder).textViewName.setText(items.get(position).getName());
-            ((CardPointsAdapter.VH)holder).textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
+            //((CardPointsAdapter.VH)holder).textViewPoints.setText(String.valueOf(items.get(position).getPoints()));
             ((CardPointsAdapter.VH)holder).textViewExchangePoints.setText(String.format("%.1f",items.get(position).getPoints()*items.get(position).getProportion()));
 
-//            Glide.with(context)
-//                    .load(items.get(position).getCardLogoURL())
-//                    .centerCrop()
-//                    .error(R.drawable.loading_card)
-//                    .into(((CardPointsAdapter.VH)holder).imageView);
+            Glide.with(context)
+                    .load(items.get(position).getLogoURL())
+                    .error(R.drawable.nike_logo)
+                    .into(((VH)holder).imageViewLogo);
 
             switch (items.get(position).getCardStyle()){
                 case 0:

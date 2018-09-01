@@ -18,11 +18,13 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 	@IBOutlet weak var cardInfoBackgroundImage: UIImageView!
 	@IBOutlet weak var barButton: UIButton!
 	
+	@IBOutlet weak var merchantLogoView: UIImageView!
 	var merchantID:String?
 	var indicator:UIActivityIndicatorView?
 	var card:Card?
 	var isFold = true
 	
+	@IBOutlet weak var merchantNameLabel: UILabel!
 	@IBOutlet weak var cardImageView: UIImageView!
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -44,9 +46,9 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		ServerConnector.getCardDetail(merchantID: self.merchantID!){(result,card) in
 			if result {
 				self.card = card
-				let imageURL = URL(string: (card.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
-				self.cardImageView.kf.indicatorType = .activity
-				self.cardImageView.kf.setImage(with: imageURL)
+				self.cardImageView.image = UIImage(named: "bg3_\(self.card!.cardStyle!)")
+				self.merchantLogoView.imageFromURL((card.merchant?.logoURL)!, placeholder: UIImage())
+				self.merchantNameLabel.text = card.merchant?.name
 				self.tableView.reloadData()
 			}
 			self.indicator?.stopAnimating()

@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,16 +34,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9KW-PY-M4E">
-                    <rect key="frame" x="70" y="30" width="235" height="372"/>
+                    <rect key="frame" x="63.5" y="40.5" width="248" height="401.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBh-WI-Qm8">
-                            <rect key="frame" x="97.5" y="0.0" width="40" height="63.5"/>
+                            <rect key="frame" x="104" y="0.0" width="40" height="68.5"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                             <color key="textColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="phoneNumber field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="ihh-Kq-aR5" userLabel="账户">
-                            <rect key="frame" x="7" y="71.5" width="221" height="40"/>
+                            <rect key="frame" x="7" y="76.5" width="234" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="XJ6-1n-4NZ"/>
                             </constraints>
@@ -53,7 +55,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="vcode field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入短信验证码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-tX-E1v" userLabel="验证码">
-                            <rect key="frame" x="7" y="119.5" width="221" height="40"/>
+                            <rect key="frame" x="7" y="124.5" width="234" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ebp-D8-JXQ"/>
                             </constraints>
@@ -66,13 +68,16 @@
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您输入的手机号不正确" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1a-e4-ZCB">
-                            <rect key="frame" x="62.5" y="163.5" width="110" height="0.0"/>
+                            <rect key="frame" x="69" y="168.5" width="110" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="tI7-7o-xYS"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="11"/>
                             <color key="textColor" red="0.88895939086294418" green="0.2758007234902688" blue="0.15531179018965896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36g-AV-biM">
-                            <rect key="frame" x="86.5" y="167.5" width="62" height="61.5"/>
+                            <rect key="frame" x="93" y="172.5" width="62" height="66"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="获取验证码">
                                 <color key="titleColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="0.80340325339999996" colorSpace="calibratedRGB"/>
@@ -82,23 +87,23 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-eC-w1V">
-                            <rect key="frame" x="7" y="237" width="221" height="104"/>
+                            <rect key="frame" x="7" y="246.5" width="234" height="113"/>
                             <state key="normal" image="Button下一步"/>
                             <connections>
                                 <action selector="clickNextBtn:" destination="-1" eventType="touchUpInside" id="sc1-xA-vbh"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sD3-57-OBV">
-                            <rect key="frame" x="38.5" y="349" width="158" height="23"/>
+                            <rect key="frame" x="45" y="367.5" width="158" height="34"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-H7-dJF">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZq-vy-IO6">
-                                    <rect key="frame" x="64" y="0.0" width="30" height="23"/>
+                                    <rect key="frame" x="64" y="0.0" width="30" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="登录">
                                         <color key="titleColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -108,7 +113,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTl-QI-Yef">
-                                    <rect key="frame" x="98" y="0.0" width="60" height="23"/>
+                                    <rect key="frame" x="98" y="0.0" width="60" height="34"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -127,10 +132,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="9KW-PY-M4E" secondAttribute="bottom" constant="120" id="aNU-f3-2Hl"/>
-                <constraint firstItem="9KW-PY-M4E" firstAttribute="top" secondItem="5bo-Rv-bsL" secondAttribute="top" constant="30" id="k48-hU-1Ur"/>
-                <constraint firstItem="9KW-PY-M4E" firstAttribute="leading" secondItem="5bo-Rv-bsL" secondAttribute="leading" constant="70" id="oKf-tD-n0h"/>
-                <constraint firstAttribute="trailing" secondItem="9KW-PY-M4E" secondAttribute="trailing" constant="70" id="xUW-aw-tws"/>
+                <constraint firstItem="YL6-i6-yQ3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9KW-PY-M4E" secondAttribute="bottom" constant="8" id="5cX-hx-9EY"/>
+                <constraint firstItem="9KW-PY-M4E" firstAttribute="height" secondItem="YL6-i6-yQ3" secondAttribute="height" multiplier="0.8" id="TCu-Pa-EDU"/>
+                <constraint firstItem="9KW-PY-M4E" firstAttribute="centerX" secondItem="5bo-Rv-bsL" secondAttribute="centerX" id="iBL-Hj-57q"/>
+                <constraint firstItem="9KW-PY-M4E" firstAttribute="top" secondItem="YL6-i6-yQ3" secondAttribute="centerY" multiplier="0.15" id="mJP-xP-iOm"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -142,16 +147,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tyv-ky-P46">
-                    <rect key="frame" x="70" y="30" width="235" height="372"/>
+                    <rect key="frame" x="63.5" y="40.5" width="248" height="401.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42X-sE-Tk9">
-                            <rect key="frame" x="97.5" y="0.0" width="40" height="75.5"/>
+                            <rect key="frame" x="104" y="0.0" width="40" height="81.5"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                             <color key="textColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="password field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="Wdx-Gg-O08">
-                            <rect key="frame" x="7" y="83.5" width="221" height="40"/>
+                            <rect key="frame" x="7" y="89.5" width="234" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="kZg-Xo-bYx"/>
                             </constraints>
@@ -163,7 +168,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="passwordAgain field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="IO0-PG-omj">
-                            <rect key="frame" x="7" y="131.5" width="221" height="40"/>
+                            <rect key="frame" x="7" y="137.5" width="234" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="WcW-aa-y8f"/>
                             </constraints>
@@ -176,29 +181,32 @@
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-Rc-oNY">
-                            <rect key="frame" x="105" y="175.5" width="25" height="0.0"/>
+                            <rect key="frame" x="111.5" y="181.5" width="25" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="JWe-IX-feO"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="11"/>
                             <color key="textColor" red="0.88895939089999998" green="0.27580072350000001" blue="0.15531179019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFu-vp-IEo">
-                            <rect key="frame" x="7" y="179.5" width="221" height="124"/>
+                            <rect key="frame" x="7" y="185.5" width="234" height="134"/>
                             <state key="normal" image="Button注册"/>
                             <connections>
                                 <action selector="clickSignUp:" destination="-1" eventType="touchUpInside" id="cVI-hx-7ld"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="RVj-Ho-9UM">
-                            <rect key="frame" x="38" y="311.5" width="159" height="60.5"/>
+                            <rect key="frame" x="44.5" y="327.5" width="159" height="74"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tyz-O2-dPr">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="74"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMk-sr-UhG">
-                                    <rect key="frame" x="64" y="0.0" width="31" height="60.5"/>
+                                    <rect key="frame" x="64" y="0.0" width="31" height="74"/>
                                     <state key="normal" title="登录">
                                         <color key="titleColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="0.80340325339999996" colorSpace="calibratedRGB"/>
                                     </state>
@@ -207,7 +215,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzP-hJ-4cd">
-                                    <rect key="frame" x="99" y="0.0" width="60" height="60.5"/>
+                                    <rect key="frame" x="99" y="0.0" width="60" height="74"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -221,15 +229,16 @@
                         <constraint firstItem="Wdx-Gg-O08" firstAttribute="leading" secondItem="TFu-vp-IEo" secondAttribute="leading" id="T14-dw-UVt"/>
                         <constraint firstItem="TFu-vp-IEo" firstAttribute="leading" secondItem="tyv-ky-P46" secondAttribute="leading" constant="7" id="WEP-EQ-h19"/>
                         <constraint firstAttribute="bottom" secondItem="RVj-Ho-9UM" secondAttribute="bottom" id="foT-NA-LYh"/>
+                        <constraint firstAttribute="width" secondItem="tyv-ky-P46" secondAttribute="height" multiplier="248:401" id="jGi-lY-6UZ"/>
                     </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="tyv-ky-P46" secondAttribute="trailing" constant="70" id="HHE-Kb-qcw"/>
-                <constraint firstItem="tyv-ky-P46" firstAttribute="top" secondItem="3ya-gr-y6x" secondAttribute="top" constant="30" id="J1c-Ul-CEh"/>
-                <constraint firstAttribute="bottom" secondItem="tyv-ky-P46" secondAttribute="bottom" constant="120" id="bN4-Ug-9Dn"/>
-                <constraint firstItem="tyv-ky-P46" firstAttribute="leading" secondItem="3ya-gr-y6x" secondAttribute="leading" constant="70" id="xFd-5v-Onb"/>
+                <constraint firstItem="tyv-ky-P46" firstAttribute="centerX" secondItem="3ya-gr-y6x" secondAttribute="centerX" id="89Y-7a-Xz7"/>
+                <constraint firstItem="tyv-ky-P46" firstAttribute="height" secondItem="Jak-7M-zet" secondAttribute="height" multiplier="0.8" id="XgZ-hm-OhV"/>
+                <constraint firstItem="Jak-7M-zet" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tyv-ky-P46" secondAttribute="bottom" constant="8" id="jEe-NH-TDL"/>
+                <constraint firstItem="tyv-ky-P46" firstAttribute="top" secondItem="Jak-7M-zet" secondAttribute="centerY" multiplier="0.15" id="mUV-6y-aRb"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

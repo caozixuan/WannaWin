@@ -21,15 +21,21 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		//隐藏导航栏，设置滑动偏移量来隐藏刷新的白边
+		// 隐藏导航栏
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
 		// 下拉加载
-		scrollView.contentOffset = CGPoint(x: 0, y: 20)
 		scrollView.es.addPullToRefresh{ [unowned self] in
 			
 			self.scrollView.es.stopPullToRefresh(ignoreDate: true)
 			self.scrollView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
 		}
+        
+    }
+    
+    // 设置滑动偏移量来隐藏刷新的白边
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollView.contentOffset = CGPoint(x: 0, y: 20)
     }
 	
 	

@@ -11,10 +11,11 @@ import UIKit
 class HomepageStackView: UIStackView{
     @IBOutlet var view: UIStackView!
     
-    @IBOutlet weak var cardScrollView: UIScrollView!
-    @IBOutlet weak var cardImage1: UIImageView!
-    @IBOutlet weak var cardImage3: UIImageView!
-    @IBOutlet weak var cardImage2: UIImageView!
+	
+	@IBOutlet weak var cardScrollView: UIScrollView!
+    @IBOutlet weak var cardImage1: UIView!
+    @IBOutlet weak var cardImage3: UIView!
+    @IBOutlet weak var cardImage2: UIView!
 	
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var currentCitiPointLabel: UILabel!
@@ -35,8 +36,10 @@ class HomepageStackView: UIStackView{
     private func initViewFromNib(){
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "HomepageStackView", bundle: bundle)
-        self.view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView as! UIStackView
+		var views = nib.instantiate(withOwner: self, options: nil)
+        self.view = views[0] as! UIView as! UIStackView
         self.view.frame = bounds
+
         self.addSubview(view)
     }
     
