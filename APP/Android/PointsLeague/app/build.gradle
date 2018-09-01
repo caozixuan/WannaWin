@@ -47,4 +47,5 @@ dependencies {
     implementation 'rouchuan.viewpagerlayoutmanager:viewpagerlayoutmanager:2.0.19'
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     implementation 'me.relex:circleindicator:1.2.2@aar'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }
