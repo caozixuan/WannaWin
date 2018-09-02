@@ -255,6 +255,7 @@ public class FindFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                System.out.println(volleyError.toString());
                 System.out.println("获取推荐商家失败");
                 dialog.dismiss();
 
@@ -273,7 +274,7 @@ public class FindFragment extends Fragment {
             }
         };
         request.setRetryPolicy(new DefaultRetryPolicy(
-                6000,
+                8000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);

@@ -14,6 +14,7 @@
 
         <!--返回键-->
         <ImageView
+            android:id="@+id/search_back"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -63,7 +64,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
         app:tabIndicatorColor="@color/colorOrange"
-        app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabSelectedTextColor="@color/colorOrange"
         app:tabTextColor="@color/colorOrange"

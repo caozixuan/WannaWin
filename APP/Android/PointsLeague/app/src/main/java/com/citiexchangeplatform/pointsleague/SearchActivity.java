@@ -1,8 +1,10 @@
 package com.citiexchangeplatform.pointsleague;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,9 +14,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -26,6 +31,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.lang.reflect.Field;
 
 public class SearchActivity extends AppCompatActivity {
+
+    private static int TAB_MARGIN_DIP = 20;
 
     private TabLayout tabLayout = null;
 
@@ -46,7 +53,11 @@ public class SearchActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         initView();
+        //showTabTextAdapteIndicator(tabLayout);
+
+
         initSearchView();
+
 
 
 
@@ -54,6 +65,13 @@ public class SearchActivity extends AppCompatActivity {
 
     private void initSearchView(){
         SearchView search = findViewById(R.id.searchView_search);
+        ImageView back = findViewById(R.id.search_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -94,7 +112,8 @@ public class SearchActivity extends AppCompatActivity {
         mTabTitles[0] = "商家";
         mTabTitles[1] = "优惠券";
         mTabTitles[2] = "线下活动";
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        //tabLayout.setTabMode(TabLayout.MODE_FIXED);
         //设置tablayout距离上下左右的距离
         //tab_title.setPadding(20,20,20,20);
         mFragmentArrays[0] = SearchMerchantFragment.newInstance();
@@ -106,7 +125,7 @@ public class SearchActivity extends AppCompatActivity {
         //将ViewPager和TabLayout绑定
         tabLayout.setupWithViewPager(viewPager);
 
-        showTabTextAdapteIndicator(tabLayout);
+        setIndicator(this, tabLayout, TAB_MARGIN_DIP, TAB_MARGIN_DIP);
     }
 
 
@@ -133,10 +152,49 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    public static DisplayMetrics getDisplayMetrics(Context context) {
+        DisplayMetrics metric = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metric);
+        return metric;
+    }
+
+    public static void setIndicator(Context context, TabLayout tabs, int leftDip, int rightDip) {
+        Class<?> tabLayout = tabs.getClass();
+        Field tabStrip = null;
+        try {
+            tabStrip = tabLayout.getDeclaredField("mTabStrip");
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        tabStrip.setAccessible(true);
+        LinearLayout ll_tab = null;
+        try {
+            ll_tab = (LinearLayout) tabStrip.get(tabs);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        int left = (int) (getDisplayMetrics(context).density * leftDip);
+        int right = (int) (getDisplayMetrics(context).density * rightDip);
+
+        for (int i = 0; i < ll_tab.getChildCount(); i++) {
+            View child = ll_tab.getChildAt(i);
+            child.setPadding(0, 0, 0, 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+            params.leftMargin = left;
+            params.rightMargin = right;
+            child.setLayoutParams(params);
+            child.invalidate();
+        }
+    }
+
+
     /** 设置tablayout指示器的长短
      *
      * @param tab
      */
+
     public static void showTabTextAdapteIndicator(final TabLayout tab) {
         tab.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
