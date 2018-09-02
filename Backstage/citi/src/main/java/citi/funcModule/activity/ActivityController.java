@@ -31,6 +31,8 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping("/search")
     public String search(String keyword){
+        if(keyword==null)
+            return "[]";
         return gson.toJson(activityService.search(keyword));
     }
 
