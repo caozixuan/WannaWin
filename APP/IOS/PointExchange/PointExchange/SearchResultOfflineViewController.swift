@@ -15,6 +15,11 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 	var keyword = ""
 	var start = 0
 	var end = 9
+	
+	override func  viewDidAppear(_ animated: Bool) {
+		self.tableView.frame = self.view.bounds
+	}
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self

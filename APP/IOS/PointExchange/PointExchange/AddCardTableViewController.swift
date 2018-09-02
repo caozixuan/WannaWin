@@ -11,6 +11,7 @@ import UIKit
 class AddCardViewController: UIViewController {
 
     var merchant:Merchant?
+	var merchantID:String?
 	
 	var activityIndicator:UIActivityIndicatorView?
 
@@ -24,8 +25,14 @@ class AddCardViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		cardID.delegate = self
-		logoView.imageFromURL((merchant?.logoURL)!, placeholder: UIImage())
-		nameLabel.text = merchant?.name
+		ServerConnector.getMerchantInfoByID(id: merchantID!){(result,merchant) in
+			if result{
+				self.merchant = merchant
+				self.logoView.imageFromURL((self.merchant?.logoURL)!, placeholder: UIImage())
+				self.nameLabel.text = self.merchant?.name
+			}
+		}
+		
 		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
     }
 

@@ -10,15 +10,22 @@ import UIKit
 import Kingfisher
 import ESPullToRefresh
 
-class SearchResultCouponViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class SearchResultCouponViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate {
 
+	var searchNavigationVC1:UINavigationController?
 	@IBOutlet var tableView: UITableView!
 	var items = [Item]()
 	var start = 0
 	var end = 6
 	var keyword = ""
+	
+	override func  viewDidAppear(_ animated: Bool) {
+		self.tableView.frame = self.view.bounds
+	}
 	override func viewDidLoad() {
         super.viewDidLoad()
+		
+		
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
@@ -35,13 +42,8 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 			self.search(keyword: self.keyword)
 			
 		}
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 	
 	func search(keyword:String){
 		self.keyword = keyword

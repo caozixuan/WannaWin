@@ -127,13 +127,13 @@
                     <rect key="frame" x="0.0" y="126" width="375" height="277.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
-                            <rect key="frame" x="0.0" y="0.5" width="635.5" height="277.5"/>
+                            <rect key="frame" x="0.0" y="0.5" width="610.5" height="277.5"/>
                             <subviews>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-IB-1xZ">
-                                    <rect key="frame" x="214.5" y="-6" width="206.5" height="290"/>
+                                    <rect key="frame" x="206" y="-0.5" width="198.5" height="278.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-qJ-kXS">
-                                            <rect key="frame" x="0.0" y="0.5" width="206.5" height="290"/>
+                                            <rect key="frame" x="0.0" y="0.5" width="198.5" height="278.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,7 +141,6 @@
                                         <constraint firstItem="2Ls-qJ-kXS" firstAttribute="leading" secondItem="Ulb-IB-1xZ" secondAttribute="leading" id="YdP-CU-P0O"/>
                                         <constraint firstAttribute="trailing" secondItem="2Ls-qJ-kXS" secondAttribute="trailing" id="d76-YN-9cL"/>
                                         <constraint firstItem="2Ls-qJ-kXS" firstAttribute="top" secondItem="Ulb-IB-1xZ" secondAttribute="top" id="iuN-Xm-eSf"/>
-                                        <constraint firstAttribute="height" priority="900" constant="290" id="obd-gk-HPk"/>
                                         <constraint firstAttribute="width" secondItem="Ulb-IB-1xZ" secondAttribute="height" multiplier="5:7" id="szF-gJ-Bsp"/>
                                         <constraint firstAttribute="bottom" secondItem="2Ls-qJ-kXS" secondAttribute="bottom" id="xiD-HT-yLV"/>
                                     </constraints>
@@ -153,10 +152,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkd-c8-VRg">
-                                    <rect key="frame" x="0.0" y="-5.5" width="206.5" height="289"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="rRy-Qe-DJz">
-                                            <rect key="frame" x="0.0" y="0.5" width="206.5" height="289"/>
+                                            <rect key="frame" x="0.0" y="0.5" width="198" height="277.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -175,10 +174,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31n-EL-h9q">
-                                    <rect key="frame" x="429" y="-5.5" width="206.5" height="289"/>
+                                    <rect key="frame" x="412.5" y="0.0" width="198" height="277.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-LX-hfY">
-                                            <rect key="frame" x="0.0" y="0.5" width="206.5" height="289"/>
+                                            <rect key="frame" x="0.0" y="0.5" width="198" height="277.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -199,13 +198,14 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="31n-EL-h9q" firstAttribute="centerY" secondItem="4ox-Ia-HHM" secondAttribute="centerY" id="IPf-rZ-V4U"/>
+                                <constraint firstItem="31n-EL-h9q" firstAttribute="top" secondItem="Hkd-c8-VRg" secondAttribute="top" id="31h-wv-9e6"/>
+                                <constraint firstItem="Ulb-IB-1xZ" firstAttribute="top" secondItem="Hkd-c8-VRg" secondAttribute="top" id="4RX-yG-Jvr"/>
+                                <constraint firstItem="Hkd-c8-VRg" firstAttribute="top" secondItem="4ox-Ia-HHM" secondAttribute="top" id="B65-mI-GC0"/>
                                 <constraint firstItem="Ulb-IB-1xZ" firstAttribute="leading" secondItem="Hkd-c8-VRg" secondAttribute="trailing" constant="8" id="IhQ-ZU-DvM"/>
                                 <constraint firstItem="Hkd-c8-VRg" firstAttribute="width" secondItem="Ulb-IB-1xZ" secondAttribute="width" id="LPa-Ay-RYw"/>
                                 <constraint firstItem="Hkd-c8-VRg" firstAttribute="leading" secondItem="4ox-Ia-HHM" secondAttribute="leading" id="Vn2-az-gg5"/>
-                                <constraint firstItem="Hkd-c8-VRg" firstAttribute="centerY" secondItem="4ox-Ia-HHM" secondAttribute="centerY" id="Y7C-rD-wfJ"/>
                                 <constraint firstItem="31n-EL-h9q" firstAttribute="width" secondItem="Ulb-IB-1xZ" secondAttribute="width" id="dV1-DQ-Tb0"/>
-                                <constraint firstItem="Ulb-IB-1xZ" firstAttribute="centerY" secondItem="4ox-Ia-HHM" secondAttribute="centerY" id="g77-JR-jVp"/>
+                                <constraint firstAttribute="bottom" secondItem="Hkd-c8-VRg" secondAttribute="bottom" id="dnS-7G-jjF"/>
                                 <constraint firstItem="31n-EL-h9q" firstAttribute="leading" secondItem="Ulb-IB-1xZ" secondAttribute="trailing" constant="8" id="nIO-lH-0iB"/>
                                 <constraint firstAttribute="trailing" secondItem="31n-EL-h9q" secondAttribute="trailing" id="vsE-p0-AiY"/>
                             </constraints>

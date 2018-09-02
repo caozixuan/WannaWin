@@ -111,7 +111,6 @@
 		B6A6EC5C20F201730079FFA4 /* ServerConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */; };
 		B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */; };
 		B6A6EC6020F25B810079FFA4 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC5F20F25B810079FFA4 /* Merchant.swift */; };
-		B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */; };
 		B6B866562101768700CE0339 /* HomepagePartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B866552101768700CE0339 /* HomepagePartViewController.swift */; };
 		B6C480662100C143002ED9C9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C480652100C143002ED9C9 /* LoginView.xib */; };
 		B6C480682100F189002ED9C9 /* HomepageStackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C480672100F189002ED9C9 /* HomepageStackView.xib */; };
@@ -230,7 +229,6 @@
 		B6A6EC5B20F201730079FFA4 /* ServerConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnector.swift; sourceTree = "<group>"; };
 		B6A6EC5D20F2024B0079FFA4 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
 		B6A6EC5F20F25B810079FFA4 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
-		B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantList.swift; sourceTree = "<group>"; };
 		B6B866552101768700CE0339 /* HomepagePartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepagePartViewController.swift; sourceTree = "<group>"; };
 		B6C480652100C143002ED9C9 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		B6C480672100F189002ED9C9 /* HomepageStackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomepageStackView.xib; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 				C1ED982020EE1C7900A2F0C5 /* User.swift */,
 				C1ED982220EE1E3900A2F0C5 /* Card.swift */,
 				B6A6EC5F20F25B810079FFA4 /* Merchant.swift */,
-				B6A6EC6120F2EE300079FFA4 /* MerchantList.swift */,
 				B66CFB2820F8AE2C007165DF /* Order.swift */,
 				B66CFB4020FE2D45007165DF /* PointsHistory.swift */,
 				3EFEFA0D210B004600BC760E /* Item.swift */,
@@ -872,7 +869,6 @@
 				C1ED982120EE1C7900A2F0C5 /* User.swift in Sources */,
 				3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */,
 				B66CFB4120FE2D45007165DF /* PointsHistory.swift in Sources */,
-				B6A6EC6220F2EE300079FFA4 /* MerchantList.swift in Sources */,
 				3ED5F6E02126B1A900F46E7C /* ActivityDetailViewController.swift in Sources */,
 				B696E7EB20F4C8A500ABF0D2 /* MerchantChooseTableViewController.swift in Sources */,
 				3E3327922120507B00426518 /* CouponHistoryContainerViewContainer.swift in Sources */,

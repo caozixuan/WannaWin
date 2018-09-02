@@ -146,11 +146,10 @@ class MerchantChooseTableViewController: UIViewController {
     func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
         if result {
             if cardTypes.count != 0 {
-                MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
                 
                 let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
                 let view = storyboard.instantiateViewController(withIdentifier: "AddCardViewController") as? AddCardViewController
-                view?.merchant = MerchantList.get(merchantID: cardTypes[0].merchantID!)
+                view?.merchantID = cardTypes[0].merchantID!
                 self.navigationController?.pushViewController(view!, animated: true)
             }
         }

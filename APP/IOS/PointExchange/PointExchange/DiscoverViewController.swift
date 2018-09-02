@@ -23,6 +23,29 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     
     var activityIndicator:UIActivityIndicatorView?
 	var searchController:UISearchController?
+	
+	override func viewDidLoad() {
+		// searchController
+		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+		
+		self.searchController = UISearchController(searchResultsController: searchResultVC)
+		
+		searchController?.searchBar.searchBarStyle = .minimal
+		searchController?.searchBar.delegate = searchResultVC
+		searchController?.searchResultsUpdater = searchResultVC
+		definesPresentationContext = true
+		searchController?.dimsBackgroundDuringPresentation = false
+		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
+		searchResultVC.searchBar = searchController?.searchBar
+		if #available(iOS 11, *) {
+			navigationItem.searchController = searchController
+			searchController?.hidesNavigationBarDuringPresentation = true
+			navigationItem.hidesSearchBarWhenScrolling = false
+		} else {
+			navigationItem.titleView = searchController?.searchBar
+			searchController?.hidesNavigationBarDuringPresentation = false
+		}
+	}
 
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
@@ -33,21 +56,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		
         self.tableView.rowHeight = 68
 		
-		// searchController
-		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
-		
-		self.searchController = UISearchController(searchResultsController: searchResultVC)
-
-        let screenWidth = UIScreen.main.bounds.width
-		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 56)
-		searchController?.searchBar.searchBarStyle = .minimal
-		searchController?.searchBar.delegate = searchResultVC
-		searchController?.searchResultsUpdater = searchResultVC
-		searchController?.definesPresentationContext = true
-		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
-		searchController?.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-		self.searchBarView.addSubview((searchController?.searchBar)!)
-		searchResultVC.searchBar = searchController?.searchBar
 		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         activityIndicator?.startAnimating()
