@@ -59,7 +59,12 @@
                         <dd><a href="javascript:load('strategy/addStrategy');">添加策略</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:merchant()">活动信息</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">活动信息</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:load('activity/all');">活动清单</a></dd>
+                        <dd><a href="javascript:load('activity/addActivity');">添加活动</a></dd>
+                    </dl>
+                </li>
                 <li class="layui-nav-item"><a href="javascript:load('history');">历史订单</a></li>
                 <li class="layui-nav-item"><a href="javascript:load('showData');">统计信息</a></li>
                 <li class="layui-nav-item"><a href="javascript:load('merchant/editMerchant')">商户信息</a></li>
