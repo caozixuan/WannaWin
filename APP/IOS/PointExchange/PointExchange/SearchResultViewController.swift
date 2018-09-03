@@ -21,7 +21,7 @@ class SearchResultViewController: UIViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		
+		definesPresentationContext = true
 		if pageMenu == nil {
 			var controllerArray:[UIViewController] = []
 			couponController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultCouponViewController") as? SearchResultCouponViewController
@@ -69,6 +69,7 @@ extension SearchResultViewController:UISearchBarDelegate,UISearchResultsUpdating
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 	}
 	
+	
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		switch pageMenu?.currentPageIndex {
 		case 0:
@@ -81,6 +82,7 @@ extension SearchResultViewController:UISearchBarDelegate,UISearchResultsUpdating
 			break
 		}
 	}
+	
 }
 
 extension SearchResultViewController:CAPSPageMenuDelegate{

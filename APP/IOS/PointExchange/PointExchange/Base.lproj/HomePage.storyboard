@@ -256,6 +256,7 @@
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FUc-Nf-DjC" secondAttribute="trailing" constant="50" id="b9X-eM-W5P"/>
                                         <constraint firstItem="nH8-Jk-ku0" firstAttribute="top" secondItem="Cjb-eo-vc2" secondAttribute="top" constant="10" id="d4m-5i-qcf"/>
                                         <constraint firstItem="Cjb-eo-vc2" firstAttribute="height" secondItem="GGf-mo-ilJ" secondAttribute="height" multiplier="0.4" id="f54-zW-eTT"/>
+                                        <constraint firstItem="Cjb-eo-vc2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FLv-si-9mv" secondAttribute="topMargin" constant="16" id="hF1-ao-eAH"/>
                                         <constraint firstItem="Cjb-eo-vc2" firstAttribute="top" secondItem="GGf-mo-ilJ" secondAttribute="centerY" multiplier="0.32" id="lPT-vs-vn0"/>
                                         <constraint firstItem="utA-1R-Ftx" firstAttribute="bottom" secondItem="GGf-mo-ilJ" secondAttribute="bottom" id="oAs-Af-LuA"/>
                                         <constraint firstItem="GGf-mo-ilJ" firstAttribute="centerX" secondItem="FLv-si-9mv" secondAttribute="centerX" id="rP6-qx-mJv"/>
@@ -684,9 +685,15 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteCircleBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Oa9-rU-ck4">
-                                <rect key="frame" x="47" y="66" width="81" height="81"/>
+                                <rect key="frame" x="47" y="76.5" width="81" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Oa9-rU-ck4" secondAttribute="height" multiplier="1:1" id="o13-oy-goZ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wp2-YW-Y2J">
+                                <rect key="frame" x="59" y="88" width="57" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wp2-YW-Y2J" secondAttribute="height" multiplier="1:1" id="gpu-ws-m4S"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGN-Zj-6kO" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
@@ -901,23 +908,17 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9m-Qm-6vV">
-                                <rect key="frame" x="149.5" y="110" width="43" height="17"/>
+                                <rect key="frame" x="149.5" y="120.5" width="43" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="------------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4O-Ao-yPf">
-                                <rect key="frame" x="149.5" y="78" width="107.5" height="24"/>
+                                <rect key="frame" x="149.5" y="88.5" width="107.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wp2-YW-Y2J">
-                                <rect key="frame" x="59" y="78" width="57" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Wp2-YW-Y2J" secondAttribute="height" multiplier="1:1" id="gpu-ws-m4S"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -936,7 +937,7 @@
                             <constraint firstItem="XEI-IZ-HHd" firstAttribute="top" secondItem="dCk-qC-VWB" secondAttribute="top" constant="18" id="T9A-sV-ZOn"/>
                             <constraint firstItem="Oa9-rU-ck4" firstAttribute="top" secondItem="Wp2-YW-Y2J" secondAttribute="top" constant="-12" id="TqC-QE-OXL"/>
                             <constraint firstItem="Oa9-rU-ck4" firstAttribute="height" secondItem="XEI-IZ-HHd" secondAttribute="height" multiplier="0.43" id="ZOV-EJ-zUV"/>
-                            <constraint firstItem="Oa9-rU-ck4" firstAttribute="top" secondItem="XEI-IZ-HHd" secondAttribute="centerY" multiplier="0.5" id="eUM-43-DiZ"/>
+                            <constraint firstItem="Oa9-rU-ck4" firstAttribute="top" secondItem="XEI-IZ-HHd" secondAttribute="centerY" multiplier="0.58" id="eUM-43-DiZ"/>
                             <constraint firstItem="Wp2-YW-Y2J" firstAttribute="trailing" secondItem="Oa9-rU-ck4" secondAttribute="trailing" constant="-12" id="fyH-f5-BSI"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S9m-Qm-6vV" secondAttribute="trailing" constant="20" symbolic="YES" id="ju7-zR-kR8"/>
                             <constraint firstItem="ZGN-Zj-6kO" firstAttribute="width" secondItem="XEI-IZ-HHd" secondAttribute="width" id="ld5-nf-Afd"/>

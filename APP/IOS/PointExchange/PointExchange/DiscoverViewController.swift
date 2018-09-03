@@ -23,10 +23,12 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     
     var activityIndicator:UIActivityIndicatorView?
 	var searchController:UISearchController?
+	var searchResultVC:SearchResultViewController!
+	var searchNavigationVC:UINavigationController!
 	
 	override func viewDidLoad() {
 		// searchController
-		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+		searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
 		
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
 		
@@ -160,5 +162,5 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 //	}
 	
 }
-extension DiscoverViewController:UISearchBarDelegate{
-}
+
+

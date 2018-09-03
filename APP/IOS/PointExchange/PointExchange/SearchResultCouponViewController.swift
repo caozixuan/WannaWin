@@ -89,6 +89,9 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 		let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
 		view.itemID = items[indexPath.row].ItemID
-		self.navigationController!.pushViewController(view, animated: true)
+		
+		// When you present a view controller modally (either explicitly or implicitly),
+		// the view controller that was presented has this property set to the view controller that presented it.
+		self.presentingViewController?.navigationController?.pushViewController(view, animated: true)
 	}
 }
