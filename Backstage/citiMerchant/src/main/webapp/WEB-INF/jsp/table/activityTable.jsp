@@ -22,8 +22,8 @@
             <td>${activity.description}</td>
             <td>${activity.startDate}</td>
             <td>${activity.endDate}</td>
-            <td><button class="layui-btn" onclick="load('item/editItem?itemID=${item.itemID}')">编辑</button> </td>
-            <td><button class="layui-btn layui-btn-danger" onclick="load('item/deleteItem?itemID=${item.itemID}')">删除</button></td>
+            <td><button class="layui-btn" onclick="load('activity/editActivity?activityID=${activity.activityID}')">编辑</button> </td>
+            <td><button class="layui-btn layui-btn-danger" onclick="load('activity/deleteActivity?activityID=${activity.activityID}')">删除</button></td>
         </tr>
     </c:forEach>
     </tbody>

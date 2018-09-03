@@ -12,7 +12,8 @@
     <legend>活动编辑</legend>
 </fieldset>
 <form class="layui-form layui-form-pane" method="post" id="add-item-form">
-    <input type="hidden" name="itemID" value="${activity.activityID}"/>
+    <input type="hidden" name="activityID" value="${activity.activityID}"/>
+    <input type="hidden" name="merchantID" value="${activity.merchantID}">
     <div class="layui-form-item">
         <label class="layui-form-label">活动名称</label>
         <div class="layui-input-inline">
@@ -56,3 +57,47 @@
     <button class="layui-btn" lay-submit="" type="submit">提交</button>
     <button class="layui-btn layui-btn-primary" type="reset">重新输入</button>
 </form>
+<script type="text/javascript">
+    //日期渲染
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#startDate' //指定元素
+        });
+        laydate.render({
+            elem:'#endDate'
+        });
+    });
+    //上传图片渲染
+    layui.upload.render({
+        elem: '#upload-img'
+        ,url: 'upload/activity'
+        ,done: function(res){
+            alert(res.status);
+            if (res.status=="success"){
+                $("#image-url").val(res.url);
+                var img="<img src='"+res.url+"'>";
+                $("#upload-img").append(img)
+            }
+        }
+    });
+
+    $(function(){
+        $("#add-item-form").ajaxForm({
+            url: "activity/submit",
+            type: "post",
+            dataType: "json",
+            success: function(responseText) {
+                var status = responseText.status;
+                if(status == "fail"){
+
+                }
+                else if(status == "success"){
+                    $("#content-body").load("activity/all");
+                }
+            }
+        });
+    });
+
+</script>

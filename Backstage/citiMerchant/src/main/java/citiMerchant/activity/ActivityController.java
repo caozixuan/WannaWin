@@ -1,10 +1,12 @@
 package citiMerchant.activity;
 
+import citiMerchant.uitl.JsonResult;
 import citiMerchant.vo.Activity;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -45,10 +47,20 @@ public class ActivityController {
         return modelAndView;
     }
 
+    @ResponseBody
     @RequestMapping("/submit")
     public String submitEdit(Activity activity){
+        if (activity.getActivityID()==null){
+            activityService.insertActivity(activity);
+        }else {
+            activityService.updateActivity(activity);
+        }
+        return JsonResult.SUCCESS;
+    }
 
-
+    public String deleteActivity(String activityID){
+        activityService.deleteActivity(activityID);
+        return JsonResult.SUCCESS;
     }
 
 

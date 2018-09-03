@@ -23,4 +23,16 @@ public class ActivityService {
     public Activity getActivity(String activityID){
         return activityMapper.getActivityByActivityID(activityID);
     }
+
+    public void updateActivity(Activity activity){
+        activityMapper.updateActivity(activity);
+    }
+
+    public void insertActivity(Activity activity){
+        activityMapper.insertActivity(activity);
+    }
+
+    public void deleteActivity(String activityID){
+        activityMapper.deleteByActivityID(activityID);
+    }
 }
