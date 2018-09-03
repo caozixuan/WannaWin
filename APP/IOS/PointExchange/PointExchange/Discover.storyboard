@@ -42,7 +42,7 @@
                                 <color key="textColor" red="0.29411764709999999" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hls-mE-JXI" customClass="DiscoverCouponView" customModule="PointExchange" customModuleProvider="target">
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hls-mE-JXI" customClass="DiscoverCouponView" customModule="PointExchange" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="99" width="375" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="1qp-ML-mMy"/>
@@ -304,8 +304,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分抵扣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkT-46-wKP">
-                                                <rect key="frame" x="16" y="243" width="77.5" height="23"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkT-46-wKP">
+                                                <rect key="frame" x="16" y="243" width="58.5" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -557,11 +557,11 @@
                                     <action selector="clickExchange:" destination="tvj-xr-jyE" eventType="touchUpInside" id="fsj-JB-YoT"/>
                                 </connections>
                             </button>
-                            <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-Wi-31h" userLabel="image" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-Wi-31h" userLabel="image" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
                                 <rect key="frame" x="75.5" y="103" width="225" height="169"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5dQ-jz-AyY">
-                                        <rect key="frame" x="-7" y="-5.5" width="239" height="179"/>
+                                        <rect key="frame" x="-20" y="-15.5" width="265" height="199"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5dQ-jz-AyY" secondAttribute="height" multiplier="4:3" id="vqI-nf-HNv"/>
                                         </constraints>
@@ -570,7 +570,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="M4h-Wi-31h" secondAttribute="height" multiplier="4:3" id="9ne-VX-0St"/>
-                                    <constraint firstItem="5dQ-jz-AyY" firstAttribute="height" secondItem="M4h-Wi-31h" secondAttribute="height" constant="10" id="XdO-rj-yDZ"/>
+                                    <constraint firstItem="5dQ-jz-AyY" firstAttribute="height" secondItem="M4h-Wi-31h" secondAttribute="height" constant="30" id="XdO-rj-yDZ"/>
                                     <constraint firstItem="5dQ-jz-AyY" firstAttribute="centerX" secondItem="M4h-Wi-31h" secondAttribute="centerX" id="yX5-zj-hYz"/>
                                     <constraint firstItem="5dQ-jz-AyY" firstAttribute="centerY" secondItem="M4h-Wi-31h" secondAttribute="centerY" id="ydr-qS-egF"/>
                                 </constraints>

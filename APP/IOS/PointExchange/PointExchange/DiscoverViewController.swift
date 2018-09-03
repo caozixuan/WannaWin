@@ -29,7 +29,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
 		
 		self.searchController = UISearchController(searchResultsController: searchResultVC)
-		
 		searchController?.searchBar.searchBarStyle = .minimal
 		searchController?.searchBar.delegate = searchResultVC
 		searchController?.searchResultsUpdater = searchResultVC

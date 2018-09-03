@@ -26,6 +26,7 @@ class SearchResultViewController: UIViewController {
 			var controllerArray:[UIViewController] = []
 			couponController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultCouponViewController") as? SearchResultCouponViewController
 			couponController?.title = "优惠券"
+            
 			merchantController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultMerchantViewController") as? SearchResultMerchantViewController
 			merchantController?.title = "商家"
 			offlineController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultOfflineViewController") as? SearchResultOfflineViewController

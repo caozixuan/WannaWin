@@ -86,9 +86,10 @@ class SearchResultCouponViewController: UIViewController,UITableViewDataSource,U
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
-		let view = storyBoard.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
-		view.itemID = items[indexPath.row].ItemID
-		self.navigationController!.pushViewController(view, animated: true)
+        let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
+        view.itemID = self.items[indexPath.row].ItemID
+        self.navigationController!.pushViewController(view, animated: true)
+		
 	}
 }
