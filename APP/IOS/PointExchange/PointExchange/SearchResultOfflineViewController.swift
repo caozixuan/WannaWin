@@ -11,12 +11,27 @@ import UIKit
 class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
 
 	@IBOutlet var tableView: UITableView!
+    var noResultLabel:UILabel?
+    
 	var activity = [OfflineActivity]()
 	var keyword = ""
 	var start = 0
 	var end = 9
+	
+	override func  viewDidAppear(_ animated: Bool) {
+		self.tableView.frame = self.view.bounds
+	}
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        noResultLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 10))
+        noResultLabel?.center.x = self.view.center.x
+        noResultLabel?.center.y = self.view.center.y-80
+        noResultLabel?.text = "暂无您搜索的结果"
+        self.view.addSubview(self.noResultLabel!)
+        noResultLabel?.isHidden = true
+        
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
@@ -31,7 +46,7 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 		self.tableView.es.addInfiniteScrolling {
 			self.start = self.start + 6
 			self.end = self.end + 6
-			self.search(keyword: self.keyword)
+			self.loadMore()
 			
 		}
     }
@@ -44,20 +59,34 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 	func search(keyword:String){
 		ServerConnector.searchActivity(start: start, end: end, keyword: keyword){(result, activity) in
 			if result {
-				if self.activity.count == 0{
-					self.activity = activity!
-				}else{
-					self.activity += activity!
-				}
-				if (activity?.count)! < 6{
-					self.tableView.es.noticeNoMoreData()
-				}else{
-					self.tableView.es.stopLoadingMore()
-				}
-				self.tableView.reloadData()
+                if activity?.count == 0{
+                    self.tableView.isHidden = true
+                    self.noResultLabel?.isHidden = false
+                }else{
+                    self.tableView.isHidden = false
+                    self.noResultLabel?.isHidden = true
+                    self.activity = activity!
+                    self.tableView.reloadData()
+                    
+                }
+                
 			}
 		}
 	}
+    
+    func loadMore(){
+        ServerConnector.searchActivity(start: start, end: end, keyword: keyword){(result, activity) in
+            if result {
+                self.activity += activity!
+                if (activity?.count)! < 6{
+                    self.tableView.es.noticeNoMoreData()
+                }else{
+                    self.tableView.es.stopLoadingMore()
+                }
+                self.tableView.reloadData()
+            }
+        }
+    }
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		var cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as? SearchTableViewCell
@@ -69,8 +98,16 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 		cell?.logoImageView.kf.setImage(with: imageURL)
 		cell?.title.text = activity[indexPath.row].name
 		cell?.descriptionLabel.text = activity[indexPath.row].description
+        
+        cell?.selectionStyle = .none
 		return cell!
 	}
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "ActivityDetailViewController") as! ActivityDetailViewController
+        view.activity = activity[indexPath.row]
+        self.presentingViewController?.navigationController?.pushViewController(view, animated: true)
+    }
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1

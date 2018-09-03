@@ -12,14 +12,21 @@ class Merchant:Codable {
     var name:String = ""
     var description:String?
     var logoURL:String?
-    var cardTypes:[CardType]?
-    var Mtype:String?
     var address:String?
+	var businessType:String?
 	
 	//test
 	convenience init(name:String){
 		self.init()
 		self.name = name
+	}
+	enum CodingKeys:String, CodingKey {
+		case id = "merchantID"
+		case logoURL = "merchantLogoURL"
+		case name
+		case description
+		case address
+		case businessType
 	}
 }
 

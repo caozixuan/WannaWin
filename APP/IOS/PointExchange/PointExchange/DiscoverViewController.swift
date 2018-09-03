@@ -23,6 +23,30 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     
     var activityIndicator:UIActivityIndicatorView?
 	var searchController:UISearchController?
+	var searchResultVC:SearchResultViewController!
+	var searchNavigationVC:UINavigationController!
+	
+	override func viewDidLoad() {
+		// searchController
+		searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+		
+		self.searchController = UISearchController(searchResultsController: searchResultVC)
+		searchController?.searchBar.searchBarStyle = .minimal
+		searchController?.searchBar.delegate = searchResultVC
+		searchController?.searchResultsUpdater = searchResultVC
+		definesPresentationContext = true
+		searchController?.dimsBackgroundDuringPresentation = false
+		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
+		searchResultVC.searchBar = searchController?.searchBar
+		if #available(iOS 11, *) {
+			navigationItem.searchController = searchController
+			searchController?.hidesNavigationBarDuringPresentation = true
+			navigationItem.hidesSearchBarWhenScrolling = false
+		} else {
+			navigationItem.titleView = searchController?.searchBar
+			searchController?.hidesNavigationBarDuringPresentation = false
+		}
+	}
 
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
@@ -33,21 +57,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		
         self.tableView.rowHeight = 68
 		
-		// searchController
-		let searchResultVC = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
-		
-		self.searchController = UISearchController(searchResultsController: searchResultVC)
-
-        let screenWidth = UIScreen.main.bounds.width
-		searchController?.searchBar.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 56)
-		searchController?.searchBar.searchBarStyle = .minimal
-		searchController?.searchBar.delegate = searchResultVC
-		searchController?.searchResultsUpdater = searchResultVC
-		searchController?.definesPresentationContext = true
-		searchController?.searchBar.tintColor = UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)
-		searchController?.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-		self.searchBarView.addSubview((searchController?.searchBar)!)
-		searchResultVC.searchBar = searchController?.searchBar
 		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         activityIndicator?.startAnimating()
@@ -123,6 +132,8 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		}
         cell?.logoView.imageFromURL((merchantArray?[indexPath.row].logoURL)!, placeholder: UIImage())
 		cell?.nameLabel.text = merchantArray![indexPath.row].name
+        cell?.addressLabel.text = merchantArray![indexPath.row].description
+        cell?.typeLabel.text = transBussinessType(type: merchantArray![indexPath.row].businessType!)
 		
 		return cell!
     }
@@ -133,24 +144,29 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		view.merchant = merchantArray?[indexPath.row]
 		self.navigationController?.pushViewController(view, animated: true)
     }
-	
-//	func addTapImageAction() {
-//		for i in 0 ... 2{
-//			couponView.images[i].tag = i
-//			let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapImageAction(_:)))
-//			couponView.images[i].addGestureRecognizer(gesture)
-//
-//		}
-//	}
-//
-//	@objc func tapImageAction(_ sender:UITapGestureRecognizer){
-//		let sb = UIStoryboard(name: "Discover", bundle: nil)
-//		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
-//		vc.itemID = items[(sender.view?.tag)!].ItemID
-//		self.navigationController?.pushViewController(vc, animated: true)
-//
-//	}
+    
+    func transBussinessType(type:String)->String{
+        var result = ""
+        switch type {
+        case "catering":
+            result = "餐饮"
+        case "operator":
+            result = "运营商"
+        case "aviation":
+            result = "航空"
+        case "hotel":
+            result = "酒店"
+        case "supermarket":
+            result = "超市便利店"
+        case "movie":
+            result = "电影"
+        default:
+            result = "一般"
+        }
+        return result
+    }
+
 	
 }
-extension DiscoverViewController:UISearchBarDelegate{
-}
+
+

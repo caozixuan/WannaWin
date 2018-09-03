@@ -69,7 +69,7 @@ class MerchantChooseTableViewController: UIViewController {
 			}.subscribe(onNext: { indexPath, model in
 				let sb = UIStoryboard(name: "HomePage", bundle: nil)
 				let view = sb.instantiateViewController(withIdentifier: "AddCardViewController") as! AddCardViewController
-				view.merchant = self.merchants[indexPath.row]
+				view.merchantID = self.merchants[indexPath.row].id
 				self.navigationController?.pushViewController(view, animated: true)
 			}).disposed(by:self.disposeBag)
 	}
@@ -146,11 +146,10 @@ class MerchantChooseTableViewController: UIViewController {
     func gotCardTypeCallback(result:Bool,cardTypes:[CardType]){
         if result {
             if cardTypes.count != 0 {
-                MerchantList.get(merchantID: cardTypes[0].merchantID!)?.cardTypes=cardTypes
                 
                 let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
                 let view = storyboard.instantiateViewController(withIdentifier: "AddCardViewController") as? AddCardViewController
-                view?.merchant = MerchantList.get(merchantID: cardTypes[0].merchantID!)
+                view?.merchantID = cardTypes[0].merchantID!
                 self.navigationController?.pushViewController(view!, animated: true)
             }
         }
