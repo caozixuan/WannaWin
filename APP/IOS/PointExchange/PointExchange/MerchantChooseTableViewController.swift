@@ -69,7 +69,7 @@ class MerchantChooseTableViewController: UIViewController {
 			}.subscribe(onNext: { indexPath, model in
 				let sb = UIStoryboard(name: "HomePage", bundle: nil)
 				let view = sb.instantiateViewController(withIdentifier: "AddCardViewController") as! AddCardViewController
-				view.merchant = self.merchants[indexPath.row]
+				view.merchantID = self.merchants[indexPath.row].id
 				self.navigationController?.pushViewController(view, animated: true)
 			}).disposed(by:self.disposeBag)
 	}

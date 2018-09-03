@@ -132,6 +132,8 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		}
         cell?.logoView.imageFromURL((merchantArray?[indexPath.row].logoURL)!, placeholder: UIImage())
 		cell?.nameLabel.text = merchantArray![indexPath.row].name
+        cell?.addressLabel.text = merchantArray![indexPath.row].description
+        cell?.typeLabel.text = transBussinessType(type: merchantArray![indexPath.row].businessType!)
 		
 		return cell!
     }
@@ -142,23 +144,28 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 		view.merchant = merchantArray?[indexPath.row]
 		self.navigationController?.pushViewController(view, animated: true)
     }
-	
-//	func addTapImageAction() {
-//		for i in 0 ... 2{
-//			couponView.images[i].tag = i
-//			let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapImageAction(_:)))
-//			couponView.images[i].addGestureRecognizer(gesture)
-//
-//		}
-//	}
-//
-//	@objc func tapImageAction(_ sender:UITapGestureRecognizer){
-//		let sb = UIStoryboard(name: "Discover", bundle: nil)
-//		let vc = sb.instantiateViewController(withIdentifier: "CouponDetailViewController") as! CouponDetailViewController
-//		vc.itemID = items[(sender.view?.tag)!].ItemID
-//		self.navigationController?.pushViewController(vc, animated: true)
-//
-//	}
+    
+    func transBussinessType(type:String)->String{
+        var result = ""
+        switch type {
+        case "catering":
+            result = "餐饮"
+        case "operator":
+            result = "运营商"
+        case "aviation":
+            result = "航空"
+        case "hotel":
+            result = "酒店"
+        case "supermarket":
+            result = "超市便利店"
+        case "movie":
+            result = "电影"
+        default:
+            result = "一般"
+        }
+        return result
+    }
+
 	
 }
 
