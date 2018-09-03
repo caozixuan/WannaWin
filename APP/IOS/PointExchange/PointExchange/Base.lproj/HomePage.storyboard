@@ -1056,14 +1056,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7dm-Hw-wWn">
-                                <rect key="frame" x="112" y="66.5" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7dm-Hw-wWn" secondAttribute="height" id="dT1-5o-qFl"/>
-                                </constraints>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入会员卡号" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="enb-72-gal" userLabel="卡号">
-                                <rect key="frame" x="65.5" y="287" width="244" height="50.5"/>
+                                <rect key="frame" x="65.5" y="286.5" width="244" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="enb-72-gal" secondAttribute="height" multiplier="279:58" id="Vju-17-b2g"/>
                                 </constraints>
@@ -1072,7 +1066,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入会员卡密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="oiR-vV-iQY" userLabel="密码">
-                                <rect key="frame" x="65.5" y="345.5" width="244" height="51"/>
+                                <rect key="frame" x="65.5" y="345" width="244" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oiR-vV-iQY" secondAttribute="height" multiplier="279:58" id="EFl-Xf-QIH"/>
                                 </constraints>
@@ -1081,18 +1075,24 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTN-WY-YrE">
-                                <rect key="frame" x="48" y="432.5" width="279" height="58"/>
+                                <rect key="frame" x="48" y="432" width="279" height="58"/>
                                 <state key="normal" image="addCardButton"/>
                                 <connections>
                                     <action selector="clickButton:" destination="hTW-hA-cUw" eventType="touchUpInside" id="FZk-wK-VGm"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Duy-BD-ARq">
-                                <rect key="frame" x="154" y="241" width="67" height="30"/>
+                                <rect key="frame" x="154" y="240.5" width="67" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="0.25098039215686274" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7dm-Hw-wWn">
+                                <rect key="frame" x="122" y="102" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7dm-Hw-wWn" secondAttribute="height" id="dT1-5o-qFl"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1101,14 +1101,14 @@
                             <constraint firstItem="DTN-WY-YrE" firstAttribute="centerX" secondItem="MlL-pv-cbA" secondAttribute="centerX" id="EBq-Ei-66d"/>
                             <constraint firstItem="Duy-BD-ARq" firstAttribute="centerX" secondItem="MlL-pv-cbA" secondAttribute="centerX" id="EXj-H0-0kZ"/>
                             <constraint firstItem="DTN-WY-YrE" firstAttribute="top" secondItem="oiR-vV-iQY" secondAttribute="bottom" constant="36" id="Maa-sS-hzA"/>
-                            <constraint firstItem="Duy-BD-ARq" firstAttribute="top" secondItem="7dm-Hw-wWn" secondAttribute="bottom" constant="24" id="OUO-Pk-hVg"/>
+                            <constraint firstItem="Duy-BD-ARq" firstAttribute="top" secondItem="7dm-Hw-wWn" secondAttribute="bottom" constant="8.5" id="OUO-Pk-hVg"/>
                             <constraint firstItem="oiR-vV-iQY" firstAttribute="top" secondItem="enb-72-gal" secondAttribute="bottom" constant="8" id="QPf-rC-twV"/>
                             <constraint firstItem="enb-72-gal" firstAttribute="top" secondItem="Duy-BD-ARq" secondAttribute="bottom" constant="16" id="Tfa-TC-Jdf"/>
-                            <constraint firstItem="7dm-Hw-wWn" firstAttribute="width" secondItem="FXz-Gc-wbX" secondAttribute="width" multiplier="0.4" id="Tz0-hQ-aLf"/>
+                            <constraint firstItem="7dm-Hw-wWn" firstAttribute="width" secondItem="FXz-Gc-wbX" secondAttribute="width" multiplier="0.4" constant="-20" id="Tz0-hQ-aLf"/>
                             <constraint firstItem="enb-72-gal" firstAttribute="centerX" secondItem="MlL-pv-cbA" secondAttribute="centerX" id="cBN-PN-U4Z"/>
                             <constraint firstItem="oiR-vV-iQY" firstAttribute="centerX" secondItem="MlL-pv-cbA" secondAttribute="centerX" id="eiF-8l-3BO"/>
                             <constraint firstItem="7dm-Hw-wWn" firstAttribute="centerX" secondItem="MlL-pv-cbA" secondAttribute="centerX" id="jAf-Im-aBq"/>
-                            <constraint firstItem="7dm-Hw-wWn" firstAttribute="top" secondItem="MlL-pv-cbA" secondAttribute="centerY" multiplier="0.2" id="pXp-jE-mIK"/>
+                            <constraint firstItem="7dm-Hw-wWn" firstAttribute="top" secondItem="MlL-pv-cbA" secondAttribute="centerY" multiplier="0.2" constant="35.299999999999997" id="pXp-jE-mIK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FXz-Gc-wbX"/>
                     </view>
