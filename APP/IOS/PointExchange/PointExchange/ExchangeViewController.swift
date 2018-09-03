@@ -8,6 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import RxCocoa
+import RxSwift
+import RxDataSources
 
 struct CellData {
     var sourcePoints: String
@@ -22,6 +25,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     var cellDataList = [CellData]() // 用于存下所有数据
     var firstTime: [Bool]?
     var allCell = [ExchangeItemCellView]()
+    
+    // rxswift - tableview
+    var disposeBag = DisposeBag()
+    var reloadDataSource: RxTableViewSectionedReloadDataSource<SectionModel<String,Merchant>>?
     
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
