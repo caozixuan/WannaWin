@@ -20,12 +20,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
 
-            <!-- 启动项 -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity
@@ -61,7 +55,6 @@
         <activity android:name=".HistoryExchangeActivity" />
         <activity android:name=".MyCouponsActivity" />
         <activity android:name=".PointsExchangeExpandListActivity" />
-        <activity android:name=".PointsExchangeRecordActivity" />
         <activity android:name=".BindCardActivity" />
         <activity android:name=".DetailFindPayActivity" />
         <activity android:name=".DetailActivityActivity" />
@@ -73,7 +66,16 @@
         <activity android:name=".UserSettingActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".QuestionnaireActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SplashActivity">
+            <!-- 启动项 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
