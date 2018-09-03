@@ -31,6 +31,9 @@ public class MainActivity extends CompatStatusBarActivity implements BottomNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //设置导航栏
+        setStatusBarPlaceVisible(false);
+
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
 
         /** 导航基础设置 包括按钮选中效果 导航栏背景色等 */

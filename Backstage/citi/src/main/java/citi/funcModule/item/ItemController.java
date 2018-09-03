@@ -80,7 +80,7 @@ public class ItemController {
     @ResponseBody
     @RequestMapping("/search")
     public String search(String keyword, String start, String end){
-        if(Integer.valueOf(start)>=Integer.valueOf(end))
+        if(Integer.valueOf(start)>=Integer.valueOf(end)||keyword==null)
             return "[]";
         String [] keywords = keyword.split("\\s+");
         ArrayList<ItemBean> itemBeans = itemService.search(keywords);

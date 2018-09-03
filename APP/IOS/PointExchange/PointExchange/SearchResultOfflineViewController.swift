@@ -12,14 +12,33 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 
 	@IBOutlet var tableView: UITableView!
 	var activity = [OfflineActivity]()
+	var keyword = ""
 	var start = 0
 	var end = 9
+	
+	override func  viewDidAppear(_ animated: Bool) {
+		self.tableView.frame = self.view.bounds
+	}
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
-        // Do any additional setup after loading the view.
+		
+		self.tableView.es.addPullToRefresh { [weak self] in
+			self?.search(keyword: (self?.keyword)!)
+			self?.tableView.es.stopPullToRefresh()
+			self?.start = 0
+			self?.end = 6
+		}
+		
+		self.tableView.es.addInfiniteScrolling {
+			self.start = self.start + 6
+			self.end = self.end + 6
+			self.search(keyword: self.keyword)
+			
+		}
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +49,16 @@ class SearchResultOfflineViewController: UIViewController, UITableViewDelegate,U
 	func search(keyword:String){
 		ServerConnector.searchActivity(start: start, end: end, keyword: keyword){(result, activity) in
 			if result {
-				self.activity = activity!
+				if self.activity.count == 0{
+					self.activity = activity!
+				}else{
+					self.activity += activity!
+				}
+				if (activity?.count)! < 6{
+					self.tableView.es.noticeNoMoreData()
+				}else{
+					self.tableView.es.stopLoadingMore()
+				}
 				self.tableView.reloadData()
 			}
 		}

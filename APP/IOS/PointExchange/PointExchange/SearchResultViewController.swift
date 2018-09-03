@@ -17,49 +17,51 @@ class SearchResultViewController: UIViewController {
 	var couponController:SearchResultCouponViewController?
 	var merchantController:SearchResultMerchantViewController?
 	var offlineController:SearchResultOfflineViewController?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		var controllerArray:[UIViewController] = []
-		couponController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultCouponViewController") as? SearchResultCouponViewController
-		couponController?.title = "优惠券"
-		merchantController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultMerchantViewController") as? SearchResultMerchantViewController
-		merchantController?.title = "商家"
-		offlineController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultOfflineViewController") as? SearchResultOfflineViewController
-		offlineController?.title = "线下活动"
-		controllerArray.append(merchantController!)
-		controllerArray.append(couponController!)
-		controllerArray.append(offlineController!)
+	var searchNavigationVC1: UINavigationController?
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 		
-		let params:[CAPSPageMenuOption] = [
-			.useMenuLikeSegmentedControl(true),
-			.addBottomMenuHairline (true),
-			.scrollMenuBackgroundColor (UIColor.white),
-			.menuHeight(40),
-			.menuItemFont(UIFont.systemFont(ofSize:18)),
-			.unselectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
-			.selectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
-			.selectionIndicatorColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0))
+		if pageMenu == nil {
+			var controllerArray:[UIViewController] = []
+			couponController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultCouponViewController") as? SearchResultCouponViewController
+			couponController?.title = "优惠券"
+			merchantController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultMerchantViewController") as? SearchResultMerchantViewController
+			merchantController?.title = "商家"
+			offlineController = UIStoryboard(name: "Discover", bundle: nil).instantiateViewController(withIdentifier: "SearchResultOfflineViewController") as? SearchResultOfflineViewController
+			offlineController?.title = "线下活动"
+			controllerArray.append(merchantController!)
+			controllerArray.append(couponController!)
+			controllerArray.append(offlineController!)
 			
-		]
-		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-64),pageMenuOptions:params)
-		pageMenu?.delegate = self
-		self.addChildViewController(pageMenu!)
-		self.view.addSubview((pageMenu?.view)!)
-		pageMenu!.didMove(toParentViewController: self)
-		
-		
-    }
+			
+			let params:[CAPSPageMenuOption] = [
+				.useMenuLikeSegmentedControl(true),
+				.addBottomMenuHairline (true),
+				.scrollMenuBackgroundColor (UIColor.white),
+				.menuHeight(35),
+				.menuItemFont(UIFont.systemFont(ofSize:18)),
+				.unselectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
+				.selectedMenuItemLabelColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
+				.selectionIndicatorColor (UIColor(red: 255/255, green: 149/255, blue: 70/255, alpha: 1.0)),
+				.enableHorizontalBounce (false)
+				
+			]
+			
+			// 获得导航栏及搜索框的高度，避免控件被遮住
+			let frameY = self.view.safeAreaLayoutGuide.layoutFrame.minY 
+			
+			pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame:CGRect(x: 0, y: frameY, width: self.view.frame.width, height: self.view.safeAreaLayoutGuide.layoutFrame.maxY - frameY),pageMenuOptions:params)
+			pageMenu?.delegate = self
+			self.addChildViewController(pageMenu!)
+			self.view.addSubview((pageMenu?.view)!)
+			pageMenu!.didMove(toParentViewController: self)
 	
+		}
+	}
 	
-	
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
-
 }
+
 extension SearchResultViewController:UISearchBarDelegate,UISearchResultsUpdating{
 	func updateSearchResults(for searchController: UISearchController) {
 		searchController.searchResultsController?.view.isHidden = false;

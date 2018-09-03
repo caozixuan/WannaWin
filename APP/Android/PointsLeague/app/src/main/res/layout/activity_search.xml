@@ -4,35 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
 
         <!--返回键-->
         <ImageView
+            android:id="@+id/search_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_left_orange_24dp"/>
 
         <!--搜索栏-->
         <LinearLayout
-            android:id="@+id/search_bar_exchange"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_marginStart="5dp"
+            android:layout_weight="25"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/bg_search_bar"
             android:orientation="horizontal">
 
             <SearchView
-                android:id="@+id/editText_search_paying"
+                android:id="@+id/searchView_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:queryHint="Search"
@@ -43,6 +45,38 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!--阴影-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- 你的View放在这里 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shadow" />
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorOrange"
+        app:tabGravity="fill"
+        app:tabSelectedTextColor="@color/colorOrange"
+        app:tabTextColor="@color/colorOrange"
+        app:tabIndicatorHeight="3dp"
+        app:tabTextAppearance="@style/TabStyle"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tab_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white" />
 
 
 

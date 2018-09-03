@@ -41,6 +41,8 @@ enum ServerService {
     case getMerchantInfoByID(id:String)
     /// 获得商户数量
     case getMerchantCount()
+	/// 搜索商家
+	case searchMerchant(start:Int, end:Int, keyword:String)
     
     // 会员卡相关
     /// 获取指定用户积分最多的n张卡
@@ -142,6 +144,8 @@ extension ServerService:TargetType {
             return "/merchant/\(merchantID)"
         case .getMerchantCount:
             return "/merchant/getNum"
+		case .searchMerchant:
+			return "/merchant/search"
 			
 		// 银行卡相关
         case .bindCitiCard:
@@ -285,6 +289,13 @@ extension ServerService:TargetType {
             var params:[String:String] = [:]
             params["userID"] = User.getUser().id
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
+			
+		case .searchMerchant(let start, let end, let keyword):
+			var params:[String:Any] = [:]
+			params["start"] = start
+			params["end"] = end
+			params["keyword"] = keyword
+			return .requestParameters(parameters: params, encoding: URLEncoding.default)
             
         // 会员卡
         case .getCardDetail(let merchantID):
