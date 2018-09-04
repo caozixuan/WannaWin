@@ -50,6 +50,23 @@
         </div>
     </div>
 
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">商品类别</label>
+            <div class="layui-input-block">
+                <select name="itemType" lay-verify="">
+                    <option value="normal">普通</option>
+                    <option value="catering">餐饮</option>
+                    <option value="exercise">运动</option>
+                    <option value="bank">银行</option>
+                    <option value="costume">服装</option>
+                    <option value="education">教育</option>
+                    <option value="communication">通讯</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">商品描述</label>
         <div class="layui-input-block">
@@ -80,7 +97,7 @@
     //上传图片渲染
         layui.upload.render({
         elem: '#upload-img'
-        ,url: 'item/uploadFile'
+        ,url: 'uploadFile/item'
         ,done: function(res){
             alert(res.status);
             if (res.status=="success"){

@@ -29,20 +29,10 @@ public class LoginController {
 
     @RequestMapping("/loginSubmit")
     @ResponseBody
-    public String loginSubmit(String merchantID, String password) {
-        /*ArrayList<Integer> nums = loginService.getNums(merchantID, password);
-        if (nums == null) {
-           return JsonResult.FAIL;
-        } else {*/
-/*            mv.addObject("nums", nums);
-            mv.addObject("merchant", loginService.getMerchant(merchantID));
-            mv.setViewName("starter");*/
-            //添加session
+    public String loginSubmit(String merchantID, String password,HttpSession session) {
         if (loginService.login(merchantID,password)==null){
             return JsonResult.FAIL;
         }else {
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            HttpSession session = request.getSession();
             session.setAttribute("merchantID", merchantID);
             session.setAttribute("password", password);
 

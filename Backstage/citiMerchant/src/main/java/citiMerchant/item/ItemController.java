@@ -68,11 +68,11 @@ public class ItemController {
 
     @RequestMapping("/submitEdit")
     @ResponseBody
-    public String submitEdit(String itemID, String name, String description, double originalPrice, int points, long stock, String overdueTime, String logoURL,HttpSession session){
+    public String submitEdit(String itemID, String name, String description, double originalPrice, int points, long stock, String overdueTime,String itemType ,String logoURL,HttpSession session){
         ModelAndView mv = new ModelAndView();
         String merchantID = (String)session.getAttribute("merchantID");
         overdueTime = overdueTime + " 00:00:00";
-        Item item=new Item(itemID,name,description,merchantID,logoURL,originalPrice,points,Timestamp.valueOf(overdueTime),stock);
+        Item item=new Item(itemID,name,description,merchantID,logoURL,originalPrice,points,Timestamp.valueOf(overdueTime),stock,itemType);
         if (item.getItemID().equals("")){
             item.setItemID(UUID.randomUUID().toString());
             itemService.addItem(item);
@@ -125,7 +125,7 @@ public class ItemController {
         return mv;
     }*/
 
-    @RequestMapping("/uploadFile")
+    /*@RequestMapping("/uploadFile")
     @ResponseBody
     public Map<String, Object> uploadFile(@RequestParam("file") MultipartFile myfile)
             throws IllegalStateException, IOException {
@@ -155,7 +155,7 @@ public class ItemController {
             map.put("status", "error");
             return map;
         }
-    }
+    }*/
 
 
     @RequestMapping("/{itemID}")
