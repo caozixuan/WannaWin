@@ -1,5 +1,6 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -33,6 +34,7 @@ public class MyOrderActivity extends AppCompatActivity {
 
     private String[] mTabTitles = new String[2];
 
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     @Override
