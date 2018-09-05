@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by zhong on 2018/8/21 16:27
@@ -25,8 +29,9 @@ public class ActivityController {
     private ActivityService activityService;
 
     @RequestMapping("/all")
-    public ModelAndView getActivities(){
-        List<Activity> activities=activityService.getActivities();
+    public ModelAndView getActivities(HttpSession session){
+        String merchantID=session.getAttribute("merchantID").toString();
+        List<Activity> activities=activityService.getMerchantActivities(merchantID);
         ModelAndView modelAndView=new ModelAndView("table/activityTable");
         modelAndView.addObject("activities",activities);
         return modelAndView;
@@ -49,18 +54,22 @@ public class ActivityController {
 
     @ResponseBody
     @RequestMapping("/submit")
-    public String submitEdit(Activity activity){
-        if (activity.getActivityID()==null){
+    public String submitEdit(String activityID, String name, String description, String startDate, String endDate, String imageURL,HttpSession session){
+        String merchantID=session.getAttribute("merchantID").toString();
+        if (activityID.equals("")){
+            Activity activity=new Activity(UUID.randomUUID().toString(),merchantID,name,description, Date.valueOf(startDate),Date.valueOf(endDate),imageURL);
             activityService.insertActivity(activity);
         }else {
+            Activity activity=new Activity(activityID,merchantID,name,description, Date.valueOf(startDate),Date.valueOf(endDate),imageURL);
             activityService.updateActivity(activity);
         }
         return JsonResult.SUCCESS;
     }
 
+    @RequestMapping("/delete")
     public String deleteActivity(String activityID){
         activityService.deleteActivity(activityID);
-        return JsonResult.SUCCESS;
+        return "forward:all";
     }
 
 

@@ -35,4 +35,8 @@ public class ActivityService {
     public void deleteActivity(String activityID){
         activityMapper.deleteByActivityID(activityID);
     }
+
+    public List<Activity> getMerchantActivities(String merchant){
+        return activityMapper.getActivitiesByMerchantID(merchant);
+    }
 }

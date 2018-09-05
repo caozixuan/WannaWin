@@ -3,6 +3,7 @@ package citiMerchant.item;
 import citiMerchant.mapper.MerchantMapper;
 import citiMerchant.uitl.JsonResult;
 import citiMerchant.vo.Item;
+import citiMerchant.vo.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by zhong on 2018/7/11 19:51
@@ -68,11 +66,14 @@ public class ItemController {
 
     @RequestMapping("/submitEdit")
     @ResponseBody
-    public String submitEdit(String itemID, String name, String description, double originalPrice, int points, long stock, String overdueTime,String itemType ,String logoURL,HttpSession session){
+    public String submitEdit(String itemID, String name, String description, double originalPrice, int points, long stock, String overdueTime,String[] itemType ,String logoURL,HttpSession session){
         ModelAndView mv = new ModelAndView();
         String merchantID = (String)session.getAttribute("merchantID");
+
+
+
         overdueTime = overdueTime + " 00:00:00";
-        Item item=new Item(itemID,name,description,merchantID,logoURL,originalPrice,points,Timestamp.valueOf(overdueTime),stock,itemType);
+        Item item=new Item(itemID,name,description,merchantID,logoURL,originalPrice,points,Timestamp.valueOf(overdueTime),stock);
         if (item.getItemID().equals("")){
             item.setItemID(UUID.randomUUID().toString());
             itemService.addItem(item);
