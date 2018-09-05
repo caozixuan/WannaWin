@@ -23,7 +23,7 @@ public class Item {
     }
 
     //for DB
-    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, String itemType) {
+    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
         ItemID = itemID;
         this.name = name;
         this.description = description;
@@ -33,7 +33,6 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
-        this.itemType = itemType;
     }
 
 
