@@ -54,13 +54,13 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品类别</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="" title="普通" >
-                <input type="checkbox" name="" title="餐饮">
-                <input type="checkbox" name="" title="运动" >
-                <input type="checkbox" name="" title="银行" >
-                <input type="checkbox" name="" title="服装">
-                <input type="checkbox" name="" title="教育" >
-                <input type="checkbox" name="" title="通讯" >
+                <input type="checkbox" name="itemType" value="normal" title="普通" ${typeCheck[0]}>
+                <input type="checkbox" name="itemType" value="catering" title="餐饮" ${typeCheck[1]}>
+                <input type="checkbox" name="itemType" value="exercise" title="运动" ${typeCheck[2]}>
+                <input type="checkbox" name="itemType" value="bank" title="银行" ${typeCheck[3]}>
+                <input type="checkbox" name="itemType" value="costume" title="服装" ${typeCheck[4]}>
+                <input type="checkbox" name="itemType" value="education" title="教育" ${typeCheck[5]}>
+                <input type="checkbox" name="itemType" value="communication" title="通讯" ${typeCheck[6]}>
             </div>
         </div>
     </div>

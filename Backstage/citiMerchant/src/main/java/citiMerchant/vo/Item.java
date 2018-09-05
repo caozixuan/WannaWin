@@ -35,9 +35,19 @@ public class Item {
         this.stock = stock;
     }
 
+    public String getStr(){
+        List<Type.ItemType> itemTypes=Type.ItemType.DBStr2enum(this.getItemType());
+        String typeStr="";
+        for (Type.ItemType i:itemTypes
+                ) {
+            typeStr+=Type.ItemType.enum2str(i)+"、";
+        }
+        return typeStr.substring(0,typeStr.length()-1);
+    }
+
 
     public Item() {
-        this.ItemID = UUID.randomUUID().toString();
+
     }
 
     public void setItemID(String itemID){

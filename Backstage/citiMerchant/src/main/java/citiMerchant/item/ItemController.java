@@ -41,6 +41,9 @@ public class ItemController {
         String merchantID=session.getAttribute("merchantID").toString();
         ModelAndView mv = new ModelAndView();
         List<Item> items = itemService.getInfo(merchantID);
+        for (Item item:items){
+            item.setItemType(item.getStr());
+        }
         mv.addObject("items", items);
         mv.addObject("merchant", merchantMapper.selectByID(merchantID));
         mv.setViewName("table/itemTable");
@@ -59,7 +62,18 @@ public class ItemController {
     public ModelAndView editItem(String itemID) {
         ModelAndView mv = new ModelAndView();
         Item item = itemService.getItem(itemID);
+        List<Type.ItemType> itemTypes=item.getItemTypeList();
+        String[] typeCheck=new String[7];
+        typeCheck[0]=itemTypes.contains(Type.ItemType.normal)?"checked":"";
+        typeCheck[1]=itemTypes.contains(Type.ItemType.catering)?"checked":"";
+        typeCheck[2]=itemTypes.contains(Type.ItemType.exercise)?"checked":"";
+        typeCheck[3]=itemTypes.contains(Type.ItemType.bank)?"checked":"";
+        typeCheck[4]=itemTypes.contains(Type.ItemType.costume)?"checked":"";
+        typeCheck[5]=itemTypes.contains(Type.ItemType.education)?"checked":"";
+        typeCheck[6]=itemTypes.contains(Type.ItemType.communication)?"checked":"";
+
         mv.addObject("item", item);
+        mv.addObject("typeCheck",typeCheck);
         mv.setViewName("table/editItem");
         return mv;
     }
@@ -69,11 +83,10 @@ public class ItemController {
     public String submitEdit(String itemID, String name, String description, double originalPrice, int points, long stock, String overdueTime,String[] itemType ,String logoURL,HttpSession session){
         ModelAndView mv = new ModelAndView();
         String merchantID = (String)session.getAttribute("merchantID");
-
-
-
+        String DBstr=Type.ItemType.str2DBStr(Arrays.asList(itemType));
         overdueTime = overdueTime + " 00:00:00";
         Item item=new Item(itemID,name,description,merchantID,logoURL,originalPrice,points,Timestamp.valueOf(overdueTime),stock);
+        item.setItemType(DBstr);
         if (item.getItemID().equals("")){
             item.setItemID(UUID.randomUUID().toString());
             itemService.addItem(item);
@@ -100,15 +113,10 @@ public class ItemController {
     }*/
 
     @RequestMapping("/deleteItem")
-    public ModelAndView deleteItem(String itemID,HttpSession session) {
+    public String deleteItem(String itemID,HttpSession session) {
         String merchantID=session.getAttribute("merchantID").toString();
         itemService.deleteItem(itemID);
-        ModelAndView mv = new ModelAndView();
-        List<Item> items = itemService.getInfo(merchantID);
-        mv.addObject("items", items);
-        mv.addObject("merchant", merchantMapper.selectByID(merchantID));
-        mv.setViewName("/table/itemTable");
-        return mv;
+        return "forward:/getItem";
     }
 
    /* @RequestMapping(value = {"/item/addItemOperation"})
