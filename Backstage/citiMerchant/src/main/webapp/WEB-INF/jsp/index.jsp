@@ -74,13 +74,15 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div id="content-body" style="padding: 15px;">
+        <div id="content-body" style="padding: 15px;" >
+            <script type="text/javascript">
+                window.onload = function(){load('item/getItem');};
+            </script>
 
         </div>
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         © layui.com - 底部固定区域
     </div>
 </div>

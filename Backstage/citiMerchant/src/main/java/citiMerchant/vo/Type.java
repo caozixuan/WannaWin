@@ -119,6 +119,15 @@ public class Type {
             return tw.toString();
         }
 
+        // List<str> => DBStr   // null -> "000..000"
+        public static String str2DBStr(List<String> itemTypes) {
+            List<ItemType> enumTypes = new ArrayList<>();
+            for (String itemType : itemTypes) {
+                enumTypes.add(str2enum(itemType));
+            }
+            return enum2DBStr(enumTypes);
+        }
+        
     }
 
 

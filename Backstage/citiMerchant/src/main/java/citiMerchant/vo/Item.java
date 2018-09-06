@@ -23,7 +23,7 @@ public class Item {
     }
 
     //for DB
-    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, String itemType) {
+    public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
         ItemID = itemID;
         this.name = name;
         this.description = description;
@@ -33,12 +33,21 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
-        this.itemType = itemType;
+    }
+
+    public String getStr(){
+        List<Type.ItemType> itemTypes=Type.ItemType.DBStr2enum(this.getItemType());
+        String typeStr="";
+        for (Type.ItemType i:itemTypes
+                ) {
+            typeStr+=Type.ItemType.enum2str(i)+"、";
+        }
+        return typeStr.substring(0,typeStr.length()-1);
     }
 
 
     public Item() {
-        this.ItemID = UUID.randomUUID().toString();
+
     }
 
     public void setItemID(String itemID){

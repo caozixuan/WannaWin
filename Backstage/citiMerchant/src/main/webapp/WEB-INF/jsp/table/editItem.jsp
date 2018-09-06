@@ -54,15 +54,13 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品类别</label>
             <div class="layui-input-block">
-                <select name="itemType" lay-verify="">
-                    <option value="normal">普通</option>
-                    <option value="catering">餐饮</option>
-                    <option value="exercise">运动</option>
-                    <option value="bank">银行</option>
-                    <option value="costume">服装</option>
-                    <option value="education">教育</option>
-                    <option value="communication">通讯</option>
-                </select>
+                <input type="checkbox" name="itemType" value="normal" title="普通" ${typeCheck[0]}>
+                <input type="checkbox" name="itemType" value="catering" title="餐饮" ${typeCheck[1]}>
+                <input type="checkbox" name="itemType" value="exercise" title="运动" ${typeCheck[2]}>
+                <input type="checkbox" name="itemType" value="bank" title="银行" ${typeCheck[3]}>
+                <input type="checkbox" name="itemType" value="costume" title="服装" ${typeCheck[4]}>
+                <input type="checkbox" name="itemType" value="education" title="教育" ${typeCheck[5]}>
+                <input type="checkbox" name="itemType" value="communication" title="通讯" ${typeCheck[6]}>
             </div>
         </div>
     </div>
@@ -86,6 +84,10 @@
     <button class="layui-btn layui-btn-primary" type="reset">重新输入</button>
 </form>
 <script type="text/javascript">
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+    });
     //日期渲染
     layui.use('laydate', function(){
         var laydate = layui.laydate;

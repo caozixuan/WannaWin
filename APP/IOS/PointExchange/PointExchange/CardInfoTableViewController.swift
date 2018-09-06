@@ -34,6 +34,7 @@ class CardInfoTableViewController: UITableViewController {
 		self.tableView.tableHeaderView = searchController?.searchBar
 		self.tableView.tableHeaderView?.backgroundColor = UIColor.white
 		
+
 		// 加入“添加”按钮在导航栏右边
 		let addBtn = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.add , target: self, action: #selector(goAddVC))
 		self.navigationItem.rightBarButtonItem = addBtn
@@ -79,22 +80,23 @@ class CardInfoTableViewController: UITableViewController {
 	//MARK: - Table view data source
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchResult == nil || searchResult?.count == 0 {
+//        if searchResult == nil || searchResult?.count == 0 {
             if let array = cardArray {
                 return array.count
             }
             else{
                 return 0
             }
-        }else{
-            return (searchResult?.count)!
-        }
+//        }else{
+//            return (searchResult?.count)!
+//        }
         
 	}
 	
 	 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
 		let cell  = tableView.dequeueReusableCell(withIdentifier: "card", for: indexPath)
+
 		if (searchController?.isActive)! && searchResult != nil && searchResult?.count != 0{
             (cell.viewWithTag(1) as! UIImageView).imageFromURL((searchResult![indexPath.row].merchant?.logoURL)!, placeholder: UIImage())
             (cell.viewWithTag(2) as! UILabel).text = String(stringInterpolationSegment: searchResult![indexPath.row].points)
@@ -112,6 +114,7 @@ class CardInfoTableViewController: UITableViewController {
                 
             }
         }
+
         cell.selectionStyle = .none
         
 		return cell
@@ -121,9 +124,11 @@ class CardInfoTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "HomePage", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailViewController
+
         if (searchController?.isActive)! && searchResult != nil && searchResult?.count != 0{
             vc.merchantID = searchResult?[indexPath.row].merchant?.id
         }else{
+
             vc.merchantID = cardArray?[indexPath.row].merchant?.id
         }
         self.navigationController?.pushViewController(vc, animated: true)
@@ -156,6 +161,6 @@ class CardInfoTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    
-    
+
+
  }
