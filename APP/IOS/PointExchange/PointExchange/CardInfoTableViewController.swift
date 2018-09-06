@@ -80,17 +80,17 @@ class CardInfoTableViewController: UITableViewController {
 	//MARK: - Table view data source
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if searchResult == nil || searchResult?.count == 0 {
+        if searchResult == nil || searchResult?.count == 0 {
             if let array = cardArray {
                 return array.count
             }
             else{
                 return 0
             }
-//        }else{
-//            return (searchResult?.count)!
-//        }
-        
+        }else{
+            return (searchResult?.count)!
+        }
+		
 	}
 	
 	 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
