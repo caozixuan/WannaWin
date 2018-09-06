@@ -891,6 +891,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Q5h-IQ-sxg" firstAttribute="leading" secondItem="9bx-Qo-ZHf" secondAttribute="leading" constant="20" id="7UW-Rf-hqi"/>
+                                    <constraint firstAttribute="width" secondItem="9bx-Qo-ZHf" secondAttribute="height" multiplier="343:384" id="9XX-v0-KmH"/>
                                     <constraint firstItem="Q5h-IQ-sxg" firstAttribute="top" secondItem="nYJ-8g-tIV" secondAttribute="bottom" constant="8" id="CZQ-xK-ozf"/>
                                     <constraint firstAttribute="bottom" secondItem="d40-mm-j4c" secondAttribute="bottom" id="PTp-hB-k4c"/>
                                     <constraint firstItem="d40-mm-j4c" firstAttribute="leading" secondItem="9bx-Qo-ZHf" secondAttribute="leading" constant="1" id="TOc-Cy-lcq"/>
