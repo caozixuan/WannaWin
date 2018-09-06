@@ -1,6 +1,7 @@
 package citi.vo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,15 +11,17 @@ public class Points_history {
     protected Integer points_card;
     protected Double points_citi;
     protected String cause;
-    protected Timestamp time;
+    protected String time;
 
     public Points_history(String userID, String merchantIDs, Integer points_card, Double points_citi, String cause, Timestamp time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String timeString = formatter.format(time);
         this.userID = userID;
         this.merchantID = merchantID;
         this.points_card = points_card;
         this.points_citi = Double.parseDouble(String.format("%.2f", points_citi));
         this.cause = cause;
-        this.time = time;
+        this.time = timeString;
     }
 
     public boolean isEXCHANGE() {
@@ -45,7 +48,7 @@ public class Points_history {
         return Cause.getCause(cause);
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 

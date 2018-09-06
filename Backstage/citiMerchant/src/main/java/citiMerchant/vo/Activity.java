@@ -1,5 +1,7 @@
 package citiMerchant.vo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
 
 public class Activity {
@@ -8,7 +10,9 @@ public class Activity {
     private String merchantID;
     private String name;
     private String description;
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startDate;
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endDate;
     private String imageURL;
 
@@ -20,6 +24,9 @@ public class Activity {
         this.startDate = startDate;
         this.endDate = endDate;
         this.imageURL = imageURL;
+    }
+
+    public Activity(){
     }
 
     public String getActivityID() {
@@ -70,4 +77,11 @@ public class Activity {
         this.imageURL = imageURL;
     }
 
+    public void setActivityID(String activityID) {
+        this.activityID = activityID;
+    }
+
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
+    }
 }

@@ -13,20 +13,12 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-            <!-- 启动项 -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".PaymentFinishActivity"
@@ -61,7 +53,6 @@
         <activity android:name=".HistoryExchangeActivity" />
         <activity android:name=".MyCouponsActivity" />
         <activity android:name=".PointsExchangeExpandListActivity" />
-        <activity android:name=".PointsExchangeRecordActivity" />
         <activity android:name=".BindCardActivity" />
         <activity android:name=".DetailFindPayActivity" />
         <activity android:name=".DetailActivityActivity" />
@@ -73,7 +64,17 @@
         <activity android:name=".UserSettingActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".QuestionnaireActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SplashActivity">
+
+            <!-- 启动项 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".GuideActivity"></activity>
     </application>
 
 </manifest>

@@ -1,24 +1,30 @@
 package citiMerchant.vo;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
-public class Item {
-    private String itemID;
-    private String name;
-    private String description;
-    private String merchantID;
-    private String logoURL;
-    private Double originalPrice;
-    private Integer points;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Timestamp overdueTime;
-    private Long stock;
 
+public class Item {
+    protected String ItemID;
+    protected String name;
+    protected String description;
+    protected String merchantID;
+    protected String logoURL;
+    protected Double originalPrice;
+    protected Integer points;
+    protected Timestamp overdueTime;
+    protected Long stock;
+    protected String itemType;
+
+
+    public List<Type.ItemType> getItemTypeList() {
+        return Type.ItemType.DBStr2enum(itemType);
+    }
+
+    //for DB
     public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
-        this.itemID = itemID;
+        ItemID = itemID;
         this.name = name;
         this.description = description;
         this.merchantID = merchantID;
@@ -28,13 +34,30 @@ public class Item {
         this.overdueTime = overdueTime;
         this.stock = stock;
     }
+
+    public String getStr(){
+        List<Type.ItemType> itemTypes=Type.ItemType.DBStr2enum(this.getItemType());
+        String typeStr="";
+        for (Type.ItemType i:itemTypes
+                ) {
+            typeStr+=Type.ItemType.enum2str(i)+"、";
+        }
+        return typeStr.substring(0,typeStr.length()-1);
+    }
+
 
     public Item() {
 
     }
 
-    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock) {
-        this.itemID = UUID.randomUUID().toString();
+    public void setItemID(String itemID){
+        this.ItemID = itemID;
+    }
+
+
+    //for programmer
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, List<Type.ItemType> itemTypes) {
+        this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.merchantID = merchantID;
@@ -43,10 +66,25 @@ public class Item {
         this.points = points;
         this.overdueTime = overdueTime;
         this.stock = stock;
+        this.itemType = Type.ItemType.enum2DBStr(itemTypes);
+    }
+
+    //for programmer
+    public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, Type.TypeWrapper tw) {
+        this.ItemID = UUID.randomUUID().toString();
+        this.name = name;
+        this.description = description;
+        this.merchantID = merchantID;
+        this.logoURL = logoURL;
+        this.originalPrice = originalPrice;
+        this.points = points;
+        this.overdueTime = overdueTime;
+        this.stock = stock;
+        this.itemType = tw.toString();
     }
 
     public String getItemID() {
-        return itemID;
+        return ItemID;
     }
 
     public String getName() {
@@ -81,39 +119,12 @@ public class Item {
         return stock;
     }
 
-    public void setItemID(String itemID) {
-        this.itemID = itemID;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getItemType(){
+        return this.itemType;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setMerchantID(String merchantID) {
-        this.merchantID = merchantID;
-    }
-
-    public void setLogoURL(String logoURL) {
-        this.logoURL = logoURL;
-    }
-
-    public void setOriginalPrice(Double originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    public void setOverdueTime(Timestamp overdueTime) {
-        this.overdueTime = overdueTime;
-    }
-
-    public void setStock(Long stock) {
-        this.stock = stock;
-    }
 }

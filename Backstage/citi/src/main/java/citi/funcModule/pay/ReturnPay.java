@@ -16,7 +16,7 @@ public class ReturnPay {
     protected String userID;
     protected String state;   //2018-07-10 从 OrderState 改为 String - 任思远
     protected String merchantID;
-    protected Timestamp time;
+    protected String time;
 
     private String merchantName;
     private String merchantLogoURL;

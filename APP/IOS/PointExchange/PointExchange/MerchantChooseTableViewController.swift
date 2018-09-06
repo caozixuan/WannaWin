@@ -69,7 +69,7 @@ class MerchantChooseTableViewController: UIViewController {
 			}.subscribe(onNext: { indexPath, model in
 				let sb = UIStoryboard(name: "HomePage", bundle: nil)
 				let view = sb.instantiateViewController(withIdentifier: "AddCardViewController") as! AddCardViewController
-				view.merchant = self.merchants[indexPath.row]
+				view.merchantID = self.merchants[indexPath.row].id
 				self.navigationController?.pushViewController(view, animated: true)
 			}).disposed(by:self.disposeBag)
 	}
@@ -105,7 +105,7 @@ class MerchantChooseTableViewController: UIViewController {
                 else{
                     var newData:[SectionModel<String, Merchant>] = []
                     for sectionModel in data {
-                        let items = sectionModel.items.filter{ "\($0.name)".transformToPinyin().contains(query.lowercased()) }
+                        let items = sectionModel.items.filter{ "\($0.name)".lowercased().contains(query.lowercased()) }
                         newData.append(SectionModel(model: sectionModel.model, items: items))
                     }
                     return Observable.just(newData)

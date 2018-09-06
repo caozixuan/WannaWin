@@ -65,7 +65,7 @@ public class MerchantController {
         return mv;
     }
 
-    @RequestMapping("/uploadFile1")
+    /*@RequestMapping("/uploadFile1")
     @ResponseBody
     public Map<String, Object> uploadFile1(MultipartFile myfile1)
             throws IllegalStateException, IOException {
@@ -127,5 +127,5 @@ public class MerchantController {
             map.put("error", "图片不合法");
             return map;
         }
-    }
+    }*/
 }

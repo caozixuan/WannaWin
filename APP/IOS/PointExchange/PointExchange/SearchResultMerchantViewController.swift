@@ -11,7 +11,7 @@ import UIKit
 class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
 	@IBOutlet var tableView: UITableView!
-	var merchants = [Merchant]()
+    var noResultLabel:UILabel?
 	var searchResults = [Merchant]()
 	var keyword = ""
 	var start = 0
@@ -23,6 +23,13 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+        noResultLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 10))
+        noResultLabel?.center.x = self.view.center.x
+        noResultLabel?.center.y = self.view.center.y-80
+        noResultLabel?.text = "暂无您搜索的结果"
+        self.view.addSubview(self.noResultLabel!)
+        noResultLabel?.isHidden = true
+        
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchCell")
@@ -57,6 +64,8 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 		cell?.logoImageView.kf.setImage(with: imageURL)
 		cell?.title.text = searchResults[indexPath.row].name
 		cell?.descriptionLabel.text = searchResults[indexPath.row].description
+        
+        cell?.selectionStyle = .none
 		return cell!
 	}
 	
@@ -64,8 +73,16 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 		self.keyword = keyword
 		ServerConnector.searchMerchant(start: self.start, end: self.end, keyword: keyword){(result, merchants) in
 			if result {
-				self.searchResults = merchants!
-				self.tableView.reloadData()
+                if merchants?.count == 0{
+                    self.tableView.isHidden = true
+                    self.noResultLabel?.isHidden = false
+                }else{
+                    self.tableView.isHidden = false
+                    self.noResultLabel?.isHidden = true
+                    self.searchResults = merchants!
+                    self.tableView.reloadData()
+                }
+				
 				
 			}
 		}
@@ -86,6 +103,12 @@ class SearchResultMerchantViewController: UIViewController,UITableViewDelegate,U
 			}
 		}
 	}
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyBoard = UIStoryboard(name:"Discover", bundle:nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "MerchantDetailViewController") as! MerchantDetailViewController
+        view.merchant = searchResults[indexPath.row]
+        self.presentingViewController?.navigationController?.pushViewController(view, animated: true)
+    }
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1

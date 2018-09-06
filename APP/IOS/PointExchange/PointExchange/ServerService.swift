@@ -140,8 +140,8 @@ extension ServerService:TargetType {
         // 商户
         case .getMerchantsInfos:
             return "/merchant/getInfos"
-        case .getMerchantInfoByID(let merchantID):
-            return "/merchant/\(merchantID)"
+        case .getMerchantInfoByID:
+            return "/merchant/getSingleInfo"
         case .getMerchantCount:
             return "/merchant/getNum"
 		case .searchMerchant:

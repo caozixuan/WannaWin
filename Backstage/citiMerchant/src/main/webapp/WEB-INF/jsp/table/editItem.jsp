@@ -50,6 +50,21 @@
         </div>
     </div>
 
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">商品类别</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="itemType" value="normal" title="普通" ${typeCheck[0]}>
+                <input type="checkbox" name="itemType" value="catering" title="餐饮" ${typeCheck[1]}>
+                <input type="checkbox" name="itemType" value="exercise" title="运动" ${typeCheck[2]}>
+                <input type="checkbox" name="itemType" value="bank" title="银行" ${typeCheck[3]}>
+                <input type="checkbox" name="itemType" value="costume" title="服装" ${typeCheck[4]}>
+                <input type="checkbox" name="itemType" value="education" title="教育" ${typeCheck[5]}>
+                <input type="checkbox" name="itemType" value="communication" title="通讯" ${typeCheck[6]}>
+            </div>
+        </div>
+    </div>
+
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">商品描述</label>
         <div class="layui-input-block">
@@ -69,6 +84,10 @@
     <button class="layui-btn layui-btn-primary" type="reset">重新输入</button>
 </form>
 <script type="text/javascript">
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+    });
     //日期渲染
     layui.use('laydate', function(){
         var laydate = layui.laydate;
@@ -80,7 +99,7 @@
     //上传图片渲染
         layui.upload.render({
         elem: '#upload-img'
-        ,url: 'item/uploadFile'
+        ,url: 'uploadFile/item'
         ,done: function(res){
             alert(res.status);
             if (res.status=="success"){

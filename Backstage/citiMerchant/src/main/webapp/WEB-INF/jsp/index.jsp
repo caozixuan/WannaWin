@@ -59,7 +59,12 @@
                         <dd><a href="javascript:load('strategy/addStrategy');">添加策略</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:merchant()">活动信息</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">活动信息</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:load('activity/all');">活动清单</a></dd>
+                        <dd><a href="javascript:load('activity/addActivity');">添加活动</a></dd>
+                    </dl>
+                </li>
                 <li class="layui-nav-item"><a href="javascript:load('history');">历史订单</a></li>
                 <li class="layui-nav-item"><a href="javascript:load('showData');">统计信息</a></li>
                 <li class="layui-nav-item"><a href="javascript:load('merchant/editMerchant')">商户信息</a></li>
@@ -69,13 +74,15 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div id="content-body" style="padding: 15px;">
+        <div id="content-body" style="padding: 15px;" >
+            <script type="text/javascript">
+                window.onload = function(){load('item/getItem');};
+            </script>
 
         </div>
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         © layui.com - 底部固定区域
     </div>
 </div>
