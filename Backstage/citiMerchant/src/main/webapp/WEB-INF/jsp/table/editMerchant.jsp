@@ -71,7 +71,7 @@
     //上传图片渲染
     layui.upload.render({
         elem: '#upload-merchantLOGO'
-        ,url: 'uploadFile1'
+        ,url: 'uploadFile/merchant'
         ,done: function(res){
             if (res.status=="success"){
                 $("#url2").val(status.url);
@@ -81,7 +81,7 @@
 
     layui.upload.render({
         elem: '#upload-cardLOGO'
-        ,url: '/uploadFile2'
+        ,url: 'uploadFile/card'
         ,done: function(res){
             if (res.status=="success"){
                 $("#url3").val(status.url);

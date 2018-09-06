@@ -16,15 +16,14 @@ import java.util.Map;
 @Controller
 public class UploadController {
     private static String url = "http://www.byzhong.cn/image/";
-    private String saveDirectory="/usr/share/tomcat7/image/";
+    private String saveDirectory="E:/image/";
 
     @RequestMapping("/uploadFile/{category}")
     @ResponseBody
     public Map<String, Object> uploadFile(@RequestParam("file") MultipartFile myFile, @PathVariable String category,HttpSession session)
             throws IllegalStateException, IOException {
-
         String oldFileName = myFile.getOriginalFilename();
-        if (myFile != null && oldFileName != null && oldFileName.length() > 0) {
+        if (oldFileName != null && oldFileName.length() > 0) {
             String merchantID = session.getAttribute("merchantID").toString();
             String newFileName = merchantID + oldFileName;
             File newFile = new File(saveDirectory+category + "/" + newFileName);

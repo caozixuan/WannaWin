@@ -25,7 +25,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">活动起始时间</label>
             <div class="layui-input-block">
-                <input type="text" name="overdueTime" lay-verify="date" id="startDate" class="layui-input" value="${item.overdueTime}">
+                <input type="text" name="startDate" lay-verify="date" id="startDate" class="layui-input" value="${activity.startDate}">
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">活动截止时间</label>
             <div class="layui-input-block">
-                <input type="text" name="overdueTime" lay-verify="date" id="endDate" class="layui-input" value="${item.overdueTime}">
+                <input type="text" name="endDate" lay-verify="date" id="endDate" class="layui-input" value="${activity.endDate}">
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
             <p>点击上传，或将文件拖拽到此处</p>
         </div>
     </div>
-    <input id="image-url" type="hidden" name="logoURL" value="${activity.imageURL}">
+    <input id="image-url" type="hidden" name="imageURL" value="${activity.imageURL}">
     <button class="layui-btn" lay-submit="" type="submit">提交</button>
     <button class="layui-btn layui-btn-primary" type="reset">重新输入</button>
 </form>
@@ -72,7 +72,7 @@
     //上传图片渲染
     layui.upload.render({
         elem: '#upload-img'
-        ,url: 'upload/activity'
+        ,url: 'uploadFile/activity'
         ,done: function(res){
             alert(res.status);
             if (res.status=="success"){

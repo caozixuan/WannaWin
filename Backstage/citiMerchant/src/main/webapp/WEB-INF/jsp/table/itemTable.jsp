@@ -10,7 +10,7 @@
          isELIgnored="false"%>
 <table class="layui-table">
     <thead>
-    <tr><th>图片</th><th>名称</th><th>简述</th><th>原价</th><th>抵扣积分</th><th>操作</th></tr>
+    <tr><th>图片</th><th>名称</th><th>简述</th><th>原价</th><th>抵扣积分</th><th>类别</th><th>操作</th></tr>
     </thead>
     <tbody>
         <c:forEach items="${items}" var="item">
@@ -22,6 +22,7 @@
         <td>${item.description}</td>
         <td>${item.originalPrice}</td>
         <td>${item.points}</td>
+        <td>${item.itemType}</td>
         <td><button class="layui-btn" onclick="load('item/editItem?itemID=${item.itemID}')">编辑</button> </td>
         <td><button class="layui-btn layui-btn-danger" onclick="load('item/deleteItem?itemID=${item.itemID}')">删除</button></td>
     </tr>
