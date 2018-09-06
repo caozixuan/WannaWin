@@ -1,6 +1,7 @@
 package citi.vo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class Activity {
 
@@ -8,17 +9,20 @@ public class Activity {
     private String merchantID;
     private String name;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String imageURL;
 
     public Activity(String activityID, String merchantID, String name, String description, Date startDate, Date endDate, String imageURL) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String startDateString = formatter.format(startDate);
+        String endDateString = formatter.format(endDate);
         this.activityID = activityID;
         this.merchantID = merchantID;
         this.name = name;
         this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = startDateString;
+        this.endDate = endDateString;
         this.imageURL = imageURL;
     }
 
@@ -38,11 +42,11 @@ public class Activity {
         return description;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -59,11 +63,15 @@ public class Activity {
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String startDateString = formatter.format(startDate);
+        this.startDate = startDateString;
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String endDateString = formatter.format(endDate);
+        this.endDate = endDateString;
     }
 
     public void setImageURL(String imageURL) {

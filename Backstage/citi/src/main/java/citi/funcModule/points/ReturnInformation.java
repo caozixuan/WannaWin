@@ -29,8 +29,8 @@ public class ReturnInformation implements Comparable<ReturnInformation>{
 
     @Override
     public int compareTo(ReturnInformation o) {
-        Timestamp timestamp1 = this.points_history_merchants.get(0).getTime();
-        Timestamp timestamp2 = o.points_history_merchants.get(0).getTime();
+        Timestamp timestamp1 = Timestamp.valueOf(this.points_history_merchants.get(0).getTime());
+        Timestamp timestamp2 = Timestamp.valueOf(o.points_history_merchants.get(0).getTime());
         if(timestamp1.after(timestamp2))
             return -1;
         // TODO Auto-generated method stub

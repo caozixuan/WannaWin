@@ -76,7 +76,8 @@ public class PointsService {
         ArrayList<Timestamp> timestamps = new ArrayList<Timestamp>();
         for(Points_history_merchant points_history_merchant:points_history_merchants){
             if(timestamps.indexOf(points_history_merchant.getTime())<0){
-                timestamps.add(points_history_merchant.getTime());
+                Timestamp timestamp = Timestamp.valueOf(points_history_merchant.getTime());
+                timestamps.add(timestamp);
             }
         }
         for(Timestamp timestamp:timestamps){

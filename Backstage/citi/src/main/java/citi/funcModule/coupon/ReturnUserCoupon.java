@@ -8,11 +8,11 @@ public class ReturnUserCoupon extends UserCoupon {
     private String itemName;
     private int points;
     private String description;
-    private Timestamp overdueTime;
+    private String overdueTime;
     private String logoURL;
 
-    public ReturnUserCoupon(long couponID, String userID, String itemID, String state, Timestamp getTime, Timestamp useTime, String itemName, int points, String description, Timestamp overdueTime, String logoURL) {
-        super(couponID, userID, itemID, state, getTime, useTime);
+    public ReturnUserCoupon(long couponID, String userID, String itemID, String state, String getTime, String useTime, String itemName, int points, String description, String overdueTime, String logoURL) {
+        super(couponID, userID, itemID, state, Timestamp.valueOf(getTime), Timestamp.valueOf(useTime));
         this.itemName = itemName;
         this.points=points;
         this.description = description;

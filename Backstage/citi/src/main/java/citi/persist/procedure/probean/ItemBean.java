@@ -16,7 +16,7 @@ public class ItemBean extends Item {
     }
 
     public ItemBean(Item item, String merchantName, String merchantLogoURL){
-        super(item.getItemID(),item.getName(),item.getDescription(),item.getMerchantID(),item.getLogoURL(),item.getOriginalPrice(),item.getPoints(),item.getOverdueTime(),item.getStock(),"暂无");
+        super(item.getItemID(),item.getName(),item.getDescription(),item.getMerchantID(),item.getLogoURL(),item.getOriginalPrice(),item.getPoints(),Timestamp.valueOf(item.getOverdueTime()),item.getStock(),"暂无");
         this.merchantName = merchantName;
         this.merchantLogoURL = merchantLogoURL;
     }
