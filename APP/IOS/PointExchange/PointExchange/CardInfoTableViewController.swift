@@ -22,21 +22,25 @@ class CardInfoTableViewController: UITableViewController {
     
     var isSearch = false
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-        
-        searchController = UISearchController(searchResultsController: nil)
-        searchController?.searchBar.delegate = self
-        searchController?.searchResultsUpdater = self
-        searchController?.searchBar.searchBarStyle = .minimal
-        searchController?.dimsBackgroundDuringPresentation = true
-        self.definesPresentationContext = true
-        searchController?.hidesNavigationBarDuringPresentation = false
-        self.tableView.tableHeaderView = searchController?.searchBar
-        
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		searchController = UISearchController(searchResultsController: nil)
+		searchController?.searchBar.delegate = self
+		searchController?.searchResultsUpdater = self
+		searchController?.searchBar.searchBarStyle = .minimal
+		searchController?.dimsBackgroundDuringPresentation = false
+		self.definesPresentationContext = true
+		searchController?.hidesNavigationBarDuringPresentation = false
+		self.tableView.tableHeaderView = searchController?.searchBar
+		self.tableView.tableHeaderView?.backgroundColor = UIColor.white
+		
 		// 加入“添加”按钮在导航栏右边
 		let addBtn = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.add , target: self, action: #selector(goAddVC))
 		self.navigationItem.rightBarButtonItem = addBtn
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		ServerConnector.getCardCount(){ (result,num) in
 			if result{
@@ -91,13 +95,13 @@ class CardInfoTableViewController: UITableViewController {
 	 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
 		let cell  = tableView.dequeueReusableCell(withIdentifier: "card", for: indexPath)
-        if searchResult != nil && searchResult?.count != 0{
+		if (searchController?.isActive)! && searchResult != nil && searchResult?.count != 0{
             (cell.viewWithTag(1) as! UIImageView).imageFromURL((searchResult![indexPath.row].merchant?.logoURL)!, placeholder: UIImage())
             (cell.viewWithTag(2) as! UILabel).text = String(stringInterpolationSegment: searchResult![indexPath.row].points)
             (cell.viewWithTag(3) as! UILabel).text = String(stringInterpolationSegment: searchResult![indexPath.row].points*searchResult![indexPath.row].proportion!)
             (cell.viewWithTag(4) as! UILabel).text = searchResult![indexPath.row].merchant?.name
             (cell.viewWithTag(5) as! UIImageView).image = UIImage(named: "bg2_\(searchResult![indexPath.row].cardStyle!)")
-            
+		
         }else{
             if cardArray != nil {
                 (cell.viewWithTag(1) as! UIImageView).imageFromURL((cardArray![indexPath.row].merchant?.logoURL)!, placeholder: UIImage())
@@ -117,13 +121,14 @@ class CardInfoTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "HomePage", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CardDetailTableViewController") as! CardDetailViewController
-        if searchResult != nil && searchResult?.count != 0{
+        if (searchController?.isActive)! && searchResult != nil && searchResult?.count != 0{
             vc.merchantID = searchResult?[indexPath.row].merchant?.id
         }else{
             vc.merchantID = cardArray?[indexPath.row].merchant?.id
         }
         self.navigationController?.pushViewController(vc, animated: true)
-		
+		// 取消搜索栏
+		searchController?.isActive = false
 	}
 }
  
