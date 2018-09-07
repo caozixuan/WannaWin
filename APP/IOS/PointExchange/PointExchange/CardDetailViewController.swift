@@ -77,33 +77,47 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             self.gestureOriginPoint = point
         }else if gesture.state == .changed{
             var offset = Double(point.y-(self.gestureOriginPoint?.y)!)
-
-            
-            if isFold{
-                //折叠状态时，若处在上部（即遮挡卡logo位置）时，下滑至-24
-                if offset > 0 && self.topConstraint+offset > -24 && self.topConstraint+offset < 169 {
-                    offset = -24 - self.topConstraint
-                }
-                // 折叠状态时，当下滑太多时，固定到169位置
-                else if self.topConstraint + offset > 169{
-                    offset = 169 - self.topConstraint
-                }
-                // 折叠状态时，当上滑太多时，固定到-100
-                else if self.topConstraint + offset < -100{
-                    offset = -100 - self.topConstraint
-                }
-            }else{
-                // 非折叠状态时，当上滑太多，只恢复到最初的样子（-24）
-                if self.topConstraint + offset < -23.5{
-                    offset = -23.5 - self.topConstraint
-                }
-                if self.topConstraint + offset > 169{
-                    offset = 0
-                }
+            self.gestureOriginPoint = point
+            if offset+self.topConstraint > 169{
+                offset = 169 - self.topConstraint
+            }else if offset+self.topConstraint < -100{
+                offset = -100 - self.topConstraint
             }
+//            if isFold{
+//                //折叠状态时，若处在上部（即遮挡卡logo位置）时，下滑至-24
+//                if offset > 0 && self.topConstraint+offset > -24 && self.topConstraint+offset < 169 {
+//                    offset = -24 - self.topConstraint
+//                }
+//                // 折叠状态时，当下滑太多时，固定到169位置
+//                else if self.topConstraint + offset > 169{
+//                    offset = 169 - self.topConstraint
+//                }
+//                // 折叠状态时，当上滑太多时，固定到-100
+//                else if self.topConstraint + offset < -100{
+//                    offset = -100 - self.topConstraint
+//                }
+//            }else{
+//                // 非折叠状态时，当上滑太多，只恢复到最初的样子（-24）
+//                if self.topConstraint + offset < -23.5{
+//                    offset = -23.5 - self.topConstraint
+//                }
+//                if self.topConstraint + offset > 169{
+//                    offset = 0
+//                }
+//            }
             print("constraint:\(self.topConstraint) offset: \(offset) new:\(self.topConstraint+offset)")
             backgroundViewSwipe(offset: offset)
         }else if gesture.state == .ended{
+            var offset = Double(point.y-(self.gestureOriginPoint?.y)!)
+            if self.topConstraint + offset > 20{
+                offset = 169 - self.topConstraint
+            }else if isFold && self.topConstraint + offset < -23.5 {
+                offset = -100 - self.topConstraint
+            }else if self.topConstraint + offset < 20{
+                offset = -23.5 - self.topConstraint
+            }
+            
+            self.backgroundViewSwipe(offset: offset)
             if self.topConstraint > 0 {
                 isFold = false
             }else{
