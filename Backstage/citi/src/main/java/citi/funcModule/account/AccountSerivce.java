@@ -104,7 +104,7 @@ public class AccountSerivce {
     public boolean resetPassword(String phoneNum,String password){
         User user=userMapper.getInfoByPhone(phoneNum);
         if (user==null){
-            return false;
+            return createUser(phoneNum,password);
         }
         if (userMapper.changePasswordByPhoneNum(phoneNum,password)==1){
             return true;

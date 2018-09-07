@@ -51,7 +51,8 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <action selector="checkInputValid:" destination="-1" eventType="editingDidEnd" id="ih4-Z6-z5c"/>
+                                <action selector="checkInputValid:" destination="-1" eventType="editingChanged" id="kqq-t2-grc"/>
+                                <action selector="phoneNumInputEnd:" destination="-1" eventType="editingDidEnd" id="1V3-lp-vqZ"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="vcode field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入短信验证码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-tX-E1v" userLabel="验证码">
@@ -64,7 +65,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <action selector="checkInputValid:" destination="-1" eventType="editingDidEnd" id="UZt-1Z-oTF"/>
+                                <action selector="checkInputValid:" destination="-1" eventType="editingChanged" id="iRF-lH-5xn"/>
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您输入的手机号不正确" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1a-e4-ZCB">
@@ -164,7 +165,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             <connections>
-                                <action selector="checkInputValid:" destination="-1" eventType="editingDidEnd" id="rUm-Jy-kQf"/>
+                                <action selector="checkInputValid:" destination="-1" eventType="editingChanged" id="oB4-xz-6mi"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="passwordAgain field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="IO0-PG-omj">
@@ -177,7 +178,8 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             <connections>
-                                <action selector="checkInputValid:" destination="-1" eventType="editingDidEnd" id="avO-XY-K6b"/>
+                                <action selector="checkInputValid:" destination="-1" eventType="editingChanged" id="GlK-Mt-CUV"/>
+                                <action selector="pswAgainInputEnd:" destination="-1" eventType="editingDidEnd" id="q8v-8D-Uop"/>
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-Rc-oNY">
