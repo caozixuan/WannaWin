@@ -8,9 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RxCocoa
-import RxSwift
-import RxDataSources
 
 struct CellData {
     var sourcePoints: String
@@ -25,14 +22,43 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     var cellDataList = [CellData]() // 用于存下所有数据
     var firstTime: [Bool]?
     var allCell = [ExchangeItemCellView]()
-    
-    // rxswift - tableview
-    var disposeBag = DisposeBag()
-    var reloadDataSource: RxTableViewSectionedReloadDataSource<SectionModel<String,Merchant>>?
-    
+	
+	
+	@IBOutlet weak var searchView: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var pointsSumLabel: UILabel!
 	var pointsSum:Double = 0.0
+	
+	var searchController:UISearchController?
+	var searchResult:[Int]? // 用于存储搜索到的cell的行数
+	var dataDic:Dictionary<Int,Card>? // 用于辅助获得searchResult
+	var isSearch = false
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		searchController = UISearchController(searchResultsController: nil)
+		searchController?.searchBar.delegate = self
+		searchController?.searchResultsUpdater = self
+		searchController?.searchBar.searchBarStyle = .minimal
+		searchController?.dimsBackgroundDuringPresentation = false
+		self.definesPresentationContext = true
+		searchController?.hidesNavigationBarDuringPresentation = false
+		self.searchView.addSubview((searchController?.searchBar)!)
+		
+		// 加入“全选”按钮在导航栏右边
+		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: self, action: #selector(ExchangeViewController.selectAllCell))
+		self.navigationItem.rightBarButtonItem = selectBtn
+		
+		// 设置初始总积分数
+		pointsSumLabel.text = String(format:"%.2f", pointsSum)
+		
+		// 设置键盘弹出收回通知
+		NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		
+		// 表底部留出空间来调整键盘弹出的偏移
+		self.tableView.contentInset.bottom = 60
+	}
 	
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -53,28 +79,22 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		}else{
 			dataSource = User.getUser().card
 		}
-		
-		// 加入“全选”按钮在导航栏右边
-		let selectBtn = UIBarButtonItem(title: "全选", style: .plain, target: self, action: #selector(ExchangeViewController.selectAllCell))
-		self.navigationItem.rightBarButtonItem = selectBtn
-		
-		// 设置初始总积分数
-		pointsSumLabel.text = String(format:"%.2f", pointsSum)
-        
-        // 设置键盘弹出收回通知
-        NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ExchangeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // 表底部留出空间来调整键盘弹出的偏移
-        self.tableView.contentInset.bottom = 60
+
     }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if dataSource != nil {
-            firstTime = Array(repeating: true, count: (dataSource?.count)!)
+		if dataSource != nil && !(searchController?.isActive)! {
+			if firstTime == nil {
+				firstTime = Array(repeating: true, count: (dataSource?.count)!)
+			}
 			return (dataSource?.count)!
-		}else {
+			
+		}else if searchResult != nil {
+			return (searchResult?.count)!
+			
+		}
+		else {
 			return 0
 		}
     }
@@ -97,42 +117,92 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
                 
 				exchangeItemCellView.perform(#selector(ExchangeItemCellView.setTextFieldDelegateWith), with: self)
 				exchangeItemCellView.delegate = self
-				exchangeItemCellView.editSourcePoints?.tag = indexPath.row
-				if let card = dataSource?[indexPath.row]{
-                    
-                    // 不变的量
-                    exchangeItemCellView.storeName.text = card.merchant?.name
-                    exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
-                    exchangeItemCellView.proportion = card.proportion
-                    
-                    if (firstTime?[indexPath.row])! { // 初始化数据
-                        
-                        exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
-                        exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
-                        exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
-                        exchangeItemCellView.checkbox.isSelected = false
-                        
-                        // 保存数据到数组中
-                        let cellData = CellData(sourcePoints: String(format:"%.2f", card.points), editSourcePoints: String(format:"%.2f", card.points), targetPoints: String(format:"%.2f", card.points * (card.proportion)!), isSelected: false)
-                        cellDataList.append(cellData)
-                        firstTime?[indexPath.row] = false
-                        
-                        // 获得所有cell，用于全选逻辑
-                        allCell.append(exchangeItemCellView)
-                    }
-                    else { // 后续更新数据
-                        exchangeItemCellView.sourcePoints.text = cellDataList[indexPath.row].sourcePoints
-                        exchangeItemCellView.editSourcePoints.text = cellDataList[indexPath.row].editSourcePoints
-                        exchangeItemCellView.targetPoints.text = cellDataList[indexPath.row].targetPoints
-                        exchangeItemCellView.checkbox.isSelected = cellDataList[indexPath.row].isSelected
-                        allCell[indexPath.row] = exchangeItemCellView
-                    }
+				if !(searchController?.isActive)! {
+					exchangeItemCellView.editSourcePoints?.tag = indexPath.row
+					
+					if let card = dataSource?[indexPath.row]{
+						
+						// 不变的量
+						initCellWithUnchanged(exchangeItemCellView, card)
+						
+						if (firstTime?[indexPath.row])! { // 初始化数据
+							
+							initCellWithChanged(exchangeItemCellView, card)
+							
+							// 保存数据到数组中
+							let cellData = CellData(sourcePoints: String(format:"%.2f", card.points), editSourcePoints: String(format:"%.2f", card.points), targetPoints: String(format:"%.2f", card.points * (card.proportion)!), isSelected: false)
+							cellDataList.append(cellData)
+							firstTime?[indexPath.row] = false
+							
+							// 获得所有cell，用于全选逻辑
+							allCell.append(exchangeItemCellView)
+						}
+						else { // 后续更新数据
+							updateCell(exchangeItemCellView, indexPath.row)
+							allCell[indexPath.row] = exchangeItemCellView
+						}
+					}
+				}
+				else { // 显示搜索结果
+					let row = searchResult![indexPath.row]
+					exchangeItemCellView.editSourcePoints?.tag = row
+					
+					if (firstTime?[row])! { // 若搜索前未初始化过
+						
+						if let card = dataSource?[row]{
+							// 不变的量
+							initCellWithUnchanged(exchangeItemCellView, card)
+							initCellWithChanged(exchangeItemCellView, card)
+							
+							// 保存数据到数组中
+							let cellData = CellData(sourcePoints: String(format:"%.2f", card.points), editSourcePoints: String(format:"%.2f", card.points), targetPoints: String(format:"%.2f", card.points * (card.proportion)!), isSelected: false)
+							cellDataList.append(cellData)
+							firstTime?[row] = false
+							
+							// 获得所有cell，用于全选逻辑
+							allCell.append(exchangeItemCellView)
+						}
+					}
+					else {
+						// 设置搜索结果的不变的量
+						initCellWithUnchanged(exchangeItemCellView, (dataSource?[row])!)
+					}
+					
+					updateCell(exchangeItemCellView, row)
 				}
                 break
 			}
 		}
 		return cell
     }
+	
+	/// 初始化单元格不变的量
+	func initCellWithUnchanged(_ exchangeItemCellView:ExchangeItemCellView, _ card:Card) {
+		exchangeItemCellView.storeName.text = card.merchant?.name
+		exchangeItemCellView.editSourcePoints.placeholder = String(format:"%.2f", card.points)
+		exchangeItemCellView.proportion = card.proportion
+	}
+	
+	/// 初始化单元格可变的量
+	func initCellWithChanged(_ exchangeItemCellView:ExchangeItemCellView, _ card:Card) {
+		exchangeItemCellView.sourcePoints.text = String(format:"%.2f", card.points)
+		exchangeItemCellView.editSourcePoints.text = String(format:"%.2f", card.points)
+		exchangeItemCellView.targetPoints.text = String(format:"%.2f", card.points * (card.proportion)!)
+		exchangeItemCellView.checkbox.isSelected = false
+	}
+	
+	func updateCell(_ exchangeItemCellView:ExchangeItemCellView, _ row: Int){
+		exchangeItemCellView.sourcePoints.text = cellDataList[row].sourcePoints
+		exchangeItemCellView.editSourcePoints.text = cellDataList[row].editSourcePoints
+		exchangeItemCellView.targetPoints.text = cellDataList[row].targetPoints
+		exchangeItemCellView.checkbox.isSelected = cellDataList[row].isSelected
+		// 重新选中，调用checkboxClick函数
+		if exchangeItemCellView.checkbox.isSelected {
+			exchangeItemCellView.checkbox.isSelected = false
+			exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
+		}
+		
+	}
 	
 	// MARK: - TextField delegate
     /// 检测输入正确性
@@ -174,6 +244,10 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         // 选中所有的单元格
         var indexPath:IndexPath
         var cell:UITableViewCell?
+		
+		if (searchController?.isActive)! {
+			searchController?.searchBar.delegate?.searchBarCancelButtonClicked!((searchController?.searchBar)!)
+		}
 
         // 改变按钮名称
         if self.navigationItem.rightBarButtonItem?.title == "全选" {
@@ -352,8 +426,52 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
     }
-    
-    
+
 }
 
+
+extension ExchangeViewController:UISearchBarDelegate,UISearchResultsUpdating{
+	//点击搜索按钮，触发该代理方法，如果已经显示搜索结果，那么直接去除键盘，否则刷新列表
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		if searchResult != nil && searchResult?.count != 0{
+			tableView.reloadData()
+			searchController?.searchBar.resignFirstResponder()
+		}
+	}
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		if searchResult != nil && searchResult?.count != 0{
+			
+		}
+	}
+	
+	func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+		searchController?.searchBar.resignFirstResponder()
+	}
+	//这个updateSearchResultsForSearchController(_:)方法是UISearchResultsUpdating中唯一一个我们必须实现的方法。当search bar 成为第一响应者，或者search bar中的内容被改变将触发该方法.不管用户输入还是删除search bar的text，UISearchController都会被通知到并执行上述方法。
+	func updateSearchResults(for searchController: UISearchController) {
+		let searchString = searchController.searchBar.text
+		isSearch = true
+		
+		if dataDic == nil {
+			dataDic = Dictionary<Int, Card>()
+			for (index,card) in (dataSource?.enumerated())! {
+				dataDic![index] = card
+			}
+		}
+		
+		//过滤数据源，存储匹配的数据
+		let resultDic = dataDic?.filter({ (card) -> Bool in
+			let name: NSString = card.value.merchant?.name as! NSString
+			return   (name.range(of: searchString!, options: .caseInsensitive).location) != NSNotFound
+		})
+		searchResult = resultDic?.keys.sorted()
+		
+		//刷新表格
+		tableView.reloadData()
+	}
+	
+	
+	
+}
 

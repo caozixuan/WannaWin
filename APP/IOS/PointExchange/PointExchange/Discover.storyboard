@@ -98,7 +98,6 @@
         <!--搜索结果-优惠券-->
         <scene sceneID="U1O-ho-MWe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2df-HU-1JX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SearchResultCouponViewController" title="搜索结果-优惠券" id="Nb2-8x-brN" customClass="SearchResultCouponViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jin-4a-ebG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -128,6 +127,7 @@
                         <outlet property="tableView" destination="81L-87-9pV" id="E5f-6Q-sME"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2df-HU-1JX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1973.5999999999999" y="1019.640179910045"/>
         </scene>

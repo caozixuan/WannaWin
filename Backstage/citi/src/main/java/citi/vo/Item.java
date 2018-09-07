@@ -1,6 +1,7 @@
 package citi.vo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class Item {
     protected String logoURL;
     protected Double originalPrice;
     protected Integer points;
-    protected Timestamp overdueTime;
+    protected String overdueTime;
     protected Long stock;
     protected String itemType;
 
@@ -24,6 +25,8 @@ public class Item {
 
     //for DB
     public Item(String itemID, String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, String itemType) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String overdueTimeString = formatter.format(overdueTime);
         ItemID = itemID;
         this.name = name;
         this.description = description;
@@ -31,7 +34,7 @@ public class Item {
         this.logoURL = logoURL;
         this.originalPrice = originalPrice;
         this.points = points;
-        this.overdueTime = overdueTime;
+        this.overdueTime = overdueTimeString;
         this.stock = stock;
         this.itemType = itemType;
     }
@@ -44,6 +47,8 @@ public class Item {
 
     //for programmer
     public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, List<Type.ItemType> itemTypes) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String overdueTimeString = formatter.format(overdueTime);
         this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
@@ -51,13 +56,15 @@ public class Item {
         this.logoURL = logoURL;
         this.originalPrice = originalPrice;
         this.points = points;
-        this.overdueTime = overdueTime;
+        this.overdueTime = overdueTimeString;
         this.stock = stock;
         this.itemType = Type.ItemType.enum2DBStr(itemTypes);
     }
 
     //for programmer
     public Item(String name, String description, String merchantID, String logoURL, Double originalPrice, Integer points, Timestamp overdueTime, Long stock, Type.TypeWrapper tw) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String overdueTimeString = formatter.format(overdueTime);
         this.ItemID = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
@@ -65,7 +72,7 @@ public class Item {
         this.logoURL = logoURL;
         this.originalPrice = originalPrice;
         this.points = points;
-        this.overdueTime = overdueTime;
+        this.overdueTime = overdueTimeString;
         this.stock = stock;
         this.itemType = tw.toString();
     }
@@ -98,7 +105,7 @@ public class Item {
         return points;
     }
 
-    public Timestamp getOverdueTime() {
+    public String getOverdueTime() {
         return overdueTime;
     }
 

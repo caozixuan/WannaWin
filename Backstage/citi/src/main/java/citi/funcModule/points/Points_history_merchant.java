@@ -2,6 +2,7 @@ package citi.funcModule.points;
 
 import citi.vo.Points_history;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 /**
@@ -15,7 +16,7 @@ public class Points_history_merchant extends Points_history {
     }
 
     public Points_history_merchant(Points_history points_history, String merchantName){
-        super(points_history.getUserID(),points_history.getMerchantID(),points_history.getPoints_card(),points_history.getPoints_citi(),points_history.getCause().toString(),points_history.getTime());
+        super(points_history.getUserID(),points_history.getMerchantID(),points_history.getPoints_card(),points_history.getPoints_citi(),points_history.getCause().toString(),Timestamp.valueOf(points_history.getTime()));
         this.merchantName=merchantName;
     }
 }

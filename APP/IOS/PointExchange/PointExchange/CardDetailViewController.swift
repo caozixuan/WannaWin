@@ -23,6 +23,8 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 	var indicator:UIActivityIndicatorView?
 	var card:Card?
 	var isFold = true
+    var gestureOriginPoint:CGPoint?
+    var topConstraint:Double = 0
 	
 	@IBOutlet weak var merchantNameLabel: UILabel!
 	@IBOutlet weak var cardImageView: UIImageView!
@@ -58,22 +60,57 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		self.cardInfoBackgroundImage.layer.zPosition = 10.0
 		
 		// 添加滑动手势
-		let gestureDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownResponse))
-		gestureDown.direction = .down
-		self.backgroundView.addGestureRecognizer(gestureDown)
-		let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpResponse))
-		gestureUp.direction = .up
-		self.backgroundView.addGestureRecognizer(gestureUp)
+//        let gestureDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownResponse))
+//        gestureDown.direction = .down
+//        self.backgroundView.addGestureRecognizer(gestureDown)
+//        let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpResponse))
+//        gestureUp.direction = .up
+//        self.backgroundView.addGestureRecognizer(gestureUp)
+        let panGesturer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
+        self.backgroundView.addGestureRecognizer(panGesturer)
 		
     }
 	
-	@objc func swipeDownResponse(){
-		backgroundViewSwipe()
-	}
-	
-	@objc func swipeUpResponse(){
-		backgroundViewSwipe()
-	}
+    @objc func panGesture(_ gesture:UIPanGestureRecognizer){
+        let point = gesture.location(in: self.view)
+        if gesture.state == .began{
+            self.gestureOriginPoint = point
+        }else if gesture.state == .changed{
+            var offset = Double(point.y-(self.gestureOriginPoint?.y)!)
+
+            
+            if isFold{
+                //折叠状态时，若处在上部（即遮挡卡logo位置）时，下滑至-24
+                if offset > 0 && self.topConstraint+offset > -24 && self.topConstraint+offset < 169 {
+                    offset = -24 - self.topConstraint
+                }
+                // 折叠状态时，当下滑太多时，固定到169位置
+                else if self.topConstraint + offset > 169{
+                    offset = 169 - self.topConstraint
+                }
+                // 折叠状态时，当上滑太多时，固定到-100
+                else if self.topConstraint + offset < -100{
+                    offset = -100 - self.topConstraint
+                }
+            }else{
+                // 非折叠状态时，当上滑太多，只恢复到最初的样子（-24）
+                if self.topConstraint + offset < -23.5{
+                    offset = -23.5 - self.topConstraint
+                }
+                if self.topConstraint + offset > 169{
+                    offset = 0
+                }
+            }
+            print("constraint:\(self.topConstraint) offset: \(offset) new:\(self.topConstraint+offset)")
+            backgroundViewSwipe(offset: offset)
+        }else if gesture.state == .ended{
+            if self.topConstraint > 0 {
+                isFold = false
+            }else{
+                isFold = true
+            }
+        }
+    }
 	
     // MARK: - Navigations
 	@objc func goExchangeHistoryVC() {
@@ -118,49 +155,36 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		return cell
 	}
 	@IBAction func clickBarBtn(_ sender: Any) {
-		backgroundViewSwipe()
-		
+        if isFold{
+            backgroundViewSwipe(offset: 169-self.topConstraint)
+        }
+        else{
+            backgroundViewSwipe(offset: -23.5-self.topConstraint)
+        }
+        isFold = !isFold
 	}
-	func backgroundViewSwipe(){
-		if isFold{
-			self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_unfold")
-			isFold = false
-            
-            // 移除原有约束
-            if bgConstraint != nil {
-                self.view.removeConstraint(bgConstraint)
-            }
-            
-            // 设置约束更改backgroundView位置
-            self.backgroundView.snp.remakeConstraints(){ make in
-                make.top.equalTo(self.cardImageView.snp.bottom).offset(169)
-            }
-            
-            // 使动画生效
-            UIView.animate(withDuration: 0.5){
-                self.view.layoutIfNeeded()
-            }
-            
-		}else{
-			self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_fold")
-			isFold = true
-            
-            // 移除原有约束
-            if bgConstraint != nil {
-                self.view.removeConstraint(bgConstraint)
-            }
+    func backgroundViewSwipe(offset:Double){
+        if self.topConstraint+offset<0{
+            self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_fold")
+        }else{
+            self.cardInfoBackgroundImage.image = UIImage(named: "cardInfo_unfold")
+        }
         
-            // 设置约束更改backgroundView位置
-            self.backgroundView.snp.remakeConstraints(){ make in
-                make.top.equalTo(self.cardImageView.snp.bottom).offset(-23.5)
-            }
+        // 移除原有约束
+        if bgConstraint != nil {
+            self.view.removeConstraint(bgConstraint)
+        }
+        
+        // 设置约束更改backgroundView位置
+        self.backgroundView.snp.remakeConstraints(){ make in
+            self.topConstraint += offset
+            make.top.equalTo(self.cardImageView.snp.bottom).offset(self.topConstraint)
             
-            // 使动画生效
-            UIView.animate(withDuration: 0.5){
-                self.view.layoutIfNeeded()
-            }
-            
-		}
+        }
+        // 使动画生效
+        UIView.animate(withDuration: 0.5){
+            self.view.layoutIfNeeded()
+        }
 	}
 	@IBAction func clickUnbind(_ sender: Any) {
 		let alert = UIAlertController(title:"解绑会员卡", message:"您确定要解绑该会员卡吗？", preferredStyle:.alert)
