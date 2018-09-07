@@ -31,20 +31,16 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		}
         
     }
-    
-    // 设置滑动偏移量来隐藏刷新的白边
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        scrollView.contentOffset = CGPoint(x: 0, y: 20)
-    }
 	
+	// 设置滑动偏移量来隐藏刷新的白边
+	override func viewWillLayoutSubviews() {
+		scrollView.contentOffset = CGPoint(x: 0, y: 20)
+	}
 	
-
-    
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
-		return ["https://photo.tuchong.com/3505293/ft640/165347608.jpg"]
+		return ["https://photo.tuchong.com/3505293/ft640/165347608.jpg","https://photo.tuchong.com/3505293/ft640/165347608.jpg","https://photo.tuchong.com/3505293/ft640/165347608.jpg"]
 	}
 	
 	// MARK: - 所有点击事件的响应动作
