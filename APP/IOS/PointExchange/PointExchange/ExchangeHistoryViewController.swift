@@ -26,7 +26,13 @@ class ExchangeHistoryViewController: UIViewController {
 		ServerConnector.getPointsHistoryByMerchantID(merchantID: merchantID!){(result,pointHistories) in
 			if result {
 				self.pointHistories = pointHistories!
-				self.setDataSource()
+                if pointHistories?.count == 0{
+                    self.tableView.isHidden = true
+                }else{
+                    self.tableView.isHidden = false
+                    self.setDataSource()
+                }
+				
 			}
 			
 		}
@@ -49,11 +55,12 @@ class ExchangeHistoryViewController: UIViewController {
 			}
 			cell?.isUserInteractionEnabled = false
 			let formatter = DateFormatter()
-			formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			let date = formatter.date(from: element.time!)
-			formatter.dateFormat = "MMM dd, yyyy"
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
 			cell?.dateLabel.text = formatter.string(from: date!)
 			cell?.pointLabel.text = "-" + String(stringInterpolationSegment: element.pointsCard!)
+            cell?.citiPointLabel.isHidden = false
 			cell?.citiPointLabel.text = "+" + String(stringInterpolationSegment: element.pointsCiti!) + "P"
 			return cell!
 		})
