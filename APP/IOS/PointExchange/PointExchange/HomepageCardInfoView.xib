@@ -23,13 +23,12 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view userInteractionEnabled="NO" contentMode="scaleToFill" id="0Kq-io-E2y">
-            <rect key="frame" x="0.0" y="0.0" width="201" height="280"/>
+            <rect key="frame" x="0.0" y="0.0" width="200" height="280"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteCircle-1" translatesAutoresizingMaskIntoConstraints="NO" id="sEK-Pb-IoX">
                     <rect key="frame" x="10" y="12" width="60" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="3N1-EK-9JG"/>
                         <constraint firstAttribute="width" secondItem="sEK-Pb-IoX" secondAttribute="height" multiplier="1:1" id="ZvU-WT-bEW"/>
                     </constraints>
                 </imageView>
@@ -52,19 +51,22 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask-1" translatesAutoresizingMaskIntoConstraints="NO" id="KuR-Y6-hed">
-                    <rect key="frame" x="-7" y="237" width="216" height="55"/>
+                    <rect key="frame" x="0.0" y="242" width="200" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="aaX-bb-H4M"/>
+                    </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5y-qB-YRp">
-                    <rect key="frame" x="49" y="256" width="105.5" height="17"/>
+                    <rect key="frame" x="48" y="253" width="105.5" height="17"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可兑通用点：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vuo-Sf-JSt">
-                            <rect key="frame" x="0.5" y="0.0" width="86" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="86" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Wm-kZ-oHo">
-                            <rect key="frame" x="86.5" y="0.0" width="19.5" height="17"/>
+                            <rect key="frame" x="86" y="0.0" width="19.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" name="main_orange"/>
                             <nil key="highlightedColor"/>
@@ -76,15 +78,15 @@
             <constraints>
                 <constraint firstItem="sEK-Pb-IoX" firstAttribute="width" secondItem="ypL-VG-VCw" secondAttribute="width" multiplier="0.3" id="53I-Vl-25W"/>
                 <constraint firstItem="sEK-Pb-IoX" firstAttribute="centerX" secondItem="0Kq-io-E2y" secondAttribute="centerX" multiplier="0.4" id="5UR-vB-ldh"/>
-                <constraint firstAttribute="trailing" secondItem="KuR-Y6-hed" secondAttribute="trailing" constant="-8" id="F5a-x3-gYG"/>
+                <constraint firstAttribute="trailing" secondItem="KuR-Y6-hed" secondAttribute="trailing" id="F5a-x3-gYG"/>
                 <constraint firstItem="H5y-qB-YRp" firstAttribute="centerX" secondItem="KuR-Y6-hed" secondAttribute="centerX" id="F9b-U5-KYJ"/>
                 <constraint firstItem="FDA-Jr-Tjd" firstAttribute="leading" secondItem="sEK-Pb-IoX" secondAttribute="trailing" constant="8" id="JMf-YT-1Ex"/>
                 <constraint firstItem="O3s-mJ-1zr" firstAttribute="centerX" secondItem="sEK-Pb-IoX" secondAttribute="centerX" id="SLM-ix-MRT"/>
                 <constraint firstItem="dDs-Y5-eUg" firstAttribute="leading" secondItem="FDA-Jr-Tjd" secondAttribute="leading" id="UwJ-MF-7zT"/>
                 <constraint firstItem="FDA-Jr-Tjd" firstAttribute="top" secondItem="O3s-mJ-1zr" secondAttribute="top" constant="6" id="Vtj-K6-Efy"/>
                 <constraint firstItem="O3s-mJ-1zr" firstAttribute="centerY" secondItem="sEK-Pb-IoX" secondAttribute="centerY" id="Yyl-TI-i41"/>
-                <constraint firstAttribute="bottom" secondItem="KuR-Y6-hed" secondAttribute="bottom" constant="-12" id="f6W-xS-HCP"/>
-                <constraint firstItem="KuR-Y6-hed" firstAttribute="leading" secondItem="0Kq-io-E2y" secondAttribute="leading" constant="-7" id="hhz-R9-wxV"/>
+                <constraint firstAttribute="bottom" secondItem="KuR-Y6-hed" secondAttribute="bottom" id="f6W-xS-HCP"/>
+                <constraint firstItem="KuR-Y6-hed" firstAttribute="leading" secondItem="0Kq-io-E2y" secondAttribute="leading" id="hhz-R9-wxV"/>
                 <constraint firstItem="dDs-Y5-eUg" firstAttribute="top" secondItem="FDA-Jr-Tjd" secondAttribute="bottom" constant="8" id="mTy-Ec-bBa"/>
                 <constraint firstItem="sEK-Pb-IoX" firstAttribute="centerY" secondItem="0Kq-io-E2y" secondAttribute="centerY" multiplier="0.3" id="odS-QV-lsB"/>
                 <constraint firstItem="O3s-mJ-1zr" firstAttribute="width" secondItem="sEK-Pb-IoX" secondAttribute="width" id="ps8-L6-Ql1"/>
@@ -92,11 +94,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ypL-VG-VCw"/>
-            <point key="canvasLocation" x="-372.5" y="683"/>
+            <point key="canvasLocation" x="-373" y="683"/>
         </view>
     </objects>
     <resources>
-        <image name="Mask-1" width="331" height="55"/>
+        <image name="Mask-1" width="933" height="108"/>
         <image name="whiteCircle-1" width="50" height="50"/>
         <namedColor name="main_orange">
             <color red="1" green="0.58399999140000003" blue="0.27500000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -63,6 +63,7 @@
 		3ED5F6E02126B1A900F46E7C /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */; };
 		3ED5F6E2212A895D00F46E7C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6E1212A895D00F46E7C /* SignUpView.swift */; };
 		3ED5F6E4212D444500F46E7C /* TendencySurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5F6E3212D444500F46E7C /* TendencySurveyViewController.swift */; };
+		3EE31AFB2142B6B800E99561 /* UIResponderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE31AFA2142B6B800E99561 /* UIResponderExtension.swift */; };
 		3EE77DAC212E919300ADDD82 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DAB212E919300ADDD82 /* SearchResultViewController.swift */; };
 		3EE77DB0212EAA9700ADDD82 /* SearchResultCouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DAF212EAA9700ADDD82 /* SearchResultCouponViewController.swift */; };
 		3EE77DB2212EAAB000ADDD82 /* SearchResultMerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77DB1212EAAB000ADDD82 /* SearchResultMerchantViewController.swift */; };
@@ -177,6 +178,7 @@
 		3ED5F6DF2126B1A900F46E7C /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		3ED5F6E1212A895D00F46E7C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3ED5F6E3212D444500F46E7C /* TendencySurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TendencySurveyViewController.swift; sourceTree = "<group>"; };
+		3EE31AFA2142B6B800E99561 /* UIResponderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponderExtension.swift; sourceTree = "<group>"; };
 		3EE77DAB212E919300ADDD82 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		3EE77DAF212EAA9700ADDD82 /* SearchResultCouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCouponViewController.swift; sourceTree = "<group>"; };
 		3EE77DB1212EAAB000ADDD82 /* SearchResultMerchantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultMerchantViewController.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				B6A6EC4420F05F360079FFA4 /* UIViewExtension.swift */,
 				3E46B77220F0BD5C00843193 /* UIViewControllerExtension.swift */,
 				B696E7EC20F5A87900ABF0D2 /* StringExtension.swift */,
+				3EE31AFA2142B6B800E99561 /* UIResponderExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				B6A6EC5E20F2024B0079FFA4 /* ServerService.swift in Sources */,
 				3EBB5D1420EE27E200B559BA /* MainViewController.swift in Sources */,
 				3E23A75021140AA300D19749 /* ChoosePointInfo.swift in Sources */,
+				3EE31AFB2142B6B800E99561 /* UIResponderExtension.swift in Sources */,
 				B6A6EC4B20F0AE160079FFA4 /* UserViewController.swift in Sources */,
 				3E4C156020EE0185000743C0 /* LoginViewController.swift in Sources */,
 				B66CFB3520F9CD65007165DF /* PointHistoryViewController.swift in Sources */,

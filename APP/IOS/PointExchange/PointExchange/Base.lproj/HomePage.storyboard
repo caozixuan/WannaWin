@@ -161,7 +161,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="10"/>
+                                                    <integer key="value" value="12"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             </userDefinedRuntimeAttributes>
@@ -169,6 +169,9 @@
                                         <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utA-1R-Ftx" userLabel="mask">
                                             <rect key="frame" x="37.5" y="130.5" width="300" height="32"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask-1" translatesAutoresizingMaskIntoConstraints="NO" id="I1X-HN-2Nf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="32"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDz-1f-uLL">
                                                     <rect key="frame" x="16" y="8" width="37" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -194,24 +197,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="cDz-1f-uLL" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="100-L2-HJ9"/>
                                                 <constraint firstItem="cYh-uy-Bgs" firstAttribute="leading" secondItem="Yej-zz-kCy" secondAttribute="trailing" id="CGa-Qx-iWh"/>
                                                 <constraint firstItem="Yej-zz-kCy" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="Fg7-cg-Gr3"/>
+                                                <constraint firstAttribute="trailing" secondItem="I1X-HN-2Nf" secondAttribute="trailing" id="GuS-ao-6ge"/>
                                                 <constraint firstItem="cYh-uy-Bgs" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="WMP-dV-8Zq"/>
                                                 <constraint firstAttribute="trailing" secondItem="cYh-uy-Bgs" secondAttribute="trailing" constant="16" id="cc0-wz-bUs"/>
+                                                <constraint firstItem="I1X-HN-2Nf" firstAttribute="top" secondItem="utA-1R-Ftx" secondAttribute="top" id="mSu-hm-HXR"/>
                                                 <constraint firstItem="Yej-zz-kCy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mHc-iD-UTs" secondAttribute="trailing" constant="24" id="nwl-iS-6Sz"/>
+                                                <constraint firstAttribute="bottom" secondItem="I1X-HN-2Nf" secondAttribute="bottom" id="qKA-Fj-nU5"/>
                                                 <constraint firstItem="cDz-1f-uLL" firstAttribute="leading" secondItem="utA-1R-Ftx" secondAttribute="leading" constant="16" id="vc4-cT-gRU"/>
                                                 <constraint firstItem="mHc-iD-UTs" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="xhT-qM-RKf"/>
                                                 <constraint firstAttribute="height" constant="32" id="zdg-Ot-8Vv"/>
+                                                <constraint firstItem="I1X-HN-2Nf" firstAttribute="leading" secondItem="utA-1R-Ftx" secondAttribute="leading" id="zpv-We-wOV"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteCircleBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-eo-vc2">
                                             <rect key="frame" x="56.5" y="28" width="60.5" height="60.5"/>
@@ -1202,8 +1202,9 @@
     <resources>
         <image name="HomeActive" width="27" height="25"/>
         <image name="HomeUnselected" width="27" height="25"/>
+        <image name="Mask-1" width="933" height="108"/>
         <image name="addCardButton" width="279" height="58"/>
-        <image name="bg2_1" width="311" height="114"/>
+        <image name="bg2_1" width="311" height="115"/>
         <image name="bg3_1" width="341" height="172"/>
         <image name="blueCircle" width="88" height="88"/>
         <image name="cardInfo_fold" width="361" height="384"/>

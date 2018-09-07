@@ -154,7 +154,7 @@ class CardInfoTableViewController: UITableViewController {
         isSearch = true
         //过滤数据源，存储匹配的数据
         searchResult = cardArray?.filter({ (card) -> Bool in
-            let name: NSString = card.merchant?.name as! NSString
+			let name: NSString = (card.merchant?.name as NSString?)!
             return   (name.range(of: searchString!, options: .caseInsensitive).location) != NSNotFound
         })
         //刷新表格
