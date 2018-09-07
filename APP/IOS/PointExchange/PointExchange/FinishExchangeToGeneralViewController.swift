@@ -33,15 +33,19 @@ class FinishExchangeToGeneralViewController: UIViewController, UITableViewDelega
         let finishBtn = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(goBackToHomePage))
         self.navigationItem.rightBarButtonItem = finishBtn
         
-        // 设置显示数据
-        //tableView.delegate = self
-        //tableView.dataSource = self
-        
         if status {
             statusText.text = "兑换成功"
             statusLogo.image = UIImage(named: "success")
             addedGeneralPoints.isHidden = false
-            addedGeneralPoints.text = "+" + String(format:"%.2f", generalPoints!) + "P"
+			
+			if String(format:"%.2f", generalPoints!) == "-0.00" { //排除误差
+				addedGeneralPoints.text = "+0.00P"
+				
+			}
+			else {
+				addedGeneralPoints.text = "+" + String(format:"%.2f", generalPoints!) + "P"
+			}
+			
         }
         else {
             statusText.text = "兑换失败"

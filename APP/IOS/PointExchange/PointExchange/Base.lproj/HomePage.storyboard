@@ -564,7 +564,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97719701776649748" green="0.97719701776649748" blue="0.97719701776649748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EAv-NR-hLZ" firstAttribute="width" secondItem="xPb-WV-E5p" secondAttribute="width" multiplier="0.4" id="3TZ-LE-2nD"/>
                             <constraint firstItem="uN4-JC-6qi" firstAttribute="trailing" secondItem="xPb-WV-E5p" secondAttribute="trailing" constant="26" id="3d5-id-Y4L"/>
@@ -913,7 +913,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97108978426395942" green="0.97108978426395942" blue="0.97108978426395942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dCk-qC-VWB" firstAttribute="trailing" secondItem="XEI-IZ-HHd" secondAttribute="trailing" constant="24" id="34c-AY-4ge"/>
                             <constraint firstItem="9bx-Qo-ZHf" firstAttribute="top" secondItem="XEI-IZ-HHd" secondAttribute="bottom" constant="-17.5" id="364-gJ-F87"/>
