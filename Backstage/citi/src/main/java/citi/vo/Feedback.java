@@ -1,17 +1,20 @@
 package citi.vo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class Feedback {
 
     private String userID;
     private String content;
-    private Timestamp time;
+    private String time;
 
     public Feedback(String userID, String content, Timestamp time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String timeString = formatter.format(time);
         this.userID = userID;
         this.content = content;
-        this.time = time;
+        this.time = timeString;
     }
 
     public String getUserID() {
@@ -22,7 +25,7 @@ public class Feedback {
         return content;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 

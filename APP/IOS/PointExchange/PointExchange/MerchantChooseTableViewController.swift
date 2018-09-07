@@ -105,7 +105,7 @@ class MerchantChooseTableViewController: UIViewController {
                 else{
                     var newData:[SectionModel<String, Merchant>] = []
                     for sectionModel in data {
-                        let items = sectionModel.items.filter{ "\($0.name)".transformToPinyin().contains(query.lowercased()) }
+                        let items = sectionModel.items.filter{ "\($0.name)".lowercased().contains(query.lowercased()) }
                         newData.append(SectionModel(model: sectionModel.model, items: items))
                     }
                     return Observable.just(newData)

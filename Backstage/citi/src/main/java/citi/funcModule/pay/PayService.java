@@ -11,6 +11,7 @@ import citi.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Comparator;
@@ -86,7 +87,8 @@ public class PayService {
         List<Order> orders = orderMapper.getOrderByUserID(userID, "01010101");
 
         for (Order order : orders) {
-            if (order.getTime().compareTo(new Timestamp(QRTimestamp * 1000)) == 0) {
+            Timestamp oderTimestamp = Timestamp.valueOf(order.getTime());
+            if (oderTimestamp.compareTo(new Timestamp(QRTimestamp * 1000)) == 0) {
                 if (order.getState() == FAIL) {
                     return QRCodeStatus.USEFAIL;
                 }
@@ -100,7 +102,8 @@ public class PayService {
         List<Order> orders = orderMapper.getOrderByUserID(userID, "0101010101");
         for (Order order : orders
                 ) {
-            if (order.getTime().compareTo(new Timestamp(Long.parseLong(timeStamp) * 1000)) == 0) {
+            Timestamp timestamp = Timestamp.valueOf(order.getTime());
+            if (timestamp.compareTo(new Timestamp(Long.parseLong(timeStamp) * 1000)) == 0) {
                 return order;
             }
         }
