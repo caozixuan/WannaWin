@@ -6,6 +6,7 @@ package citi.vo;
  */
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class Order {
     protected String userID;
     protected String state;   //2018-07-10 从 OrderState 改为 String - 任思远
     protected String merchantID;
-    protected Timestamp time;
+    protected String time;
 
     public enum OrderState {
         SUCCESS, FAIL, TOBEFINISHED;
@@ -51,6 +52,8 @@ public class Order {
     }
 
     public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String timeString = formatter.format(time);
         this.orderID = orderId;
         this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
         this.priceAfter = Double.parseDouble(String.format("%.2f", priceAfter));
@@ -58,10 +61,12 @@ public class Order {
         this.userID = userId;
         this.state = state;
         this.merchantID = merchantId;
-        this.time = time;
+        this.time = timeString;
     }
 
     public Order(Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String timeString = formatter.format(time);
         this.orderID = UUID.randomUUID().toString().toLowerCase();
         this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
         this.priceAfter = Double.parseDouble(String.format("%.2f", priceAfter));
@@ -69,7 +74,7 @@ public class Order {
         this.userID = userId;
         this.state = OrderState.getStateString(state);
         this.merchantID = merchantId;
-        this.time = time;
+        this.time = timeString;
     }
 
 
@@ -111,7 +116,9 @@ public class Order {
     }
 
     public void setTime(Timestamp time) {
-        this.time = time;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String timeString = formatter.format(time);
+        this.time = timeString;
     }
 
     public String getOrderId() {
@@ -142,7 +149,7 @@ public class Order {
         return merchantID;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 }

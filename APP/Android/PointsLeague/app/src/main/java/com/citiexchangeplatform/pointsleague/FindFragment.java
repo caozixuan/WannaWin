@@ -240,6 +240,21 @@ public class FindFragment extends Fragment {
                             case "communication":
                                 businessType = "通讯";
                                 break;
+                            case "operator":
+                                businessType = "运营商";
+                                break;
+                            case "aviation":
+                                businessType = "航空";
+                                break;
+                            case "hotel":
+                                businessType = "酒店";
+                                break;
+                            case "supermarket":
+                                businessType = "超市便利店";
+                                break;
+                            case "movie":
+                                businessType = "电影";
+                                break;
                             default:
                                 businessType = "一般";
                         }

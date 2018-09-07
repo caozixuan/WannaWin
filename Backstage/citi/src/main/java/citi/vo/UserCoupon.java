@@ -1,6 +1,7 @@
 package citi.vo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,8 +10,8 @@ public class UserCoupon {
     protected String userID;
     protected String ItemID;
     protected String state;
-    protected Timestamp getTime;
-    protected Timestamp useTime;
+    protected String getTime;
+    protected String useTime;
 
     public enum CouponState {
         USED, UNUSED, OVERDUED;
@@ -42,11 +43,11 @@ public class UserCoupon {
         return couponID;
     }
 
-    public Timestamp getGetTime() {
+    public String getGetTime() {
         return getTime;
     }
 
-    public Timestamp getUseTime() {
+    public String getUseTime() {
         return useTime;
     }
 
@@ -55,12 +56,15 @@ public class UserCoupon {
     }
 
     public UserCoupon(Long couponID, String userID, String itemID, String state, Timestamp getTime, Timestamp useTime) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String getTimeString = formatter.format(getTime);
+        String useTimeString = formatter.format(useTime);
         this.couponID = couponID;
         this.userID = userID;
         ItemID = itemID;
         this.state = state;
-        this.getTime = getTime;
-        this.useTime = useTime;
+        this.getTime = getTimeString;
+        this.useTime = useTimeString;
     }
 
     public UserCoupon(String userID, String itemID, UserCoupon.CouponState state) {
