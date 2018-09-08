@@ -22,6 +22,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.citiexchangeplatform.pointsleague.adapter.FindAdapter;
 import com.citiexchangeplatform.pointsleague.adapter.FindSearchAdapter;
 import com.citiexchangeplatform.pointsleague.models.SearchKeyword;
+import com.scwang.smartrefresh.header.BezierCircleHeader;
+import com.scwang.smartrefresh.header.DeliveryHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -40,9 +48,11 @@ import java.util.Map;
 public class SearchActivityFragment extends Fragment {
 
     RecyclerView searchRecyclerView;
+    RefreshLayout refreshLayout;
     private FindSearchAdapter searchAdapter;
     ProgressDialog dialog;
     String keyword;
+    int num = 0;
 
 
     public SearchActivityFragment() {
@@ -58,8 +68,10 @@ public class SearchActivityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_merchant, container, false);
-        searchRecyclerView = view.findViewById(R.id.recyclerView_search_merchant);
+        View view = inflater.inflate(R.layout.fragment_search_activity, container, false);
+        searchRecyclerView = view.findViewById(R.id.recyclerView_search_activity);
+
+        refreshLayout = view.findViewById(R.id.refreshLayout);
 
         //注册EventBus,接受关键字
         if(!EventBus.getDefault().isRegistered(this)) {
@@ -68,6 +80,10 @@ public class SearchActivityFragment extends Fragment {
 
         //设置RecyclerView管理器
         setRecyclerView();
+
+        setRefreshLayout();
+
+
 
         //获得初始化数据
         initData();
@@ -92,6 +108,32 @@ public class SearchActivityFragment extends Fragment {
 
     }
 
+    protected void setRefreshLayout(){
+
+        //设置 Header 为 Material风格
+        refreshLayout.setRefreshHeader(new DeliveryHeader(Objects.requireNonNull(getContext())));
+        //设置 Footer 为 球脉冲
+        refreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshlayout) {
+                searchAdapter.clearAll();
+
+                getSearchTotalNum(keyword);
+                getSearchMerchants();
+                searchAdapter.notifyDataSetChanged();
+
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
+
     protected void setRecyclerView(){
 
         searchAdapter = new FindSearchAdapter(getActivity());
@@ -112,7 +154,7 @@ public class SearchActivityFragment extends Fragment {
                 System.out.println(s);
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    int num = jsonObject.getInt("num");
+                    num = jsonObject.getInt("num");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -178,7 +220,7 @@ public class SearchActivityFragment extends Fragment {
 
                 map.put("keyword",keyword);
                 map.put("start","0");
-                map.put("end","1");
+                map.put("end",String.valueOf(num));
 
 
                 return map;

@@ -103,9 +103,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81L-87-9pV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81L-87-9pV">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" id="bdj-Mo-SVU">
@@ -120,6 +119,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="81L-87-9pV" firstAttribute="trailing" secondItem="Bfk-H9-Em5" secondAttribute="trailing" id="4hv-Xi-aMc"/>
+                            <constraint firstItem="81L-87-9pV" firstAttribute="leading" secondItem="Bfk-H9-Em5" secondAttribute="leading" id="UJG-8d-3Ia"/>
+                            <constraint firstItem="81L-87-9pV" firstAttribute="bottom" secondItem="Bfk-H9-Em5" secondAttribute="bottom" id="skU-kZ-W39"/>
+                            <constraint firstItem="81L-87-9pV" firstAttribute="top" secondItem="Bfk-H9-Em5" secondAttribute="top" id="xbh-mO-E0Q"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Bfk-H9-Em5"/>
                     </view>
                     <navigationItem key="navigationItem" id="wMz-FB-GjB"/>
@@ -139,12 +144,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wmh-Bi-pEE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wmh-Bi-pEE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="searchCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tzi-9f-Fnt">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="searchCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" id="tzi-9f-Fnt">
                                         <rect key="frame" x="0.0" y="28" width="375" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tzi-9f-Fnt" id="NGa-sb-zWl">
@@ -156,6 +160,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Wmh-Bi-pEE" firstAttribute="trailing" secondItem="JHC-TO-JLK" secondAttribute="trailing" id="1fb-gX-cnh"/>
+                            <constraint firstItem="Wmh-Bi-pEE" firstAttribute="leading" secondItem="JHC-TO-JLK" secondAttribute="leading" id="7rg-Zd-ubc"/>
+                            <constraint firstItem="Wmh-Bi-pEE" firstAttribute="bottom" secondItem="JHC-TO-JLK" secondAttribute="bottom" id="N8h-cf-yNu"/>
+                            <constraint firstItem="Wmh-Bi-pEE" firstAttribute="top" secondItem="h4S-pQ-cqW" secondAttribute="top" id="Yjj-cp-6dk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JHC-TO-JLK"/>
                     </view>
                     <navigationItem key="navigationItem" id="hZf-H9-Wzl"/>
@@ -718,12 +728,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2oF-Oj-T6d">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="574"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2oF-Oj-T6d">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="searchCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ud7-6V-9Zb" customClass="SearchTableViewCell" customModule="PointExchange" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="searchCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" id="ud7-6V-9Zb" customClass="SearchTableViewCell" customModule="PointExchange" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ud7-6V-9Zb" id="vD3-EP-A6c">
@@ -735,6 +744,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2oF-Oj-T6d" firstAttribute="trailing" secondItem="p5G-lJ-kQn" secondAttribute="trailing" id="2tb-t7-Ha0"/>
+                            <constraint firstItem="2oF-Oj-T6d" firstAttribute="leading" secondItem="p5G-lJ-kQn" secondAttribute="leading" id="Ac6-vI-SZU"/>
+                            <constraint firstItem="2oF-Oj-T6d" firstAttribute="top" secondItem="zaa-uJ-L0i" secondAttribute="top" id="ljp-xz-1wF"/>
+                            <constraint firstItem="p5G-lJ-kQn" firstAttribute="bottom" secondItem="2oF-Oj-T6d" secondAttribute="bottom" id="v5A-Xc-NIM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="p5G-lJ-kQn"/>
                     </view>
                     <navigationItem key="navigationItem" id="ho1-Wk-HC1"/>

@@ -50,13 +50,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	
 	//自动滚动计时器
 	var autoScrollTimer:Timer?
-    
-    //viewDidLoad：view加载完毕
-    //viewWillAppear：控制器的view将要显示
-    //viewWillLayoutSubviews：控制器的view将要布局子控件
-    //viewDidLayoutSubviews：控制器的view布局子控件完成
-    //这期间系统可能会多次调用viewWillLayoutSubviews 、 viewDidLayoutSubviews 俩个方法
-    //viewDidAppear:控制器的view完全显示 (约束布局都已完成)
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.scrollerViewWidth = self.view.bounds.size.width
@@ -89,11 +83,10 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		//滚动视图内容区域向左偏移一个view的宽度
 		self.scrollerView?.contentOffset = CGPoint(x: self.scrollerViewWidth!, y: 0)
 		self.scrollerView?.isPagingEnabled = true
-		self.scrollerView?.bounces = false
+		self.scrollerView?.bounces = true
 		self.view.addSubview(self.scrollerView!)
 		self.scrollerView?.snp.makeConstraints { (make) -> Void in
 			make.size.equalTo(self.view.bounds.size)
-			//make.center.equalTo(self.view)
 		}
 	}
 	
@@ -147,7 +140,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//设置自动滚动计时器
 	func configureAutoScrollTimer() {
 		//设置一个定时器，每三秒钟滚动一次
-		autoScrollTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
+		autoScrollTimer = Timer.scheduledTimer(timeInterval: 3.5, target: self,
 											   selector: #selector(ImageScrollerViewController.letItScroll),
 											   userInfo: nil, repeats: true)
 	}
@@ -155,7 +148,10 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//计时器时间一到，滚动一张图片
 	@objc func letItScroll(){
 		let offset = CGPoint(x: 2*scrollerViewWidth!, y: 0)
-		self.scrollerView?.setContentOffset(offset, animated: true)
+		UIView.animate(withDuration: 2.0) {
+			self.scrollerView?.setContentOffset(offset, animated: true)
+		}
+		
 	}
 	
 	//每当滚动后重新设置各个imageView的图片

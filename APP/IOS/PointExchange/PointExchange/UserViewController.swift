@@ -57,6 +57,9 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 			self.locationLabel.isHidden = true
 			self.logoutBtn.isHidden = true
 			self.nameLabel.isHidden = true
+			self.portrait.isUserInteractionEnabled = false
+			self.portraitBg.isUserInteractionEnabled = false
+			
 			
 		}
 	}

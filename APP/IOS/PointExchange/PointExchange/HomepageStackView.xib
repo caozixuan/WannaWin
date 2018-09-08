@@ -33,7 +33,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-0E-Vcu">
-                            <rect key="frame" x="131" y="-4.5" width="112" height="46"/>
+                            <rect key="frame" x="131" y="-4" width="112" height="46"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="46" id="lZ6-oL-bPJ"/>
                             </constraints>
@@ -52,7 +52,7 @@
                     <constraints>
                         <constraint firstItem="Bqt-0E-Vcu" firstAttribute="centerY" secondItem="tNj-zL-lGc" secondAttribute="centerY" constant="-6" id="MZm-0g-vw8"/>
                         <constraint firstItem="Bqt-0E-Vcu" firstAttribute="centerX" secondItem="tNj-zL-lGc" secondAttribute="centerX" id="TZ9-44-Iih"/>
-                        <constraint firstAttribute="height" priority="900" constant="24" id="xYB-tK-5YX"/>
+                        <constraint firstAttribute="height" priority="900" constant="30" id="xYB-tK-5YX"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tw-SN-gIL" userLabel="LabelView">
@@ -130,10 +130,10 @@
                             <rect key="frame" x="0.0" y="0.5" width="610.5" height="277.5"/>
                             <subviews>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-IB-1xZ">
-                                    <rect key="frame" x="206" y="-0.5" width="198.5" height="278.5"/>
+                                    <rect key="frame" x="206" y="-0.5" width="198.5" height="277.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-qJ-kXS">
-                                            <rect key="frame" x="0.0" y="0.5" width="198.5" height="278.5"/>
+                                            <rect key="frame" x="0.0" y="0.5" width="198.5" height="277.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -174,10 +174,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31n-EL-h9q">
-                                    <rect key="frame" x="412.5" y="0.0" width="198" height="277.5"/>
+                                    <rect key="frame" x="412.5" y="0.0" width="198" height="792"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-LX-hfY">
-                                            <rect key="frame" x="0.0" y="0.5" width="198" height="277.5"/>
+                                            <rect key="frame" x="0.0" y="0.5" width="198" height="792"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
