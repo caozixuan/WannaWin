@@ -1,6 +1,7 @@
 package citi.funcModule.recommend;
 
 import citi.persist.mapper.*;
+import citi.persist.procedure.probean.ActivityBean;
 import citi.persist.procedure.probean.ItemBean;
 import citi.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ public class RecommendService {
     private CouponMapper couponMapper;
     @Autowired
     private  UserPrefMapper userPrefMapper;
+    @Autowired
+    private  ActivityMapper activityMapper;
 
     /**
      * 初始化用户的偏好列表
@@ -61,6 +64,22 @@ public class RecommendService {
         return false;
     }
 
+    public ArrayList<ActivityBean> getAds(String userID){
+        ArrayList<Activity> activities = new ArrayList<>();
+        ArrayList<ActivityBean> activityBeans = new ArrayList<>();
+        Activity activity1 = activityMapper.getActivityByActivityID("1");
+        Activity activity2 = activityMapper.getActivityByActivityID("2");
+        Activity activity3 = activityMapper.getActivityByActivityID("3");
+        activities.add(activity1);
+        activities.add(activity2);
+        activities.add(activity3);
+        for(Activity activity:activities){
+            Merchant merchant = merchantMapper.selectByID(activity.getMerchantID());
+            ActivityBean activityBean = new ActivityBean(activity, merchant.getName(),merchant.getMerchantLogoURL());
+            activityBeans.add(activityBean);
+        }
+        return  activityBeans;
+    }
     /**
      * 添加用户浏览记录
      * @param userID

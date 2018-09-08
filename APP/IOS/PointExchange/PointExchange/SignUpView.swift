@@ -81,20 +81,13 @@ class SignUpView: UIView {
 		timer.fire()
 	}
 	
-	@IBAction func clickLogin(_ sender: Any) {
-		
-	}
 	
 	/// 检查phoneNumber输入是否合法
 	func checkPhoneNumberInput()->Bool{
 		if phoneNumField.text?.count != 11 {
-			phoneNumField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
-			self.errorLabel.isHidden = false
-			self.errorLabel.text = "您输入的手机号不正确（至少11位）"
 			return false
 		}
 		else{
-			self.errorLabel.isHidden = true
 			return true
 		}
 	}
@@ -117,12 +110,10 @@ class SignUpView: UIView {
 	/// 检查确认密码输入是否合法
 	func checkPasswordIdentifyInput()->Bool{
 		if passwordAgainField.text != passwordField.text {
-			passwordAgainField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
-			errorLabel2.isHidden = false
-			errorLabel2.text = "两次输入的密码不一致"
+			
 			return false
 		}else{
-			errorLabel2.isHidden = true
+			
 			return true
 		}
 	}
@@ -175,6 +166,24 @@ class SignUpView: UIView {
 		second -= 1
 	}
 
+    @IBAction func phoneNumInputEnd(_ sender: Any) {
+        if (phoneNumField.text?.count)! < 11{
+            phoneNumField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+            self.errorLabel.isHidden = false
+            self.errorLabel.text = "您输入的手机号不正确（至少11位）"
+        }else{
+            self.errorLabel.isHidden = true
+        }
+    }
+    @IBAction func pswAgainInputEnd(_ sender: Any) {
+        if passwordAgainField.text != passwordField.text {
+            passwordAgainField.shake(direction: .horizontal, times: 5, duration: 0.05, delta: 2, completion: nil)
+            errorLabel2.isHidden = false
+            errorLabel2.text = "两次输入的密码不一致"
+        }else{
+            errorLabel2.isHidden = true
+        }
+    }
 }
 
 protocol SignUpViewDelegate{

@@ -31,7 +31,7 @@ import java.util.UUID;
  * 构架：刘钟博
  * 作者：曹子轩
  */
-@RequestMapping(value = {"/citi"},produces = {"text/html;charset=UTF-8"})
+@RequestMapping(value = {"/citi"})
 @Controller
 public class CitiController {
 
@@ -50,17 +50,14 @@ public class CitiController {
 
     /**
      * 绑定花旗卡
-     * @param code
-     * @return 成功：{"isBinding":true}，失败：{"isBinding":false}
      */
-    @ResponseBody
     @RequestMapping("/bindCard")
     public String bindCard(String code, String state){
         CitiCard citiCard = citiService.getCardToBeBind(code, state);
         if(citiService.binding(citiCard)){
-            return gson.toJson(citiCard);
+            return "redirect:success.html";
         }
-        return ResultJson.FAILURE;
+        return "redirect:../fail.html";
     }
 
     @ResponseBody

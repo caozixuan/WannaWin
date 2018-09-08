@@ -55,7 +55,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 				
                 // contentOffset will not change before the main runloop ends without queueing it
                 DispatchQueue.main.async {
-                    v.cardScrollView.contentOffset = CGPoint(x: xOffset, y: 0)
+					v.cardScrollView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
                 }
                 
                 // 添加会员卡点击手势事件

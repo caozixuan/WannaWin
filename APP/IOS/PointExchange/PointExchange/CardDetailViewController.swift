@@ -109,11 +109,11 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
             backgroundViewSwipe(offset: offset)
         }else if gesture.state == .ended{
             var offset = Double(point.y-(self.gestureOriginPoint?.y)!)
-            if self.topConstraint + offset > 20{
+            if self.topConstraint + offset > 90{
                 offset = 169 - self.topConstraint
             }else if isFold && self.topConstraint + offset < -23.5 {
                 offset = -100 - self.topConstraint
-            }else if self.topConstraint + offset < 20{
+            }else if self.topConstraint + offset < 90{
                 offset = -23.5 - self.topConstraint
             }
             

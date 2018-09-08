@@ -58,7 +58,7 @@
                                 <action selector="passwordInputCheck:" destination="-1" eventType="editingDidEnd" id="5Cz-aV-xt4"/>
                             </connections>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z41-fb-VoN">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z41-fb-VoN">
                             <rect key="frame" x="7" y="184.5" width="221" height="131.5"/>
                             <state key="normal" image="login"/>
                             <connections>

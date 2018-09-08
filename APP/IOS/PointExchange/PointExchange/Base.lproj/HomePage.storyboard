@@ -161,7 +161,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="10"/>
+                                                    <integer key="value" value="12"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             </userDefinedRuntimeAttributes>
@@ -169,6 +169,9 @@
                                         <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utA-1R-Ftx" userLabel="mask">
                                             <rect key="frame" x="37.5" y="130.5" width="300" height="32"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask-1" translatesAutoresizingMaskIntoConstraints="NO" id="I1X-HN-2Nf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="32"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDz-1f-uLL">
                                                     <rect key="frame" x="16" y="8" width="37" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -194,24 +197,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="cDz-1f-uLL" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="100-L2-HJ9"/>
                                                 <constraint firstItem="cYh-uy-Bgs" firstAttribute="leading" secondItem="Yej-zz-kCy" secondAttribute="trailing" id="CGa-Qx-iWh"/>
                                                 <constraint firstItem="Yej-zz-kCy" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="Fg7-cg-Gr3"/>
+                                                <constraint firstAttribute="trailing" secondItem="I1X-HN-2Nf" secondAttribute="trailing" id="GuS-ao-6ge"/>
                                                 <constraint firstItem="cYh-uy-Bgs" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="WMP-dV-8Zq"/>
                                                 <constraint firstAttribute="trailing" secondItem="cYh-uy-Bgs" secondAttribute="trailing" constant="16" id="cc0-wz-bUs"/>
+                                                <constraint firstItem="I1X-HN-2Nf" firstAttribute="top" secondItem="utA-1R-Ftx" secondAttribute="top" id="mSu-hm-HXR"/>
                                                 <constraint firstItem="Yej-zz-kCy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mHc-iD-UTs" secondAttribute="trailing" constant="24" id="nwl-iS-6Sz"/>
+                                                <constraint firstAttribute="bottom" secondItem="I1X-HN-2Nf" secondAttribute="bottom" id="qKA-Fj-nU5"/>
                                                 <constraint firstItem="cDz-1f-uLL" firstAttribute="leading" secondItem="utA-1R-Ftx" secondAttribute="leading" constant="16" id="vc4-cT-gRU"/>
                                                 <constraint firstItem="mHc-iD-UTs" firstAttribute="centerY" secondItem="utA-1R-Ftx" secondAttribute="centerY" id="xhT-qM-RKf"/>
                                                 <constraint firstAttribute="height" constant="32" id="zdg-Ot-8Vv"/>
+                                                <constraint firstItem="I1X-HN-2Nf" firstAttribute="leading" secondItem="utA-1R-Ftx" secondAttribute="leading" id="zpv-We-wOV"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteCircleBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-eo-vc2">
                                             <rect key="frame" x="56.5" y="28" width="60.5" height="60.5"/>
@@ -1136,6 +1136,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owO-cQ-5TM" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
                                 <rect key="frame" x="8" y="44" width="359" height="599"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该卡暂无兑换记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4po-3c-VRm">
+                                        <rect key="frame" x="98" y="287.5" width="163.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D0j-rN-zhZ">
                                         <rect key="frame" x="8" y="16" width="343" height="535"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1154,7 +1160,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="4po-3c-VRm" firstAttribute="centerY" secondItem="owO-cQ-5TM" secondAttribute="centerY" id="Dtm-b5-Ze3"/>
                                     <constraint firstItem="D0j-rN-zhZ" firstAttribute="top" secondItem="owO-cQ-5TM" secondAttribute="top" constant="16" id="LZ8-pe-rE4"/>
+                                    <constraint firstItem="4po-3c-VRm" firstAttribute="centerX" secondItem="owO-cQ-5TM" secondAttribute="centerX" id="ZUy-zm-XQD"/>
                                     <constraint firstAttribute="bottom" secondItem="D0j-rN-zhZ" secondAttribute="bottom" constant="48" id="f8a-7m-G8a"/>
                                     <constraint firstItem="D0j-rN-zhZ" firstAttribute="leading" secondItem="owO-cQ-5TM" secondAttribute="leading" constant="8" id="rNh-3I-1RF"/>
                                     <constraint firstAttribute="trailing" secondItem="D0j-rN-zhZ" secondAttribute="trailing" constant="8" id="wCV-k9-TtF"/>
@@ -1181,7 +1189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CYo-qv-PVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3825" y="-456"/>
+            <point key="canvasLocation" x="3824.8000000000002" y="-456.52173913043481"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="B5p-Vn-CNs">
@@ -1202,8 +1210,9 @@
     <resources>
         <image name="HomeActive" width="27" height="25"/>
         <image name="HomeUnselected" width="27" height="25"/>
+        <image name="Mask-1" width="933" height="108"/>
         <image name="addCardButton" width="279" height="58"/>
-        <image name="bg2_1" width="311" height="114"/>
+        <image name="bg2_1" width="311" height="115"/>
         <image name="bg3_1" width="341" height="172"/>
         <image name="blueCircle" width="88" height="88"/>
         <image name="cardInfo_fold" width="361" height="384"/>

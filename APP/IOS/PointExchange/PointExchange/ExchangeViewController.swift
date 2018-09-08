@@ -242,6 +242,11 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		if (searchController?.isActive)! {
 			searchController?.isActive = false
 		}
+		
+		// 如果此时输入框正在输入，先验证输入并结束
+		if let textField = UIResponder.currentFirstResponder as? UITextField {
+			let _ = self.textFieldShouldEndEditing(textField)
+		}
 
         // 改变按钮名称
         if self.navigationItem.rightBarButtonItem?.title == "全选" {
@@ -301,7 +306,12 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		switch type {
 		case .add:
 			pointsSum += Double(text)!
-			pointsSumLabel.text = String(format:"%.2f", pointsSum)
+			if String(format:"%.2f", pointsSum) == "-0.00" { //排除误差
+				pointsSumLabel.text = "0.00"
+			}
+			else {
+				pointsSumLabel.text = String(format:"%.2f", pointsSum)
+			}
 			
 		default: //minus
 			pointsSum -= Double(text)!
@@ -448,7 +458,7 @@ extension ExchangeViewController:UISearchBarDelegate,UISearchResultsUpdating{
 		
 		//过滤数据源，存储匹配的数据
 		let resultDic = dataDic?.filter({ (card) -> Bool in
-			let name: NSString = card.value.merchant?.name as! NSString
+			let name: NSString = (card.value.merchant?.name as NSString?)!
 			return   (name.range(of: searchString!, options: .caseInsensitive).location) != NSNotFound
 		})
 		searchResult = resultDic?.keys.sorted()

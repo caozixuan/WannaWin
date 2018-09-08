@@ -17,12 +17,16 @@ class LoginViewController: UIViewController,LoginViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 		loginView.delegate = self
+		
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //调整以适配屏幕
-        self.loginView.view.frame = self.loginView.bounds
-    }
+	
+	//不要在viewDidAppear里写，调用那个方法的时候视图已经显示了
+	// 下面这个方法是改变视图边界最好的时候，改变完正好准备布局子视图
+	override func viewWillLayoutSubviews() {
+		//调整以适配屏幕
+		self.loginView.view.frame = self.loginView.bounds
+	}
+
 
 	func login() {
 		ServerConnector.login(phoneNum: loginView.usernameField.text!, password: loginView.passwordField.text!, callback: afterLogin)
