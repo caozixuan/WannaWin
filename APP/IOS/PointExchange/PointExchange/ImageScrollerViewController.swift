@@ -14,8 +14,6 @@ import SnapKit
 protocol ImageScrollerControllerDelegate{
 	//获取数据源
 	func scrollerDataSource()->[String]
-	//获取内部sliderView的宽高尺寸
-	//func scrollerViewSize()->CGSize
 }
 
 class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
@@ -72,9 +70,20 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.black
     }
 	
+	/// 刷新图片
+	func refresh(){
+		// 使自动滚动计时器失效
+		autoScrollTimer?.invalidate()
+		self.dataSource =  self.delegate.scrollerDataSource()
+		if dataSource?.count != 0 {
+			resetImageViewSource()
+			configurePageController()
+		}
+		configureAutoScrollTimer()
+	}
+	
 	//设置scrollerView
 	func configureScrollerView(){
-		//self.scrollerView = UIScrollView(frame: CGRect(x: 0,y: 0, width: self.scrollerViewWidth!, height: self.scrollerViewHeight!))
 		self.scrollerView = UIScrollView()
 		self.scrollerView?.backgroundColor = UIColor.gray
 		self.scrollerView?.delegate = self
@@ -109,22 +118,25 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.scrollerView?.showsHorizontalScrollIndicator = false
 		self.scrollerView?.showsVerticalScrollIndicator = false
 		
-		//设置初始时左中右三个imageView的图片（分别时数据源中最后一张，第一张，第二张图片）
+		//设置初始时左中右三个imageView的图片（分别是数据源中最后一张，第一张，第二张图片）
 		if(self.dataSource?.count != 0){
 			resetImageViewSource()
+		}
+		else {
+			self.leftImageView?.image = placeholderImage
+			self.middleImageView?.image = placeholderImage
+			self.rightImageView?.image = placeholderImage
 		}
 		
 		self.scrollerView?.addSubview(self.leftImageView!)
 		self.scrollerView?.addSubview(self.middleImageView!)
 		self.scrollerView?.addSubview(self.rightImageView!)
 		
-		
 	}
 	
 	
 	//设置页控制器
 	func configurePageController() {
-		//self.pageControl = UIPageControl(frame: CGRect(x: self.scrollerViewWidth!/2-60, y: self.scrollerViewHeight! - 40, width: 120, height: 20))
 		self.pageControl = UIPageControl()
 		self.pageControl?.numberOfPages = (self.dataSource?.count)!
 		self.pageControl?.isUserInteractionEnabled = false
