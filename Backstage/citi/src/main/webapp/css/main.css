@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #ccc;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.center-block{
+
+}
+
+.common-wrapper {
+  margin: 0 auto;
+  width: 1200px;
+  background: white;
+  height: 80%;
+  margin-top: 10vh;
+  overflow: hidden;
+}
+
+.common-wrapper .login-wrapper {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.common-wrapper .login-wrapper h1.login-title {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 50px;
+}
+
+.common-wrapper .login-wrapper .input-box {
+  margin: 0 auto;
+  width: 250px;
+  height: 80px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.common-wrapper .login-wrapper .btn-wrapper {
+  width: 250px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 25px auto;
+}
+
+.common-wrapper .login-wrapper .remember-id {
+  width: 250px;
+  margin: 0 auto;
+  text-align: left !important;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.common-wrapper .login-wrapper .remember-id label {
+  cursor: pointer;
+  position: relative;
+}
+
+.common-wrapper .login-wrapper .common-passage {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.common-wrapper .login-wrapper .common-passage st {
+  color: #21649e;
+  cursor: pointer;
+}
+
+.common-wrapper .login-wrapper .common-passage st:hover {
+  color: #78a6ce;
+}
+
+.common-wrapper input[type=text], .common-wrapper input[type=password] {
+  background: #eee;
+  border-radius: 6px;
+  width: 250px;
+  height: 50px;
+  font-size: 16px;
+  font-family: Georgia, serif;
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  padding-left: 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.common-wrapper input::-webkit-input-placeholder {
+  color: #666;
+}
+
+.common-wrapper input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #666;
+}
+
+.common-wrapper input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #666;
+}
+
+.common-wrapper input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #666;
+}
+
+.common-wrapper .btn {
+  border-radius: 6px;
+  width: 250px;
+  height: 50px;
+  font-size: 16px;
+  font-family: Georgia, serif;
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  text-align: center;
+  color: white;
+  line-height: 50px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.common-wrapper .btn.primary {
+  background: #337ab7;
+}
+
+.common-wrapper .btn.primary:hover, .common-wrapper .btn.primary:focus {
+  background: #21649e;
+}
+
+.mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background: rgba(66,66,66,0.6);
+	z-index: 1;
+}
+
+.mask .spinner {
+	font-size: 36px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	color: white;
+}
