@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,8 +54,13 @@ public class AccountFragment extends Fragment {
         portrait.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intentToUserSetting = new Intent(getContext(), UserSettingActivity.class);
-                startActivity(intentToUserSetting);
+                if(LogStateInfo.getInstance(getContext()).isLogin()){
+                    Intent intentToUserSetting = new Intent(getContext(), UserSettingActivity.class);
+                    startActivity(intentToUserSetting);
+                }
+                else
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -66,8 +72,14 @@ public class AccountFragment extends Fragment {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                if(LogStateInfo.getInstance(getContext()).isLogin() != isLogin) {
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -98,21 +110,27 @@ public class AccountFragment extends Fragment {
         listViewMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0:
-                        Intent intentToRecord = new Intent(getContext(), PointsExchangeExpandListActivity.class);
-                        startActivity(intentToRecord);
-                        break;
-                    case 1:
-                        Intent intentToOrder = new Intent(getContext(), MyOrderActivity.class);
-                        startActivity(intentToOrder);
-                        break;
-                    case 2:
-                        Intent intentToGeneral = new Intent(getContext(), SettingActivity.class);
-                        startActivity(intentToGeneral);
-                        break;
-
+                if(!LogStateInfo.getInstance(getContext()).isLogin()) {
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
                 }
+                else{
+                    switch (position){
+                        case 0:
+                            Intent intentToRecord = new Intent(getContext(), PointsExchangeExpandListActivity.class);
+                            startActivity(intentToRecord);
+                            break;
+                        case 1:
+                            Intent intentToOrder = new Intent(getContext(), MyOrderActivity.class);
+                            startActivity(intentToOrder);
+                            break;
+                        case 2:
+                            Intent intentToGeneral = new Intent(getContext(), SettingActivity.class);
+                            startActivity(intentToGeneral);
+                            break;
+
+                    }
+                }
+
             }
         });
 
