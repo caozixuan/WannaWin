@@ -80,7 +80,7 @@ public class SearchCouponFragment extends Fragment {
         setRecyclerView();
 
         setRefreshLayout();
-        
+
         //获得初始化数据
         initData();
 
