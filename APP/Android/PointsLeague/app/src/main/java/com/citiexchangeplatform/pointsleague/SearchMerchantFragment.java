@@ -51,6 +51,7 @@ public class SearchMerchantFragment extends Fragment{
     private FindSearchAdapter searchAdapter;
     ProgressDialog dialog;
     String keyword;
+    int num = 0;
 
 
 
@@ -160,7 +161,7 @@ public class SearchMerchantFragment extends Fragment{
                 System.out.println(s);
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    int num = jsonObject.getInt("num");
+                    num = jsonObject.getInt("num");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -249,7 +250,7 @@ public class SearchMerchantFragment extends Fragment{
 
                 map.put("keyword",keyword);
                 map.put("start","0");
-                map.put("end","1");
+                map.put("end",String.valueOf(num));
 
 
                 return map;
