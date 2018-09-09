@@ -24,7 +24,13 @@ class OfflineHistoryViewController: UIViewController {
 		ServerConnector.getOrders(intervalTime: "101010101"){ (result, orders) in
 			if result {
 				self.orders = orders
-				self.setDataSource()
+                if orders.count == 0{
+                    self.tableView.isHidden = true
+                }else{
+                    self.tableView.isHidden = false
+                    self.setDataSource()
+                }
+				
 			}
 			
 		}

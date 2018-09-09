@@ -10,7 +10,7 @@ public class VisitRecord {
     private String time;
 
     public VisitRecord(String userID, String itemID, Timestamp time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeString = formatter.format(time);
         this.userID = userID;
         this.itemID = itemID;

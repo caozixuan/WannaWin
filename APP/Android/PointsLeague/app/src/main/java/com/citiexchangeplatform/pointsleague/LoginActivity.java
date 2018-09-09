@@ -3,6 +3,8 @@ package com.citiexchangeplatform.pointsleague;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,8 +14,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -46,9 +51,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //设置toolbar
+        toolBar();
 
-        editTextAccount = (EditText) findViewById(R.id.editText_account_login);
-        editTextPassword = (EditText) findViewById(R.id.editText_password_login);
+        editTextAccount = (EditText) findViewById(R.id.editText_account_card_points);
+        editTextPassword = (EditText) findViewById(R.id.editText_password_card_points);
 
         Button buttonLogin = (Button) findViewById(R.id.button_login_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -68,25 +75,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonRegister = (Button) findViewById(R.id.button_register_login);
+        TextView buttonRegister = (TextView) findViewById(R.id.button_register_login);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentToRegister = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intentToRegister);
-            }
-        });
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_login);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 finish();
             }
         });
+
 
     }
 
@@ -149,5 +147,57 @@ public class LoginActivity extends AppCompatActivity {
                         dialog = ProgressDialog.show(LoginActivity.this, "", "登录中...");
                     }
                 });
+    }
+
+    public void toolBar(){
+        boolean isImmersive = false;
+        if (hasKitKat() && !hasLollipop()) {
+            isImmersive = true;
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        } else if (hasLollipop()) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            isImmersive = true;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
+            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
+        final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        titleBar.setLeftImageResource(R.drawable.ic_left_orange_24dp);
+        titleBar.setLeftText("返回");
+        titleBar.setLeftTextSize(18);
+        titleBar.setLeftTextColor(getResources().getColor(R.color.colorLightOrange));
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+
+        titleBar.setTitleColor(Color.BLACK);
+
+        //沉浸式
+        titleBar.setImmersive(isImmersive);
+    }
+
+    public static boolean hasKitKat() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    }
+
+    public static boolean hasLollipop() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 }

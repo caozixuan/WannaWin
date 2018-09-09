@@ -14,7 +14,7 @@ public class Points_history {
     protected String time;
 
     public Points_history(String userID, String merchantIDs, Integer points_card, Double points_citi, String cause, Timestamp time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeString = formatter.format(time);
         this.userID = userID;
         this.merchantID = merchantID;

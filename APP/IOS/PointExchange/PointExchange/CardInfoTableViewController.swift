@@ -57,10 +57,27 @@ class CardInfoTableViewController: UITableViewController {
         if result {
             cardArray = cards
 			User.getUser().card = cards
-            tableView.reloadData()
+			if cards.count == 0 {
+				tableView.isHidden = true
+				showMessage()
+			}
+			else {
+				tableView.isHidden = false
+				tableView.reloadData()
+			}
         }
         activityIndicator?.stopAnimating()
     }
+	
+	func showMessage() {
+		let messageLabel = UILabel()
+		messageLabel.text = "您暂无任何会员卡"
+		messageLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 18)
+		messageLabel.textColor = UIColor.lightGray
+		messageLabel.textAlignment = NSTextAlignment.center
+		messageLabel.sizeToFit()
+		self.tableView.backgroundView = messageLabel
+	}
 	
 	/// 跳转到“添加银行卡”页面
 	@objc func goAddVC() {
@@ -154,7 +171,7 @@ class CardInfoTableViewController: UITableViewController {
         isSearch = true
         //过滤数据源，存储匹配的数据
         searchResult = cardArray?.filter({ (card) -> Bool in
-            let name: NSString = card.merchant?.name as! NSString
+			let name: NSString = (card.merchant?.name as NSString?)!
             return   (name.range(of: searchString!, options: .caseInsensitive).location) != NSNotFound
         })
         //刷新表格

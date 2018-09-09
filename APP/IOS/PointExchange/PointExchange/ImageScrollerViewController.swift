@@ -14,8 +14,6 @@ import SnapKit
 protocol ImageScrollerControllerDelegate{
 	//获取数据源
 	func scrollerDataSource()->[String]
-	//获取内部sliderView的宽高尺寸
-	//func scrollerViewSize()->CGSize
 }
 
 class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
@@ -50,13 +48,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	
 	//自动滚动计时器
 	var autoScrollTimer:Timer?
-    
-    //viewDidLoad：view加载完毕
-    //viewWillAppear：控制器的view将要显示
-    //viewWillLayoutSubviews：控制器的view将要布局子控件
-    //viewDidLayoutSubviews：控制器的view布局子控件完成
-    //这期间系统可能会多次调用viewWillLayoutSubviews 、 viewDidLayoutSubviews 俩个方法
-    //viewDidAppear:控制器的view完全显示 (约束布局都已完成)
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.scrollerViewWidth = self.view.bounds.size.width
@@ -78,9 +70,20 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.black
     }
 	
+	/// 刷新图片
+	func refresh(){
+		// 使自动滚动计时器失效
+		autoScrollTimer?.invalidate()
+		self.dataSource =  self.delegate.scrollerDataSource()
+		if dataSource?.count != 0 {
+			resetImageViewSource()
+			configurePageController()
+		}
+		configureAutoScrollTimer()
+	}
+	
 	//设置scrollerView
 	func configureScrollerView(){
-		//self.scrollerView = UIScrollView(frame: CGRect(x: 0,y: 0, width: self.scrollerViewWidth!, height: self.scrollerViewHeight!))
 		self.scrollerView = UIScrollView()
 		self.scrollerView?.backgroundColor = UIColor.gray
 		self.scrollerView?.delegate = self
@@ -89,11 +92,10 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		//滚动视图内容区域向左偏移一个view的宽度
 		self.scrollerView?.contentOffset = CGPoint(x: self.scrollerViewWidth!, y: 0)
 		self.scrollerView?.isPagingEnabled = true
-		self.scrollerView?.bounces = false
+		self.scrollerView?.bounces = true
 		self.view.addSubview(self.scrollerView!)
 		self.scrollerView?.snp.makeConstraints { (make) -> Void in
 			make.size.equalTo(self.view.bounds.size)
-			//make.center.equalTo(self.view)
 		}
 	}
 	
@@ -116,22 +118,25 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		self.scrollerView?.showsHorizontalScrollIndicator = false
 		self.scrollerView?.showsVerticalScrollIndicator = false
 		
-		//设置初始时左中右三个imageView的图片（分别时数据源中最后一张，第一张，第二张图片）
+		//设置初始时左中右三个imageView的图片（分别是数据源中最后一张，第一张，第二张图片）
 		if(self.dataSource?.count != 0){
 			resetImageViewSource()
+		}
+		else {
+			self.leftImageView?.image = placeholderImage
+			self.middleImageView?.image = placeholderImage
+			self.rightImageView?.image = placeholderImage
 		}
 		
 		self.scrollerView?.addSubview(self.leftImageView!)
 		self.scrollerView?.addSubview(self.middleImageView!)
 		self.scrollerView?.addSubview(self.rightImageView!)
 		
-		
 	}
 	
 	
 	//设置页控制器
 	func configurePageController() {
-		//self.pageControl = UIPageControl(frame: CGRect(x: self.scrollerViewWidth!/2-60, y: self.scrollerViewHeight! - 40, width: 120, height: 20))
 		self.pageControl = UIPageControl()
 		self.pageControl?.numberOfPages = (self.dataSource?.count)!
 		self.pageControl?.isUserInteractionEnabled = false
@@ -147,7 +152,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//设置自动滚动计时器
 	func configureAutoScrollTimer() {
 		//设置一个定时器，每三秒钟滚动一次
-		autoScrollTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
+		autoScrollTimer = Timer.scheduledTimer(timeInterval: 3.5, target: self,
 											   selector: #selector(ImageScrollerViewController.letItScroll),
 											   userInfo: nil, repeats: true)
 	}
@@ -155,7 +160,10 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//计时器时间一到，滚动一张图片
 	@objc func letItScroll(){
 		let offset = CGPoint(x: 2*scrollerViewWidth!, y: 0)
-		self.scrollerView?.setContentOffset(offset, animated: true)
+		UIView.animate(withDuration: 2.0) {
+			self.scrollerView?.setContentOffset(offset, animated: true)
+		}
+		
 	}
 	
 	//每当滚动后重新设置各个imageView的图片

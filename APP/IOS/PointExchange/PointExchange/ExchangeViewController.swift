@@ -32,7 +32,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 	var searchController:UISearchController?
 	var searchResult:[Int]? // 用于存储搜索到的cell的行数
 	var dataDic:Dictionary<Int,Card>? // 用于辅助获得searchResult
-	var isSearch = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -72,6 +71,13 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 							User.getUser().card = cards
 							self.dataSource = cards
 							self.tableView.reloadData()
+							
+							if self.dataSource?.count == 0{
+								self.tableView.isHidden = true
+							}else{
+								self.tableView.isHidden = false
+								self.tableView.reloadData()
+							}
 						}
 					}
 				}
@@ -167,8 +173,8 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 						// 设置搜索结果的不变的量
 						initCellWithUnchanged(exchangeItemCellView, (dataSource?[row])!)
 					}
-					
 					updateCell(exchangeItemCellView, row)
+					allCell[indexPath.row] = exchangeItemCellView
 				}
                 break
 			}
@@ -196,12 +202,7 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		exchangeItemCellView.editSourcePoints.text = cellDataList[row].editSourcePoints
 		exchangeItemCellView.targetPoints.text = cellDataList[row].targetPoints
 		exchangeItemCellView.checkbox.isSelected = cellDataList[row].isSelected
-		// 重新选中，调用checkboxClick函数
-		if exchangeItemCellView.checkbox.isSelected {
-			exchangeItemCellView.checkbox.isSelected = false
-			exchangeItemCellView.perform(#selector(ExchangeItemCellView.checkboxClick), with: exchangeItemCellView.checkbox)
-		}
-		
+		exchangeItemCellView.updateControlsState() // 更新控件状态
 	}
 	
 	// MARK: - TextField delegate
@@ -246,7 +247,12 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         var cell:UITableViewCell?
 		
 		if (searchController?.isActive)! {
-			searchController?.searchBar.delegate?.searchBarCancelButtonClicked!((searchController?.searchBar)!)
+			searchController?.isActive = false
+		}
+		
+		// 如果此时输入框正在输入，先验证输入并结束
+		if let textField = UIResponder.currentFirstResponder as? UITextField {
+			let _ = self.textFieldShouldEndEditing(textField)
 		}
 
         // 改变按钮名称
@@ -307,7 +313,12 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		switch type {
 		case .add:
 			pointsSum += Double(text)!
-			pointsSumLabel.text = String(format:"%.2f", pointsSum)
+			if String(format:"%.2f", pointsSum) == "-0.00" { //排除误差
+				pointsSumLabel.text = "0.00"
+			}
+			else {
+				pointsSumLabel.text = String(format:"%.2f", pointsSum)
+			}
 			
 		default: //minus
 			pointsSum -= Double(text)!
@@ -344,7 +355,6 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
     
     /// 标记选中状态
     func setSelected(tag: Int, isSelected: Bool) {
-        //selectedList?[tag] = isSelected
         cellDataList[tag].isSelected = isSelected
         
     }
@@ -431,17 +441,11 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 
 
 extension ExchangeViewController:UISearchBarDelegate,UISearchResultsUpdating{
-	//点击搜索按钮，触发该代理方法，如果已经显示搜索结果，那么直接去除键盘，否则刷新列表
+	/// 如果已经显示搜索结果，那么直接去除键盘，否则刷新列表
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		if searchResult != nil && searchResult?.count != 0{
 			tableView.reloadData()
 			searchController?.searchBar.resignFirstResponder()
-		}
-	}
-	
-	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-		if searchResult != nil && searchResult?.count != 0{
-			
 		}
 	}
 	
@@ -451,7 +455,6 @@ extension ExchangeViewController:UISearchBarDelegate,UISearchResultsUpdating{
 	//这个updateSearchResultsForSearchController(_:)方法是UISearchResultsUpdating中唯一一个我们必须实现的方法。当search bar 成为第一响应者，或者search bar中的内容被改变将触发该方法.不管用户输入还是删除search bar的text，UISearchController都会被通知到并执行上述方法。
 	func updateSearchResults(for searchController: UISearchController) {
 		let searchString = searchController.searchBar.text
-		isSearch = true
 		
 		if dataDic == nil {
 			dataDic = Dictionary<Int, Card>()
@@ -462,7 +465,7 @@ extension ExchangeViewController:UISearchBarDelegate,UISearchResultsUpdating{
 		
 		//过滤数据源，存储匹配的数据
 		let resultDic = dataDic?.filter({ (card) -> Bool in
-			let name: NSString = card.value.merchant?.name as! NSString
+			let name: NSString = (card.value.merchant?.name as NSString?)!
 			return   (name.range(of: searchString!, options: .caseInsensitive).location) != NSNotFound
 		})
 		searchResult = resultDic?.keys.sorted()

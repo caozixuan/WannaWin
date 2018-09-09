@@ -31,23 +31,39 @@ class CouponHistoryContainViewContainer: UIViewController {
 		if tag == "unuse" {
 			ServerConnector.getUnusedCoupons(){(result, items) in
 				if result {
-					self.items = items
-					self.setDataSource()
+                    self.items = items
+                    if items.count == 0{
+                        self.tableView.isHidden = true
+                    }else{
+                        self.tableView.isHidden = false
+                        self.setDataSource()
+                    }
+					
 				}
 			}
 		}else if tag == "used"{
 			ServerConnector.getUsedCoupons(){(result, items) in
 				if result {
-					self.items = items
-					self.setDataSource()
+                    self.items = items
+                    if items.count == 0{
+                        self.tableView.isHidden = true
+                    }else{
+                        self.tableView.isHidden = false
+                        self.setDataSource()
+                    }
 				}
 			}
 		}
 		else if tag == "overdue"{
 			ServerConnector.getOverdueCoupons(){(result, items) in
 				if result {
-					self.items = items
-					self.setDataSource()
+                    self.items = items
+                    if items.count == 0{
+                        self.tableView.isHidden = true
+                    }else{
+                        self.tableView.isHidden = false
+                        self.setDataSource()
+                    }
 				}
 			}
 		}
@@ -71,7 +87,7 @@ class CouponHistoryContainViewContainer: UIViewController {
 			}
 			if self.items.count != 0 {
 				let formatter = DateFormatter()
-				formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 				self.tableView.isHidden = false
 				let imageURL = URL(string: (element.logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
 				cell?.logoImage.kf.setImage(with: imageURL)

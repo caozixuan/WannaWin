@@ -100,6 +100,8 @@ enum ServerService {
 	case isInvestigated()
 	/// 初始化调查
 	case investigate(types:[Bool])
+    /// 广告
+    case getAds()
 	
 	// 活动
 	/// 获取活动详情
@@ -210,6 +212,9 @@ extension ServerService:TargetType {
 			return "/recommend/isInvestigated"
 		case .investigate:
 			return "/recommend/initPref"
+        case .getAds():
+            return "/recommend/getAds"
+            
 		// 活动
 		case .getActivity:
 			return "/activity/getActivity"
@@ -418,6 +423,13 @@ extension ServerService:TargetType {
 				params["type\(i+1)"] = types[i]
 			}
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .getAds():
+            var params:[String:Any] = [:]
+            if User.getUser().id != nil {
+                params["userID"] = User.getUser().id
+            }
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
 		// 活动
 		case .getActivity(let activityID):
 			var params:[String:String] = [:]

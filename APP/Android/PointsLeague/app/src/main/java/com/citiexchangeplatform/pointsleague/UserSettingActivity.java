@@ -52,6 +52,9 @@ public class UserSettingActivity extends CompatStatusBarActivity {
                         Intent intentToBind = new Intent(UserSettingActivity.this, BindAccountActivity.class);
                         startActivity(intentToBind);
                         break;
+                    case 1:
+                        Intent intentToModifyPassword = new Intent(UserSettingActivity.this, ModifyPasswordActivity.class);
+                        startActivity(intentToModifyPassword);
 
                 }
             }

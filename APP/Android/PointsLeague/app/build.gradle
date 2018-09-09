@@ -48,4 +48,11 @@ dependencies {
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'org.greenrobot:eventbus:3.0.0'
+
+    //1.1.0 API改动过大，老用户升级需谨慎
+    //1.1.0 API改动过大，老用户升级需谨慎
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
+    implementation 'com.android.support:appcompat-v7:27.1.1'//版本 23以上（必须）
+
 }

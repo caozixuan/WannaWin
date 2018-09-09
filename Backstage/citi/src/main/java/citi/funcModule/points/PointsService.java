@@ -75,7 +75,7 @@ public class PointsService {
         ArrayList<ReturnInformation> returnInformations = new ArrayList<ReturnInformation>();
         ArrayList<Timestamp> timestamps = new ArrayList<Timestamp>();
         for(Points_history_merchant points_history_merchant:points_history_merchants){
-            if(timestamps.indexOf(points_history_merchant.getTime())<0){
+            if(timestamps.indexOf(Timestamp.valueOf(points_history_merchant.getTime()))<0){
                 Timestamp timestamp = Timestamp.valueOf(points_history_merchant.getTime());
                 timestamps.add(timestamp);
             }
@@ -85,7 +85,7 @@ public class PointsService {
         }
         ReturnInformation returnInformation = new ReturnInformation();
         for(Points_history_merchant points_history_merchant:points_history_merchants){
-            returnInformation = returnInformations.get(timestamps.indexOf(points_history_merchant.getTime()));
+            returnInformation = returnInformations.get(timestamps.indexOf(Timestamp.valueOf(points_history_merchant.getTime())));
             returnInformation.points_history_merchants.add(points_history_merchant);
         }
         for(ReturnInformation returnIn:returnInformations){

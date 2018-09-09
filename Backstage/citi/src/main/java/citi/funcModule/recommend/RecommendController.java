@@ -1,8 +1,10 @@
 package citi.funcModule.recommend;
 
 
+import citi.persist.procedure.probean.ActivityBean;
 import citi.support.resultjson.ResultJson;
 import citi.support.resultjson.SerializeGson;
+import citi.vo.Activity;
 import citi.vo.Item;
 
 import citi.vo.Type;
@@ -46,6 +48,13 @@ public class RecommendController {
             return ResultJson.SUCCESS;
         }
         return ResultJson.FAILURE;
+    }
+
+    @ResponseBody
+    @RequestMapping("getAds")
+    public String getAds(String userID){
+        ArrayList<ActivityBean> activities = recommendService.getAds(userID);
+        return gson.toJson(activities);
     }
 
     @ResponseBody

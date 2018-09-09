@@ -109,6 +109,19 @@ class ExchangeItemCellView: UIView {
 		}
 	}
 	
+	/// 更新控件状态，解决控件复用导致的错乱
+	func updateControlsState (){
+		if checkbox.isSelected {
+			editSourcePoints?.isHidden = false
+			sourcePoints?.isHidden = true
+			editSourcePoints.text = sourcePoints.text
+		}
+		else {
+			editSourcePoints?.isHidden = true
+			sourcePoints?.isHidden = false
+		}
+	}
+	
 	@objc func pointBeginEdit(){
 		// 触发代理获得textfield数据，统计积分总数
 		if let text = targetPoints?.text {

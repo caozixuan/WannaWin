@@ -15,12 +15,12 @@ class SignUpViewController: UIViewController,SignUpViewDelegate {
         super.viewDidLoad()
 		signUpView.delegate = self
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        //调整以适配屏幕
-        self.signUpView.view1.frame = self.signUpView.bounds
-        self.signUpView.view2.frame = self.signUpView.bounds
-    }
+	
+	override func viewWillLayoutSubviews() {
+		//调整以适配屏幕
+		self.signUpView.view1.frame = self.signUpView.bounds
+		self.signUpView.view2.frame = self.signUpView.bounds
+	}
     
     // 向服务器进行注册操作
     func signUp(){

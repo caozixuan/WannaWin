@@ -12,10 +12,9 @@ public class AuthInterceptorAdapter extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("AuthInterceptorAdapter");
         String merchantID=(String)request.getSession().getAttribute("merchantID");
         if (merchantID==null){
-            return true;
+            return false;
         }else {
             return true;
         }

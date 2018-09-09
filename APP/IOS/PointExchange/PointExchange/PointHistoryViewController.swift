@@ -25,7 +25,13 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
 		ServerConnector.getAllPointsHistory{ (result, pointsHistory) in
 			if result {
 				self.pointsHistoryArray = pointsHistory
-				self.tableView.reloadData()
+                if pointsHistory.count == 0{
+                    self.tableView.isHidden = true
+                }else{
+                    self.tableView.isHidden = false
+                    self.tableView.reloadData()
+                }
+				
 			}
 
 		}
@@ -63,11 +69,8 @@ class PointHistoryViewController: UIViewController, ExpyTableViewDataSource {
 		}
 		
         cell?.pointLabel.text = String(stringInterpolationSegment: pointsHistoryArray[section].totalPoints!) + "P"
-		let formatter = DateFormatter()
-		formatter.dateFormat = "MMM dd, yyyy hh:mm:ss a"
-		let date = formatter.date(from: pointsHistoryArray[section].historyMerchants![0].time!)
-		formatter.dateFormat = "MMM dd, yyyy"
-        cell?.dateLabel.text = formatter.string(from: date!)
+		
+        cell?.dateLabel.text = pointsHistoryArray[section].historyMerchants![0].time!
         return cell!
     }
     

@@ -56,7 +56,7 @@ public class UserCoupon {
     }
 
     public UserCoupon(Long couponID, String userID, String itemID, String state, Timestamp getTime, Timestamp useTime) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String getTimeString = formatter.format(getTime);
         String useTimeString = formatter.format(useTime);
         this.couponID = couponID;
