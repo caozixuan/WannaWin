@@ -44,14 +44,29 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
                 if self.items.count < 3 && self.moreButton != nil {
                     self.moreButton.removeFromSuperview()
                 }
-				self.couponTableView.reloadData()
+				
+				if self.items.count != 0 {
+					self.couponTableView.reloadData()
+				}
+				else { // 当没有优惠信息时，显示提示文字
+					self.couponTableView.backgroundView = self.showMessage("暂无优惠劵")
+				}
+				
 			}
 			
 		}
 		ServerConnector.getMerchantActivities(merchantID: (merchant?.id)!){(result,activities) in
 			if result {
 				self.offlineActivities = activities!
-				self.setOfflineScrollView()
+				
+				if self.offlineActivities.count != 0 {
+					self.setOfflineScrollView()
+				}
+				else { // 当没有线下活动时，显示提示文字
+					let view = self.showMessage("暂无线下活动")
+					view.frame = self.offlineScrollView.bounds
+					self.offlineView.addSubview(view)
+				}
 			}
 			
 		}
@@ -82,6 +97,17 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 				
 			}
 		}
+	}
+	
+	/// 无内容时显示提示信息
+	func showMessage(_ message:String)-> UIView{
+		let messageLabel = UILabel()
+		messageLabel.text = message
+		messageLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 18)
+		messageLabel.textColor = UIColor.lightGray
+		messageLabel.textAlignment = NSTextAlignment.center
+		messageLabel.sizeToFit()
+		return messageLabel
 	}
 	
 	@objc func clickActivity(_ sender:UITapGestureRecognizer){

@@ -71,6 +71,13 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 							User.getUser().card = cards
 							self.dataSource = cards
 							self.tableView.reloadData()
+							
+							if self.dataSource?.count == 0{
+								self.tableView.isHidden = true
+							}else{
+								self.tableView.isHidden = false
+								self.tableView.reloadData()
+							}
 						}
 					}
 				}

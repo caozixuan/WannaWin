@@ -11,19 +11,26 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ValueAnimator;
 import com.study.xuan.xvolleyutil.base.XVolley;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
@@ -31,7 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CardInfoActivity extends AppCompatActivity {
+public class CardInfoActivity extends AppCompatActivity  {
 
     private String merchantID;
     private ProgressDialog dialog;
@@ -42,7 +49,16 @@ public class CardInfoActivity extends AppCompatActivity {
     TextView textViewExchangePoint;
     TextView textViewAccount;
     TextView textViewAccount2;
-    TextView textViewDescription;
+    //TextView textViewDescription;
+
+    LinearLayout layoutContent;
+    View content;
+    View viewAbove;
+
+    boolean isExtended = false;
+    Button buttonExtend;
+    float mPosX ,mPosY = 0.0f,mCurPosX,mCurPosY = 0.0f;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +67,56 @@ public class CardInfoActivity extends AppCompatActivity {
 
         imageViewCard = findViewById(R.id.imageView_card_info);
         textViewName = findViewById(R.id.textView_name_card_info);
-        textViewPoint = findViewById(R.id.textView_points_card_info);
-        textViewExchangePoint = findViewById(R.id.textView_exchange_points_card_info);
-        textViewAccount = findViewById(R.id.textView_account_card_info);
         textViewAccount2 = findViewById(R.id.textView_account2_card_info);
-        //textViewDescription = findViewById(R.id.textView_description_card_info);
+        layoutContent = findViewById(R.id.layout_content_card_info);
+        content = LayoutInflater.from(CardInfoActivity.this).inflate(R.layout.content_card_info, null);
+        layoutContent.addView(content);
+        viewAbove = findViewById(R.id.view_above_card_info);
+
+
+        textViewPoint = content.findViewById(R.id.textView_points_card_info);
+        textViewExchangePoint = content.findViewById(R.id.textView_exchange_points_card_info);
+        textViewAccount = content.findViewById(R.id.textView_account_card_info);
+
+
+        layoutContent.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        mPosX = event.getX();
+                        mPosY = event.getY();
+                        mCurPosX = event.getX();
+                        mCurPosY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mCurPosX = event.getX();
+                        mCurPosY = event.getY();
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (mCurPosY - mPosY > 200) {
+                            //向下滑動
+                            if(!isExtended){
+                                toggle();
+                            }
+
+                        } else if (mCurPosY - mPosY < -200) {
+                            //向上滑动
+                            if(isExtended)
+                                toggle();
+                        }
+
+                        break;
+                }
+                return false;
+            }
+
+        });
+        layoutContent.setLongClickable(true);
 
         Intent intent = getIntent();
         merchantID = intent.getStringExtra("merchantID");
@@ -80,8 +141,82 @@ public class CardInfoActivity extends AppCompatActivity {
             }
         });
 
+        buttonExtend = content.findViewById(R.id.button_extend_card_info);
+        buttonExtend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggle();
+            }
+        });
+
         getInfos();
 
+    }
+
+
+
+    private void toggle() {
+        ValueAnimator animator = null;
+        if (isExtended) {
+            // 关闭
+            isExtended = false;
+            // 属性动画
+            animator = ValueAnimator.ofInt(850, 270);// 从某个值变化到某个值
+        } else {
+            // 开启
+            isExtended = true;
+            // 属性动画
+            animator = ValueAnimator.ofInt(270, 850);
+        }
+
+        // 动画更新的监听
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            // 启动动画之后, 会不断回调此方法来获取最新的值
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                // 获取最新的高度值
+                Integer newHeight = (Integer) animator.getAnimatedValue();
+
+
+                // 重新修改布局高度
+                ViewGroup.LayoutParams layoutParams = viewAbove.getLayoutParams();
+                layoutParams.height = newHeight;
+                viewAbove.setLayoutParams(layoutParams);
+            }
+        });
+
+        animator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator arg0) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator arg0) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator arg0) {
+                // 动画结束的事件
+                // 更新小箭头的方向
+                if (isExtended) {
+                    buttonExtend.setBackgroundResource(R.drawable.button_extend2);
+                } else {
+                    buttonExtend.setBackgroundResource(R.drawable.button_extend1);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator arg0) {
+
+            }
+        });
+
+        animator.setDuration(200);// 动画时间
+        animator.start();// 启动动画
     }
 
     public void toolBar(){
@@ -264,4 +399,6 @@ public class CardInfoActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }
