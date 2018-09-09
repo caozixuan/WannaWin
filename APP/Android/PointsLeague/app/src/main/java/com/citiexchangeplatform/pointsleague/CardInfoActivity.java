@@ -161,12 +161,12 @@ public class CardInfoActivity extends AppCompatActivity  {
             // 关闭
             isExtended = false;
             // 属性动画
-            animator = ValueAnimator.ofInt(650, 270);// 从某个值变化到某个值
+            animator = ValueAnimator.ofInt(850, 270);// 从某个值变化到某个值
         } else {
             // 开启
             isExtended = true;
             // 属性动画
-            animator = ValueAnimator.ofInt(270, 650);
+            animator = ValueAnimator.ofInt(270, 850);
         }
 
         // 动画更新的监听
