@@ -344,8 +344,17 @@ public class SearchCouponFragment extends Fragment {
 
 
         getSearchTotalNum(keyword);
-        getAllCoupons();
-        //getHistoryOrderByQRCode();
+        if(num <= NUM_LOAD_ONCE){
+            isLoadMore = false;
+            getAllCoupons();
+        }
+        else{
+            loadMoreData();
+        }
+
+        //getSearchTotalNum(keyword);
+        //getAllCoupons();
+
     }
 
     @Override
