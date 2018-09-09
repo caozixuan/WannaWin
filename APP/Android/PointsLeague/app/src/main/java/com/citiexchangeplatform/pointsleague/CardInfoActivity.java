@@ -11,7 +11,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -36,7 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CardInfoActivity extends AppCompatActivity {
+public class CardInfoActivity extends AppCompatActivity  {
 
     private String merchantID;
     private ProgressDialog dialog;
@@ -55,6 +57,8 @@ public class CardInfoActivity extends AppCompatActivity {
 
     boolean isExtended = false;
     Button buttonExtend;
+    float mPosX ,mPosY = 0.0f,mCurPosX,mCurPosY = 0.0f;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,46 @@ public class CardInfoActivity extends AppCompatActivity {
         textViewPoint = content.findViewById(R.id.textView_points_card_info);
         textViewExchangePoint = content.findViewById(R.id.textView_exchange_points_card_info);
         textViewAccount = content.findViewById(R.id.textView_account_card_info);
+
+
+        layoutContent.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        mPosX = event.getX();
+                        mPosY = event.getY();
+                        mCurPosX = event.getX();
+                        mCurPosY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mCurPosX = event.getX();
+                        mCurPosY = event.getY();
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (mCurPosY - mPosY > 200) {
+                            //向下滑動
+                            if(!isExtended){
+                                toggle();
+                            }
+
+                        } else if (mCurPosY - mPosY < -200) {
+                            //向上滑动
+                            if(isExtended)
+                                toggle();
+                        }
+
+                        break;
+                }
+                return false;
+            }
+
+        });
+        layoutContent.setLongClickable(true);
 
         Intent intent = getIntent();
         merchantID = intent.getStringExtra("merchantID");
@@ -108,6 +152,8 @@ public class CardInfoActivity extends AppCompatActivity {
         getInfos();
 
     }
+
+
 
     private void toggle() {
         ValueAnimator animator = null;
@@ -353,4 +399,6 @@ public class CardInfoActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }
