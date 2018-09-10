@@ -1,8 +1,10 @@
 package com.citiexchangeplatform.pointsleague;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.citiexchangeplatform.pointsleague.base.CompatStatusBarActivity;
+import com.citiexchangeplatform.pointsleague.util.DataCleanManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +59,21 @@ public class SettingActivity extends CompatStatusBarActivity {
 
                         break;
                     case 1:
+                        String size = "0M";
+                        try {
+                            size = DataCleanManager.getCacheSize(getCacheDir());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        String alter = "缓存共"+size+", 确认要清除吗？";
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(SettingActivity.this);
+                        alertDialog.setTitle(alter).setPositiveButton("确认", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                                DataCleanManager.deleteCache(getApplicationContext());
+                            }
+                        }).setNegativeButton("取消", null).show();
                         break;
                     case 2:
                         Intent intentToFeedback = new Intent(SettingActivity.this, FeedbackActivity.class);

@@ -99,6 +99,24 @@ public class FindSearchAdapter extends RecyclerView.Adapter<FindSearchAdapter.VH
 
     }
 
+    //下面两个方法提供给页面刷新和加载时调用
+    public void loadMore(List<FindSearchModel> addMessageList) {
+        //增加数据
+        int position = sourceItems.size();
+        sourceItems.addAll(position, addMessageList);
+        System.out.println("source size: " + sourceItems.size());
+
+        notifyDataSetChanged();
+        //notifyItemInserted(position);
+    }
+
+    public void refresh(List<FindSearchModel> newList) {
+        //刷新数据
+        sourceItems.removeAll(sourceItems);
+        sourceItems.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return sourceItems.size();
