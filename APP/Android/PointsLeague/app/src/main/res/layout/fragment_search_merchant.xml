@@ -6,12 +6,18 @@
     tools:context=".SearchMerchantFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_search_merchant"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_search_merchant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </FrameLayout>

@@ -44,6 +44,7 @@ public class GuideFragment2 extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(Objects.requireNonNull(getActivity()), MainActivity.class);
                 startActivity(intent);
+                getActivity().onBackPressed();//销毁自己
             }
         });
 

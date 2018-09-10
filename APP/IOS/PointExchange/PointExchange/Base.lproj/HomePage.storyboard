@@ -282,6 +282,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您暂未绑定任何会员卡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1n-Nr-6ln">
+                                <rect key="frame" x="85.5" y="288" width="204" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vfr-nh-MiV">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
@@ -455,11 +461,13 @@
                         <constraints>
                             <constraint firstItem="vfr-nh-MiV" firstAttribute="leading" secondItem="ikg-gU-lta" secondAttribute="leading" id="E7j-ls-ehF"/>
                             <constraint firstItem="vfr-nh-MiV" firstAttribute="top" secondItem="ikg-gU-lta" secondAttribute="top" id="Idd-j2-Skw"/>
+                            <constraint firstItem="B1n-Nr-6ln" firstAttribute="centerY" secondItem="M6x-hg-rXY" secondAttribute="centerY" multiplier="0.9" id="N1k-xD-u7V"/>
                             <constraint firstItem="X3B-w8-Ngx" firstAttribute="leading" secondItem="ikg-gU-lta" secondAttribute="leading" id="Yn4-fo-XPg"/>
                             <constraint firstItem="X3B-w8-Ngx" firstAttribute="trailing" secondItem="ikg-gU-lta" secondAttribute="trailing" id="g0s-B5-Pg9"/>
                             <constraint firstItem="vfr-nh-MiV" firstAttribute="bottom" secondItem="ikg-gU-lta" secondAttribute="bottom" id="ofK-bF-HyU"/>
                             <constraint firstItem="vfr-nh-MiV" firstAttribute="trailing" secondItem="ikg-gU-lta" secondAttribute="trailing" id="rxr-mH-FWL"/>
                             <constraint firstItem="X3B-w8-Ngx" firstAttribute="bottom" secondItem="ikg-gU-lta" secondAttribute="bottom" id="yEG-ek-9rW"/>
+                            <constraint firstItem="B1n-Nr-6ln" firstAttribute="centerX" secondItem="M6x-hg-rXY" secondAttribute="centerX" id="z33-XZ-Bzx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ikg-gU-lta"/>
                     </view>
@@ -1137,7 +1145,7 @@
                                 <rect key="frame" x="8" y="44" width="359" height="599"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该卡暂无兑换记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4po-3c-VRm">
-                                        <rect key="frame" x="98" y="287.5" width="163.5" height="24"/>
+                                        <rect key="frame" x="98" y="227.5" width="163.5" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1160,7 +1168,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="4po-3c-VRm" firstAttribute="centerY" secondItem="owO-cQ-5TM" secondAttribute="centerY" id="Dtm-b5-Ze3"/>
+                                    <constraint firstItem="4po-3c-VRm" firstAttribute="centerY" secondItem="owO-cQ-5TM" secondAttribute="centerY" multiplier="0.8" id="Dtm-b5-Ze3"/>
                                     <constraint firstItem="D0j-rN-zhZ" firstAttribute="top" secondItem="owO-cQ-5TM" secondAttribute="top" constant="16" id="LZ8-pe-rE4"/>
                                     <constraint firstItem="4po-3c-VRm" firstAttribute="centerX" secondItem="owO-cQ-5TM" secondAttribute="centerX" id="ZUy-zm-XQD"/>
                                     <constraint firstAttribute="bottom" secondItem="D0j-rN-zhZ" secondAttribute="bottom" constant="48" id="f8a-7m-G8a"/>

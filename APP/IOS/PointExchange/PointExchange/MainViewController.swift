@@ -14,9 +14,39 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
+    var activities:[OfflineActivity]?
+    var coupons:[Item]?
+    var isLoaded = false
 	
 	//图片轮播组件
 	var imageScroller : ImageScrollerViewController!
+    
+    override func viewDidLoad() {
+        ServerConnector.getAds(){(result,activities) in
+            if result {
+                self.activities = activities
+                if self.isLoaded{
+                    // TODO: 刷新轮播
+					self.imageScroller.refresh()
+					
+                }else{
+                    self.isLoaded = true
+                }
+            }
+        }
+        ServerConnector.getRecommendedItems(){(result, items) in
+            if result {
+                self.coupons = items
+                if self.isLoaded{
+                    // TODO: 刷新轮播
+					self.imageScroller.refresh()
+                }else{
+                    self.isLoaded = true
+                    
+                }
+            }
+        }
+    }
 
     override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -40,7 +70,25 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
-		return ["https://photo.tuchong.com/3505293/ft640/165347608.jpg","https://photo.tuchong.com/3505293/ft640/165347608.jpg","https://photo.tuchong.com/3505293/ft640/165347608.jpg"]
+		if self.activities != nil && self.coupons != nil {
+			var items = [String]()
+			
+			items.append(self.activities![0].imageURL!)
+			if (self.activities?.count)! > 1 {
+				items.append(self.activities![1].imageURL!)
+			}
+			
+			items.append(self.coupons![0].logoURL!)
+			if (self.coupons?.count)! > 1 {
+				items.append(self.coupons![1].logoURL!)
+			}
+			
+			return items
+		}
+		else {
+			return [String]()
+		}
+		
 	}
 	
 	// MARK: - 所有点击事件的响应动作
