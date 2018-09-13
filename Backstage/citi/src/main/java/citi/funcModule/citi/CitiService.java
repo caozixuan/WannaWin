@@ -5,6 +5,7 @@ import citi.API.Card;
 import citi.API.Customer;
 import citi.API.PayWithAwards;
 import citi.persist.mapper.CitiMapper;
+import citi.persist.mapper.MSCardMapper;
 import citi.persist.mapper.TokenMapper;
 import citi.persist.mapper.UserMapper;
 import citi.vo.*;
@@ -36,6 +37,8 @@ public class CitiService {
     @Autowired
     private Gson gson;
 
+    @Autowired
+    private MSCardMapper msCardMapper;
 
     /**
      * 绑定操作
@@ -120,34 +123,31 @@ public class CitiService {
         return creditCardNum;
     }
 
+    public double getPoints(String pointInformation){
+        PointInformation jsonObject = gson.fromJson(pointInformation, PointInformation.class);
+        return jsonObject.getAvailablePointBalance();
+    }
+
     public CitiCard getCardToBeBind(String code, String state){
         String phoneNum = null;
         String creditCardNum = null;
         String citiCardID = null;
         String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");
         String accessToken = Authorize.getToken(accessInformation);
-        saveRefreshToken(accessInformation, state);
+        //saveRefreshToken(accessInformation, state);
         phoneNum = getPhoneNum(accessToken);
         creditCardNum = getCardNum(accessToken);
         citiCardID = getCardID(accessToken);
         CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,state,0.0);
+        String linkCode = PayWithAwards.getLinkCode("1","2","3",accessToken);
+        PayWithAwards.activateCode(linkCode,accessToken);
+        String pointsInformation = PayWithAwards.getInformation(linkCode,accessToken);
+        double totalPoints = getPoints(pointsInformation);
+        MSCard msCard = new MSCard(state, creditCardNum, (int)totalPoints, "22");
+        msCardMapper.insert(msCard);
         return citiCard;
     }
 
-
-
-    public String openPointsService(String userID){
-        String  formerRefreshToken = tokenMapper.select(userID);
-        String[] tokens = Authorize.getTokenAndRefreshTokenByFormerRefreshToken(userID,formerRefreshToken);
-        String token = tokens[0];
-        String refreshToken = tokens[1];
-        saveRefreshToken(refreshToken, userID);
-        CitiCard citiCard = citiMapper.getCardByID(userID);
-        String rewardLinkCode = PayWithAwards.getLinkCode(citiCard.getCitiCardNum(),citiCard.getPhoneNum(),userID);
-        PayWithAwards.activateCode(rewardLinkCode,token);
-        // TODO:把这个token绑到数据库中
-        return "";
-    }
 
     public String getNewTokenAndSaveFreshToken(String userID){
         String  formerRefreshToken = tokenMapper.select(userID);
