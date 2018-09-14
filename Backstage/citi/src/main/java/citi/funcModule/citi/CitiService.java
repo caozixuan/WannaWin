@@ -143,7 +143,7 @@ public class CitiService {
         PayWithAwards.activateCode(linkCode,accessToken);
         String pointsInformation = PayWithAwards.getInformation(linkCode,accessToken);
         double totalPoints = getPoints(pointsInformation);
-        MSCard msCard = new MSCard(state, creditCardNum, (int)totalPoints, "22");
+        MSCard msCard = new MSCard(state, creditCardNum, (int)totalPoints, "23");
         msCardMapper.insert(msCard);
         return citiCard;
     }
