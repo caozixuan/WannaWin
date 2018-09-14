@@ -10,9 +10,8 @@ import java.util.UUID;
 public class PayWithAwards {
 
 
-    public static String getLinkCode(String cardNum, String phoneNum, String merchantCustomerReferenceId){
+    public static String getLinkCode(String cardNum, String phoneNum, String merchantCustomerReferenceId, String accessToken){
         String linkCode = null;
-        String accessToken = Authorize.getAccessToken();
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "{\"lastFourDigitsCardNumber\":"+cardNum+",\"citiCardHolderPhoneNumber\":"+phoneNum+",\"merchantCustomerReferenceId\":"+merchantCustomerReferenceId+"}");
         Request request = new Request.Builder()

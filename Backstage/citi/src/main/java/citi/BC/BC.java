@@ -141,15 +141,15 @@ public class BC {
         System.out.println("\n decrypt: \n");
 
 
-        if (secondBlock.data.merchantID == "1") {
+        if (secondBlock.data.merchantID.equals("1")) {
             System.out.println("The 2nd block chain decoded by 1: ");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
         }
-        if (secondBlock.data.merchantID == "1") {
+        if (secondBlock.data.merchantID.equals("1")) {
             System.out.println("The 3rd block chain decoded by 1: ");
             System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
         }
-        if (secondBlock.data.merchantID == "2") {
+        if (secondBlock.data.merchantID.equals("2")) {
             System.out.println("The 2nd block chain decoded by 2: ");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K2)));
         }

@@ -32,11 +32,13 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.leochuan.CenterSnapHelper;
 import com.leochuan.ScaleLayoutManager;
 import com.study.xuan.xvolleyutil.base.XVolley;
+import com.study.xuan.xvolleyutil.build.PostFormBuilder;
 import com.study.xuan.xvolleyutil.callback.CallBack;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +68,8 @@ public class PointsFragment extends Fragment {
         initImageSlider();
 
         //状态栏文字图标暗色
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-            getActivity().getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
+            getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         return view;
     }
@@ -75,32 +77,64 @@ public class PointsFragment extends Fragment {
 
     private void initImageSlider() {
 
-        SliderLayout sliderLayout = (SliderLayout) view.findViewById(R.id.slider_main);
+        final SliderLayout sliderLayout = (SliderLayout) view.findViewById(R.id.slider_main);
         PagerIndicator indicator = (PagerIndicator) view.findViewById(R.id.custom_indicator_main);
-
-        //准备好要显示的数据
-        List<String> imageUrls = new ArrayList<>();
-        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic1.jpg");
-        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic2.jpg");
-        imageUrls.add("http://www.never-give-it-up.top/wp-content/uploads/2018/07/pic3.jpg");
-
-        for (int i = 0; i < imageUrls.size(); i++) {
-            DefaultSliderView sv = new DefaultSliderView(getActivity());
-            sv.image(imageUrls.get(i));
-            sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getActivity(), "~", Toast.LENGTH_SHORT).show();
-                }
-            });
-            sliderLayout.addSlider(sv);
-        }
 
         //对SliderLayout自定义配置
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
         sliderLayout.setDuration(3000);
         sliderLayout.setCustomIndicator(indicator);
+
+        PostFormBuilder url =
+                XVolley.getInstance()
+                        .doPost()
+                        .url("http://193.112.44.141:80/citi//recommend/getAds");
+
+        if (LogStateInfo.getInstance(getContext()).isLogin()) {
+            url = url.addParam("userID", LogStateInfo.getInstance(getContext()).getUserID());
+        }
+
+        url.build().execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean logSuccess = false;
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                String imageURL = jsonObject.getString("imageURL");
+                                final String activityID = jsonObject.getString("activityID");
+
+                                DefaultSliderView sv = new DefaultSliderView(getActivity());
+                                sv.image(imageURL);
+                                sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                    @Override
+                                    public void onSliderClick(BaseSliderView slider) {
+                                        Intent intentToDetailFindPay = new Intent(getActivity(), DetailFindPayActivity.class);
+                                        intentToDetailFindPay.putExtra("itemID",activityID);
+                                        getActivity().startActivity(intentToDetailFindPay);
+                                    }
+                                });
+                                sliderLayout.addSlider(sv);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+
+                });
+
+
     }
 
 
@@ -128,20 +162,20 @@ public class PointsFragment extends Fragment {
             recyclerView = (RecyclerView) content.findViewById(R.id.recyclerView_cards_points);
             recyclerView.setLayoutManager(
                     new ScaleLayoutManager
-                    .Builder(getContext(),2)
-                    .setOrientation(OrientationHelper. HORIZONTAL)
-                    .build());
+                            .Builder(getContext(), 2)
+                            .setOrientation(OrientationHelper.HORIZONTAL)
+                            .build());
             new CenterSnapHelper().attachToRecyclerView(recyclerView);
             cardPointsAdapter = new CardPointsAdapter(getContext());
             recyclerView.setAdapter(cardPointsAdapter);
-            recyclerView.setItemAnimator( new DefaultItemAnimator());
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         } else {
             loadLoginContent();
         }
     }
 
-    private void loadLoginContent(){
+    private void loadLoginContent() {
         content = LayoutInflater.from(getContext()).inflate(R.layout.content_login_points, null);
         accountInfoLayout.addView(content);
 
@@ -176,7 +210,7 @@ public class PointsFragment extends Fragment {
         });
     }
 
-    private void loadRegisterContent1(){
+    private void loadRegisterContent1() {
         content = LayoutInflater.from(getContext()).inflate(R.layout.content_register1_points, null);
         accountInfoLayout.addView(content);
 
@@ -219,13 +253,12 @@ public class PointsFragment extends Fragment {
         });
     }
 
-    private void loadRegisterContent2(){
+    private void loadRegisterContent2() {
         content = LayoutInflater.from(getContext()).inflate(R.layout.content_register2_points, null);
         accountInfoLayout.addView(content);
 
         final EditText editTextPassword1 = (EditText) content.findViewById(R.id.editText_password1_card_points);
         final EditText editTextPassword2 = (EditText) content.findViewById(R.id.editText_password2_card_points);
-
 
 
         Button buttonRegister = (Button) content.findViewById(R.id.button_register_card_points);
@@ -234,7 +267,7 @@ public class PointsFragment extends Fragment {
             public void onClick(View v) {
                 if (editTextPassword1.getText().length() == 0 || editTextPassword2.getText().length() == 0) {
                     Toast.makeText(getContext(), "请输入密码", Toast.LENGTH_SHORT).show();
-                } else if ( ! editTextPassword1.getText().toString().equals(editTextPassword2.getText().toString())) {
+                } else if (!editTextPassword1.getText().toString().equals(editTextPassword2.getText().toString())) {
                     Toast.makeText(getContext(), "两次密码输入不一致", Toast.LENGTH_SHORT).show();
                 } else {
                     tryRegister(newAccount, editTextPassword1.getText().toString());
@@ -263,7 +296,7 @@ public class PointsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(wasLogin != LogStateInfo.getInstance(getContext()).isLogin()){
+        if (wasLogin != LogStateInfo.getInstance(getContext()).isLogin()) {
             accountInfoLayout.removeAllViewsInLayout();
             loadMainContent();
         }
@@ -303,7 +336,7 @@ public class PointsFragment extends Fragment {
                                 items.add(item);
                             }
 
-                            switch (items.size()){
+                            switch (items.size()) {
                                 case 1:
                                     cardPointsAdapter.addData(items.get(0));
                                     break;
@@ -332,7 +365,7 @@ public class PointsFragment extends Fragment {
                                 default:
                             }
 
-                            recyclerView.scrollToPosition(cardPointsAdapter.getItemCount()/2);
+                            recyclerView.scrollToPosition(cardPointsAdapter.getItemCount() / 2);
 
 
                         } catch (JSONException e) {
@@ -371,8 +404,8 @@ public class PointsFragment extends Fragment {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             double generalPoints = jsonObject.getDouble("generalPoints");
-                            TextView textView = (TextView)view.findViewById(R.id.textView_generalPoints_main);
-                            textView.setText(String.format("%.1f",generalPoints));
+                            TextView textView = (TextView) view.findViewById(R.id.textView_generalPoints_main);
+                            textView.setText(String.format("%.1f", generalPoints));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -399,8 +432,8 @@ public class PointsFragment extends Fragment {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             double availablePoints = jsonObject.getDouble("availablePoints");
-                            TextView textView = (TextView)view.findViewById(R.id.textView_availablePoints_main);
-                            textView.setText(String.format("%.1f",availablePoints));
+                            TextView textView = (TextView) view.findViewById(R.id.textView_availablePoints_main);
+                            textView.setText(String.format("%.1f", availablePoints));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -492,7 +525,7 @@ public class PointsFragment extends Fragment {
                             e.printStackTrace();
                         }
 
-                        if(!haveDone){
+                        if (!haveDone) {
                             Intent intentToQuestionnaire = new Intent(getContext(), QuestionnaireActivity.class);
                             startActivity(intentToQuestionnaire);
                         }
@@ -553,7 +586,7 @@ public class PointsFragment extends Fragment {
                                     }
                                 }
                             }.sendMessage(messageChangeSecond);
-                        }else {
+                        } else {
                             Toast.makeText(getContext(), "获取验证码失败", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -567,12 +600,12 @@ public class PointsFragment extends Fragment {
                 });
     }
 
-    private void checkMsgVerification(String strPhone, String strMsg){
+    private void checkMsgVerification(String strPhone, String strMsg) {
         accountInfoLayout.removeAllViewsInLayout();
         loadRegisterContent2();
     }
 
-    private void tryRegister(final String strAccount, final String strPassword){
+    private void tryRegister(final String strAccount, final String strPassword) {
         XVolley.getInstance()
                 .doPost()
                 .url("http://193.112.44.141:80/citi/account/sendVCode")
@@ -595,7 +628,7 @@ public class PointsFragment extends Fragment {
                         if (registerSuccess) {
                             Toast.makeText(getContext(), "注册成功", Toast.LENGTH_SHORT).show();
                             tryLogin(strAccount, strPassword);
-                        }else {
+                        } else {
                             Toast.makeText(getContext(), "注册失败", Toast.LENGTH_SHORT).show();
                         }
                     }

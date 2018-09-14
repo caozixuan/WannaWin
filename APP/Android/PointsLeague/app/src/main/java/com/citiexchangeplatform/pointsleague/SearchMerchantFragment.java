@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -26,6 +27,7 @@ import com.scwang.smartrefresh.header.DeliveryHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -40,6 +42,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.citiexchangeplatform.pointsleague.SearchCouponFragment.NUM_LOAD_ONCE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +55,9 @@ public class SearchMerchantFragment extends Fragment{
     private FindSearchAdapter searchAdapter;
     ProgressDialog dialog;
     String keyword;
+    int num = 0;
+    int currentPage = 0;
+    Boolean isLoadMore = true;
 
 
 
@@ -93,7 +100,15 @@ public class SearchMerchantFragment extends Fragment{
         keyword = event.getKeyWord();
         System.out.println(keyword);
         getSearchTotalNum(keyword);
-        getSearchMerchants();
+        if(num <= NUM_LOAD_ONCE){
+            isLoadMore = false;
+            getAllMerchant();
+        }
+        else{
+            loadMoreData();
+        }
+        //getSearchTotalNum(keyword);
+        //getSearchMerchants();
 
     }
 
@@ -128,15 +143,30 @@ public class SearchMerchantFragment extends Fragment{
         //设置 Header 为 Material风格
         refreshLayout.setRefreshHeader(new DeliveryHeader(Objects.requireNonNull(getContext())));
         //设置 Footer 为 球脉冲
-        refreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        //refreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        //设置 Footer 为 经典样式
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
                 searchAdapter.clearAll();
 
+                currentPage = 0;
                 getSearchTotalNum(keyword);
-                getSearchMerchants();
+                //getAllCoupons();
+                if(num <= NUM_LOAD_ONCE){
+                    isLoadMore = false;
+                    getAllMerchant();
+                }
+                else{
+                    loadMoreData();
+                }
+
                 searchAdapter.notifyDataSetChanged();
+                //getSearchTotalNum(keyword);
+                //getSearchMerchants();
+                //searchAdapter.notifyDataSetChanged();
 
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
@@ -144,9 +174,33 @@ public class SearchMerchantFragment extends Fragment{
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
+                getSearchTotalNum(keyword);
+                if(!isLoadMore){
+                    Toast.makeText(getActivity(),"暂无更多数据",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    loadMoreData();
+
+                }
                 refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
             }
         });
+    }
+
+    private void loadMoreData(){
+        getSearchTotalNum(keyword);
+
+        if(currentPage + NUM_LOAD_ONCE >= num){
+            isLoadMore = false;
+            getPartMerchant(String.valueOf(num));
+        }
+        else{
+            isLoadMore = true;
+
+            getPartMerchant(String.valueOf(currentPage+NUM_LOAD_ONCE));
+
+        }
+
     }
 
     private void getSearchTotalNum(final String keyword){
@@ -160,7 +214,7 @@ public class SearchMerchantFragment extends Fragment{
                 System.out.println(s);
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    int num = jsonObject.getInt("num");
+                    num = jsonObject.getInt("num");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -185,7 +239,7 @@ public class SearchMerchantFragment extends Fragment{
         queue.add(request);
     }
 
-    private void getSearchMerchants(){
+    private void getAllMerchant(){
         searchAdapter.clearAll();
         String url="http://193.112.44.141:80/citi/merchant/search";
         dialog = ProgressDialog.show(getContext(), "", "正在获取商家信息...");
@@ -249,7 +303,82 @@ public class SearchMerchantFragment extends Fragment{
 
                 map.put("keyword",keyword);
                 map.put("start","0");
-                map.put("end","1");
+                map.put("end",String.valueOf(num));
+
+
+                return map;
+            }
+        };
+
+        queue.add(request);
+    }
+
+
+    private void getPartMerchant(final String end){
+        searchAdapter.clearAll();
+        String url="http://193.112.44.141:80/citi/merchant/search";
+        dialog = ProgressDialog.show(getContext(), "", "正在获取商家信息...");
+        RequestQueue queue = MyApplication.getHttpQueues();
+        final StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+
+                Log.e("success",s);
+                System.out.println(s);
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String merchantID = jsonObject.getString("merchantID");
+                        String name = jsonObject.getString("name");
+                        String description = jsonObject.getString("description");
+                        String businessType;
+                        switch (jsonObject.getString("businessType")) {
+                            case "catering":
+                                businessType = "餐饮";
+                                break;
+                            case "exercise":
+                                businessType = "运动";
+                                break;
+                            case "bank":
+                                businessType = "银行";
+                                break;
+                            case "costume":
+                                businessType = "服饰";
+                                break;
+                            case "education":
+                                businessType = "教育";
+                                break;
+                            case "communication":
+                                businessType = "通讯";
+                                break;
+                            default:
+                                businessType = "一般";
+                        }
+                        String merchantLogoURL = jsonObject.getString("merchantLogoURL");
+
+                        searchAdapter.addData(name, merchantID, merchantLogoURL, businessType, description);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                dialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                dialog.dismiss();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+
+                map.put("keyword",keyword);
+                map.put("start", String.valueOf(currentPage));
+                map.put("end",end);
 
 
                 return map;
@@ -265,8 +394,16 @@ public class SearchMerchantFragment extends Fragment{
 
 
         getSearchTotalNum(keyword);
-        getSearchMerchants();
-        //getHistoryOrderByQRCode();
+        if(num <= NUM_LOAD_ONCE){
+            isLoadMore = false;
+            getAllMerchant();
+        }
+        else{
+            loadMoreData();
+        }
+        //getSearchTotalNum(keyword);
+        //getSearchMerchants();
+
     }
 
     @Override
