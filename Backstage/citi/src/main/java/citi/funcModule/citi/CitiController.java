@@ -55,7 +55,7 @@ public class CitiController {
     public String bindCard(String code, String state){
         CitiCard citiCard = citiService.getCardToBeBind(code, state);
         if(citiService.binding(citiCard)){
-            return "redirect:success.html";
+            return "redirect:.../success.html";
         }
         return "redirect:../fail.html";
     }
@@ -63,7 +63,7 @@ public class CitiController {
     @ResponseBody
     @RequestMapping("/requestBind")
     public String requestBind(String userID){
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles","AU","GCB","en_US",userID,"http://193.112.44.141/citi/citi/bindCard");
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles pay_with_points","AU","GCB","en_US",userID,"http://193.112.44.141/citi/citi/bindCard");
     }
 
     /**
@@ -101,7 +101,7 @@ public class CitiController {
         String[] tokens = Authorize.getTokenAndRefreshTokenByFormerRefreshToken(userID, formerRefreshToken);
         citiService.saveRefreshToken(tokens[1], userID);
         String merchantCustomerReferenceId = UUID.randomUUID().toString();
-        String linkCode = PayWithAwards.getLinkCode(cardNum,phoneNum,merchantCustomerReferenceId);
+        String linkCode = PayWithAwards.getLinkCode(cardNum,phoneNum,merchantCustomerReferenceId, Authorize.getAccessToken());
         PayWithAwards.activateCode(linkCode, tokens[0]);
         return PayWithAwards.getInformation(linkCode,tokens[0]);
     }

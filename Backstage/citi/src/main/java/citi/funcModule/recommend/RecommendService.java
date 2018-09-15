@@ -362,6 +362,9 @@ public class RecommendService {
 
         @Override
         public int compareTo(UserMerchantPoints o) {
+            if(this.merchantID.equals("23")){
+                return -1;
+            }
             if((this.points - o.points)>=0){
                 return -1;
             }

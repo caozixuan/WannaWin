@@ -73,7 +73,7 @@ public class MerchantController {
     @ResponseBody
     @RequestMapping("/search")
     public String search(String keyword, String start, String end){
-        if(Integer.valueOf(start)>=Integer.valueOf(end)||keyword==null)
+        if(Integer.valueOf(start)>=Integer.valueOf(end)||keyword==null||keyword.equals(""))
             return "[]";
         String [] keywords = keyword.split("\\s+");
         ArrayList<Merchant> merchants = merchantSerivce.search(keywords);

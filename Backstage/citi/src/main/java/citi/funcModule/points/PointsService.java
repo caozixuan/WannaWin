@@ -1,5 +1,9 @@
 package citi.funcModule.points;
 
+import citi.BC.BC;
+import citi.BC.BC_Data;
+import citi.BC.Block;
+import citi.BC.DealData;
 import citi.persist.mapper.MSCardMapper;
 import citi.persist.mapper.MerchantMapper;
 import citi.persist.mapper.UserMapper;
@@ -67,10 +71,15 @@ public class PointsService {
                 userMapper.exchangeGeneralPoints(user.getUserID(), Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion());
                 msCard.setPoints(msCard.getPoints()-Integer.valueOf(merchantBean.getSelectedMSCardPoints()));
                 user.setGeneralPoints(user.getGeneralPoints()+Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion());
+                addBlock(DealData.DealType.IN,merchant.getMerchantID(),user.getUserID(),Double.valueOf(merchantBean.getSelectedMSCardPoints())*merchant.getProportion());
             }
         }
     }
 
+    public void addBlock(DealData.DealType dealType, String merchantID, String userID, double points_citi){
+        DealData data = new DealData(dealType, merchantID, userID, points_citi);
+        BC.addBlock(data);
+    }
     public ArrayList<ReturnInformation> dividePointsHistory(ArrayList<Points_history_merchant> points_history_merchants){
         ArrayList<ReturnInformation> returnInformations = new ArrayList<ReturnInformation>();
         ArrayList<Timestamp> timestamps = new ArrayList<Timestamp>();
