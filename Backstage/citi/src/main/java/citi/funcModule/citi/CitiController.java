@@ -45,7 +45,6 @@ public class CitiController {
     @Autowired
     private Gson gson;
 
-    CitiAPIContext context = new CitiAPIContext();
 
 
     /**
@@ -63,7 +62,7 @@ public class CitiController {
     @ResponseBody
     @RequestMapping("/requestBind")
     public String requestBind(String userID){
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles pay_with_points","AU","GCB","en_US",userID,"http://193.112.44.141/citi/citi/bindCard");
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles pay_with_points","AU","GCB","en_US",userID,"http://localhost:8080/citi/bindCard");//http://193.112.44.141/citi/citi/bindCard
     }
 
     /**
@@ -116,58 +115,5 @@ public class CitiController {
         return PayWithAwards.getInformation(linkCode,tokens[0]);
     }
 
-    @ResponseBody
-    @RequestMapping("/citiAccount")
-    public String citiAccountBind(String username, String password, String userID){
-        CitiAccount accs = new CitiAccount();
-        CitiAuthorize authorize = new CitiAuthorize();
-        Map map = null;
-        String jsCode = null;
-        try{
-            map = authorize.getBizToken(context);
-        }catch (Exception e){
-            System.out.println("error");
-        }
-        String accounts = null;
-        String encoding = "UTF-8";
-        File file = new File("./E2E.js");
-        Long filelength = file.length();
-        byte[] filecontent = new byte[filelength.intValue()];
-        try {
-            FileInputStream in = new FileInputStream(file);
-            in.read(filecontent);
-            in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            jsCode = new String(filecontent, encoding);
-        } catch (UnsupportedEncodingException e) {
-            System.err.println("The OS does not support " + encoding);
-            e.printStackTrace();
-        }
-        //Resource RESJS = new ClassPathResource("E:\\WannaWin\\Backstage\\citi\\src\\E2E.js");
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        String scriptResult = null;
-        try{
-            engine.eval(jsCode);
-            Invocable invocable = (Invocable) engine;
-            scriptResult = (String) invocable.invokeFunction("doRSA",map.get("modulus"),map.get("exponent"),context.getEventId(),password);
-        }catch(ScriptException e){
-            e.printStackTrace();
-            System.out.println("Error executing script: "+ e.getMessage()+" script:["+"1"+"]");
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            System.out.println("Error executing script,为找到需要的方法: "+ e.getMessage()+" script:["+"2"+"]");
-        }
-        try{
-            accounts = accs.getAccounts(username, scriptResult,context);
-        }catch (Exception e){
-            System.out.println("error");
-        }
-        return accounts;
-    }
 
 }
