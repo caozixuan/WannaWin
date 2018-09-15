@@ -132,7 +132,7 @@ public class CitiService {
         String phoneNum = null;
         String creditCardNum = null;
         String citiCardID = null;
-        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://localhost:8080/citi/bindCard");//http://193.112.44.141/citi/citi/bindCard
+        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");//
         String accessToken = Authorize.getToken(accessInformation);
         //saveRefreshToken(accessInformation, state);
         phoneNum = getPhoneNum(accessToken);
