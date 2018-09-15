@@ -2,6 +2,7 @@ package citi.BC;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@Component
-public class BC {
+public class BC implements Runnable{
 
     private static int difficulty = 6;
     public static ArrayList<Block> BC = new ArrayList<>();
@@ -43,7 +43,7 @@ public class BC {
 
     //TODO: 找一个地方调用线程。如果找不到程序入口，就改成一个静态线程池，在添加的时候就唤醒。
     //后台线程，一直在创建区块
-    @PostConstruct
+    @Override
     public void run() {
 
         synchronized (this) {
@@ -57,6 +57,7 @@ public class BC {
                     notify_all(newBlock);
                 }
                 try {
+                    System.out.println("run");
                     Thread.sleep(3000);//wait 3 sec.
                 } catch (InterruptedException e) {
                     System.err.println("error with bg threads to wait.");
