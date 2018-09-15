@@ -123,3 +123,7 @@ Backstage/citi/target
 Backstage/citiMerchant/citiMerchant.iml
 Backstage/citiMerchant/target/*
 Backstage/citiMerchant/.idea/*
+
+Backstage/merchantDemo/.idea/*
+Backstage/merchantDemo/citiMerchant.iml
+Backstage/merchantDemo/target/*

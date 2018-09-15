@@ -1,4 +1,4 @@
-package citiMerchant.BC;
+package java.BC;
 
 import java.security.MessageDigest;
 
