@@ -16,7 +16,7 @@ import java.util.Map;
 @Controller
 public class UploadController {
     private static String url = "http://www.byzhong.cn/image/";
-    private String saveDirectory="E:/image/";
+    private String saveDirectory="/usr/share/tomcat7/image/";
 
     @RequestMapping("/uploadFile/{category}")
     @ResponseBody
