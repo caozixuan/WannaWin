@@ -62,7 +62,7 @@ public class CitiController {
     @ResponseBody
     @RequestMapping("/requestBind")
     public String requestBind(String userID){
-        return Authorize.getURL("accounts_details_transactions cards customers_profiles pay_with_points","AU","GCB","en_US",userID,"http://localhost:8080/citi/bindCard");//http://193.112.44.141/citi/citi/bindCard
+        return Authorize.getURL("accounts_details_transactions cards customers_profiles pay_with_points","AU","GCB","en_US",userID,"http://193.112.44.141/citi/citi/bindCard");
     }
 
     /**

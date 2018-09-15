@@ -38,7 +38,7 @@ public class MSCardController {
     public String getMSInfo(String userID,Integer n){
         if(n==null)
             return "[]";
-        List<MSCard> cards = msCardService.getInfo(userID, n);
+        List<MSCard> cards = msCardService.getInfo(userID);
         if(cards==null){
             return "[]";
         }
@@ -46,7 +46,11 @@ public class MSCardController {
         if(briefCards==null)
             return "[]";
         Collections.sort(briefCards);
-        String jsonStr = gson.toJson(briefCards);
+        ArrayList<BriefCard> results = new ArrayList<>();
+        for(int i=0;i<n&&i<briefCards.size();i++){
+            results.add(briefCards.get(i));
+        }
+        String jsonStr = gson.toJson(results);
         return jsonStr;
     }
 

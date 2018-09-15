@@ -34,14 +34,12 @@ public class MSCardService {
      * @param n n张卡
      * @return 卡列表
      */
-    public List<MSCard> getInfo(String userId, int n){
+    public List<MSCard> getInfo(String userId){
         List<MSCard> allCards =msCardMapper.select(userId);
         if(allCards==null)
             return null;
-        Collections.sort(allCards,new SortByPoints());
-
         ArrayList<MSCard> returnCards = new ArrayList<>();
-        for(int i=0;i<n&&i<allCards.size();i++){
+        for(int i=0;i<allCards.size();i++){
             MSCard msCard=allCards.get(i);
             Merchant merchant=merchantMapper.selectByID(msCard.getMerchantId());
             msCard.setLogoURL(merchant.getMerchantLogoURL());
