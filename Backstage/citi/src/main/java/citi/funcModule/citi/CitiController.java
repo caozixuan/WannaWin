@@ -54,7 +54,7 @@ public class CitiController {
     public String bindCard(String code, String state){
         CitiCard citiCard = citiService.getCardToBeBind(code, state);
         if(citiService.binding(citiCard)){
-            return "redirect:.../success.html";
+            return "redirect:../success.html";
         }
         return "redirect:../fail.html";
     }
