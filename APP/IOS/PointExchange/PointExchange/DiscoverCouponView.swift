@@ -46,12 +46,6 @@ class DiscoverCouponView: UIScrollView {
 		self.images.append(self.image1)
 		self.images.append(self.image2)
 		self.images.append(self.image3)
-		image1.contentMode = .scaleAspectFit
-		image2.contentMode = .scaleAspectFit
-		image3.contentMode = .scaleAspectFit
-		imageView1.contentMode = .scaleAspectFit
-		imageView2.contentMode = .scaleAspectFit
-		imageView3.contentMode = .scaleAspectFit
 		
 		// 添加点击
 		viewDelegate?.addTapImageAction()

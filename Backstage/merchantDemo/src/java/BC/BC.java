@@ -1,5 +1,6 @@
-package citiMerchant.BC;
+package java.BC;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -75,11 +76,13 @@ public class BC {
             return;
         }
         waitingQueue.add(block);
+        sendSMS(block);
     }
 
 
     //必须单线程跑，用于接受区块，并组成链.
-    public void run() {
+    public static void run() {
+        System.out.println("startup");
         while (!isInit) {
             try {
                 Thread.sleep(1L * 1000 * 60);
@@ -135,6 +138,19 @@ public class BC {
             if (b.data.merchantID == merchantID && b.timeStamp > timestamp)
                 l.add(new DealInfo(read(b, merchantID, private_K), b.timeStamp));
         return l;
+    }
+
+    public static void sendSMS(Block block){
+        String merchantID="0";
+        DealData dealData= BC.read(block,merchantID,BC.priv_K);
+        String phoneNum=dealData.getPhoneNum();
+        String merchantName=dealData.getMerchantName();
+        double points=dealData.getPoints_citi();
+        String type=dealData.getType();
+        /**
+         * 完成短信发送
+         */
+
     }
 
 

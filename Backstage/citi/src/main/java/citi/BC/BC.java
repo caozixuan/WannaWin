@@ -1,12 +1,23 @@
 package citi.BC;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
+import javax.annotation.PostConstruct;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class BC {
+public class BC implements Runnable{
 
     private static int difficulty = 6;
     public static ArrayList<Block> BC = new ArrayList<>();
@@ -26,12 +37,14 @@ public class BC {
         clq.offer(dealData);
     }
 
+    private static String RegisterUrl="http://www.byzhong.cn/merchantDemo/block/";
+
+    private static Gson gson=new Gson();
 
     //TODO: 找一个地方调用线程。如果找不到程序入口，就改成一个静态线程池，在添加的时候就唤醒。
     //后台线程，一直在创建区块
+    @Override
     public void run() {
-        if (false)
-            return;
 
         synchronized (this) {
             while (true) {
@@ -44,6 +57,7 @@ public class BC {
                     notify_all(newBlock);
                 }
                 try {
+                    System.out.println("run");
                     Thread.sleep(3000);//wait 3 sec.
                 } catch (InterruptedException e) {
                     System.err.println("error with bg threads to wait.");
@@ -56,8 +70,52 @@ public class BC {
 
     //TODO: 向全网公开区块
     public static void notify_all(Block newBlock) {
-
-
+        PrintWriter out = null;
+        BufferedReader in = null;
+        String result = "";
+        try {
+            URL realUrl = new URL(RegisterUrl);
+            // 打开和URL之间的连接
+            URLConnection conn = realUrl.openConnection();
+//            // 设置通用的请求属性
+//            conn.setRequestProperty("accept", "*/*");
+//            conn.setRequestProperty("connection", "Keep-Alive");
+//            conn.setRequestProperty("user-agent",
+//                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+//            // 发送POST请求必须设置如下两行
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            // 获取URLConnection对象对应的输出流
+            out = new PrintWriter(conn.getOutputStream());
+            // 发送请求参数
+            out.print(gson.toJson(newBlock));
+            // flush输出流的缓冲
+            out.flush();
+            // 定义BufferedReader输入流来读取URL的响应
+            in = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+        } catch (Exception e) {
+            System.out.println("发送 POST 请求出现异常！"+e);
+            e.printStackTrace();
+        }
+        //使用finally块来关闭输出流、输入流
+        finally{
+            try{
+                if(out!=null){
+                    out.close();
+                }
+                if(in!=null){
+                    in.close();
+                }
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
 
@@ -141,15 +199,15 @@ public class BC {
         System.out.println("\n decrypt: \n");
 
 
-        if (secondBlock.data.merchantID == "1") {
+        if (secondBlock.data.merchantID.equals("1")) {
             System.out.println("The 2nd block chain decoded by 1: ");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
         }
-        if (secondBlock.data.merchantID == "1") {
+        if (secondBlock.data.merchantID.equals("1")) {
             System.out.println("The 3rd block chain decoded by 1: ");
             System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
         }
-        if (secondBlock.data.merchantID == "2") {
+        if (secondBlock.data.merchantID.equals("2")) {
             System.out.println("The 2nd block chain decoded by 2: ");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K2)));
         }

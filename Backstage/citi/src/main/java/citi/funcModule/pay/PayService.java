@@ -1,5 +1,7 @@
 package citi.funcModule.pay;
 
+import citi.BC.BC;
+import citi.BC.DealData;
 import citi.persist.mapper.MerchantMapper;
 import citi.persist.mapper.OrderMapper;
 import citi.persist.mapper.StrategyMapper;
@@ -63,6 +65,7 @@ public class PayService {
                 Double priceAfter = strategy.getPriceAfter();
                 Order order = new Order(totalPrice, priceAfter, strategy.getPoints(), userID, Order.OrderState.SUCCESS, merchantID, new Timestamp(QRTimestamp * 1000));
                 if (orderMapper.addOrder(order) == 1) {
+                    addBlock(DealData.DealType.OUT,merchantID,userID,strategy.getPoints());
                     return true;
                 }
             }
@@ -73,6 +76,13 @@ public class PayService {
         }
         return false;
     }
+
+
+    public void addBlock(DealData.DealType dealType, String merchantID, String userID, double points_citi){
+        DealData data = new DealData(dealType, merchantID, userID, points_citi);
+        BC.addBlock(data);
+    }
+
 
     public void calc(String userID, String merchantID, float totlePrice) {
 
