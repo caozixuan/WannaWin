@@ -3,7 +3,7 @@ package citi.vo;
 /*
  * 作者：曹子轩
  */
-public class MSCard {
+public class MSCard implements Comparable<MSCard>{
     private String userID;
     private String cardNum;
     private Integer points;
@@ -92,6 +92,13 @@ public class MSCard {
 
     public Integer getPoints() {
         return points;
+    }
+
+    @Override
+    public int compareTo(MSCard o) {
+        if(o.points*o.proportion-this.points*this.proportion>0)
+            return 1;
+        return -1;
     }
 
 }

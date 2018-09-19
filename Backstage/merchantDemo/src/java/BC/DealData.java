@@ -1,5 +1,8 @@
-package citiMerchant.BC;
+package java.BC;
 
+import java.database.DBCon;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +19,15 @@ public class DealData {
     final public String merchantID;
     final private String userID;
     final private Double points_citi;
+
+
+    public String getType() {
+        return type;
+    }
+
+    public Double getPoints_citi() {
+        return points_citi;
+    }
 
     public enum DealType {
         IN, OUT;
@@ -56,6 +68,28 @@ public class DealData {
         }
         String message = type + "," + userID + "," + points_citi.toString();
         return RSA.encryptByPublic(message, pub_K);
+    }
+
+    public String getPhoneNum(){
+        String sql="select PhoneNum from user where userID="+userID;
+        ResultSet resultSet=DBCon.getResultSet(sql);
+        try{
+            return resultSet.getString("PhoneNum");
+        }catch (SQLException s){
+            s.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getMerchantName(){
+        String sql="select name from merchant where userID="+merchantID;
+        ResultSet resultSet=DBCon.getResultSet(sql);
+        try{
+            return resultSet.getString("name");
+        }catch (SQLException s){
+            s.printStackTrace();
+            return null;
+        }
     }
 
 }

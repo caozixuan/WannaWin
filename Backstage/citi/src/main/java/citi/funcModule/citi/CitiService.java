@@ -132,14 +132,14 @@ public class CitiService {
         String phoneNum = null;
         String creditCardNum = null;
         String citiCardID = null;
-        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");
+        String accessInformation = Authorize.getAccessTokenWithGrantType(code,"http://193.112.44.141/citi/citi/bindCard");//
         String accessToken = Authorize.getToken(accessInformation);
         //saveRefreshToken(accessInformation, state);
         phoneNum = getPhoneNum(accessToken);
         creditCardNum = getCardNum(accessToken);
         citiCardID = getCardID(accessToken);
         CitiCard citiCard = new CitiCard(citiCardID, creditCardNum,phoneNum,state,0.0);
-        String linkCode = PayWithAwards.getLinkCode("1","2","3",accessToken);
+        String linkCode = PayWithAwards.getLinkCode(creditCardNum,phoneNum,"2608191234111",accessToken);
         PayWithAwards.activateCode(linkCode,accessToken);
         String pointsInformation = PayWithAwards.getInformation(linkCode,accessToken);
         double totalPoints = getPoints(pointsInformation);

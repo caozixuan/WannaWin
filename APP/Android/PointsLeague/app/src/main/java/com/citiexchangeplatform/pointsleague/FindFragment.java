@@ -272,6 +272,7 @@ public class FindFragment extends Fragment {
             public void onErrorResponse(VolleyError volleyError) {
                 System.out.println(volleyError.toString());
                 System.out.println("获取推荐商家失败");
+                Toast.makeText(getContext(),"获取推荐商家失败",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
             }
