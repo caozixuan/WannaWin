@@ -88,26 +88,29 @@ extension SearchResultViewController:UISearchBarDelegate,UISearchResultsUpdating
 
 extension SearchResultViewController:CAPSPageMenuDelegate{
 	func didMoveToPage(_ controller: UIViewController, index: Int) {
-		if index != currentPage{
-			currentPage = index
-			switch index {
-			case 0:
-				if let keyword = searchBar?.text{
-					merchantController?.search(keyword: keyword)
+		if searchBar?.text != ""{
+			if index != currentPage{
+				currentPage = index
+				switch index {
+				case 0:
+					if let keyword = searchBar?.text{
+						merchantController?.search(keyword: keyword)
+					}
+				case 1:
+					if let keyword = searchBar?.text{
+						couponController?.search(keyword: keyword)
+					}
+					
+				case 2:
+					if let keyword = searchBar?.text{
+						offlineController?.search(keyword: keyword)
+					}
+				default:
+					break
 				}
-			case 1:
-				if let keyword = searchBar?.text{
-					couponController?.search(keyword: keyword)
-				}
-				
-			case 2:
-				if let keyword = searchBar?.text{
-					offlineController?.search(keyword: keyword)
-				}
-			default:
-				break
 			}
 		}
+		
 	}
 	
 }
