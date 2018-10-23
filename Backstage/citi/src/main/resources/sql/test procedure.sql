@@ -4,3 +4,6 @@ CALL merchant_out_points_record('2', 7, @temp);
 CALL order_record_date('00002', '2018-07-09', '2018-07-15', @temp);
 SELECT @temp;
 SELECT @temp_card, @temp_citi;
+
+
+CALL user_coupon_overdue_update('210c69cc-b533-4736-b8b4-671de02f4b3d');
