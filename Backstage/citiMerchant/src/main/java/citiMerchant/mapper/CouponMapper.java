@@ -24,7 +24,7 @@ public interface CouponMapper {
     final String addUserCoupon = "INSERT INTO user_coupon(couponID, userID, ItemID, state, getTime, useTime) " +
             "VALUES(NULL, #{userID}, #{ItemID}, #{state}, now(), null)";
     final String deleteOneUserCouponBy_UserID_AND_ItemID = "CALL user_coupon_update(#{IN_userID, mode = IN, jdbcType = VARCHAR}, #{IN_itemID, mode = IN, jdbcType = VARCHAR}, #{ifUsed, mode = OUT, jdbcType = INTEGER})";
-    final String updateOneUserConpon_By_UserID = "CALL user_coupon_overdue_update(#{IN_userID, mode = IN, jdbcType = VARCHAR})";
+    final String updateOneUserCoupon_By_UserID = "CALL user_coupon_overdue_update(#{IN_userID, mode = IN, jdbcType = VARCHAR})";
 
 
     @Select(getCouponsByUserID)
@@ -47,9 +47,9 @@ public interface CouponMapper {
     @ResultType(UserCoupon_record.class)
     void deleteOneUserCouponBy_UserID_AND_ItemID(UserCoupon_record userCoupon_record);
 
-    @Insert(value = updateOneUserConpon_By_UserID)
+    @Insert(value = updateOneUserCoupon_By_UserID)
     @Options(statementType = StatementType.CALLABLE)
-    void updateOneUserConpon_By_UserID(@Param("IN_userID") String IN_userID);
+    void updateOneUserCoupon_By_UserID(@Param("IN_userID") String IN_userID);
 
 
 }
