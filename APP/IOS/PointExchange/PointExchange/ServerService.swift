@@ -402,7 +402,7 @@ extension ServerService:TargetType {
 		case .buyCoupons(let itemID, let count):
 			var params:[String:String] = [:]
 			params["userID"] = User.getUser().id
-			params["itemsID"] = itemID
+			params["itemID"] = itemID
 			params["count"] = String(count)
 			return .requestParameters(parameters: params, encoding: URLEncoding.default)
 			
