@@ -35,7 +35,6 @@ class CouponDetailViewController: UIViewController {
 				self.pointLabel.text = String(stringInterpolationSegment: self.item!.points!)+"P"
 			}
 		}
-		self.logoImage.contentMode = .scaleAspectFit
 		
 		
         // Do any additional setup after loading the view.
