@@ -14,8 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema huaqiShow
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `huaqiShowShow` DEFAULT CHARACTER SET utf8 ;
-USE `huaqiShowShow` ;
+USE `huaqiShow` ;
 
 -- -----------------------------------------------------
 -- Table `huaqiShow`.`merchant`
@@ -272,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `huaqiShow`.`order_view` (`PointsNeeded` INT, `Mercha
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `MSCard_record_date`(IN IN_MerchantID VARCHAR(45), IN IN_start_date DATE, IN IN_end_date DATE, OUT totalPoints BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `MSCard_record_date`(IN IN_MerchantID VARCHAR(45), IN IN_start_date DATE, IN IN_end_date DATE, OUT totalPoints BIGINT)
 BEGIN
 SELECT SUM(points_card)
 FROM points_history
@@ -290,7 +289,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `addM`()
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `addM`()
 BEGIN
       DECLARE i INT Default 1;
       DECLARE OriginalPrice DOUBLE; 
@@ -316,7 +315,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `coupon_record`(IN IN_MerchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `coupon_record`(IN IN_MerchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints BIGINT)
 BEGIN
 SELECT SUM(points)
 FROM (SELECT ItemID, getTime FROM user_coupon) AS user_coupon_tmp NATURAL JOIN (SELECT ItemID, points FROM item WHERE MerchantID = IN_MerchantID) AS item_tmp
@@ -333,7 +332,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `merchant_out_points_record`(IN IN_MerchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `merchant_out_points_record`(IN IN_MerchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints BIGINT)
 BEGIN
 SELECT SUM(points_card)
 FROM points_history
@@ -350,7 +349,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `order_record`(IN IN_MerchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `order_record`(IN IN_MerchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints BIGINT)
 BEGIN
 SELECT SUM(PointsNeeded)
 FROM order_view
@@ -368,7 +367,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `order_record_date`(IN IN_MerchantID VARCHAR(45), IN IN_start_date DATE, IN IN_end_date DATE, OUT totalPoints BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `order_record_date`(IN IN_MerchantID VARCHAR(45), IN IN_start_date DATE, IN IN_end_date DATE, OUT totalPoints BIGINT)
 BEGIN
 SELECT SUM(PointsNeeded)
 FROM huaqiShow.order
@@ -386,7 +385,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `points_record_card`(IN IN_userID VARCHAR(45), IN IN_merchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints_card BIGINT, OUT totalPoints_citi BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `points_record_card`(IN IN_userID VARCHAR(45), IN IN_merchantID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints_card BIGINT, OUT totalPoints_citi BIGINT)
 BEGIN
 SELECT SUM(points_card), SUM(points_citi)
 FROM points_history
@@ -404,7 +403,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `points_record_user`(IN IN_userID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints_card BIGINT, OUT totalPoints_citi BIGINT)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `points_record_user`(IN IN_userID VARCHAR(45), IN IN_intervalDate INT, OUT totalPoints_card BIGINT, OUT totalPoints_citi BIGINT)
 BEGIN
 SELECT SUM(points_card), SUM(points_citi)
 FROM points_history
@@ -422,7 +421,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `huaqiShow`$$
-CREATE DEFINER=`huaqiShow`@`%` PROCEDURE `user_coupon_update`(IN IN_userID VARCHAR(45), IN IN_itemID VARCHAR(45), OUT ifUsed INTEGER)
+CREATE DEFINER=`huaqi`@`%` PROCEDURE `user_coupon_update`(IN IN_userID VARCHAR(45), IN IN_itemID VARCHAR(45), OUT ifUsed INTEGER)
 BEGIN
 	
     DECLARE _overdueTime Timestamp;
@@ -459,20 +458,20 @@ DELIMITER ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `huaqiShow`.`coupon_view`;
 USE `huaqiShow`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`huaqiShow`@`%` SQL SECURITY DEFINER VIEW `huaqiShow`.`coupon_view` AS select `huaqiShow`.`user_coupon`.`ItemID` AS `ItemID`,`huaqiShow`.`user_coupon`.`getTime` AS `getTime` from `huaqiShow`.`user_coupon`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`huaqi`@`%` SQL SECURITY DEFINER VIEW `huaqiShow`.`coupon_view` AS select `huaqiShow`.`user_coupon`.`ItemID` AS `ItemID`,`huaqiShow`.`user_coupon`.`getTime` AS `getTime` from `huaqiShow`.`user_coupon`;
 
 -- -----------------------------------------------------
 -- View `huaqiShow`.`order_view`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `huaqiShow`.`order_view`;
 USE `huaqiShow`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`huaqiShow`@`%` SQL SECURITY DEFINER VIEW `huaqiShow`.`order_view` AS select `huaqiShow`.`order`.`PointsNeeded` AS `PointsNeeded`,`huaqiShow`.`order`.`MerchantID` AS `MerchantID`,`huaqiShow`.`order`.`time` AS `time` from `huaqiShow`.`order` where (`huaqiShow`.`order`.`state` = 'SUCCESS');
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`huaqi`@`%` SQL SECURITY DEFINER VIEW `huaqiShow`.`order_view` AS select `huaqiShow`.`order`.`PointsNeeded` AS `PointsNeeded`,`huaqiShow`.`order`.`MerchantID` AS `MerchantID`,`huaqiShow`.`order`.`time` AS `time` from `huaqiShow`.`order` where (`huaqiShow`.`order`.`state` = 'SUCCESS');
 USE `huaqiShow`;
 
 DELIMITER $$
 USE `huaqiShow`$$
 CREATE
-DEFINER=`huaqiShow`@`%`
+DEFINER=`huaqi`@`%`
 TRIGGER `huaqiShow`.`points_update`
 AFTER UPDATE ON `huaqiShow`.`m_card`
 FOR EACH ROW
@@ -491,7 +490,7 @@ END$$
 
 USE `huaqiShow`$$
 CREATE
-DEFINER=`huaqiShow`@`%`
+DEFINER=`huaqi`@`%`
 TRIGGER `huaqiShow`.`user_points_delete`
 AFTER DELETE ON `huaqiShow`.`m_card`
 FOR EACH ROW
@@ -508,7 +507,7 @@ END$$
 
 USE `huaqiShow`$$
 CREATE
-DEFINER=`huaqiShow`@`%`
+DEFINER=`huaqi`@`%`
 TRIGGER `huaqiShow`.`user_points_insert`
 AFTER INSERT ON `huaqiShow`.`m_card`
 FOR EACH ROW
@@ -525,7 +524,7 @@ END$$
 
 USE `huaqiShow`$$
 CREATE
-DEFINER=`huaqiShow`@`%`
+DEFINER=`huaqi`@`%`
 TRIGGER `huaqiShow`.`user_points_update`
 AFTER UPDATE ON `huaqiShow`.`m_card`
 FOR EACH ROW
@@ -542,7 +541,7 @@ END$$
 
 USE `huaqiShow`$$
 CREATE
-DEFINER=`huaqiShow`@`%`
+DEFINER=`huaqi`@`%`
 TRIGGER `huaqiShow`.`item_stock_update`
 AFTER INSERT ON `huaqiShow`.`user_coupon`
 FOR EACH ROW
