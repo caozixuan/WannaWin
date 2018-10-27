@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,21 +22,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qT-IT-Gq4">
                                 <rect key="frame" x="0.0" y="20" width="375" height="191"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points League" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAr-6w-RF6">
-                                        <rect key="frame" x="112" y="128" width="151" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PointLeague" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAr-6w-RF6">
+                                        <rect key="frame" x="121" y="128" width="133.5" height="29"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                         <color key="textColor" name="main_orange"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分通兑平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdQ-Kb-IJf">
-                                        <rect key="frame" x="141" y="157" width="92" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V.1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdQ-Kb-IJf">
+                                        <rect key="frame" x="165.5" y="157" width="44" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portrait_1userTabMe" translatesAutoresizingMaskIntoConstraints="NO" id="oSl-Qf-5vx">
-                                        <rect key="frame" x="137" y="20" width="100" height="100"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="oSl-Qf-5vx">
+                                        <rect key="frame" x="137.5" y="20" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="oSl-Qf-5vx" secondAttribute="height" multiplier="1:1" id="IGf-Fi-nje"/>
                                             <constraint firstAttribute="width" constant="100" id="V05-Bc-AXq"/>
@@ -59,10 +58,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LlI-63-CfT" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="16" y="243" width="343" height="142"/>
+                                <rect key="frame" x="16" y="259" width="343" height="158"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="        Points League旨在建立一个以花旗银行信用为担保的积分兑换平台，实现花旗银行及其友商客户群体的互通，打破各友商积分使用的局限，有助于其积分业务的有效合理互通，扩大消费者积分使用范围及其友商的社会影响力。" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-Ff-gKO">
-                                        <rect key="frame" x="24" y="8" width="295" height="126"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="        PointLeague旨在建立一个以花旗银行信用为担保的积分兑换平台，实现花旗银行及其友商客户群体的互通，打破各友商积分使用的局限，有助于其积分业务的有效合理互通，扩大消费者积分使用范围及其友商的社会影响力。" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-Ff-gKO">
+                                        <rect key="frame" x="36" y="16" width="271" height="126"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="126" id="V4Y-JS-sDk"/>
@@ -73,10 +72,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="cYT-Ff-gKO" secondAttribute="bottom" constant="8" id="U8m-FM-ujv"/>
-                                    <constraint firstItem="cYT-Ff-gKO" firstAttribute="top" secondItem="LlI-63-CfT" secondAttribute="top" constant="8" id="WaD-pd-ILQ"/>
-                                    <constraint firstItem="cYT-Ff-gKO" firstAttribute="leading" secondItem="LlI-63-CfT" secondAttribute="leading" constant="24" id="aao-UF-Ora"/>
-                                    <constraint firstAttribute="trailing" secondItem="cYT-Ff-gKO" secondAttribute="trailing" constant="24" id="cNY-4P-TLc"/>
+                                    <constraint firstItem="cYT-Ff-gKO" firstAttribute="centerX" secondItem="LlI-63-CfT" secondAttribute="centerX" id="LHW-KV-Rj7"/>
+                                    <constraint firstAttribute="bottom" secondItem="cYT-Ff-gKO" secondAttribute="bottom" constant="16" id="N0t-Wy-Geq"/>
+                                    <constraint firstItem="cYT-Ff-gKO" firstAttribute="top" secondItem="LlI-63-CfT" secondAttribute="top" constant="16" id="VBk-gA-KIo"/>
+                                    <constraint firstItem="cYT-Ff-gKO" firstAttribute="leading" secondItem="LlI-63-CfT" secondAttribute="leading" constant="36" id="aao-UF-Ora"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
@@ -96,15 +95,31 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开发团队" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pA9-Kq-pRe">
+                                <rect key="frame" x="158.5" y="613" width="58" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="武汉大学WannaWin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGF-uQ-gnR">
+                                <rect key="frame" x="124.5" y="634" width="126" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6qT-IT-Gq4" firstAttribute="leading" secondItem="plw-Jo-YTi" secondAttribute="leading" id="9x3-Jp-b16"/>
                             <constraint firstItem="6qT-IT-Gq4" firstAttribute="top" secondItem="plw-Jo-YTi" secondAttribute="top" id="ElG-jy-034"/>
+                            <constraint firstItem="lGF-uQ-gnR" firstAttribute="centerX" secondItem="P5h-s3-Ox6" secondAttribute="centerX" id="aV6-Oz-fkb"/>
+                            <constraint firstItem="pA9-Kq-pRe" firstAttribute="centerX" secondItem="P5h-s3-Ox6" secondAttribute="centerX" id="bhZ-ey-COX"/>
+                            <constraint firstItem="lGF-uQ-gnR" firstAttribute="top" secondItem="pA9-Kq-pRe" secondAttribute="bottom" constant="4" id="dkf-Qx-YfS"/>
                             <constraint firstItem="LlI-63-CfT" firstAttribute="leading" secondItem="plw-Jo-YTi" secondAttribute="leading" constant="16" id="iFD-3e-sUY"/>
                             <constraint firstItem="6qT-IT-Gq4" firstAttribute="trailing" secondItem="plw-Jo-YTi" secondAttribute="trailing" id="o3m-QA-dwc"/>
+                            <constraint firstItem="plw-Jo-YTi" firstAttribute="bottom" secondItem="lGF-uQ-gnR" secondAttribute="bottom" constant="16" id="oKA-Oq-b7h"/>
                             <constraint firstItem="LlI-63-CfT" firstAttribute="centerX" secondItem="P5h-s3-Ox6" secondAttribute="centerX" id="pA4-SI-lEH"/>
-                            <constraint firstItem="LlI-63-CfT" firstAttribute="top" secondItem="6qT-IT-Gq4" secondAttribute="bottom" constant="32" id="x1k-PY-acx"/>
+                            <constraint firstItem="LlI-63-CfT" firstAttribute="top" secondItem="6qT-IT-Gq4" secondAttribute="bottom" constant="48" id="x1k-PY-acx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="plw-Jo-YTi"/>
                     </view>
@@ -112,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NKA-hp-DTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2593" y="-396"/>
+            <point key="canvasLocation" x="2592.8000000000002" y="-396.25187406296857"/>
         </scene>
         <!--通用设置-->
         <scene sceneID="XeQ-CQ-kyy">
@@ -329,7 +344,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="portrait_1userTabMe" width="128" height="128"/>
+        <image name="AppLogo" width="120" height="120"/>
         <image name="关于我们" width="48" height="48"/>
         <image name="反馈意见" width="48" height="48"/>
         <image name="清除缓存" width="48" height="48"/>
