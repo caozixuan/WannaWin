@@ -324,7 +324,7 @@ public class PayingActivity extends AppCompatActivity {
             for (int i = 0;i<mAdapter.getSourceItems().size();i++){
                 if (mAdapter.getSourceItems().get(i).getChoose()){
                     //map.keySet()返回的是所有key的值
-                    String usePoints = mAdapter.getSourceItems().get(i).getExchangePoint();
+                    int usePoints = mAdapter.getSourceItems().get(i).getExchangePoint();
                     String merchantName = mAdapter.getSourceItems().get(i).getName();
                     ExchangeResultModel model = new ExchangeResultModel(null,merchantName,usePoints);
                     list.add(model);
@@ -350,7 +350,7 @@ public class PayingActivity extends AppCompatActivity {
             if (names!=null&&reasons!=null){
 
                 for (int i = 0;i<names.size();i++){
-                    ExchangeResultModel model = new ExchangeResultModel(reasons.get(i),names.get(i),null);
+                    ExchangeResultModel model = new ExchangeResultModel(reasons.get(i),names.get(i),0);
                     list.add(model);
 
                 }
@@ -472,7 +472,7 @@ public class PayingActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
-                        String generalPoints = String.valueOf(jObj.getInt("points"));
+                        int generalPoints = jObj.getInt("points");
                         double availablePoints = jObj.getInt("points")*jObj.getDouble("proportion");
 
                         //保留两位小数
@@ -484,7 +484,7 @@ public class PayingActivity extends AppCompatActivity {
                         String result = nf.format(availablePoints);
 
                         if(jObj.getInt("points") > 0)
-                            mAdapter.addData(generalPoints,result,jObj.getString("merchantID"),jObj.getString("proportion"),jObj.getString("merchantName"),jObj.getString("merchantLogoURL"));
+                            mAdapter.addData(generalPoints,availablePoints,jObj.getString("merchantID"),jObj.getDouble("proportion"),jObj.getString("merchantName"),jObj.getString("merchantLogoURL"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

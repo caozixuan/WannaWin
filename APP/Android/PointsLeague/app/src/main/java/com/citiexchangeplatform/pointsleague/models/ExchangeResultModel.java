@@ -6,13 +6,13 @@ import android.os.Parcelable;
 public class ExchangeResultModel implements Parcelable {
     private String reason;
     private String merchantName;
-    private String usePoints;
+    private int usePoints;
 
     public ExchangeResultModel() {
 
     }
 
-    public ExchangeResultModel(String reason, String merchantName, String usePoints) {
+    public ExchangeResultModel(String reason, String merchantName, int usePoints) {
         this.reason = reason;
         this.merchantName = merchantName;
         this.usePoints = usePoints;
@@ -34,11 +34,11 @@ public class ExchangeResultModel implements Parcelable {
         this.merchantName = merchantName;
     }
 
-    public String getUsePoints() {
+    public int getUsePoints() {
         return usePoints;
     }
 
-    public void setUsePoints(String usePoints) {
+    public void setUsePoints(int usePoints) {
         this.usePoints = usePoints;
     }
 
@@ -52,7 +52,7 @@ public class ExchangeResultModel implements Parcelable {
 
         dest.writeString(reason);
         dest.writeString(merchantName);
-        dest.writeString(usePoints);
+        dest.writeInt(usePoints);
     }
 
     public static final Parcelable.Creator<ExchangeResultModel> CREATOR = new Creator(){
@@ -64,7 +64,7 @@ public class ExchangeResultModel implements Parcelable {
             ExchangeResultModel p = new ExchangeResultModel();
             p.setReason(source.readString());
             p.setMerchantName(source.readString());
-            p.setUsePoints(source.readString());
+            p.setUsePoints(source.readInt());
             return p;
         }
 

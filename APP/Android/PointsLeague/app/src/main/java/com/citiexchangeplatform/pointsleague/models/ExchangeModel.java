@@ -6,9 +6,9 @@ public class ExchangeModel {
 
     private Boolean choose;
 
-    private String maxExchangePoint;
-    private String exchangePoint;
-    private String targetPoint;
+    private int maxExchangePoint;
+    private int exchangePoint;
+    private double targetPoint;
     private String name;
     private String merchantID;
     private double rate;
@@ -18,15 +18,55 @@ public class ExchangeModel {
     //private HashMap<Integer, Boolean> map = new HashMap<>();
 
 
-    public ExchangeModel(Boolean choose, String general_point, String posses_point, Double rate, String logo_url, String name, String merchantID) {
+    public ExchangeModel(Boolean choose, int general_point, double targetPoint, String name, String merchantID, double rate, String logo) {
         this.choose = choose;
         this.maxExchangePoint = general_point;
         this.exchangePoint = general_point;
-        this.targetPoint = posses_point;
-        this.rate = rate;
-        this.logo = logo_url;
+        this.targetPoint = targetPoint;
         this.name = name;
         this.merchantID = merchantID;
+        this.rate = rate;
+        this.logo = logo;
+    }
+
+    public Boolean getChoose() {
+        return choose;
+    }
+
+    public void setChoose(Boolean choose) {
+        this.choose = choose;
+    }
+
+    public int getMaxExchangePoint() {
+        return maxExchangePoint;
+    }
+
+    public void setMaxExchangePoint(int maxExchangePoint) {
+        this.maxExchangePoint = maxExchangePoint;
+    }
+
+    public int getExchangePoint() {
+        return exchangePoint;
+    }
+
+    public void setExchangePoint(int exchangePoint) {
+        this.exchangePoint = exchangePoint;
+    }
+
+    public double getTargetPoint() {
+        return targetPoint;
+    }
+
+    public void setTargetPoint(double targetPoint) {
+        this.targetPoint = targetPoint;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMerchantID() {
@@ -45,51 +85,11 @@ public class ExchangeModel {
         this.rate = rate;
     }
 
-    public Boolean getChoose() {
-        return choose;
-    }
-
-    public void setChoose(Boolean choose) {
-        this.choose = choose;
-    }
-
-    public String getMaxExchangePoint() {
-        return maxExchangePoint;
-    }
-
-    public void setMaxExchangePoint(String maxExchangePoint) {
-        this.maxExchangePoint = maxExchangePoint;
-    }
-
-    public String getExchangePoint() {
-        return exchangePoint;
-    }
-
-    public void setExchangePoint(String exchangePoint) {
-        this.exchangePoint = exchangePoint;
-    }
-
     public String getLogo() {
         return logo;
     }
 
     public void setLogo(String logo) {
         this.logo = logo;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTargetPoint() {
-        return targetPoint;
-    }
-
-    public void setTargetPoint(String targetPoint) {
-        this.targetPoint = targetPoint;
     }
 }

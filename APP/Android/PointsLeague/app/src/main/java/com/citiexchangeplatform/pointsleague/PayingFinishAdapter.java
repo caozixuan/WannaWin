@@ -60,7 +60,7 @@ public class PayingFinishAdapter extends RecyclerView.Adapter<PayingFinishAdapte
     public void onBindViewHolder(@NonNull final PayingFinishAdapter.MyViewHolder holder, final int position) {
         if(state){
             //使用的积分
-            holder.Details.setText(exchangeResultModels.get(position).getUsePoints());
+            holder.Details.setText(String.valueOf(exchangeResultModels.get(position).getUsePoints()));
             //设置列表中积分信息
 
             //holder.pointsExchange.setText(points_exchanged.get(position));
