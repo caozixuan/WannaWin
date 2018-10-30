@@ -77,7 +77,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         initMap();
     }
 
-    public void addData(String posses, String target,String merchantID, String rate, String name, String logoURL) {
+    public void addData(int posses, double target,String merchantID, double rate, String name, String logoURL) {
         //maxExchangePoints.add(posses);
         //exchangePoints.add(posses);
         //targetPoints.add(target);
@@ -85,7 +85,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         //names.add(totalPoints);
         //logos.add(logoURL);
 
-        ExchangeModel newItem = new ExchangeModel(false, posses, target,Double.parseDouble(rate), logoURL,name,merchantID);
+        ExchangeModel newItem = new ExchangeModel(false, posses, target , name, merchantID, rate, logoURL);
         sourceItems.add(newItem);
         notifyDataSetChanged();
     }
@@ -194,10 +194,10 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         viewHolder = holder;
         holder.setIsRecyclable(false);
         //设置列表中积分信息
-        holder.editPoint.setText(filteredItems.get(position).getExchangePoint());
+        holder.editPoint.setText(String.valueOf(filteredItems.get(position).getExchangePoint()));
         //holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         holder.editPoint.setInputType(InputType.TYPE_CLASS_NUMBER);
-        holder.exchangePoint.setText(filteredItems.get(position).getTargetPoint());
+        holder.exchangePoint.setText(String.valueOf(filteredItems.get(position).getTargetPoint()));
         //设置商家图片
         /*Glide.with(context)
                 .load(filteredItems.get(position).getLogo())
@@ -311,7 +311,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 total = 0;
                 for(int i = 0;i<sourceItems.size();i++){
                     if(sourceItems.get(i).getChoose()){
-                        total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
+                        total += sourceItems.get(i).getTargetPoint();
                     }
                 }
 
@@ -330,7 +330,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                     //取消选择后编辑框为不可编辑状态
                     holder.editPoint.setFocusable(false);
                     holder.editPoint.setFocusableInTouchMode(false);
-                    holder.editPoint.setText(sourceItems.get(position).getMaxExchangePoint());
+                    holder.editPoint.setText(String.valueOf(sourceItems.get(position).getMaxExchangePoint()));
 
                 }
 
@@ -377,29 +377,29 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 if(s.length()!=0){
                     if(Double.parseDouble(s.toString())<0){
                         exchangedPoint = 0;
-                        filteredItems.get(position).setExchangePoint("0");
+                        filteredItems.get(position).setExchangePoint(0);
                         Toast.makeText(context, "输入不得小于0", Toast.LENGTH_SHORT).show();
 
                     }
                     else {
                         exchangedPoint = Double.parseDouble(s.toString())*rate;
-                        filteredItems.get(position).setExchangePoint(s.toString());
+                        filteredItems.get(position).setExchangePoint(Integer.parseInt(s.toString()));
 
                         //超出最大值，自动更新为最大值
-                        double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
+                        double max = filteredItems.get(position).getMaxExchangePoint();
                         if(Double.parseDouble(s.toString()) > max){
 
                             exchangedPoint = max * rate;
 
                             filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
-                            holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
+                            holder.editPoint.setText(String.valueOf(filteredItems.get(position).getMaxExchangePoint()));
                             Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                 }
                 if(s.length()==0){
-                    filteredItems.get(position).setExchangePoint("0");
+                    filteredItems.get(position).setExchangePoint(0);
                 }
 
 
@@ -411,7 +411,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 nf.setRoundingMode(RoundingMode.UP);
                 String result = nf.format(exchangedPoint);
 
-                filteredItems.get(position).setTargetPoint(result);
+                filteredItems.get(position).setTargetPoint(exchangedPoint);
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(result);
                 //notifyItemChanged(position);
@@ -425,21 +425,21 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 if(s.length()!=0){
                     if(Double.parseDouble(s.toString())<0){
                         exchangedPoint = 0;
-                        filteredItems.get(position).setExchangePoint("0");
+                        filteredItems.get(position).setExchangePoint(0);
                         Toast.makeText(context, "输入不得小于0", Toast.LENGTH_SHORT).show();
 
                     }
                     else {
                         exchangedPoint = Double.parseDouble(s.toString())*rate;
-                        filteredItems.get(position).setExchangePoint(s.toString());
+                        filteredItems.get(position).setExchangePoint(Integer.parseInt(s.toString()));
 
                         //超出最大值，自动更新为最大值
-                        double max = Double.parseDouble(filteredItems.get(position).getMaxExchangePoint());
+                        double max = filteredItems.get(position).getMaxExchangePoint();
                         if(Double.parseDouble(s.toString()) > max){
 
                             exchangedPoint = max * rate;
                             filteredItems.get(position).setExchangePoint(filteredItems.get(position).getMaxExchangePoint());
-                            holder.editPoint.setText(filteredItems.get(position).getMaxExchangePoint());
+                            holder.editPoint.setText(String.valueOf(filteredItems.get(position).getMaxExchangePoint()));
                             Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -447,7 +447,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 }
 
                 else{
-                    filteredItems.get(position).setExchangePoint("0");
+                    filteredItems.get(position).setExchangePoint(0);
                     holder.editPoint.setText("0");
                 }
 
@@ -460,7 +460,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 nf.setRoundingMode(RoundingMode.UP);
                 String result = nf.format(exchangedPoint);
 
-                filteredItems.get(position).setTargetPoint(result);
+                filteredItems.get(position).setTargetPoint(exchangedPoint);
+                //filteredItems.get(position).setTargetPoint(Double.parseDouble(result));
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(result);
 
@@ -594,7 +595,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
         total = 0;
         for (int i = 0;i<sourceItems.size();i++){
             if(sourceItems.get(i).getChoose()){
-                total += Double.parseDouble(sourceItems.get(i).getTargetPoint());
+                total += sourceItems.get(i).getTargetPoint();
             }
         }
 

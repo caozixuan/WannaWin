@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="@dimen/feedback_border_radius"></corners>
-    <stroke android:color="@color/colorToolBar"
+    <stroke android:color="#696969"
         android:width="@dimen/feedback_border_width"></stroke>
 </shape>
