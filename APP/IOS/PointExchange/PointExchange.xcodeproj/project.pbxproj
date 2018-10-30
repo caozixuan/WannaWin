@@ -73,7 +73,6 @@
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
-		3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */; };
 		3EFEFA0E210B004600BC760E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0D210B004600BC760E /* Item.swift */; };
 		844CF6E1211EC05600B232DF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CF6DF211EC05600B232DF /* GradientView.swift */; };
 		844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 844CF6E0211EC05600B232DF /* LICENSE.txt */; };
@@ -188,7 +187,6 @@
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
-		3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountTableViewCell.xib; sourceTree = "<group>"; };
 		3EFEFA0D210B004600BC760E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
@@ -514,7 +512,6 @@
 			isa = PBXGroup;
 			children = (
 				3ED5F6D42122985C00F46E7C /* MerchantCouponTableViewCell.xib */,
-				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
 				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
 				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
 				3EE77DB62133B9AC00ADDD82 /* SearchTableViewCell.xib */,
@@ -688,7 +685,6 @@
 			files = (
 				3ED5F6D62122985C00F46E7C /* MerchantCouponTableViewCell.xib in Resources */,
 				3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */,
-				3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */,
 				3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */,
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
 				3E3327902120041900426518 /* HistoryTableViewCell.xib in Resources */,
