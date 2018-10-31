@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MxV-jO-O3v">
-                                <rect key="frame" x="0.0" y="309" width="375" height="338"/>
+                                <rect key="frame" x="0.0" y="387" width="375" height="280"/>
                                 <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="merchantCell" rowHeight="95" id="dVD-tf-kIX" customClass="DsMerchantTableViewCell" customModule="PointExchange" customModuleProvider="target">
@@ -40,14 +40,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hls-mE-JXI" customClass="DiscoverCouponView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="111.5" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="111.5" width="375" height="220"/>
                                 <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="1qp-ML-mMy"/>
+                                    <constraint firstAttribute="height" constant="220" id="1qp-ML-mMy"/>
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐商家" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2Z-2C-4fB">
-                                <rect key="frame" x="16" y="277.5" width="93.5" height="27.5"/>
+                                <rect key="frame" x="16" y="351" width="93.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                 <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <nil key="highlightedColor"/>
@@ -56,17 +56,17 @@
                         <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="trailing" secondItem="aDG-2P-Ln0" secondAttribute="trailing" id="0Ya-Aj-A2p"/>
-                            <constraint firstItem="MxV-jO-O3v" firstAttribute="top" secondItem="J2Z-2C-4fB" secondAttribute="bottom" constant="4" id="3UP-Fy-7fW"/>
+                            <constraint firstItem="MxV-jO-O3v" firstAttribute="top" secondItem="J2Z-2C-4fB" secondAttribute="bottom" constant="8.5" id="3UP-Fy-7fW"/>
                             <constraint firstItem="pjn-np-K5R" firstAttribute="leading" secondItem="J2Z-2C-4fB" secondAttribute="leading" id="4aD-i4-zB8"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="leading" secondItem="aDG-2P-Ln0" secondAttribute="leading" id="A2u-40-7yy"/>
-                            <constraint firstItem="J2Z-2C-4fB" firstAttribute="top" secondItem="hls-mE-JXI" secondAttribute="bottom" constant="16" id="AFF-V8-fzO"/>
+                            <constraint firstItem="J2Z-2C-4fB" firstAttribute="top" secondItem="hls-mE-JXI" secondAttribute="bottom" constant="19.5" id="AFF-V8-fzO"/>
                             <constraint firstItem="pjn-np-K5R" firstAttribute="leading" secondItem="aDG-2P-Ln0" secondAttribute="leadingMargin" id="AyP-Mo-qWK"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="top" secondItem="pjn-np-K5R" secondAttribute="bottom" constant="4" id="F5J-a5-o1u"/>
                             <constraint firstItem="pjn-np-K5R" firstAttribute="top" secondItem="1vg-n1-HwL" secondAttribute="top" constant="16" id="Kmf-fM-sAJ"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="leading" secondItem="MxV-jO-O3v" secondAttribute="leading" id="Ofy-Aq-4xX"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="leading" secondItem="1vg-n1-HwL" secondAttribute="leading" id="c8p-Lx-2cp"/>
                             <constraint firstItem="hls-mE-JXI" firstAttribute="trailing" secondItem="MxV-jO-O3v" secondAttribute="trailing" id="fLi-g5-135"/>
-                            <constraint firstAttribute="bottom" secondItem="MxV-jO-O3v" secondAttribute="bottom" constant="20" symbolic="YES" id="hRc-Xu-cJa"/>
+                            <constraint firstAttribute="bottom" secondItem="MxV-jO-O3v" secondAttribute="bottom" id="hRc-Xu-cJa"/>
                             <constraint firstItem="1vg-n1-HwL" firstAttribute="trailing" secondItem="hls-mE-JXI" secondAttribute="trailing" id="kMW-7N-jhn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1vg-n1-HwL"/>

@@ -86,9 +86,9 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
 					}
 					let couponNameLabel = UILabel()
 					couponNameLabel.text = items[i].name
-					couponNameLabel.font = UIFont.systemFont(ofSize: 12)
-					couponNameLabel.textColor = UIColor.white
-					couponNameLabel.frame = CGRect(x: 10, y: 100, width: 150, height: 28)
+					couponNameLabel.font = UIFont.boldSystemFont(ofSize: 14)
+					couponNameLabel.textColor = UIColor.black
+					couponNameLabel.frame = CGRect(x: 5, y: 120, width: 150, height: 28)
 					self.couponView.imageViews[i].addSubview(couponNameLabel)
 				}
 			}

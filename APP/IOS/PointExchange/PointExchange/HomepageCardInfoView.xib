@@ -52,8 +52,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-Y5-eUg">
-                    <rect key="frame" x="73" y="51.5" width="40" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-Y5-eUg">
+                    <rect key="frame" x="73" y="52" width="55" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -90,7 +90,6 @@
                 <constraint firstItem="H5y-qB-YRp" firstAttribute="centerX" secondItem="KuR-Y6-hed" secondAttribute="centerX" id="F9b-U5-KYJ"/>
                 <constraint firstItem="FDA-Jr-Tjd" firstAttribute="leading" secondItem="7Fi-Qa-Xpp" secondAttribute="trailing" constant="5" id="JMf-YT-1Ex"/>
                 <constraint firstItem="FDA-Jr-Tjd" firstAttribute="top" secondItem="ypL-VG-VCw" secondAttribute="top" constant="23" id="PX7-ao-Ibm"/>
-                <constraint firstItem="ypL-VG-VCw" firstAttribute="trailing" secondItem="dDs-Y5-eUg" secondAttribute="trailing" constant="87" id="Ut1-ny-f6o"/>
                 <constraint firstItem="dDs-Y5-eUg" firstAttribute="leading" secondItem="FDA-Jr-Tjd" secondAttribute="leading" id="UwJ-MF-7zT"/>
                 <constraint firstAttribute="bottom" secondItem="KuR-Y6-hed" secondAttribute="bottom" id="f6W-xS-HCP"/>
                 <constraint firstItem="KuR-Y6-hed" firstAttribute="leading" secondItem="0Kq-io-E2y" secondAttribute="leading" id="hhz-R9-wxV"/>
@@ -100,7 +99,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ypL-VG-VCw"/>
-            <point key="canvasLocation" x="-373" y="683"/>
+            <point key="canvasLocation" x="-374.39999999999998" y="682.75862068965523"/>
         </view>
     </objects>
     <resources>
