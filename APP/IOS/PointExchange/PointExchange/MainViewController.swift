@@ -80,7 +80,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		if gesture.state == .began{
 		}else if gesture.state == .changed{
 			maskView.snp.remakeConstraints{ make in
-				if offset < 40 && offset > 0{
+				if offset < 30 && offset > 0{
 					make.top.equalTo(self.imageScrollerContainer.snp.top).offset(160+offset)
 				}
 			}
