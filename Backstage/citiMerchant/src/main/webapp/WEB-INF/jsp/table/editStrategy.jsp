@@ -46,7 +46,6 @@
             dataType: "json",
             success: function(responseText) {
                 var status = responseText.status;
-                alert(status);
                 if(status == "fail"){
 
                 }
