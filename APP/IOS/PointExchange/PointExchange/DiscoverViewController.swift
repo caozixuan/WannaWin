@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import ViewAnimator
 
 class DiscoverTableViewController: UITableViewController{
 //    @IBOutlet weak var searchBarView: UIView!
@@ -50,18 +51,25 @@ class DiscoverTableViewController: UITableViewController{
 		// mainTableView
 		mainTableView.delegate = self
 		mainTableView.dataSource = self
+		
+		requestData()
+		
+		// 切换动画
+		let fromAnimation = AnimationType.from(direction: .right, offset: 30.0)
+		let zoomAnimation = AnimationType.zoom(scale: 0.2)
+//		let rotateAnimation = AnimationType.rotate(angle: CGFloat.pi/6)
+//		UIView.animate(views: collectionView.visibleCells,
+//					   animations: [zoomAnimation, rotateAnimation],
+//					   duration: 0.5)
+		UIView.animate(views: mainTableView.visibleCells,
+					   animations: [fromAnimation, zoomAnimation],
+					   delay: 0.5)
 	}
-
-    override func viewWillAppear(_ animated:Bool) {
-        super.viewWillAppear(animated)
-		
-//        self.couponView.viewDelegate = self
-		
-//        self.tableView.rowHeight = 68
-		
+	
+	func requestData(){
 		// 加载数据
-        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-        activityIndicator?.startAnimating()
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		activityIndicator?.startAnimating()
 		ServerConnector.getMerchantCount(){(result,count) in
 			if result {
 				ServerConnector.getMerchantsInfos(start: 0, n: count){ (result,merchants) in
@@ -95,6 +103,14 @@ class DiscoverTableViewController: UITableViewController{
 				}
 			}
 		}
+	}
+
+    override func viewWillAppear(_ animated:Bool) {
+        super.viewWillAppear(animated)
+		
+//        self.couponView.viewDelegate = self
+		
+//        self.tableView.rowHeight = 68
 		
 		// 商家tableView
 		self.mainTableView.register(UINib(nibName: "DsMerchantTableViewCell", bundle: nil), forCellReuseIdentifier: "merchantCell")

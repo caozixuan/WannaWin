@@ -55,7 +55,13 @@ class TendencySurveyViewController: UIViewController {
 		}
 		ServerConnector.investigate(types: chooseResult){ result in
 			if result{
-				self.navigationController?.popViewController(animated: true)
+				let alert = UIAlertController(title:"欢迎", message:"欢迎注册PointsLeague!", preferredStyle:.alert)
+				let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+					self.navigationController!.popViewController(animated: true)
+					self.navigationController?.popViewController(animated: true)
+				})
+				alert.addAction(okAction)
+				self.present(alert, animated: true, completion: nil)
 			}
 		}
 	}

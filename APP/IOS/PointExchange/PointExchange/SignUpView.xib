@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,16 +32,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9KW-PY-M4E">
-                    <rect key="frame" x="63.5" y="40.5" width="248" height="401.5"/>
+                    <rect key="frame" x="-170.5" y="40.5" width="716" height="402"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBh-WI-Qm8">
-                            <rect key="frame" x="104" y="0.0" width="40" height="68.5"/>
+                            <rect key="frame" x="338" y="0.0" width="40" height="44"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                             <color key="textColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="phoneNumber field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="ihh-Kq-aR5" userLabel="账户">
-                            <rect key="frame" x="7" y="76.5" width="234" height="40"/>
+                            <rect key="frame" x="7" y="52" width="702" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="XJ6-1n-4NZ"/>
                             </constraints>
@@ -56,7 +54,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="vcode field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入短信验证码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-tX-E1v" userLabel="验证码">
-                            <rect key="frame" x="7" y="124.5" width="234" height="40"/>
+                            <rect key="frame" x="7" y="100" width="702" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ebp-D8-JXQ"/>
                             </constraints>
@@ -69,7 +67,7 @@
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您输入的手机号不正确" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1a-e4-ZCB">
-                            <rect key="frame" x="69" y="168.5" width="110" height="16"/>
+                            <rect key="frame" x="303" y="144" width="110" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="tI7-7o-xYS"/>
                             </constraints>
@@ -78,7 +76,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36g-AV-biM">
-                            <rect key="frame" x="93" y="172.5" width="62" height="66"/>
+                            <rect key="frame" x="327" y="148" width="62" height="42.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="获取验证码">
                                 <color key="titleColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="0.80340325339999996" colorSpace="calibratedRGB"/>
@@ -88,33 +86,33 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-eC-w1V">
-                            <rect key="frame" x="7" y="246.5" width="234" height="113"/>
+                            <rect key="frame" x="7" y="198.5" width="702" height="195.5"/>
                             <state key="normal" image="Button下一步"/>
                             <connections>
                                 <action selector="clickNextBtn:" destination="-1" eventType="touchUpInside" id="sc1-xA-vbh"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sD3-57-OBV">
-                            <rect key="frame" x="45" y="367.5" width="158" height="34"/>
+                            <rect key="frame" x="279" y="402" width="158" height="0.0"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-H7-dJF">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="0.0"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZq-vy-IO6">
-                                    <rect key="frame" x="64" y="0.0" width="30" height="34"/>
+                                    <rect key="frame" x="64" y="0.0" width="30" height="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="登录">
                                         <color key="titleColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="clickLogin:" destination="-1" eventType="touchUpInside" id="Qp1-mG-84D"/>
+                                        <action selector="clickLogin:" destination="-1" eventType="touchUpInside" id="d6P-Gr-fSX"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTl-QI-Yef">
-                                    <rect key="frame" x="98" y="0.0" width="60" height="34"/>
+                                    <rect key="frame" x="98" y="0.0" width="60" height="0.0"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -148,16 +146,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tyv-ky-P46">
-                    <rect key="frame" x="63.5" y="40.5" width="248" height="401.5"/>
+                    <rect key="frame" x="63.5" y="40.5" width="248" height="402"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42X-sE-Tk9">
-                            <rect key="frame" x="104" y="0.0" width="40" height="81.5"/>
+                            <rect key="frame" x="104" y="0.0" width="40" height="49"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                             <color key="textColor" red="0.4039215686" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="password field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="Wdx-Gg-O08">
-                            <rect key="frame" x="7" y="89.5" width="234" height="40"/>
+                            <rect key="frame" x="7" y="57" width="234" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="kZg-Xo-bYx"/>
                             </constraints>
@@ -169,7 +167,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="passwordAgain field" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="center" minimumFontSize="17" background="输入框" translatesAutoresizingMaskIntoConstraints="NO" id="IO0-PG-omj">
-                            <rect key="frame" x="7" y="137.5" width="234" height="40"/>
+                            <rect key="frame" x="7" y="105" width="234" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="WcW-aa-y8f"/>
                             </constraints>
@@ -183,7 +181,7 @@
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-Rc-oNY">
-                            <rect key="frame" x="111.5" y="181.5" width="25" height="16"/>
+                            <rect key="frame" x="111.5" y="149" width="25" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="JWe-IX-feO"/>
                             </constraints>
@@ -192,23 +190,23 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFu-vp-IEo">
-                            <rect key="frame" x="7" y="185.5" width="234" height="134"/>
+                            <rect key="frame" x="7" y="153" width="234" height="241"/>
                             <state key="normal" image="Button注册"/>
                             <connections>
                                 <action selector="clickSignUp:" destination="-1" eventType="touchUpInside" id="cVI-hx-7ld"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="RVj-Ho-9UM">
-                            <rect key="frame" x="44.5" y="327.5" width="159" height="74"/>
+                            <rect key="frame" x="44.5" y="402" width="159" height="0.0"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tyz-O2-dPr">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="74"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="0.0"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMk-sr-UhG">
-                                    <rect key="frame" x="64" y="0.0" width="31" height="74"/>
+                                    <rect key="frame" x="64" y="0.0" width="31" height="0.0"/>
                                     <state key="normal" title="登录">
                                         <color key="titleColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="0.80340325339999996" colorSpace="calibratedRGB"/>
                                     </state>
@@ -217,7 +215,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="———" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzP-hJ-4cd">
-                                    <rect key="frame" x="99" y="0.0" width="60" height="74"/>
+                                    <rect key="frame" x="99" y="0.0" width="60" height="0.0"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -249,8 +247,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Button下一步" width="234" height="46"/>
-        <image name="Button注册" width="234" height="46"/>
+        <image name="Button下一步" width="702" height="138"/>
+        <image name="Button注册" width="702" height="138"/>
         <image name="输入框" width="660" height="138"/>
     </resources>
 </document>
