@@ -113,9 +113,9 @@ public class PointsFragment extends Fragment {
                                 sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                                     @Override
                                     public void onSliderClick(BaseSliderView slider) {
-                                        Intent intentToDetailFindPay = new Intent(getActivity(), DetailFindPayActivity.class);
-                                        intentToDetailFindPay.putExtra("itemID",activityID);
-                                        getActivity().startActivity(intentToDetailFindPay);
+                                        Intent intentToDetailActivity = new Intent(getActivity(), DetailActivityActivity.class);
+                                        intentToDetailActivity.putExtra("activityID",activityID);
+                                        getContext().startActivity(intentToDetailActivity);
                                     }
                                 });
                                 sliderLayout.addSlider(sv);
@@ -169,7 +169,6 @@ public class PointsFragment extends Fragment {
             cardPointsAdapter = new CardPointsAdapter(getContext());
             recyclerView.setAdapter(cardPointsAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         } else {
             loadLoginContent();
         }
