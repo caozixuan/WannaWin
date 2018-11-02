@@ -296,10 +296,10 @@ public class PointsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (wasLogin != LogStateInfo.getInstance(getContext()).isLogin()) {
+        //if (wasLogin != LogStateInfo.getInstance(getContext()).isLogin()) {
             accountInfoLayout.removeAllViewsInLayout();
             loadMainContent();
-        }
+        //}
 
         if (LogStateInfo.getInstance(getContext()).isLogin()) {
             cardPointsAdapter.clearAll();
@@ -393,7 +393,6 @@ public class PointsFragment extends Fragment {
                             double generalPoints = jsonObject.getDouble("generalPoints");
                             TextView textView = (TextView) view.findViewById(R.id.textView_generalPoints_main);
                             textView.setText(String.format("%.1f", generalPoints));
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
