@@ -13,6 +13,7 @@ import citi.vo.User;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class PointsService {
                 returnMerchants.add(returnMerchant);
                 isCanChange = false;
             }
-            else if(Double.valueOf(merchantBean.getSelectedMSCardPoints())<0){
+            else if(Double.valueOf(merchantBean.getSelectedMSCardPoints())<=0){
                 ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "兑换积分不为负");
                 returnMerchants.add(returnMerchant);
                 isCanChange = false;
@@ -61,6 +62,7 @@ public class PointsService {
         return isCanChange;
     }
 
+    @Transactional
     public void deductPoints(User user, List<ResultBean.MerchantBean> merchantBeanList){
         for(int i=0;i<merchantBeanList.size();i++){
             ResultBean.MerchantBean merchantBean=  merchantBeanList.get(i);
