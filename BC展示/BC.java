@@ -61,22 +61,25 @@ public class BC {
             System.out.println("\nThe 2nd block decoded by Merchant-1: ");
             System.out.println("Type, MerchantID, userID, points");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
-        }
+        } else System.out.println("\nMerchant-1 fails to decode 2nd block.");
+
         if (secondBlock.data.merchantID == "2") {
             System.out.println("\nThe 2nd block decoded by Merchant-2: ");
             System.out.println("Type, MerchantID, userID, points");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K2)));
-        }
+        } else System.out.println("\nMerchant-2 fails to decode 2nd block.");
+
         if (thirdBlock.data.merchantID == "1") {
             System.out.println("The 3rd block decoded by Merchant-1: ");
             System.out.println("Type, MerchantID, userID, points");
             System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
-        }
+        } else System.out.println("\nMerchant-1 fails to decode 3rd block.");
+
         if (thirdBlock.data.merchantID == "2") {
             System.out.println("\nThe 3rd block decoded by Merchant-2: ");
             System.out.println("Type, MerchantID, userID, points");
             System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K2)));
-        }
+        } else System.out.println("\nMerchant-2 fails to decode 3rd block.");
 
     }
 
