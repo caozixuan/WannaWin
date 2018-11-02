@@ -33,7 +33,7 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
                     android:adjustViewBounds="true"
-                    android:padding="5dp"
+                    android:padding="10.3dp"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/nike_logo" />
 

@@ -3,6 +3,7 @@ package citi.BC;
 import com.google.gson.annotations.Expose;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Block {
 
@@ -68,13 +69,25 @@ public class Block {
         return calculateHash(this.previousHash, this.data.toString(), this.timeStamp, this.getNonce());
     }
 
+    // No proof-of-work model !!!
     public void mineBlock(int difficulty) {
+        /*
+         * Instead of proof-of-work model,
+         * we use the model where a centre keeps accounts and others audit accounts decentrally.
+         */
+        /*
         String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0"
         while (!hash.substring(0, difficulty).equals(target)) {
             nonce++;
             hash = calculateThisHash();
         }
-        System.out.println("Block Mined!!! : " + hash);
+        */
+
+        Random random = new Random();
+        nonce = random.nextInt();
+        hash = calculateThisHash();
+
+        //System.out.println("Block Mined!!! : " + hash);
 
         String str = data.merchantID +
                 Long.toString(timeStamp) +

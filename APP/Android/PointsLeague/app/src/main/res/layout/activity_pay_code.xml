@@ -12,10 +12,12 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"/>-->
 
+    <!--状态栏-->
     <com.citiexchangeplatform.pointsleague.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"/>
 
 
     <!--<android.support.v7.widget.Toolbar-->
@@ -43,23 +45,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="#deff9546">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="15dp"
+            android:background="@drawable/background_radius"  >
 
-        <ImageView
-            android:id="@+id/imageview_barcode"
-            android:layout_width="282dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/BarCodeDescription"
-            app:srcCompat="@android:color/background_light" />
+            <ImageView
+                android:id="@+id/imageview_barcode"
+                android:layout_width="282dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/BarCodeDescription"
+                app:srcCompat="@android:color/background_light" />
 
-        <ImageView
-            android:id="@+id/imageview_qr"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:contentDescription="@string/QRDescription"
-            app:srcCompat="@android:color/background_light"
-            android:layout_marginTop="15dp"/>
+            <ImageView
+                android:id="@+id/imageview_qr"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:contentDescription="@string/QRDescription"
+                app:srcCompat="@android:color/background_light"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+
+
 
         <!--<Button-->
             <!--android:id="@+id/button_gt_choose_point"-->
