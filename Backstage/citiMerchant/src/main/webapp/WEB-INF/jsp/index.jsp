@@ -30,7 +30,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="${merchant.merchantLogoURL}" class="layui-nav-img">
-                    贤心
+                    ${merchant.name}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>

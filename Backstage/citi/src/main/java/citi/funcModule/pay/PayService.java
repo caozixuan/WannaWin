@@ -94,7 +94,7 @@ public class PayService {
         if (timeMillis - QRTimestamp > 60 || timeMillis < QRTimestamp) {
             return QRCodeStatus.INVALID;
         }
-        List<Order> orders = orderMapper.getOrderByUserID(userID, "01010101");
+        List<Order> orders = orderMapper.getOrderByUserID(userID, "101");
 
         for (Order order : orders) {
             Timestamp oderTimestamp = Timestamp.valueOf(order.getTime());
