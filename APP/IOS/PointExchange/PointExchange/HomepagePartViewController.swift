@@ -30,6 +30,12 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 loginView = nil
                 
             }
+			else{
+				homepageStackView?.removeFromSuperview()
+				homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+				homepageStackView?.delegate = self
+				view.addSubview(homepageStackView!)
+			}
         }
         else {
             if loginView == nil {
@@ -39,9 +45,15 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 homepageStackView?.removeFromSuperview()
                 homepageStackView = nil
                 
-            }
-            activityIndicator?.stopAnimating()
+			}else{
+				loginView?.removeFromSuperview()
+				loginView = LoginView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+				loginView?.delegate = self
+				view.addSubview(loginView!)
+			}
+			
         }
+		activityIndicator?.stopAnimating()
     }
     
     override func viewWillLayoutSubviews() {
@@ -77,7 +89,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 								image.image = UIImage(named: "bg1_\(String(describing: self.cards![0].cardStyle!))")
                                 if v.cardImage1.subviews.count < 2{
                                     let view = HomepageCardInfoView(frame: CGRect(x: 0, y: 0, width: v.cardImage1.frame.width, height: v.cardImage1.frame.height))
-									view.logoBackgroundView.cornerRadius = view.logoBackgroundView.bounds.width/2
+									view.logoBackgroundView.cornerRadius = view.bounds.width*0.15
                                     v.cardImage1.addSubview(view)
                                     view.merchantNameLabel.text = self.cards?[0].merchant?.name
                                     view.merchantLogoImageView.imageFromURL((self.cards?[0].merchant?.logoURL)!, placeholder: UIImage())
@@ -93,7 +105,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 								image.image = UIImage(named: "bg1_\(String(describing: self.cards![1].cardStyle!))")
                                 if v.cardImage2.subviews.count < 2{
                                     let view = HomepageCardInfoView(frame: CGRect(x: 0, y: 0, width: v.cardImage2.frame.width, height: v.cardImage2.frame.height))
-									view.logoBackgroundView.cornerRadius = view.logoBackgroundView.bounds.width/2
+									view.logoBackgroundView.cornerRadius = view.bounds.width*0.15
                                     view.layer.zPosition = 10
                                     v.cardImage2.addSubview(view)
                                     view.merchantNameLabel.text = self.cards?[1].merchant?.name
@@ -109,7 +121,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                                     image.image = UIImage(named: "bg1_\(String(describing: self.cards![2].cardStyle!))")
                                     if v.cardImage3.subviews.count < 2{
                                         let view = HomepageCardInfoView(frame: CGRect(x: 0, y: 0, width: v.cardImage3.frame.width, height: v.cardImage3.frame.height))
-										view.logoBackgroundView.cornerRadius = view.logoBackgroundView.bounds.width/2
+										view.logoBackgroundView.cornerRadius = view.bounds.width*0.15
                                         view.layer.zPosition = 10
                                         v.cardImage3.addSubview(view)
                                         view.merchantNameLabel.text = self.cards?[2].merchant?.name

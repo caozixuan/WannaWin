@@ -343,7 +343,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9X-4e-Phm">
                                                         <rect key="frame" x="233.5" y="0.0" width="100" height="24"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可兑花旗点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwo-M0-z9I">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可兑通用点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwo-M0-z9I">
                                                                 <rect key="frame" x="15" y="2" width="70" height="20"/>
                                                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1235,7 +1235,7 @@
         <image name="merchantChosen" width="349" height="68"/>
         <image name="merchantUnChoose" width="349" height="68"/>
         <image name="success" width="90" height="88"/>
-        <image name="unbind_button" width="180" height="49"/>
+        <image name="unbind_button" width="166" height="35"/>
         <image name="输入框" width="660" height="138"/>
         <namedColor name="main_lightGreen">
             <color red="0.60399997234344482" green="0.52499997615814209" blue="0.086000002920627594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

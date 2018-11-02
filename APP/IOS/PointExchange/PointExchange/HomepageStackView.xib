@@ -127,10 +127,10 @@
                     <rect key="frame" x="0.0" y="125.5" width="375" height="278"/>
                     <subviews>
                         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
-                            <rect key="frame" x="0.0" y="0.0" width="611.5" height="278"/>
+                            <rect key="frame" x="0.0" y="0.0" width="651.5" height="278"/>
                             <subviews>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-IB-1xZ">
-                                    <rect key="frame" x="206.5" y="0.0" width="198.5" height="278"/>
+                                    <rect key="frame" x="226.5" y="0.0" width="198.5" height="278"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-qJ-kXS">
                                             <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
@@ -152,7 +152,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkd-c8-VRg">
-                                    <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
+                                    <rect key="frame" x="20" y="0.0" width="198.5" height="278"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="rRy-Qe-DJz">
                                             <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
@@ -174,7 +174,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31n-EL-h9q">
-                                    <rect key="frame" x="413" y="0.0" width="198.5" height="278"/>
+                                    <rect key="frame" x="433" y="0.0" width="198.5" height="278"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-LX-hfY">
                                             <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
@@ -203,21 +203,21 @@
                                 <constraint firstItem="Hkd-c8-VRg" firstAttribute="top" secondItem="4ox-Ia-HHM" secondAttribute="top" id="B65-mI-GC0"/>
                                 <constraint firstItem="Ulb-IB-1xZ" firstAttribute="leading" secondItem="Hkd-c8-VRg" secondAttribute="trailing" constant="8" id="IhQ-ZU-DvM"/>
                                 <constraint firstItem="Hkd-c8-VRg" firstAttribute="width" secondItem="Ulb-IB-1xZ" secondAttribute="width" id="LPa-Ay-RYw"/>
-                                <constraint firstItem="Hkd-c8-VRg" firstAttribute="leading" secondItem="4ox-Ia-HHM" secondAttribute="leading" id="Vn2-az-gg5"/>
+                                <constraint firstItem="Hkd-c8-VRg" firstAttribute="leading" secondItem="4ox-Ia-HHM" secondAttribute="leading" constant="20" id="Vn2-az-gg5"/>
                                 <constraint firstItem="31n-EL-h9q" firstAttribute="width" secondItem="Ulb-IB-1xZ" secondAttribute="width" id="dV1-DQ-Tb0"/>
                                 <constraint firstAttribute="bottom" secondItem="Hkd-c8-VRg" secondAttribute="bottom" id="dnS-7G-jjF"/>
                                 <constraint firstItem="31n-EL-h9q" firstAttribute="leading" secondItem="Ulb-IB-1xZ" secondAttribute="trailing" constant="8" id="nIO-lH-0iB"/>
-                                <constraint firstAttribute="trailing" secondItem="31n-EL-h9q" secondAttribute="trailing" id="vsE-p0-AiY"/>
+                                <constraint firstAttribute="trailing" secondItem="31n-EL-h9q" secondAttribute="trailing" constant="20" id="vsE-p0-AiY"/>
                             </constraints>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="20" leading="8" bottom="8" trailing="20"/>
                         </view>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="4ox-Ia-HHM" secondAttribute="trailing" id="1Qn-MM-EjO"/>
                         <constraint firstAttribute="height" priority="900" constant="300" id="1lb-h2-KFv"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="top" secondItem="kjJ-VY-RPH" secondAttribute="top" id="UmX-nI-cki"/>
                         <constraint firstAttribute="bottom" secondItem="4ox-Ia-HHM" secondAttribute="bottom" id="VmR-gj-iks"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="leading" secondItem="kjJ-VY-RPH" secondAttribute="leading" id="h9J-mg-lC5"/>
-                        <constraint firstItem="4ox-Ia-HHM" firstAttribute="trailing" secondItem="kjJ-VY-RPH" secondAttribute="trailing" id="mNj-rt-zKy"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="centerY" secondItem="kjJ-VY-RPH" secondAttribute="centerY" id="t1w-Kh-UCZ"/>
                     </constraints>
                 </scrollView>

@@ -80,6 +80,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 			configurePageController()
 		}
 		configureAutoScrollTimer()
+//		autoScrollTimer?.fire()
 	}
 	
 	//设置scrollerView
@@ -248,6 +249,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 								  willDecelerate decelerate: Bool) {
 		//重新启动自动滚动计时器
 		configureAutoScrollTimer()
+//		autoScrollTimer?.fire()
 		
 	}
 
