@@ -116,7 +116,7 @@ public class ItemController {
     public String deleteItem(String itemID,HttpSession session) {
         String merchantID=session.getAttribute("merchantID").toString();
         itemService.deleteItem(itemID);
-        return "forward:/getItem";
+        return "forward:getItem";
     }
 
    /* @RequestMapping(value = {"/item/addItemOperation"})

@@ -10,10 +10,6 @@
     <context:annotation-config/>
     <mvc:annotation-driven />
 
-    <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
-    <task:scheduler id="qbScheduler" pool-size="10"/>
-
-
     <context:component-scan base-package="citiMerchant.*"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
