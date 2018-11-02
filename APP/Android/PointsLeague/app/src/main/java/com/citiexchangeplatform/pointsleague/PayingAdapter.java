@@ -375,7 +375,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 double rate = filteredItems.get(position).getRate();
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    if(Double.parseDouble(s.toString())<0){
+                    if(Double.parseDouble(s.toString())<=0){
                         exchangedPoint = 0;
                         filteredItems.get(position).setExchangePoint(0);
                         Toast.makeText(context, "输入不得小于0", Toast.LENGTH_SHORT).show();

@@ -314,50 +314,42 @@ public class PayingActivity extends AppCompatActivity {
 
     /*确认抵扣按钮点击事件*/
     public void click_finish(View view){
-        exchangePostJSON();
-        List<ExchangeResultModel> list = new ArrayList<>();
-        Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
-        Bundle bundle = new Bundle();
-        if(state){
-
-            //map = mAdapter.getMap();
-            for (int i = 0;i<mAdapter.getSourceItems().size();i++){
-                if (mAdapter.getSourceItems().get(i).getChoose()){
-                    //map.keySet()返回的是所有key的值
-                    int usePoints = mAdapter.getSourceItems().get(i).getExchangePoint();
-                    String merchantName = mAdapter.getSourceItems().get(i).getName();
-                    ExchangeResultModel model = new ExchangeResultModel(null,merchantName,usePoints);
-                    list.add(model);
-                }
-            }
-
-            bundle.putString("total",mAdapter.getTotalPoints());
-            bundle.putParcelableArrayList("resultList", (ArrayList<? extends Parcelable>) list);
-            //intent.putExtra("resultList", (Serializable) list);
-            /*Bundle bundle = new Bundle();
-
-            bundle.putStringArrayList("points_used",used);
-            bundle.putBoolean("state",state);
-            bundle.putStringArrayList("points_exchanged",exchanged);
-            bundle.putStringArrayList("logo_urls",logos);
-            bundle.putStringArrayList("business_names",names);
-            bundle.putString("total",mAdapter.getTotalPoints());
-            //bundle.putSerializable("checkbox_map", myMap);
-            intent.putExtras(bundle);*/
-            //
+        if(mAdapter.getTotalPoints().equals("0")){
+            Toast.makeText(getApplicationContext(), "兑换积分为0，请重新选择", Toast.LENGTH_SHORT).show();
         }
-        else {
-            if (names!=null&&reasons!=null){
+        else{
+            exchangePostJSON();
+            List<ExchangeResultModel> list = new ArrayList<>();
+            Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
+            Bundle bundle = new Bundle();
+            if(state){
 
-                for (int i = 0;i<names.size();i++){
-                    ExchangeResultModel model = new ExchangeResultModel(reasons.get(i),names.get(i),0);
-                    list.add(model);
-
+                //map = mAdapter.getMap();
+                for (int i = 0;i<mAdapter.getSourceItems().size();i++){
+                    if (mAdapter.getSourceItems().get(i).getChoose()){
+                        //map.keySet()返回的是所有key的值
+                        int usePoints = mAdapter.getSourceItems().get(i).getExchangePoint();
+                        String merchantName = mAdapter.getSourceItems().get(i).getName();
+                        ExchangeResultModel model = new ExchangeResultModel(null,merchantName,usePoints);
+                        list.add(model);
+                    }
                 }
-            }
 
-            bundle.putParcelableArrayList("resultList", (ArrayList<? extends Parcelable>) list);
-            //intent.putExtra("resultList", (Serializable) list);
+                bundle.putString("total",mAdapter.getTotalPoints());
+                bundle.putParcelableArrayList("resultList", (ArrayList<? extends Parcelable>) list);
+            }
+            else {
+                if (names!=null&&reasons!=null){
+
+                    for (int i = 0;i<names.size();i++){
+                        ExchangeResultModel model = new ExchangeResultModel(reasons.get(i),names.get(i),0);
+                        list.add(model);
+
+                    }
+                }
+
+                bundle.putParcelableArrayList("resultList", (ArrayList<? extends Parcelable>) list);
+                //intent.putExtra("resultList", (Serializable) list);
 
             /*Intent intent = new Intent(PayingActivity.this, PaymentFinishActivity.class);
             Bundle bundle = new Bundle();
@@ -370,17 +362,15 @@ public class PayingActivity extends AppCompatActivity {
             //
             startActivity(intent);*/
 
+            }
+
+
+            bundle.putBoolean("state",state);
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
         }
-
-
-        bundle.putBoolean("state",state);
-
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-
-
-
 
     }
 
