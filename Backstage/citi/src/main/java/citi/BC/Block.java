@@ -70,7 +70,7 @@ public class Block {
     }
 
     // No proof-of-work model !!!
-    public void mineBlock(int difficulty) {
+    public void mineBlock() {
         /*
          * Instead of proof-of-work model,
          * we use the model where a centre keeps accounts and others audit accounts decentrally.
@@ -84,10 +84,10 @@ public class Block {
         */
 
         Random random = new Random();
-        nonce = random.nextInt();
+        nonce = Math.abs(random.nextInt());
         hash = calculateThisHash();
 
-        //System.out.println("Block Mined!!! : " + hash);
+        System.out.println("Block Mined!!! : " + hash);
 
         String str = data.merchantID +
                 Long.toString(timeStamp) +
@@ -97,5 +97,6 @@ public class Block {
         signature = RSA.sign(enStr, BC.privateKey);
 
     }
+
 
 }
