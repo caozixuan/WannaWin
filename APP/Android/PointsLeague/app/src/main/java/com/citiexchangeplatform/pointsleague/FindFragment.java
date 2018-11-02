@@ -80,8 +80,8 @@ public class FindFragment extends Fragment {
         if(findAdapter.getItemCount() == 0){
             findActivityAdapter.clearAll();
             findAdapter.clearAll();
-            getRecommendedMerchants();
             getRecommendedActivity();
+            getRecommendedMerchants();
         }
 
     }
@@ -286,9 +286,9 @@ public class FindFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
 
-                if (LogStateInfo.getInstance(getContext()).isLogin()) {
-                    map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
-                }
+//                if (LogStateInfo.getInstance(getContext()).isLogin()) {
+//                    map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+//                }
 
 
                 return map;
