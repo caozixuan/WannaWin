@@ -42,6 +42,8 @@ import static com.citiexchangeplatform.pointsleague.utils.Utils.showJson;
 
 
 public class PointsExchangeExpandListActivity extends AppCompatActivity {
+
+    private View mEmptyView;
     List<RecordParent> recordList;
     ExpandableAdapter adapter;
     VExpandableAdapter expandableAdapter;
@@ -52,7 +54,10 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_expandlist);
-        final RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        final EmptyRecyclerView recyclerView = findViewById(R.id.recyclerView);
+        //final RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        mEmptyView = findViewById(R.id.empty_iv);
         toolBar();
 
         vertical(recyclerView);
@@ -104,10 +109,11 @@ public class PointsExchangeExpandListActivity extends AppCompatActivity {
     }
 
 
-    private void vertical(RecyclerView recyclerView) {
+    private void vertical(EmptyRecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         expandableAdapter = new VExpandableAdapter(PointsExchangeExpandListActivity.this);
         recyclerView.setAdapter(expandableAdapter);
+        recyclerView.setEmptyView(mEmptyView); //设置空布局
         expandableAdapter.collapseAllGroup();
 
 
