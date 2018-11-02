@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+</head>
+<body>
+<form id="upload">
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入文件夹名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+<div class="layui-form-item">
+    <label class="layui-form-label">图片</label>
+    <div class="layui-upload-drag" id="upload-img">
+        <i class="layui-icon"></i>
+        <p>点击上传，或将文件拖拽到此处</p>
+    </div>
+</div>
+</form>
+<h2></h2>
+<script type="text/javascript">
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+    });
+    //上传图片渲染
+    layui.upload.render({
+        elem: '#upload-img'
+        ,url: 'uploadFile/merchant'
+        ,done: function(res){
+            if (res.status=="success"){
+                $("h2").val(res.url);
+            }
+        }
+    });
+</script>
+</body>
+</html>

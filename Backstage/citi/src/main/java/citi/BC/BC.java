@@ -46,11 +46,13 @@ public class BC implements Runnable {
             while (true) {
                 if (!clq.isEmpty()) {
                     DealData dealData = clq.poll();
-                    Block lastBLock = BC.get(BC.size() - 1);
-                    Block newBlock = new Block(lastBLock, lastBLock.getHash(), BC_Data.Data2BC_Data(dealData));
-                    newBlock.mineBlock();
-                    blockchain.add(newBlock);
-                    notify_all(newBlock);
+                    if (BC.size()>0){
+                        Block lastBLock = BC.get(BC.size() - 1);
+                        Block newBlock = new Block(lastBLock, lastBLock.getHash(), BC_Data.Data2BC_Data(dealData));
+                        newBlock.mineBlock();
+                        blockchain.add(newBlock);
+                        notify_all(newBlock);
+                    }
                 }
                 try {
                     System.out.println("run");
