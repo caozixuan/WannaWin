@@ -20,6 +20,8 @@ class DiscoverCouponView: UIScrollView {
 	
 	@IBOutlet weak var image3: UIImageView!
 	
+	@IBOutlet weak var contentView: UIView!
+	@IBOutlet weak var viewWidthCons: NSLayoutConstraint!
 	var images = [UIImageView]()
 	var imageViews = [GradientView]()
 	
@@ -49,6 +51,15 @@ class DiscoverCouponView: UIScrollView {
 		
 		// 添加点击
 		viewDelegate?.addTapImageAction()
+		
+		// contentView
+		if viewWidthCons != nil {
+			contentView.removeConstraint(viewWidthCons)
+		}
+		contentView.snp.remakeConstraints{ make in
+			make.width.equalTo(view.bounds.size.width+150)
+		}
+		
 		
 	}
 	

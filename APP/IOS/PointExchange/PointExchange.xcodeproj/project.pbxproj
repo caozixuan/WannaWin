@@ -264,6 +264,7 @@
 				3E46B75F20EFE05500843193 /* HomePage.storyboard */,
 				3E46B75D20EFE00400843193 /* Discover.storyboard */,
 				3E46B75920EFDFA000843193 /* Store.storyboard */,
+				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				3E46B75B20EFDFE400843193 /* Exchange.storyboard */,
 				3E8AB4C320EDAFB300915561 /* Main.storyboard */,
 			);
@@ -608,7 +609,6 @@
 		B6C480642100C132002ED9C9 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				84A968752129551F00EF5BA8 /* SignUpView.xib */,
 				84A9687A212ACCDC00EF5BA8 /* ModifyPasswordView.xib */,
 				842237C12130343500CDC7DF /* HomePageTab */,

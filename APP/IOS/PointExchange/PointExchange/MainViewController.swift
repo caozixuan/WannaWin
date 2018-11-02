@@ -22,33 +22,23 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     var coupons:[Item]?
     var isLoaded = false
 	
+	var activityIndicator:UIActivityIndicatorView?
+	
 	var containerOriginTop:Double?
 	
 	//图片轮播组件
 	var imageScroller : ImageScrollerViewController!
+	
+	override var preferredStatusBarStyle: UIStatusBarStyle{
+		return UIStatusBarStyle.lightContent
+	}
     
     override func viewDidLoad() {
 		
-//		if maskHeightCons != nil{
-//			maskView.removeConstraint(maskHeightCons)
-//		}
-//		maskView.snp.makeConstraints{ make in
-//			let height = UIScreen.main.bounds.size.height*0.7
-//			make.height.equalTo(height)
-//		}
+		//activityIndicator
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
 		
-//        ServerConnector.getAds(){(result,activities) in
-//            if result {
-//                self.activities = activities
-//                if self.isLoaded{
-//                    // TODO: 刷新轮播
-//					self.imageScroller.refresh()
-//
-//                }else{
-//                    self.isLoaded = true
-//                }
-//            }
-//        }
+
 		
 		refresh()
 		
@@ -58,6 +48,8 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     }
 	
 	func refresh(){
+		
+		activityIndicator?.startAnimating()
 		ServerConnector.getAds(){(result,activities) in
 			if result {
 				self.activities = activities
@@ -69,6 +61,7 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 					self.isLoaded = true
 				}
 			}
+			self.activityIndicator?.stopAnimating()
 		}
 	}
 	
@@ -150,12 +143,6 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	@objc func handleTapAction(_ tap:UITapGestureRecognizer)->Void{
 		//获取图片索引值
 		let index = imageScroller.currentIndex
-//		//弹出索引信息
-//		let alertController = UIAlertController(title: "您点击的图片索引是：",
-//												message: "\(index)", preferredStyle: .alert)
-//		let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
-//		alertController.addAction(cancelAction)
-//		self.present(alertController, animated: true, completion: nil)
 		
 		let sb = UIStoryboard(name: "Discover", bundle: nil)
 		let vc = sb.instantiateViewController(withIdentifier: "ActivityDetailViewController") as! ActivityDetailViewController
