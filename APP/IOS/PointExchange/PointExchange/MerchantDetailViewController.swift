@@ -27,6 +27,9 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 	
 	@IBOutlet weak var couponTableViewHeightCons: NSLayoutConstraint!
 	
+	
+	@IBOutlet weak var bgGradientView: GradientView!
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		merchantLogo.imageFromURL((merchant?.logoURL)!, placeholder: UIImage())
@@ -35,6 +38,8 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		self.couponTableView.register(UINib(nibName: "MerchantCouponTableViewCell", bundle: nil), forCellReuseIdentifier: "couponCell")
 		self.couponTableView.delegate = self
 		self.couponTableView.dataSource = self
+		
+		self.bgGradientView.cornerRadius = UIScreen.main.bounds.width*0.27/2
 		
     }
 	

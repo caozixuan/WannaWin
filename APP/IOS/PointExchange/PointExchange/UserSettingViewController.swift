@@ -25,12 +25,20 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+		//导航栏设置
+		//导航栏透明
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
+		
+		
+		
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+		
+		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         
         self.tableView.reloadData()

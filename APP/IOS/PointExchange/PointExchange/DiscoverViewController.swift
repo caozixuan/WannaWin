@@ -168,7 +168,12 @@ class DiscoverTableViewController: UITableViewController{
 			if cell == nil {
 				cell = UITableViewCell(style: .default, reuseIdentifier: "merchantCell") as? DsMerchantTableViewCell
 			}
-			cell?.logoView.imageFromURL((merchantArray?[indexPath.row].logoURL)!, placeholder: UIImage())
+//			let imageURL = URL(string: (merchantArray?[indexPath.row].logoURL)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!)
+			let imageURL = URL(string: (merchantArray?[indexPath.row].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+			cell?.logoView.kf.indicatorType = .activity
+			cell?.logoView.kf.setImage(with: imageURL){(image, error, cacheType, imageUrl) in
+			}
+			
 			cell?.nameLabel.text = merchantArray![indexPath.row].name
 			cell?.addressLabel.text = merchantArray![indexPath.row].description
 			cell?.typeLabel.text = transBussinessType(type: merchantArray![indexPath.row].businessType!)
@@ -189,6 +194,8 @@ class DiscoverTableViewController: UITableViewController{
 			return super.tableView(tableView, heightForRowAt: indexPath)
 		}
 	}
+	
+	
 	override func tableView(_ tableView: UITableView,
 							indentationLevelForRowAt indexPath: IndexPath) -> Int {
 		if indexPath.section == 1{

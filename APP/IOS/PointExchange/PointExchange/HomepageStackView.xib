@@ -54,8 +54,8 @@
                         <constraint firstAttribute="height" priority="900" constant="30" id="xYB-tK-5YX"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tw-SN-gIL" userLabel="LabelView">
-                    <rect key="frame" x="0.0" y="50" width="375" height="76"/>
+                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3tw-SN-gIL" userLabel="LabelView">
+                    <rect key="frame" x="0.0" y="50" width="375" height="75.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="花旗点信息" translatesAutoresizingMaskIntoConstraints="NO" id="CNn-p2-klz">
                             <rect key="frame" x="82.5" y="0.0" width="210" height="76"/>
@@ -119,20 +119,21 @@
                         <constraint firstItem="CNn-p2-klz" firstAttribute="centerY" secondItem="3tw-SN-gIL" secondAttribute="centerY" id="V8m-Qf-d9g"/>
                         <constraint firstAttribute="height" secondItem="CNn-p2-klz" secondAttribute="height" constant="6" id="VeP-oU-azv"/>
                         <constraint firstItem="MKt-Ei-VJq" firstAttribute="centerY" secondItem="CNn-p2-klz" secondAttribute="centerY" id="h9X-Vr-ZDV"/>
-                        <constraint firstAttribute="height" priority="900" constant="82" id="zSa-Tz-RY8"/>
+                        <constraint firstAttribute="height" priority="900" constant="90" id="zSa-Tz-RY8"/>
                     </constraints>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="8" bottom="8" trailing="12"/>
                 </view>
                 <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjJ-VY-RPH">
-                    <rect key="frame" x="0.0" y="126" width="375" height="277.5"/>
+                    <rect key="frame" x="0.0" y="125.5" width="375" height="278"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
-                            <rect key="frame" x="0.0" y="0.0" width="610.5" height="277.5"/>
+                        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="611.5" height="278"/>
                             <subviews>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-IB-1xZ">
-                                    <rect key="frame" x="206" y="0.0" width="198.5" height="277.5"/>
+                                    <rect key="frame" x="206.5" y="0.0" width="198.5" height="278"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-qJ-kXS">
-                                            <rect key="frame" x="0.0" y="0.0" width="198.5" height="277.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -151,10 +152,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkd-c8-VRg">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="rRy-Qe-DJz">
-                                            <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -173,10 +174,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31n-EL-h9q">
-                                    <rect key="frame" x="412.5" y="0.0" width="198" height="277.5"/>
+                                    <rect key="frame" x="413" y="0.0" width="198.5" height="278"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-LX-hfY">
-                                            <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198.5" height="278"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -208,6 +209,7 @@
                                 <constraint firstItem="31n-EL-h9q" firstAttribute="leading" secondItem="Ulb-IB-1xZ" secondAttribute="trailing" constant="8" id="nIO-lH-0iB"/>
                                 <constraint firstAttribute="trailing" secondItem="31n-EL-h9q" secondAttribute="trailing" id="vsE-p0-AiY"/>
                             </constraints>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="20" leading="8" bottom="8" trailing="20"/>
                         </view>
                     </subviews>
                     <constraints>
@@ -241,10 +243,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="q4M-hb-6z0" firstAttribute="centerX" secondItem="bu7-kK-vQe" secondAttribute="centerX" id="anh-Tr-hhQ"/>
-                        <constraint firstAttribute="height" priority="900" constant="48" id="fUJ-xO-5WT"/>
+                        <constraint firstAttribute="height" priority="900" constant="50" id="fUJ-xO-5WT"/>
                         <constraint firstItem="q4M-hb-6z0" firstAttribute="top" secondItem="bu7-kK-vQe" secondAttribute="top" constant="4" id="gfO-px-ETi"/>
                     </constraints>
-                    <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="8" bottom="8" trailing="12"/>
                 </view>
             </subviews>
             <constraints>
