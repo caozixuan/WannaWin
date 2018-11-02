@@ -229,15 +229,14 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onError(VolleyError error) {
                         super.onError(error);
-                        dialog.dismiss();
                         Toast.makeText(RegisterActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
     private void checkMsgVerification(String strPhone, String strMsg){
-        accountInfoLayout.removeAllViewsInLayout();
-        loadRegisterContent2();
+        verifyVCode(strPhone,strMsg);
+
     }
 
     private void loadRegisterContent2(){
@@ -275,12 +274,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void tryRegister(final String strAccount, final String strPassword){
+    private void verifyVCode(final String strAccount, final String vCode){
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/account/sendVCode")
+                .url("http://193.112.44.141:80/citi/account/vfcode")
                 .addParam("phoneNum", strAccount)
-                .addParam("password", strPassword)
+                .addParam("vcode", vCode)
                 .build()
                 .execute(RegisterActivity.this, new CallBack<String>() {
                     @Override
@@ -296,8 +295,48 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         if (registerSuccess) {
+                            //Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            //tryLogin(strAccount, strPassword);
+                            accountInfoLayout.removeAllViewsInLayout();
+                            loadRegisterContent2();
+                        }else {
+                            Toast.makeText(RegisterActivity.this, "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(RegisterActivity.this, "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void tryRegister(final String phoneNum, final String password){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/account/resetPassword")
+                .addParam("phoneNum", phoneNum)
+                .addParam("newPassword", password)
+                .build()
+                .execute(RegisterActivity.this, new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean registerSuccess = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            registerSuccess = jsonObject.getBoolean("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (registerSuccess) {
+                            strPassword = password;
                             Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                            tryLogin(strAccount, strPassword);
+                            tryLogin(newAccount, strPassword);
+
                         }else {
                             Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                         }

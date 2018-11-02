@@ -2,11 +2,7 @@ package citi.BC;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class BC implements Runnable{
+public class BC implements Runnable {
 
     private static int difficulty = 6;
     public static ArrayList<Block> BC = new ArrayList<>();
@@ -37,9 +33,9 @@ public class BC implements Runnable{
         clq.offer(dealData);
     }
 
-    private static String RegisterUrl="http://www.byzhong.cn/merchantDemo/block/";
+    private static String RegisterUrl = "http://www.byzhong.cn/merchantDemo/block/";
 
-    private static Gson gson=new Gson();
+    private static Gson gson = new Gson();
 
     //TODO: 找一个地方调用线程。如果找不到程序入口，就改成一个静态线程池，在添加的时候就唤醒。
     //后台线程，一直在创建区块
@@ -52,13 +48,13 @@ public class BC implements Runnable{
                     DealData dealData = clq.poll();
                     Block lastBLock = BC.get(BC.size() - 1);
                     Block newBlock = new Block(lastBLock, lastBLock.getHash(), BC_Data.Data2BC_Data(dealData));
-                    newBlock.mineBlock(difficulty);
+                    newBlock.mineBlock();
                     blockchain.add(newBlock);
                     notify_all(newBlock);
                 }
                 try {
                     System.out.println("run");
-                    Thread.sleep(3000);//wait 3 sec.
+                    Thread.sleep(1000);//wait 3 sec.
                 } catch (InterruptedException e) {
                     System.err.println("error with bg threads to wait.");
                 }
@@ -99,20 +95,19 @@ public class BC implements Runnable{
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！"+e);
+            System.out.println("发送 POST 请求出现异常！" + e);
             e.printStackTrace();
         }
         //使用finally块来关闭输出流、输入流
-        finally{
-            try{
-                if(out!=null){
+        finally {
+            try {
+                if (out != null) {
                     out.close();
                 }
-                if(in!=null){
+                if (in != null) {
                     in.close();
                 }
-            }
-            catch(IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
@@ -157,7 +152,7 @@ public class BC implements Runnable{
         System.out.println("KEY of 1: \n" + RSA.getPublicKey(merchant_K1) + "\n" + RSA.getPrivateKey(merchant_K1));
 
         try {
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.err.println("InterruptedException");
         }
@@ -170,21 +165,21 @@ public class BC implements Runnable{
 
         Block genesisBlock = Block.getInitBlock();
         System.out.println("Trying to Mine block 1... ");
-        genesisBlock.mineBlock(difficulty);
+        genesisBlock.mineBlock();
         blockchain.add(genesisBlock);
 
 
         DealData data2 = new DealData(DealData.DealType.IN, "1", "1", 678.0);
         Block secondBlock = new Block(genesisBlock, genesisBlock.getHash(), BC_Data.Data2BC_Data(data2));
         System.out.println("Trying to Mine block 2... ");
-        secondBlock.mineBlock(difficulty);
+        secondBlock.mineBlock();
         blockchain.add(secondBlock);
 
 
-        DealData data3 = new DealData(DealData.DealType.IN, "1", "123", 23.3);
+        DealData data3 = new DealData(DealData.DealType.IN, "2", "123", 23.3);
         Block thirdBlock = new Block(secondBlock, secondBlock.getHash(), BC_Data.Data2BC_Data(data3));
         System.out.println("Trying to Mine block 3... ");
-        thirdBlock.mineBlock(difficulty);
+        thirdBlock.mineBlock();
         blockchain.add(thirdBlock);
 
 
@@ -196,23 +191,29 @@ public class BC implements Runnable{
         System.out.println(blockchainJson);
 
 
-        System.out.println("\n decrypt: \n");
-
-
-        if (secondBlock.data.merchantID.equals("1")) {
-            System.out.println("The 2nd block chain decoded by 1: ");
+        System.out.println("\n------------------------------ decrypt: ------------------------------\n");
+        if (secondBlock.data.merchantID == "1") {
+            System.out.println("\nThe 2nd block decoded by Merchant-1: ");
+            System.out.println("Type, userID, points");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
         }
-        if (secondBlock.data.merchantID.equals("1")) {
-            System.out.println("The 3rd block chain decoded by 1: ");
-            System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
-        }
-        if (secondBlock.data.merchantID.equals("2")) {
-            System.out.println("The 2nd block chain decoded by 2: ");
+        if (secondBlock.data.merchantID == "2") {
+            System.out.println("\nThe 2nd block decoded by Merchant-2: ");
+            System.out.println("Type, userID, points");
             System.out.println(RSA.decryptByPrivate(secondBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K2)));
         }
+        if (thirdBlock.data.merchantID == "1") {
+            System.out.println("The 3rd block decoded by Merchant-1: ");
+            System.out.println("Type, userID, points\n");
+            System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K1)));
+        }
+        if (thirdBlock.data.merchantID == "2") {
+            System.out.println("\nThe 3rd block decoded by Merchant-2: ");
+            System.out.println("Type, userID, points");
+            System.out.println(RSA.decryptByPrivate(thirdBlock.data.encrypted_data, RSA.getPrivateKey(merchant_K2)));
+        }
 
-    }
+    } // end test
 
 
 }
