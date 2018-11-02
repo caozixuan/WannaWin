@@ -282,9 +282,7 @@ public class PayingActivity extends AppCompatActivity {
             @Override
             public void onclick(View view, int position) {
                 Choose_Points.setText(mAdapter.getTotalPoints());
-                if(isSoftShowing()){
 
-                }
             }
         });
 
@@ -294,6 +292,8 @@ public class PayingActivity extends AppCompatActivity {
                 //修改合计价格
                 Choose_Points.setText(mAdapter.getTotalPoints());
             }
+
+
         });
 
     }

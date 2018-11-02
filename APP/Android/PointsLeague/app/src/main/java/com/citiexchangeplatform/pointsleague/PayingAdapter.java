@@ -395,6 +395,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                             holder.editPoint.setText(String.valueOf(filteredItems.get(position).getMaxExchangePoint()));
                             Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                         }
+
                     }
 
                 }
@@ -415,6 +416,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(result);
                 //notifyItemChanged(position);
+
+
             }
 
             @Override
