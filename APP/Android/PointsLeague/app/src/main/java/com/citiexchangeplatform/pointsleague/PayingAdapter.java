@@ -375,7 +375,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 double rate = filteredItems.get(position).getRate();
                 double exchangedPoint = 0;
                 if(s.length()!=0){
-                    if(Double.parseDouble(s.toString())<0){
+                    if(Double.parseDouble(s.toString())<=0){
                         exchangedPoint = 0;
                         filteredItems.get(position).setExchangePoint(0);
                         Toast.makeText(context, "输入不得小于0", Toast.LENGTH_SHORT).show();
@@ -395,6 +395,7 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                             holder.editPoint.setText(String.valueOf(filteredItems.get(position).getMaxExchangePoint()));
                             Toast.makeText(context, "超出最大值，已自动更新为最大值", Toast.LENGTH_SHORT).show();
                         }
+
                     }
 
                 }
@@ -415,6 +416,8 @@ class PayingAdapter extends RecyclerView.Adapter<PayingAdapter.MyViewHolder>impl
                 //targetPoints.set(position,String.valueOf(exchangedPoint));
                 holder.exchangePoint.setText(result);
                 //notifyItemChanged(position);
+
+
             }
 
             @Override

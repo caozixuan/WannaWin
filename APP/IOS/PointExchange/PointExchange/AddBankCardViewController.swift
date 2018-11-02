@@ -18,7 +18,7 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 	var forwardBtn: UIBarButtonItem!
 	var refreshBtn: UIBarButtonItem!
 	var url:String?
-    var activityIndicator:UIActivityIndicatorView? // 用于初次加载网页的时候显示
+//    var activityIndicator:UIActivityIndicatorView? // 用于初次加载网页的时候显示
 	
     lazy private var progressView: UIProgressView = {
         self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
@@ -45,9 +45,9 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
 		self.navigationItem.leftBarButtonItems = [closeBtn,backBtn,forwardBtn]
 		self.navigationItem.rightBarButtonItem = refreshBtn
         
-        // 初次加载网页的时候显示
-        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-        activityIndicator?.startAnimating()
+//        // 初次加载网页的时候显示
+//        activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+//        activityIndicator?.startAnimating()
 
     }
 
@@ -92,9 +92,9 @@ class AddBankCardViewController: UIViewController, WKNavigationDelegate, WKUIDel
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if (activityIndicator?.isAnimating)! {
-            activityIndicator?.stopAnimating()
-        }
+//        if (activityIndicator?.isAnimating)! {
+//            activityIndicator?.stopAnimating()
+//        }
         
         self.refreshButtonState()
     }

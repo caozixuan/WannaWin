@@ -12,6 +12,9 @@ class MerchantCouponTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var pointLabel: UILabel!
 	@IBOutlet weak var nameView: UITextView!
+	
+	
+	
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
