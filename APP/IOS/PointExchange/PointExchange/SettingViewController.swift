@@ -31,7 +31,7 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
 		case 2:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "aboutCell")
             // 去除最后一行的分割线
-            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width)
+            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width+50)
 			return cell!
 		default:
 			return UITableViewCell()

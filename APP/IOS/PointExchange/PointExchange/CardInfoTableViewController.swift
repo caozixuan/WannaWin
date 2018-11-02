@@ -128,6 +128,8 @@ class CardInfoTableViewController: UITableViewController {
                 (cell.viewWithTag(3) as! UILabel).text = String(stringInterpolationSegment: cardArray![indexPath.row].points*cardArray![indexPath.row].proportion!)
                 (cell.viewWithTag(4) as! UILabel).text = cardArray![indexPath.row].merchant?.name
                 (cell.viewWithTag(5) as! UIImageView).image = UIImage(named: "bg2_\(cardArray![indexPath.row].cardStyle!)")
+				let cornerRadius = UIScreen.main.bounds.width*0.09
+				(cell.viewWithTag(6) as! GradientView).cornerRadius = cornerRadius
                 
             }
         }

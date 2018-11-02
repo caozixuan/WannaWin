@@ -28,6 +28,7 @@ class OrdersViewController: UIViewController {
 			var controllerArray:[UIViewController] = []
 			let couponController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "CouponHistoryViewController")
 			couponController.title = "优惠券"
+			
 			let offlineController = UIStoryboard(name: "User", bundle: nil).instantiateViewController(withIdentifier: "OfflineHistoryViewController")
 			offlineController.title = "线下支付"
 			controllerArray.append(couponController)
