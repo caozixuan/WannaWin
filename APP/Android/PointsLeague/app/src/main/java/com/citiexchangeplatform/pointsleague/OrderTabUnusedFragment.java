@@ -30,7 +30,9 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class OrderTabUnusedFragment extends Fragment {
-    private RecyclerView unusedOrderRecyclerView;
+    private EmptyRecyclerView unusedOrderRecyclerView;
+    private View mEmptyView;
+    //private RecyclerView unusedOrderRecyclerView;
     private MyCouponAdapter orderAdapter;
     ProgressDialog dialog;
 
@@ -50,7 +52,8 @@ public class OrderTabUnusedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order_tab_unused, container, false);
-        unusedOrderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder_unused);
+        unusedOrderRecyclerView = view.findViewById(R.id.recyclerView_myOrder_unused);
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         //设置RecyclerView管理器
         setRecyclerView();
@@ -86,6 +89,7 @@ public class OrderTabUnusedFragment extends Fragment {
         unusedOrderRecyclerView.setLayoutManager(layoutManager);
         orderAdapter = new MyCouponAdapter(getActivity());
         unusedOrderRecyclerView.setAdapter(orderAdapter);
+        unusedOrderRecyclerView.setEmptyView(mEmptyView); //设置空布局
     }
 
 
