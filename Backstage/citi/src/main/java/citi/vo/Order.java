@@ -52,7 +52,7 @@ public class Order {
     }
 
     public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeString = formatter.format(time);
         this.orderID = orderId;
         this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));

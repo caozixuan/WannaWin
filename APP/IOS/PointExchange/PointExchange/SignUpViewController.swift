@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController,SignUpViewDelegate {
     
     // 向服务器进行注册操作
     func signUp(){
-        ServerConnector.sendPassword(phoneNumber: signUpView.phoneNumField.text!, vcode: signUpView.vcodeField.text!, password: signUpView.passwordField.text!, callback: signUpFinish)
+        ServerConnector.resetPassword(phoneNum: signUpView.phoneNumField.text!, newPassword: signUpView.passwordField.text!, callback: signUpFinish)
     }
     
     // 注册完成后的处理
@@ -57,4 +57,8 @@ class SignUpViewController: UIViewController,SignUpViewDelegate {
             self.present(alert, animated: true, completion: nil)
         }
     }
+	
+	func gotoLogin() {
+		self.navigationController?.popViewController(animated: true)
+	}
 }

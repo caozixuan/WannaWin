@@ -166,6 +166,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let storyBoard = UIStoryboard(name:"User", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 		self.navigationController!.pushViewController(view, animated: true)
+		self.navigationController?.isNavigationBarHidden = false
 	}
     
     @objc func goToUserSetting(_ tap:UITapGestureRecognizer){

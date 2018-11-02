@@ -74,7 +74,6 @@
         elem: '#upload-img'
         ,url: 'uploadFile/activity'
         ,done: function(res){
-            alert(res.status);
             if (res.status=="success"){
                 $("#image-url").val(res.url);
                 var img="<img src='"+res.url+"'>";

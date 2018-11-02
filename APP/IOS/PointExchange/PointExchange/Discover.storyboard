@@ -319,19 +319,17 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <scrollView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9E-oQ-rhX">
-                                                        <rect key="frame" x="0.0" y="88" width="375" height="152"/>
+                                                        <rect key="frame" x="10" y="88" width="355" height="152"/>
                                                         <subviews>
                                                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h2N-pB-QyF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="152"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="415" height="152"/>
                                                                 <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="378" id="AiC-ak-zSm"/>
-                                                                </constraints>
                                                             </view>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="h2N-pB-QyF" secondAttribute="bottom" id="GVt-aD-9tR"/>
+                                                            <constraint firstItem="h2N-pB-QyF" firstAttribute="width" secondItem="W9E-oQ-rhX" secondAttribute="width" constant="60" id="I2v-VG-GIR"/>
                                                             <constraint firstItem="h2N-pB-QyF" firstAttribute="top" secondItem="W9E-oQ-rhX" secondAttribute="top" id="fmb-Hg-4sy"/>
                                                             <constraint firstAttribute="height" constant="152" id="jzT-f9-UR0"/>
                                                             <constraint firstAttribute="trailing" secondItem="h2N-pB-QyF" secondAttribute="trailing" id="qRR-ca-Xqs"/>
@@ -342,9 +340,9 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="W9E-oQ-rhX" firstAttribute="leading" secondItem="Jzy-cZ-2J8" secondAttribute="leading" id="9fn-PC-Kiw"/>
+                                                    <constraint firstItem="W9E-oQ-rhX" firstAttribute="leading" secondItem="Jzy-cZ-2J8" secondAttribute="leading" constant="10" id="9fn-PC-Kiw"/>
                                                     <constraint firstItem="W9E-oQ-rhX" firstAttribute="top" secondItem="Stb-Mu-ZdD" secondAttribute="bottom" id="D8N-Kd-qG8"/>
-                                                    <constraint firstAttribute="trailing" secondItem="W9E-oQ-rhX" secondAttribute="trailing" id="W6L-e4-bj8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="W9E-oQ-rhX" secondAttribute="trailing" constant="10" id="W6L-e4-bj8"/>
                                                     <constraint firstItem="Q6K-Az-azI" firstAttribute="top" secondItem="Jzy-cZ-2J8" secondAttribute="top" id="Zhs-0V-eBB"/>
                                                     <constraint firstItem="W9E-oQ-rhX" firstAttribute="bottom" secondItem="Jzy-cZ-2J8" secondAttribute="bottom" id="cRm-Sc-jO2"/>
                                                     <constraint firstItem="Q6K-Az-azI" firstAttribute="centerX" secondItem="Jzy-cZ-2J8" secondAttribute="centerX" id="jsj-dq-0Vv"/>

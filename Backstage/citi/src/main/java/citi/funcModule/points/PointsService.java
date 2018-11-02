@@ -33,7 +33,7 @@ public class PointsService {
     @Autowired
     private MerchantMapper merchantMapper;
 
-
+    @Transactional
     public boolean isCanChange(List<ResultBean.MerchantBean> merchantBeanList, User user, ArrayList<ReturnMerchant> returnMerchants, ArrayList<String> ids){
         boolean isCanChange = true;
         if(merchantBeanList==null||user==null||returnMerchants==null||ids==null){

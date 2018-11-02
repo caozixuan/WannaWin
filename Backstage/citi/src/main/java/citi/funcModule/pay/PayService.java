@@ -12,6 +12,7 @@ import citi.vo.Strategy;
 import citi.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -40,6 +41,7 @@ public class PayService {
     @Autowired
     private MerchantMapper merchantMapper;
 
+    @Transactional
     public boolean pay(String userID, String timeStamp, String merchantID, Double totalPrice) {
         if(totalPrice<=0)return false;
         long timeMillis = System.currentTimeMillis() / 1000;
@@ -88,13 +90,14 @@ public class PayService {
 
     }
 
+    @Transactional
     public QRCodeStatus QRCode(String userID, String timestamp) {
         long timeMillis = System.currentTimeMillis() / 1000;
         long QRTimestamp = Long.parseLong(timestamp);
         if (timeMillis - QRTimestamp > 60 || timeMillis < QRTimestamp) {
             return QRCodeStatus.INVALID;
         }
-        List<Order> orders = orderMapper.getOrderByUserID(userID, "01010101");
+        List<Order> orders = orderMapper.getOrderByUserID(userID, "101");
 
         for (Order order : orders) {
             Timestamp oderTimestamp = Timestamp.valueOf(order.getTime());

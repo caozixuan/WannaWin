@@ -30,21 +30,17 @@
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-mJ-1zr">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="O3s-mJ-1zr" secondAttribute="height" multiplier="1:1" id="GDC-3o-ztK"/>
-                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="7Fi-Qa-Xpp" secondAttribute="height" multiplier="1:1" id="9iy-4I-qvS"/>
                         <constraint firstItem="O3s-mJ-1zr" firstAttribute="height" secondItem="7Fi-Qa-Xpp" secondAttribute="height" id="HSG-O1-81I"/>
-                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="width" secondItem="7Fi-Qa-Xpp" secondAttribute="width" id="MrZ-jU-8kT"/>
+                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="width" secondItem="7Fi-Qa-Xpp" secondAttribute="width" id="JnY-c5-gYr"/>
                         <constraint firstItem="O3s-mJ-1zr" firstAttribute="bottom" secondItem="7Fi-Qa-Xpp" secondAttribute="bottom" id="OQK-1b-b2c"/>
                         <constraint firstItem="O3s-mJ-1zr" firstAttribute="leading" secondItem="7Fi-Qa-Xpp" secondAttribute="leading" id="Xzn-wY-iG4"/>
                         <constraint firstItem="O3s-mJ-1zr" firstAttribute="top" secondItem="7Fi-Qa-Xpp" secondAttribute="top" id="gGc-P0-Thn"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="uGC-yS-YaZ"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDA-Jr-Tjd">
                     <rect key="frame" x="73" y="23" width="31" height="20.5"/>
@@ -52,8 +48,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-Y5-eUg">
-                    <rect key="frame" x="73" y="52" width="55" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-Y5-eUg">
+                    <rect key="frame" x="73" y="51.5" width="40" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>

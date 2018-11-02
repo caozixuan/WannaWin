@@ -19,16 +19,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="67.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card background" translatesAutoresizingMaskIntoConstraints="NO" id="mnE-JC-LFU">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card background" translatesAutoresizingMaskIntoConstraints="NO" id="mnE-JC-LFU">
                         <rect key="frame" x="0.0" y="-1" width="320" height="69.5"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-----" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vr-WT-Anu">
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-----" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vr-WT-Anu">
                         <rect key="frame" x="255" y="20.5" width="49" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="---------------------" translatesAutoresizingMaskIntoConstraints="NO" id="lCw-cv-Qwj">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="---------------------" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCw-cv-Qwj">
                         <rect key="frame" x="29" y="2" width="181" height="57.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

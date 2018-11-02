@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class UploadController {
@@ -25,7 +26,7 @@ public class UploadController {
         String oldFileName = myFile.getOriginalFilename();
         if (oldFileName != null && oldFileName.length() > 0) {
             String merchantID = session.getAttribute("merchantID").toString();
-            String newFileName = merchantID + oldFileName;
+            String newFileName = UUID.randomUUID().toString().replaceAll("-","");
             File newFile = new File(saveDirectory+category + "/" + newFileName);
             myFile.transferTo(newFile);
             Map<String, Object> map = new HashMap<String, Object>();

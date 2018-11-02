@@ -81,6 +81,9 @@ class SignUpView: UIView {
 		timer.fire()
 	}
 	
+	@IBAction func clickLogin(_ sender: Any) {
+		delegate?.gotoLogin()
+	}
 	
 	/// 检查phoneNumber输入是否合法
 	func checkPhoneNumberInput()->Bool{
@@ -129,7 +132,7 @@ class SignUpView: UIView {
 		case "vcode field":
 			vcodeValid=checkIdentifyCodeInput()
 		case "password field":
-			passwordValid=checkPasswordIdentifyInput()
+//			3passwordValid=checkPasswordIdentifyInput()
 			passwordAgainValid=checkPasswordIdentifyInput()
 		case "passwordAgain field":
 			passwordAgainValid=checkPasswordIdentifyInput()
@@ -188,4 +191,5 @@ class SignUpView: UIView {
 
 protocol SignUpViewDelegate{
 	func signUp()
+	func gotoLogin()
 }
