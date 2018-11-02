@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarDelegate {
 
 	var window: UIWindow?
 
@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().isTranslucent = true
 		//UINavigationBar.appearance().barStyle = UIBarStyle.black
 		//UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+		
+		
 		
 		return true
 	}

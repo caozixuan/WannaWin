@@ -20,7 +20,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
         super.viewDidAppear(animated)
         
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
-        activityIndicator?.startAnimating()
+		
         if User.getUser().username != nil {
             if homepageStackView == nil {
                 homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
@@ -31,6 +31,7 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 
             }
 			else{
+				
 				homepageStackView?.removeFromSuperview()
 				homepageStackView = HomepageStackView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
 				homepageStackView?.delegate = self
@@ -53,13 +54,14 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
 			}
 			
         }
-		activityIndicator?.stopAnimating()
+		
     }
     
     override func viewWillLayoutSubviews() {
-        
+		
         for subview in view.subviews{
             if subview .isKind(of: HomepageStackView.self){
+				activityIndicator?.startAnimating()
                 let v = subview as! HomepageStackView
 				
 				// 设置会员卡偏移量---显示中间卡
@@ -79,7 +81,8 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                 v.cardImage3.addGestureRecognizer(cardTap3)
 				
 				v.exchangeBtn.addTarget(self, action: #selector(HomepagePartViewController.gotoExchangeVC), for: .touchUpInside)
-                
+				
+				
                 ServerConnector.getMostPointCards(n: 3){(result,cards) in
                     if result {
                         self.cards = cards
@@ -131,22 +134,22 @@ class HomepagePartViewController: UIViewController, LoginViewDelegate, HomepageS
                                     
                                 }
                             }
-
+							self.activityIndicator?.stopAnimating()
 						}
                         ServerConnector.getGeneralPoints(){ (result, points) in
                             if result {
                                 v.currentCitiPointLabel.text = String(stringInterpolationSegment: points)
-                                if (self.activityIndicator?.isAnimating)! {
-                                    self.activityIndicator?.stopAnimating()
-                                }
+//                                if (self.activityIndicator?.isAnimating)! {
+//                                    self.activityIndicator?.stopAnimating()
+//                                }
                             }
                         }
                         ServerConnector.getAvailablePoints(){(result,points) in
                             if result {
                                 v.availablePointsLabel.text = String(stringInterpolationSegment: points)
-                                if (self.activityIndicator?.isAnimating)! {
-                                    self.activityIndicator?.stopAnimating()
-                                }
+//                                if (self.activityIndicator?.isAnimating)! {
+//                                    self.activityIndicator?.stopAnimating()
+//                                }
                             }
                         }
                     }
