@@ -314,7 +314,7 @@ public class PointsFragment extends Fragment {
                 .doPost()
                 .url("http://193.112.44.141:80/citi/mscard/infos")
                 .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
-                .addParam("n", "5")
+                .addParam("n", "3")
                 .build()
                 .execute(getContext(), new CallBack<String>() {
                     @Override
@@ -348,19 +348,6 @@ public class PointsFragment extends Fragment {
                                     cardPointsAdapter.addData(items.get(1));
                                     cardPointsAdapter.addData(items.get(0));
                                     cardPointsAdapter.addData(items.get(2));
-                                    break;
-                                case 4:
-                                    cardPointsAdapter.addData(items.get(3));
-                                    cardPointsAdapter.addData(items.get(1));
-                                    cardPointsAdapter.addData(items.get(0));
-                                    cardPointsAdapter.addData(items.get(2));
-                                    break;
-                                case 5:
-                                    cardPointsAdapter.addData(items.get(3));
-                                    cardPointsAdapter.addData(items.get(1));
-                                    cardPointsAdapter.addData(items.get(0));
-                                    cardPointsAdapter.addData(items.get(2));
-                                    cardPointsAdapter.addData(items.get(4));
                                     break;
                                 default:
                             }

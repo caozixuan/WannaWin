@@ -54,6 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="name"
+                        android:textColor="#262626"
                         android:textSize="24sp"
                         android:layout_margin="2dp"
                         android:maxLines="1"/>
