@@ -3,10 +3,7 @@ package citi.funcModule.item;
 import citi.persist.mapper.*;
 import citi.persist.procedure.probean.ItemBean;
 import citi.support.status.Status;
-import citi.vo.Item;
-import citi.vo.Merchant;
-import citi.vo.UserCoupon;
-import citi.vo.VisitRecord;
+import citi.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +39,11 @@ public class ItemService {
         }
         if (item.getStock()-count<0){
             return ItemStatus.EMPTY;
+        }
+        int totalPoint=item.getPoints()*count;
+        User user=userMapper.getInfoByUserID(userID);
+        if (user.getGeneralPoints()<totalPoint){
+            return ItemStatus.OTHER;
         }
         if (itemMapper.updateItemStockByID(itemID,item.getStock()-count)==1){
             UserCoupon userCoupon=new UserCoupon(userID,itemID,UserCoupon.CouponState.UNUSED);
