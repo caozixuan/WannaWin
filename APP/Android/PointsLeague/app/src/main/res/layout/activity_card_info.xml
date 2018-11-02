@@ -47,6 +47,7 @@
                             android:id="@+id/imageView_card_info"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
+                            android:padding="10.3dp"
                             android:scaleType="centerInside"
                             android:layout_marginStart="20dp"
                             android:layout_gravity="center_vertical"
