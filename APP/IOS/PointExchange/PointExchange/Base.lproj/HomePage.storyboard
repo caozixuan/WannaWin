@@ -57,10 +57,10 @@
                                                 </connections>
                                             </containerView>
                                             <view opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve6-PH-yOv" customClass="MaskView" customModule="PointExchange" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="155" width="375" height="460"/>
+                                                <rect key="frame" x="0.0" y="155" width="375" height="463.5"/>
                                                 <subviews>
                                                     <containerView opaque="NO" contentMode="scaleToFill" restorationIdentifier="mainViewContainer" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGN-Ab-H4O">
-                                                        <rect key="frame" x="0.0" y="40" width="375" height="420"/>
+                                                        <rect key="frame" x="0.0" y="40" width="375" height="423.5"/>
                                                         <connections>
                                                             <segue destination="cme-Fl-azE" kind="embed" identifier="container" id="ifq-wG-s1m"/>
                                                         </connections>
@@ -70,7 +70,6 @@
                                                     <constraint firstItem="vGN-Ab-H4O" firstAttribute="top" secondItem="ve6-PH-yOv" secondAttribute="top" constant="40" id="1Fu-Hs-h38"/>
                                                     <constraint firstItem="vGN-Ab-H4O" firstAttribute="leading" secondItem="ve6-PH-yOv" secondAttribute="leading" id="CE8-N1-7el"/>
                                                     <constraint firstAttribute="bottom" secondItem="vGN-Ab-H4O" secondAttribute="bottom" id="WRk-gB-qBh"/>
-                                                    <constraint firstAttribute="height" constant="460" id="jIM-8S-TF8"/>
                                                     <constraint firstAttribute="trailing" secondItem="vGN-Ab-H4O" secondAttribute="trailing" id="lp5-h3-F5w"/>
                                                 </constraints>
                                             </view>
@@ -79,6 +78,7 @@
                                         <constraints>
                                             <constraint firstItem="ve6-PH-yOv" firstAttribute="top" secondItem="oSD-fv-QKp" secondAttribute="top" constant="155" id="BTV-zM-WaI"/>
                                             <constraint firstAttribute="trailing" secondItem="oSD-fv-QKp" secondAttribute="trailing" id="Tcj-ZQ-wK2"/>
+                                            <constraint firstItem="ve6-PH-yOv" firstAttribute="height" secondItem="Z78-a1-SRI" secondAttribute="height" multiplier="0.75" id="X1a-6E-tTC"/>
                                             <constraint firstItem="ve6-PH-yOv" firstAttribute="leading" secondItem="Z78-a1-SRI" secondAttribute="leading" id="baO-dd-mxa"/>
                                             <constraint firstItem="oSD-fv-QKp" firstAttribute="leading" secondItem="Z78-a1-SRI" secondAttribute="leading" id="haf-Tl-ckY"/>
                                             <constraint firstAttribute="trailing" secondItem="ve6-PH-yOv" secondAttribute="trailing" id="s0h-1v-idx"/>
@@ -116,7 +116,6 @@
                         <outlet property="container" destination="vGN-Ab-H4O" id="yVC-u9-twf"/>
                         <outlet property="imageScrollerContainer" destination="oSD-fv-QKp" id="5of-O3-FjX"/>
                         <outlet property="maskConstraint" destination="BTV-zM-WaI" id="Cor-iN-gWH"/>
-                        <outlet property="maskHeightCons" destination="jIM-8S-TF8" id="Wgg-e3-Nfe"/>
                         <outlet property="maskView" destination="ve6-PH-yOv" id="q74-Nx-GKr"/>
                         <outlet property="scrollView" destination="IHr-Bj-siO" id="XOL-cB-J9n"/>
                     </connections>

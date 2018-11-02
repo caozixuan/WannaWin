@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -43,6 +44,7 @@ public class CardInfoActivity extends AppCompatActivity  {
     private String merchantID;
     private ProgressDialog dialog;
 
+    ImageView iv_bar;
     ImageView imageViewCard;
     TextView textViewName;
     TextView textViewPoint;
@@ -65,6 +67,7 @@ public class CardInfoActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_info);
 
+        iv_bar = findViewById(R.id.imageview_barcode);
         imageViewCard = findViewById(R.id.imageView_card_info);
         textViewName = findViewById(R.id.textView_name_card_info);
         textViewAccount2 = findViewById(R.id.textView_account2_card_info);
@@ -150,6 +153,23 @@ public class CardInfoActivity extends AppCompatActivity  {
         });
 
         getInfos();
+        createBitMap("citimerchantID123456789");
+
+    }
+
+    public void createBitMap(String content) {
+
+        //清空原有图片
+        iv_bar.setImageDrawable(null);
+
+        /*生成条形码*/
+
+        //Bitmap bitmap_bar = ZXingUtils.creatBarcode(getApplicationContext(), content, iv_bar.getWidth(),  iv_bar.getHeight(),true);
+        //iv_bar.setImageBitmap(bitmap_bar);
+
+        Bitmap bitmap_bar = ZXingUtils.creatBarcode(CardInfoActivity.this, content,450,  200,false);
+        iv_bar.setImageBitmap(bitmap_bar);
+
 
     }
 
