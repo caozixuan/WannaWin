@@ -34,7 +34,9 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class OrderTabOverdueFragment extends Fragment {
-    RecyclerView overdueOrderRecyclerView;
+    private EmptyRecyclerView overdueOrderRecyclerView;
+    private View mEmptyView;
+    //RecyclerView overdueOrderRecyclerView;
     private MyCouponAdapter orderAdapter;
     ProgressDialog dialog;
 
@@ -56,7 +58,8 @@ public class OrderTabOverdueFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order_tab_overdue, container, false);
 
-        overdueOrderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder_overdue);
+        overdueOrderRecyclerView = view.findViewById(R.id.recyclerView_myOrder_overdue);
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         //设置RecyclerView管理器
         setRecyclerView();
@@ -94,6 +97,7 @@ public class OrderTabOverdueFragment extends Fragment {
         overdueOrderRecyclerView.setLayoutManager(layoutManager);
         orderAdapter = new MyCouponAdapter(getActivity());
         overdueOrderRecyclerView.setAdapter(orderAdapter);
+        overdueOrderRecyclerView.setEmptyView(mEmptyView); //设置空布局
     }
 
 
