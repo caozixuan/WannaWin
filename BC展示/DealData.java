@@ -52,7 +52,7 @@ public class DealData {
             System.err.println("The merchant with ID: \"" + merchantID + "\" has not registered!");
             return null;
         }
-        String message = type + "," + userID + "," + points_citi.toString();
+        String message = type + "," + merchantID + "," + userID + "," + points_citi.toString();
         return RSA.encryptByPublic(message, pub_K);
     }
 
