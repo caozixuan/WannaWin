@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +32,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-0E-Vcu">
-                            <rect key="frame" x="131" y="-4" width="112" height="46"/>
+                            <rect key="frame" x="19.5" y="-4" width="336" height="46"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="46" id="lZ6-oL-bPJ"/>
                             </constraints>
@@ -59,14 +58,14 @@
                     <rect key="frame" x="0.0" y="50" width="375" height="76"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="花旗点信息" translatesAutoresizingMaskIntoConstraints="NO" id="CNn-p2-klz">
-                            <rect key="frame" x="82" y="0.0" width="210" height="76"/>
+                            <rect key="frame" x="82.5" y="0.0" width="210" height="76"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="210" id="RXY-Ds-Bb8"/>
                                 <constraint firstAttribute="height" priority="900" constant="76" id="dQf-Gb-XRL"/>
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MKt-Ei-VJq">
-                            <rect key="frame" x="135" y="12.5" width="104" height="51"/>
+                            <rect key="frame" x="135.5" y="12.5" width="104" height="51"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="muH-P5-7FY">
                                     <rect key="frame" x="0.0" y="0.0" width="104" height="25.5"/>
@@ -123,17 +122,17 @@
                         <constraint firstAttribute="height" priority="900" constant="82" id="zSa-Tz-RY8"/>
                     </constraints>
                 </view>
-                <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjJ-VY-RPH">
+                <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjJ-VY-RPH">
                     <rect key="frame" x="0.0" y="126" width="375" height="277.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ox-Ia-HHM" userLabel="ScrollViewContainer">
-                            <rect key="frame" x="0.0" y="0.5" width="610.5" height="277.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="610.5" height="277.5"/>
                             <subviews>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-IB-1xZ">
-                                    <rect key="frame" x="206" y="-0.5" width="198.5" height="277.5"/>
+                                    <rect key="frame" x="206" y="0.0" width="198.5" height="277.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-qJ-kXS">
-                                            <rect key="frame" x="0.0" y="0.5" width="198.5" height="277.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198.5" height="277.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -155,7 +154,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="rRy-Qe-DJz">
-                                            <rect key="frame" x="0.0" y="0.5" width="198" height="277.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -174,10 +173,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31n-EL-h9q">
-                                    <rect key="frame" x="412.5" y="0.0" width="198" height="792"/>
+                                    <rect key="frame" x="412.5" y="0.0" width="198" height="277.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addcard" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-LX-hfY">
-                                            <rect key="frame" x="0.0" y="0.5" width="198" height="792"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="198" height="277.5"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -213,10 +212,9 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" priority="900" constant="300" id="1lb-h2-KFv"/>
-                        <constraint firstAttribute="bottom" secondItem="4ox-Ia-HHM" secondAttribute="bottom" id="ESr-yM-n48"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="top" secondItem="kjJ-VY-RPH" secondAttribute="top" id="UmX-nI-cki"/>
+                        <constraint firstAttribute="bottom" secondItem="4ox-Ia-HHM" secondAttribute="bottom" id="VmR-gj-iks"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="leading" secondItem="kjJ-VY-RPH" secondAttribute="leading" id="h9J-mg-lC5"/>
-                        <constraint firstItem="4ox-Ia-HHM" firstAttribute="height" secondItem="kjJ-VY-RPH" secondAttribute="height" id="mIf-0Q-jAl"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="trailing" secondItem="kjJ-VY-RPH" secondAttribute="trailing" id="mNj-rt-zKy"/>
                         <constraint firstItem="4ox-Ia-HHM" firstAttribute="centerY" secondItem="kjJ-VY-RPH" secondAttribute="centerY" id="t1w-Kh-UCZ"/>
                     </constraints>
@@ -225,7 +223,7 @@
                     <rect key="frame" x="0.0" y="403.5" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-hb-6z0">
-                            <rect key="frame" x="136" y="4" width="102" height="38"/>
+                            <rect key="frame" x="34.5" y="4" width="306" height="114"/>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             <state key="normal" image="查看">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,8 +264,8 @@
     </objects>
     <resources>
         <image name="addcard" width="648" height="792"/>
-        <image name="兑换" width="112" height="46"/>
-        <image name="查看" width="102" height="38"/>
+        <image name="兑换" width="336" height="138"/>
+        <image name="查看" width="306" height="114"/>
         <image name="花旗点信息" width="630" height="213"/>
     </resources>
 </document>

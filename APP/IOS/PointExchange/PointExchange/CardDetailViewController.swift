@@ -12,6 +12,7 @@ import SnapKit
 class CardDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 	
 	
+	@IBOutlet weak var logoBackgroundView: GradientView!
 	@IBOutlet weak var barView: GradientView!
 	@IBOutlet weak var barImage: UIImageView!
 	@IBOutlet weak var backgroundView: UIView!
@@ -39,10 +40,26 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 		self.tableView.delegate = self
 		self.tableView.rowHeight = 56
 		// TODO: 条形码内容
-		self.barImage.image = ScanCodeManager().createBarCode(url:"hi")
+		self.barImage.image = ScanCodeManager().createBarCode(url:"welcome to use our app")
 		// 加入“历史积分兑换记录”按钮在导航栏右边
 		let historyBtn = UIBarButtonItem(title: "兑换记录", style: .plain, target: self, action: #selector(goExchangeHistoryVC))
 		self.navigationItem.rightBarButtonItem = historyBtn
+		
+		self.tableView.layer.zPosition = 10.0
+		self.barButton.layer.zPosition = 10.0
+		self.cardInfoBackgroundImage.layer.zPosition = 10.0
+		
+		// 添加滑动手势
+        let panGesturer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
+        self.backgroundView.addGestureRecognizer(panGesturer)
+		
+		// logo背景图层
+		logoBackgroundView.cornerRadius = UIScreen.main.bounds.size.width*0.11
+    }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		
+		
 		indicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
 		indicator?.startAnimating()
 		ServerConnector.getCardDetail(merchantID: self.merchantID!){(result,card) in
@@ -55,21 +72,7 @@ class CardDetailViewController: UIViewController,UITableViewDataSource,UITableVi
 			}
 			self.indicator?.stopAnimating()
 		}
-		self.tableView.layer.zPosition = 10.0
-		self.barButton.layer.zPosition = 10.0
-		self.cardInfoBackgroundImage.layer.zPosition = 10.0
-		
-		// 添加滑动手势
-//        let gestureDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownResponse))
-//        gestureDown.direction = .down
-//        self.backgroundView.addGestureRecognizer(gestureDown)
-//        let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpResponse))
-//        gestureUp.direction = .up
-//        self.backgroundView.addGestureRecognizer(gestureUp)
-        let panGesturer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
-        self.backgroundView.addGestureRecognizer(panGesturer)
-		
-    }
+	}
 	
     @objc func panGesture(_ gesture:UIPanGestureRecognizer){
         let point = gesture.location(in: self.view)

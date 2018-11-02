@@ -33,7 +33,7 @@ class HomepageCardInfoView: UIView {
 		self.view.frame = bounds
 		self.addSubview(view)
 		
-		logoBackgroundView.cornerRadius = merchantLogoImageView.frame.width/2
+//		logoBackgroundView.cornerRadius = merchantLogoImageView.frame.width/2
 	}
 
 }
