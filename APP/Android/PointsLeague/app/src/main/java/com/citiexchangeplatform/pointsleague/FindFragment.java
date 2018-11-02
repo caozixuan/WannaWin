@@ -77,10 +77,13 @@ public class FindFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        findActivityAdapter.clearAll();
-        findAdapter.clearAll();
-        getRecommendedMerchants();
-        getRecommendedActivity();
+        if(findAdapter.getItemCount() == 0){
+            findActivityAdapter.clearAll();
+            findAdapter.clearAll();
+            getRecommendedMerchants();
+            getRecommendedActivity();
+        }
+
     }
 
     private void initRecyclerView(){
