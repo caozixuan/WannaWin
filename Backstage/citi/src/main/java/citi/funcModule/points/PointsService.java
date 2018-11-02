@@ -49,7 +49,7 @@ public class PointsService {
                 isCanChange = false;
             }
             else if(Double.valueOf(merchantBean.getSelectedMSCardPoints())<=0){
-                ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "兑换积分不为负");
+                ReturnMerchant returnMerchant = new ReturnMerchant(merchantBean.getMerchantID(),merchant.getName(),merchant.getCardLogoURL(), "兑换积分为正");
                 returnMerchants.add(returnMerchant);
                 isCanChange = false;
             }
