@@ -51,7 +51,9 @@ public class SearchCouponFragment extends Fragment {
 
     public static final int NUM_LOAD_ONCE = 5;
 
-    RecyclerView searchRecyclerView;
+    EmptyRecyclerView searchRecyclerView;
+    View mEmptyView;
+    //RecyclerView searchRecyclerView;
     RefreshLayout refreshLayout;
     private FindSearchAdapter searchAdapter;
     ProgressDialog dialog;
@@ -75,8 +77,10 @@ public class SearchCouponFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_merchant, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_coupon, container, false);
         searchRecyclerView = view.findViewById(R.id.recyclerView_search_merchant);
+
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
 
@@ -127,6 +131,7 @@ public class SearchCouponFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         searchRecyclerView.setLayoutManager(layoutManager);
         searchRecyclerView.setAdapter(searchAdapter);
+        searchRecyclerView.setEmptyView(mEmptyView);
     }
 
     protected void setRefreshLayout(){

@@ -77,6 +77,7 @@ public class SearchActivityFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_activity, container, false);
         searchRecyclerView = view.findViewById(R.id.recyclerView_search_activity);
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
 
