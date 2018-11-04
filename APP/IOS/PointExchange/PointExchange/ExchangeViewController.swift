@@ -57,6 +57,9 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		// 表底部留出空间来调整键盘弹出的偏移
 		self.tableView.contentInset.bottom = 60
+		
+//		self.tableView.delegate = self
+//		self.tableView.dataSource = self
 	}
 	
     override func viewDidAppear(_ animated: Bool) {

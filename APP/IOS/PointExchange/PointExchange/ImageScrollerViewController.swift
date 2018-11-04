@@ -161,7 +161,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 		autoScrollTimer = Timer.scheduledTimer(timeInterval: 2, target: self,
 											   selector: #selector(ImageScrollerViewController.letItScroll),
 											   userInfo: nil, repeats: true)
-		autoScrollTimer?.fire()
+		//autoScrollTimer?.fire()
 	}
 	
 	//计时器时间一到，滚动一张图片
@@ -246,15 +246,16 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//手动拖拽滚动开始
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 		//使自动滚动计时器失效（防止用户手动移动图片的时候这边也在自动滚动）
-		autoScrollTimer?.fireDate = Date.distantFuture
+//		autoScrollTimer?.fireDate = Date.distantFuture
+		autoScrollTimer?.invalidate()
 	}
 	
 	//手动拖拽滚动结束
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView,
 								  willDecelerate decelerate: Bool) {
 		//重新启动自动滚动计时器
-//		configureAutoScrollTimer()
-		autoScrollTimer?.fireDate = Date.distantPast
+//		autoScrollTimer?.fireDate = Date.distantPast
+		configureAutoScrollTimer()
 		
 	}
 
