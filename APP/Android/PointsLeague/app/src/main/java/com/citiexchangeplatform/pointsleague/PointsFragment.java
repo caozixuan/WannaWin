@@ -113,9 +113,9 @@ public class PointsFragment extends Fragment {
                                 sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                                     @Override
                                     public void onSliderClick(BaseSliderView slider) {
-                                        Intent intentToDetailFindPay = new Intent(getActivity(), DetailFindPayActivity.class);
-                                        intentToDetailFindPay.putExtra("itemID",activityID);
-                                        getActivity().startActivity(intentToDetailFindPay);
+                                        Intent intentToDetailActivity = new Intent(getActivity(), DetailActivityActivity.class);
+                                        intentToDetailActivity.putExtra("activityID",activityID);
+                                        getContext().startActivity(intentToDetailActivity);
                                     }
                                 });
                                 sliderLayout.addSlider(sv);
@@ -169,7 +169,6 @@ public class PointsFragment extends Fragment {
             cardPointsAdapter = new CardPointsAdapter(getContext());
             recyclerView.setAdapter(cardPointsAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         } else {
             loadLoginContent();
         }
@@ -296,10 +295,10 @@ public class PointsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (wasLogin != LogStateInfo.getInstance(getContext()).isLogin()) {
+        //if (wasLogin != LogStateInfo.getInstance(getContext()).isLogin()) {
             accountInfoLayout.removeAllViewsInLayout();
             loadMainContent();
-        }
+        //}
 
         if (LogStateInfo.getInstance(getContext()).isLogin()) {
             cardPointsAdapter.clearAll();
@@ -314,7 +313,7 @@ public class PointsFragment extends Fragment {
                 .doPost()
                 .url("http://193.112.44.141:80/citi/mscard/infos")
                 .addParam("userID", LogStateInfo.getInstance(getContext()).getUserID())
-                .addParam("n", "5")
+                .addParam("n", "3")
                 .build()
                 .execute(getContext(), new CallBack<String>() {
                     @Override
@@ -348,19 +347,6 @@ public class PointsFragment extends Fragment {
                                     cardPointsAdapter.addData(items.get(1));
                                     cardPointsAdapter.addData(items.get(0));
                                     cardPointsAdapter.addData(items.get(2));
-                                    break;
-                                case 4:
-                                    cardPointsAdapter.addData(items.get(3));
-                                    cardPointsAdapter.addData(items.get(1));
-                                    cardPointsAdapter.addData(items.get(0));
-                                    cardPointsAdapter.addData(items.get(2));
-                                    break;
-                                case 5:
-                                    cardPointsAdapter.addData(items.get(3));
-                                    cardPointsAdapter.addData(items.get(1));
-                                    cardPointsAdapter.addData(items.get(0));
-                                    cardPointsAdapter.addData(items.get(2));
-                                    cardPointsAdapter.addData(items.get(4));
                                     break;
                                 default:
                             }
@@ -406,7 +392,6 @@ public class PointsFragment extends Fragment {
                             double generalPoints = jsonObject.getDouble("generalPoints");
                             TextView textView = (TextView) view.findViewById(R.id.textView_generalPoints_main);
                             textView.setText(String.format("%.1f", generalPoints));
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -600,17 +585,55 @@ public class PointsFragment extends Fragment {
                 });
     }
 
-    private void checkMsgVerification(String strPhone, String strMsg) {
-        accountInfoLayout.removeAllViewsInLayout();
-        loadRegisterContent2();
+    private void checkMsgVerification(String strPhone, String strMsg){
+        verifyVCode(strPhone,strMsg);
+
     }
 
-    private void tryRegister(final String strAccount, final String strPassword) {
+    private void verifyVCode(final String strAccount, final String vCode){
         XVolley.getInstance()
                 .doPost()
-                .url("http://193.112.44.141:80/citi/account/sendVCode")
+                .url("http://193.112.44.141:80/citi/account/vfcode")
                 .addParam("phoneNum", strAccount)
-                .addParam("password", strPassword)
+                .addParam("vcode", vCode)
+                .build()
+                .execute(getContext(), new CallBack<String>() {
+                    @Override
+                    public void onSuccess(Context context, String response) {
+                        System.out.println(response);
+                        boolean registerSuccess = false;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            registerSuccess = jsonObject.getBoolean("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (registerSuccess) {
+                            //Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            //tryLogin(strAccount, strPassword);
+                            accountInfoLayout.removeAllViewsInLayout();
+                            loadRegisterContent2();
+                        }else {
+                            Toast.makeText(getContext(), "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        super.onError(error);
+                        Toast.makeText(getContext(), "服务器连接失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void tryRegister(final String phoneNum, final String password){
+        XVolley.getInstance()
+                .doPost()
+                .url("http://193.112.44.141:80/citi/account/resetPassword")
+                .addParam("phoneNum", phoneNum)
+                .addParam("newPassword", password)
                 .build()
                 .execute(getContext(), new CallBack<String>() {
                     @Override
@@ -627,8 +650,9 @@ public class PointsFragment extends Fragment {
 
                         if (registerSuccess) {
                             Toast.makeText(getContext(), "注册成功", Toast.LENGTH_SHORT).show();
-                            tryLogin(strAccount, strPassword);
-                        } else {
+                            tryLogin(newAccount, password);
+
+                        }else {
                             Toast.makeText(getContext(), "注册失败", Toast.LENGTH_SHORT).show();
                         }
                     }

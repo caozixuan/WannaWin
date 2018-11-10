@@ -37,6 +37,7 @@
 		3E519ADF213523DD00D4D5D9 /* HomepageCardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519ADE213523DD00D4D5D9 /* HomepageCardInfoView.swift */; };
 		3E5FD378211ECCA600ECE558 /* DsMerchantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */; };
 		3E5FD379211ECCA600ECE558 /* DsMerchantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */; };
+		3E778352218C8CEF0028674F /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E778351218C8CEF0028674F /* MyTabBarController.swift */; };
 		3E8AB4B120EDAEDC00915561 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */; };
 		3E8AB4B820EDAEDE00915561 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B720EDAEDE00915561 /* Assets.xcassets */; };
 		3E8AB4BB20EDAEDE00915561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E8AB4B920EDAEDE00915561 /* LaunchScreen.storyboard */; };
@@ -73,7 +74,6 @@
 		3EECCEC7211FED5100A73B9F /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */; };
 		3EFEFA02210AF72900BC760E /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */; };
 		3EFEFA0B210AFD7100BC760E /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */; };
-		3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */; };
 		3EFEFA0E210B004600BC760E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEFA0D210B004600BC760E /* Item.swift */; };
 		844CF6E1211EC05600B232DF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CF6DF211EC05600B232DF /* GradientView.swift */; };
 		844CF6E2211EC05600B232DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 844CF6E0211EC05600B232DF /* LICENSE.txt */; };
@@ -151,6 +151,7 @@
 		3E519ADE213523DD00D4D5D9 /* HomepageCardInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageCardInfoView.swift; sourceTree = "<group>"; };
 		3E5FD376211ECCA600ECE558 /* DsMerchantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DsMerchantTableViewCell.swift; sourceTree = "<group>"; };
 		3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DsMerchantTableViewCell.xib; sourceTree = "<group>"; };
+		3E778351218C8CEF0028674F /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		3E8AB4AD20EDAEDC00915561 /* PointExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PointExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AB4B020EDAEDC00915561 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E8AB4B720EDAEDE00915561 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,7 +189,6 @@
 		3EECCEC6211FED5100A73B9F /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		3EFEFA01210AF72900BC760E /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		3EFEFA09210AFD7100BC760E /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
-		3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountTableViewCell.xib; sourceTree = "<group>"; };
 		3EFEFA0D210B004600BC760E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5A897BC2C945E2D586CADDA3 /* Pods_PointExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PointExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABB2B870EE98E39B9EDF074 /* Pods-PointExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PointExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-PointExchange/Pods-PointExchange.release.xcconfig"; sourceTree = "<group>"; };
@@ -266,6 +266,7 @@
 				3E46B75F20EFE05500843193 /* HomePage.storyboard */,
 				3E46B75D20EFE00400843193 /* Discover.storyboard */,
 				3E46B75920EFDFA000843193 /* Store.storyboard */,
+				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				3E46B75B20EFDFE400843193 /* Exchange.storyboard */,
 				3E8AB4C320EDAFB300915561 /* Main.storyboard */,
 			);
@@ -395,6 +396,7 @@
 				3E46B77920F254E800843193 /* ExchangeTab */,
 				3E8B15E320F4491E0034896B /* DiscoverTab */,
 				3E8B15E420F449320034896B /* StoreTab */,
+				3E778351218C8CEF0028674F /* MyTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -514,7 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				3ED5F6D42122985C00F46E7C /* MerchantCouponTableViewCell.xib */,
-				3EFEFA0A210AFD7100BC760E /* DiscountTableViewCell.xib */,
 				3E23A752211E94A600D19749 /* DiscoverCouponView.xib */,
 				3E5FD377211ECCA600ECE558 /* DsMerchantTableViewCell.xib */,
 				3EE77DB62133B9AC00ADDD82 /* SearchTableViewCell.xib */,
@@ -611,7 +612,6 @@
 		B6C480642100C132002ED9C9 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				B6C480652100C143002ED9C9 /* LoginView.xib */,
 				84A968752129551F00EF5BA8 /* SignUpView.xib */,
 				84A9687A212ACCDC00EF5BA8 /* ModifyPasswordView.xib */,
 				842237C12130343500CDC7DF /* HomePageTab */,
@@ -688,7 +688,6 @@
 			files = (
 				3ED5F6D62122985C00F46E7C /* MerchantCouponTableViewCell.xib in Resources */,
 				3E46B75A20EFDFA000843193 /* Store.storyboard in Resources */,
-				3EFEFA0C210AFD7100BC760E /* DiscountTableViewCell.xib in Resources */,
 				3E8AB4C520EDAFB300915561 /* Main.storyboard in Resources */,
 				3E46B75C20EFDFE400843193 /* Exchange.storyboard in Resources */,
 				3E3327902120041900426518 /* HistoryTableViewCell.xib in Resources */,
@@ -743,6 +742,7 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Valet/Valet.framework",
+				"${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -763,6 +763,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Valet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewAnimator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -835,6 +836,7 @@
 				3E4C156220EE01AB000743C0 /* SignUpViewController.swift in Sources */,
 				3ED5F6DA21240C6300F46E7C /* CouponDetailViewController.swift in Sources */,
 				3E519ADF213523DD00D4D5D9 /* HomepageCardInfoView.swift in Sources */,
+				3E778352218C8CEF0028674F /* MyTabBarController.swift in Sources */,
 				3E46B77320F0BD5C00843193 /* UIViewControllerExtension.swift in Sources */,
 				3EFEFA0E210B004600BC760E /* Item.swift in Sources */,
 				3ED5F6E4212D444500F46E7C /* TendencySurveyViewController.swift in Sources */,
@@ -1039,14 +1041,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PointExchange/PointExchange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W4GH5MNPHW;
+				DEVELOPMENT_TEAM = 695ANUHALN;
 				HEADER_SEARCH_PATHS = /Pods;
 				INFOPLIST_FILE = PointExchange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = WannaWinTeam.PointExchange;
+				PRODUCT_BUNDLE_IDENTIFIER = WannaWin.PointsLeague;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1060,14 +1062,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PointExchange/PointExchange.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W4GH5MNPHW;
+				DEVELOPMENT_TEAM = 695ANUHALN;
 				HEADER_SEARCH_PATHS = /Pods;
 				INFOPLIST_FILE = PointExchange/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = WannaWinTeam.PointExchange;
+				PRODUCT_BUNDLE_IDENTIFIER = WannaWin.PointsLeague;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

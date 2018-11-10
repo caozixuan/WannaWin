@@ -67,6 +67,14 @@ class CouponDetailViewController: UIViewController {
 	}
 	
 	@IBAction func clickExchange(_ sender: Any) {
+		if User.getUser().username == nil {
+			let alert = UIAlertController(title:"提示", message:"您还未登录，请先登录", preferredStyle:.alert)
+			let okAction = UIAlertAction(title:"确定", style:.default, handler:{ action in
+			})
+			
+			alert.addAction(okAction)
+			self.present(alert, animated: true, completion: nil)
+		}
 		ServerConnector.buyCoupons(itemID: (item?.ItemID)!, count: self.count){result in
 			if result {
 				let alert = UIAlertController(title:"兑换", message:"兑换成功！", preferredStyle:.alert)

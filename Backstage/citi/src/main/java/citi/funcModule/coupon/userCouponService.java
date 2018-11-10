@@ -9,6 +9,7 @@ import citi.vo.UserCoupon;
 import citi.persist.procedure.probean.UserCoupon_record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class userCouponService {
         return returnUserCoupons;
     }
 
+    @Transactional
     public boolean use(String userID,String itemID){
         UserCoupon_record userCoupon_record=new UserCoupon_record(userID,itemID);
         couponMapper.deleteOneUserCouponBy_UserID_AND_ItemID(userCoupon_record);

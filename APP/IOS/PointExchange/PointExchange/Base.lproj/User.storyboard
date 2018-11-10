@@ -545,20 +545,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdf-On-Or3">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="-4" width="375" height="671"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2h-Xe-u5U">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="562.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="598.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRL-b3-WAd">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="-24" width="375" height="140"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navi background" translatesAutoresizingMaskIntoConstraints="NO" id="9re-9Z-sdH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.96260310920000003" green="0.96260310920000003" blue="0.96260310920000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="tyS-VZ-62P"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9re-9Z-sdH" secondAttribute="trailing" id="8X4-hv-NJm"/>
+                                                    <constraint firstItem="9re-9Z-sdH" firstAttribute="leading" secondItem="yRL-b3-WAd" secondAttribute="leading" id="K2C-xA-eX0"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9re-9Z-sdH" secondAttribute="bottom" id="RMn-iJ-eY9"/>
+                                                    <constraint firstItem="9re-9Z-sdH" firstAttribute="top" secondItem="yRL-b3-WAd" secondAttribute="top" id="idi-rq-a9f"/>
+                                                    <constraint firstAttribute="height" constant="140" id="tyS-VZ-62P"/>
                                                 </constraints>
                                             </view>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portrait_1userTabMe" translatesAutoresizingMaskIntoConstraints="NO" id="s62-T4-U0B">
-                                                <rect key="frame" x="131.5" y="17.5" width="112.5" height="112.5"/>
+                                                <rect key="frame" x="131.5" y="53.5" width="112.5" height="112.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="s62-T4-U0B" secondAttribute="height" multiplier="1:1" id="tP7-nd-V4O"/>
                                                 </constraints>
@@ -567,26 +576,26 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-Ce-uWV">
-                                                <rect key="frame" x="146.5" y="138" width="82" height="39"/>
+                                                <rect key="frame" x="146.5" y="174" width="82" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WuHan, China" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUz-AM-gvb">
-                                                <rect key="frame" x="126.5" y="185" width="122" height="23"/>
+                                                <rect key="frame" x="126.5" y="221" width="122" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4q-qD-Yum">
-                                                <rect key="frame" x="-99" y="154" width="573" height="138"/>
+                                                <rect key="frame" x="-99" y="190" width="573" height="138"/>
                                                 <state key="normal" backgroundImage="Button登录"/>
                                                 <connections>
                                                     <action selector="clickLogin:" destination="J1I-3M-UwK" eventType="touchUpInside" id="bDR-aM-K4c"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIu-hc-UXH" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                                <rect key="frame" x="6" y="229.5" width="363" height="203"/>
+                                                <rect key="frame" x="6" y="265.5" width="363" height="203"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BI8-T7-3kb">
                                                         <rect key="frame" x="8" y="8" width="347" height="192"/>
@@ -688,7 +697,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-cH-9Mm">
-                                                <rect key="frame" x="32.5" y="468.5" width="310" height="46"/>
+                                                <rect key="frame" x="32.5" y="504.5" width="310" height="46"/>
                                                 <state key="normal" image="退出登录"/>
                                                 <connections>
                                                     <action selector="logoutBtnClick:" destination="J1I-3M-UwK" eventType="touchUpInside" id="oE1-AJ-eCV"/>
@@ -713,7 +722,7 @@
                                             <constraint firstItem="D4q-qD-Yum" firstAttribute="top" secondItem="s62-T4-U0B" secondAttribute="bottom" constant="24" id="maM-SZ-RcR"/>
                                             <constraint firstItem="Jlb-Ce-uWV" firstAttribute="top" secondItem="s62-T4-U0B" secondAttribute="bottom" constant="8" id="pIj-79-ctS"/>
                                             <constraint firstItem="yRL-b3-WAd" firstAttribute="leading" secondItem="x2h-Xe-u5U" secondAttribute="leading" id="v9U-tZ-b93"/>
-                                            <constraint firstItem="yRL-b3-WAd" firstAttribute="top" secondItem="x2h-Xe-u5U" secondAttribute="top" id="xf9-Va-Vye"/>
+                                            <constraint firstItem="yRL-b3-WAd" firstAttribute="top" secondItem="x2h-Xe-u5U" secondAttribute="top" constant="-24" id="xf9-Va-Vye"/>
                                             <constraint firstAttribute="trailing" secondItem="CIu-hc-UXH" secondAttribute="trailing" constant="6" id="zDb-ZN-3pC"/>
                                         </constraints>
                                     </view>
@@ -732,12 +741,14 @@
                         <constraints>
                             <constraint firstItem="Hdf-On-Or3" firstAttribute="leading" secondItem="yyL-mo-FSs" secondAttribute="leading" id="PVi-hp-5eb"/>
                             <constraint firstItem="Hdf-On-Or3" firstAttribute="trailing" secondItem="yyL-mo-FSs" secondAttribute="trailing" id="YXs-9g-sQ1"/>
-                            <constraint firstItem="Hdf-On-Or3" firstAttribute="top" secondItem="yyL-mo-FSs" secondAttribute="top" id="qjW-1i-r3k"/>
+                            <constraint firstItem="Hdf-On-Or3" firstAttribute="top" secondItem="yyL-mo-FSs" secondAttribute="top" constant="-24" id="qjW-1i-r3k"/>
                             <constraint firstItem="Hdf-On-Or3" firstAttribute="bottom" secondItem="yyL-mo-FSs" secondAttribute="bottom" id="z3D-IQ-bDk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yyL-mo-FSs"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="我的" id="sjQ-KA-r7W"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="locationLabel" destination="EUz-AM-gvb" id="7GQ-h9-hMu"/>
                         <outlet property="loginBtn" destination="D4q-qD-Yum" id="Weq-bO-Hju"/>
@@ -751,30 +762,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YRc-vx-pCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="-1997"/>
+            <point key="canvasLocation" x="1096.8" y="-1997.4512743628188"/>
         </scene>
         <!--历史订单-优惠券-->
         <scene sceneID="tBa-nQ-tky">
             <objects>
-                <viewController storyboardIdentifier="CouponHistoryViewController" title="历史订单-优惠券" id="sab-0W-tes" customClass="CouponHistoryViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CouponHistoryViewController" title="历史订单-优惠券" automaticallyAdjustsScrollViewInsets="NO" id="sab-0W-tes" customClass="CouponHistoryViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Soy-JR-EXa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVn-rc-bcL">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="531"/>
                                 <connections>
                                     <segue destination="S0T-R1-w9X" kind="embed" identifier="usedView" id="sqY-WO-kpk"/>
                                 </connections>
                             </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9JA-QN-VjT">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="531"/>
                                 <connections>
                                     <segue destination="Lw7-ak-9Di" kind="embed" identifier="expireView" id="zoA-xY-sxO"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmp-cC-WBc">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="531"/>
                                 <connections>
                                     <segue destination="j14-DT-tT6" kind="embed" identifier="unuseView" id="BD7-wm-2c9"/>
                                 </connections>
@@ -796,7 +807,7 @@
                         <constraints>
                             <constraint firstItem="9JA-QN-VjT" firstAttribute="leading" secondItem="SnS-I0-Tev" secondAttribute="leading" id="1GY-Zb-bG3"/>
                             <constraint firstItem="nmp-cC-WBc" firstAttribute="leading" secondItem="SnS-I0-Tev" secondAttribute="leading" id="2VP-ET-06X"/>
-                            <constraint firstItem="nmp-cC-WBc" firstAttribute="bottom" secondItem="SnS-I0-Tev" secondAttribute="bottom" id="6qj-ev-SjP"/>
+                            <constraint firstItem="nmp-cC-WBc" firstAttribute="bottom" secondItem="SnS-I0-Tev" secondAttribute="bottom" constant="-80" id="6qj-ev-SjP"/>
                             <constraint firstItem="xHD-UX-hgO" firstAttribute="top" secondItem="SnS-I0-Tev" secondAttribute="top" constant="8" id="92k-SM-Nvl"/>
                             <constraint firstItem="bVn-rc-bcL" firstAttribute="leading" secondItem="SnS-I0-Tev" secondAttribute="leading" id="AAP-wv-WtK"/>
                             <constraint firstItem="nmp-cC-WBc" firstAttribute="top" secondItem="xHD-UX-hgO" secondAttribute="bottom" id="Bx2-fP-MAM"/>
@@ -805,9 +816,9 @@
                             <constraint firstItem="xHD-UX-hgO" firstAttribute="trailing" secondItem="SnS-I0-Tev" secondAttribute="trailing" id="eRS-E2-TOy"/>
                             <constraint firstItem="nmp-cC-WBc" firstAttribute="trailing" secondItem="SnS-I0-Tev" secondAttribute="trailing" id="jMg-fc-gjC"/>
                             <constraint firstItem="bVn-rc-bcL" firstAttribute="top" secondItem="xHD-UX-hgO" secondAttribute="bottom" id="onC-xh-oUI"/>
-                            <constraint firstItem="bVn-rc-bcL" firstAttribute="bottom" secondItem="SnS-I0-Tev" secondAttribute="bottom" id="tOu-fj-LAx"/>
+                            <constraint firstItem="bVn-rc-bcL" firstAttribute="bottom" secondItem="SnS-I0-Tev" secondAttribute="bottom" constant="-80" id="tOu-fj-LAx"/>
                             <constraint firstItem="xHD-UX-hgO" firstAttribute="leading" secondItem="SnS-I0-Tev" secondAttribute="leading" id="u7Z-Tr-1CM"/>
-                            <constraint firstItem="9JA-QN-VjT" firstAttribute="bottom" secondItem="SnS-I0-Tev" secondAttribute="bottom" id="vga-6H-khz"/>
+                            <constraint firstItem="9JA-QN-VjT" firstAttribute="bottom" secondItem="SnS-I0-Tev" secondAttribute="bottom" constant="-80" id="vga-6H-khz"/>
                             <constraint firstItem="bVn-rc-bcL" firstAttribute="trailing" secondItem="SnS-I0-Tev" secondAttribute="trailing" id="ypA-tE-c32"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SnS-I0-Tev"/>
@@ -828,17 +839,17 @@
             <objects>
                 <viewController title="未使用列表" id="j14-DT-tT6" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ug5-td-KmJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您暂无未使用优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBl-3D-VPz">
-                                <rect key="frame" x="96" y="303.5" width="183.5" height="24"/>
+                                <rect key="frame" x="96" y="263.5" width="183.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YiZ-yL-bvg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="511"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" rowHeight="85" id="yuU-XF-Z8R" customClass="HistoryTableViewCell" customModule="PointExchange" customModuleProvider="target">
@@ -953,17 +964,17 @@
             <objects>
                 <viewController title="已使用列表" id="S0T-R1-w9X" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="plK-2u-7WL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您暂无已使用优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kd-rh-jcO">
-                                <rect key="frame" x="96" y="303.5" width="183.5" height="24"/>
+                                <rect key="frame" x="96" y="263.5" width="183.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YoR-aQ-I6D">
-                                <rect key="frame" x="0.0" y="20" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="511"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" rowHeight="85" id="aRi-Ff-4iu">
@@ -1001,17 +1012,17 @@
             <objects>
                 <viewController title="已过期列表" id="Lw7-ak-9Di" customClass="CouponHistoryContainViewContainer" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guY-2l-ISC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您暂无已过期优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBF-eF-ngl">
-                                <rect key="frame" x="96" y="303.5" width="183.5" height="24"/>
+                                <rect key="frame" x="96" y="263.5" width="183.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2OZ-AL-Xe6">
-                                <rect key="frame" x="0.0" y="20" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="511"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" rowHeight="85" id="PWL-y3-4FX">
@@ -1321,6 +1332,7 @@
         <image name="MyUnselected" width="72" height="72"/>
         <image name="blueCircle" width="88" height="88"/>
         <image name="button" width="663" height="138"/>
+        <image name="navi background" width="375" height="176"/>
         <image name="portrait_1userTabMe" width="128" height="128"/>
         <image name="whiteCircle" width="86" height="86"/>
         <image name="兑换记录" width="48" height="48"/>
@@ -1328,7 +1340,7 @@
         <image name="设置" width="48" height="48"/>
         <image name="退出登录" width="310" height="46"/>
         <namedColor name="main_orange">
-            <color red="1" green="0.58399999141693115" blue="0.27500000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58039215686274515" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

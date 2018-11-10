@@ -52,7 +52,8 @@ public class Order {
     }
 
     public Order(String orderId, Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, String state, String merchantId, Timestamp time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(time.toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String timeString = formatter.format(time);
         this.orderID = orderId;
         this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
@@ -65,7 +66,7 @@ public class Order {
     }
 
     public Order(Double originalPrice, Double priceAfter, Double pointsNeeded, String userId, OrderState state, String merchantId, Timestamp time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeString = formatter.format(time);
         this.orderID = UUID.randomUUID().toString().toLowerCase();
         this.originalPrice = Double.parseDouble(String.format("%.2f", originalPrice));
@@ -116,7 +117,7 @@ public class Order {
     }
 
     public void setTime(Timestamp time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeString = formatter.format(time);
         this.time = timeString;
     }

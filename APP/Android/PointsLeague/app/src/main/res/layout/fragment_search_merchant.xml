@@ -12,12 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView_search_merchant"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_height="match_parent">
+            <com.citiexchangeplatform.pointsleague.EmptyRecyclerView
+                android:id="@+id/recyclerView_search_merchant"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <!--Empty提示图-->
+                <TextView
+                    android:id="@+id/empty_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="没有找到商家"/>
+            </LinearLayout>
+
+            <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/recyclerView_search_merchant"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--/>-->
+        </FrameLayout>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </FrameLayout>

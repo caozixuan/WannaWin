@@ -1,12 +1,36 @@
 *{margin: 0; padding: 0}
 body {
+    background: url("../../img/loginbg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-attachment: fixed;
     font-family: 'PT Sans', Helvetica, Arial, sans-serif;
     text-align: center;
-    color: #fff;
+    background-color:#fff;
+}
+#moban{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+/*    background-color:#fff;
+    filter:Alpha(Opacity=60);
+    opacity:0.6;*/
+}
+
+#moban::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    /*content: "";*/
+    background-color:rgba(0,0,0,0.3);
+    /*filter:Alpha(Opacity=60);*/
+    /*opacity:0.6;*/
 }
 
 .page-container {
@@ -19,7 +43,7 @@ body {
     width: 400px;
     padding-bottom: 50px;
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #23262E;
 }
 
 h1 {
@@ -27,7 +51,7 @@ h1 {
     font-size: 30px;
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(0,0,0,.2);
-    color:#eee;
+    color: #16887D;
 }
 
 form {
@@ -72,7 +96,7 @@ button {
     height: 44px;
     margin-top: 25px;
     padding: 0;
-    background-color: rgba(200, 200, 200, 0.5);
+    background-color: rgba(126, 126, 126, 0.86);
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;

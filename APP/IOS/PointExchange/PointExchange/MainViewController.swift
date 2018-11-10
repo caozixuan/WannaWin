@@ -10,7 +10,11 @@ import ESPullToRefresh
 
 class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     
-    @IBOutlet weak var container: UIView!
+	@IBOutlet weak var maskHeightCons: NSLayoutConstraint!
+	@IBOutlet weak var bgView: UIView!
+	@IBOutlet weak var maskConstraint: NSLayoutConstraint!
+	@IBOutlet weak var maskView: MaskView!
+	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var imageScrollerContainer: UIView!
 	
@@ -18,35 +22,74 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
     var coupons:[Item]?
     var isLoaded = false
 	
+	var activityIndicator:UIActivityIndicatorView?
+	
+	var containerOriginTop:Double?
+	
 	//图片轮播组件
 	var imageScroller : ImageScrollerViewController!
+	
+	override var preferredStatusBarStyle: UIStatusBarStyle{
+		return UIStatusBarStyle.lightContent
+	}
     
     override func viewDidLoad() {
-        ServerConnector.getAds(){(result,activities) in
-            if result {
-                self.activities = activities
-                if self.isLoaded{
-                    // TODO: 刷新轮播
+		
+		//activityIndicator
+		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
+		
+
+		
+		refresh()
+		
+		let pan = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.panGesture(_:)))
+		maskView.addGestureRecognizer(pan)
+		
+    }
+	
+	func refresh(){
+		
+		activityIndicator?.startAnimating()
+		ServerConnector.getAds(){(result,activities) in
+			if result {
+				self.activities = activities
+				if self.isLoaded{
+					// TODO: 刷新轮播
 					self.imageScroller.refresh()
 					
-                }else{
-                    self.isLoaded = true
-                }
-            }
-        }
-        ServerConnector.getRecommendedItems(){(result, items) in
-            if result {
-                self.coupons = items
-                if self.isLoaded{
-                    // TODO: 刷新轮播
-					self.imageScroller.refresh()
-                }else{
-                    self.isLoaded = true
-                    
-                }
-            }
-        }
-    }
+				}else{
+					self.isLoaded = true
+				}
+			}
+			self.activityIndicator?.stopAnimating()
+		}
+	}
+	
+	@objc func panGesture(_ gesture:UIPanGestureRecognizer){
+		let offset = gesture.translation(in: self.view).y
+		if maskConstraint != nil{
+			self.bgView.removeConstraint(maskConstraint)
+		}
+		if gesture.state == .began{
+		}else if gesture.state == .changed{
+			maskView.snp.remakeConstraints{ make in
+				if offset < 30 && offset > 0{
+					make.top.equalTo(self.imageScrollerContainer.snp.top).offset(155+offset)
+				}
+			}
+		}else if gesture.state == .ended{
+			refresh()
+			maskView.snp.remakeConstraints{ make in
+				make.top.equalTo(self.imageScrollerContainer.snp.top).offset(155)
+			}
+		}
+		
+		// 使动画生效
+		UIView.animate(withDuration: 0.5){
+			self.view.layoutIfNeeded()
+		}
+		
+	}
 
     override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -54,12 +97,12 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 		// 隐藏导航栏
 		self.navigationController?.setNavigationBarHidden(true, animated: true)
 		// 下拉加载
-		scrollView.es.addPullToRefresh{ [unowned self] in
-			
-			self.scrollView.es.stopPullToRefresh(ignoreDate: true)
-			self.scrollView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
-		}
-        
+//		scrollView.es.addPullToRefresh{ [unowned self] in
+//
+//			self.scrollView.es.stopPullToRefresh(ignoreDate: true)
+//			self.scrollView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+//		}
+		
     }
 	
 	// 设置滑动偏移量来隐藏刷新的白边
@@ -70,17 +113,21 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	// MARK: - 图片轮播组件协议
 	//图片轮播组件协议方法：获取数据集合
 	func scrollerDataSource() -> [String] {
-		if self.activities != nil && self.coupons != nil {
+		self.isLoaded = true
+		if self.activities != nil || self.coupons != nil {
 			var items = [String]()
-			
-			items.append(self.activities![0].imageURL!)
-			if (self.activities?.count)! > 1 {
-				items.append(self.activities![1].imageURL!)
+			if(self.activities != nil){
+				for i in 0 ... (self.activities?.count)!-1{
+					items.append(self.activities![i].imageURL!)
+				}
+				
+				
 			}
-			
-			items.append(self.coupons![0].logoURL!)
-			if (self.coupons?.count)! > 1 {
-				items.append(self.coupons![1].logoURL!)
+			if(self.coupons != nil){
+				
+				for i in 0 ... (self.coupons?.count)!-1{
+					items.append(self.coupons![i].logoURL!)
+				}
 			}
 			
 			return items
@@ -96,12 +143,12 @@ class MainViewController: UIViewController,ImageScrollerControllerDelegate {
 	@objc func handleTapAction(_ tap:UITapGestureRecognizer)->Void{
 		//获取图片索引值
 		let index = imageScroller.currentIndex
-		//弹出索引信息
-		let alertController = UIAlertController(title: "您点击的图片索引是：",
-												message: "\(index)", preferredStyle: .alert)
-		let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
-		alertController.addAction(cancelAction)
-		self.present(alertController, animated: true, completion: nil)
+		
+		let sb = UIStoryboard(name: "Discover", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "ActivityDetailViewController") as! ActivityDetailViewController
+		vc.activity = activities?[index]
+		self.navigationController!.pushViewController(vc, animated: true)
+		self.navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
     // MARK: - Navigation

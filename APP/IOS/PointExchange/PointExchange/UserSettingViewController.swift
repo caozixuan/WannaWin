@@ -25,12 +25,20 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+		//导航栏设置
+		//导航栏透明
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
+		
+		
+		
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+		
+		
         activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
         
         self.tableView.reloadData()
@@ -83,7 +91,7 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "modifyPasswordCell")
             cell?.selectionStyle = .none
             // 去除最后一行的分割线
-            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width)
+            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width+50)
             return cell!
         default:
             return UITableViewCell()
@@ -91,6 +99,7 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
+		
         switch indexPath.row{
         // 绑定花旗账户
         case 0:
@@ -99,6 +108,7 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
         case 1:
             let view = storyBoard.instantiateViewController(withIdentifier: "ModifyPasswordViewController") as! ModifyPasswordViewController
             self.navigationController?.pushViewController(view, animated: true)
+			self.navigationController?.setNavigationBarHidden(false, animated: true)
         default:
             break;
         }
@@ -112,6 +122,7 @@ class UserSettingViewController: UIViewController, UITableViewDataSource, UITabl
                 let view = self.storyBoard.instantiateViewController(withIdentifier:"AddBankCardViewController") as! AddBankCardViewController
                 view.url = url
                 self.navigationController?.pushViewController(view, animated: true)
+				self.navigationController?.setNavigationBarHidden(false, animated: true)
                 self.activityIndicator?.stopAnimating()
             }
         }

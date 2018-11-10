@@ -72,13 +72,18 @@ public class FindFragment extends Fragment {
         return view;
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
-        findActivityAdapter.clearAll();
-        findAdapter.clearAll();
-        getRecommendedMerchants();
-        getRecommendedActivity();
+        if(findAdapter.getItemCount() == 0){
+            findActivityAdapter.clearAll();
+            findAdapter.clearAll();
+            getRecommendedActivity();
+            getRecommendedMerchants();
+        }
+
     }
 
     private void initRecyclerView(){
@@ -281,9 +286,9 @@ public class FindFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
 
-                if (LogStateInfo.getInstance(getContext()).isLogin()) {
-                    map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
-                }
+//                if (LogStateInfo.getInstance(getContext()).isLogin()) {
+//                    map.put("userID",LogStateInfo.getInstance(getContext()).getUserID());
+//                }
 
 
                 return map;

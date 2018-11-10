@@ -22,6 +22,7 @@ class ActivityDetailViewController: UIViewController {
 		validDateLabel.text = (activity?.startDate)! + " - " + (activity?.endDate)!
 		descriptionText.text = activity?.description
 		nameLabel.text = activity?.name
+		nameLabel.adjustsFontSizeToFitWidth = true
 		imageView.imageFromURL((activity?.imageURL)!, placeholder: UIImage())
         // Do any additional setup after loading the view.
     }

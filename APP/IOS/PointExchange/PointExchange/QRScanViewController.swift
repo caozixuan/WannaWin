@@ -19,6 +19,13 @@ class QRScanViewController: UIViewController {
     
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		if User.getUser().username == nil{
+			let storyBoard = UIStoryboard(name:"User", bundle:nil)
+			let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+			self.navigationController!.pushViewController(view, animated: true)
+			self.navigationController?.isNavigationBarHidden = false
+			return
+		}
 		changeCode()
 		timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(refreshCode), userInfo: nil, repeats: true)
 		timer?.fire()
@@ -64,7 +71,6 @@ class QRScanViewController: UIViewController {
 	
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// TODO: - 网络请求
 		let isSuccess = true
 		// ...
 		

@@ -24,6 +24,12 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 	@IBOutlet weak var merchantPhoneNumLAbel: UILabel!
 	
 	@IBOutlet weak var offlineView: UIView!
+	
+	@IBOutlet weak var couponTableViewHeightCons: NSLayoutConstraint!
+	
+	
+	@IBOutlet weak var bgGradientView: GradientView!
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		merchantLogo.imageFromURL((merchant?.logoURL)!, placeholder: UIImage())
@@ -33,11 +39,13 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
 		self.couponTableView.delegate = self
 		self.couponTableView.dataSource = self
 		
+		self.bgGradientView.cornerRadius = UIScreen.main.bounds.width*0.27/2
+		
     }
 	
 	override func viewWillLayoutSubviews() {
 		// 获取优惠信息
-		ServerConnector.getMerchantItems(merchantID: (merchant?.id)!, start: 0, n: 2){ (result, items) in
+		ServerConnector.getMerchantItems(merchantID: (merchant?.id)!, start: 0, n: 5){ (result, items) in
 			if result {
 				self.items = items!
                 // 当优惠信息少于三个时，移除“查看更多”按钮
@@ -165,9 +173,13 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
         
         if sender.isSelected { // tableview变长
             isFold = false
+			if couponTableViewHeightCons != nil {
+				couponTableView.removeConstraint(couponTableViewHeightCons)
+			}else{
+			}
             // 设置约束更改tableview高度
-            self.couponTableView.snp.remakeConstraints(){ make in
-                make.height.equalTo(70*self.items.count).priority(1000)
+            self.couponTableView.snp.makeConstraints(){ make in
+				couponTableViewHeightCons = make.height.equalTo(70*self.items.count).priority(1000).constraint.layoutConstraints[0]
             }
             
             // 使动画生效
@@ -177,9 +189,12 @@ class MerchantDetailViewController: UIViewController,UITableViewDelegate,UITable
         }
         else { // tableview变短
             isFold = true
+			if couponTableViewHeightCons != nil {
+				couponTableView.removeConstraint(couponTableViewHeightCons)
+			}
             // 更改约束更改tableview高度
             self.couponTableView.snp.remakeConstraints(){ make in
-                make.height.equalTo(136).priority(1000)
+                couponTableViewHeightCons = make.height.equalTo(140).priority(1000).constraint.layoutConstraints[0]
             }
             
             // 使动画生效

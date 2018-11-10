@@ -24,14 +24,21 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     let storyBoard = UIStoryboard(name: "User", bundle: nil)
     
 
+	//隐藏状态栏
+//	override var prefersStatusBarHidden: Bool {
+//		return true
+//	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.rowHeight = 60
+		
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+		self.navigationController?.isNavigationBarHidden = true
 		activityIndicator = ActivityIndicator.createWaitIndicator(parentView: self.view)
 		refreshView()
         
@@ -80,7 +87,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		case 2:
 			let cell = self.tableView.dequeueReusableCell(withIdentifier: "settingCell")
             // 去除最后一行的分割线
-            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width)
+            cell!.separatorInset = UIEdgeInsetsMake(0,0, 0, cell!.bounds.size.width+50)
 			return cell!
 		default:
 			return UITableViewCell()
@@ -88,6 +95,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath){
+		self.navigationController?.isNavigationBarHidden = false
             switch indexPath.row{
             // 查看我的订单
             case 0:
@@ -158,12 +166,14 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let storyBoard = UIStoryboard(name:"User", bundle:nil)
 		let view = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
 		self.navigationController!.pushViewController(view, animated: true)
+		self.navigationController?.isNavigationBarHidden = false
 	}
     
     @objc func goToUserSetting(_ tap:UITapGestureRecognizer){
         let storyBoard = UIStoryboard(name:"UserSetting", bundle:nil)
         let view = storyBoard.instantiateViewController(withIdentifier: "UserSettingViewController")
         self.navigationController!.pushViewController(view, animated: true)
+		self.navigationController?.isNavigationBarHidden = false
     }
     
 }

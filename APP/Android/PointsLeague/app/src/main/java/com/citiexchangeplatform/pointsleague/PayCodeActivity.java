@@ -98,7 +98,7 @@ public class PayCodeActivity extends AppCompatActivity {
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setDividerColor(Color.GRAY);
+        //titleBar.setDividerColor(Color.GRAY);
         titleBar.setLeftImageResource(R.drawable.ic_left_black_24dp);
         titleBar.setLeftText("返回");
         titleBar.setLeftTextColor(Color.BLACK);
@@ -138,7 +138,7 @@ public class PayCodeActivity extends AppCompatActivity {
         //Bitmap bitmap_bar = ZXingUtils.creatBarcode(getApplicationContext(), content, iv_bar.getWidth(),  iv_bar.getHeight(),true);
         //iv_bar.setImageBitmap(bitmap_bar);
 
-        Bitmap bitmap_bar = ZXingUtils.creatBarcode(getApplicationContext(), content,400,  200,false);
+        Bitmap bitmap_bar = ZXingUtils.creatBarcode(getApplicationContext(), content,450,  200,false);
         iv_bar.setImageBitmap(bitmap_bar);
         /*生成二维码*/
         //Bitmap bitmap_qr = ZXingUtils.createQRImage(content, iv_qr.getWidth(),  iv_qr.getHeight());

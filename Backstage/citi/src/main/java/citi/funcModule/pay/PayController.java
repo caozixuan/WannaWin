@@ -49,7 +49,7 @@ public class PayController {
                 ReturnPay returnPay2=new ReturnPay(order2,merchant2);
                 return gson.toJson(returnPay2);
             default:
-                return "";
+                return "0";
         }
     }
 

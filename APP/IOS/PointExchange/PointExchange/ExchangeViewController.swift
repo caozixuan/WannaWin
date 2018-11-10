@@ -57,6 +57,9 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		// 表底部留出空间来调整键盘弹出的偏移
 		self.tableView.contentInset.bottom = 60
+		
+//		self.tableView.delegate = self
+//		self.tableView.dataSource = self
 	}
 	
     override func viewDidAppear(_ animated: Bool) {
@@ -391,11 +394,12 @@ class ExchangeViewController: UIViewController, UITableViewDelegate, UITableView
         var chosenMerchantList = [ChooseMerchants]()
         var chosenMerchant:ChooseMerchants
         var chosenMerchantNames = [String]()
-        
+		
         for (row,cell) in cellDataList.enumerated() {
             if cell.isSelected {
                 //避免发送“0.00”导致后台出错
-                if cell.sourcePoints == "0.00" || String(format:"%.2f", cell.sourcePoints) == "0.00"  {
+				//注意：String(format:"%.2f", Double(cell.sourcePoints)!)，格式化的变量不能是字符串，只能是数字
+                if cell.sourcePoints == "0.00" || String(format:"%.2f", Double(cell.sourcePoints)!) == "0.00"  {
                     chosenMerchant = ChooseMerchants(merchantID: (dataSource?[row].merchant?.id)!, selectedMSCardPoints: "0")
                 }
                 else {

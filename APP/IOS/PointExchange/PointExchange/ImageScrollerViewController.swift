@@ -70,16 +70,21 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.black
     }
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		autoScrollTimer?.invalidate()
+	}
+	
 	/// 刷新图片
 	func refresh(){
 		// 使自动滚动计时器失效
-		autoScrollTimer?.invalidate()
+		autoScrollTimer?.fireDate = Date.distantFuture
 		self.dataSource =  self.delegate.scrollerDataSource()
 		if dataSource?.count != 0 {
 			resetImageViewSource()
 			configurePageController()
 		}
-		configureAutoScrollTimer()
+//		configureAutoScrollTimer()
+		autoScrollTimer?.fireDate = Date.distantPast
 	}
 	
 	//设置scrollerView
@@ -145,16 +150,18 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 			make.width.equalTo(120)
 			make.height.equalTo(20)
 			make.centerX.equalTo(self.view.snp.centerX)
-			make.bottom.equalTo(self.view).offset(-45)
+			let controlOffset = -UIScreen.main.bounds.size.height*0.093
+			make.bottom.equalTo(self.view).offset(controlOffset)
 		}
 	}
 	
 	//设置自动滚动计时器
 	func configureAutoScrollTimer() {
 		//设置一个定时器，每三秒钟滚动一次
-		autoScrollTimer = Timer.scheduledTimer(timeInterval: 3.5, target: self,
+		autoScrollTimer = Timer.scheduledTimer(timeInterval: 2, target: self,
 											   selector: #selector(ImageScrollerViewController.letItScroll),
 											   userInfo: nil, repeats: true)
+		//autoScrollTimer?.fire()
 	}
 	
 	//计时器时间一到，滚动一张图片
@@ -239,6 +246,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	//手动拖拽滚动开始
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 		//使自动滚动计时器失效（防止用户手动移动图片的时候这边也在自动滚动）
+//		autoScrollTimer?.fireDate = Date.distantFuture
 		autoScrollTimer?.invalidate()
 	}
 	
@@ -246,6 +254,7 @@ class ImageScrollerViewController: UIViewController,UIScrollViewDelegate {
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView,
 								  willDecelerate decelerate: Bool) {
 		//重新启动自动滚动计时器
+//		autoScrollTimer?.fireDate = Date.distantPast
 		configureAutoScrollTimer()
 		
 	}

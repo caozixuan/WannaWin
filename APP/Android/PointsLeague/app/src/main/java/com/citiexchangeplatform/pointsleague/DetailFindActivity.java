@@ -249,8 +249,8 @@ public class DetailFindActivity extends AppCompatActivity {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String activityID = jsonObject.getString("activityID");
                                 String name = jsonObject.getString("name");
-                                String description = jsonObject.getString("description");
-                                detailActivityAdapter.addData(activityID, name, description);
+                                String imageURL = jsonObject.getString("imageURL");
+                                detailActivityAdapter.addData(activityID, name, imageURL);
                             }
                             recyclerView1.scrollToPosition(detailActivityAdapter.getItemCount()/2);
 

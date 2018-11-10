@@ -1,5 +1,6 @@
 package citi.funcModule.item;
 
+import citi.persist.mapper.UserMapper;
 import citi.persist.procedure.probean.ItemBean;
 import citi.support.resultjson.ResultJson;
 import citi.vo.Item;
@@ -8,14 +9,9 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +26,8 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private Gson gson;

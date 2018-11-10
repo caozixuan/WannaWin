@@ -264,7 +264,7 @@ extension ServerService:TargetType {
             
         case .resetPassword(let phoneNum, let newPassword):
             var params:[String:String] = [:]
-            params["phoneNUm"] = phoneNum
+            params["phoneNum"] = phoneNum
             params["newPassword"] = newPassword
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
             

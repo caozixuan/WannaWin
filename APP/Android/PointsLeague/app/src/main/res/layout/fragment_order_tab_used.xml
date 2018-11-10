@@ -5,10 +5,24 @@
     android:orientation="vertical"
     android:background="@color/colorBackground">
 
-    <android.support.v7.widget.RecyclerView
+    <com.citiexchangeplatform.pointsleague.EmptyRecyclerView
         android:id="@+id/recyclerView_myOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <!--Empty提示图-->
+        <TextView
+            android:id="@+id/empty_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="这里还没有优惠券"/>
+    </LinearLayout>
+
 
 </LinearLayout>

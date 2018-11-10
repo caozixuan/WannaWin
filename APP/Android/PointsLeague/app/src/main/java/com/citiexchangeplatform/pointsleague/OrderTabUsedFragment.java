@@ -31,7 +31,9 @@ import java.util.Map;
  */
 public class OrderTabUsedFragment extends Fragment {
 
-    RecyclerView usedOrderRecyclerView;
+    private EmptyRecyclerView usedOrderRecyclerView;
+    private View mEmptyView;
+    //RecyclerView usedOrderRecyclerView;
     private MyCouponAdapter orderAdapter;
     ProgressDialog dialog;
 
@@ -52,7 +54,8 @@ public class OrderTabUsedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order_tab_used, container, false);
 
-        usedOrderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder);
+        usedOrderRecyclerView =  view.findViewById(R.id.recyclerView_myOrder);
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         //设置RecyclerView管理器
         setRecyclerView();
@@ -87,6 +90,7 @@ public class OrderTabUsedFragment extends Fragment {
         usedOrderRecyclerView.setLayoutManager(layoutManager);
         orderAdapter = new MyCouponAdapter(getActivity());
         usedOrderRecyclerView.setAdapter(orderAdapter);
+        usedOrderRecyclerView.setEmptyView(mEmptyView); //设置空布局
     }
 
     private void getHistoryOrderByCoupon() {

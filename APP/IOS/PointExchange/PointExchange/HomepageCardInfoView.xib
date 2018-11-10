@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomepageCardInfoView" customModule="PointExchange" customModuleProvider="target">
             <connections>
                 <outlet property="generalPointLabel" destination="0Wm-kZ-oHo" id="OmR-AD-zBl"/>
+                <outlet property="logoBackgroundView" destination="7Fi-Qa-Xpp" id="yP6-IB-3pg"/>
                 <outlet property="merchantLogoImageView" destination="O3s-mJ-1zr" id="4dE-wK-zMb"/>
                 <outlet property="merchantNameLabel" destination="FDA-Jr-Tjd" id="mdx-ht-3sr"/>
                 <outlet property="view" destination="0Kq-io-E2y" id="tMB-Qd-10y"/>
@@ -26,26 +25,31 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="280"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteCircle-1" translatesAutoresizingMaskIntoConstraints="NO" id="sEK-Pb-IoX">
-                    <rect key="frame" x="10" y="12" width="60" height="60"/>
+                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="7Fi-Qa-Xpp" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
+                    <rect key="frame" x="8" y="12" width="60" height="60"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-mJ-1zr">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="sEK-Pb-IoX" secondAttribute="height" multiplier="1:1" id="ZvU-WT-bEW"/>
+                        <constraint firstAttribute="width" secondItem="7Fi-Qa-Xpp" secondAttribute="height" multiplier="1:1" id="9iy-4I-qvS"/>
+                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="height" secondItem="7Fi-Qa-Xpp" secondAttribute="height" id="HSG-O1-81I"/>
+                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="width" secondItem="7Fi-Qa-Xpp" secondAttribute="width" id="JnY-c5-gYr"/>
+                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="bottom" secondItem="7Fi-Qa-Xpp" secondAttribute="bottom" id="OQK-1b-b2c"/>
+                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="leading" secondItem="7Fi-Qa-Xpp" secondAttribute="leading" id="Xzn-wY-iG4"/>
+                        <constraint firstItem="O3s-mJ-1zr" firstAttribute="top" secondItem="7Fi-Qa-Xpp" secondAttribute="top" id="gGc-P0-Thn"/>
                     </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-mJ-1zr">
-                    <rect key="frame" x="10" y="12" width="60" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="O3s-mJ-1zr" secondAttribute="height" multiplier="1:1" id="GDC-3o-ztK"/>
-                    </constraints>
-                </imageView>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDA-Jr-Tjd">
-                    <rect key="frame" x="78" y="18" width="31" height="20.5"/>
+                    <rect key="frame" x="73" y="23" width="31" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-Y5-eUg">
-                    <rect key="frame" x="78" y="46.5" width="40" height="16"/>
+                    <rect key="frame" x="73" y="51.5" width="40" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -57,7 +61,7 @@
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5y-qB-YRp">
-                    <rect key="frame" x="48" y="253" width="105.5" height="17"/>
+                    <rect key="frame" x="47.5" y="252.5" width="105.5" height="17"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可兑通用点：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vuo-Sf-JSt">
                             <rect key="frame" x="0.0" y="0.0" width="86" height="17"/>
@@ -76,32 +80,28 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="sEK-Pb-IoX" firstAttribute="width" secondItem="ypL-VG-VCw" secondAttribute="width" multiplier="0.3" id="53I-Vl-25W"/>
-                <constraint firstItem="sEK-Pb-IoX" firstAttribute="centerX" secondItem="0Kq-io-E2y" secondAttribute="centerX" multiplier="0.4" id="5UR-vB-ldh"/>
+                <constraint firstItem="7Fi-Qa-Xpp" firstAttribute="leading" secondItem="ypL-VG-VCw" secondAttribute="leading" constant="8" id="1WJ-qP-jKQ"/>
+                <constraint firstItem="7Fi-Qa-Xpp" firstAttribute="width" secondItem="ypL-VG-VCw" secondAttribute="width" multiplier="0.3" id="53I-Vl-25W"/>
                 <constraint firstAttribute="trailing" secondItem="KuR-Y6-hed" secondAttribute="trailing" id="F5a-x3-gYG"/>
                 <constraint firstItem="H5y-qB-YRp" firstAttribute="centerX" secondItem="KuR-Y6-hed" secondAttribute="centerX" id="F9b-U5-KYJ"/>
-                <constraint firstItem="FDA-Jr-Tjd" firstAttribute="leading" secondItem="sEK-Pb-IoX" secondAttribute="trailing" constant="8" id="JMf-YT-1Ex"/>
-                <constraint firstItem="O3s-mJ-1zr" firstAttribute="centerX" secondItem="sEK-Pb-IoX" secondAttribute="centerX" id="SLM-ix-MRT"/>
+                <constraint firstItem="FDA-Jr-Tjd" firstAttribute="leading" secondItem="7Fi-Qa-Xpp" secondAttribute="trailing" constant="5" id="JMf-YT-1Ex"/>
+                <constraint firstItem="FDA-Jr-Tjd" firstAttribute="top" secondItem="ypL-VG-VCw" secondAttribute="top" constant="23" id="PX7-ao-Ibm"/>
                 <constraint firstItem="dDs-Y5-eUg" firstAttribute="leading" secondItem="FDA-Jr-Tjd" secondAttribute="leading" id="UwJ-MF-7zT"/>
-                <constraint firstItem="FDA-Jr-Tjd" firstAttribute="top" secondItem="O3s-mJ-1zr" secondAttribute="top" constant="6" id="Vtj-K6-Efy"/>
-                <constraint firstItem="O3s-mJ-1zr" firstAttribute="centerY" secondItem="sEK-Pb-IoX" secondAttribute="centerY" id="Yyl-TI-i41"/>
                 <constraint firstAttribute="bottom" secondItem="KuR-Y6-hed" secondAttribute="bottom" id="f6W-xS-HCP"/>
                 <constraint firstItem="KuR-Y6-hed" firstAttribute="leading" secondItem="0Kq-io-E2y" secondAttribute="leading" id="hhz-R9-wxV"/>
                 <constraint firstItem="dDs-Y5-eUg" firstAttribute="top" secondItem="FDA-Jr-Tjd" secondAttribute="bottom" constant="8" id="mTy-Ec-bBa"/>
-                <constraint firstItem="sEK-Pb-IoX" firstAttribute="centerY" secondItem="0Kq-io-E2y" secondAttribute="centerY" multiplier="0.3" id="odS-QV-lsB"/>
-                <constraint firstItem="O3s-mJ-1zr" firstAttribute="width" secondItem="sEK-Pb-IoX" secondAttribute="width" id="ps8-L6-Ql1"/>
                 <constraint firstItem="H5y-qB-YRp" firstAttribute="centerY" secondItem="KuR-Y6-hed" secondAttribute="centerY" id="qaQ-vV-18C"/>
+                <constraint firstItem="7Fi-Qa-Xpp" firstAttribute="top" secondItem="ypL-VG-VCw" secondAttribute="top" constant="12" id="uU1-Rx-pXa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ypL-VG-VCw"/>
-            <point key="canvasLocation" x="-373" y="683"/>
+            <point key="canvasLocation" x="-374.39999999999998" y="682.75862068965523"/>
         </view>
     </objects>
     <resources>
         <image name="Mask-1" width="933" height="108"/>
-        <image name="whiteCircle-1" width="50" height="50"/>
         <namedColor name="main_orange">
-            <color red="1" green="0.58399999140000003" blue="0.27500000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58039215686274515" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

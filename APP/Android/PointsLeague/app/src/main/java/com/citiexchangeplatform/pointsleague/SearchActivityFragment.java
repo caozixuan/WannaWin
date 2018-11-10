@@ -51,7 +51,8 @@ import static com.citiexchangeplatform.pointsleague.SearchCouponFragment.NUM_LOA
  */
 public class SearchActivityFragment extends Fragment {
 
-    RecyclerView searchRecyclerView;
+    EmptyRecyclerView searchRecyclerView;
+    private View mEmptyView;
     RefreshLayout refreshLayout;
     private FindSearchAdapter searchAdapter;
     ProgressDialog dialog;
@@ -76,6 +77,7 @@ public class SearchActivityFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_activity, container, false);
         searchRecyclerView = view.findViewById(R.id.recyclerView_search_activity);
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
 
@@ -192,6 +194,7 @@ public class SearchActivityFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         searchRecyclerView.setLayoutManager(layoutManager);
         searchRecyclerView.setAdapter(searchAdapter);
+        searchRecyclerView.setEmptyView(mEmptyView); //设置空布局
     }
 
     private void getSearchTotalNum(final String keyword){

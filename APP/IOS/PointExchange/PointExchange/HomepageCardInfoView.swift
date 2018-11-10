@@ -10,6 +10,7 @@ import UIKit
 
 class HomepageCardInfoView: UIView {
 
+	@IBOutlet weak var logoBackgroundView: GradientView!
 	@IBOutlet var view: UIView!
 	@IBOutlet weak var generalPointLabel: UILabel!
 	@IBOutlet weak var merchantNameLabel: UILabel!
@@ -31,6 +32,8 @@ class HomepageCardInfoView: UIView {
 		self.view = views[0] as! UIView
 		self.view.frame = bounds
 		self.addSubview(view)
+		
+//		logoBackgroundView.cornerRadius = merchantLogoImageView.frame.width/2
 	}
 
 }

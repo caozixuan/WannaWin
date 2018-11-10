@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,14 +15,17 @@
             <objects>
                 <viewController storyboardIdentifier="UserSettingViewController" title="用户设置" id="tjj-zw-oBZ" customClass="UserSettingViewController" customModule="PointExchange" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wr9-hS-PfB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91s-vI-8e6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="159"/>
+                                <rect key="frame" x="0.0" y="-64" width="375" height="230"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navi background2" translatesAutoresizingMaskIntoConstraints="NO" id="epd-gM-j9M">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                                    </imageView>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portrait_1userTabMe" translatesAutoresizingMaskIntoConstraints="NO" id="fVT-Fl-YSw">
-                                        <rect key="frame" x="123" y="15" width="128" height="128"/>
+                                        <rect key="frame" x="123.5" y="71" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="fVT-Fl-YSw" secondAttribute="height" multiplier="1:1" id="P7s-jN-zeW"/>
                                             <constraint firstAttribute="width" constant="128" id="yK9-HN-ugx"/>
@@ -35,13 +37,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="epd-gM-j9M" firstAttribute="top" secondItem="91s-vI-8e6" secondAttribute="top" id="1uj-gz-fek"/>
+                                    <constraint firstItem="epd-gM-j9M" firstAttribute="leading" secondItem="91s-vI-8e6" secondAttribute="leading" id="35F-qo-6C3"/>
+                                    <constraint firstAttribute="bottom" secondItem="epd-gM-j9M" secondAttribute="bottom" id="6Hp-bE-sx3"/>
                                     <constraint firstItem="fVT-Fl-YSw" firstAttribute="centerX" secondItem="91s-vI-8e6" secondAttribute="centerX" id="RQ4-XT-TK0"/>
-                                    <constraint firstAttribute="height" constant="159" id="d3I-UY-3u9"/>
-                                    <constraint firstItem="fVT-Fl-YSw" firstAttribute="centerY" secondItem="91s-vI-8e6" secondAttribute="centerY" id="weX-vR-uHp"/>
+                                    <constraint firstAttribute="height" constant="230" id="d3I-UY-3u9"/>
+                                    <constraint firstAttribute="trailing" secondItem="epd-gM-j9M" secondAttribute="trailing" id="ns3-e5-rHk"/>
+                                    <constraint firstItem="fVT-Fl-YSw" firstAttribute="centerY" secondItem="91s-vI-8e6" secondAttribute="centerY" constant="20" id="weX-vR-uHp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71g-NN-gal" customClass="GradientView" customModule="PointExchange" customModuleProvider="target">
-                                <rect key="frame" x="8" y="287" width="359" height="130"/>
+                                <rect key="frame" x="8" y="230" width="359" height="130"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a8z-4N-F9x">
                                         <rect key="frame" x="8" y="6" width="343" height="120"/>
@@ -125,7 +131,7 @@
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="45T-gX-E8I" firstAttribute="trailing" secondItem="71g-NN-gal" secondAttribute="trailing" constant="8" id="8I2-fO-YzO"/>
-                            <constraint firstItem="91s-vI-8e6" firstAttribute="top" secondItem="45T-gX-E8I" secondAttribute="top" id="IeI-C9-Wlp"/>
+                            <constraint firstItem="91s-vI-8e6" firstAttribute="top" secondItem="45T-gX-E8I" secondAttribute="top" constant="-64" id="IeI-C9-Wlp"/>
                             <constraint firstItem="71g-NN-gal" firstAttribute="leading" secondItem="45T-gX-E8I" secondAttribute="leading" constant="8" id="K2Z-8l-tIc"/>
                             <constraint firstItem="91s-vI-8e6" firstAttribute="leading" secondItem="45T-gX-E8I" secondAttribute="leading" id="dy2-qi-6iZ"/>
                             <constraint firstItem="71g-NN-gal" firstAttribute="top" secondItem="91s-vI-8e6" secondAttribute="bottom" constant="64" id="pt7-Ji-XD1"/>
@@ -133,7 +139,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="45T-gX-E8I"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="用户设置" id="sCm-fa-Iy0"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="portraitImage" destination="fVT-Fl-YSw" id="HiK-Kf-7xv"/>
                         <outlet property="tableView" destination="a8z-4N-F9x" id="WMe-QY-Vv1"/>
@@ -225,6 +233,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="navi background2" width="375" height="224"/>
         <image name="portrait_1userTabMe" width="128" height="128"/>
         <image name="修改密码" width="64" height="64"/>
         <image name="账户" width="54" height="48"/>

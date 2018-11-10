@@ -33,7 +33,9 @@ import java.util.Map;
  */
 public class MyOrderFragment extends Fragment {
 
-    RecyclerView orderRecyclerView;
+    private EmptyRecyclerView orderRecyclerView;
+    private View mEmptyView;
+    //RecyclerView orderRecyclerView;
     private MyOrderAdapter orderAdapter;
     ProgressDialog dialog;
 
@@ -53,7 +55,8 @@ public class MyOrderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_order, container, false);
 
-        orderRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_myOrder_overdue);
+        orderRecyclerView = view.findViewById(R.id.recyclerView_myOrder_overdue);
+        mEmptyView = view.findViewById(R.id.empty_iv);
 
         //设置RecyclerView管理器
         setRecyclerView();
@@ -89,6 +92,7 @@ public class MyOrderFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         orderRecyclerView.setLayoutManager(layoutManager);
         orderRecyclerView.setAdapter(orderAdapter);
+        orderRecyclerView.setEmptyView(mEmptyView); //设置空布局
     }
 
 
