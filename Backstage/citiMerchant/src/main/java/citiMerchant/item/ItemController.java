@@ -80,7 +80,7 @@ public class ItemController {
 
     @RequestMapping("/submitEdit")
     @ResponseBody
-    public String submitEdit(String itemID, String name, String description, double originalPrice, int points, long stock, String overdueTime,String[] itemType ,String logoURL,HttpSession session){
+    public String submitEdit(String itemID, String name, String description, Double originalPrice, int points, long stock, String overdueTime,String[] itemType ,String logoURL,HttpSession session){
         ModelAndView mv = new ModelAndView();
         String merchantID = (String)session.getAttribute("merchantID");
         String DBstr=Type.ItemType.str2DBStr(Arrays.asList(itemType));
@@ -116,7 +116,7 @@ public class ItemController {
     public String deleteItem(String itemID,HttpSession session) {
         String merchantID=session.getAttribute("merchantID").toString();
         itemService.deleteItem(itemID);
-        return "forward:/getItem";
+        return "forward:getItem";
     }
 
    /* @RequestMapping(value = {"/item/addItemOperation"})

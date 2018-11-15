@@ -185,12 +185,12 @@ class DiscoverTableViewController: UITableViewController{
 				cell = UITableViewCell(style: .default, reuseIdentifier: "merchantCell") as? DsMerchantTableViewCell
 			}
 //			let imageURL = URL(string: (merchantArray?[indexPath.row].logoURL)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!)
-			let imageURL = URL(string: (merchantArray?[indexPath.row].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
-			cell?.logoView.kf.indicatorType = .activity
-			cell?.logoView.kf.setImage(with: imageURL){(image, error, cacheType, imageUrl) in
-			}
-			
-			cell?.nameLabel.text = merchantArray![indexPath.row].name
+//			let imageURL = URL(string: (merchantArray?[indexPath.row].logoURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!)
+//			cell?.logoView.kf.indicatorType = .activity
+//			cell?.logoView.kf.setImage(with: imageURL){(image, error, cacheType, imageUrl) in
+//			}
+			cell?.nameLabel.text = merchantArray?[indexPath.row].name
+			cell?.logoView.imageFromURL((merchantArray?[indexPath.row].logoURL!)!, placeholder: UIImage())
 			cell?.addressLabel.text = merchantArray![indexPath.row].description
 			cell?.typeLabel.text = transBussinessType(type: merchantArray![indexPath.row].businessType!)
 			

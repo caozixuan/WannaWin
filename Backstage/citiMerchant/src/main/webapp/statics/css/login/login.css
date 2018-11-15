@@ -15,7 +15,7 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-    /*background-color:#fff;
+/*    background-color:#fff;
     filter:Alpha(Opacity=60);
     opacity:0.6;*/
 }
@@ -27,7 +27,7 @@ body {
     bottom: 0;
     right: 0;
     display: block;
-    content: "";
+    /*content: "";*/
     background-color:rgba(0,0,0,0.3);
     /*filter:Alpha(Opacity=60);*/
     /*opacity:0.6;*/

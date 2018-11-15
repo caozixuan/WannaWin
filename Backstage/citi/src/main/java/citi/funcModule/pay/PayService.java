@@ -94,10 +94,10 @@ public class PayService {
     public QRCodeStatus QRCode(String userID, String timestamp) {
         long timeMillis = System.currentTimeMillis() / 1000;
         long QRTimestamp = Long.parseLong(timestamp);
-        if (timeMillis - QRTimestamp > 60 || timeMillis < QRTimestamp) {
+/*        if (timeMillis - QRTimestamp > 60 || timeMillis < QRTimestamp) {
             return QRCodeStatus.INVALID;
-        }
-        List<Order> orders = orderMapper.getOrderByUserID(userID, "101");
+        }*/
+        List<Order> orders = orderMapper.getOrderByUserID(userID, "010101");
 
         for (Order order : orders) {
             Timestamp oderTimestamp = Timestamp.valueOf(order.getTime());
