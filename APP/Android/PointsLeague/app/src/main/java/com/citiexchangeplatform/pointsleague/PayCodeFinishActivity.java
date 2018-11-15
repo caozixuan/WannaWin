@@ -79,9 +79,9 @@ public class PayCodeFinishActivity extends AppCompatActivity {
         imageIds = new int[]{R.drawable.ad1, R.drawable.ad2, R.drawable.ad3};
 
         imageDescriptions = new String[]{
-                "banner1",
-                "banner2",
-                "banner3"
+                " ",
+                " ",
+                " "
         };
         //保存
         List<ImageView> imageList = new ArrayList<ImageView>();
